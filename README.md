@@ -1,5 +1,5 @@
 # [![bitmovin](http://bitmovin-a.akamaihd.net/webpages/bitmovin-logo-github.png)](http://www.bitmovin.com)
-Android client that allows you to monitor your ExoPlayer playback with [Bitmovin Analytics](https://bitmovin.com/video-analytics/)
+iOS library that allows you to monitor your iOS video playback with [Bitmovin Analytics](https://bitmovin.com/video-analytics/)
 
 # Getting started
 ## Adding to your project
@@ -17,7 +17,7 @@ The following example creates a BitmovinAnalytics object and attaches an AVPlaye
 
 // Attach your player instance
 
-// Detach your player when you are done. For example, call this method when you call ExoPlayer's release() method
+// Detach your player when you are done. 
 ```
 
 
