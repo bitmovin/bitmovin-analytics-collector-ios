@@ -28,16 +28,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var playerView: PlayerView!
     private var timeObserverToken: Any?
     
-    var currentTime: Double {
-        get {
-            return CMTimeGetSeconds(player.currentTime())
-        }
-        set {
-            let newTime = CMTimeMakeWithSeconds(newValue, 1)
-            player.seek(to: newTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
-        }
-    }
-    
     var duration: Double {
         guard let currentItem = player.currentItem else { return 0.0 }
         
@@ -90,7 +80,6 @@ class ViewController: UIViewController {
         analyticsCollector.attachAVPlayer(player: player);
     }
     
-
     @IBAction func createPlayer(){
         /*
          Update the UI when these player properties change.
@@ -104,7 +93,7 @@ class ViewController: UIViewController {
         addObserver(self, forKeyPath: #keyPath(ViewController.player.currentItem.duration), options: [.new, .initial], context: &ViewController.playerViewControllerKVOContext)
         addObserver(self, forKeyPath: #keyPath(ViewController.player.currentItem.status), options: [.new, .initial], context: &ViewController.playerViewControllerKVOContext)
         
-        let movieURL = URL(string: "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
+        let movieURL = URL(string: "http://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
         let  asset = AVURLAsset(url: movieURL!, options: nil)
         player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
         player.play()
@@ -191,7 +180,7 @@ class ViewController: UIViewController {
             }
             
             if newStatus == .failed {
-//                handleErrorWithMessage(player.currentItem?.error?.localizedDescription, error:player.currentItem?.error)
+                //                handleErrorWithMessage(player.currentItem?.error?.localizedDescription, error:player.currentItem?.error)
             }
         }
     }
@@ -200,18 +189,34 @@ class ViewController: UIViewController {
     
     @IBAction func playPauseButtonWasPressed(_ sender: UIButton) {
         if player.rate != 1.0 {
-            // Not playing forward, so play.
-            if currentTime == duration {
-                // At end, so got back to begining.
-                currentTime = 0.0
-            }
-            
             player.play()
         }
         else {
             // Playing, so pause.
             player.pause()
         }
+    }
+    
+    @IBAction func jumpForwardButtomPressed(_ sender: UIButton) {
+        let currentTime = player.currentTime()
+        let deltaTime = CMTimeMakeWithSeconds(30, 30)
+        print("Seek To Time \(CMTimeAdd(currentTime, deltaTime))")
+        player.seek(to: CMTimeAdd(currentTime, deltaTime), completionHandler: { (completed) in
+            if(completed){
+                print("Seek Completed")
+            }
+        })
+    }
+    
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        let currentTime = player.currentTime()
+        let deltaTime = CMTimeMakeWithSeconds(30, 30)
+        print("Seek To Time \(CMTimeSubtract(currentTime, deltaTime))")
+        player.seek(to: CMTimeSubtract(currentTime, deltaTime), completionHandler: { (completed) in
+            if(completed){
+                print("Seek Completed")
+            }
+        })
     }
     
     @IBAction func rewindButtonWasPressed(_ sender: UIButton) {
@@ -225,7 +230,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func timeSliderDidChange(_ sender: UISlider) {
-        currentTime = Double(sender.value)
+        print("Slider Changed: \(slider.value)")
     }
     
     override func didReceiveMemoryWarning() {

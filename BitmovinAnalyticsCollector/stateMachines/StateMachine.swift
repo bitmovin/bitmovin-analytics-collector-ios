@@ -41,13 +41,18 @@ public class StateMachine {
     }
     
     public func transitionState(destinationState: PlayerStateEnum, time: CMTime?){
-        let timestamp = Date().timeIntervalSince1970Millis
-        videoTimeEnd = time
-        self.state.onExit(stateMachine: self, timestamp: timestamp, destinationState: destinationState)
-        self.state = destinationState;
-        self.enterTimestamp = timestamp
-        self.videoTimeStart = videoTimeEnd
-        self.state.onEntry(stateMachine: self,timestamp: timestamp,destinationState: destinationState)
+        if(state == destinationState) {
+            return
+        }else{
+            print("Transitioning from \(state.rawValue) to \(destinationState.rawValue)")
+            let timestamp = Date().timeIntervalSince1970Millis
+            videoTimeEnd = time
+            self.state.onExit(stateMachine: self, timestamp: timestamp, destinationState: destinationState)
+            self.state = destinationState;
+            self.enterTimestamp = timestamp
+            self.videoTimeStart = videoTimeEnd
+            self.state.onEntry(stateMachine: self,timestamp: timestamp,destinationState: destinationState)
+        }
     }
     
     func enableHeartbeat(){

@@ -32,37 +32,31 @@ public class BitmovinAnalytics:StateMachineDelegate {
     }
     
     func didExitSetup() {
-        print("Did Exit Setup")
     }
     
     func didExitBuffering(duration: Int) {
         let eventData = createEventData(duration: duration)
         sendEventData(eventData: eventData)
-        print("Did Exit Buffering")
     }
     
     func didEnterError() {
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
-        print("Did Enter Error")
     }
     
     func didExitPlaying(duration: Int) {
         let eventData = createEventData(duration: duration)
         eventData?.played = duration
         sendEventData(eventData: eventData)
-        print("Did Exit Playing")
     }
     
     func didExitPause(duration: Int) {
-        print("Did Exit Pause")
         let eventData = createEventData(duration: duration)
         eventData?.paused = duration
         sendEventData(eventData: eventData)
     }
     
     func didQualityChange() {
-        print("Did Quality Change")
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
     }
@@ -70,7 +64,6 @@ public class BitmovinAnalytics:StateMachineDelegate {
     func didExitSeeking(duration: Int, destinationPlayerState: PlayerStateEnum) {
         let eventData = createEventData(duration: duration)
         sendEventData(eventData: eventData)
-        print("Did Exit Seeking")
     }
     
     func heartbeatFired(duration: Int) {
@@ -93,7 +86,6 @@ public class BitmovinAnalytics:StateMachineDelegate {
     }
     
     func didStartup(duration: Int) {
-        print("Did Startup")
         let eventData = createEventData(duration: duration)
         eventData?.videoStartupTime = duration
         eventData?.startupTime = duration

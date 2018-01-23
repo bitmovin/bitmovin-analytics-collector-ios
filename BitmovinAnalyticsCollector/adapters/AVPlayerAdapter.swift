@@ -15,6 +15,9 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
     private var lastBitrate: Double = 0
     @objc private var player: AVPlayer?
+    var playbackLikelyToKeepUpKeyPathObserver: NSKeyValueObservation?
+    var playbackBufferEmptyObserver: NSKeyValueObservation?
+    var playbackBufferFullObserver: NSKeyValueObservation?
     
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine){
         self.player = player
@@ -26,11 +29,68 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
     public func startMonitoring(){
         addObserver(self, forKeyPath: #keyPath(player.rate), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
         addObserver(self, forKeyPath: #keyPath(player.currentItem.status), options: [.new, .initial], context:&AVPlayerAdapter.playerKVOContext)
-//        addObserver(self, forKeyPath: #keyPath(player.currentItem), options: [.new, .initial], context:&AVPlayerAdapter.playerKVOContext)
+        addObserver(self, forKeyPath: #keyPath(player.currentItem), options: [.new, .initial], context:&AVPlayerAdapter.playerKVOContext)
     }
     
     private func startMonitoringPlayerItem(){
         NotificationCenter.default.addObserver(self, selector: #selector(accessItemAdded(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: self.player?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(didPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.player?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(failedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: self.player?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: self.player?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: self.player?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(addedErrorLog(notification:)), name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: self.player?.currentItem)
+        
+        observeBuffering()
+    }
+    
+        private func observeBuffering() {
+            
+            let playbackBufferEmptyKeyPath = \AVPlayerItem.playbackBufferEmpty
+            playbackBufferEmptyObserver = player?.currentItem?.observe(playbackBufferEmptyKeyPath, options: [.new]) { [weak self] (playerItem:AVPlayerItem, _) in
+                guard let rate = self?.player?.rate else {
+                    return
+                }
+                NSLog("PlaybackBufferEmpty \(playerItem.isPlaybackBufferEmpty) Rate: \(rate)")
+            }
+            
+            let playbackLikelyToKeepUpKeyPath = \AVPlayerItem.playbackLikelyToKeepUp
+            playbackLikelyToKeepUpKeyPathObserver = player?.currentItem?.observe(playbackLikelyToKeepUpKeyPath, options: [.new]) { [weak self] (playerItem:AVPlayerItem, change) in
+                guard let rate = self?.player?.rate else {
+                    return
+                }
+                NSLog("PlaybackLikelyToKeepUp \(playerItem.isPlaybackLikelyToKeepUp) Rate: \(rate)")
+            }
+            
+            
+            
+            let playbackBufferFullKeyPath = \AVPlayerItem.playbackBufferFull
+            
+            playbackBufferFullObserver = player?.currentItem?.observe(playbackBufferFullKeyPath, options: [.new]) { [weak self] (playerItem:AVPlayerItem, b) in
+                guard let rate = self?.player?.rate else {
+                    return
+                }
+                NSLog("PlaybackBufferFull %d Rate: %d",playerItem.isPlaybackBufferFull as CVarArg,rate)
+            }
+    }
+
+    @objc private func addedErrorLog(notification: Notification){
+        print("Error Log Added")
+    }
+    
+    @objc private func playbackStalled(notification: Notification){
+        stateMachine.transitionState(destinationState: .buffering, time: player?.currentTime())
+    }
+    
+    @objc private func didPlayToEndTime(notification: Notification){
+        print("Did Play to End Time")
+    }
+    
+    @objc private func failedToPlayToEndTime(notification: Notification){
+        print("Did Play to End Time")
+    }
+    
+    @objc private func timeJumped(notification: Notification){
+        NSLog("Time Jumped")
     }
     
     @objc private func accessItemAdded(notification: Notification){
@@ -66,11 +126,12 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
             let newStatus: AVPlayerItemStatus
             if let newStatusAsNumber = change?[NSKeyValueChangeKey.newKey] as? NSNumber {
                 newStatus = AVPlayerItemStatus(rawValue: newStatusAsNumber.intValue)!
+                NSLog("Status Changed: %d",newStatus.rawValue)
                 switch newStatus {
                 case .readyToPlay:
                     if (player?.rate == 0){
                         stateMachine.transitionState(destinationState: .paused, time: self.player?.currentTime())
-                    }else{
+                    }else if(player?.rate == 1){
                         stateMachine.transitionState(destinationState: .playing, time: self.player?.currentTime())
                     }
                     break
@@ -84,7 +145,7 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
             }
         }else if keyPath == #keyPath(player.currentItem){ 
             if let currentItem = change?[NSKeyValueChangeKey.newKey] as? AVPlayerItem {
-                print("Current Item Changed: ",currentItem.debugDescription)
+                NSLog("Current Item Changed: %@",currentItem.debugDescription)
                 startMonitoringPlayerItem()
             }
         }
@@ -104,7 +165,8 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
             eventData.videoDuration = Int(CMTimeGetSeconds(duration)*1000)
         }
         
-        //isPlayingAd
+        //isCasting
+        eventData.isCasting = player?.isExternalPlaybackActive
         
         //isLive
         if let duration = player?.currentItem?.duration {
