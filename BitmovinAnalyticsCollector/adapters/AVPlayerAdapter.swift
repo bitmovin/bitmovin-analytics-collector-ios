@@ -39,39 +39,8 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
         NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: self.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: self.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(addedErrorLog(notification:)), name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: self.player?.currentItem)
-        
-        observeBuffering()
     }
-    
-        private func observeBuffering() {
-            
-            let playbackBufferEmptyKeyPath = \AVPlayerItem.playbackBufferEmpty
-            playbackBufferEmptyObserver = player?.currentItem?.observe(playbackBufferEmptyKeyPath, options: [.new]) { [weak self] (playerItem:AVPlayerItem, _) in
-                guard let rate = self?.player?.rate else {
-                    return
-                }
-                NSLog("PlaybackBufferEmpty \(playerItem.isPlaybackBufferEmpty) Rate: \(rate)")
-            }
-            
-            let playbackLikelyToKeepUpKeyPath = \AVPlayerItem.playbackLikelyToKeepUp
-            playbackLikelyToKeepUpKeyPathObserver = player?.currentItem?.observe(playbackLikelyToKeepUpKeyPath, options: [.new]) { [weak self] (playerItem:AVPlayerItem, change) in
-                guard let rate = self?.player?.rate else {
-                    return
-                }
-                NSLog("PlaybackLikelyToKeepUp \(playerItem.isPlaybackLikelyToKeepUp) Rate: \(rate)")
-            }
-            
-            
-            
-            let playbackBufferFullKeyPath = \AVPlayerItem.playbackBufferFull
-            
-            playbackBufferFullObserver = player?.currentItem?.observe(playbackBufferFullKeyPath, options: [.new]) { [weak self] (playerItem:AVPlayerItem, b) in
-                guard let rate = self?.player?.rate else {
-                    return
-                }
-                NSLog("PlaybackBufferFull %d Rate: %d",playerItem.isPlaybackBufferFull as CVarArg,rate)
-            }
-    }
+
 
     @objc private func addedErrorLog(notification: Notification){
         print("Error Log Added")
@@ -90,7 +59,8 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
     }
     
     @objc private func timeJumped(notification: Notification){
-        NSLog("Time Jumped")
+        stateMachine.potentialSeekStart = Date().timeIntervalSince1970Millis
+        stateMachine.potentialSeekVideoTimeStart = player?.currentTime()
     }
     
     @objc private func accessItemAdded(notification: Notification){
@@ -126,9 +96,15 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
             let newStatus: AVPlayerItemStatus
             if let newStatusAsNumber = change?[NSKeyValueChangeKey.newKey] as? NSNumber {
                 newStatus = AVPlayerItemStatus(rawValue: newStatusAsNumber.intValue)!
-                NSLog("Status Changed: %d",newStatus.rawValue)
+                let timestamp = Date().timeIntervalSince1970Millis
                 switch newStatus {
                 case .readyToPlay:
+                    
+                    if(stateMachine.firstReadyTimestamp > 0 && (timestamp - stateMachine.potentialSeekStart) <= 10000 ){
+                        stateMachine.confirmSeek()
+                        stateMachine.transitionState(destinationState: .seeking, time: self.player?.currentTime())
+                    }
+                    
                     if (player?.rate == 0){
                         stateMachine.transitionState(destinationState: .paused, time: self.player?.currentTime())
                     }else if(player?.rate == 1){

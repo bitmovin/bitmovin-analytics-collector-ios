@@ -14,8 +14,9 @@ public class StateMachine {
     private var config: BitmovinAnalyticsConfig
     private var initialTimestamp: Int;
     private(set) var enterTimestamp: Int?;
+    var potentialSeekStart : Int = 0
+    var potentialSeekVideoTimeStart : CMTime?
     var firstReadyTimestamp: Int = 0;
-    var seekTimestamp: Int?;
     private(set) var videoTimeStart: CMTime?
     private(set) var videoTimeEnd: CMTime?
     private(set) var impressionId: String
@@ -53,6 +54,11 @@ public class StateMachine {
             self.videoTimeStart = videoTimeEnd
             self.state.onEntry(stateMachine: self,timestamp: timestamp,destinationState: destinationState)
         }
+    }
+    
+    public func confirmSeek(){
+        self.enterTimestamp = potentialSeekStart
+        self.videoTimeStart = potentialSeekVideoTimeStart
     }
     
     func enableHeartbeat(){

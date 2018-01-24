@@ -40,7 +40,6 @@ public enum PlayerStateEnum: String {
             delegate.didQualityChange()
             return;
         case .seeking:
-            stateMachine.seekTimestamp = Date().timeIntervalSince1970Millis
             return;
         }
     }
