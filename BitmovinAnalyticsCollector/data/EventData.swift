@@ -17,6 +17,7 @@ public class EventData : Codable {
     var screenHeight: Int?
     var isLive: Bool = false
     var isCasting: Bool? = false
+    var isMuted: Bool? = false
     var videoDuration: Int = 0
     var time: Double?
     var videoWindowWidth: Int = 0
@@ -26,7 +27,7 @@ public class EventData : Codable {
     var buffered: Int = 0
     var paused: Int = 0
     var ad: Int = 0
-    var seeked: Double?
+    var seeked: Int = 0
     var videoPlaybackWidth: Int?
     var videoPlaybackHeight: Int?
     var videoBitrate: Double = 0
@@ -40,6 +41,7 @@ public class EventData : Codable {
     var key: String?
     var playerKey: String?
     var player: String?
+    var playerTech: String = "Native"
     var cdnProvider: String?
     var streamForamt: String?
     var videoId: String?
@@ -105,9 +107,6 @@ public class EventData : Codable {
             return ""
         }
     }
-    
-    
-    
-    
+     
     
 }

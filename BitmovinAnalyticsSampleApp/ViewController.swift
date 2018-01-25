@@ -88,12 +88,10 @@ class ViewController: UIViewController {
          and not those destined for a subclass that also happens to be observing
          these properties.
          */
-        
-        
         addObserver(self, forKeyPath: #keyPath(ViewController.player.currentItem.duration), options: [.new, .initial], context: &ViewController.playerViewControllerKVOContext)
         addObserver(self, forKeyPath: #keyPath(ViewController.player.currentItem.status), options: [.new, .initial], context: &ViewController.playerViewControllerKVOContext)
         
-        let movieURL = URL(string: "http://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
+        let movieURL = URL(string: "https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8")
         let  asset = AVURLAsset(url: movieURL!, options: nil)
         player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
         player.play()
@@ -199,7 +197,7 @@ class ViewController: UIViewController {
     
     @IBAction func jumpForwardButtomPressed(_ sender: UIButton) {
         let currentTime = player.currentTime()
-        let deltaTime = CMTimeMakeWithSeconds(30, 30)
+        let deltaTime = CMTimeMakeWithSeconds(600, 30)
         print("Seek To Time \(CMTimeAdd(currentTime, deltaTime))")
         player.seek(to: CMTimeAdd(currentTime, deltaTime), completionHandler: { (completed) in
             if(completed){
@@ -210,7 +208,7 @@ class ViewController: UIViewController {
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
         let currentTime = player.currentTime()
-        let deltaTime = CMTimeMakeWithSeconds(30, 30)
+        let deltaTime = CMTimeMakeWithSeconds(600, 30)
         print("Seek To Time \(CMTimeSubtract(currentTime, deltaTime))")
         player.seek(to: CMTimeSubtract(currentTime, deltaTime), completionHandler: { (completed) in
             if(completed){

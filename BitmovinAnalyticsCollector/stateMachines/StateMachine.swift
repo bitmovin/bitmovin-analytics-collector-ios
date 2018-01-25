@@ -77,7 +77,7 @@ public class StateMachine {
         guard let enterTime = enterTimestamp else {
             return
         }
-        delegate?.heartbeatFired(duration: enterTime - timestamp)
+        delegate?.heartbeatFired(duration: timestamp - enterTime)
         enterTimestamp = timestamp
     }
 }

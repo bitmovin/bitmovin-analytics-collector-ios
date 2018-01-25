@@ -110,7 +110,7 @@
 		01F468BF20042F130078FDF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01F468CF20046D0E0078FDF0 /* BitmovinAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitmovinAnalytics.swift; sourceTree = "<group>"; };
 		01F468D120046DBD0078FDF0 /* BitmovinAnalyticsConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitmovinAnalyticsConfig.swift; sourceTree = "<group>"; };
-		01F468D720046E3E0078FDF0 /* BitmovinAnalyticsSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitmovinAnalyticsSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		01F468D720046E3E0078FDF0 /* Bitmovin Analytics Sample App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bitmovin Analytics Sample App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F468D920046E3E0078FDF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01F468DB20046E3E0078FDF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		01F468DE20046E3E0078FDF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -215,7 +215,7 @@
 			children = (
 				01F468AF20042F130078FDF0 /* BitmovinAnalyticsCollector.framework */,
 				01F468B820042F130078FDF0 /* BitmovinAnalyticsCollectorTests.xctest */,
-				01F468D720046E3E0078FDF0 /* BitmovinAnalyticsSampleApp.app */,
+				01F468D720046E3E0078FDF0 /* Bitmovin Analytics Sample App.app */,
 				01F468EA20046E3F0078FDF0 /* BitmovinAnalyticsSampleAppTests.xctest */,
 				01F468F520046E3F0078FDF0 /* BitmovinAnalyticsSampleAppUITests.xctest */,
 			);
@@ -388,9 +388,9 @@
 			productReference = 01F468B820042F130078FDF0 /* BitmovinAnalyticsCollectorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		01F468D620046E3E0078FDF0 /* BitmovinAnalyticsSampleApp */ = {
+		01F468D620046E3E0078FDF0 /* Bitmovin Analytics Sample App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 01F468FC20046E3F0078FDF0 /* Build configuration list for PBXNativeTarget "BitmovinAnalyticsSampleApp" */;
+			buildConfigurationList = 01F468FC20046E3F0078FDF0 /* Build configuration list for PBXNativeTarget "Bitmovin Analytics Sample App" */;
 			buildPhases = (
 				01F468D320046E3E0078FDF0 /* Sources */,
 				01F468D420046E3E0078FDF0 /* Frameworks */,
@@ -402,9 +402,9 @@
 			dependencies = (
 				01292EB02006B4F90026854E /* PBXTargetDependency */,
 			);
-			name = BitmovinAnalyticsSampleApp;
+			name = "Bitmovin Analytics Sample App";
 			productName = BitmovinAnalyticsSampleApp;
-			productReference = 01F468D720046E3E0078FDF0 /* BitmovinAnalyticsSampleApp.app */;
+			productReference = 01F468D720046E3E0078FDF0 /* Bitmovin Analytics Sample App.app */;
 			productType = "com.apple.product-type.application";
 		};
 		01F468E920046E3F0078FDF0 /* BitmovinAnalyticsSampleAppTests */ = {
@@ -493,7 +493,7 @@
 			targets = (
 				01F468AE20042F130078FDF0 /* BitmovinAnalyticsCollector */,
 				01F468B720042F130078FDF0 /* BitmovinAnalyticsCollectorTests */,
-				01F468D620046E3E0078FDF0 /* BitmovinAnalyticsSampleApp */,
+				01F468D620046E3E0078FDF0 /* Bitmovin Analytics Sample App */,
 				01F468E920046E3F0078FDF0 /* BitmovinAnalyticsSampleAppTests */,
 				01F468F420046E3F0078FDF0 /* BitmovinAnalyticsSampleAppUITests */,
 			);
@@ -615,12 +615,12 @@
 		};
 		01F468EC20046E3F0078FDF0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 01F468D620046E3E0078FDF0 /* BitmovinAnalyticsSampleApp */;
+			target = 01F468D620046E3E0078FDF0 /* Bitmovin Analytics Sample App */;
 			targetProxy = 01F468EB20046E3F0078FDF0 /* PBXContainerItemProxy */;
 		};
 		01F468F720046E3F0078FDF0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 01F468D620046E3E0078FDF0 /* BitmovinAnalyticsSampleApp */;
+			target = 01F468D620046E3E0078FDF0 /* Bitmovin Analytics Sample App */;
 			targetProxy = 01F468F620046E3F0078FDF0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -971,7 +971,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		01F468FC20046E3F0078FDF0 /* Build configuration list for PBXNativeTarget "BitmovinAnalyticsSampleApp" */ = {
+		01F468FC20046E3F0078FDF0 /* Build configuration list for PBXNativeTarget "Bitmovin Analytics Sample App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				01F468FD20046E3F0078FDF0 /* Debug */,

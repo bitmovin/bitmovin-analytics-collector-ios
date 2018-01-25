@@ -63,6 +63,7 @@ public class BitmovinAnalytics:StateMachineDelegate {
     
     func didExitSeeking(duration: Int, destinationPlayerState: PlayerStateEnum) {
         let eventData = createEventData(duration: duration)
+        eventData?.seeked = duration
         sendEventData(eventData: eventData)
     }
     

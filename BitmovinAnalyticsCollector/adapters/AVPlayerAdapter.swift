@@ -40,8 +40,8 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: self.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(addedErrorLog(notification:)), name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: self.player?.currentItem)
     }
-
-
+    
+    
     @objc private func addedErrorLog(notification: Notification){
         print("Error Log Added")
     }
@@ -59,8 +59,13 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
     }
     
     @objc private func timeJumped(notification: Notification){
-        stateMachine.potentialSeekStart = Date().timeIntervalSince1970Millis
-        stateMachine.potentialSeekVideoTimeStart = player?.currentTime()
+        let timestamp = Date().timeIntervalSince1970Millis
+        if(((timestamp - stateMachine.potentialSeekStart) > 1000)){
+            print("Time Jumped")
+            stateMachine.potentialSeekStart = timestamp
+            stateMachine.potentialSeekVideoTimeStart = player?.currentTime()
+            
+        }
     }
     
     @objc private func accessItemAdded(notification: Notification){
@@ -75,7 +80,7 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
             stateMachine.transitionState(destinationState: previousState, time: self.player?.currentTime())
             lastBitrate = event.indicatedBitrate
         }
-
+        
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
@@ -99,10 +104,10 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
                 let timestamp = Date().timeIntervalSince1970Millis
                 switch newStatus {
                 case .readyToPlay:
-                    
                     if(stateMachine.firstReadyTimestamp > 0 && (timestamp - stateMachine.potentialSeekStart) <= 10000 ){
-                        stateMachine.confirmSeek()
+                        print("Seek Confirmed")
                         stateMachine.transitionState(destinationState: .seeking, time: self.player?.currentTime())
+                        stateMachine.confirmSeek()
                     }
                     
                     if (player?.rate == 0){
@@ -116,7 +121,7 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
                     break
                 default:
                     break
-                
+                    
                 }
             }
         }else if keyPath == #keyPath(player.currentItem){ 
@@ -133,9 +138,8 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
         decorateEventData(eventData: eventData)
         return eventData
     }
-
+    
     private func decorateEventData(eventData: EventData){
-        
         //Duration
         if let duration = player?.currentItem?.duration, CMTIME_IS_NUMERIC(_: duration) {
             eventData.videoDuration = Int(CMTimeGetSeconds(duration)*1000)
@@ -159,24 +163,42 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
         }
         
         //audio bitrate
+        if let asset = player?.currentItem?.asset {
+            if asset.tracks.count > 0 {
+                let tracks = asset.tracks(withMediaType: .audio)
+                if (tracks.count > 0){
+                    let desc = tracks[0].formatDescriptions[0] as! CMAudioFormatDescription
+                    let basic = CMAudioFormatDescriptionGetStreamBasicDescription(desc)
+                    if let sampleRate = basic?.pointee.mSampleRate {
+                        eventData.audioBitrate = sampleRate
+                    }
+                }
+            }
+        }
         
         //video bitrate
         eventData.videoBitrate = lastBitrate
         
-        //width
-        if let urlAsset = player?.currentItem?.asset as? AVURLAsset {
-            let tracks = urlAsset.tracks(withMediaType: .video)
-            for track:AVAssetTrack in tracks {
-                print(track)
-            }
-            
+        //videoPlaybackWidth
+        if let width = player?.currentItem?.presentationSize.width {
+            eventData.videoPlaybackWidth = Int(width)
         }
-
         
-        //height
+        //videoPlaybackHeight
+        if let height = player?.currentItem?.presentationSize.height {
+            eventData.videoPlaybackHeight = Int(height)
+        }
+        
+        let scale = UIScreen.main.scale
+        //screenHeight
+        eventData.screenHeight = Int(UIScreen.main.bounds.size.height * scale)
+
+        //screenWidth
+        eventData.screenWidth = Int(UIScreen.main.bounds.size.width * scale)
+
         
         
         
     }
-
+    
 }
