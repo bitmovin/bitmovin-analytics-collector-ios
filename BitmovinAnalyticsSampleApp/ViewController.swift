@@ -79,9 +79,7 @@ class ViewController: UIViewController {
     
     @IBAction func createPlayer(){
         addObserver(self, forKeyPath: #keyPath(ViewController.player.currentItem.duration), options: [.new, .initial], context: &ViewController.playerViewControllerKVOContext)
-        addObserver(self, forKeyPath: #keyPath(ViewController.player.currentItem.status), options: [.new, .initial], context: &ViewController.playerViewControllerKVOContext)
-        
-        let movieURL = URL(string: "https://devstreaming-cdn.apple.com/videos/streaming/examplSDsdSDes/bipbop_16x9/bipbop_16x9_variant.m3u8")
+        let movieURL = URL(string: "https://devstreaming-cdn.apple.com/videos/streaming/examplSDsdSDes/bipbop_16x9/bipbop_16x9_variant1234567.m3u8")
         let  asset = AVURLAsset(url: movieURL!, options: nil)
         player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
         player.play()
@@ -131,32 +129,11 @@ class ViewController: UIViewController {
         }
         else if keyPath == #keyPath(ViewController.player.rate) {
             // Update `playPauseButton` image.
-            
             let newRate = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).doubleValue
             let buttonImageName = newRate == 1.0 ? "PauseButton" : "PlayButton"
             let buttonImage = UIImage(named: buttonImageName)
             
             playButton.setImage(buttonImage, for: UIControlState())
-        }
-        else if keyPath == #keyPath(ViewController.player.currentItem.status) {
-            // Display an error if status becomes `.Failed`.
-            
-            /*
-             Handle `NSNull` value for `NSKeyValueChangeNewKey`, i.e. when
-             `player.currentItem` is nil.
-             */
-            let newStatus: AVPlayerItemStatus
-            
-            if let newStatusAsNumber = change?[NSKeyValueChangeKey.newKey] as? NSNumber {
-                newStatus = AVPlayerItemStatus(rawValue: newStatusAsNumber.intValue)!
-            }
-            else {
-                newStatus = .unknown
-            }
-            
-            if newStatus == .failed {
-                print("Failed Status")
-            }
         }
     }
     

@@ -39,7 +39,7 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
         NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: self.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: self.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(addedErrorLog(notification:)), name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: self.player?.currentItem)
-
+        
     }
     
     
@@ -47,7 +47,7 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
         guard let object = notification.object, let playerItem = object as? AVPlayerItem else {
             return
         }
-        guard let errorLog: AVPlayerItemErrorLog = playerItem.errorLog(), let errorLogEvent: AVPlayerItemErrorLogEvent = errorLog.events.first else {
+        guard let errorLog: AVPlayerItemErrorLog = playerItem.errorLog(), let errorLogEvent: AVPlayerItemErrorLogEvent = errorLog.events.last else {
             return
         }
         
@@ -204,13 +204,21 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
         let scale = UIScreen.main.scale
         //screenHeight
         eventData.screenHeight = Int(UIScreen.main.bounds.size.height * scale)
-
+        
         //screenWidth
         eventData.screenWidth = Int(UIScreen.main.bounds.size.width * scale)
-
+        
         //isMuted
         if(player?.volume == 0){
             eventData.isMuted = true;
+        }
+        
+        //Error Code 
+        if(player?.currentItem?.status == .failed){
+            if let errorLog = player?.currentItem?.errorLog(), let errorLogEvent: AVPlayerItemErrorLogEvent = errorLog.events.first {
+                eventData.errorCode = String(errorLogEvent.errorStatusCode)
+                eventData.errorMessage = errorLogEvent.errorComment
+            }
         }
         
         
