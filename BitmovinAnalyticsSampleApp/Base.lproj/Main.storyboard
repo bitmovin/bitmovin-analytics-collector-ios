@@ -14,7 +14,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="BitmovinAnalyticsSampleApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Bitmovin_Analytics_Sample_App" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -46,10 +46,10 @@
                             <slider opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="zs2-tO-O9K">
                                 <rect key="frame" x="296" y="728" width="65" height="31"/>
                                 <connections>
-                                    <action selector="timeSliderDidChange:" destination="BYZ-38-t0r" eventType="touchDragExit" id="dgL-Kd-bHq"/>
+                                    <action selector="timeSliderDidChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="nwz-gW-JRb"/>
                                 </connections>
                             </slider>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2B-HR-6u1" customClass="PlayerView" customModule="BitmovinAnalyticsSampleApp" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2B-HR-6u1" customClass="PlayerView" customModule="Bitmovin_Analytics_Sample_App" customModuleProvider="target">
                                 <rect key="frame" x="-4" y="44" width="383" height="654"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>

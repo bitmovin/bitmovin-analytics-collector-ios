@@ -39,11 +39,20 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
         NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: self.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: self.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(addedErrorLog(notification:)), name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: self.player?.currentItem)
+
     }
     
     
     @objc private func addedErrorLog(notification: Notification){
-        print("Error Log Added")
+        guard let object = notification.object, let playerItem = object as? AVPlayerItem else {
+            return
+        }
+        guard let errorLog: AVPlayerItemErrorLog = playerItem.errorLog(), let errorLogEvent: AVPlayerItemErrorLogEvent = errorLog.events.first else {
+            return
+        }
+        
+        print(errorLogEvent.errorStatusCode)
+        
     }
     
     @objc private func playbackStalled(notification: Notification){
@@ -140,6 +149,9 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
     }
     
     private func decorateEventData(eventData: EventData){
+        
+        eventData.errorMessage = player?.error?.localizedDescription
+        
         //Duration
         if let duration = player?.currentItem?.duration, CMTIME_IS_NUMERIC(_: duration) {
             eventData.videoDuration = Int(CMTimeGetSeconds(duration)*1000)
@@ -196,6 +208,10 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
         //screenWidth
         eventData.screenWidth = Int(UIScreen.main.bounds.size.width * scale)
 
+        //isMuted
+        if(player?.volume == 0){
+            eventData.isMuted = true;
+        }
         
         
         

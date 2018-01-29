@@ -68,7 +68,6 @@ public class BitmovinAnalytics:StateMachineDelegate {
     }
     
     func heartbeatFired(duration: Int) {
-        print("Heartbeat Fired")
         let eventData = createEventData(duration: duration)
         switch stateMachine.state {
         case .playing:

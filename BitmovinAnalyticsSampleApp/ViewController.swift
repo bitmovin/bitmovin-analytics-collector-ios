@@ -11,26 +11,24 @@ import AVKit
 import BitmovinAnalyticsCollector
 
 class ViewController: UIViewController {
-    
     private static var playerViewControllerKVOContext = 0
     private var analyticsCollector: BitmovinAnalytics
+    private var isSeeking: Bool = false;
     @objc private let player: AVPlayer = AVPlayer()
+    
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var endDuration: UILabel!
     @IBOutlet weak var position: UILabel!
-    
     @IBOutlet weak var fastForwardButton: UIButton!
     @IBOutlet weak var reloadButton: UIButton!
     @IBOutlet weak var rewindButton: UIButton!
-    
-    
     @IBOutlet weak var playerView: PlayerView!
+    
     private var timeObserverToken: Any?
     
     var duration: Double {
         guard let currentItem = player.currentItem else { return 0.0 }
-        
         return CMTimeGetSeconds(currentItem.duration)
     }
     
@@ -38,7 +36,6 @@ class ViewController: UIViewController {
         get {
             return player.rate
         }
-        
         set {
             player.rate = newValue
         }
@@ -57,7 +54,7 @@ class ViewController: UIViewController {
     }()
     
     required init?(coder aDecoder: NSCoder) {
-        let config:BitmovinAnalyticsConfig = BitmovinAnalyticsConfig(key:"9ae0b480-f2ee-4c10-bc3c-cb88e982e0ac",playerKey:"18ca6ad5-9768-4129-bdf6-17685e0d14d2")
+        let config:BitmovinAnalyticsConfig = BitmovinAnalyticsConfig(key:"9ae0b480-f2ee-4c10-bc3c-cb88e982e0ac")
         config.cdnProvider = .akamai
         config.customData1 = "customData1"
         config.customData2 = "customData2"
@@ -65,7 +62,7 @@ class ViewController: UIViewController {
         config.customData4 = "customData4"
         config.customData5 = "customData5"
         config.customerUserId = "customUserId"
-        config.experimentName = "experiement-1"
+        config.experimentName = "experiment-1"
         config.videoId = "iOSHLSStatic"
         config.path = "/vod/breadcrumb/"
         
@@ -81,51 +78,33 @@ class ViewController: UIViewController {
     }
     
     @IBAction func createPlayer(){
-        /*
-         Update the UI when these player properties change.
-         
-         Use the context parameter to distinguish KVO for our particular observers
-         and not those destined for a subclass that also happens to be observing
-         these properties.
-         */
         addObserver(self, forKeyPath: #keyPath(ViewController.player.currentItem.duration), options: [.new, .initial], context: &ViewController.playerViewControllerKVOContext)
         addObserver(self, forKeyPath: #keyPath(ViewController.player.currentItem.status), options: [.new, .initial], context: &ViewController.playerViewControllerKVOContext)
         
-        let movieURL = URL(string: "https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8")
+        let movieURL = URL(string: "https://devstreaming-cdn.apple.com/videos/streaming/examplSDsdSDes/bipbop_16x9/bipbop_16x9_variant.m3u8")
         let  asset = AVURLAsset(url: movieURL!, options: nil)
         player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
         player.play()
-        // Make sure we don't have a strong reference cycle by only capturing self as weak.
         let interval = CMTimeMake(1, 1)
         timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { [unowned self] time in
             let position = Float(CMTimeGetSeconds(time))
-            
             self.slider.value = Float(position)
             self.position.text = self.createTimeString(time: position)
         }
     }
     
     
-    // Update our UI when player or `player.currentItem` changes.
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        // Make sure the this KVO callback was intended for this view controller.
         guard context == &ViewController.playerViewControllerKVOContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
         
         if keyPath == #keyPath(ViewController.player.currentItem.duration) {
-            // Update timeSlider and enable/disable controls when duration > 0.0
-            
-            /*
-             Handle `NSNull` value for `NSKeyValueChangeNewKey`, i.e. when
-             `player.currentItem` is nil.
-             */
             let newDuration: CMTime
             if let newDurationAsValue = change?[NSKeyValueChangeKey.newKey] as? NSValue {
                 newDuration = newDurationAsValue.timeValue
-            }
-            else {
+            } else {
                 newDuration = kCMTimeZero
             }
             
@@ -134,17 +113,17 @@ class ViewController: UIViewController {
             let currentTime = hasValidDuration ? Float(CMTimeGetSeconds(player.currentTime())) : 0.0
             
             slider.maximumValue = Float(newDurationSeconds)
-            slider.value = currentTime
+            
+            if(!isSeeking){
+                slider.value = currentTime
+            }
             
             rewindButton.isEnabled = hasValidDuration
-            
             playButton.isEnabled = hasValidDuration
-            
             fastForwardButton.isEnabled = hasValidDuration
-            
             slider.isEnabled = hasValidDuration
-            
             position.isEnabled = hasValidDuration
+            
             position.text = createTimeString(time: currentTime)
             
             endDuration.isEnabled = hasValidDuration
@@ -154,9 +133,7 @@ class ViewController: UIViewController {
             // Update `playPauseButton` image.
             
             let newRate = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).doubleValue
-            
             let buttonImageName = newRate == 1.0 ? "PauseButton" : "PlayButton"
-            
             let buttonImage = UIImage(named: buttonImageName)
             
             playButton.setImage(buttonImage, for: UIControlState())
@@ -178,7 +155,7 @@ class ViewController: UIViewController {
             }
             
             if newStatus == .failed {
-                //                handleErrorWithMessage(player.currentItem?.error?.localizedDescription, error:player.currentItem?.error)
+                print("Failed Status")
             }
         }
     }
@@ -228,20 +205,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction func timeSliderDidChange(_ sender: UISlider) {
-        print("Slider Changed: \(slider.value)")
+        isSeeking = true;
+        player.seek(to: CMTimeMakeWithSeconds(Float64(slider.value), 30)) { [weak self] (completed) in
+            self?.isSeeking = false;
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
-    // MARK: Convenience
     
     func createTimeString(time: Float) -> String {
         let components = NSDateComponents()
         components.second = Int(max(0.0, time))
-        
         return timeRemainingFormatter.string(from: components as DateComponents)!
     }
 }

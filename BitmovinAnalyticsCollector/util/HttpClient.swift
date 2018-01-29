@@ -26,7 +26,7 @@ class HttpClient {
         request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else {                                                 // check for fundamental networking error
-                print("Http Error: \(error)")
+                print(String(describing: error))
                 return
             }
             

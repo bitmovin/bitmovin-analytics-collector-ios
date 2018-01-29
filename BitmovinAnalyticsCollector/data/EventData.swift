@@ -13,6 +13,8 @@ public class EventData : Codable {
     var path: String?
     var language: String
     var userAgent: String?
+    var errorCode: String?
+    var errorMessage: String?
     var screenWidth: Int?
     var screenHeight: Int?
     var isLive: Bool = false
@@ -87,8 +89,7 @@ public class EventData : Codable {
         self.path = config.path
     }
     
-    public func jsonString() -> String{
-        
+    public func jsonString() -> String {
         let encoder = JSONEncoder();
         if #available(iOS 11.0, *) {
             encoder.outputFormatting = [.sortedKeys]

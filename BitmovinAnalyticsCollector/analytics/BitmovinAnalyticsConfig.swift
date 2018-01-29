@@ -21,7 +21,7 @@ public class BitmovinAnalyticsConfig {
     public var experimentName: String?
     public var videoId: String?
     public var key: String
-    public var playerKey: String
+    public var playerKey: String = ""
     public var path: String?
     
     var heartbeatInterval: Int = 59000
@@ -29,5 +29,9 @@ public class BitmovinAnalyticsConfig {
     public init(key: String, playerKey: String){
         self.key = key;
         self.playerKey = playerKey;
+    }
+    
+    public init(key: String){
+        self.key = key;
     }
 }
