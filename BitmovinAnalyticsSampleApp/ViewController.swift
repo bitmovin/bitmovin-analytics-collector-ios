@@ -70,7 +70,7 @@ class ViewController: UIViewController {
     
     @IBAction func createPlayer(){
         addObserver(self, forKeyPath: #keyPath(ViewController.player.currentItem.duration), options: [.new, .initial], context: &ViewController.playerViewControllerKVOContext)
-        let movieURL = URL(string: "https://devstreaming-cdn.apple.com/videos/streaming/examplSDsdSDes/bipbop_16x9/bipbop_16x9_variant1234567.m3u8")
+        let movieURL = URL(string: "https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8")
         let  asset = AVURLAsset(url: movieURL!, options: nil)
         player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
         player.play()

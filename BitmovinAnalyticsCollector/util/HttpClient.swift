@@ -9,14 +9,14 @@
 import Foundation
 
 class HttpClient {
-    var config: BitmovinAnalyticsConfig
+    var urlString: String
     
-    init(config: BitmovinAnalyticsConfig) {
-        self.config = config
+    init(urlString: String) {
+        self.urlString = urlString
     }
     
-    func post(json: String){
-        let url = URL(string: BitmovinAnalyticsConfig.analyticsUrl)!
+    func post(json: String, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> Void {
+        let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         request.setValue("http://\(Util.bundle())", forHTTPHeaderField: "Origin")
@@ -25,7 +25,7 @@ class HttpClient {
         print(postString)
         request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard error == nil else {                                                 // check for fundamental networking error
+            guard error == nil else {// check for fundamental networking error
                 print(String(describing: error))
                 return
             }
@@ -33,6 +33,7 @@ class HttpClient {
             if let httpStatus = response as? HTTPURLResponse {           // check for http errors
                 print("HTTP Analytics response: \(httpStatus.statusCode)")
             }
+            completionHandler(data,response,error)
         }
         task.resume()
     }

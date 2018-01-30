@@ -23,6 +23,8 @@
 		016B4D57200D221600D2260A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 016B4D56200D221600D2260A /* Images.xcassets */; };
 		016B4D59200D241000D2260A /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B4D58200D241000D2260A /* PlayerView.swift */; };
 		0177B23E200FF13400839CCB /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177B23D200FF13400839CCB /* HttpClient.swift */; };
+		0185838E2020ABC60029CC37 /* LicenseCallData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0185838D2020ABC60029CC37 /* LicenseCallData.swift */; };
+		018583902020B01C0029CC37 /* LicenseCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0185838F2020B01C0029CC37 /* LicenseCall.swift */; };
 		018F5175200ECAAE00B27BC4 /* StateMachineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018F5174200ECAAE00B27BC4 /* StateMachineDelegate.swift */; };
 		018F5177200FC60000B27BC4 /* EventDataDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018F5176200FC60000B27BC4 /* EventDataDispatcher.swift */; };
 		018F5179200FC6DB00B27BC4 /* SimpleEventDataDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018F5178200FC6DB00B27BC4 /* SimpleEventDataDispatcher.swift */; };
@@ -99,6 +101,8 @@
 		016B4D56200D221600D2260A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		016B4D58200D241000D2260A /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		0177B23D200FF13400839CCB /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
+		0185838D2020ABC60029CC37 /* LicenseCallData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseCallData.swift; sourceTree = "<group>"; };
+		0185838F2020B01C0029CC37 /* LicenseCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseCall.swift; sourceTree = "<group>"; };
 		018F5174200ECAAE00B27BC4 /* StateMachineDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMachineDelegate.swift; sourceTree = "<group>"; };
 		018F5176200FC60000B27BC4 /* EventDataDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDataDispatcher.swift; sourceTree = "<group>"; };
 		018F5178200FC6DB00B27BC4 /* SimpleEventDataDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleEventDataDispatcher.swift; sourceTree = "<group>"; };
@@ -254,6 +258,7 @@
 				014F74CE2006869F009DF902 /* EventData.swift */,
 				018F5176200FC60000B27BC4 /* EventDataDispatcher.swift */,
 				018F5178200FC6DB00B27BC4 /* SimpleEventDataDispatcher.swift */,
+				0185838D2020ABC60029CC37 /* LicenseCallData.swift */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -272,6 +277,7 @@
 			children = (
 				01292EB22006B6720026854E /* Util.swift */,
 				0177B23D200FF13400839CCB /* HttpClient.swift */,
+				0185838F2020B01C0029CC37 /* LicenseCall.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -557,6 +563,8 @@
 				018F5179200FC6DB00B27BC4 /* SimpleEventDataDispatcher.swift in Sources */,
 				01292EB92006B7AA0026854E /* StateMachine.swift in Sources */,
 				014F74CF2006869F009DF902 /* EventData.swift in Sources */,
+				0185838E2020ABC60029CC37 /* LicenseCallData.swift in Sources */,
+				018583902020B01C0029CC37 /* LicenseCall.swift in Sources */,
 				014F74D1200698B1009DF902 /* AVPlayerAdapter.swift in Sources */,
 				014F74CD20068606009DF902 /* PlayerType.swift in Sources */,
 				014F74CB2004968A009DF902 /* CdnProvider.swift in Sources */,

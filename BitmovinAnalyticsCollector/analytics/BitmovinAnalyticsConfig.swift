@@ -11,6 +11,8 @@ import UIKit
 public class BitmovinAnalyticsConfig {
     
     static var analyticsUrl: String = "https://analytics-ingress-global.bitmovin.com/analytics";
+    static var analyticsLicenseUrl: String = "https://analytics-ingress-global.bitmovin.com/licensing";
+
     public var cdnProvider: CdnProver?
     public var customData1: String?
     public var customData2: String?
