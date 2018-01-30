@@ -31,16 +31,7 @@ class ViewController: UIViewController {
         guard let currentItem = player.currentItem else { return 0.0 }
         return CMTimeGetSeconds(currentItem.duration)
     }
-    
-    var rate: Float {
-        get {
-            return player.rate
-        }
-        set {
-            player.rate = newValue
-        }
-    }
-    
+
     /*
      A formatter for individual date components used to provide an appropriate
      value for the `startTimeLabel` and `durationLabel`.
@@ -173,12 +164,13 @@ class ViewController: UIViewController {
     
     @IBAction func rewindButtonWasPressed(_ sender: UIButton) {
         // Rewind no faster than -2.0.
-        rate = max(player.rate - 2.0, -2.0)
+        
+        player.rate = max(player.rate - 2.0,-2.0)
     }
     
     @IBAction func fastForwardButtonWasPressed(_ sender: UIButton) {
         // Fast forward no faster than 2.0.
-        rate = min(player.rate + 2.0, 2.0)
+        player.rate = min(player.rate + 2.0, 2.0)
     }
     
     @IBAction func timeSliderDidChange(_ sender: UISlider) {
