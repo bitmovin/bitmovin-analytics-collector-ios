@@ -26,10 +26,22 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
         self.lastBitrate = 0
     }
     
+    deinit {
+        removePlayerItemMonitoring()
+        detachMonitoring()
+    }
+    
     public func startMonitoring(){
         addObserver(self, forKeyPath: #keyPath(player.rate), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
         addObserver(self, forKeyPath: #keyPath(player.currentItem.status), options: [.new, .initial], context:&AVPlayerAdapter.playerKVOContext)
         addObserver(self, forKeyPath: #keyPath(player.currentItem), options: [.new, .initial], context:&AVPlayerAdapter.playerKVOContext)
+    }
+    
+    public func detachMonitoring(){
+        removeObserver(self, forKeyPath: #keyPath(player.rate), context: &AVPlayerAdapter.playerKVOContext)
+        removeObserver(self, forKeyPath: #keyPath(player.currentItem.status), context: &AVPlayerAdapter.playerKVOContext)
+        removeObserver(self, forKeyPath: #keyPath(player.currentItem), context: &AVPlayerAdapter.playerKVOContext)
+
     }
     
     private func startMonitoringPlayerItem(){
@@ -39,9 +51,16 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
         NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: self.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: self.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(addedErrorLog(notification:)), name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: self.player?.currentItem)
-        
     }
-    
+
+    private func removePlayerItemMonitoring() {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: self.player?.currentItem)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.player?.currentItem)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: self.player?.currentItem)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemTimeJumped, object: self.player?.currentItem)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: self.player?.currentItem)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: self.player?.currentItem)
+    }
     
     @objc private func addedErrorLog(notification: Notification){
         guard let object = notification.object, let playerItem = object as? AVPlayerItem else {
@@ -143,14 +162,27 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
     
     public func createEventData() -> EventData {
         let eventData: EventData = EventData(config:config,impressionId:stateMachine.impressionId);
-        eventData.player = PlayerType.avplayer.rawValue
         decorateEventData(eventData: eventData)
         return eventData
     }
     
     private func decorateEventData(eventData: EventData){
+        //Player
+        eventData.player = PlayerType.avplayer.rawValue
         
-        eventData.errorMessage = player?.error?.localizedDescription
+        //Player Tech
+        eventData.playerTech = "ios:avplayer"
+        
+        //Error Code
+        if(player?.currentItem?.status == .failed){
+            if let errorLog = player?.currentItem?.errorLog(), let errorLogEvent: AVPlayerItemErrorLogEvent = errorLog.events.first {
+                eventData.errorCode = errorLogEvent.errorStatusCode
+                eventData.errorMessage = errorLogEvent.errorComment
+            }
+        }
+        
+        //Error Message
+        eventData.errorMessage = player?.error?.localizedDescription        
         
         //Duration
         if let duration = player?.currentItem?.duration, CMTIME_IS_NUMERIC(_: duration) {
@@ -212,17 +244,6 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
         if(player?.volume == 0){
             eventData.isMuted = true;
         }
-        
-        //Error Code 
-        if(player?.currentItem?.status == .failed){
-            if let errorLog = player?.currentItem?.errorLog(), let errorLogEvent: AVPlayerItemErrorLogEvent = errorLog.events.first {
-                eventData.errorCode = errorLogEvent.errorStatusCode
-                eventData.errorMessage = errorLogEvent.errorComment
-            }
-        }
-        
-        
-        
     }
     
 }

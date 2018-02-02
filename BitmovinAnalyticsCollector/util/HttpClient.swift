@@ -8,14 +8,16 @@
 
 import Foundation
 
+typealias HttpCompletionHandlerType = ((_ data: Data?, _ response: URLResponse?, _ error:Error?) -> ())
+
 class HttpClient {
     var urlString: String
-    
+
     init(urlString: String) {
         self.urlString = urlString
     }
     
-    func post(json: String, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> Void {
+    func post(json: String, completionHandler: HttpCompletionHandlerType?) -> Void {
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
@@ -33,7 +35,7 @@ class HttpClient {
             if let httpStatus = response as? HTTPURLResponse {           // check for http errors
                 print("HTTP Analytics response: \(httpStatus.statusCode)")
             }
-            completionHandler(data,response,error)
+            completionHandler?(data,response,error)
         }
         task.resume()
     }

@@ -36,16 +36,17 @@ public class StateMachine {
         self.impressionId = NSUUID().uuidString
     }
     
-    private func resetStateMachine() {
+    public func reset() {
         self.impressionId = NSUUID().uuidString
         self.initialTimestamp = Date().timeIntervalSince1970Millis
+        disableHeartbeat()
+        self.state = .setup
     }
     
     public func transitionState(destinationState: PlayerStateEnum, time: CMTime?){
         if(state == destinationState) {
             return
         }else{
-            print("Transitioning from \(state.rawValue) to \(destinationState.rawValue)")
             let timestamp = Date().timeIntervalSince1970Millis
             videoTimeEnd = time
             self.state.onExit(stateMachine: self, timestamp: timestamp, destinationState: destinationState)

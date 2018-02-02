@@ -81,7 +81,7 @@
                                 </constraints>
                                 <state key="normal" image="Reload"/>
                                 <connections>
-                                    <action selector="createPlayer" destination="BYZ-38-t0r" eventType="touchUpInside" id="QYC-gb-fZ7"/>
+                                    <action selector="reloadPlayer" destination="BYZ-38-t0r" eventType="touchUpInside" id="btS-ob-LkP"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPx-xu-KMD" userLabel="Jump Back Button">

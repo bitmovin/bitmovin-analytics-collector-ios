@@ -43,7 +43,7 @@ public class EventData : Codable {
     var key: String?
     var playerKey: String?
     var player: String?
-    var playerTech: String = "Native"
+    var playerTech: String?
     var cdnProvider: String?
     var streamForamt: String?
     var videoId: String?

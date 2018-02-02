@@ -16,27 +16,28 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
     init(config: BitmovinAnalyticsConfig) {
         self.httpClient = HttpClient(urlString: BitmovinAnalyticsConfig.analyticsUrl)
         self.config = config
-        makeLicenseCall()
     }
     
     func makeLicenseCall(){
         let licenseCall = LicenseCall(config: self.config)
-        licenseCall.authenticate { (success) in
+        licenseCall.authenticate { [weak self] (success) in
             if(success){
-                self.enable()
+                self?.enabled = true
+                guard let events = self?.events.enumerated() else {
+                    return
+                }
+                for (i,eventData) in events {
+                    self?.httpClient.post(json: eventData.jsonString(), completionHandler: nil);
+                    self?.events.remove(at: i)
+                }
             }else{
-                self.disable()
+                self?.enabled = false
             }
         }
     }
     
     func enable() {
-        enabled = true
-        for eventData:EventData in events {
-            httpClient.post(json: eventData.jsonString(), completionHandler: { _, _, _ in
-                
-            })
-        }
+        makeLicenseCall()
     }
     
     func disable() {
@@ -45,9 +46,7 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
     
     func add(eventData: EventData) {
         if enabled {
-            httpClient.post(json: eventData.jsonString(), completionHandler: { _, _, _ in
-                
-            });
+            httpClient.post(json: eventData.jsonString(), completionHandler: nil);
         }else{
             events.append(eventData)
         }

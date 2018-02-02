@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     private static var playerViewControllerKVOContext = 0
     private var analyticsCollector: BitmovinAnalytics
     private var isSeeking: Bool = false;
+    private var timeObserverToken: Any?
+    private var config:BitmovinAnalyticsConfig
     @objc private let player: AVPlayer = AVPlayer()
     
     @IBOutlet weak var playButton: UIButton!
@@ -24,8 +26,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var reloadButton: UIButton!
     @IBOutlet weak var rewindButton: UIButton!
     @IBOutlet weak var playerView: PlayerView!
-    
-    private var timeObserverToken: Any?
     
     var duration: Double {
         guard let currentItem = player.currentItem else { return 0.0 }
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
     }()
     
     required init?(coder aDecoder: NSCoder) {
-        let config:BitmovinAnalyticsConfig = BitmovinAnalyticsConfig(key:"9ae0b480-f2ee-4c10-bc3c-cb88e982e0ac")
+        self.config = BitmovinAnalyticsConfig(key:"9ae0b480-f2ee-4c10-bc3c-cb88e982e0ac")
         config.cdnProvider = .akamai
         config.customData1 = "customData1"
         config.customData2 = "customData2"
@@ -63,8 +63,8 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         playerView.playerLayer.player = player
-        createPlayer()
         addObserver(self, forKeyPath: #keyPath(ViewController.player.rate), options: [.new, .initial], context: &ViewController.playerViewControllerKVOContext)
+        createPlayer()
         analyticsCollector.attachAVPlayer(player: player);
     }
     
@@ -82,6 +82,21 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func reloadPlayer() {
+        analyticsCollector.detachPlayer()
+        createPlayer()
+        config.cdnProvider = .bitmovin
+        config.customData1 = "customData6"
+        config.customData2 = "customData7"
+        config.customData3 = "customData8"
+        config.customData4 = "customData9"
+        config.customData5 = "customData10"
+        config.customerUserId = "customUserId2"
+        config.experimentName = "experiment-12"
+        config.videoId = "iOSHLSStatic2"
+        config.path = "/vod/breadcrumb/2/"
+        analyticsCollector.attachAVPlayer(player: player)
+    }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         guard context == &ViewController.playerViewControllerKVOContext else {

@@ -25,8 +25,15 @@ public class BitmovinAnalytics:StateMachineDelegate {
         self.eventDataDispatcher = SimpleEventDataDispatcher(config: config)
     }
     
+    public func detachPlayer(){
+        self.eventDataDispatcher.disable()
+        self.stateMachine.reset()
+        self.adapter = nil
+    }
+    
     public func attachAVPlayer(player: AVPlayer) {
         self.stateMachine.delegate = self
+        self.eventDataDispatcher.enable()
         self.adapter = AVPlayerAdapter(player: player, config: config, stateMachine: self.stateMachine)
         self.adapter?.startMonitoring()
     }
