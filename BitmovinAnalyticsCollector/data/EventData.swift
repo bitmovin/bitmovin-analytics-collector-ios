@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class EventData : Codable {
+public class EventData: Codable {
     var domain: String
     var path: String?
     var language: String
@@ -62,51 +62,48 @@ public class EventData : Codable {
     var pageLoadType: Int = 1
     var pageLoadTime: Int = 0
     var version: String?
-    
+
     public init(config: BitmovinAnalyticsConfig, impressionId: String) {
-        self.domain = Util.bundle()
-        
-        if let text = Bundle(identifier: "com.bitmovin.BitmovinAnalyticsCollector")?.infoDictionary?["CFBundleShortVersionString"]  as? String {
-            self.analyticsVersion = text
+        domain = Util.bundle()
+
+        if let text = Bundle(identifier: "com.bitmovin.BitmovinAnalyticsCollector")?.infoDictionary?["CFBundleShortVersionString"] as? String {
+            analyticsVersion = text
         }
-        
-        self.version = UIDevice.current.systemVersion
-        self.language = Util.language()
-        self.userAgent = Util.userAgent()
+
+        version = UIDevice.current.systemVersion
+        language = Util.language()
+        userAgent = Util.userAgent()
         self.impressionId = impressionId
-        self.key = config.key
-        self.playerKey = config.playerKey
-        self.cdnProvider = config.cdnProvider?.rawValue
-        self.customUserId = config.customerUserId
-        self.customData1 = config.customData1
-        self.customData2 = config.customData2
-        self.customData3 = config.customData3
-        self.customData4 = config.customData4
-        self.customData5 = config.customData5
-        self.videoId = config.videoId
-        self.experimentName = config.experimentName
-        self.path = config.path
+        key = config.key
+        playerKey = config.playerKey
+        cdnProvider = config.cdnProvider?.rawValue
+        customUserId = config.customerUserId
+        customData1 = config.customData1
+        customData2 = config.customData2
+        customData3 = config.customData3
+        customData4 = config.customData4
+        customData5 = config.customData5
+        videoId = config.videoId
+        experimentName = config.experimentName
+        path = config.path
     }
-    
+
     public func jsonString() -> String {
-        let encoder = JSONEncoder();
+        let encoder = JSONEncoder()
         if #available(iOS 11.0, *) {
             encoder.outputFormatting = [.sortedKeys]
         }
-        
+
         encoder.nonConformingFloatEncodingStrategy = .convertToString(positiveInfinity: "Infinity", negativeInfinity: "Negative Infinity", nan: "nan")
         do {
             let jsonData = try encoder.encode(self)
             guard let jsonString = String(data: jsonData, encoding: .utf8) else {
                 return ""
             }
-            
+
             return jsonString
-        }
-        catch {
+        } catch {
             return ""
         }
     }
-    
-    
 }

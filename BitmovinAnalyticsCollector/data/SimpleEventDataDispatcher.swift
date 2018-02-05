@@ -11,48 +11,47 @@ import Foundation
 class SimpleEventDataDispatcher: EventDataDispatcher {
     private var httpClient: HttpClient
     private var enabled: Bool = false
-    private var events = [EventData]();
+    private var events = [EventData]()
     private var config: BitmovinAnalyticsConfig
     init(config: BitmovinAnalyticsConfig) {
-        self.httpClient = HttpClient(urlString: BitmovinAnalyticsConfig.analyticsUrl)
+        httpClient = HttpClient(urlString: BitmovinAnalyticsConfig.analyticsUrl)
         self.config = config
     }
-    
-    func makeLicenseCall(){
-        let licenseCall = LicenseCall(config: self.config)
-        licenseCall.authenticate { [weak self] (success) in
-            if(success){
+
+    func makeLicenseCall() {
+        let licenseCall = LicenseCall(config: config)
+        licenseCall.authenticate { [weak self] success in
+            if success {
                 self?.enabled = true
                 guard let events = self?.events.enumerated() else {
                     return
                 }
-                for (i,eventData) in events {
-                    self?.httpClient.post(json: eventData.jsonString(), completionHandler: nil);
+                for (i, eventData) in events {
+                    self?.httpClient.post(json: eventData.jsonString(), completionHandler: nil)
                     self?.events.remove(at: i)
                 }
-            }else{
+            } else {
                 self?.enabled = false
             }
         }
     }
-    
+
     func enable() {
         makeLicenseCall()
     }
-    
+
     func disable() {
         enabled = false
     }
-    
+
     func add(eventData: EventData) {
         if enabled {
-            httpClient.post(json: eventData.jsonString(), completionHandler: nil);
-        }else{
+            httpClient.post(json: eventData.jsonString(), completionHandler: nil)
+        } else {
             events.append(eventData)
         }
-        
     }
+
     func clear() {
-        
     }
 }

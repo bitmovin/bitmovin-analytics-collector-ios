@@ -6,81 +6,81 @@
 //  Copyright © 2018 Bitmovin. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
+import Foundation
 
 /**
  * An iOS analytics plugin that sends video playback analytics to Bitmovin Analytics servers. Currently
  * supports analytics on AVPlayer video players
  */
-public class BitmovinAnalytics:StateMachineDelegate {
+public class BitmovinAnalytics: StateMachineDelegate {
     private var config: BitmovinAnalyticsConfig
     private var adapter: PlayerAdapter?
     private var stateMachine: StateMachine
     private var eventDataDispatcher: EventDataDispatcher
-    
+
     public init(config: BitmovinAnalyticsConfig) {
         self.config = config
-        self.stateMachine = StateMachine(config: self.config)
-        self.eventDataDispatcher = SimpleEventDataDispatcher(config: config)
+        stateMachine = StateMachine(config: self.config)
+        eventDataDispatcher = SimpleEventDataDispatcher(config: config)
     }
-    
+
     /**
      * Detach the current player that is being used with Bitmovin Analytics.
      */
-    public func detachPlayer(){
-        self.eventDataDispatcher.disable()
-        self.stateMachine.reset()
-        self.adapter = nil
+    public func detachPlayer() {
+        eventDataDispatcher.disable()
+        stateMachine.reset()
+        adapter = nil
     }
-    
+
     /**
      * Attach a player instance to this analytics plugin. After this is completed, BitmovinAnalytics
      * will start monitoring and sending analytics data based on the attached player instance.
      */
     public func attachAVPlayer(player: AVPlayer) {
-        self.stateMachine.delegate = self
-        self.eventDataDispatcher.enable()
-        self.adapter = AVPlayerAdapter(player: player, config: config, stateMachine: self.stateMachine)
-        self.adapter?.startMonitoring()
+        stateMachine.delegate = self
+        eventDataDispatcher.enable()
+        adapter = AVPlayerAdapter(player: player, config: config, stateMachine: stateMachine)
+        adapter?.startMonitoring()
     }
-    
+
     func didExitSetup() {
     }
-    
+
     func didExitBuffering(duration: Int) {
         let eventData = createEventData(duration: duration)
         sendEventData(eventData: eventData)
     }
-    
+
     func didEnterError() {
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
     }
-    
+
     func didExitPlaying(duration: Int) {
         let eventData = createEventData(duration: duration)
         eventData?.played = duration
         sendEventData(eventData: eventData)
     }
-    
+
     func didExitPause(duration: Int) {
         let eventData = createEventData(duration: duration)
         eventData?.paused = duration
         sendEventData(eventData: eventData)
     }
-    
+
     func didQualityChange() {
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
     }
-    
-    func didExitSeeking(duration: Int, destinationPlayerState: PlayerStateEnum) {
+
+    func didExitSeeking(duration: Int, destinationPlayerState _: PlayerStateEnum) {
         let eventData = createEventData(duration: duration)
         eventData?.seeked = duration
         sendEventData(eventData: eventData)
     }
-    
+
     func heartbeatFired(duration: Int) {
         let eventData = createEventData(duration: duration)
         switch stateMachine.state {
@@ -98,7 +98,7 @@ public class BitmovinAnalytics:StateMachineDelegate {
         }
         sendEventData(eventData: eventData)
     }
-    
+
     func didStartup(duration: Int) {
         let eventData = createEventData(duration: duration)
         eventData?.videoStartupTime = duration
@@ -106,26 +106,26 @@ public class BitmovinAnalytics:StateMachineDelegate {
         eventData?.state = "startup"
         sendEventData(eventData: eventData)
     }
-    
-    private func sendEventData(eventData: EventData?){
+
+    private func sendEventData(eventData: EventData?) {
         guard let data = eventData else {
             return
         }
         eventDataDispatcher.add(eventData: data)
     }
-    
+
     private func createEventData(duration: Int) -> EventData? {
         guard let eventData = adapter?.createEventData() else {
             return nil
         }
         eventData.state = stateMachine.state.rawValue
         eventData.duration = duration
-        
+
         if let timeStart = stateMachine.videoTimeStart {
-            eventData.videoTimeEnd = Int(CMTimeGetSeconds(timeStart)*1000)
+            eventData.videoTimeEnd = Int(CMTimeGetSeconds(timeStart) * 1000)
         }
         if let timeEnd = stateMachine.videoTimeEnd {
-            eventData.videoTimeEnd = Int(CMTimeGetSeconds(timeEnd)*1000)
+            eventData.videoTimeEnd = Int(CMTimeGetSeconds(timeEnd) * 1000)
         }
         return eventData
     }

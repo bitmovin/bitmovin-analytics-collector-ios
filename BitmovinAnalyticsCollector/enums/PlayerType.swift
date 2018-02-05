@@ -9,6 +9,6 @@
 import Foundation
 
 enum PlayerType: String {
-    case avplayer = "avplayer"
-    case bitmovin = "bitmovin"
+    case avplayer
+    case bitmovin
 }

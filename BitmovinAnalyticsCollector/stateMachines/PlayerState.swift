@@ -9,15 +9,15 @@
 import Foundation
 
 public enum PlayerStateEnum: String {
-    case setup = "setup"
-    case buffering = "buffering"
-    case error = "error"
-    case playing = "playing"
-    case paused = "paused"
-    case qualitychange = "qualitychange"
-    case seeking = "seeking"
-    
-    func onEntry(stateMachine: StateMachine, timestamp: Int, destinationState: PlayerStateEnum){
+    case setup
+    case buffering
+    case error
+    case playing
+    case paused
+    case qualitychange
+    case seeking
+
+    func onEntry(stateMachine: StateMachine, timestamp _: Int, destinationState _: PlayerStateEnum) {
         guard let delegate = stateMachine.delegate else {
             return
         }
@@ -30,29 +30,29 @@ public enum PlayerStateEnum: String {
             delegate.didEnterError()
             return;
         case .playing, .paused:
-            if (stateMachine.firstReadyTimestamp == 0){
+            if stateMachine.firstReadyTimestamp == 0 {
                 stateMachine.firstReadyTimestamp = Date().timeIntervalSince1970Millis
-                delegate.didStartup(duration: stateMachine.startupTime);
+                delegate.didStartup(duration: stateMachine.startupTime)
             }
-            stateMachine.enableHeartbeat();
+            stateMachine.enableHeartbeat()
             return;
         case .qualitychange:
             delegate.didQualityChange()
             return;
         case .seeking:
-            return;
+            return
         }
     }
-    
-    func onExit(stateMachine: StateMachine, timestamp: Int, destinationState: PlayerStateEnum){
+
+    func onExit(stateMachine: StateMachine, timestamp: Int, destinationState: PlayerStateEnum) {
         guard let delegate = stateMachine.delegate else {
             return
         }
-        
-        //Get the duration we were in the state we are exiting
+
+        // Get the duration we were in the state we are exiting
         let enterTimestamp = stateMachine.enterTimestamp ?? 0
         let duration = timestamp - enterTimestamp
-        
+
         switch self {
         case .setup:
             delegate.didExitSetup()
@@ -75,9 +75,7 @@ public enum PlayerStateEnum: String {
             return;
         case .seeking:
             delegate.didExitSeeking(duration: duration, destinationPlayerState: destinationState)
-            return;
+            return
         }
     }
 }
-
-

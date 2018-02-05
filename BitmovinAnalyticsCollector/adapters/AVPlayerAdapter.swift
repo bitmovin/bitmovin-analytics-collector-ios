@@ -5,11 +5,10 @@
 //  Copyright © 2018 Bitmovin. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
+import Foundation
 
-class AVPlayerAdapter:NSObject,PlayerAdapter {
-    
+class AVPlayerAdapter: NSObject, PlayerAdapter {
     private static var playerKVOContext = 0
     private let stateMachine: StateMachine
     private let config: BitmovinAnalyticsConfig
@@ -18,124 +17,119 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
     var playbackLikelyToKeepUpKeyPathObserver: NSKeyValueObservation?
     var playbackBufferEmptyObserver: NSKeyValueObservation?
     var playbackBufferFullObserver: NSKeyValueObservation?
-    
-    init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine){
+
+    init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.stateMachine = stateMachine
         self.config = config
-        self.lastBitrate = 0
+        lastBitrate = 0
     }
-    
+
     deinit {
         removePlayerItemMonitoring()
         detachMonitoring()
     }
-    
-    public func startMonitoring(){
+
+    public func startMonitoring() {
         addObserver(self, forKeyPath: #keyPath(player.rate), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
-        addObserver(self, forKeyPath: #keyPath(player.currentItem.status), options: [.new, .initial], context:&AVPlayerAdapter.playerKVOContext)
-        addObserver(self, forKeyPath: #keyPath(player.currentItem), options: [.new, .initial], context:&AVPlayerAdapter.playerKVOContext)
+        addObserver(self, forKeyPath: #keyPath(player.currentItem.status), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
+        addObserver(self, forKeyPath: #keyPath(player.currentItem), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
     }
-    
-    public func detachMonitoring(){
+
+    public func detachMonitoring() {
         removeObserver(self, forKeyPath: #keyPath(player.rate), context: &AVPlayerAdapter.playerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(player.currentItem.status), context: &AVPlayerAdapter.playerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(player.currentItem), context: &AVPlayerAdapter.playerKVOContext)
-        
     }
-    
-    private func startMonitoringPlayerItem(){
-        NotificationCenter.default.addObserver(self, selector: #selector(accessItemAdded(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: self.player?.currentItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(didPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.player?.currentItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: self.player?.currentItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: self.player?.currentItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(addedErrorLog(notification:)), name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: self.player?.currentItem)
+
+    private func startMonitoringPlayerItem() {
+        NotificationCenter.default.addObserver(self, selector: #selector(accessItemAdded(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: player?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(didPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: player?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: player?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(addedErrorLog(notification:)), name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: player?.currentItem)
     }
-    
+
     private func removePlayerItemMonitoring() {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: self.player?.currentItem)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.player?.currentItem)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: self.player?.currentItem)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemTimeJumped, object: self.player?.currentItem)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: self.player?.currentItem)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: self.player?.currentItem)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: player?.currentItem)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: player?.currentItem)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemTimeJumped, object: player?.currentItem)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: player?.currentItem)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: player?.currentItem)
     }
-    
-    @objc private func addedErrorLog(notification: Notification){
+
+    @objc private func addedErrorLog(notification: Notification) {
         guard let object = notification.object, let playerItem = object as? AVPlayerItem else {
             return
         }
         guard let errorLog: AVPlayerItemErrorLog = playerItem.errorLog(), let errorLogEvent: AVPlayerItemErrorLogEvent = errorLog.events.last else {
             return
         }
-        
+
         print(errorLogEvent.errorStatusCode)
-        
     }
-    
-    @objc private func playbackStalled(notification: Notification){
+
+    @objc private func playbackStalled(notification _: Notification) {
         stateMachine.transitionState(destinationState: .buffering, time: player?.currentTime())
     }
-    
-    @objc private func didPlayToEndTime(notification: Notification){
+
+    @objc private func didPlayToEndTime(notification _: Notification) {
         print("Did Play to End Time")
     }
-    
-    @objc private func timeJumped(notification: Notification){
+
+    @objc private func timeJumped(notification _: Notification) {
         let timestamp = Date().timeIntervalSince1970Millis
-        if(((timestamp - stateMachine.potentialSeekStart) > 1000)){
+        if (timestamp - stateMachine.potentialSeekStart) > 1000 {
             print("Time Jumped")
             stateMachine.potentialSeekStart = timestamp
             stateMachine.potentialSeekVideoTimeStart = player?.currentTime()
-            
         }
     }
-    
-    @objc private func accessItemAdded(notification: Notification){
+
+    @objc private func accessItemAdded(notification: Notification) {
         guard let item = notification.object as? AVPlayerItem, let event = item.accessLog()?.events.last else {
             return
         }
-        if(lastBitrate == 0){
-            lastBitrate = event.indicatedBitrate;
-        }else if (lastBitrate != event.indicatedBitrate){
+        if lastBitrate == 0 {
+            lastBitrate = event.indicatedBitrate
+        } else if lastBitrate != event.indicatedBitrate {
             let previousState = stateMachine.state
-            stateMachine.transitionState(destinationState: .qualitychange, time: self.player?.currentTime())
-            stateMachine.transitionState(destinationState: previousState, time: self.player?.currentTime())
+            stateMachine.transitionState(destinationState: .qualitychange, time: player?.currentTime())
+            stateMachine.transitionState(destinationState: previousState, time: player?.currentTime())
             lastBitrate = event.indicatedBitrate
         }
-        
     }
-    
+
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        
         guard context == &AVPlayerAdapter.playerKVOContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
-        
+
         if keyPath == #keyPath(player.rate) {
             let newRate = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).doubleValue
-            if (newRate == 0.0 && stateMachine.firstReadyTimestamp > 0){
+            if newRate == 0.0 && stateMachine.firstReadyTimestamp > 0 {
                 stateMachine.transitionState(destinationState: .paused, time: self.player?.currentTime())
-            }else if (newRate == 1.0  && stateMachine.firstReadyTimestamp > 0){
+            } else if newRate == 1.0 && stateMachine.firstReadyTimestamp > 0 {
                 stateMachine.transitionState(destinationState: .playing, time: self.player?.currentTime())
             }
-        }else if keyPath == #keyPath(player.currentItem.status) {
+        } else if keyPath == #keyPath(player.currentItem.status) {
             let newStatus: AVPlayerItemStatus
             if let newStatusAsNumber = change?[NSKeyValueChangeKey.newKey] as? NSNumber {
                 newStatus = AVPlayerItemStatus(rawValue: newStatusAsNumber.intValue)!
                 let timestamp = Date().timeIntervalSince1970Millis
                 switch newStatus {
                 case .readyToPlay:
-                    if(stateMachine.firstReadyTimestamp > 0 && (timestamp - stateMachine.potentialSeekStart) <= 10000 ){
+                    if stateMachine.firstReadyTimestamp > 0 && (timestamp - stateMachine.potentialSeekStart) <= 10000 {
                         print("Seek Confirmed")
                         stateMachine.transitionState(destinationState: .seeking, time: self.player?.currentTime())
                         stateMachine.confirmSeek()
                     }
-                    
-                    if (player?.rate == 0){
+
+                    if player?.rate == 0 {
                         stateMachine.transitionState(destinationState: .paused, time: self.player?.currentTime())
-                    }else if(player?.rate == 1){
+                    } else if player?.rate == 1 {
                         stateMachine.transitionState(destinationState: .playing, time: self.player?.currentTime())
                     }
                     break
@@ -144,68 +138,67 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
                     break
                 default:
                     break
-                    
                 }
             }
-        }else if keyPath == #keyPath(player.currentItem){ 
+        } else if keyPath == #keyPath(player.currentItem) {
             if let currentItem = change?[NSKeyValueChangeKey.newKey] as? AVPlayerItem {
-                NSLog("Current Item Changed: %@",currentItem.debugDescription)
+                NSLog("Current Item Changed: %@", currentItem.debugDescription)
                 startMonitoringPlayerItem()
             }
         }
     }
-    
+
     public func createEventData() -> EventData {
-        let eventData: EventData = EventData(config:config,impressionId:stateMachine.impressionId);
+        let eventData: EventData = EventData(config: config, impressionId: stateMachine.impressionId)
         decorateEventData(eventData: eventData)
         return eventData
     }
-    
-    private func decorateEventData(eventData: EventData){
-        //Player
+
+    private func decorateEventData(eventData: EventData) {
+        // Player
         eventData.player = PlayerType.avplayer.rawValue
-        
-        //Player Tech
+
+        // Player Tech
         eventData.playerTech = "ios:avplayer"
-        
-        //Error Code
-        if(player?.currentItem?.status == .failed){
+
+        // Error Code
+        if player?.currentItem?.status == .failed {
             if let errorLog = player?.currentItem?.errorLog(), let errorLogEvent: AVPlayerItemErrorLogEvent = errorLog.events.first {
                 eventData.errorCode = errorLogEvent.errorStatusCode
                 eventData.errorMessage = errorLogEvent.errorComment
             }
         }
-        
-        //Error Message
-        eventData.errorMessage = player?.error?.localizedDescription        
-        
-        //Duration
+
+        // Error Message
+        eventData.errorMessage = player?.error?.localizedDescription
+
+        // Duration
         if let duration = player?.currentItem?.duration, CMTIME_IS_NUMERIC(_: duration) {
-            eventData.videoDuration = Int(CMTimeGetSeconds(duration)*1000)
+            eventData.videoDuration = Int(CMTimeGetSeconds(duration) * 1000)
         }
-        
-        //isCasting
+
+        // isCasting
         eventData.isCasting = player?.isExternalPlaybackActive
-        
-        //isLive
+
+        // isLive
         if let duration = player?.currentItem?.duration {
             eventData.isLive = CMTIME_IS_INDEFINITE(duration)
         }
-        
-        //version
+
+        // version
         eventData.version = UIDevice.current.systemVersion
-        
-        //streamFormat, hlsUrl
+
+        // streamFormat, hlsUrl
         eventData.streamForamt = "hls"
         if let urlAsset = player?.currentItem?.asset as? AVURLAsset {
             eventData.m3u8Url = urlAsset.url.absoluteString
         }
-        
-        //audio bitrate
+
+        // audio bitrate
         if let asset = player?.currentItem?.asset {
             if asset.tracks.count > 0 {
                 let tracks = asset.tracks(withMediaType: .audio)
-                if (tracks.count > 0){
+                if tracks.count > 0 {
                     let desc = tracks[0].formatDescriptions[0] as! CMAudioFormatDescription
                     let basic = CMAudioFormatDescriptionGetStreamBasicDescription(desc)
                     if let sampleRate = basic?.pointee.mSampleRate {
@@ -214,31 +207,30 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
                 }
             }
         }
-        
-        //video bitrate
+
+        // video bitrate
         eventData.videoBitrate = lastBitrate
-        
-        //videoPlaybackWidth
+
+        // videoPlaybackWidth
         if let width = player?.currentItem?.presentationSize.width {
             eventData.videoPlaybackWidth = Int(width)
         }
-        
-        //videoPlaybackHeight
+
+        // videoPlaybackHeight
         if let height = player?.currentItem?.presentationSize.height {
             eventData.videoPlaybackHeight = Int(height)
         }
-        
+
         let scale = UIScreen.main.scale
-        //screenHeight
+        // screenHeight
         eventData.screenHeight = Int(UIScreen.main.bounds.size.height * scale)
-        
-        //screenWidth
+
+        // screenWidth
         eventData.screenWidth = Int(UIScreen.main.bounds.size.width * scale)
-        
-        //isMuted
-        if(player?.volume == 0){
-            eventData.isMuted = true;
+
+        // isMuted
+        if player?.volume == 0 {
+            eventData.isMuted = true
         }
     }
-    
 }
