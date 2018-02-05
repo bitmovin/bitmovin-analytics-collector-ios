@@ -1,0 +1,22 @@
+{
+  "name": "BitmovinAnalyticsCollector",
+  "version": "0.1.0",
+  "summary": "A short description of BitmovinAnalyticsCollector.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/Cory Zachman/BitmovinAnalyticsCollector",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Cory Zachman": "cory.zachman@bitmovin.com"
+  },
+  "source": {
+    "git": "https://github.com/Cory Zachman/BitmovinAnalyticsCollector.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "BitmovinAnalyticsCollector/Classes/**/*"
+}
