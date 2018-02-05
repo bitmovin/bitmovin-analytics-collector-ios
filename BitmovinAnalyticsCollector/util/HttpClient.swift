@@ -12,7 +12,7 @@ typealias HttpCompletionHandlerType = ((_ data: Data?, _ response: URLResponse?,
 
 class HttpClient {
     var urlString: String
-
+    
     init(urlString: String) {
         self.urlString = urlString
     }

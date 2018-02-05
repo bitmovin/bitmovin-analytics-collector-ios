@@ -71,7 +71,6 @@ public class EventData : Codable {
         }
         
         self.version = UIDevice.current.systemVersion
-        
         self.language = Util.language()
         self.userAgent = Util.userAgent()
         self.impressionId = impressionId
@@ -108,6 +107,6 @@ public class EventData : Codable {
             return ""
         }
     }
-     
+    
     
 }

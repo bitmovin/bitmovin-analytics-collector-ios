@@ -25,12 +25,19 @@ public class BitmovinAnalytics:StateMachineDelegate {
         self.eventDataDispatcher = SimpleEventDataDispatcher(config: config)
     }
     
+    /**
+     * Detach the current player that is being used with Bitmovin Analytics.
+     */
     public func detachPlayer(){
         self.eventDataDispatcher.disable()
         self.stateMachine.reset()
         self.adapter = nil
     }
     
+    /**
+     * Attach a player instance to this analytics plugin. After this is completed, BitmovinAnalytics
+     * will start monitoring and sending analytics data based on the attached player instance.
+     */
     public func attachAVPlayer(player: AVPlayer) {
         self.stateMachine.delegate = self
         self.eventDataDispatcher.enable()

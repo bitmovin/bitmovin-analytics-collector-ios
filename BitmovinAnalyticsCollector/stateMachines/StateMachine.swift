@@ -72,8 +72,7 @@ public class StateMachine {
     }
     
     
-    @objc func onHeartbeat()
-    {
+    @objc func onHeartbeat(){
         let timestamp = Date().timeIntervalSince1970Millis
         guard let enterTime = enterTimestamp else {
             return

@@ -41,18 +41,17 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
         removeObserver(self, forKeyPath: #keyPath(player.rate), context: &AVPlayerAdapter.playerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(player.currentItem.status), context: &AVPlayerAdapter.playerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(player.currentItem), context: &AVPlayerAdapter.playerKVOContext)
-
+        
     }
     
     private func startMonitoringPlayerItem(){
         NotificationCenter.default.addObserver(self, selector: #selector(accessItemAdded(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: self.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(didPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.player?.currentItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(failedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: self.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: self.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: self.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(addedErrorLog(notification:)), name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: self.player?.currentItem)
     }
-
+    
     private func removePlayerItemMonitoring() {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: self.player?.currentItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.player?.currentItem)
@@ -79,10 +78,6 @@ class AVPlayerAdapter:NSObject,PlayerAdapter {
     }
     
     @objc private func didPlayToEndTime(notification: Notification){
-        print("Did Play to End Time")
-    }
-    
-    @objc private func failedToPlayToEndTime(notification: Notification){
         print("Did Play to End Time")
     }
     
