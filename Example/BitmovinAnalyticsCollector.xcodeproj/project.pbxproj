@@ -225,11 +225,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = PLT3CHF9CL;
+						DevelopmentTeam = 7UXPEM3WRB;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 7UXPEM3WRB;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -476,7 +477,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -522,7 +523,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -535,7 +536,7 @@
 			baseConfigurationReference = 50BDD2BA49B6C287A5B1F940 /* Pods-BitmovinAnalyticsCollector_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PLT3CHF9CL;
+				DEVELOPMENT_TEAM = 7UXPEM3WRB;
 				INFOPLIST_FILE = BitmovinAnalyticsCollector/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -551,7 +552,7 @@
 			baseConfigurationReference = 6C25EC86D83FCAD97DE9E11C /* Pods-BitmovinAnalyticsCollector_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PLT3CHF9CL;
+				DEVELOPMENT_TEAM = 7UXPEM3WRB;
 				INFOPLIST_FILE = BitmovinAnalyticsCollector/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -566,6 +567,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F19E237725D61F43403DC733 /* Pods-BitmovinAnalyticsCollector_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 7UXPEM3WRB;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -587,6 +589,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AC5CA12D2D5F63D83F16BF5A /* Pods-BitmovinAnalyticsCollector_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 7UXPEM3WRB;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
