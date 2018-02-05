@@ -32,6 +32,7 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
                 }
             } else {
                 self?.enabled = false
+                NotificationCenter.default.post(name: .licenseFailed, object: self)
             }
         }
     }

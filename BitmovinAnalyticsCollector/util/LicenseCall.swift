@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias LicenseCallCompletionHandler = ((_ success: Bool) -> Void)
+
 class LicenseCall {
     var config: BitmovinAnalyticsConfig
     var httpClient: HttpClient
@@ -17,7 +19,7 @@ class LicenseCall {
         httpClient = HttpClient(urlString: BitmovinAnalyticsConfig.analyticsLicenseUrl)
     }
 
-    public func authenticate(_ completionHandler: @escaping (Bool) -> Void) {
+    public func authenticate(_ completionHandler: @escaping LicenseCallCompletionHandler) {
         let licenseCallData = LicenseCallData()
         licenseCallData.key = config.key
         licenseCallData.domain = Util.bundle()
@@ -53,4 +55,8 @@ class LicenseCall {
             }
         }
     }
+}
+
+extension Notification.Name {
+    static let licenseFailed = Notification.Name("licenseFailed")
 }
