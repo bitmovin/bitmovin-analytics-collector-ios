@@ -1,12 +1,12 @@
-# [![bitmovin](http://bitmovin-a.akamaihd.net/webpages/bitmovin-logo-github.png)](http://www.bitmovin.com)
-iOS library that allows you to monitor your iOS video playback with [Bitmovin Analytics](https://bitmovin.com/video-analytics/)
+# BitmovinAnalyticsCollector
 
-# Getting started
-## Adding to your project
-#### Carthage
-#### Cocoapods
+[![CI Status](http://img.shields.io/travis/Cory Zachman/BitmovinAnalyticsCollector.svg?style=flat)](https://travis-ci.org/Cory Zachman/BitmovinAnalyticsCollector)
+[![Version](https://img.shields.io/cocoapods/v/BitmovinAnalyticsCollector.svg?style=flat)](http://cocoapods.org/pods/BitmovinAnalyticsCollector)
+[![License](https://img.shields.io/cocoapods/l/BitmovinAnalyticsCollector.svg?style=flat)](http://cocoapods.org/pods/BitmovinAnalyticsCollector)
+[![Platform](https://img.shields.io/cocoapods/p/BitmovinAnalyticsCollector.svg?style=flat)](http://cocoapods.org/pods/BitmovinAnalyticsCollector)
 
-## Examples
+## Example
+
 
 The following example creates a BitmovinAnalytics object and attaches an AVPlayer instance to it. 
 
@@ -40,3 +40,22 @@ config.path = "/vod/breadcrumb/"
 ```
 
 A [full example app]() can be seen in the github repo 
+
+## Requirements
+
+## Installation
+
+BitmovinAnalyticsCollector is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod 'BitmovinAnalyticsCollector'
+```
+
+## Author
+
+Cory Zachman, cory.zachman@bitmovin.com
+
+## License
+
+BitmovinAnalyticsCollector is available under the MIT license. See the LICENSE file for more info.
