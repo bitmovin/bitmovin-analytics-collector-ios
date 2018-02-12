@@ -1,9 +1,9 @@
 {
   "name": "BitmovinAnalyticsCollector",
-  "version": "0.1.0",
-  "summary": "A short description of BitmovinAnalyticsCollector.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/Cory Zachman/BitmovinAnalyticsCollector",
+  "version": "1.0.0",
+  "summary": "iOS library that allows you to monitor your iOS video playback with Bitmovin Analytics",
+  "description": "iOS library that allows you to monitor your iOS video playback with Bitmovin Analytics",
+  "homepage": "https://github.com/bitmovin/bitmovin-analytics-collector-ios",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/Cory Zachman/BitmovinAnalyticsCollector.git",
-    "tag": "0.1.0"
+    "tag": "1.0.0"
   },
   "platforms": {
     "ios": "8.0"
