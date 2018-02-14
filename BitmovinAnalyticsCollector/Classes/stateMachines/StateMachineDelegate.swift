@@ -15,7 +15,7 @@ protocol StateMachineDelegate: class {
     func didExitPlaying(duration: Int)
     func didExitPause(duration: Int)
     func didQualityChange()
-    func didExitSeeking(duration: Int, destinationPlayerState: PlayerStateEnum)
+    func didExitSeeking(duration: Int, destinationPlayerState: PlayerState)
     func heartbeatFired(duration: Int)
     func didStartup(duration: Int)
 }

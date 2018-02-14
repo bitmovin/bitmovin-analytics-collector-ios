@@ -26,8 +26,8 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     }
 
     deinit {
-        removePlayerItemMonitoring()
-        detachMonitoring()
+        stopMonitoringPlayerItem()
+        stopMonitoring()
     }
 
     public func startMonitoring() {
@@ -36,7 +36,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         addObserver(self, forKeyPath: #keyPath(player.currentItem), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
     }
 
-    public func detachMonitoring() {
+    public func stopMonitoring() {
         removeObserver(self, forKeyPath: #keyPath(player.rate), context: &AVPlayerAdapter.playerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(player.currentItem.status), context: &AVPlayerAdapter.playerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(player.currentItem), context: &AVPlayerAdapter.playerKVOContext)
@@ -44,16 +44,13 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
 
     private func startMonitoringPlayerItem() {
         NotificationCenter.default.addObserver(self, selector: #selector(accessItemAdded(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: player?.currentItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(didPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(addedErrorLog(notification:)), name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: player?.currentItem)
     }
 
-    private func removePlayerItemMonitoring() {
+    private func stopMonitoringPlayerItem() {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: player?.currentItem)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: player?.currentItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemTimeJumped, object: player?.currentItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: player?.currentItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: player?.currentItem)
@@ -72,10 +69,6 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
 
     @objc private func playbackStalled(notification _: Notification) {
         stateMachine.transitionState(destinationState: .buffering, time: player?.currentTime())
-    }
-
-    @objc private func didPlayToEndTime(notification _: Notification) {
-        print("Did Play to End Time")
     }
 
     @objc private func timeJumped(notification _: Notification) {

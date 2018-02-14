@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum CdnProver: String {
+public enum CdnProvider: String {
     case bitmovin
     case akamai
     case fastly

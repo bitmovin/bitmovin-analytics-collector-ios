@@ -10,7 +10,7 @@ import AVFoundation
 import Foundation
 
 public class StateMachine {
-    private(set) var state: PlayerStateEnum
+    private(set) var state: PlayerState
     private var config: BitmovinAnalyticsConfig
     private var initialTimestamp: Int
     private(set) var enterTimestamp: Int?
@@ -41,7 +41,7 @@ public class StateMachine {
         state = .setup
     }
 
-    public func transitionState(destinationState: PlayerStateEnum, time: CMTime?) {
+    public func transitionState(destinationState: PlayerState, time: CMTime?) {
         if state == destinationState {
             return
         } else {
@@ -62,6 +62,9 @@ public class StateMachine {
 
     func enableHeartbeat() {
         let interval = Double(config.heartbeatInterval) / 1000.0
+        if(heartbeatTimer != nil){
+            heartbeatTimer?.invalidate()
+        }
         heartbeatTimer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(StateMachine.onHeartbeat), userInfo: nil, repeats: true)
     }
 
@@ -70,10 +73,10 @@ public class StateMachine {
     }
 
     @objc func onHeartbeat() {
-        let timestamp = Date().timeIntervalSince1970Millis
         guard let enterTime = enterTimestamp else {
             return
         }
+        let timestamp = Date().timeIntervalSince1970Millis
         delegate?.heartbeatFired(duration: timestamp - enterTime)
         enterTimestamp = timestamp
     }

@@ -12,7 +12,7 @@ import Foundation
 class Util {
     static func bundle() -> String {
         guard let bundle = Bundle.main.bundleIdentifier else {
-            return "Unknow"
+            return "Unknown"
         }
         return bundle
     }

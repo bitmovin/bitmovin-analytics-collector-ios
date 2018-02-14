@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum PlayerStateEnum: String {
+public enum PlayerState: String {
     case setup
     case buffering
     case error
@@ -17,7 +17,7 @@ public enum PlayerStateEnum: String {
     case qualitychange
     case seeking
 
-    func onEntry(stateMachine: StateMachine, timestamp _: Int, destinationState _: PlayerStateEnum) {
+    func onEntry(stateMachine: StateMachine, timestamp _: Int, destinationState _: PlayerState) {
         guard let delegate = stateMachine.delegate else {
             return
         }
@@ -44,7 +44,7 @@ public enum PlayerStateEnum: String {
         }
     }
 
-    func onExit(stateMachine: StateMachine, timestamp: Int, destinationState: PlayerStateEnum) {
+    func onExit(stateMachine: StateMachine, timestamp: Int, destinationState: PlayerState) {
         guard let delegate = stateMachine.delegate else {
             return
         }
