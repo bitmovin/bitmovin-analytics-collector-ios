@@ -41,6 +41,7 @@ public class StateMachine {
     public func reset() {
         impressionId = NSUUID().uuidString
         initialTimestamp = Date().timeIntervalSince1970Millis
+        firstReadyTimestamp = 0
         disableHeartbeat()
         state = .setup
     }
