@@ -104,7 +104,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
             let newRate = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).doubleValue
             if newRate == 0.0 && stateMachine.firstReadyTimestamp > 0 {
                 stateMachine.transitionState(destinationState: .paused, time: self.player?.currentTime())
-            } else if newRate == 1.0 && stateMachine.firstReadyTimestamp > 0 {
+            } else if newRate > 0.0 && stateMachine.firstReadyTimestamp > 0 {
                 stateMachine.transitionState(destinationState: .playing, time: self.player?.currentTime())
             }
         } else if keyPath == #keyPath(player.currentItem.status) {
@@ -122,7 +122,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
 
                     if player?.rate == 0 {
                         stateMachine.transitionState(destinationState: .paused, time: self.player?.currentTime())
-                    } else if player?.rate == 1 {
+                    } else if player?.rate > 0 {
                         stateMachine.transitionState(destinationState: .playing, time: self.player?.currentTime())
                     }
                     break

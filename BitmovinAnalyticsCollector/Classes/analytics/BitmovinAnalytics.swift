@@ -74,8 +74,6 @@ public class BitmovinAnalytics {
     }
 }
 
-extension BitmovinAnalytics:
-
 extension BitmovinAnalytics: StateMachineDelegate {
     func didExitSetup() {
     }

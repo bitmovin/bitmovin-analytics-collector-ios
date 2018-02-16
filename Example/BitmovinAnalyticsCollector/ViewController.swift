@@ -135,7 +135,7 @@ class ViewController: UIViewController {
         } else if keyPath == #keyPath(ViewController.player.rate) {
             // Update `playPauseButton` image.
             let newRate = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).doubleValue
-            let buttonImageName = newRate == 1.0 ? "PauseButton" : "PlayButton"
+            let buttonImageName = newRate > 0.0 ? "PauseButton" : "PlayButton"
             let buttonImage = UIImage(named: buttonImageName)
 
             playButton.setImage(buttonImage, for: UIControlState())

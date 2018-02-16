@@ -62,9 +62,7 @@ public class StateMachine {
 
     func enableHeartbeat() {
         let interval = Double(config.heartbeatInterval) / 1000.0
-        if(heartbeatTimer != nil){
-            heartbeatTimer?.invalidate()
-        }
+        heartbeatTimer?.invalidate()
         heartbeatTimer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(StateMachine.onHeartbeat), userInfo: nil, repeats: true)
     }
 
