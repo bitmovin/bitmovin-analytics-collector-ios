@@ -75,43 +75,43 @@ public class BitmovinAnalytics {
 }
 
 extension BitmovinAnalytics: StateMachineDelegate {
-    
+
     func stateMachineDidExitSetup(_ stateMachine: StateMachine) {
     }
-    
+
     func stateMachine(_ stateMachine: StateMachine, didExitBufferingWithDuration duration: Int) {
         let eventData = createEventData(duration: duration)
         sendEventData(eventData: eventData)
     }
-    
+
     func stateMachineDidEnterError(_ stateMachine: StateMachine) {
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
     }
-    
+
     func stateMachine(_ stateMachine: StateMachine, didExitPlayingWithDuration duration: Int) {
         let eventData = createEventData(duration: duration)
         eventData?.played = duration
         sendEventData(eventData: eventData)
     }
-    
+
     func stateMachine(_ stateMachine: StateMachine, didExitPauseWithDuration duration: Int) {
         let eventData = createEventData(duration: duration)
         eventData?.paused = duration
         sendEventData(eventData: eventData)
     }
-    
+
     func stateMachineDidQualityChange(_ stateMachine: StateMachine) {
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
     }
-    
+
     func stateMachine(_ stateMachine: StateMachine, didExitSeekingWithDuration duration: Int, destinationPlayerState: PlayerState) {
         let eventData = createEventData(duration: duration)
         eventData?.seeked = duration
         sendEventData(eventData: eventData)
     }
-    
+
     func stateMachine(_ stateMachine: StateMachine, didHeartbeatWithDuration duration: Int) {
         let eventData = createEventData(duration: duration)
         switch stateMachine.state {
@@ -129,7 +129,7 @@ extension BitmovinAnalytics: StateMachineDelegate {
         }
         sendEventData(eventData: eventData)
     }
-    
+
     func stateMachine(_ stateMachine: StateMachine, didStartupWithDuration duration: Int) {
         let eventData = createEventData(duration: duration)
         eventData?.videoStartupTime = duration

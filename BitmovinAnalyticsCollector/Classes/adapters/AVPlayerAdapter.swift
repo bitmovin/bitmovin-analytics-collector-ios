@@ -119,11 +119,11 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
                         stateMachine.transitionState(destinationState: .seeking, time: self.player?.currentTime())
                         stateMachine.confirmSeek()
                     }
-                    
+
                     guard let rate = player?.rate else {
                         break
                     }
-                    
+
                     if rate == 0 {
                         stateMachine.transitionState(destinationState: .paused, time: self.player?.currentTime())
                     } else if rate > 0.0 {

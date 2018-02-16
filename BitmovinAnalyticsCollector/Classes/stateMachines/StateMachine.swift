@@ -33,7 +33,7 @@ public class StateMachine {
         initialTimestamp = Date().timeIntervalSince1970Millis
         impressionId = NSUUID().uuidString
     }
-    
+
     deinit {
         heartbeatTimer?.invalidate()
     }

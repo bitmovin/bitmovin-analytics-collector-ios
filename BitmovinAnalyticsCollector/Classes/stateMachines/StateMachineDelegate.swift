@@ -15,7 +15,7 @@ protocol StateMachineDelegate: class {
     func stateMachine(_ stateMachine: StateMachine, didExitPlayingWithDuration duration: Int)
     func stateMachine(_ stateMachine: StateMachine, didExitPauseWithDuration duration: Int)
     func stateMachineDidQualityChange(_ stateMachine: StateMachine)
-    func stateMachine(_ stateMachine:StateMachine, didExitSeekingWithDuration duration: Int, destinationPlayerState: PlayerState)
-    func stateMachine(_ stateMachine:StateMachine, didHeartbeatWithDuration duration: Int)
-    func stateMachine(_ stateMachine:StateMachine, didStartupWithDuration duration: Int)
+    func stateMachine(_ stateMachine: StateMachine, didExitSeekingWithDuration duration: Int, destinationPlayerState: PlayerState)
+    func stateMachine(_ stateMachine: StateMachine, didHeartbeatWithDuration duration: Int)
+    func stateMachine(_ stateMachine: StateMachine, didStartupWithDuration duration: Int)
 }

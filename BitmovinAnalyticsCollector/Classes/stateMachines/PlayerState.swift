@@ -23,22 +23,22 @@ public enum PlayerState: String {
         }
         switch self {
         case .setup:
-            return;
+            return
         case .buffering:
-            return;
+            return
         case .error:
             delegate.stateMachineDidEnterError(stateMachine)
-            return;
+            return
         case .playing, .paused:
             if stateMachine.firstReadyTimestamp == 0 {
                 stateMachine.firstReadyTimestamp = Date().timeIntervalSince1970Millis
                 delegate.stateMachine(stateMachine, didStartupWithDuration: stateMachine.startupTime)
             }
             stateMachine.enableHeartbeat()
-            return;
+            return
         case .qualitychange:
             delegate.stateMachineDidQualityChange(stateMachine)
-            return;
+            return
         case .seeking:
             return
         }
@@ -56,23 +56,23 @@ public enum PlayerState: String {
         switch self {
         case .setup:
             delegate.stateMachineDidExitSetup(stateMachine)
-            return;
+            return
         case .buffering:
             delegate.stateMachine(stateMachine, didExitBufferingWithDuration: duration)
-            return;
+            return
         case .error:
-            return;
+            return
         case .playing:
             delegate.stateMachine(stateMachine, didExitPlayingWithDuration: duration)
             stateMachine.disableHeartbeat()
-            return;
+            return
         case .paused:
             delegate.stateMachine(stateMachine, didExitPauseWithDuration: duration)
             stateMachine.disableHeartbeat()
-            return;
+            return
         case .qualitychange:
             delegate.stateMachineDidQualityChange(stateMachine)
-            return;
+            return
         case .seeking:
             delegate.stateMachine(stateMachine, didExitSeekingWithDuration: duration, destinationPlayerState: destinationState)
             return
