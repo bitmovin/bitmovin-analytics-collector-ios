@@ -10,11 +10,11 @@ import CoreTelephony
 import Foundation
 
 class Util {
-    static func bundle() -> String {
-        guard let bundle = Bundle.main.bundleIdentifier else {
+    static func mainBundleIdentifier() -> String {
+        guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
             return "Unknown"
         }
-        return bundle
+        return bundleIdentifier
     }
 
     static func language() -> String {
@@ -35,7 +35,7 @@ class Util {
     }
 
     static func version() -> String? {
-        return Bundle(identifier: "com.bitmovin.BitmovinAnalyticsCollector")?.infoDictionary?["CFBundleShortVersionString"] as? String
+        return Bundle(for: self).infoDictionary?["CFBundleShortVersionString"] as? String
     }
 
     static func toJson<T: Codable>(object: T?) -> String {

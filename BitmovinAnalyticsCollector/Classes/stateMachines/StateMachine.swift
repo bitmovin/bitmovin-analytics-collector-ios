@@ -33,6 +33,10 @@ public class StateMachine {
         initialTimestamp = Date().timeIntervalSince1970Millis
         impressionId = NSUUID().uuidString
     }
+    
+    deinit {
+        heartbeatTimer?.invalidate()
+    }
 
     public func reset() {
         impressionId = NSUUID().uuidString
@@ -75,7 +79,7 @@ public class StateMachine {
             return
         }
         let timestamp = Date().timeIntervalSince1970Millis
-        delegate?.heartbeatFired(duration: timestamp - enterTime)
+        delegate?.stateMachine(self, didHeartbeatWithDuration: timestamp - enterTime)
         enterTimestamp = timestamp
     }
 }

@@ -64,7 +64,7 @@ public class EventData: Codable {
     var version: String?
 
     public init(config: BitmovinAnalyticsConfig, impressionId: String) {
-        domain = Util.bundle()
+        domain = Util.mainBundleIdentifier()
 
         if let text = Bundle(identifier: "com.bitmovin.BitmovinAnalyticsCollector")?.infoDictionary?["CFBundleShortVersionString"] as? String {
             analyticsVersion = text

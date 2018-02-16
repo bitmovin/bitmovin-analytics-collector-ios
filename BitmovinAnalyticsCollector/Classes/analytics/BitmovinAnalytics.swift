@@ -75,43 +75,44 @@ public class BitmovinAnalytics {
 }
 
 extension BitmovinAnalytics: StateMachineDelegate {
-    func didExitSetup() {
+    
+    func stateMachineDidExitSetup(_ stateMachine: StateMachine) {
     }
     
-    func didExitBuffering(duration: Int) {
+    func stateMachine(_ stateMachine: StateMachine, didExitBufferingWithDuration duration: Int) {
         let eventData = createEventData(duration: duration)
         sendEventData(eventData: eventData)
     }
     
-    func didEnterError() {
+    func stateMachineDidEnterError(_ stateMachine: StateMachine) {
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
     }
     
-    func didExitPlaying(duration: Int) {
+    func stateMachine(_ stateMachine: StateMachine, didExitPlayingWithDuration duration: Int) {
         let eventData = createEventData(duration: duration)
         eventData?.played = duration
         sendEventData(eventData: eventData)
     }
     
-    func didExitPause(duration: Int) {
+    func stateMachine(_ stateMachine: StateMachine, didExitPauseWithDuration duration: Int) {
         let eventData = createEventData(duration: duration)
         eventData?.paused = duration
         sendEventData(eventData: eventData)
     }
     
-    func didQualityChange() {
+    func stateMachineDidQualityChange(_ stateMachine: StateMachine) {
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
     }
     
-    func didExitSeeking(duration: Int, destinationPlayerState _: PlayerState) {
+    func stateMachine(_ stateMachine: StateMachine, didExitSeekingWithDuration duration: Int, destinationPlayerState: PlayerState) {
         let eventData = createEventData(duration: duration)
         eventData?.seeked = duration
         sendEventData(eventData: eventData)
     }
     
-    func heartbeatFired(duration: Int) {
+    func stateMachine(_ stateMachine: StateMachine, didHeartbeatWithDuration duration: Int) {
         let eventData = createEventData(duration: duration)
         switch stateMachine.state {
         case .playing:
@@ -129,7 +130,7 @@ extension BitmovinAnalytics: StateMachineDelegate {
         sendEventData(eventData: eventData)
     }
     
-    func didStartup(duration: Int) {
+    func stateMachine(_ stateMachine: StateMachine, didStartupWithDuration duration: Int) {
         let eventData = createEventData(duration: duration)
         eventData?.videoStartupTime = duration
         eventData?.startupTime = duration

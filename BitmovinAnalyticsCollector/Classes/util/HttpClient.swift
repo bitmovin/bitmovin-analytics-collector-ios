@@ -21,7 +21,7 @@ class HttpClient {
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-        request.setValue("http://\(Util.bundle())", forHTTPHeaderField: "Origin")
+        request.setValue("http://\(Util.mainBundleIdentifier())", forHTTPHeaderField: "Origin")
         request.httpMethod = "POST"
         let postString = json
         print(postString)

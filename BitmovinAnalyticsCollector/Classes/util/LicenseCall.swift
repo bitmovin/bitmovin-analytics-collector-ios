@@ -22,7 +22,7 @@ class LicenseCall {
     public func authenticate(_ completionHandler: @escaping LicenseCallCompletionHandler) {
         let licenseCallData = LicenseCallData()
         licenseCallData.key = config.key
-        licenseCallData.domain = Util.bundle()
+        licenseCallData.domain = Util.mainBundleIdentifier()
         licenseCallData.analyticsVersion = Util.version()
         httpClient.post(json: Util.toJson(object: licenseCallData)) { data, response, error in
             guard error == nil else { // check for fundamental networking error

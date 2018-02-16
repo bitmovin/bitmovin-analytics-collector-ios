@@ -9,13 +9,13 @@
 import Foundation
 
 protocol StateMachineDelegate: class {
-    func didExitSetup()
-    func didExitBuffering(duration: Int)
-    func didEnterError()
-    func didExitPlaying(duration: Int)
-    func didExitPause(duration: Int)
-    func didQualityChange()
-    func didExitSeeking(duration: Int, destinationPlayerState: PlayerState)
-    func heartbeatFired(duration: Int)
-    func didStartup(duration: Int)
+    func stateMachineDidExitSetup(_ stateMachine: StateMachine)
+    func stateMachine(_ stateMachine: StateMachine, didExitBufferingWithDuration: Int)
+    func stateMachineDidEnterError(_ stateMachine: StateMachine)
+    func stateMachine(_ stateMachine: StateMachine, didExitPlayingWithDuration duration: Int)
+    func stateMachine(_ stateMachine: StateMachine, didExitPauseWithDuration duration: Int)
+    func stateMachineDidQualityChange(_ stateMachine: StateMachine)
+    func stateMachine(_ stateMachine:StateMachine, didExitSeekingWithDuration duration: Int, destinationPlayerState: PlayerState)
+    func stateMachine(_ stateMachine:StateMachine, didHeartbeatWithDuration duration: Int)
+    func stateMachine(_ stateMachine:StateMachine, didStartupWithDuration duration: Int)
 }

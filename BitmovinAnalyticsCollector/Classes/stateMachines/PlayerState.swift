@@ -27,17 +27,17 @@ public enum PlayerState: String {
         case .buffering:
             return;
         case .error:
-            delegate.didEnterError()
+            delegate.stateMachineDidEnterError(stateMachine)
             return;
         case .playing, .paused:
             if stateMachine.firstReadyTimestamp == 0 {
                 stateMachine.firstReadyTimestamp = Date().timeIntervalSince1970Millis
-                delegate.didStartup(duration: stateMachine.startupTime)
+                delegate.stateMachine(stateMachine, didStartupWithDuration: stateMachine.startupTime)
             }
             stateMachine.enableHeartbeat()
             return;
         case .qualitychange:
-            delegate.didQualityChange()
+            delegate.stateMachineDidQualityChange(stateMachine)
             return;
         case .seeking:
             return
@@ -55,26 +55,26 @@ public enum PlayerState: String {
 
         switch self {
         case .setup:
-            delegate.didExitSetup()
+            delegate.stateMachineDidExitSetup(stateMachine)
             return;
         case .buffering:
-            delegate.didExitBuffering(duration: duration)
+            delegate.stateMachine(stateMachine, didExitBufferingWithDuration: duration)
             return;
         case .error:
             return;
         case .playing:
-            delegate.didExitPlaying(duration: duration)
+            delegate.stateMachine(stateMachine, didExitPlayingWithDuration: duration)
             stateMachine.disableHeartbeat()
             return;
         case .paused:
-            delegate.didExitPause(duration: duration)
+            delegate.stateMachine(stateMachine, didExitPauseWithDuration: duration)
             stateMachine.disableHeartbeat()
             return;
         case .qualitychange:
-            delegate.didQualityChange()
+            delegate.stateMachineDidQualityChange(stateMachine)
             return;
         case .seeking:
-            delegate.didExitSeeking(duration: duration, destinationPlayerState: destinationState)
+            delegate.stateMachine(stateMachine, didExitSeekingWithDuration: duration, destinationPlayerState: destinationState)
             return
         }
     }
