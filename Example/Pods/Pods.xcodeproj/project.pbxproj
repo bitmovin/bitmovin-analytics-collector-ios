@@ -1088,6 +1088,38 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0436015F1450B1A538540CED4E6FEF20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44ACDEC32CEDD59A809123CEA0ED637B /* BitmovinAnalyticsCollector.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BitmovinAnalyticsCollector/BitmovinAnalyticsCollector-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BitmovinAnalyticsCollector/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BitmovinAnalyticsCollector/BitmovinAnalyticsCollector.modulemap";
+				PRODUCT_NAME = BitmovinAnalyticsCollector;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		060127653D7813CA38AB42748604D12B /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9F1099FD4999254B79A9C46AD730FB22 /* Pods-BitmovinAnalyticsCollector_Example.release.xcconfig */;
@@ -1219,69 +1251,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
-		};
-		4BEE96FD75B7F61206BBB17B2161A5D2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 44ACDEC32CEDD59A809123CEA0ED637B /* BitmovinAnalyticsCollector.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BitmovinAnalyticsCollector/BitmovinAnalyticsCollector-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BitmovinAnalyticsCollector/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BitmovinAnalyticsCollector/BitmovinAnalyticsCollector.modulemap";
-				PRODUCT_NAME = BitmovinAnalyticsCollector;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		55C7D8BB95B31A53B27E262269E37B94 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 44ACDEC32CEDD59A809123CEA0ED637B /* BitmovinAnalyticsCollector.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BitmovinAnalyticsCollector/BitmovinAnalyticsCollector-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BitmovinAnalyticsCollector/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BitmovinAnalyticsCollector/BitmovinAnalyticsCollector.modulemap";
-				PRODUCT_NAME = BitmovinAnalyticsCollector;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 		6F9224530522DD3C735EC96CF142642E /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1528,6 +1497,37 @@
 			};
 			name = Debug;
 		};
+		C8B1C556AA2DD8211122F308E05DE7B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44ACDEC32CEDD59A809123CEA0ED637B /* BitmovinAnalyticsCollector.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BitmovinAnalyticsCollector/BitmovinAnalyticsCollector-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BitmovinAnalyticsCollector/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BitmovinAnalyticsCollector/BitmovinAnalyticsCollector.modulemap";
+				PRODUCT_NAME = BitmovinAnalyticsCollector;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1552,8 +1552,8 @@
 		50A03C45DED84800A548F18F4D7210A4 /* Build configuration list for PBXNativeTarget "BitmovinAnalyticsCollector" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				55C7D8BB95B31A53B27E262269E37B94 /* Debug */,
-				4BEE96FD75B7F61206BBB17B2161A5D2 /* Release */,
+				C8B1C556AA2DD8211122F308E05DE7B1 /* Debug */,
+				0436015F1450B1A538540CED4E6FEF20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

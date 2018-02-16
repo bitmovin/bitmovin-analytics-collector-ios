@@ -13,7 +13,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  BitmovinAnalyticsCollector: bf3e85aef8789f7893603ce0c9cf1c99df968db7
+  BitmovinAnalyticsCollector: 2d5fcece66f94e9f1d790e01790d08ed85899aaa
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
 
