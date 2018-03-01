@@ -121,7 +121,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
                 switch newStatus {
                 case .readyToPlay:
                     if stateMachine.firstReadyTimestamp > 0 && (timestamp - stateMachine.potentialSeekStart) <= 10000 {
-                        print("Seek Confirmed")
+//                        print("Seek Confirmed")
                         stateMachine.transitionState(destinationState: .seeking, time: self.player?.currentTime())
                         stateMachine.confirmSeek()
                     }
@@ -151,7 +151,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
 //                stateMachine.transitionState(destinationState: .buffering, time: player?.currentTime())
 //            }
         }else if keyPath == #keyPath(player.currentItem.playbackLikelyToKeepUp) {
-            print("PlaybackLikelyToKeepUp",player?.currentItem?.isPlaybackLikelyToKeepUp)
+//            print("PlaybackLikelyToKeepUp",player?.currentItem?.isPlaybackLikelyToKeepUp)
         }
         else if keyPath == #keyPath(player.currentItem) {
             if let currentItem = change?[NSKeyValueChangeKey.newKey] as? AVPlayerItem {
