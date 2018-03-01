@@ -17,6 +17,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     var playbackLikelyToKeepUpKeyPathObserver: NSKeyValueObservation?
     var playbackBufferEmptyObserver: NSKeyValueObservation?
     var playbackBufferFullObserver: NSKeyValueObservation?
+    let lockQueue = DispatchQueue.init(label:"com.bitmovin.analytics.avplayeradapter")
     
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
@@ -69,8 +70,6 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         guard let errorLog: AVPlayerItemErrorLog = playerItem.errorLog(), let errorLogEvent: AVPlayerItemErrorLogEvent = errorLog.events.last else {
             return
         }
-        
-        print(errorLogEvent.errorStatusCode)
     }
     
     @objc private func playbackStalled(notification _: Notification) {
@@ -80,7 +79,6 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     @objc private func timeJumped(notification _: Notification) {
         let timestamp = Date().timeIntervalSince1970Millis
         if (timestamp - stateMachine.potentialSeekStart) > 1000 {
-            print("Time Jumped")
             stateMachine.potentialSeekStart = timestamp
             stateMachine.potentialSeekVideoTimeStart = player?.currentTime()
         }
@@ -120,10 +118,11 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
                 let timestamp = Date().timeIntervalSince1970Millis
                 switch newStatus {
                 case .readyToPlay:
-                    if stateMachine.firstReadyTimestamp > 0 && (timestamp - stateMachine.potentialSeekStart) <= 10000 {
-//                        print("Seek Confirmed")
-                        stateMachine.transitionState(destinationState: .seeking, time: self.player?.currentTime())
-                        stateMachine.confirmSeek()
+                    lockQueue.sync() {
+                        if stateMachine.firstReadyTimestamp > 0 && stateMachine.potentialSeekStart > 0 && (timestamp - stateMachine.potentialSeekStart) <= 10000 {
+                            stateMachine.confirmSeek()
+                            stateMachine.transitionState(destinationState: .seeking, time: self.player?.currentTime())
+                        }
                     }
                     
                     guard let rate = player?.rate else {
@@ -135,6 +134,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
                     } else if rate > 0.0 {
                         stateMachine.transitionState(destinationState: .playing, time: self.player?.currentTime())
                     }
+                    
                     break
                 case .failed:
                     stateMachine.transitionState(destinationState: .error, time: self.player?.currentTime())
@@ -144,14 +144,14 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
                 }
             }
         }else if keyPath == #keyPath(player.currentItem.playbackBufferEmpty) {
-//            guard let playbackBufferEmpty = player?.currentItem?.isPlaybackBufferEmpty else {
-//                return
-//            }
-//            if(playbackBufferEmpty){
-//                stateMachine.transitionState(destinationState: .buffering, time: player?.currentTime())
-//            }
+            //            guard let playbackBufferEmpty = player?.currentItem?.isPlaybackBufferEmpty else {
+            //                return
+            //            }
+            //            if(playbackBufferEmpty){
+            //                stateMachine.transitionState(destinationState: .buffering, time: player?.currentTime())
+            //            }
         }else if keyPath == #keyPath(player.currentItem.playbackLikelyToKeepUp) {
-//            print("PlaybackLikelyToKeepUp",player?.currentItem?.isPlaybackLikelyToKeepUp)
+            //            print("PlaybackLikelyToKeepUp",player?.currentItem?.isPlaybackLikelyToKeepUp)
         }
         else if keyPath == #keyPath(player.currentItem) {
             if let currentItem = change?[NSKeyValueChangeKey.newKey] as? AVPlayerItem {
@@ -160,8 +160,8 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
             }
             if let currentItem = change?[NSKeyValueChangeKey.oldKey] as? AVPlayerItem {
                 NSLog("Current Item Changed: %@", currentItem.debugDescription)
-//                stopMonitoring()
-//                stopMonitoringOldPlayerItem
+                //                stopMonitoring()
+                //                stopMonitoringOldPlayerItem
             }
         }
     }
