@@ -24,6 +24,7 @@ class LicenseCall {
         licenseCallData.key = config.key
         licenseCallData.domain = Util.mainBundleIdentifier()
         licenseCallData.analyticsVersion = Util.version()
+        print(Util.toJson(object: licenseCallData))
         httpClient.post(json: Util.toJson(object: licenseCallData)) { data, response, error in
             guard error == nil else { // check for fundamental networking error
                 print(String(describing: error))
