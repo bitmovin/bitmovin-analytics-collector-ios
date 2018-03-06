@@ -156,7 +156,6 @@ class ViewController: UIViewController {
     @IBAction func jumpForwardButtomPressed(_: UIButton) {
         let currentTime = player.currentTime()
         let deltaTime = CMTimeMakeWithSeconds(30, 30)
-//        print("Seek To Time \(CMTimeGetSeconds(CMTimeAdd(currentTime, deltaTime)))")
         player.seek(to: CMTimeAdd(currentTime, deltaTime), completionHandler: { completed in
             if completed {
             }
@@ -166,7 +165,6 @@ class ViewController: UIViewController {
     @IBAction func backButtonPressed(_: UIButton) {
         let currentTime = player.currentTime()
         let deltaTime = CMTimeMakeWithSeconds(30, 30)
-//        print("Seek To Time \(CMTimeSubtract(currentTime, deltaTime))")
         player.seek(to: CMTimeSubtract(currentTime, deltaTime), completionHandler: { completed in
             if completed {
             }

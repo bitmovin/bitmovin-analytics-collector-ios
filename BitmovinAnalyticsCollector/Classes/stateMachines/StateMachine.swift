@@ -16,14 +16,17 @@ public class StateMachine {
     private(set) var enterTimestamp: Int?
     var potentialSeekStart: Int = 0
     var potentialSeekVideoTimeStart: CMTime?
-    var firstReadyTimestamp: Int = 0
+    var firstReadyTimestamp: Int?
     private(set) var videoTimeStart: CMTime?
     private(set) var videoTimeEnd: CMTime?
     private(set) var impressionId: String
     weak var delegate: StateMachineDelegate?
-    private var heartbeatTimer: Timer?
+    weak private var heartbeatTimer: Timer?
 
     var startupTime: Int {
+        guard let firstReadyTimestamp = firstReadyTimestamp else {
+            return 0
+        }
         return firstReadyTimestamp - initialTimestamp
     }
 
@@ -41,7 +44,7 @@ public class StateMachine {
     public func reset() {
         impressionId = NSUUID().uuidString
         initialTimestamp = Date().timeIntervalSince1970Millis
-        firstReadyTimestamp = 0
+        firstReadyTimestamp = nil
         disableHeartbeat()
         state = .setup
     }

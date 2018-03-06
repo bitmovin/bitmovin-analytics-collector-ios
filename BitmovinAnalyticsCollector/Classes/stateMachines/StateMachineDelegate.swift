@@ -10,7 +10,7 @@ import Foundation
 
 protocol StateMachineDelegate: class {
     func stateMachineDidExitSetup(_ stateMachine: StateMachine)
-    func stateMachine(_ stateMachine: StateMachine, didExitBufferingWithDuration: Int)
+    func stateMachine(_ stateMachine: StateMachine, didExitBufferingWithDuration duration: Int)
     func stateMachineDidEnterError(_ stateMachine: StateMachine)
     func stateMachine(_ stateMachine: StateMachine, didExitPlayingWithDuration duration: Int)
     func stateMachine(_ stateMachine: StateMachine, didExitPauseWithDuration duration: Int)
