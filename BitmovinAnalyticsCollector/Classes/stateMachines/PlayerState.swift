@@ -34,7 +34,6 @@ public enum PlayerState: String {
             stateMachine.enableHeartbeat()
             return
         case .qualitychange:
-            stateMachine.delegate?.stateMachineDidQualityChange(stateMachine)
             return
         case .seeking:
             return

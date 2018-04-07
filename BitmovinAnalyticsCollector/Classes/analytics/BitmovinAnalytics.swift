@@ -14,11 +14,12 @@ import Foundation
  * supports analytics on AVPlayer video players
  */
 public class BitmovinAnalytics {
+    static let msInSec = 1000.0
     private var config: BitmovinAnalyticsConfig
     private var adapter: PlayerAdapter?
     private var stateMachine: StateMachine
     private var eventDataDispatcher: EventDataDispatcher
-
+    
     public init(config: BitmovinAnalyticsConfig) {
         self.config = config
         stateMachine = StateMachine(config: self.config)
@@ -65,10 +66,10 @@ public class BitmovinAnalytics {
         eventData.duration = duration
 
         if let timeStart = stateMachine.videoTimeStart {
-            eventData.videoTimeEnd = Int(CMTimeGetSeconds(timeStart) * 1000)
+            eventData.videoTimeEnd = Int(CMTimeGetSeconds(timeStart) * BitmovinAnalytics.msInSec)
         }
         if let timeEnd = stateMachine.videoTimeEnd {
-            eventData.videoTimeEnd = Int(CMTimeGetSeconds(timeEnd) * 1000)
+            eventData.videoTimeEnd = Int(CMTimeGetSeconds(timeEnd) * BitmovinAnalytics.msInSec)
         }
         return eventData
     }
@@ -113,6 +114,7 @@ extension BitmovinAnalytics: StateMachineDelegate {
     }
 
     func stateMachine(_ stateMachine: StateMachine, didHeartbeatWithDuration duration: Int) {
+        print("Heartbeat Fired")
         let eventData = createEventData(duration: duration)
         switch stateMachine.state {
         case .playing:
