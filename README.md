@@ -21,7 +21,7 @@ analyticsCollector = BitmovinAnalytics(config: config);
 analyticsCollector.attachAVPlayer(player: player);
 
 // Detach your player when you are done. 
-
+analyticsCollector.detachPlayer()
 ```
 
 
