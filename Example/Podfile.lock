@@ -1,22 +1,34 @@
 PODS:
-  - BitmovinAnalyticsCollector (1.0.0)
+  - BitmovinAnalyticsCollector (1.0.0):
+    - BitmovinPlayer (~> 2.7.0)
+  - BitmovinPlayer (2.7.0)
   - Nimble (7.0.3)
   - Quick (1.2.0)
 
 DEPENDENCIES:
   - BitmovinAnalyticsCollector (from `../`)
+  - BitmovinPlayer (from `https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git`, tag `2.7.0`)
   - Nimble (~> 7.0.2)
   - Quick (~> 1.2.0)
 
 EXTERNAL SOURCES:
   BitmovinAnalyticsCollector:
     :path: ../
+  BitmovinPlayer:
+    :git: https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git
+    :tag: 2.7.0
+
+CHECKOUT OPTIONS:
+  BitmovinPlayer:
+    :git: https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git
+    :tag: 2.7.0
 
 SPEC CHECKSUMS:
-  BitmovinAnalyticsCollector: 2d5fcece66f94e9f1d790e01790d08ed85899aaa
+  BitmovinAnalyticsCollector: dc502f06e8c0d918bdb81dc2b89807b5773a9abe
+  BitmovinPlayer: fdbc98fb1a096c73c21d1efe2e77db6acd32c585
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
 
-PODFILE CHECKSUM: c3648a074d21dc559a0343dbcaa5f545132e4001
+PODFILE CHECKSUM: 0cb1fd95db3898b138035707d5c7a89602b79bdf
 
 COCOAPODS: 1.4.0

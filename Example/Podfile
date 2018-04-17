@@ -2,6 +2,7 @@ use_frameworks!
 
 target 'BitmovinAnalyticsCollector_Example' do
   pod 'BitmovinAnalyticsCollector', :path => '../'
+  pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.7.0'
 
   target 'BitmovinAnalyticsCollector_Tests' do
     inherit! :search_paths

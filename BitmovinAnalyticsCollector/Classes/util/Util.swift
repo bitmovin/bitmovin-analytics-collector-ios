@@ -8,6 +8,7 @@
 
 import CoreTelephony
 import Foundation
+import AVKit
 
 class Util {
     static func mainBundleIdentifier() -> String {
@@ -36,6 +37,10 @@ class Util {
 
     static func version() -> String? {
         return Bundle(for: self).infoDictionary?["CFBundleShortVersionString"] as? String
+    }
+    
+    static func doubleToCMTime(double: Double) -> CMTime? {        
+        return CMTimeMake(Int64(double), 1000)
     }
 
     static func toJson<T: Codable>(object: T?) -> String {

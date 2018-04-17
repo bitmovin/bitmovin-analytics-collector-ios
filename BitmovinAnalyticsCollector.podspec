@@ -31,12 +31,12 @@ DESC
   s.ios.deployment_target = '9.0'
 
   s.source_files = 'BitmovinAnalyticsCollector/Classes/**/*'
-  
   # s.resource_bundles = {
   #   'BitmovinAnalyticsCollector' => ['BitmovinAnalyticsCollector/Assets/*.png']
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'BitmovinPlayer', '~>2.7.0'
+
 end

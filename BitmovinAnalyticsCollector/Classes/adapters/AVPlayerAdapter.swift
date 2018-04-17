@@ -179,7 +179,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         // Error Code
         if player?.currentItem?.status == .failed {
             if let errorLog = player?.currentItem?.errorLog(), let errorLogEvent: AVPlayerItemErrorLogEvent = errorLog.events.first {
-                eventData.errorCode = errorLogEvent.errorStatusCode
+                eventData.errorCode = UInt(errorLogEvent.errorStatusCode)
                 eventData.errorMessage = errorLogEvent.errorComment
             }
         }

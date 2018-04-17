@@ -1,0 +1,6 @@
+framework module BitmovinPlayer {
+  umbrella header "BitmovinPlayer.h"
+
+  export *
+  module * { export * }
+}

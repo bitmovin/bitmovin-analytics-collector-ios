@@ -18,5 +18,10 @@
   "platforms": {
     "ios": "9.0"
   },
-  "source_files": "BitmovinAnalyticsCollector/Classes/**/*"
+  "source_files": "BitmovinAnalyticsCollector/Classes/**/*",
+  "dependencies": {
+    "BitmovinPlayer": [
+      "~>2.7.0"
+    ]
+  }
 }

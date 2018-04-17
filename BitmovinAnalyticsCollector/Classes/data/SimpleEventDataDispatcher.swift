@@ -23,7 +23,7 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
         licenseCall.authenticate { [weak self] success in
             if success {
                 self?.enabled = true
-                guard let events = self?.events.enumerated() else {
+                guard let events = self?.events.enumerated().reversed() else {
                     return
                 }
                 for (i, eventData) in events {

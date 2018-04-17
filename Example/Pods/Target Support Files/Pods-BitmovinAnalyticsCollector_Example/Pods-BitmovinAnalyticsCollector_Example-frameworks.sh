@@ -135,9 +135,11 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/BitmovinAnalyticsCollector/BitmovinAnalyticsCollector.framework"
+  install_framework "${PODS_ROOT}/BitmovinPlayer/iOS/BitmovinPlayer.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/BitmovinAnalyticsCollector/BitmovinAnalyticsCollector.framework"
+  install_framework "${PODS_ROOT}/BitmovinPlayer/iOS/BitmovinPlayer.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

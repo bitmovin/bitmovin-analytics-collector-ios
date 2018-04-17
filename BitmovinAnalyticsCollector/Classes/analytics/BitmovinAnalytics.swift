@@ -8,6 +8,7 @@
 
 import AVFoundation
 import Foundation
+import BitmovinPlayer
 
 /**
  * An iOS analytics plugin that sends video playback analytics to Bitmovin Analytics servers. Currently
@@ -44,6 +45,17 @@ public class BitmovinAnalytics {
         stateMachine.delegate = self
         eventDataDispatcher.enable()
         adapter = AVPlayerAdapter(player: player, config: config, stateMachine: stateMachine)
+        adapter?.startMonitoring()
+    }
+    
+    /**
+     * Attach a player instance to this analytics plugin. After this is completed, BitmovinAnalytics
+     * will start monitoring and sending analytics data based on the attached player instance.
+     */
+    public func attachBitmovinPlayer(player: BitmovinPlayer) {
+        stateMachine.delegate = self
+        eventDataDispatcher.enable()
+        adapter = BitmovinPlayerAdapter(player: player, config: config, stateMachine: stateMachine)
         adapter?.startMonitoring()
     }
 

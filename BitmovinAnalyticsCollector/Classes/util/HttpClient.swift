@@ -24,7 +24,7 @@ class HttpClient {
         request.setValue("http://\(Util.mainBundleIdentifier())", forHTTPHeaderField: "Origin")
         request.httpMethod = "POST"
         let postString = json
-        print("Posting Analytics Message: ",postString)
+//        print("Posting Analytics Message: ",postString)
         request.httpBody = postString.data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else { // check for fundamental networking error

@@ -1,0 +1,42 @@
+{
+  "name": "BitmovinPlayer",
+  "version": "2.7.0",
+  "summary": "Bitmovin Player SDK for iOS and tvOS",
+  "homepage": "https://www.bitmovin.com/",
+  "social_media_url": "https://twitter.com/bitmovin",
+  "documentation_url": "https://www.bitmovin.com/",
+  "authors": {
+    "Bitmovin": "support@bitmovin.com"
+  },
+  "license": {
+    "type": "Commercial",
+    "file": "LICENSE.md"
+  },
+  "source": {
+    "git": "https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git",
+    "tag": "2.7.0"
+  },
+  "platforms": {
+    "ios": "9.0",
+    "tvos": "9.0"
+  },
+  "ios": {
+    "vendored_frameworks": "iOS/BitmovinPlayer.framework",
+    "frameworks": [
+      "Foundation",
+      "UIKit",
+      "AVFoundation",
+      "AVKit",
+      "WebKit"
+    ]
+  },
+  "tvos": {
+    "vendored_frameworks": "tvOS/BitmovinPlayer.framework",
+    "frameworks": [
+      "Foundation",
+      "UIKit",
+      "AVFoundation",
+      "AVKit"
+    ]
+  }
+}
