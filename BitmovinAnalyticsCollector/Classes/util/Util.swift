@@ -38,8 +38,8 @@ class Util {
     static func version() -> String? {
         return Bundle(for: self).infoDictionary?["CFBundleShortVersionString"] as? String
     }
-    
-    static func doubleToCMTime(double: Double) -> CMTime? {        
+
+    static func doubleToCMTime(double: Double) -> CMTime? {
         return CMTimeMake(Int64(double), 1000)
     }
 

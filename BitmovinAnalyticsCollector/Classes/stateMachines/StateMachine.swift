@@ -55,7 +55,7 @@ public class StateMachine {
         } else if state == .buffering && destinationState == .qualitychange {
             return
         } else {
-            print("Transitioning from ",self.state,"->",destinationState)
+            print("Transitioning from ", self.state, "->", destinationState)
             let timestamp = Date().timeIntervalSince1970Millis
             videoTimeEnd = time
             state.onExit(stateMachine: self, timestamp: timestamp, destinationState: destinationState)

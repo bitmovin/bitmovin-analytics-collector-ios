@@ -20,7 +20,7 @@ public class BitmovinAnalytics {
     private var adapter: PlayerAdapter?
     private var stateMachine: StateMachine
     private var eventDataDispatcher: EventDataDispatcher
-    
+
     public init(config: BitmovinAnalyticsConfig) {
         self.config = config
         stateMachine = StateMachine(config: self.config)
@@ -47,7 +47,7 @@ public class BitmovinAnalytics {
         adapter = AVPlayerAdapter(player: player, config: config, stateMachine: stateMachine)
         adapter?.startMonitoring()
     }
-    
+
     /**
      * Attach a player instance to this analytics plugin. After this is completed, BitmovinAnalytics
      * will start monitoring and sending analytics data based on the attached player instance.
