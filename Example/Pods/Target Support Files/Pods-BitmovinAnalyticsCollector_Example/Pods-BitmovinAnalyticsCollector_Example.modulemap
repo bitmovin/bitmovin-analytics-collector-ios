@@ -1,6 +1,0 @@
-framework module Pods_BitmovinAnalyticsCollector_Example {
-  umbrella header "Pods-BitmovinAnalyticsCollector_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}
