@@ -147,7 +147,10 @@ extension BitmovinAnalytics: StateMachineDelegate {
     func stateMachine(_ stateMachine: StateMachine, didStartupWithDuration duration: Int) {
         let eventData = createEventData(duration: duration)
         eventData?.videoStartupTime = duration
-        eventData?.startupTime = duration
+        // Hard coding 1 as the player startup time to workaround a Dashboard issue
+        eventData?.playerStartupTime = 1
+        eventData?.startupTime = duration+1
+        
         eventData?.state = "startup"
         sendEventData(eventData: eventData)
     }
