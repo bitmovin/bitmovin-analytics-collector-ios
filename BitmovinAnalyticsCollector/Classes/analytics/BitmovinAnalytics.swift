@@ -45,7 +45,6 @@ public class BitmovinAnalytics {
         stateMachine.delegate = self
         eventDataDispatcher.enable()
         adapter = AVPlayerAdapter(player: player, config: config, stateMachine: stateMachine)
-        adapter?.startMonitoring()
     }
 
     /**
@@ -56,7 +55,6 @@ public class BitmovinAnalytics {
         stateMachine.delegate = self
         eventDataDispatcher.enable()
         adapter = BitmovinPlayerAdapter(player: player, config: config, stateMachine: stateMachine)
-        adapter?.startMonitoring()
     }
 
     @objc private func licenseFailed(notification _: Notification) {

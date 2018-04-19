@@ -66,9 +66,11 @@ public class EventData: Codable {
     public init(config: BitmovinAnalyticsConfig, impressionId: String) {
         domain = Util.mainBundleIdentifier()
 
-        if let text = Bundle(identifier: "com.bitmovin.BitmovinAnalyticsCollector")?.infoDictionary?["CFBundleShortVersionString"] as? String {
+        if let text = Bundle(for: type(of: self)).infoDictionary?["CFBundleShortVersionString"] as? String {
             analyticsVersion = text
         }
+        
+        
 
         version = UIDevice.current.systemVersion
         language = Util.language()

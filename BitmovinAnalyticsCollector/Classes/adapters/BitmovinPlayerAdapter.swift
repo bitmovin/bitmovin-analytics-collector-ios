@@ -19,6 +19,8 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         self.player = player
         self.stateMachine = stateMachine
         self.config = config
+        super.init()
+        startMonitoring()
     }
 
     func createEventData() -> EventData {
