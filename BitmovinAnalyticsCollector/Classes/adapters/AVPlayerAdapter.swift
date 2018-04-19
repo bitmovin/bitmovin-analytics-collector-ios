@@ -20,7 +20,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     var playbackBufferEmptyObserver: NSKeyValueObservation?
     var playbackBufferFullObserver: NSKeyValueObservation?
     let lockQueue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
-
+    var statusObserver: NSKeyValueObservation?
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.stateMachine = stateMachine
@@ -29,38 +29,70 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     }
 
     deinit {
-        stopMonitoringPlayerItem()
+        if let playerItem = player?.currentItem {
+            stopMonitoringPlayerItem(playerItem: playerItem)
+        }
         stopMonitoring()
     }
 
     public func startMonitoring() {
         addObserver(self, forKeyPath: #keyPath(player.rate), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
-        addObserver(self, forKeyPath: #keyPath(player.currentItem.status), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
         addObserver(self, forKeyPath: #keyPath(player.currentItem), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
     }
 
     public func stopMonitoring() {
         removeObserver(self, forKeyPath: #keyPath(player.rate), context: &AVPlayerAdapter.playerKVOContext)
-        removeObserver(self, forKeyPath: #keyPath(player.currentItem.status), context: &AVPlayerAdapter.playerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(player.currentItem), context: &AVPlayerAdapter.playerKVOContext)
     }
 
-    private func startMonitoringPlayerItem() {
-        NotificationCenter.default.addObserver(self, selector: #selector(accessItemAdded(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: player?.currentItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: player?.currentItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: player?.currentItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(addedErrorLog(notification:)), name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: player?.currentItem)
-        addObserver(self, forKeyPath: #keyPath(player.currentItem.playbackBufferEmpty), options: [.new], context: &AVPlayerAdapter.playerKVOContext)
-        addObserver(self, forKeyPath: #keyPath(player.currentItem.status), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
+    private func startMonitoringPlayerItem(playerItem: AVPlayerItem) {
+        //        addObserver(self, forKeyPath: #keyPath(playerItem.status), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
+        statusObserver = playerItem.observe(\.status) {[weak self] (playerItem, _) in
+
+            guard let adapter = self else {
+                return
+            }
+
+            let timestamp = Date().timeIntervalSince1970Millis
+            switch playerItem.status {
+            case .readyToPlay:
+                adapter.lockQueue.sync {
+                    if adapter.stateMachine.firstReadyTimestamp != nil && adapter.stateMachine.potentialSeekStart > 0 && (timestamp - adapter.stateMachine.potentialSeekStart) <= AVPlayerAdapter.maxSeekOperation {
+                        adapter.stateMachine.confirmSeek()
+                        adapter.stateMachine.transitionState(destinationState: .seeking, time: adapter.player?.currentTime())
+                    }
+                }
+
+                guard let rate = adapter.player?.rate else {
+                    break
+                }
+
+                if rate == 0 {
+                    adapter.stateMachine.transitionState(destinationState: .paused, time: adapter.player?.currentTime())
+                } else if rate > 0.0 {
+                    adapter.stateMachine.transitionState(destinationState: .playing, time: adapter.player?.currentTime())
+                }
+
+                break
+            case .failed:
+                adapter.stateMachine.transitionState(destinationState: .error, time: adapter.player?.currentTime())
+                break
+            default:
+                break
+            }
+
+        }
+        NotificationCenter.default.addObserver(self, selector: #selector(accessItemAdded(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(addedErrorLog(notification:)), name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: playerItem)
     }
 
-    private func stopMonitoringPlayerItem() {
+    private func stopMonitoringPlayerItem(playerItem: AVPlayerItem) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: player?.currentItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemTimeJumped, object: player?.currentItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: player?.currentItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: player?.currentItem)
-        removeObserver(self, forKeyPath: #keyPath(player.currentItem.playbackBufferEmpty), context: &AVPlayerAdapter.playerKVOContext)
-        removeObserver(self, forKeyPath: #keyPath(player.currentItem.status), context: &AVPlayerAdapter.playerKVOContext)
     }
 
     @objc private func addedErrorLog(notification: Notification) {
@@ -111,55 +143,16 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
             } else if newRate > 0.0 && stateMachine.firstReadyTimestamp != nil {
                 stateMachine.transitionState(destinationState: .playing, time: self.player?.currentTime())
             }
-        } else if keyPath == #keyPath(player.currentItem.status) {
-            let newStatus: AVPlayerItemStatus
-            if let newStatusAsNumber = change?[NSKeyValueChangeKey.newKey] as? NSNumber {
-                newStatus = AVPlayerItemStatus(rawValue: newStatusAsNumber.intValue)!
-                let timestamp = Date().timeIntervalSince1970Millis
-                switch newStatus {
-                case .readyToPlay:
-                    lockQueue.sync {
-                        if stateMachine.firstReadyTimestamp != nil && stateMachine.potentialSeekStart > 0 && (timestamp - stateMachine.potentialSeekStart) <= AVPlayerAdapter.maxSeekOperation {
-                            stateMachine.confirmSeek()
-                            stateMachine.transitionState(destinationState: .seeking, time: self.player?.currentTime())
-                        }
-                    }
-
-                    guard let rate = player?.rate else {
-                        break
-                    }
-
-                    if rate == 0 {
-                        stateMachine.transitionState(destinationState: .paused, time: self.player?.currentTime())
-                    } else if rate > 0.0 {
-                        stateMachine.transitionState(destinationState: .playing, time: self.player?.currentTime())
-                    }
-
-                    break
-                case .failed:
-                    stateMachine.transitionState(destinationState: .error, time: self.player?.currentTime())
-                    break
-                default:
-                    break
-                }
-            }
-        } else if keyPath == #keyPath(player.currentItem.playbackBufferEmpty) {
-            //            guard let playbackBufferEmpty = player?.currentItem?.isPlaybackBufferEmpty else {
-            //                return
-            //            }
-            //            if(playbackBufferEmpty){
-            //                stateMachine.transitionState(destinationState: .buffering, time: player?.currentTime())
-            //            }
         } else if keyPath == #keyPath(player.currentItem) {
+            if let oldItem = change?[NSKeyValueChangeKey.oldKey] as? AVPlayerItem {
+                NSLog("Current Item Changed: %@", oldItem.debugDescription)
+                stopMonitoringPlayerItem(playerItem: oldItem)
+            }
             if let currentItem = change?[NSKeyValueChangeKey.newKey] as? AVPlayerItem {
                 NSLog("Current Item Changed: %@", currentItem.debugDescription)
-                startMonitoringPlayerItem()
+                startMonitoringPlayerItem(playerItem: currentItem)
             }
-            if let currentItem = change?[NSKeyValueChangeKey.oldKey] as? AVPlayerItem {
-                NSLog("Current Item Changed: %@", currentItem.debugDescription)
-                //                stopMonitoring()
-                //                stopMonitoringOldPlayerItem
-            }
+
         }
     }
 
