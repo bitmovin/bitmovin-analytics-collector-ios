@@ -1,6 +1,5 @@
 # BitmovinAnalyticsCollector
 
-[![CI Status](http://img.shields.io/travis/Cory Zachman/BitmovinAnalyticsCollector.svg?style=flat)](https://travis-ci.org/Cory Zachman/BitmovinAnalyticsCollector)
 [![Version](https://img.shields.io/cocoapods/v/BitmovinAnalyticsCollector.svg?style=flat)](http://cocoapods.org/pods/BitmovinAnalyticsCollector)
 [![License](https://img.shields.io/cocoapods/l/BitmovinAnalyticsCollector.svg?style=flat)](http://cocoapods.org/pods/BitmovinAnalyticsCollector)
 [![Platform](https://img.shields.io/cocoapods/p/BitmovinAnalyticsCollector.svg?style=flat)](http://cocoapods.org/pods/BitmovinAnalyticsCollector)
