@@ -52,6 +52,12 @@ it, simply add the following line to your Podfile:
 pod 'BitmovinAnalyticsCollector'
 ```
 
+Then, in your command line run 
+
+```ruby
+pod install
+```
+
 ## Author
 
 Cory Zachman, cory.zachman@bitmovin.com
