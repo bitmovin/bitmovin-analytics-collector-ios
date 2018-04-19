@@ -15,6 +15,7 @@ class BitmovinViewController: UIViewController {
     var player: BitmovinPlayer?
     private var analyticsCollector: BitmovinAnalytics
     private var config: BitmovinAnalyticsConfig
+    let url = URL(string: "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
     @IBOutlet var playerView: UIView!
     @IBOutlet var doneButton: UIButton!
     @IBOutlet var reloadButton: UIButton!
@@ -35,20 +36,18 @@ class BitmovinViewController: UIViewController {
         config.experimentName = "experiment-1"
         config.videoId = "iOSHLSStaticBitmovin"
         config.path = "/vod/breadcrumb/"
-
         analyticsCollector = BitmovinAnalytics(config: config)
+        
         super.init(coder: aDecoder)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.playerView.backgroundColor = .black
-
-        // Define needed resources
-        guard let streamUrl = URL(string: "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8") else {
+        guard let streamUrl = url else {
             return
         }
+        
+        self.playerView.backgroundColor = .black
 
         // Create player configuration
         let config = PlayerConfiguration()
@@ -92,8 +91,13 @@ class BitmovinViewController: UIViewController {
 
     @IBAction func reloadButtonWasPressed(_: UIButton) {
         analyticsCollector.detachPlayer()
+        
+        guard let player = player else {
+            return
+        }
+        
         // Define needed resources
-        guard let streamUrl = URL(string: "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8") else {
+        guard let streamUrl = url else {
             return
         }
 
@@ -104,9 +108,6 @@ class BitmovinViewController: UIViewController {
             // Create player based on player configuration
             self.player?.load(sourceConfiguration: config.sourceConfiguration)
 
-            guard let player = player else {
-                return
-            }
             analyticsCollector.attachBitmovinPlayer(player: player)
 
         } catch {
