@@ -1,9 +1,3 @@
-//
-//  BitmovinPlayerAdapter.swift
-//  BitmovinAnalyticsCollector
-//
-//  Created by Cory Zachman on 4/15/18.
-//
 
 import Foundation
 import BitmovinPlayer
