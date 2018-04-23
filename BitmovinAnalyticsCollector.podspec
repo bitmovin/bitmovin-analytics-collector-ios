@@ -11,32 +11,17 @@ Pod::Spec.new do |s|
   s.version          = '1.0.0'
   s.summary          = 'iOS library that allows you to monitor your iOS video playback with Bitmovin Analytics'
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
   s.description      = <<-DESC
-iOS library that allows you to monitor your iOS video playback with Bitmovin Analytics
+iOS library that allows you to monitor your iOS video playback with Bitmovin Analytics. This SDK can monitor an AVPlayer or a Bitmovin Player
 DESC
 
   s.homepage         = 'https://github.com/bitmovin/bitmovin-analytics-collector-ios'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Cory Zachman' => 'cory.zachman@bitmovin.com' }
   s.source           = { :git => 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '9.0'
-
   s.source_files = 'BitmovinAnalyticsCollector/Classes/**/*'
-  # s.resource_bundles = {
-  #   'BitmovinAnalyticsCollector' => ['BitmovinAnalyticsCollector/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'BitmovinPlayer', '~>2.7.0'
 
 end
