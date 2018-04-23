@@ -69,8 +69,6 @@ public class EventData: Codable {
         if let text = Bundle(for: type(of: self)).infoDictionary?["CFBundleShortVersionString"] as? String {
             analyticsVersion = text
         }
-        
-        
 
         version = UIDevice.current.systemVersion
         language = Util.language()

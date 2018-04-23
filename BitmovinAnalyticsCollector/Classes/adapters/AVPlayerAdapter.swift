@@ -48,40 +48,8 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     }
 
     private func startMonitoringPlayerItem(playerItem: AVPlayerItem) {
-        statusObserver = playerItem.observe(\.status) {[weak self] (playerItem, _) in
-
-            guard let adapter = self else {
-                return
-            }
-
-            let timestamp = Date().timeIntervalSince1970Millis
-            switch playerItem.status {
-            case .readyToPlay:
-                adapter.lockQueue.sync {
-                    if adapter.stateMachine.firstReadyTimestamp != nil && adapter.stateMachine.potentialSeekStart > 0 && (timestamp - adapter.stateMachine.potentialSeekStart) <= AVPlayerAdapter.maxSeekOperation {
-                        adapter.stateMachine.confirmSeek()
-                        adapter.stateMachine.transitionState(destinationState: .seeking, time: adapter.player?.currentTime())
-                    }
-                }
-
-                guard let rate = adapter.player?.rate else {
-                    break
-                }
-
-                if rate == 0 {
-                    adapter.stateMachine.transitionState(destinationState: .paused, time: adapter.player?.currentTime())
-                } else if rate > 0.0 {
-                    adapter.stateMachine.transitionState(destinationState: .playing, time: adapter.player?.currentTime())
-                }
-
-                break
-            case .failed:
-                adapter.stateMachine.transitionState(destinationState: .error, time: adapter.player?.currentTime())
-                break
-            default:
-                break
-            }
-
+        statusObserver = playerItem.observe(\.status) {[weak self] (item, _) in
+            self?.playerItemStatusObserver(playerItem: item)
         }
         NotificationCenter.default.addObserver(self, selector: #selector(accessItemAdded(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: playerItem)
@@ -94,6 +62,37 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemTimeJumped, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: playerItem)
+        statusObserver?.invalidate()
+    }
+
+    private func playerItemStatusObserver(playerItem: AVPlayerItem) {
+        let timestamp = Date().timeIntervalSince1970Millis
+        switch playerItem.status {
+        case .readyToPlay:
+            lockQueue.sync {
+                if stateMachine.firstReadyTimestamp != nil && stateMachine.potentialSeekStart > 0 && (timestamp - stateMachine.potentialSeekStart) <= AVPlayerAdapter.maxSeekOperation {
+                    stateMachine.confirmSeek()
+                    stateMachine.transitionState(destinationState: .seeking, time: player?.currentTime())
+                }
+            }
+
+            guard let rate = player?.rate else {
+                break
+            }
+
+            if rate == 0 {
+                stateMachine.transitionState(destinationState: .paused, time: player?.currentTime())
+            } else if rate > 0.0 {
+                stateMachine.transitionState(destinationState: .playing, time: player?.currentTime())
+            }
+
+            break
+        case .failed:
+            stateMachine.transitionState(destinationState: .error, time: player?.currentTime())
+            break
+        default:
+            break
+        }
     }
 
     @objc private func addedErrorLog(notification: Notification) {
