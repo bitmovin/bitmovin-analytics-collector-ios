@@ -10,8 +10,9 @@
 The following example creates a BitmovinAnalytics object and attaches an AVPlayer instance to it. 
 
 ```swift
-// Create a BitmovinAnalyticsConfig using your Bitmovin analytics license key and your Bitmovin Player Key
+// Create a BitmovinAnalyticsConfig using your Bitmovin analytics license key and/or your Bitmovin Player Key
 let config:BitmovinAnalyticsConfig = BitmovinAnalyticsConfig(key:"YOUR_ANALYTICS_KEY",playerKey:"YOUR_PLAYER_KEY")
+let config:BitmovinAnalyticsConfig = BitmovinAnalyticsConfig(key:"YOUR_ANALYTICS_KEY")
 
 // Create a BitmovinAnalytics object using the config just created 
 analyticsCollector = BitmovinAnalytics(config: config);
