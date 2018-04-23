@@ -64,7 +64,6 @@ class BitmovinViewController: UIViewController {
 
             self.player = player
         } catch {
-            print("Configuration error: \(error)")
         }
     }
 
@@ -104,7 +103,6 @@ class BitmovinViewController: UIViewController {
             analyticsCollector.attachBitmovinPlayer(player: player)
 
         } catch {
-            print("Configuration error: \(error)")
         }
     }
 }

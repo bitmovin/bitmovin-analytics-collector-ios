@@ -117,7 +117,6 @@ extension BitmovinAnalytics: StateMachineDelegate {
     }
 
     func stateMachine(_ stateMachine: StateMachine, didHeartbeatWithDuration duration: Int) {
-        print("Heartbeat Fired")
         let eventData = createEventData(duration: duration)
         switch stateMachine.state {
         case .playing:

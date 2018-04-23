@@ -58,10 +58,6 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
 
         // streamForamt, hlsUrl
         eventData.streamForamt = "hls"
-        //eventData.m3u8Url = player?.
-
-        // audio Bitrate
-        //TODO need update to iOS SDK to implement
 
         // videoBitrate
         if let bitrate = player.videoQuality?.bitrate {
