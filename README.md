@@ -1,9 +1,5 @@
 # BitmovinAnalyticsCollector
 
-[![Version](https://img.shields.io/cocoapods/v/BitmovinAnalyticsCollector.svg?style=flat)](http://cocoapods.org/pods/BitmovinAnalyticsCollector)
-[![License](https://img.shields.io/cocoapods/l/BitmovinAnalyticsCollector.svg?style=flat)](http://cocoapods.org/pods/BitmovinAnalyticsCollector)
-[![Platform](https://img.shields.io/cocoapods/p/BitmovinAnalyticsCollector.svg?style=flat)](http://cocoapods.org/pods/BitmovinAnalyticsCollector)
-
 ## Example
 
 
