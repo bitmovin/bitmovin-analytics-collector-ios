@@ -3,5 +3,5 @@ use_frameworks!
 
 target 'BitmovinAnalyticsCollector_Example' do
   pod 'BitmovinAnalyticsCollector', :path => '../'
-  pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.9.0'
+  pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.8.0'
 end
