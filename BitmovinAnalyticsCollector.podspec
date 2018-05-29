@@ -15,6 +15,6 @@ DESC
 
   s.ios.deployment_target = '9.0'
   s.source_files = 'BitmovinAnalyticsCollector/Classes/**/*'
-  s.dependency 'BitmovinPlayer', '~>2.9.0'
+  s.dependency 'BitmovinPlayer', '~>2.8.0'
 
 end
