@@ -38,7 +38,7 @@ class ViewController: UIViewController {
     }()
 
     required init?(coder aDecoder: NSCoder) {
-        config = BitmovinAnalyticsConfig(key: "<YOUR_ANALYTICS_KEY>")
+        config = BitmovinAnalyticsConfig(key: "9ae0b480-f2ee-4c10-bc3c-cb88e982e0ac")
         config.cdnProvider = .akamai
         config.customData1 = "customData1"
         config.customData2 = "customData2"
