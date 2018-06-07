@@ -39,7 +39,9 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         eventData.errorMessage = errorDescription
 
         //Duration
-        eventData.videoDuration = Int(player.duration)
+        if !player.duration.isNaN && !player.duration.isInfinite {
+            eventData.videoDuration = Int(player.duration)
+        }
 
         //isCasting
         eventData.isCasting = player.isCasting
