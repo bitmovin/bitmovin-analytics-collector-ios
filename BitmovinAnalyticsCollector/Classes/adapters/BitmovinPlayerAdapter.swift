@@ -40,7 +40,7 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
 
         //Duration
         if !player.duration.isNaN && !player.duration.isInfinite {
-            eventData.videoDuration = Int(player.duration)
+            eventData.videoDuration = Int(player.duration) * 1000
         }
 
         //isCasting
