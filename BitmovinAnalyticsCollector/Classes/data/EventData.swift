@@ -69,7 +69,7 @@ public class EventData: Codable {
         self.impressionId = impressionId
         key = config.key
         playerKey = config.playerKey
-        cdnProvider = config.cdnProvider?.rawValue
+        cdnProvider = config.cdnProvider
         customUserId = config.customerUserId
         customData1 = config.customData1
         customData2 = config.customData2

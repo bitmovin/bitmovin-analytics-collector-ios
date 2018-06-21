@@ -39,7 +39,7 @@ class ViewController: UIViewController {
 
     required init?(coder aDecoder: NSCoder) {
         config = BitmovinAnalyticsConfig(key: "9ae0b480-f2ee-4c10-bc3c-cb88e982e0ac")
-        config.cdnProvider = .akamai
+        config.cdnProvider = CdnProvider.bitmovin
         config.customData1 = "customData1"
         config.customData2 = "customData2"
         config.customData3 = "customData3"
@@ -78,7 +78,7 @@ class ViewController: UIViewController {
     @IBAction func reloadPlayer() {
         analyticsCollector.detachPlayer()
         createPlayer()
-        config.cdnProvider = .bitmovin
+        config.cdnProvider = CdnProvider.bitmovin
         config.customData1 = "customData6"
         config.customData2 = "customData7"
         config.customData3 = "customData8"

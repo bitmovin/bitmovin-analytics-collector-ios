@@ -8,7 +8,7 @@ public class BitmovinAnalyticsConfig {
     /**
      * CDN Provide that the video playback session is using
      */
-    public var cdnProvider: CdnProvider?
+    public var cdnProvider: String?
 
     /**
      * Optional free-form custom data

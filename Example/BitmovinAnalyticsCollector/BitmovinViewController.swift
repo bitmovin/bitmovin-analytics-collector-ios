@@ -19,7 +19,7 @@ class BitmovinViewController: UIViewController {
 
     required init?(coder aDecoder: NSCoder) {
         config = BitmovinAnalyticsConfig(key: "9ae0b480-f2ee-4c10-bc3c-cb88e982e0ac")
-        config.cdnProvider = .akamai
+        config.cdnProvider = "custom_cdn_provider"
         config.customData1 = "customData1"
         config.customData2 = "customData2"
         config.customData3 = "customData3"
