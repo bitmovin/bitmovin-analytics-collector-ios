@@ -23,7 +23,7 @@ analyticsCollector.detachPlayer()
 
 #### Optional Configuration Parameters
 ```swift
-config.cdnProvider = .akamai
+config.cdnProvider = CdnProvider.akamai
 config.customData1 = "customData1"
 config.customData2 = "customData2"
 config.customData3 = "customData3"
