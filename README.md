@@ -23,7 +23,7 @@ analyticsCollector.detachPlayer()
 
 #### Optional Configuration Parameters
 ```swift
-config.cdnProvider = .akamai
+config.cdnProvider = CdnProvider.akamai
 config.customData1 = "customData1"
 config.customData2 = "customData2"
 config.customData3 = "customData3"
@@ -45,7 +45,7 @@ BitmovinAnalyticsCollector is available through [CocoaPods](http://cocoapods.org
 it, simply add the following line to your Podfile:
 
 ```ruby
-  pod 'BitmovinAnalyticsCollector', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag:'1.2.2'
+  pod 'BitmovinAnalyticsCollector', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag:'1.3.0'
   pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.9.0'
 
   use_frameworks!
