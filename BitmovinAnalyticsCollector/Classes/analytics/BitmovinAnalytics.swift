@@ -61,7 +61,7 @@ public class BitmovinAnalytics {
         eventDataDispatcher.add(eventData: data)
     }
 
-    private func createEventData(duration: Int) -> EventData? {
+    private func createEventData(duration: Int64) -> EventData? {
         guard let eventData = adapter?.createEventData() else {
             return nil
         }
@@ -69,10 +69,10 @@ public class BitmovinAnalytics {
         eventData.duration = duration
 
         if let timeStart = stateMachine.videoTimeStart {
-            eventData.videoTimeEnd = Int(CMTimeGetSeconds(timeStart) * BitmovinAnalytics.msInSec)
+            eventData.videoTimeEnd = Int64(CMTimeGetSeconds(timeStart) * BitmovinAnalytics.msInSec)
         }
         if let timeEnd = stateMachine.videoTimeEnd {
-            eventData.videoTimeEnd = Int(CMTimeGetSeconds(timeEnd) * BitmovinAnalytics.msInSec)
+            eventData.videoTimeEnd = Int64(CMTimeGetSeconds(timeEnd) * BitmovinAnalytics.msInSec)
         }
         return eventData
     }
@@ -83,7 +83,7 @@ extension BitmovinAnalytics: StateMachineDelegate {
     func stateMachineDidExitSetup(_ stateMachine: StateMachine) {
     }
 
-    func stateMachine(_ stateMachine: StateMachine, didExitBufferingWithDuration duration: Int) {
+    func stateMachine(_ stateMachine: StateMachine, didExitBufferingWithDuration duration: Int64) {
         let eventData = createEventData(duration: duration)
         sendEventData(eventData: eventData)
     }
@@ -93,13 +93,13 @@ extension BitmovinAnalytics: StateMachineDelegate {
         sendEventData(eventData: eventData)
     }
 
-    func stateMachine(_ stateMachine: StateMachine, didExitPlayingWithDuration duration: Int) {
+    func stateMachine(_ stateMachine: StateMachine, didExitPlayingWithDuration duration: Int64) {
         let eventData = createEventData(duration: duration)
         eventData?.played = duration
         sendEventData(eventData: eventData)
     }
 
-    func stateMachine(_ stateMachine: StateMachine, didExitPauseWithDuration duration: Int) {
+    func stateMachine(_ stateMachine: StateMachine, didExitPauseWithDuration duration: Int64) {
         let eventData = createEventData(duration: duration)
         eventData?.paused = duration
         sendEventData(eventData: eventData)
@@ -110,13 +110,13 @@ extension BitmovinAnalytics: StateMachineDelegate {
         sendEventData(eventData: eventData)
     }
 
-    func stateMachine(_ stateMachine: StateMachine, didExitSeekingWithDuration duration: Int, destinationPlayerState: PlayerState) {
+    func stateMachine(_ stateMachine: StateMachine, didExitSeekingWithDuration duration: Int64, destinationPlayerState: PlayerState) {
         let eventData = createEventData(duration: duration)
         eventData?.seeked = duration
         sendEventData(eventData: eventData)
     }
 
-    func stateMachine(_ stateMachine: StateMachine, didHeartbeatWithDuration duration: Int) {
+    func stateMachine(_ stateMachine: StateMachine, didHeartbeatWithDuration duration: Int64) {
         let eventData = createEventData(duration: duration)
         switch stateMachine.state {
         case .playing:
@@ -134,7 +134,7 @@ extension BitmovinAnalytics: StateMachineDelegate {
         sendEventData(eventData: eventData)
     }
 
-    func stateMachine(_ stateMachine: StateMachine, didStartupWithDuration duration: Int) {
+    func stateMachine(_ stateMachine: StateMachine, didStartupWithDuration duration: Int64) {
         let eventData = createEventData(duration: duration)
         eventData?.videoStartupTime = duration
         // Hard coding 1 as the player startup time to workaround a Dashboard issue

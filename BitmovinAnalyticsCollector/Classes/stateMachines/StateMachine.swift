@@ -5,18 +5,18 @@ import Foundation
 public class StateMachine {
     private(set) var state: PlayerState
     private var config: BitmovinAnalyticsConfig
-    private var initialTimestamp: Int
-    private(set) var enterTimestamp: Int?
-    var potentialSeekStart: Int = 0
+    private var initialTimestamp: Int64
+    private(set) var enterTimestamp: Int64?
+    var potentialSeekStart: Int64 = 0
     var potentialSeekVideoTimeStart: CMTime?
-    var firstReadyTimestamp: Int?
+    var firstReadyTimestamp: Int64?
     private(set) var videoTimeStart: CMTime?
     private(set) var videoTimeEnd: CMTime?
     private(set) var impressionId: String
     weak var delegate: StateMachineDelegate?
     weak private var heartbeatTimer: Timer?
 
-    var startupTime: Int {
+    var startupTime: Int64 {
         guard let firstReadyTimestamp = firstReadyTimestamp else {
             return 0
         }

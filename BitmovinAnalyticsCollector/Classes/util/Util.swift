@@ -57,7 +57,7 @@ class Util {
 }
 
 extension Date {
-    var timeIntervalSince1970Millis: Int {
-        return Int(round(Date().timeIntervalSince1970 * 1000))
+    var timeIntervalSince1970Millis: Int64 {
+        return Int64(round(Date().timeIntervalSince1970 * 1000))
     }
 }

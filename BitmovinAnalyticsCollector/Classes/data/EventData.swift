@@ -18,20 +18,20 @@ public class EventData: Codable {
     var videoWindowWidth: Int = 0
     var videoWindowHeight: Int = 0
     var droppedFrames: Int = 0
-    var played: Int = 0
-    var buffered: Int = 0
-    var paused: Int = 0
-    var ad: Int = 0
-    var seeked: Int = 0
+    var played: Int64 = 0
+    var buffered: Int64 = 0
+    var paused: Int64 = 0
+    var ad: Int64 = 0
+    var seeked: Int64 = 0
     var videoPlaybackWidth: Int?
     var videoPlaybackHeight: Int?
     var videoBitrate: Double = 0
     var audioBitrate: Double = 0
-    var videoTimeStart: Int = 0
-    var videoTimeEnd: Int = 0
-    var videoStartupTime: Int = 0
-    var duration: Int = 0
-    var startupTime: Int = 0
+    var videoTimeStart: Int64 = 0
+    var videoTimeEnd: Int64 = 0
+    var videoStartupTime: Int64 = 0
+    var duration: Int64 = 0
+    var startupTime: Int64 = 0
     var analyticsVersion: String = "0"
     var key: String?
     var playerKey: String?
@@ -51,9 +51,9 @@ public class EventData: Codable {
     var impressionId: String
     var state: String?
     var m3u8Url: String?
-    var playerStartupTime: Int = 0
+    var playerStartupTime: Int64 = 0
     var pageLoadType: Int = 1
-    var pageLoadTime: Int = 0
+    var pageLoadTime: Int64 = 0
     var version: String?
 
     public init(config: BitmovinAnalyticsConfig, impressionId: String) {
