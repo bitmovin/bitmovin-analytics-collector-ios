@@ -3,20 +3,20 @@
 ## Example
 
 
-The following example creates a BitmovinAnalytics object and attaches an AVPlayer instance to it. 
+The following example creates a BitmovinAnalytics object and attaches an AVPlayer instance to it.
 
 ```swift
 // Create a BitmovinAnalyticsConfig using your Bitmovin analytics license key and/or your Bitmovin Player Key
 let config:BitmovinAnalyticsConfig = BitmovinAnalyticsConfig(key:"YOUR_ANALYTICS_KEY",playerKey:"YOUR_PLAYER_KEY")
 let config:BitmovinAnalyticsConfig = BitmovinAnalyticsConfig(key:"YOUR_ANALYTICS_KEY")
 
-// Create a BitmovinAnalytics object using the config just created 
+// Create a BitmovinAnalytics object using the config just created
 analyticsCollector = BitmovinAnalytics(config: config);
 
 // Attach your player instance
 analyticsCollector.attachAVPlayer(player: player);
 
-// Detach your player when you are done. 
+// Detach your player when you are done.
 analyticsCollector.detachPlayer()
 ```
 
@@ -35,7 +35,7 @@ config.videoId = "iOSHLSStatic"
 config.path = "/vod/breadcrumb/"
 ```
 
-A [full example app]() can be seen in the github repo 
+A [full example app]() can be seen in the github repo
 
 ## Requirements
 
@@ -45,13 +45,13 @@ BitmovinAnalyticsCollector is available through [CocoaPods](http://cocoapods.org
 it, simply add the following line to your Podfile:
 
 ```ruby
-  pod 'BitmovinAnalyticsCollector', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag:'1.3.0'
+  pod 'BitmovinAnalyticsCollector', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag:'1.3.1'
   pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.9.0'
 
   use_frameworks!
 ```
 
-Then, in your command line run 
+Then, in your command line run
 
 ```ruby
 pod install
