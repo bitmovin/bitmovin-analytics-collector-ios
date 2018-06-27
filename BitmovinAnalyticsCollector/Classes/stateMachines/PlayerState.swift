@@ -10,7 +10,7 @@ public enum PlayerState: String {
     case qualitychange
     case seeking
 
-    func onEntry(stateMachine: StateMachine, timestamp _: Int, destinationState _: PlayerState) {
+    func onEntry(stateMachine: StateMachine, timestamp _: Int64, destinationState _: PlayerState) {
         switch self {
         case .setup:
             return
@@ -33,7 +33,7 @@ public enum PlayerState: String {
         }
     }
 
-    func onExit(stateMachine: StateMachine, timestamp: Int, destinationState: PlayerState) {
+    func onExit(stateMachine: StateMachine, timestamp: Int64, destinationState: PlayerState) {
         // Get the duration we were in the state we are exiting
         let enterTimestamp = stateMachine.enterTimestamp ?? 0
         let duration = timestamp - enterTimestamp
