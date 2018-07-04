@@ -13,7 +13,7 @@ public class EventData: Codable {
     var isLive: Bool = false
     var isCasting: Bool? = false
     var isMuted: Bool? = false
-    var videoDuration: Int = 0
+    var videoDuration: Int64 = 0
     var time: Double?
     var videoWindowWidth: Int = 0
     var videoWindowHeight: Int = 0
