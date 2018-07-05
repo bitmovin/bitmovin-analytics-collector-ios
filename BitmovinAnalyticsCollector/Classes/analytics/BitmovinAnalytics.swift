@@ -69,7 +69,7 @@ public class BitmovinAnalytics {
         eventData.duration = duration
 
         if let timeStart = stateMachine.videoTimeStart {
-            eventData.videoTimeEnd = Int64(CMTimeGetSeconds(timeStart) * BitmovinAnalytics.msInSec)
+            eventData.videoTimeStart = Int64(CMTimeGetSeconds(timeStart) * BitmovinAnalytics.msInSec)
         }
         if let timeEnd = stateMachine.videoTimeEnd {
             eventData.videoTimeEnd = Int64(CMTimeGetSeconds(timeEnd) * BitmovinAnalytics.msInSec)

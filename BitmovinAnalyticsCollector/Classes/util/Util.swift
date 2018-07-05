@@ -33,7 +33,7 @@ class Util {
     }
 
     static func doubleToCMTime(double: Double) -> CMTime? {
-        return CMTimeMake(Int64(double), 1000)
+        return CMTimeMake(Int64(double), 1)
     }
 
     static func toJson<T: Codable>(object: T?) -> String {
