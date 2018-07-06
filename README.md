@@ -1,5 +1,15 @@
 # BitmovinAnalyticsCollector
 
+## Support
+
+##### Platforms
+ * iOS 9.0+
+ * tvOS 9.0+
+ 
+##### Video Players
+ * [Bitmovin Player](https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod)
+ * AVPlayer
+
 ## Example
 
 
