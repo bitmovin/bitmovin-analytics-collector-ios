@@ -17,15 +17,14 @@ class HttpClient {
         request.httpMethod = "POST"
         let postString = json
         request.httpBody = postString.data(using: .utf8)
-        print("Post String: \(postString)")
+//        print("Post String: \(postString)")
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else { // check for fundamental networking error
                 return
             }
-
-            if let httpResponse = response as? HTTPURLResponse {
-                print("Status Code \(httpResponse.statusCode)")
-            }
+//            if let httpResponse = response as? HTTPURLResponse {
+//                print("Status Code \(httpResponse.statusCode)")
+//            }
 
             completionHandler?(data, response, error)
         }

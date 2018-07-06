@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     private var config: BitmovinAnalyticsConfig
 
     required init?(coder aDecoder: NSCoder) {
-        config = BitmovinAnalyticsConfig(key: "9ae0b480-f2ee-4c10-bc3c-cb88e982e0ac")
+        config = BitmovinAnalyticsConfig(key: "YOUR_ANALYTICS_KEY")
         config.cdnProvider = CdnProvider.bitmovin
         config.customData1 = "customData1"
         config.customData2 = "customData2"
@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         config.customData5 = "customData5"
         config.customerUserId = "customUserId"
         config.experimentName = "experiment-1"
-        config.videoId = "iOSHLSStatic"
+        config.videoId = "tvOSHLSStatic"
         config.path = "/vod/breadcrumb/"
 
         analyticsCollector = BitmovinAnalytics(config: config)
