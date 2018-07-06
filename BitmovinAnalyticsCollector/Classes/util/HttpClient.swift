@@ -1,4 +1,3 @@
-
 import Foundation
 
 typealias HttpCompletionHandlerType = ((_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void)
@@ -23,11 +22,11 @@ class HttpClient {
             guard error == nil else { // check for fundamental networking error
                 return
             }
-            
+
             if let httpResponse = response as? HTTPURLResponse {
                 print("Status Code \(httpResponse.statusCode)")
             }
-            
+
             completionHandler?(data, response, error)
         }
         task.resume()
