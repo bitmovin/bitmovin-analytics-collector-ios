@@ -76,7 +76,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		010952B620EF22940010173A /* BitmovinAnalyticsCollector_tvOSExample */ = {
+		010952B620EF22940010173A /* tvOS Example for BitmovinAnalyticsCollector */ = {
 			isa = PBXGroup;
 			children = (
 				010952B720EF22940010173A /* AppDelegate.swift */,
@@ -85,15 +85,15 @@
 				010952BE20EF22950010173A /* Assets.xcassets */,
 				010952C020EF22950010173A /* Info.plist */,
 			);
-			path = BitmovinAnalyticsCollector_tvOSExample;
+			path = "tvOS Example for BitmovinAnalyticsCollector";
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
-				607FACD21AFB9204008FA782 /* Example for BitmovinAnalyticsCollector */,
-				010952B620EF22940010173A /* BitmovinAnalyticsCollector_tvOSExample */,
+				607FACD21AFB9204008FA782 /* iOS Example for BitmovinAnalyticsCollector */,
+				010952B620EF22940010173A /* tvOS Example for BitmovinAnalyticsCollector */,
 				607FACD11AFB9204008FA782 /* Products */,
 				B7AF69EE56B837676CE468B0 /* Pods */,
 				E318837416DF6C69933327CB /* Frameworks */,
@@ -109,7 +109,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		607FACD21AFB9204008FA782 /* Example for BitmovinAnalyticsCollector */ = {
+		607FACD21AFB9204008FA782 /* iOS Example for BitmovinAnalyticsCollector */ = {
 			isa = PBXGroup;
 			children = (
 				0110960D2028C7B800A70D38 /* Assets.xcassets */,
@@ -123,7 +123,7 @@
 				01C26BE32083ED7B001A0D76 /* WelcomeViewController.swift */,
 				01C26BE52083F14D001A0D76 /* BitmovinViewController.swift */,
 			);
-			name = "Example for BitmovinAnalyticsCollector";
+			name = "iOS Example for BitmovinAnalyticsCollector";
 			path = BitmovinAnalyticsCollector;
 			sourceTree = "<group>";
 		};
@@ -422,7 +422,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7UXPEM3WRB;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = BitmovinAnalyticsCollector_tvOSExample/Info.plist;
+				INFOPLIST_FILE = "tvOS Example for BitmovinAnalyticsCollector/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.BitmovinAnalyticsCollector-tvOSExample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -451,7 +451,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7UXPEM3WRB;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = BitmovinAnalyticsCollector_tvOSExample/Info.plist;
+				INFOPLIST_FILE = "tvOS Example for BitmovinAnalyticsCollector/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.BitmovinAnalyticsCollector-tvOSExample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
