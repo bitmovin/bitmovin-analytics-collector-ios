@@ -14,7 +14,9 @@ DESC
   s.source           = { :git => 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '9.0'
+  s.tvos.deployment_target = '9.0'
   s.source_files = 'BitmovinAnalyticsCollector/Classes/**/*'
-  s.dependency 'BitmovinPlayer', '~>2.9.0'
+  s.tvos.dependency 'BitmovinPlayer', '~>2.10.0'
+  s.ios.dependency 'BitmovinPlayer', '~>2.10.0'
 
 end

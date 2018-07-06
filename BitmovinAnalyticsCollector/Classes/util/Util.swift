@@ -1,5 +1,7 @@
-
+#if os(iOS)
 import CoreTelephony
+#endif
+
 import Foundation
 import AVKit
 
@@ -21,7 +23,11 @@ class Util {
         let scale = UIScreen.main.scale
         let height = UIScreen.main.bounds.size.height * scale
         let version = UIDevice.current.systemVersion
+        #if os(iOS)
         let carrier = CTTelephonyNetworkInfo().subscriberCellularProvider?.carrierName ?? "Unknown Carrier"
+        #else
+        let carrier = "Unknown Carrier tvOS"
+        #endif
 
         let userAgent = String(format: "%@ / Apple; %@ %.f / iOS %@ / %@", product, model, height, version, carrier)
 
@@ -38,7 +44,7 @@ class Util {
 
     static func toJson<T: Codable>(object: T?) -> String {
         let encoder = JSONEncoder()
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, *) {
             encoder.outputFormatting = [.sortedKeys]
         }
 

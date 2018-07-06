@@ -1,7 +1,15 @@
-platform :ios, '9.0'
-use_frameworks!
 
 target 'BitmovinAnalyticsCollector_Example' do
-  pod 'BitmovinAnalyticsCollector', :path => '../'
-  pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.9.0'
+    use_frameworks!
+    platform :ios, '9.0'
+    pod 'BitmovinAnalyticsCollector', :path => '../'
+    pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.10.0'
+end
+
+target 'BitmovinAnalyticsCollector_tvOSExample' do
+    pod 'BitmovinAnalyticsCollector', :path => '../'
+    use_frameworks!
+    platform :tvos
+    pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.10.0'
+
 end
