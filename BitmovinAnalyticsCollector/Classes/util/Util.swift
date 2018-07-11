@@ -25,8 +25,10 @@ class Util {
         let version = UIDevice.current.systemVersion
         #if os(iOS)
         let carrier = CTTelephonyNetworkInfo().subscriberCellularProvider?.carrierName ?? "Unknown Carrier"
-        #else
+        #elseif os(tvOS)
         let carrier = "Unknown Carrier tvOS"
+        #else
+        let carrier = "Unknown Carrier OSX"
         #endif
 
         let userAgent = String(format: "%@ / Apple; %@ %.f / iOS %@ / %@", product, model, height, version, carrier)
