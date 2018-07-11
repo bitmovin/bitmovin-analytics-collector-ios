@@ -1,4 +1,3 @@
-
 import Foundation
 import BitmovinPlayer
 import BitmovinAnalyticsCollector
@@ -30,7 +29,7 @@ class BitmovinViewController: UIViewController {
         config.videoId = "iOSHLSStaticBitmovin"
         config.path = "/vod/breadcrumb/"
         analyticsCollector = BitmovinAnalytics(config: config)
-        
+
         super.init(coder: aDecoder)
     }
 
@@ -39,7 +38,7 @@ class BitmovinViewController: UIViewController {
         guard let streamUrl = url else {
             return
         }
-        
+
         self.playerView.backgroundColor = .black
 
         // Create player configuration
@@ -83,11 +82,11 @@ class BitmovinViewController: UIViewController {
 
     @IBAction func reloadButtonWasPressed(_: UIButton) {
         analyticsCollector.detachPlayer()
-        
+
         guard let player = player else {
             return
         }
-        
+
         // Define needed resources
         guard let streamUrl = url else {
             return

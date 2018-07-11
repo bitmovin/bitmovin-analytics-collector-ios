@@ -1,4 +1,3 @@
-
 import Foundation
 
 typealias LicenseCallCompletionHandler = ((_ success: Bool) -> Void)
