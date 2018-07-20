@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BitmovinAnalyticsCollector'
-  s.version          = '1.4.0'
+  s.version          = '1.4.1'
   s.summary          = 'iOS library that allows you to monitor your iOS video playback with Bitmovin Analytics'
 
   s.description      = <<-DESC
@@ -16,7 +16,7 @@ DESC
   s.ios.deployment_target = '9.0'
   s.tvos.deployment_target = '9.0'
   s.source_files = 'BitmovinAnalyticsCollector/Classes/**/*'
-  s.tvos.dependency 'BitmovinPlayer', '~>2.10.0'
-  s.ios.dependency 'BitmovinPlayer', '~>2.10.0'
+  s.tvos.dependency 'BitmovinPlayer', '~>2.11.0'
+  s.ios.dependency 'BitmovinPlayer', '~>2.11.0'
 
 end
