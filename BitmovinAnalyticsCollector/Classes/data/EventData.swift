@@ -39,6 +39,7 @@ public class EventData: Codable {
     var cdnProvider: String?
     var streamForamt: String?
     var videoId: String?
+    var title: String?
     var customUserId: String?
     var customData1: String?
     var customData2: String?
@@ -75,6 +76,7 @@ public class EventData: Codable {
         customData3 = config.customData3
         customData4 = config.customData4
         customData5 = config.customData5
+        title = config.title
         videoId = config.videoId
         experimentName = config.experimentName
         path = config.path
