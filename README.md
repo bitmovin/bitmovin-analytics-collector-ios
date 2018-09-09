@@ -42,6 +42,7 @@ config.customData5 = "customData5"
 config.customerUserId = "customUserId"
 config.experimentName = "experiement-1"
 config.videoId = "iOSHLSStatic"
+config.title = "Video Title"
 config.path = "/vod/breadcrumb/"
 ```
 

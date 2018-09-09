@@ -35,6 +35,11 @@ public class BitmovinAnalyticsConfig {
     public var customData5: String?
 
     /**
+     * Title of the video in the CMS system
+     */
+    public var title: String?
+    
+    /**
      * User ID of the customer
      */
     public var customerUserId: String?

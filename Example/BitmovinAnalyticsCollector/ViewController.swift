@@ -85,6 +85,7 @@ class ViewController: UIViewController {
         config.customData5 = "customData10"
         config.customerUserId = "customUserId2"
         config.experimentName = "experiment-12"
+        config.title = "video title"
         config.videoId = "iOSHLSStatic2"
         config.path = "/vod/breadcrumb/2/"
         analyticsCollector.attachAVPlayer(player: player)
