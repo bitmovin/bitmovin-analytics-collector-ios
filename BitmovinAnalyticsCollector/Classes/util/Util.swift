@@ -62,6 +62,20 @@ class Util {
             return ""
         }
     }
+    
+    static func getUserId() -> String {
+        let defaults = UserDefaults.standard
+        let userIdFromStore = defaults.string(forKey: "bitmovin_analytics_user_id")
+        if (userIdFromStore != nil) {
+            return userIdFromStore!;
+        }
+        
+        let newUserId = NSUUID().uuidString
+        defaults.set(newUserId, forKey: "bitmovin_analytics_user_id")
+        return newUserId
+        
+        
+    }
 }
 
 extension Date {
