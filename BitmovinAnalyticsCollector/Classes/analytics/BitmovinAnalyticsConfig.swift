@@ -48,6 +48,11 @@ public class BitmovinAnalyticsConfig {
      * ID of the video in the CMS system
      */
     public var videoId: String?
+    
+    /**
+     * Human readable title of the video asset currently playing
+     */
+    public var title: String?
 
     /**
      * Analytics key. Find this value on dashboard.bitmovin.com/analytics

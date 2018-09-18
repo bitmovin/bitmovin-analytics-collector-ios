@@ -27,6 +27,7 @@ public class StateMachine {
         state = .setup
         initialTimestamp = Date().timeIntervalSince1970Millis
         impressionId = NSUUID().uuidString
+        print("Generated impressionID: " + impressionId)
     }
 
     deinit {
