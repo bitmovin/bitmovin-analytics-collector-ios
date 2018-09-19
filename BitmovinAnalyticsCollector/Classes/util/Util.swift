@@ -64,14 +64,13 @@ class Util {
     }
     
     static func getUserId() -> String {
-        let defaults = UserDefaults.standard
-        let userIdFromStore = defaults.string(forKey: "bitmovin_analytics_user_id")
-        if (userIdFromStore != nil) {
-            return userIdFromStore!;
+        let defaults = UserDefaults(suiteName: "com.bitmovin.analytics.collector_defaults")
+        if let userIdFromStore = defaults?.string(forKey: "user_id") {
+            return userIdFromStore
         }
         
         let newUserId = NSUUID().uuidString
-        defaults.set(newUserId, forKey: "bitmovin_analytics_user_id")
+        defaults?.set(newUserId, forKey: "user_id")
         return newUserId
         
         
