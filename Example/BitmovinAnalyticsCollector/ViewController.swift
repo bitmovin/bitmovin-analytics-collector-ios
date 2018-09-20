@@ -47,6 +47,7 @@ class ViewController: UIViewController {
         config.customerUserId = "customUserId"
         config.experimentName = "experiment-1"
         config.videoId = "iOSHLSStatic"
+        config.title = "Static HLS Video on iOS"
         config.path = "/vod/breadcrumb/"
 
         analyticsCollector = BitmovinAnalytics(config: config)
@@ -86,6 +87,7 @@ class ViewController: UIViewController {
         config.customerUserId = "customUserId2"
         config.experimentName = "experiment-12"
         config.videoId = "iOSHLSStatic2"
+        config.title = "ios static with AVFoundation"
         config.path = "/vod/breadcrumb/2/"
         analyticsCollector.attachAVPlayer(player: player)
     }

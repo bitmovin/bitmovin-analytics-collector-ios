@@ -27,8 +27,10 @@ class BitmovinViewController: UIViewController {
         config.customerUserId = "customUserId"
         config.experimentName = "experiment-1"
         config.videoId = "iOSHLSStaticBitmovin"
+        config.title = "iOS HLS Static Asset with Bitmovin Player"
         config.path = "/vod/breadcrumb/"
         analyticsCollector = BitmovinAnalytics(config: config)
+        print("Setup of collector finished")
 
         super.init(coder: aDecoder)
     }

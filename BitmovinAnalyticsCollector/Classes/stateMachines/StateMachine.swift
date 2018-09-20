@@ -27,6 +27,7 @@ public class StateMachine {
         state = .setup
         initialTimestamp = Date().timeIntervalSince1970Millis
         impressionId = NSUUID().uuidString
+        print("Generated Bitmovin Analytics impression ID: " + impressionId)
     }
 
     deinit {
