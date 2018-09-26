@@ -51,11 +51,11 @@ A [full example app]() can be seen in the github repo
 
 ## Installation
 
-BitmovinAnalyticsCollector is available through [CocoaPods](http://cocoapods.org). To install
+BitmovinAnalyticsCollector is available through [CocoaPods](http://cocoapods.org). We depend on `cocoapods` version `>= 1.4`. To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-  pod 'BitmovinAnalyticsCollector', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag:'1.5.0'
+  pod 'BitmovinAnalyticsCollector', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.5.0'
   pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.11.0'
 
   use_frameworks!
