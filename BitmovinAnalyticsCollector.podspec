@@ -18,6 +18,6 @@ DESC
   s.source_files = 'BitmovinAnalyticsCollector/Classes/**/*.{swift}'
   s.tvos.dependency 'BitmovinPlayer', '~>2.11'
   s.ios.dependency 'BitmovinPlayer', '~>2.11'
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
+  s.swift_version = '4.0'
 
 end
