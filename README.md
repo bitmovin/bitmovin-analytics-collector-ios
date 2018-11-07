@@ -45,7 +45,7 @@ config.videoId = "iOSHLSStatic"
 config.path = "/vod/breadcrumb/"
 ```
 
-A [full example app]() can be seen in the github repo
+A full example app can be seen [here](https://github.com/bitmovin/bitmovin-analytics-collector-ios/tree/develop/Example/BitmovinAnalyticsCollector).
 
 ## Requirements
 
