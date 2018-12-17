@@ -55,6 +55,8 @@ public class EventData: Codable {
     var pageLoadType: Int = 1
     var pageLoadTime: Int64 = 0
     var version: String?
+    var sequenceNumber: Int32 = 0
+    var platform: String = "iOS"
 
     public init(config: BitmovinAnalyticsConfig, impressionId: String) {
         domain = Util.mainBundleIdentifier()
