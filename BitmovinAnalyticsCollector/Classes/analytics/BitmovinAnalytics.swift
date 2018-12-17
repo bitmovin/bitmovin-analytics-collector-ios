@@ -25,7 +25,7 @@ public class BitmovinAnalytics {
      */
     public func detachPlayer() {
         eventDataDispatcher.disable()
-        stateMachine.reset()
+        stateMachine = StateMachine(config: self.config)
         adapter = nil
     }
 

@@ -34,15 +34,6 @@ public class StateMachine {
         heartbeatTimer?.invalidate()
     }
 
-    public func reset() {
-        impressionId = NSUUID().uuidString
-        initialTimestamp = Date().timeIntervalSince1970Millis
-        firstReadyTimestamp = nil
-        disableHeartbeat()
-        state = .setup
-        print("Generated Bitmovin Analytics impression ID: " +  impressionId.lowercased())
-    }
-
     public func transitionState(destinationState: PlayerState, time: CMTime?) {
         if state == destinationState {
             return
