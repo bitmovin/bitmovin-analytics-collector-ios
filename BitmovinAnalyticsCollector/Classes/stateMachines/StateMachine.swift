@@ -27,7 +27,7 @@ public class StateMachine {
         state = .setup
         initialTimestamp = Date().timeIntervalSince1970Millis
         impressionId = NSUUID().uuidString
-        print("Generated Bitmovin Analytics impression ID: " + impressionId)
+        print("Generated Bitmovin Analytics impression ID: " + impressionId.lowercased())
     }
 
     deinit {
@@ -40,6 +40,7 @@ public class StateMachine {
         firstReadyTimestamp = nil
         disableHeartbeat()
         state = .setup
+        print("Generated Bitmovin Analytics impression ID: " +  impressionId.lowercased())
     }
 
     public func transitionState(destinationState: PlayerState, time: CMTime?) {

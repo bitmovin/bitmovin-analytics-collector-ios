@@ -5,6 +5,8 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
     private var enabled: Bool = false
     private var events = [EventData]()
     private var config: BitmovinAnalyticsConfig
+    private var sequenceNumber: Int32 = 0
+    
     init(config: BitmovinAnalyticsConfig) {
         httpClient = HttpClient(urlString: BitmovinAnalyticsConfig.analyticsUrl)
         self.config = config
@@ -35,9 +37,12 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
 
     func disable() {
         enabled = false
+        self.sequenceNumber = 0;
     }
 
     func add(eventData: EventData) {
+        eventData.sequenceNumber = self.sequenceNumber
+        self.sequenceNumber += 1
         if enabled {
             httpClient.post(json: eventData.jsonString(), completionHandler: nil)
         } else {
