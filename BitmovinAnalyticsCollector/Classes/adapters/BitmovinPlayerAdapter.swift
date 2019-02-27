@@ -68,6 +68,11 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         if let videoPlaybackHeight = player.videoQuality?.height {
             eventData.videoPlaybackHeight = Int(videoPlaybackHeight)
         }
+        
+        // videoCodec
+        if let videoCodec = player.videoQuality?.codec {
+            eventData.videoCodec = String(videoCodec)
+        }
 
         let scale = UIScreen.main.scale
         // screenHeight
