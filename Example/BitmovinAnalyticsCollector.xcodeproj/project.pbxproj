@@ -298,7 +298,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-BitmovinAnalyticsCollector_tvOSExample/Pods-BitmovinAnalyticsCollector_tvOSExample-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector_tvOSExample/Pods-BitmovinAnalyticsCollector_tvOSExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BitmovinAnalyticsCollector-tvOS/BitmovinAnalyticsCollector.framework",
 				"${PODS_ROOT}/BitmovinPlayer/tvOS/BitmovinPlayer.framework",
 			);
@@ -309,7 +309,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BitmovinAnalyticsCollector_tvOSExample/Pods-BitmovinAnalyticsCollector_tvOSExample-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector_tvOSExample/Pods-BitmovinAnalyticsCollector_tvOSExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		65039E948B72CDEB2F1B8B80 /* [CP] Embed Pods Frameworks */ = {
@@ -318,7 +318,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-BitmovinAnalyticsCollector_Example/Pods-BitmovinAnalyticsCollector_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector_Example/Pods-BitmovinAnalyticsCollector_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BitmovinAnalyticsCollector-iOS/BitmovinAnalyticsCollector.framework",
 				"${PODS_ROOT}/BitmovinPlayer/iOS/BitmovinPlayer.framework",
 			);
@@ -329,7 +329,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BitmovinAnalyticsCollector_Example/Pods-BitmovinAnalyticsCollector_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector_Example/Pods-BitmovinAnalyticsCollector_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CC21A438A5C1517EA9C1D977 /* [CP] Check Pods Manifest.lock */ = {
