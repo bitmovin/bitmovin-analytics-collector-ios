@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 1.6.0
 - Split project into Core, AVPlayer and BitmovinPlayer to avoid unnecessary dependency imports
+- Added debug logging for denied licensing requests to facilitate debugging of whitelisted package names
 
 ## 1.5.3
 
