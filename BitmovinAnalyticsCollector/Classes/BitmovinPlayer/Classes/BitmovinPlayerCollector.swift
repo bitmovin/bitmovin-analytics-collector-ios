@@ -1,10 +1,3 @@
-//
-//  BitmovinPlayerCollector.swift
-//  BitmovinAnalyticsCollector-iOS
-//
-//  Created by Roland on 27.02.19.
-//
-
 import Foundation
 import BitmovinPlayer
 
