@@ -2,6 +2,12 @@ import Foundation
 
 typealias LicenseCallCompletionHandler = ((_ success: Bool) -> Void)
 
+func DPrint(_ string: String) {
+    #if DEBUG
+    print(string)
+    #endif
+}
+
 class LicenseCall {
     var config: BitmovinAnalyticsConfig
     var httpClient: HttpClient
@@ -33,15 +39,33 @@ class LicenseCall {
             }
 
             do {
-                let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: AnyObject]
-                if httpResponse.statusCode >= 400 {
-                    let message = json["message"] as? String
-                    NSLog("Authentication failed. Reason: %@", message ?? "Unknown error")
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else {
+                    DPrint("Licensing failed. Could not decode JSON response: \(data)")
                     completionHandler(false)
+                    return
                 }
-                if let status = json["status"] as? String {
-                    return completionHandler(status == "granted")
+                
+                guard httpResponse.statusCode < 400 else {
+                    let message = json["message"] as? String
+                    DPrint("Licensing failed. Reason: \(message ?? "Unknown error")")
+                    completionHandler(false)
+                    return
                 }
+                
+                guard let status = json["status"] as? String else{
+                    DPrint("Licensing failed. Reason: status not set")
+                    completionHandler(false)
+                    return
+                }
+                
+                guard status == "granted" else {
+                    DPrint("Licensing failed. Reason given by server: \(status)")
+                    completionHandler(false)
+                    return
+                }
+                
+                completionHandler(true)
+                
             } catch {
                 completionHandler(false)
             }
