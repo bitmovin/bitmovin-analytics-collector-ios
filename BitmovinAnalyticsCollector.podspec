@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BitmovinAnalyticsCollector'
-  s.version          = '1.5.0'
+  s.version          = '1.6.0'
   s.summary          = 'iOS library that allows you to monitor your iOS video playback with Bitmovin Analytics'
 
   s.description      = <<-DESC
@@ -15,9 +15,20 @@ DESC
 
   s.ios.deployment_target = '9.0'
   s.tvos.deployment_target = '9.0'
-  s.source_files = 'BitmovinAnalyticsCollector/Classes/**/*.{swift}'
-  s.tvos.dependency 'BitmovinPlayer', '~>2.11'
-  s.ios.dependency 'BitmovinPlayer', '~>2.11'
   s.swift_version = '4.0'
+
+  s.subspec 'Core' do |core|
+    core.source_files = 'BitmovinAnalyticsCollector/Classes/Collector/**/*.{swift}' 
+  end
+
+  s.subspec 'BitmovinPlayer' do |bitmovinplayer|
+    bitmovinplayer.source_files = 'BitmovinAnalyticsCollector/Classes/BitmovinPlayer/**/*.{swift}'    
+    bitmovinplayer.tvos.dependency 'BitmovinPlayer', '~>2.11'
+    bitmovinplayer.ios.dependency 'BitmovinPlayer', '~>2.11'
+  end
+
+  s.subspec 'AVPlayer' do |avplayer|
+    avplayer.source_files = 'BitmovinAnalyticsCollector/Classes/AVPlayer/**/*.{swift}'
+  end
 
 end

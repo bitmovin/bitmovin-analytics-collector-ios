@@ -1,19 +1,17 @@
 import AVFoundation
 import Foundation
-import BitmovinPlayer
-
 /**
  * An iOS analytics plugin that sends video playback analytics to Bitmovin Analytics servers. Currently
  * supports analytics on AVPlayer video players
  */
 public class BitmovinAnalytics {
     static let msInSec = 1000.0
-    private var config: BitmovinAnalyticsConfig
+    internal var config: BitmovinAnalyticsConfig
+    internal var stateMachine: StateMachine
     private var adapter: PlayerAdapter?
-    private var stateMachine: StateMachine
     private var eventDataDispatcher: EventDataDispatcher
 
-    public init(config: BitmovinAnalyticsConfig) {
+    internal init(config: BitmovinAnalyticsConfig) {
         self.config = config
         stateMachine = StateMachine(config: self.config)
         eventDataDispatcher = SimpleEventDataDispatcher(config: config)
@@ -28,25 +26,11 @@ public class BitmovinAnalytics {
         stateMachine.reset()
         adapter = nil
     }
-
-    /**
-     * Attach a player instance to this analytics plugin. After this is completed, BitmovinAnalytics
-     * will start monitoring and sending analytics data based on the attached player instance.
-     */
-    public func attachAVPlayer(player: AVPlayer) {
+    
+    internal func attach(adapter: PlayerAdapter) {
         stateMachine.delegate = self
         eventDataDispatcher.enable()
-        adapter = AVPlayerAdapter(player: player, config: config, stateMachine: stateMachine)
-    }
-
-    /**
-     * Attach a player instance to this analytics plugin. After this is completed, BitmovinAnalytics
-     * will start monitoring and sending analytics data based on the attached player instance.
-     */
-    public func attachBitmovinPlayer(player: BitmovinPlayer) {
-        stateMachine.delegate = self
-        eventDataDispatcher.enable()
-        adapter = BitmovinPlayerAdapter(player: player, config: config, stateMachine: stateMachine)
+        self.adapter = adapter
     }
 
     @objc private func licenseFailed(notification _: Notification) {
