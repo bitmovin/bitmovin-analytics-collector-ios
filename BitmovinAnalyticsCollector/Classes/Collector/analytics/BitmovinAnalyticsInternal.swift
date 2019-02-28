@@ -4,7 +4,7 @@ import Foundation
  * An iOS analytics plugin that sends video playback analytics to Bitmovin Analytics servers. Currently
  * supports analytics on AVPlayer video players
  */
-public class BitmovinAnalytics {
+public class BitmovinAnalyticsInternal {
     static let msInSec = 1000.0
     internal var config: BitmovinAnalyticsConfig
     internal var stateMachine: StateMachine
@@ -52,16 +52,16 @@ public class BitmovinAnalytics {
         eventData.duration = duration
 
         if let timeStart = stateMachine.videoTimeStart {
-            eventData.videoTimeStart = Int64(CMTimeGetSeconds(timeStart) * BitmovinAnalytics.msInSec)
+            eventData.videoTimeStart = Int64(CMTimeGetSeconds(timeStart) * BitmovinAnalyticsInternal.msInSec)
         }
         if let timeEnd = stateMachine.videoTimeEnd {
-            eventData.videoTimeEnd = Int64(CMTimeGetSeconds(timeEnd) * BitmovinAnalytics.msInSec)
+            eventData.videoTimeEnd = Int64(CMTimeGetSeconds(timeEnd) * BitmovinAnalyticsInternal.msInSec)
         }
         return eventData
     }
 }
 
-extension BitmovinAnalytics: StateMachineDelegate {
+extension BitmovinAnalyticsInternal: StateMachineDelegate {
 
     func stateMachineDidExitSetup(_ stateMachine: StateMachine) {
     }

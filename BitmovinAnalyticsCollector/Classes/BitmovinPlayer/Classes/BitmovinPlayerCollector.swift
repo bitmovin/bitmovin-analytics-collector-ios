@@ -8,7 +8,7 @@
 import Foundation
 import BitmovinPlayer
 
-public class BitmovinPlayerCollector : BitmovinAnalytics {
+public class BitmovinPlayerCollector : BitmovinAnalyticsInternal {
     
     public override init(config: BitmovinAnalyticsConfig) {
         super.init(config: config);

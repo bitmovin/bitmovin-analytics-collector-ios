@@ -8,7 +8,7 @@
 import Foundation
 import AVKit
 
-public class AVPlayerCollector : BitmovinAnalytics {
+public class AVPlayerCollector : BitmovinAnalyticsInternal {
     
     public override init(config: BitmovinAnalyticsConfig) {
         super.init(config: config);
