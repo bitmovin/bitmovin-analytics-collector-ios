@@ -27,10 +27,6 @@ class LicenseCall {
                 return
             }
 
-            if httpResponse.statusCode >= 400 {
-                completionHandler(false)
-            }
-
             guard let data = data else {
                 completionHandler(false)
                 return
@@ -38,6 +34,11 @@ class LicenseCall {
 
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: AnyObject]
+                if httpResponse.statusCode >= 400 {
+                    let message = json["message"] as? String
+                    NSLog("Authentication failed. Reason: %@", message ?? "Unknown error")
+                    completionHandler(false)
+                }
                 if let status = json["status"] as? String {
                     return completionHandler(status == "granted")
                 }
