@@ -1,14 +1,7 @@
-//
-//  AVPlayerCollector.swift
-//  BitmovinAnalyticsCollector-iOS
-//
-//  Created by Roland on 27.02.19.
-//
-
 import Foundation
 import AVKit
 
-public class AVPlayerCollector : BitmovinAnalytics {
+public class AVPlayerCollector : BitmovinAnalyticsInternal {
     
     public override init(config: BitmovinAnalyticsConfig) {
         super.init(config: config);
