@@ -4,7 +4,7 @@ import UIKit
 
 class ViewController: UIViewController {
     private static var playerViewControllerKVOContext = 0
-    private var analyticsCollector: BitmovinAnalytics
+    private var analyticsCollector: AVPlayerCollector
     private var isSeeking: Bool = false
     private var timeObserverToken: Any?
     private var config: BitmovinAnalyticsConfig
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         config.title = "Static HLS Video on iOS"
         config.path = "/vod/breadcrumb/"
 
-        analyticsCollector = BitmovinAnalytics(config: config)
+        analyticsCollector = AVPlayerCollector(config: config)
         super.init(coder: aDecoder)
     }
 
@@ -58,7 +58,7 @@ class ViewController: UIViewController {
         playerView.playerLayer.player = player
         addObserver(self, forKeyPath: #keyPath(ViewController.player.rate), options: [.new, .initial], context: &ViewController.playerViewControllerKVOContext)
         createPlayer()
-        analyticsCollector.attachAVPlayer(player: player)
+        analyticsCollector.attachPlayer(player: player)
     }
 
     @IBAction func createPlayer() {
@@ -89,7 +89,7 @@ class ViewController: UIViewController {
         config.videoId = "iOSHLSStatic2"
         config.title = "ios static with AVFoundation"
         config.path = "/vod/breadcrumb/2/"
-        analyticsCollector.attachAVPlayer(player: player)
+        analyticsCollector.attachPlayer(player: player)
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {

@@ -20,11 +20,11 @@ The following example creates a BitmovinAnalytics object and attaches an AVPlaye
 let config:BitmovinAnalyticsConfig = BitmovinAnalyticsConfig(key:"YOUR_ANALYTICS_KEY",playerKey:"YOUR_PLAYER_KEY")
 let config:BitmovinAnalyticsConfig = BitmovinAnalyticsConfig(key:"YOUR_ANALYTICS_KEY")
 
-// Create a BitmovinAnalytics object using the config just created
-analyticsCollector = BitmovinAnalytics(config: config);
+// Create a AVPlayerCollector object using the config just created (for the Bitmovin Player, create a BitmovinPlayerCollector)
+analyticsCollector = AVPlayerCollector(config: config);
 
 // Attach your player instance
-analyticsCollector.attachAVPlayer(player: player);
+analyticsCollector.attachPlayer(player: player);
 
 // Detach your player when you are done.
 analyticsCollector.detachPlayer()
@@ -54,11 +54,34 @@ A full example app can be seen [here](https://github.com/bitmovin/bitmovin-analy
 BitmovinAnalyticsCollector is available through [CocoaPods](http://cocoapods.org). We depend on `cocoapods` version `>= 1.4`. To install
 it, simply add the following line to your Podfile:
 
+### Bitmovin Player
+
+The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` version `>= 2.11.0`.
+
 ```ruby
-  pod 'BitmovinAnalyticsCollector', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.5.2'
+  pod 'BitmovinAnalyticsCollector/Core', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.6.0'
+  pod 'BitmovinAnalyticsCollector/BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.6.0'
   pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.11.0'
 
   use_frameworks!
+```
+
+### AVPlayer
+
+```ruby
+pod 'BitmovinAnalyticsCollector/Core', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.6.0'
+pod 'BitmovinAnalyticsCollector/AVPlayer', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.6.0'
+
+use_frameworks!
+```
+
+To include all available collectors, add the following lines (the dependency on `BitmovinPlayer` applies here as well):
+
+```ruby
+pod 'BitmovinAnalyticsCollector', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.6.0'
+pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.11.0'
+
+use_frameworks!
 ```
 
 Then, in your command line run

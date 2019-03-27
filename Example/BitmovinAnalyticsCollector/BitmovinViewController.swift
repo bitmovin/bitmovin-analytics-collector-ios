@@ -5,7 +5,7 @@ import UIKit
 
 class BitmovinViewController: UIViewController {
     var player: BitmovinPlayer?
-    private var analyticsCollector: BitmovinAnalytics
+    private var analyticsCollector: BitmovinPlayerCollector
     private var config: BitmovinAnalyticsConfig
     let url = URL(string: "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
     @IBOutlet var playerView: UIView!
@@ -29,7 +29,7 @@ class BitmovinViewController: UIViewController {
         config.videoId = "iOSHLSStaticBitmovin"
         config.title = "iOS HLS Static Asset with Bitmovin Player"
         config.path = "/vod/breadcrumb/"
-        analyticsCollector = BitmovinAnalytics(config: config)
+        analyticsCollector = BitmovinPlayerCollector(config: config)
         print("Setup of collector finished")
 
         super.init(coder: aDecoder)
@@ -52,7 +52,7 @@ class BitmovinViewController: UIViewController {
             // Create player based on player configuration
             let player = BitmovinPlayer(configuration: config)
 
-            analyticsCollector.attachBitmovinPlayer(player: player)
+            analyticsCollector.attachPlayer(player: player)
 
             // Create player view and pass the player instance to it
             let playerBoundary = BMPBitmovinPlayerView(player: player, frame: .zero)
@@ -101,7 +101,7 @@ class BitmovinViewController: UIViewController {
             // Create player based on player configuration
             self.player?.load(sourceConfiguration: config.sourceConfiguration)
 
-            analyticsCollector.attachBitmovinPlayer(player: player)
+            analyticsCollector.attachPlayer(player: player)
 
         } catch {
         }

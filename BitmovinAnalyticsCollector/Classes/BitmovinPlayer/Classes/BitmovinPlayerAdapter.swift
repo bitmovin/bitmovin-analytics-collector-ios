@@ -39,7 +39,7 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
 
         //Duration
         if !player.duration.isNaN && !player.duration.isInfinite {
-            eventData.videoDuration = Int64(player.duration * BitmovinAnalytics.msInSec)
+            eventData.videoDuration = Int64(player.duration * BitmovinAnalyticsInternal.msInSec)
         }
 
         //isCasting

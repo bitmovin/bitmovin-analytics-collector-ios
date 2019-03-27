@@ -175,7 +175,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
 
         // Duration
         if let duration = player?.currentItem?.duration, CMTIME_IS_NUMERIC(_: duration) {
-            eventData.videoDuration = Int64(CMTimeGetSeconds(duration) * BitmovinAnalytics.msInSec)
+            eventData.videoDuration = Int64(CMTimeGetSeconds(duration) * BitmovinAnalyticsInternal.msInSec)
         }
 
         // isCasting
