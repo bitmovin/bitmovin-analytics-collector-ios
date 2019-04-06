@@ -90,6 +90,10 @@ Then, in your command line run
 pod install
 ```
 
+## Known Issues
+
+- The `audioCodec` property is not collected at the moment, as the information isn't available in the player.
+
 ## Author
 
 Cory Zachman, cory.zachman@bitmovin.com

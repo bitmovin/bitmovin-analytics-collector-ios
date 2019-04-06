@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+## 1.7.0
+
+### Added
+
+- `audioCodec` and `videoCodec` in outgoing payload
+
 ## 1.6.0
 - Split project into Core, AVPlayer and BitmovinPlayer to avoid unnecessary dependency imports
 - Added debug logging for denied licensing requests to facilitate debugging of whitelisted package names
