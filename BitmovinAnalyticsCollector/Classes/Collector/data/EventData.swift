@@ -62,6 +62,7 @@ public class EventData: Codable {
     var platform: String = "tvOS"
     #endif
     var videoCodec: String?
+    var audioCodec: String?
 
 
     public init(config: BitmovinAnalyticsConfig, impressionId: String) {
