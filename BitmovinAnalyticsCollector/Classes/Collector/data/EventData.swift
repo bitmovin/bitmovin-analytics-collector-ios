@@ -63,6 +63,7 @@ public class EventData: Codable {
     #endif
     var videoCodec: String?
     var audioCodec: String?
+    var supportedVideoCodecs: [String]?
 
 
     public init(config: BitmovinAnalyticsConfig, impressionId: String) {
