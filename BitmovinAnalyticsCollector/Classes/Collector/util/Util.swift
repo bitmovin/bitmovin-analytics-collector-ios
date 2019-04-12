@@ -78,7 +78,7 @@ class Util {
     
     static func getSupportedVideoCodecs() -> [String] {
         var codecs = ["avc"];
-        if #available(iOS 11, *) {
+        if #available(iOS 11, tvOS 11, *) {
             codecs.append("hevc")
         }
         return codecs;
