@@ -60,6 +60,14 @@ public class EventData: Codable {
     var platform: String = "iOS"
     #elseif os(tvOS)
     var platform: String = "tvOS"
+    #elseif os(watchOS)
+    var platform: String = "watchOS"
+    #elseif os(macOS)
+    var platform: String = "macOS"
+    #elseif os(Linux)
+    var platform: String = "Linux"
+    #else
+    var platform: String = "unknown"
     #endif
     var videoCodec: String?
     var audioCodec: String?
