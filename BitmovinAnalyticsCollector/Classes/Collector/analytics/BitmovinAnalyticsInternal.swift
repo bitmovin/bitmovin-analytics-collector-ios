@@ -123,6 +123,7 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         // Hard coding 1 as the player startup time to workaround a Dashboard issue
         eventData?.playerStartupTime = 1
         eventData?.startupTime = duration+1
+        eventData?.supportedVideoCodecs = Util.getSupportedVideoCodecs()
 
         eventData?.state = "startup"
         sendEventData(eventData: eventData)

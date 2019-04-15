@@ -49,7 +49,9 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         eventData.isLive = player.isLive
 
         //version
-        eventData.version = "1.0"
+        if let sdkVersion = Bundle(for: BitmovinPlayer.self).object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
+            eventData.version = sdkVersion
+        }
 
         // streamForamt, hlsUrl
         eventData.streamForamt = "hls"

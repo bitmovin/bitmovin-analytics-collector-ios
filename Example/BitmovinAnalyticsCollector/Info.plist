@@ -31,6 +31,8 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>BitmovinPlayerLicenseKey</key>
+	<string>a6e31908-550a-4f75-b4bc-a9d89880a733</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
