@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Added
+
+- `supportedVideoCodecs` in outgoing payload
+
+### Fixed
+
+- Collector didn't report the correct version of the Bitmovin player
+- Added additional cases to the  `platform` field (`watchOS`,  `macOS`, `Linux` and `unknown`) 
+
 ## 1.7.0
 
 ### Added
