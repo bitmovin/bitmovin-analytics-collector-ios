@@ -9,18 +9,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- `supportedVideoCodecs` in outgoing payload
 
-### Fixed
-
-- Collector didn't report the correct version of the Bitmovin player
-- Added additional cases to the  `platform` field (`watchOS`,  `macOS`, `Linux` and `unknown`) 
 
 ## 1.7.0
 
 ### Added
 
 - `audioCodec` and `videoCodec` in outgoing payload
+- `supportedVideoCodecs` in outgoing payload
+
+### Fixed
+
+- Collector didn't report the correct version of the Bitmovin player
+- Added additional cases to the  `platform` field (`watchOS`,  `macOS`, `Linux` and `unknown`) 
 
 ## 1.6.0
 - Split project into Core, AVPlayer and BitmovinPlayer to avoid unnecessary dependency imports
