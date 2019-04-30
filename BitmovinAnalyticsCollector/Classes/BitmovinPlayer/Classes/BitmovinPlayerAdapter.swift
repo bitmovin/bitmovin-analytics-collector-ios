@@ -149,4 +149,8 @@ extension BitmovinPlayerAdapter: PlayerListener {
             stateMachine.transitionState(destinationState: .playing, time: Util.doubleToCMTime(double: player.currentTime))
         }
     }
+    
+    func onSourceUnloaded(_ event: SourceUnloadedEvent) {
+        stateMachine.reset()
+    }
 }
