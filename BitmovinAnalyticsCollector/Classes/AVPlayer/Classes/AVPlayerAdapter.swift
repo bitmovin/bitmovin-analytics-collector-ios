@@ -8,8 +8,6 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     private let stateMachine: StateMachine
     private let config: BitmovinAnalyticsConfig
     private var lastBitrate: Double = 0
-    private var lastErrorCode: Int? = nil;
-    private var lastErrorMessage: String? = nil;
     @objc private var player: AVPlayer?
     var playbackLikelyToKeepUpKeyPathObserver: NSKeyValueObservation?
     var playbackBufferEmptyObserver: NSKeyValueObservation?
@@ -89,10 +87,10 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
             break
         case .failed:
             let error = self.player?.currentItem?.error as NSError?
-            lastErrorCode = error?.code ?? 1
-            lastErrorMessage = error?.localizedDescription ?? "Unkown"
-
-            stateMachine.transitionState(destinationState: .error, time: player?.currentTime())
+            let errorCode = error?.code ?? 1
+            let errorMessage = error?.localizedDescription ?? "Unkown"
+            
+            stateMachine.transitionState(destinationState: .error, time: player?.currentTime(), data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode, BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
             break
         default:
             break
@@ -102,10 +100,10 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     @objc private func failedToPlayToEndTime(notification: Notification) {
         let error = notification.userInfo?[AVPlayerItemFailedToPlayToEndTimeErrorKey] as? NSError
         
-        lastErrorCode = error?.code ?? 1
-        lastErrorMessage = error?.localizedDescription ?? "Unkown"
+        let errorCode = error?.code ?? 1
+        let errorMessage = error?.localizedDescription ?? "Unkown"
         
-        stateMachine.transitionState(destinationState: .error, time: player?.currentTime())
+        stateMachine.transitionState(destinationState: .error, time: player?.currentTime(), data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode, BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
     }
     
     @objc private func addedErrorLog(notification: Notification) {
@@ -116,10 +114,10 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
             return
         }
         
-        lastErrorCode = errorLog.events.last?.errorStatusCode
-        lastErrorMessage = errorLog.events.last?.errorComment
+        let errorCode = errorLog.events.last?.errorStatusCode ?? 1
+        let errorMessage = errorLog.events.last?.errorComment ?? "Unkown"
         
-        stateMachine.transitionState(destinationState: .error, time: player?.currentTime())
+        stateMachine.transitionState(destinationState: .error, time: player?.currentTime(), data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode, BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
     }
 
     @objc private func playbackStalled(notification _: Notification) {
@@ -186,22 +184,6 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
 
         // Player Tech
         eventData.playerTech = "ios:avplayer"
-
-        // Error Code
-//        if player?.currentItem?.status == .failed {
-//            if let errorLog = player?.currentItem?.errorLog(), let errorLogEvent: AVPlayerItemErrorLogEvent = errorLog.events.first {
-//                eventData.errorCode = UInt(errorLogEvent.errorStatusCode)
-//                eventData.errorMessage = errorLogEvent.errorComment
-//            }
-//        }
-//
-//        // Error Message
-//        eventData.errorMessage = player?.error?.localizedDescription
-        eventData.errorMessage = lastErrorMessage
-        eventData.errorCode = lastErrorCode
-        
-        lastErrorMessage = nil
-        lastErrorCode = nil
 
         // Duration
         if let duration = player?.currentItem?.duration, CMTIME_IS_NUMERIC(_: duration) {
