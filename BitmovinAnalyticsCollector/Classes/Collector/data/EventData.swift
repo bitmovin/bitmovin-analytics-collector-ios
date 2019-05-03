@@ -5,7 +5,7 @@ public class EventData: Codable {
     var path: String?
     var language: String
     var userAgent: String?
-    var errorCode: UInt?
+    var errorCode: Int?
     var errorMessage: String?
     var screenWidth: Int?
     var screenHeight: Int?
