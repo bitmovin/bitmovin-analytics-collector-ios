@@ -5,6 +5,9 @@ import Foundation
  * supports analytics on AVPlayer video players
  */
 public class BitmovinAnalyticsInternal {
+    public static let ErrorMessageKey = "errorMessage"
+    public static let ErrorCodeKey = "errorCode"
+    
     static let msInSec = 1000.0
     internal var config: BitmovinAnalyticsConfig
     internal var stateMachine: StateMachine
@@ -71,8 +74,14 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         sendEventData(eventData: eventData)
     }
 
-    func stateMachineDidEnterError(_ stateMachine: StateMachine) {
+    func stateMachineDidEnterError(_ stateMachine: StateMachine, data: [AnyHashable: Any]?) {
         let eventData = createEventData(duration: 0)
+        if((data?[BitmovinAnalyticsInternal.ErrorCodeKey]) != nil) {
+            eventData?.errorCode = data?[BitmovinAnalyticsInternal.ErrorCodeKey] as! Int?
+        }
+        if((data?[BitmovinAnalyticsInternal.ErrorMessageKey]) != nil) {
+            eventData?.errorMessage = data?[BitmovinAnalyticsInternal.ErrorMessageKey] as! String?
+        }
         sendEventData(eventData: eventData)
     }
 

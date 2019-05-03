@@ -43,7 +43,7 @@ public class StateMachine {
         print("Generated Bitmovin Analytics impression ID: " +  impressionId.lowercased())
     }
 
-    public func transitionState(destinationState: PlayerState, time: CMTime?) {
+    public func transitionState(destinationState: PlayerState, time: CMTime?, data: [AnyHashable : Any]? = nil) {
         if state == destinationState {
             return
         } else if state == .buffering && destinationState == .qualitychange {
@@ -55,7 +55,7 @@ public class StateMachine {
             state = destinationState
             enterTimestamp = timestamp
             videoTimeStart = videoTimeEnd
-            state.onEntry(stateMachine: self, timestamp: timestamp, destinationState: destinationState)
+            state.onEntry(stateMachine: self, timestamp: timestamp, destinationState: destinationState, data: data)
         }
     }
 

@@ -3,7 +3,7 @@ import Foundation
 protocol StateMachineDelegate: class {
     func stateMachineDidExitSetup(_ stateMachine: StateMachine)
     func stateMachine(_ stateMachine: StateMachine, didExitBufferingWithDuration duration: Int64)
-    func stateMachineDidEnterError(_ stateMachine: StateMachine)
+    func stateMachineDidEnterError(_ stateMachine: StateMachine, data: [AnyHashable : Any]?)
     func stateMachine(_ stateMachine: StateMachine, didExitPlayingWithDuration duration: Int64)
     func stateMachine(_ stateMachine: StateMachine, didExitPauseWithDuration duration: Int64)
     func stateMachineDidQualityChange(_ stateMachine: StateMachine)
