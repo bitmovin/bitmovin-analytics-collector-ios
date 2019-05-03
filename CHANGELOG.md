@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 
+### Fixed
+
+- Collector didn't report errors when using the `AVPlayerCollector` 
+
 
 ## 1.7.0
 
