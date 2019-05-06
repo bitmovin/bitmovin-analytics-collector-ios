@@ -9,14 +9,14 @@ public enum PlayerState: String {
     case qualitychange
     case seeking
 
-    func onEntry(stateMachine: StateMachine, timestamp _: Int64, destinationState _: PlayerState) {
+    func onEntry(stateMachine: StateMachine, timestamp _: Int64, destinationState _: PlayerState, data: [AnyHashable : Any]?) {
         switch self {
         case .setup:
             return
         case .buffering:
             return
         case .error:
-            stateMachine.delegate?.stateMachineDidEnterError(stateMachine)
+            stateMachine.delegate?.stateMachineDidEnterError(stateMachine, data: data)
             return
         case .playing, .paused:
             if (stateMachine.firstReadyTimestamp == nil) {

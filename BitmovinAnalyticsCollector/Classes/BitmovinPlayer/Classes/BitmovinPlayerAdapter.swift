@@ -5,7 +5,7 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
     private let stateMachine: StateMachine
     private let config: BitmovinAnalyticsConfig
     private var player: BitmovinPlayer
-    private var errorCode: UInt?
+    private var errorCode: Int?
     private var errorDescription: String?
 
     init(player: BitmovinPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
@@ -137,7 +137,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onError(_ event: ErrorEvent) {
-        errorCode = event.code
+        errorCode = Int(event.code)
         errorDescription = event.description
         stateMachine.transitionState(destinationState: .error, time: Util.doubleToCMTime(double: player.currentTime))
     }

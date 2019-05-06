@@ -11,11 +11,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- AVPlayer Collector now reports `playerVersion` as `avplayer-<iOS-Version>`
-- Bitmovin Collector now reports `playerVersion` as `bitmovin-<SDK-version>`
-
 ### Fixed
 
+- Collector didn't report errors when using the `AVPlayerCollector` 
+- AVPlayer Collector now reports `playerVersion` as `avplayer-<iOS-Version>`
+- Bitmovin Collector now reports `playerVersion` as `bitmovin-<SDK-version>`
 - Collector didn't reset on `onSourceUnloaded` and continued sending samples with the inital `impression_id`, if `detachPlayer` wasn't called 
 
 ## 1.7.0
