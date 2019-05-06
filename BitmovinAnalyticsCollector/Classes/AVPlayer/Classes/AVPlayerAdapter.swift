@@ -199,7 +199,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         }
 
         // version
-        eventData.version = UIDevice.current.systemVersion
+        eventData.version = PlayerType.avplayer.rawValue + "-" + UIDevice.current.systemVersion
 
         // streamFormat, hlsUrl
         eventData.streamForamt = "hls"

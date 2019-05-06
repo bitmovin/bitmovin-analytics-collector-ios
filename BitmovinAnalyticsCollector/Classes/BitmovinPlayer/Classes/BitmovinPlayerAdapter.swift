@@ -50,7 +50,7 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
 
         //version
         if let sdkVersion = Bundle(for: BitmovinPlayer.self).object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
-            eventData.version = sdkVersion
+            eventData.version = PlayerType.bitmovin.rawValue + "-" + sdkVersion
         }
 
         // streamForamt, hlsUrl
@@ -148,5 +148,9 @@ extension BitmovinPlayerAdapter: PlayerListener {
         } else {
             stateMachine.transitionState(destinationState: .playing, time: Util.doubleToCMTime(double: player.currentTime))
         }
+    }
+    
+    func onSourceUnloaded(_ event: SourceUnloadedEvent) {
+        stateMachine.reset()
     }
 }
