@@ -44,6 +44,7 @@ public class BitmovinAnalyticsInternal {
         guard let data = eventData else {
             return
         }
+        print("error message: ", eventData?.errorMessage, ", error code: ", eventData?.errorCode)
         eventDataDispatcher.add(eventData: data)
     }
 
@@ -76,11 +77,11 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
 
     func stateMachineDidEnterError(_ stateMachine: StateMachine, data: [AnyHashable: Any]?) {
         let eventData = createEventData(duration: 0)
-        if((data?[BitmovinAnalyticsInternal.ErrorCodeKey]) != nil) {
-            eventData?.errorCode = data?[BitmovinAnalyticsInternal.ErrorCodeKey] as! Int?
+        if let errorCode = data?[BitmovinAnalyticsInternal.ErrorCodeKey] {
+            eventData?.errorCode = errorCode as? Int
         }
-        if((data?[BitmovinAnalyticsInternal.ErrorMessageKey]) != nil) {
-            eventData?.errorMessage = data?[BitmovinAnalyticsInternal.ErrorMessageKey] as! String?
+        if let errorMessage = data?[BitmovinAnalyticsInternal.ErrorMessageKey] {
+            eventData?.errorMessage = errorMessage as? String
         }
         sendEventData(eventData: eventData)
     }
