@@ -37,7 +37,7 @@ public class EventData: Codable {
     var player: String?
     var playerTech: String?
     var cdnProvider: String?
-    var streamForamt: String?
+    var streamFormat: String?
     var videoId: String?
     var videoTitle: String?
     var customUserId: String?
@@ -51,6 +51,8 @@ public class EventData: Codable {
     var impressionId: String
     var state: String?
     var m3u8Url: String?
+    var mpdUrl: String?
+    var progUrl: String?
     var playerStartupTime: Int64 = 0
     var pageLoadType: Int = 1
     var pageLoadTime: Int64 = 0
