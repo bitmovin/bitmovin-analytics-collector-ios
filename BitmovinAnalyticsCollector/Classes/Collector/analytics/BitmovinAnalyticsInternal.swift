@@ -71,6 +71,7 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
 
     func stateMachine(_ stateMachine: StateMachine, didExitBufferingWithDuration duration: Int64) {
         let eventData = createEventData(duration: duration)
+        eventData?.buffered = duration
         sendEventData(eventData: eventData)
     }
 
