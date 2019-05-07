@@ -84,16 +84,16 @@ class Util {
         return codecs;
     }
     
-    static func getStreamTypeFromUrl(url: String) -> StreamType? {
-        let path = url.lowercased()
+    static func getStreamType(fromUrl: String) -> StreamType? {
+        let path = fromUrl.lowercased()
         
-        if (path.hasSuffix(".m3u8")) {
+        if path.hasSuffix(".m3u8") {
             return StreamType.hls
         }
-        if (path.hasSuffix(".mp4") || path.hasSuffix(".m4v") || path.hasSuffix(".m4a") || path.hasSuffix(".webm")) {
+        if path.hasSuffix(".mp4") || path.hasSuffix(".m4v") || path.hasSuffix(".m4a") || path.hasSuffix(".webm") {
             return StreamType.progressive
         }
-        if (path.hasSuffix(".mpd")) {
+        if path.hasSuffix(".mpd") {
             return StreamType.dash
         }
         return nil

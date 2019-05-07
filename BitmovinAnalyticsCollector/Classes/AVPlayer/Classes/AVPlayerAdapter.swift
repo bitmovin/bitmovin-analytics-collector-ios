@@ -207,14 +207,11 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
             switch streamFormat {
             case .dash:
                 eventData.mpdUrl = urlAsset.url.absoluteString
-                break
             case .hls:
                 eventData.m3u8Url = urlAsset.url.absoluteString
-                break
             case .progressive:
                 eventData.progUrl = urlAsset.url.absoluteString
-                break
-            default: break
+            case .unknown: break;
             }
         }
 
