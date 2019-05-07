@@ -52,9 +52,20 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         if let sdkVersion = Bundle(for: BitmovinPlayer.self).object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
             eventData.version = PlayerType.bitmovin.rawValue + "-" + sdkVersion
         }
-
-        // streamForamt, hlsUrl
-        eventData.streamForamt = "hls"
+        
+        let sourceUrl = player.config.sourceItem?.url(forType: player.streamType)
+        switch player.streamType {
+        case .DASH:
+            eventData.streamFormat = StreamType.dash.rawValue
+            eventData.mpdUrl = sourceUrl?.absoluteString
+        case .HLS:
+            eventData.streamFormat = StreamType.hls.rawValue
+            eventData.m3u8Url = sourceUrl?.absoluteString
+        case .progressive:
+            eventData.streamFormat = StreamType.progressive.rawValue
+            eventData.progUrl = sourceUrl?.absoluteString
+        default: break;
+        }
 
         // videoBitrate
         if let bitrate = player.videoQuality?.bitrate {

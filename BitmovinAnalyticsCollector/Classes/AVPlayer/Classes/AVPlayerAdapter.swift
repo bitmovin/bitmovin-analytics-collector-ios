@@ -201,10 +201,21 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         // version
         eventData.version = PlayerType.avplayer.rawValue + "-" + UIDevice.current.systemVersion
 
-        // streamFormat, hlsUrl
-        eventData.streamForamt = "hls"
-        if let urlAsset = player?.currentItem?.asset as? AVURLAsset {
-            eventData.m3u8Url = urlAsset.url.absoluteString
+        if let urlAsset = (player?.currentItem?.asset as? AVURLAsset),
+            let streamFormat = Util.getStreamTypeFromUrl(url: urlAsset.url.absoluteString) {
+            eventData.streamFormat = streamFormat.rawValue
+            switch streamFormat {
+            case .dash:
+                eventData.mpdUrl = urlAsset.url.absoluteString
+                break
+            case .hls:
+                eventData.m3u8Url = urlAsset.url.absoluteString
+                break
+            case .progressive:
+                eventData.progUrl = urlAsset.url.absoluteString
+                break
+            default: break
+            }
         }
 
         // audio bitrate
