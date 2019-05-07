@@ -85,7 +85,7 @@ class Util {
     }
     
     static func streamType(from url: String) -> StreamType? {
-        let path = fromUrl.lowercased()
+        let path = url.lowercased()
         
         if path.hasSuffix(".m3u8") {
             return StreamType.hls
