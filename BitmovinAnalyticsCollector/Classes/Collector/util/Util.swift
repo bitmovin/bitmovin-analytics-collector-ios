@@ -84,7 +84,7 @@ class Util {
         return codecs;
     }
     
-    static func getStreamType(fromUrl: String) -> StreamType? {
+    static func streamType(from url: String) -> StreamType? {
         let path = fromUrl.lowercased()
         
         if path.hasSuffix(".m3u8") {

@@ -197,8 +197,8 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         // version
         eventData.version = PlayerType.avplayer.rawValue + "-" + UIDevice.current.systemVersion
 
-        if let urlAsset = (player?.currentItem?.asset as? AVURLAsset),
-            let streamFormat = Util.getStreamTypeFromUrl(url: urlAsset.url.absoluteString) {
+        if let urlAsset = (player.currentItem?.asset as? AVURLAsset),
+            let streamFormat = Util.streamType(from: urlAsset.url.absoluteString) {
             eventData.streamFormat = streamFormat.rawValue
             switch streamFormat {
             case .dash:
