@@ -44,7 +44,6 @@ public class BitmovinAnalyticsInternal {
         guard let data = eventData else {
             return
         }
-        print("error message: ", eventData?.errorMessage, ", error code: ", eventData?.errorCode)
         eventDataDispatcher.add(eventData: data)
     }
 
@@ -137,5 +136,11 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
 
         eventData?.state = "startup"
         sendEventData(eventData: eventData)
+    }
+    
+    var currentTime: CMTime? {
+        get {
+            return self.adapter?.currentTime
+        }
     }
 }

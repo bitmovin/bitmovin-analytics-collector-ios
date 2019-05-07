@@ -8,7 +8,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     private let stateMachine: StateMachine
     private let config: BitmovinAnalyticsConfig
     private var lastBitrate: Double = 0
-    @objc private var player: AVPlayer?
+    @objc private var player: AVPlayer
     var playbackLikelyToKeepUpKeyPathObserver: NSKeyValueObservation?
     var playbackBufferEmptyObserver: NSKeyValueObservation?
     var playbackBufferFullObserver: NSKeyValueObservation?
@@ -24,7 +24,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     }
 
     deinit {
-        if let playerItem = player?.currentItem {
+        if let playerItem = player.currentItem {
             stopMonitoringPlayerItem(playerItem: playerItem)
         }
         stopMonitoring()
@@ -70,27 +70,23 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
             lockQueue.sync {
                 if stateMachine.firstReadyTimestamp != nil && stateMachine.potentialSeekStart > 0 && (timestamp - stateMachine.potentialSeekStart) <= AVPlayerAdapter.maxSeekOperation {
                     stateMachine.confirmSeek()
-                    stateMachine.transitionState(destinationState: .seeking, time: player?.currentTime())
+                    stateMachine.transitionState(destinationState: .seeking, time: player.currentTime())
                 }
             }
 
-            guard let rate = player?.rate else {
-                break
-            }
-
-            if rate == 0 {
-                stateMachine.transitionState(destinationState: .paused, time: player?.currentTime())
-            } else if rate > 0.0 {
-                stateMachine.transitionState(destinationState: .playing, time: player?.currentTime())
+            if player.rate == 0 {
+                stateMachine.transitionState(destinationState: .paused, time: player.currentTime())
+            } else if player.rate > 0.0 {
+                stateMachine.transitionState(destinationState: .playing, time: player.currentTime())
             }
 
             break
         case .failed:
-            let error = self.player?.currentItem?.error as NSError?
+            let error = self.player.currentItem?.error as NSError?
             let errorCode = error?.code ?? 1
             let errorMessage = error?.localizedDescription ?? "Unkown"
             
-            stateMachine.transitionState(destinationState: .error, time: player?.currentTime(), data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode, BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
+            stateMachine.transitionState(destinationState: .error, time: player.currentTime(), data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode, BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
             break
         default:
             break
@@ -103,7 +99,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         let errorCode = error?.code ?? 1
         let errorMessage = error?.localizedDescription ?? "Unkown"
         
-        stateMachine.transitionState(destinationState: .error, time: player?.currentTime(), data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode, BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
+        stateMachine.transitionState(destinationState: .error, time: player.currentTime(), data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode, BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
     }
     
     @objc private func addedErrorLog(notification: Notification) {
@@ -117,18 +113,18 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         let errorCode = errorLog.events.last?.errorStatusCode ?? 1
         let errorMessage = errorLog.events.last?.errorComment ?? "Unkown"
         
-        stateMachine.transitionState(destinationState: .error, time: player?.currentTime(), data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode, BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
+        stateMachine.transitionState(destinationState: .error, time: player.currentTime(), data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode, BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
     }
 
     @objc private func playbackStalled(notification _: Notification) {
-        stateMachine.transitionState(destinationState: .buffering, time: player?.currentTime())
+        stateMachine.transitionState(destinationState: .buffering, time: player.currentTime())
     }
 
     @objc private func timeJumped(notification _: Notification) {
         let timestamp = Date().timeIntervalSince1970Millis
         if (timestamp - stateMachine.potentialSeekStart) > AVPlayerAdapter.timeJumpedDuplicateTolerance {
             stateMachine.potentialSeekStart = timestamp
-            stateMachine.potentialSeekVideoTimeStart = player?.currentTime()
+            stateMachine.potentialSeekVideoTimeStart = player.currentTime()
         }
     }
 
@@ -140,8 +136,8 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
             lastBitrate = event.indicatedBitrate
         } else if lastBitrate != event.indicatedBitrate {
             let previousState = stateMachine.state
-            stateMachine.transitionState(destinationState: .qualitychange, time: player?.currentTime())
-            stateMachine.transitionState(destinationState: previousState, time: player?.currentTime())
+            stateMachine.transitionState(destinationState: .qualitychange, time: player.currentTime())
+            stateMachine.transitionState(destinationState: previousState, time: player.currentTime())
             lastBitrate = event.indicatedBitrate
         }
     }
@@ -155,9 +151,9 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         if keyPath == #keyPath(player.rate) {
             let newRate = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).doubleValue
             if newRate == 0.0 && stateMachine.firstReadyTimestamp != nil {
-                stateMachine.transitionState(destinationState: .paused, time: self.player?.currentTime())
+                stateMachine.transitionState(destinationState: .paused, time: self.player.currentTime())
             } else if newRate > 0.0 && stateMachine.firstReadyTimestamp != nil {
-                stateMachine.transitionState(destinationState: .playing, time: self.player?.currentTime())
+                stateMachine.transitionState(destinationState: .playing, time: self.player.currentTime())
             }
         } else if keyPath == #keyPath(player.currentItem) {
             if let oldItem = change?[NSKeyValueChangeKey.oldKey] as? AVPlayerItem {
@@ -186,15 +182,15 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         eventData.playerTech = "ios:avplayer"
 
         // Duration
-        if let duration = player?.currentItem?.duration, CMTIME_IS_NUMERIC(_: duration) {
+        if let duration = player.currentItem?.duration, CMTIME_IS_NUMERIC(_: duration) {
             eventData.videoDuration = Int64(CMTimeGetSeconds(duration) * BitmovinAnalyticsInternal.msInSec)
         }
 
         // isCasting
-        eventData.isCasting = player?.isExternalPlaybackActive
+        eventData.isCasting = player.isExternalPlaybackActive
 
         // isLive
-        if let duration = player?.currentItem?.duration {
+        if let duration = player.currentItem?.duration {
             eventData.isLive = CMTIME_IS_INDEFINITE(duration)
         }
 
@@ -216,7 +212,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         }
 
         // audio bitrate
-        if let asset = player?.currentItem?.asset {
+        if let asset = player.currentItem?.asset {
             if asset.tracks.count > 0 {
                 let tracks = asset.tracks(withMediaType: .audio)
                 if tracks.count > 0 {
@@ -233,12 +229,12 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         eventData.videoBitrate = lastBitrate
 
         // videoPlaybackWidth
-        if let width = player?.currentItem?.presentationSize.width {
+        if let width = player.currentItem?.presentationSize.width {
             eventData.videoPlaybackWidth = Int(width)
         }
 
         // videoPlaybackHeight
-        if let height = player?.currentItem?.presentationSize.height {
+        if let height = player.currentItem?.presentationSize.height {
             eventData.videoPlaybackHeight = Int(height)
         }
 
@@ -250,8 +246,14 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         eventData.screenWidth = Int(UIScreen.main.bounds.size.width * scale)
 
         // isMuted
-        if player?.volume == 0 {
+        if player.volume == 0 {
             eventData.isMuted = true
+        }
+    }
+    
+    var currentTime: CMTime {
+        get {
+            return player.currentTime()
         }
     }
 }

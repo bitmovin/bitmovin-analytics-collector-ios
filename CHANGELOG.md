@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 - Collector didn't correctly report `streamFormat`, `m3u8Url`, `mpdUrl` or `progUrl`
+- `videoTimeStart` and `videoTimeEnd` were not set when sending out heartbeats
 - Collector didn't report errors when using the `AVPlayerCollector` 
 - AVPlayer Collector now reports `playerVersion` as `avplayer-<iOS-Version>`
 - Bitmovin Collector now reports `playerVersion` as `bitmovin-<SDK-version>`
