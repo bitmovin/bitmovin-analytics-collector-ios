@@ -40,7 +40,7 @@ class Util {
         return Bundle(for: self).infoDictionary?["CFBundleShortVersionString"] as? String
     }
 
-    static func doubleToCMTime(double: Double) -> CMTime? {
+    static func doubleToCMTime(double: Double) -> CMTime {
         return CMTimeMake(Int64(double), 1)
     }
 
