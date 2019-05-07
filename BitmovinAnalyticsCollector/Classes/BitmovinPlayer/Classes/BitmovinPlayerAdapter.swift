@@ -95,6 +95,12 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
     func stopMonitoring() {
         player.remove(listener: self)
     }
+    
+    var currentTime: CMTime {
+        get {
+            return Util.doubleToCMTime(double: player.currentTime)
+        }
+    }
 }
 
 extension BitmovinPlayerAdapter: PlayerListener {

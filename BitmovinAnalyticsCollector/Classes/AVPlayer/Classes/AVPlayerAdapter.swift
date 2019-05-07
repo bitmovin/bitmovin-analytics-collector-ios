@@ -242,4 +242,10 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
             eventData.isMuted = true
         }
     }
+    
+    var currentTime: CMTime {
+        get {
+            return player.currentTime()
+        }
+    }
 }

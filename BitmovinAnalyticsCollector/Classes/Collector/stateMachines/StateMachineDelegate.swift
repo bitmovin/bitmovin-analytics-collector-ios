@@ -1,4 +1,5 @@
 import Foundation
+import CoreMedia
 
 protocol StateMachineDelegate: class {
     func stateMachineDidExitSetup(_ stateMachine: StateMachine)
@@ -10,4 +11,5 @@ protocol StateMachineDelegate: class {
     func stateMachine(_ stateMachine: StateMachine, didExitSeekingWithDuration duration: Int64, destinationPlayerState: PlayerState)
     func stateMachine(_ stateMachine: StateMachine, didHeartbeatWithDuration duration: Int64)
     func stateMachine(_ stateMachine: StateMachine, didStartupWithDuration duration: Int64)
+    var currentTime: CMTime? { get }
 }

@@ -137,4 +137,10 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         eventData?.state = "startup"
         sendEventData(eventData: eventData)
     }
+    
+    var currentTime: CMTime? {
+        get {
+            return self.adapter?.currentTime
+        }
+    }
 }
