@@ -80,8 +80,10 @@ public class StateMachine {
         guard let enterTime = enterTimestamp else {
             return
         }
+        videoTimeEnd = delegate?.currentTime
         let timestamp = Date().timeIntervalSince1970Millis
         delegate?.stateMachine(self, didHeartbeatWithDuration: timestamp - enterTime)
+        videoTimeStart = videoTimeEnd
         enterTimestamp = timestamp
     }
 }
