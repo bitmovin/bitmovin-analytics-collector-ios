@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+## 1.7.1
+
 ### Added
 
 ### Changed
+
+- AVPlayer Collector now reports `playerVersion` as `avplayer-<iOS-Version>`
+- Bitmovin Collector now reports `playerVersion` as `bitmovin-<SDK-version>`
 
 ### Fixed
 
@@ -17,8 +22,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Collector didn't correctly report `streamFormat`, `m3u8Url`, `mpdUrl` or `progUrl`
 - `videoTimeStart` and `videoTimeEnd` were not set when sending out heartbeats
 - Collector didn't report errors when using the `AVPlayerCollector` 
-- AVPlayer Collector now reports `playerVersion` as `avplayer-<iOS-Version>`
-- Bitmovin Collector now reports `playerVersion` as `bitmovin-<SDK-version>`
 - Collector didn't reset on `onSourceUnloaded` and continued sending samples with the inital `impression_id`, if `detachPlayer` wasn't called 
 
 ## 1.7.0
