@@ -46,7 +46,6 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         NotificationCenter.default.addObserver(self, selector: #selector(accessItemAdded(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(addedErrorLog(notification:)), name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: playerItem)
         NotificationCenter.default.addObserver(self, selector:#selector(failedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
 
     }
@@ -55,7 +54,6 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemTimeJumped, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
         statusObserver?.invalidate()
     }
@@ -96,18 +94,6 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     @objc private func failedToPlayToEndTime(notification: Notification) {
         let error = notification.userInfo?[AVPlayerItemFailedToPlayToEndTimeErrorKey] as? NSError
         errorOccured(error: error)
-    }
-    
-    @objc private func addedErrorLog(notification: Notification) {
-//        guard let errorLog = player.currentItem?.errorLog() else {
-//            return
-//        }
-//
-//        for event in errorLog.events {
-//            let errorCode = event.errorStatusCode ?? 1
-//            let errorMessage = event.errorComment ?? "Unkown"
-//            //Handle these as warnings, as they don't affect playback
-//        }
     }
 
     @objc private func playbackStalled(notification _: Notification) {
@@ -158,10 +144,8 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
                 NSLog("Current Item Changed: %@", currentItem.debugDescription)
                 startMonitoringPlayerItem(playerItem: currentItem)
             }
-        } else if keyPath == #keyPath(player.status) {
-            if(player.status == .failed) {
-                errorOccured(error: self.player.currentItem?.error as NSError?)
-            }
+        } else if keyPath == #keyPath(player.status) && player.status == .failed {
+            errorOccured(error: self.player.currentItem?.error as NSError?)
         }
     }
 
