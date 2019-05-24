@@ -82,38 +82,35 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
 
             break
         case .failed:
-            let error = self.player.currentItem?.error as NSError?
-            let errorCode = error?.code ?? 1
-            let errorMessage = error?.localizedDescription ?? "Unkown"
-            
-            stateMachine.transitionState(destinationState: .error, time: player.currentTime(), data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode, BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
+            errorOccured(error: playerItem.error as NSError?)
             break
         default:
             break
         }
     }
-
-    @objc private func failedToPlayToEndTime(notification: Notification) {
-        let error = notification.userInfo?[AVPlayerItemFailedToPlayToEndTimeErrorKey] as? NSError
-        
+    
+    private func errorOccured(error: NSError?) {
         let errorCode = error?.code ?? 1
         let errorMessage = error?.localizedDescription ?? "Unkown"
         
         stateMachine.transitionState(destinationState: .error, time: player.currentTime(), data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode, BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
     }
+
+    @objc private func failedToPlayToEndTime(notification: Notification) {
+        let error = notification.userInfo?[AVPlayerItemFailedToPlayToEndTimeErrorKey] as? NSError
+        errorOccured(error: error)
+    }
     
     @objc private func addedErrorLog(notification: Notification) {
-        guard let object = notification.object, let playerItem = object as? AVPlayerItem else {
-            return
-        }
-        guard let errorLog: AVPlayerItemErrorLog = playerItem.errorLog() else {
-            return
-        }
-        
-        let errorCode = errorLog.events.last?.errorStatusCode ?? 1
-        let errorMessage = errorLog.events.last?.errorComment ?? "Unkown"
-        
-        stateMachine.transitionState(destinationState: .error, time: player.currentTime(), data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode, BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
+//        guard let errorLog = player.currentItem?.errorLog() else {
+//            return
+//        }
+//
+//        for event in errorLog.events {
+//            let errorCode = event.errorStatusCode ?? 1
+//            let errorMessage = event.errorComment ?? "Unkown"
+//            //Handle these as warnings, as they don't affect playback
+//        }
     }
 
     @objc private func playbackStalled(notification _: Notification) {
@@ -164,7 +161,10 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
                 NSLog("Current Item Changed: %@", currentItem.debugDescription)
                 startMonitoringPlayerItem(playerItem: currentItem)
             }
-
+        } else if keyPath == #keyPath(player.status) {
+            if(player.status == .failed) {
+                errorOccured(error: self.player.currentItem?.error as NSError?)
+            }
         }
     }
 
