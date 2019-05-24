@@ -9,9 +9,6 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
     private var lastBitrate: Double = 0
     @objc private var player: AVPlayer
-    var playbackLikelyToKeepUpKeyPathObserver: NSKeyValueObservation?
-    var playbackBufferEmptyObserver: NSKeyValueObservation?
-    var playbackBufferFullObserver: NSKeyValueObservation?
     let lockQueue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
     var statusObserver: NSKeyValueObservation?
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
