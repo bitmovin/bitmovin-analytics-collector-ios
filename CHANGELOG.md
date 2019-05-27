@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+## 1.7.2
+
 ### Fixed
 
 - AVPlayer reported some warnings as errors and got stuck in an error state, even if playback was able to continue
