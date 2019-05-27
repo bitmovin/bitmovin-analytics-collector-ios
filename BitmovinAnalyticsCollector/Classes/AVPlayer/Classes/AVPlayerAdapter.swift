@@ -9,9 +9,6 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
     private var lastBitrate: Double = 0
     @objc private var player: AVPlayer
-    var playbackLikelyToKeepUpKeyPathObserver: NSKeyValueObservation?
-    var playbackBufferEmptyObserver: NSKeyValueObservation?
-    var playbackBufferFullObserver: NSKeyValueObservation?
     let lockQueue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
     var statusObserver: NSKeyValueObservation?
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
@@ -49,7 +46,6 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         NotificationCenter.default.addObserver(self, selector: #selector(accessItemAdded(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(addedErrorLog(notification:)), name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: playerItem)
         NotificationCenter.default.addObserver(self, selector:#selector(failedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
 
     }
@@ -58,7 +54,6 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemTimeJumped, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewErrorLogEntry, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
         statusObserver?.invalidate()
     }
@@ -82,38 +77,23 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
 
             break
         case .failed:
-            let error = self.player.currentItem?.error as NSError?
-            let errorCode = error?.code ?? 1
-            let errorMessage = error?.localizedDescription ?? "Unkown"
-            
-            stateMachine.transitionState(destinationState: .error, time: player.currentTime(), data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode, BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
+            errorOccured(error: playerItem.error as NSError?)
             break
         default:
             break
         }
     }
-
-    @objc private func failedToPlayToEndTime(notification: Notification) {
-        let error = notification.userInfo?[AVPlayerItemFailedToPlayToEndTimeErrorKey] as? NSError
-        
+    
+    private func errorOccured(error: NSError?) {
         let errorCode = error?.code ?? 1
         let errorMessage = error?.localizedDescription ?? "Unkown"
         
         stateMachine.transitionState(destinationState: .error, time: player.currentTime(), data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode, BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
     }
-    
-    @objc private func addedErrorLog(notification: Notification) {
-        guard let object = notification.object, let playerItem = object as? AVPlayerItem else {
-            return
-        }
-        guard let errorLog: AVPlayerItemErrorLog = playerItem.errorLog() else {
-            return
-        }
-        
-        let errorCode = errorLog.events.last?.errorStatusCode ?? 1
-        let errorMessage = errorLog.events.last?.errorComment ?? "Unkown"
-        
-        stateMachine.transitionState(destinationState: .error, time: player.currentTime(), data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode, BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
+
+    @objc private func failedToPlayToEndTime(notification: Notification) {
+        let error = notification.userInfo?[AVPlayerItemFailedToPlayToEndTimeErrorKey] as? NSError
+        errorOccured(error: error)
     }
 
     @objc private func playbackStalled(notification _: Notification) {
@@ -164,7 +144,8 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
                 NSLog("Current Item Changed: %@", currentItem.debugDescription)
                 startMonitoringPlayerItem(playerItem: currentItem)
             }
-
+        } else if keyPath == #keyPath(player.status) && player.status == .failed {
+            errorOccured(error: self.player.currentItem?.error as NSError?)
         }
     }
 
