@@ -54,10 +54,10 @@ public class BitmovinAnalyticsInternal {
         eventData.state = stateMachine.state.rawValue
         eventData.duration = duration
 
-        if let timeStart = stateMachine.videoTimeStart {
+        if let timeStart = stateMachine.videoTimeStart, CMTIME_IS_NUMERIC(_: timeStart) {
             eventData.videoTimeStart = Int64(CMTimeGetSeconds(timeStart) * BitmovinAnalyticsInternal.msInSec)
         }
-        if let timeEnd = stateMachine.videoTimeEnd {
+        if let timeEnd = stateMachine.videoTimeEnd, CMTIME_IS_NUMERIC(_: timeEnd) {
             eventData.videoTimeEnd = Int64(CMTimeGetSeconds(timeEnd) * BitmovinAnalyticsInternal.msInSec)
         }
         return eventData
