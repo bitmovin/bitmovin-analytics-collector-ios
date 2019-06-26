@@ -109,18 +109,18 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
     
     var currentTime: CMTime? {
         get {
-            return Util.doubleToCMTime(double: player.currentTime)
+            return Util.timeIntervalToCMTime(_: player.currentTime)
         }
     }
 }
 
 extension BitmovinPlayerAdapter: PlayerListener {
     func onPlay(_ event: PlayEvent) {
-        stateMachine.transitionState(destinationState: .playing, time: Util.doubleToCMTime(double: player.currentTime))
+        stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
 
     func onPaused(_ event: PausedEvent) {
-        stateMachine.transitionState(destinationState: .paused, time: Util.doubleToCMTime(double: player.currentTime))
+        stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
 
     func onReady(_ event: ReadyEvent) {
@@ -128,7 +128,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onStallStarted(_ event: StallStartedEvent) {
-        stateMachine.transitionState(destinationState: .buffering, time: Util.doubleToCMTime(double: player.currentTime))
+        stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
 
     func onStallEnded(_ event: StallEndedEvent) {
@@ -136,11 +136,11 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onSeek(_ event: SeekEvent) {
-        stateMachine.transitionState(destinationState: .seeking, time: Util.doubleToCMTime(double: player.currentTime))
+        stateMachine.transitionState(destinationState: .seeking, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
 
     func onVideoDownloadQualityChanged(_ event: VideoDownloadQualityChangedEvent) {
-        stateMachine.transitionState(destinationState: .qualitychange, time: Util.doubleToCMTime(double: player.currentTime))
+        stateMachine.transitionState(destinationState: .qualitychange, time: Util.timeIntervalToCMTime(_: player.currentTime))
         transitionToPausedOrPlaying()
     }
 
@@ -149,21 +149,21 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onPlaybackFinished(_ event: PlaybackFinishedEvent) {
-                    stateMachine.transitionState(destinationState: .paused, time: Util.doubleToCMTime(double: player.currentTime))
+                    stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.currentTime))
         stateMachine.disableHeartbeat()
     }
 
     func onError(_ event: ErrorEvent) {
         errorCode = Int(event.code)
         errorDescription = event.description
-        stateMachine.transitionState(destinationState: .error, time: Util.doubleToCMTime(double: player.currentTime))
+        stateMachine.transitionState(destinationState: .error, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
 
     func transitionToPausedOrPlaying() {
         if player.isPaused {
-            stateMachine.transitionState(destinationState: .paused, time: Util.doubleToCMTime(double: player.currentTime))
+            stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.currentTime))
         } else {
-            stateMachine.transitionState(destinationState: .playing, time: Util.doubleToCMTime(double: player.currentTime))
+            stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
         }
     }
     

@@ -40,8 +40,8 @@ class Util {
         return Bundle(for: self).infoDictionary?["CFBundleShortVersionString"] as? String
     }
 
-    static func doubleToCMTime(double: Double) -> CMTime {
         return CMTimeMake(Int64(double), 1)
+    static func timeIntervalToCMTime(_ timeInterval: TimeInterval) -> CMTime? {
     }
 
     static func toJson<T: Codable>(object: T?) -> String {
