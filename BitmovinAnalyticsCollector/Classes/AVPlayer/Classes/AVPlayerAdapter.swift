@@ -232,7 +232,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         }
     }
     
-    var currentTime: CMTime {
+    var currentTime: CMTime? {
         get {
             return player.currentTime()
         }

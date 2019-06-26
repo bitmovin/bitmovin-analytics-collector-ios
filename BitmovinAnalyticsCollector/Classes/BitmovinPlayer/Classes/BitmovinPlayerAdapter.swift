@@ -107,7 +107,7 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         player.remove(listener: self)
     }
     
-    var currentTime: CMTime {
+    var currentTime: CMTime? {
         get {
             return Util.doubleToCMTime(double: player.currentTime)
         }
