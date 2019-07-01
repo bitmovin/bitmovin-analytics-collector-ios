@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+## 1.7.3
+
+### Fixed
+
+- Fixed occasional crashes when `currentPlayTime` from player is NaN
+
 ## 1.7.2
 
 ### Fixed
