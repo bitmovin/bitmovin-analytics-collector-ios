@@ -61,7 +61,7 @@ class BitmovinViewController: UIViewController {
             playerBoundary.frame = playerView.bounds
 
             playerView.addSubview(playerBoundary)
-            playerView.bringSubview(toFront: playerBoundary)
+            playerView.bringSubviewToFront(playerBoundary)
 
             self.player = player
         } catch {

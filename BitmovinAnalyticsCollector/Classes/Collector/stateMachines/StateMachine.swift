@@ -63,7 +63,7 @@ public class StateMachine {
         enterTimestamp = potentialSeekStart
         videoTimeStart = potentialSeekVideoTimeStart
         potentialSeekStart = 0
-        potentialSeekVideoTimeStart = kCMTimeZero
+        potentialSeekVideoTimeStart = CMTime.zero
     }
 
     func enableHeartbeat() {
