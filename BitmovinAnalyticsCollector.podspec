@@ -15,7 +15,7 @@ DESC
 
   s.ios.deployment_target = '9.0'
   s.tvos.deployment_target = '9.0'
-  s.swift_version = '4.0'
+  s.swift_version = '5.0'
 
   s.subspec 'Core' do |core|
     core.source_files = 'BitmovinAnalyticsCollector/Classes/Collector/**/*.{swift}' 

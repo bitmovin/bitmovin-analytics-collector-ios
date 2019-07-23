@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+## 1.7.4
+
+### Fixed
+
+- Xcode 10.2 and Swift 5.0 updates
+
 ## 1.7.3
 
 ### Fixed

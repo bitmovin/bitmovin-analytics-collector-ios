@@ -67,7 +67,7 @@ class ViewController: UIViewController {
         let asset = AVURLAsset(url: movieURL!, options: nil)
         player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
         player.play()
-        let interval = CMTimeMake(1, 1)
+        let interval = CMTimeMake(value: 1, timescale: 1)
         timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { [unowned self] time in
             let position = Float(CMTimeGetSeconds(time))
             self.slider.value = Float(position)
@@ -103,7 +103,7 @@ class ViewController: UIViewController {
             if let newDurationAsValue = change?[NSKeyValueChangeKey.newKey] as? NSValue {
                 newDuration = newDurationAsValue.timeValue
             } else {
-                newDuration = kCMTimeZero
+                newDuration = CMTime.zero
             }
 
             let hasValidDuration = newDuration.isNumeric && newDuration.value != 0
@@ -132,7 +132,7 @@ class ViewController: UIViewController {
             let buttonImageName = newRate > 0.0 ? "PauseButton" : "PlayButton"
             let buttonImage = UIImage(named: buttonImageName)
 
-            playButton.setImage(buttonImage, for: UIControlState())
+            playButton.setImage(buttonImage, for: UIControl.State())
         }
     }
 
@@ -149,7 +149,7 @@ class ViewController: UIViewController {
 
     @IBAction func jumpForwardButtomPressed(_: UIButton) {
         let currentTime = player.currentTime()
-        let deltaTime = CMTimeMakeWithSeconds(30, 30)
+        let deltaTime = CMTimeMakeWithSeconds(30, preferredTimescale: 30)
         player.seek(to: CMTimeAdd(currentTime, deltaTime), completionHandler: { completed in
             if completed {
             }
@@ -158,7 +158,7 @@ class ViewController: UIViewController {
 
     @IBAction func backButtonPressed(_: UIButton) {
         let currentTime = player.currentTime()
-        let deltaTime = CMTimeMakeWithSeconds(30, 30)
+        let deltaTime = CMTimeMakeWithSeconds(30, preferredTimescale: 30)
         player.seek(to: CMTimeSubtract(currentTime, deltaTime), completionHandler: { completed in
             if completed {
             }
@@ -178,7 +178,7 @@ class ViewController: UIViewController {
 
     @IBAction func timeSliderDidChange(_: UISlider) {
         isSeeking = true
-        player.seek(to: CMTimeMakeWithSeconds(Float64(slider.value), 30)) { [weak self] _ in
+        player.seek(to: CMTimeMakeWithSeconds(Float64(slider.value), preferredTimescale: 30)) { [weak self] _ in
             self?.isSeeking = false
         }
     }
