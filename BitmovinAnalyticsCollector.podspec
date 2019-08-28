@@ -10,13 +10,18 @@ DESC
 
   s.homepage         = 'https://github.com/bitmovin/bitmovin-analytics-collector-ios'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Cory Zachman' => 'cory.zachman@bitmovin.com' }
+  s.author           = { 'Bitmovin Inc' => 'admin@bitmovin.com' }
   s.source           = { :git => 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '9.0'
   s.tvos.deployment_target = '9.0'
   s.swift_version = '5.0'
 
+  s.pod_target_xcconfig = {
+      'FRAMEWORK_SEARCH_PATHS' => '"${PODS_ROOT}"/*',
+      'OTHER_LDFLAGS' => '$(inherited) -ObjC',
+      'ENABLE_BITCOD' => 'YES'
+  }
   s.subspec 'Core' do |core|
     core.source_files = 'BitmovinAnalyticsCollector/Classes/Collector/**/*.{swift}' 
   end

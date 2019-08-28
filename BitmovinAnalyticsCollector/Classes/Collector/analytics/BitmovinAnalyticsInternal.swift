@@ -4,7 +4,7 @@ import Foundation
  * An iOS analytics plugin that sends video playback analytics to Bitmovin Analytics servers. Currently
  * supports analytics on AVPlayer video players
  */
-public class BitmovinAnalyticsInternal {
+public class BitmovinAnalyticsInternal: NSObject {
     public static let ErrorMessageKey = "errorMessage"
     public static let ErrorCodeKey = "errorCode"
     
@@ -18,13 +18,14 @@ public class BitmovinAnalyticsInternal {
         self.config = config
         stateMachine = StateMachine(config: self.config)
         eventDataDispatcher = SimpleEventDataDispatcher(config: config)
+        super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(licenseFailed(notification:)), name: .licenseFailed, object: eventDataDispatcher)
     }
 
     /**
      * Detach the current player that is being used with Bitmovin Analytics.
      */
-    public func detachPlayer() {
+    @objc public func detachPlayer() {
         eventDataDispatcher.disable()
         stateMachine.reset()
         adapter = nil
