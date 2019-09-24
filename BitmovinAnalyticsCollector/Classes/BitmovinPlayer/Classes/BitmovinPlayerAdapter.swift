@@ -173,7 +173,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
     
     func onAudioChanged(_ event: AudioChangedEvent) {
-        if stateMachine.state != .paused && stateMachine.state != .playing {
+        guard stateMachine.state == .paused || stateMachine.state == .playing else {
             return
         }
         stateMachine.transitionState(destinationState: .audiochange, time: Util.timeIntervalToCMTime(_: player.currentTime))
