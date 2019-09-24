@@ -174,4 +174,9 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onSourceUnloaded(_ event: SourceUnloadedEvent) {
         stateMachine.reset()
     }
+    
+    func onSubtitleChanged(_ event: SubtitleChangedEvent) {
+        stateMachine.transitionState(destinationState: .subtitlechange, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        transitionToPausedOrPlaying()
+    }
 }
