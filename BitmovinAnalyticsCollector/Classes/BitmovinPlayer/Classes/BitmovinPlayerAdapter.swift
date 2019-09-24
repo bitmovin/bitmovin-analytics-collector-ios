@@ -176,7 +176,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
     
     func onSubtitleChanged(_ event: SubtitleChangedEvent) {
-        if stateMachine.state != .paused && stateMachine.state != .playing {
+        guard stateMachine.state == .paused || stateMachine.state == .playing else {
             return
         }
         stateMachine.transitionState(destinationState: .subtitlechange, time: Util.timeIntervalToCMTime(_: player.currentTime))
