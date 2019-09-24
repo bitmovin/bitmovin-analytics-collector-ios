@@ -171,4 +171,12 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onSourceUnloaded(_ event: SourceUnloadedEvent) {
         stateMachine.reset()
     }
+    
+    func onAudioChanged(_ event: AudioChangedEvent) {
+        if stateMachine.state != .paused && stateMachine.state != .playing {
+            return
+        }
+        stateMachine.transitionState(destinationState: .audiochange, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        transitionToPausedOrPlaying()
+    }
 }
