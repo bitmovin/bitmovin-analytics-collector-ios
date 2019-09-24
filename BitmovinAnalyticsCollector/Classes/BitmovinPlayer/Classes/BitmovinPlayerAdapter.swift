@@ -96,7 +96,11 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
 
         // isMuted
         eventData.isMuted = player.isMuted
-
+        
+        eventData.subtitleEnabled = player.subtitle.identifier != "off"
+        if eventData.subtitleEnabled! {
+            eventData.subtitleLanguage = player.subtitle.language ?? player.subtitle.label
+        }
     }
 
     func startMonitoring() {
