@@ -59,8 +59,8 @@ it, simply add the following line to your Podfile:
 The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` version `>= 2.11.0`.
 
 ```ruby
-  pod 'BitmovinAnalyticsCollector/Core', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.7.5'
-  pod 'BitmovinAnalyticsCollector/BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.7.5'
+  pod 'BitmovinAnalyticsCollector/Core', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.8.0'
+  pod 'BitmovinAnalyticsCollector/BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.8.0'
   pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.11.0'
 
   use_frameworks!
@@ -69,8 +69,8 @@ The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` versi
 ### AVPlayer
 
 ```ruby
-pod 'BitmovinAnalyticsCollector/Core', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.7.5'
-pod 'BitmovinAnalyticsCollector/AVPlayer', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.7.5'
+pod 'BitmovinAnalyticsCollector/Core', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.8.0'
+pod 'BitmovinAnalyticsCollector/AVPlayer', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.8.0'
 
 use_frameworks!
 ```
