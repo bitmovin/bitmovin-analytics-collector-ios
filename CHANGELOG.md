@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - `subtitleEnabled` and `subtitleLanguage` in outgoing payload 
+- `audioLanguage` in outgoing payload
 
 ## 1.7.5
 

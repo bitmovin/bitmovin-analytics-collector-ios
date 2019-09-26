@@ -9,6 +9,7 @@ public enum PlayerState: String {
     case qualitychange
     case seeking
     case subtitlechange
+    case audiochange
 
     func onEntry(stateMachine: StateMachine, timestamp _: Int64, destinationState _: PlayerState, data: [AnyHashable : Any]?) {
         switch self {
@@ -31,6 +32,8 @@ public enum PlayerState: String {
         case .seeking:
             return
         case .subtitlechange:
+            return
+        case .audiochange:
             return
         }
     }
@@ -65,6 +68,9 @@ public enum PlayerState: String {
             return
         case .subtitlechange:
             stateMachine.delegate?.stateMachineDidSubtitleChange(stateMachine)
+            return
+        case .audiochange:
+            stateMachine.delegate?.stateMachineDidAudioChange(stateMachine)
             return
         }
     }
