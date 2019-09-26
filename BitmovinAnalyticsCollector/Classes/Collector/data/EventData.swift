@@ -74,6 +74,8 @@ public class EventData: Codable {
     var videoCodec: String?
     var audioCodec: String?
     var supportedVideoCodecs: [String]?
+    var subtitleEnabled: Bool?
+    var subtitleLanguage: String?
     var audioLanguage: String?
 
 

@@ -93,6 +93,7 @@ pod install
 ## Known Issues
 
 - The `audioCodec` property is not collected at the moment, as the information isn't available in the player.
+- `subtitleLanguage` will fallback to the `label`, if no language is defined.
 
 ## Author
 

@@ -96,6 +96,11 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
 
         // isMuted
         eventData.isMuted = player.isMuted
+        
+        eventData.subtitleEnabled = player.subtitle.identifier != "off"
+        if eventData.subtitleEnabled! {
+            eventData.subtitleLanguage = player.subtitle.language ?? player.subtitle.label
+        }
 
         eventData.audioLanguage = player.audio?.language
     }
@@ -172,6 +177,14 @@ extension BitmovinPlayerAdapter: PlayerListener {
         stateMachine.reset()
     }
     
+    func onSubtitleChanged(_ event: SubtitleChangedEvent) {
+        guard stateMachine.state == .paused || stateMachine.state == .playing else {
+            return
+        }
+        stateMachine.transitionState(destinationState: .subtitlechange, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        transitionToPausedOrPlaying()
+    }
+
     func onAudioChanged(_ event: AudioChangedEvent) {
         guard stateMachine.state == .paused || stateMachine.state == .playing else {
             return

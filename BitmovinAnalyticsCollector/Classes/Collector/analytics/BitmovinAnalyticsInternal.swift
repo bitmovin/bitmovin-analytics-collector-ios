@@ -140,6 +140,11 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         sendEventData(eventData: eventData)
     }
     
+    func stateMachineDidSubtitleChange(_ stateMachine: StateMachine) {
+        let eventData = createEventData(duration: 0)
+        sendEventData(eventData: eventData)
+    }
+
     func stateMachineDidAudioChange(_ stateMachine: StateMachine) {
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
