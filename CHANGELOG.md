@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+- `audioLanguage` in outgoing payload
+
 ## 1.7.5
 
 ### Added
+
 - `@objc` annotations to allow embedding the Collector in Objective-C Applications
 
 ## 1.7.4

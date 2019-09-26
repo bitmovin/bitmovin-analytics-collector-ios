@@ -97,6 +97,7 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         // isMuted
         eventData.isMuted = player.isMuted
 
+        eventData.audioLanguage = player.audio?.language
     }
 
     func startMonitoring() {
@@ -169,5 +170,13 @@ extension BitmovinPlayerAdapter: PlayerListener {
     
     func onSourceUnloaded(_ event: SourceUnloadedEvent) {
         stateMachine.reset()
+    }
+    
+    func onAudioChanged(_ event: AudioChangedEvent) {
+        guard stateMachine.state == .paused || stateMachine.state == .playing else {
+            return
+        }
+        stateMachine.transitionState(destinationState: .audiochange, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        transitionToPausedOrPlaying()
     }
 }
