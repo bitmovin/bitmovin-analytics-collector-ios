@@ -1,0 +1,11 @@
+framework module BitmovinAnalyticsCollector {
+  umbrella header "BitmovinAnalyticsCollector-tvOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module BitmovinAnalyticsCollector.Swift {
+    header "BitmovinAnalyticsCollector-Swift.h"
+    requires objc
+}
