@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Added
+
+- iOS and tvOS binaries
+- Scripts to build iOS and tvOS binaries
+
 ## v1.8.0
 
 ### Added
