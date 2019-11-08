@@ -102,8 +102,8 @@ class Util {
         return nil
     }
     
-    static func getIsLIveFromConfigOrPlayer(isPlayerReady: Bool, isLiveFromConfig:Bool, isLiveFromPlayer:Bool) -> Bool{
-        if isPlayerReady{
+    static func getIsLIveFromConfigOrPlayer(isPlayerReady: Bool, isLiveFromConfig:Bool, isLiveFromPlayer:Bool) -> Bool {
+        if isPlayerReady {
             return isLiveFromPlayer
         }
         return isLiveFromConfig

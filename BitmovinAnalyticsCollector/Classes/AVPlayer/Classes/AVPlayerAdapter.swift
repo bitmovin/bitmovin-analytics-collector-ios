@@ -176,7 +176,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
 
         // isLive
         let duration = player.currentItem?.duration
-        if duration != nil && self.isPlayerReady{
+        if duration != nil && self.isPlayerReady {
             eventData.isLive = CMTIME_IS_INDEFINITE(duration!)
         }
         else {

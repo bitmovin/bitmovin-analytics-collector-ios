@@ -67,7 +67,7 @@ class ViewController: UIViewController {
         let movieURL = URL(string: "http://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
         let asset = AVURLAsset(url: movieURL!, options: nil)
         player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
-        player.play()
+//        player.play()
         let interval = CMTimeMake(value: 1, timescale: 1)
         timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { [unowned self] time in
             let position = Float(CMTimeGetSeconds(time))
@@ -90,6 +90,7 @@ class ViewController: UIViewController {
         config.videoId = "iOSHLSStatic2"
         config.title = "ios static with AVFoundation"
         config.path = "/vod/breadcrumb/2/"
+        config.isLive = true
         analyticsCollector.attachPlayer(player: player)
     }
 
