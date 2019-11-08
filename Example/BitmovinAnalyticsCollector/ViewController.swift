@@ -49,6 +49,7 @@ class ViewController: UIViewController {
         config.videoId = "iOSHLSStatic"
         config.title = "Static HLS Video on iOS"
         config.path = "/vod/breadcrumb/"
+        config.isLive = true
 
         analyticsCollector = AVPlayerCollector(config: config)
         super.init(coder: aDecoder)

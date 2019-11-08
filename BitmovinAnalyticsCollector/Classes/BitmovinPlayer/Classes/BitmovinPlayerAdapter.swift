@@ -7,11 +7,13 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
     private var player: BitmovinPlayer
     private var errorCode: Int?
     private var errorDescription: String?
+    private var isPlayerReady: Bool
 
     init(player: BitmovinPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.stateMachine = stateMachine
         self.config = config
+        self.isPlayerReady = false
         super.init()
         startMonitoring()
     }
@@ -23,6 +25,7 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
     }
 
     deinit {
+        self.isPlayerReady = false
         stopMonitoring()
     }
 
@@ -46,7 +49,7 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         eventData.isCasting = player.isCasting
 
         //isLive
-        eventData.isLive = player.isLive
+        eventData.isLive = Util.getIsLIveFromConfigOrPlayer(isPlayerReady: self.isPlayerReady, isLiveFromConfig: self.config.isLive, isLiveFromPlayer: player.isLive)
 
         //version
         if let sdkVersion = Bundle(for: BitmovinPlayer.self).object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
@@ -130,6 +133,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onReady(_ event: ReadyEvent) {
+        self.isPlayerReady = true
         transitionToPausedOrPlaying()
     }
 
