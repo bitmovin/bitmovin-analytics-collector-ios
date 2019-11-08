@@ -49,7 +49,7 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         eventData.isCasting = player.isCasting
 
         //isLive
-        eventData.isLive = Util.getIsLIveFromConfigOrPlayer(isPlayerReady: self.isPlayerReady, isLiveFromConfig: self.config.isLive, isLiveFromPlayer: player.isLive)
+        eventData.isLive =  self.isPlayerReady && player.isLive || !self.isPlayerReady && self.config.isLive
 
         //version
         if let sdkVersion = Bundle(for: BitmovinPlayer.self).object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
