@@ -70,6 +70,11 @@ public class BitmovinAnalyticsConfig: NSObject {
      * Breadcrumb path to show where in the app the user is
      */
     @objc public var path: String?
+    
+    /**
+     * Flag to see if stream is live before stream metadata is available (default: false)
+     */
+    @objc public var isLive: Bool = false
 
     /**
      * How often the video engine should heartbeat

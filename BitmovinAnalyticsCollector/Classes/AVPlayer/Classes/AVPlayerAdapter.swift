@@ -8,6 +8,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     private let stateMachine: StateMachine
     private let config: BitmovinAnalyticsConfig
     private var lastBitrate: Double = 0
+    private var isPlayerReady: Bool
     @objc private var player: AVPlayer
     let lockQueue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
     var statusObserver: NSKeyValueObservation?
@@ -15,12 +16,14 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         self.player = player
         self.stateMachine = stateMachine
         self.config = config
+        self.isPlayerReady = false
         lastBitrate = 0
         super.init()
         startMonitoring()
     }
 
     deinit {
+        self.isPlayerReady = false
         if let playerItem = player.currentItem {
             stopMonitoringPlayerItem(playerItem: playerItem)
         }
@@ -62,6 +65,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         let timestamp = Date().timeIntervalSince1970Millis
         switch playerItem.status {
         case .readyToPlay:
+            self.isPlayerReady = true
             lockQueue.sync {
                 if stateMachine.firstReadyTimestamp != nil && stateMachine.potentialSeekStart > 0 && (timestamp - stateMachine.potentialSeekStart) <= AVPlayerAdapter.maxSeekOperation {
                     stateMachine.confirmSeek()
@@ -171,9 +175,14 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         eventData.isCasting = player.isExternalPlaybackActive
 
         // isLive
-        if let duration = player.currentItem?.duration {
-            eventData.isLive = CMTIME_IS_INDEFINITE(duration)
+        let duration = player.currentItem?.duration
+        if duration != nil && self.isPlayerReady {
+            eventData.isLive = CMTIME_IS_INDEFINITE(duration!)
         }
+        else {
+            eventData.isLive = config.isLive
+        }
+        
 
         // version
         eventData.version = PlayerType.avplayer.rawValue + "-" + UIDevice.current.systemVersion

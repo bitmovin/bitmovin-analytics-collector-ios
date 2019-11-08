@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - iOS and tvOS binaries
 - Scripts to build iOS and tvOS binaries
+- New boolean configuration field called `isLive` to indicate if the upcoming stream is a live stream. Will be overridden once playback metadata is available.
 
 ## v1.8.0
 
