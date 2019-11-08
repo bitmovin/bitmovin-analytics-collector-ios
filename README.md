@@ -43,6 +43,7 @@ config.customerUserId = "customUserId"
 config.experimentName = "experiement-1"
 config.videoId = "iOSHLSStatic"
 config.path = "/vod/breadcrumb/"
+config.isLive = true
 ```
 
 A full example app can be seen [here](https://github.com/bitmovin/bitmovin-analytics-collector-ios/tree/develop/Example/BitmovinAnalyticsCollector).
