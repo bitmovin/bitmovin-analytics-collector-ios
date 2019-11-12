@@ -79,7 +79,7 @@ use_frameworks!
 To include all available collectors, add the following lines (the dependency on `BitmovinPlayer` applies here as well):
 
 ```ruby
-pod 'BitmovinAnalyticsCollector', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.7.5'
+pod 'BitmovinAnalyticsCollector', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.9.0'
 pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.11.0'
 
 use_frameworks!
