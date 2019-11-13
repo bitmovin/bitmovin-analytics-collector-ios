@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Added
+
+- added `customData6` and `customData7` to outgoing payload
+
 ## v1.9.0
 
 ### Added
