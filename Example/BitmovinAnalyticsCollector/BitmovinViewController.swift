@@ -24,6 +24,8 @@ class BitmovinViewController: UIViewController {
         config.customData3 = "customData3"
         config.customData4 = "customData4"
         config.customData5 = "customData5"
+        config.customData6 = "customData6"
+        config.customData7 = "customData7"
         config.customerUserId = "customUserId"
         config.experimentName = "experiment-1"
         config.videoId = "iOSHLSStaticBitmovin"

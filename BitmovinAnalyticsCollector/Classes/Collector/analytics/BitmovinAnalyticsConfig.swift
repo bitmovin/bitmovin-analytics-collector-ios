@@ -35,7 +35,17 @@ public class BitmovinAnalyticsConfig: NSObject {
      * Optional free-form custom data
      */
     @objc public var customData5: String?
-
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData6: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData7: String?
+    
     /**
      * User ID of the customer
      */

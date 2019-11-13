@@ -46,6 +46,8 @@ public class EventData: Codable {
     var customData3: String?
     var customData4: String?
     var customData5: String?
+    var customData6: String?
+    var customData7: String?
     var experimentName: String?
     var userId: String?
     var impressionId: String
@@ -100,6 +102,8 @@ public class EventData: Codable {
         customData3 = config.customData3
         customData4 = config.customData4
         customData5 = config.customData5
+        customData6 = config.customData6
+        customData7 = config.customData7
         videoId = config.videoId
         videoTitle = config.title;
         experimentName = config.experimentName
