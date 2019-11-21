@@ -91,8 +91,9 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         let errorMessage = error?.localizedDescription ?? "Unkown"
 
         stateMachine.transitionState(destinationState: .error,
-                                     time: player.currentTime(), data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode,
-                                                                        BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
+                                     time: player.currentTime(),
+                                     data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode,
+                                            BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
     }
 
     @objc private func failedToPlayToEndTime(notification: Notification) {

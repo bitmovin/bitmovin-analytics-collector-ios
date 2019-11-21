@@ -20,9 +20,9 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
                 guard let events = self?.events.enumerated().reversed() else {
                     return
                 }
-                for (imdex, eventData) in events {
+                for (index, eventData) in events {
                     self?.httpClient.post(json: eventData.jsonString(), completionHandler: nil)
-                    self?.events.remove(at: imdex)
+                    self?.events.remove(at: index)
                 }
             } else {
                 self?.enabled = false
