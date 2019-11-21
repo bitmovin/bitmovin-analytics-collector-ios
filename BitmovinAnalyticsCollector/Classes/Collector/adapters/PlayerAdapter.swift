@@ -1,5 +1,5 @@
-import Foundation
 import CoreMedia
+import Foundation
 
 protocol PlayerAdapter {
     func createEventData() -> EventData

@@ -50,7 +50,7 @@ public class BitmovinAnalyticsConfig: NSObject {
      * ID of the video in the CMS system
      */
     @objc public var videoId: String?
-    
+
     /**
      * Human readable title of the video asset currently playing
      */
@@ -70,7 +70,7 @@ public class BitmovinAnalyticsConfig: NSObject {
      * Breadcrumb path to show where in the app the user is
      */
     @objc public var path: String?
-    
+
     /**
      * Flag to see if stream is live before stream metadata is available (default: false)
      */
@@ -79,7 +79,7 @@ public class BitmovinAnalyticsConfig: NSObject {
     /**
      * How often the video engine should heartbeat
      */
-    @objc public var heartbeatInterval: Int = 59000
+    @objc public var heartbeatInterval: Int = 59_000
 
     @objc public init(key: String, playerKey: String) {
         self.key = key

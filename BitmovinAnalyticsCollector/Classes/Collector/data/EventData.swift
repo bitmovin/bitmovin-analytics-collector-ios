@@ -78,7 +78,6 @@ public class EventData: Codable {
     var subtitleLanguage: String?
     var audioLanguage: String?
 
-
     public init(config: BitmovinAnalyticsConfig, impressionId: String) {
         domain = Util.mainBundleIdentifier()
         userId = Util.getUserId()
@@ -101,7 +100,7 @@ public class EventData: Codable {
         customData4 = config.customData4
         customData5 = config.customData5
         videoId = config.videoId
-        videoTitle = config.title;
+        videoTitle = config.title
         experimentName = config.experimentName
         path = config.path
     }
