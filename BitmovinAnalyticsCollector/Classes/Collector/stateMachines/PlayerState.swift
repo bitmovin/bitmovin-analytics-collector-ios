@@ -11,7 +11,7 @@ public enum PlayerState: String {
     case subtitlechange
     case audiochange
 
-    func onEntry(stateMachine: StateMachine, timestamp _: Int64, destinationState _: PlayerState, data: [AnyHashable : Any]?) {
+    func onEntry(stateMachine: StateMachine, timestamp _: Int64, destinationState _: PlayerState, data: [AnyHashable: Any]?) {
         switch self {
         case .setup:
             return
@@ -21,7 +21,7 @@ public enum PlayerState: String {
             stateMachine.delegate?.stateMachineDidEnterError(stateMachine, data: data)
             return
         case .playing, .paused:
-            if (stateMachine.firstReadyTimestamp == nil) {
+            if stateMachine.firstReadyTimestamp == nil {
                 stateMachine.firstReadyTimestamp = Date().timeIntervalSince1970Millis
                 stateMachine.delegate?.stateMachine(stateMachine, didStartupWithDuration: stateMachine.startupTime)
             }

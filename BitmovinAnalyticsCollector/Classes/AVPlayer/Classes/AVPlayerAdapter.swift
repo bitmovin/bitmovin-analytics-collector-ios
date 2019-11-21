@@ -2,8 +2,8 @@ import AVFoundation
 import Foundation
 
 class AVPlayerAdapter: NSObject, PlayerAdapter {
-    static let timeJumpedDuplicateTolerance = 1000
-    static let maxSeekOperation = 10000
+    static let timeJumpedDuplicateTolerance = 1_000
+    static let maxSeekOperation = 10_000
     private static var playerKVOContext = 0
     private let stateMachine: StateMachine
     private let config: BitmovinAnalyticsConfig
@@ -49,8 +49,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         NotificationCenter.default.addObserver(self, selector: #selector(accessItemAdded(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
-        NotificationCenter.default.addObserver(self, selector:#selector(failedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
-
+        NotificationCenter.default.addObserver(self, selector: #selector(failedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
     }
 
     private func stopMonitoringPlayerItem(playerItem: AVPlayerItem) {
@@ -79,20 +78,22 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
                 stateMachine.transitionState(destinationState: .playing, time: player.currentTime())
             }
 
-            break
         case .failed:
             errorOccured(error: playerItem.error as NSError?)
-            break
+
         default:
             break
         }
     }
-    
+
     private func errorOccured(error: NSError?) {
         let errorCode = error?.code ?? 1
         let errorMessage = error?.localizedDescription ?? "Unkown"
-        
-        stateMachine.transitionState(destinationState: .error, time: player.currentTime(), data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode, BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
+
+        stateMachine.transitionState(destinationState: .error,
+                                     time: player.currentTime(),
+                                     data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode,
+                                            BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
     }
 
     @objc private func failedToPlayToEndTime(notification: Notification) {
@@ -133,7 +134,10 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         }
 
         if keyPath == #keyPath(player.rate) {
-            let newRate = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).doubleValue
+            guard let newRateNumber = change?[NSKeyValueChangeKey.newKey] as? NSNumber else {
+                return
+            }
+            let newRate = newRateNumber.doubleValue
             if newRate == 0.0 && stateMachine.firstReadyTimestamp != nil {
                 stateMachine.transitionState(destinationState: .paused, time: self.player.currentTime())
             } else if newRate > 0.0 && stateMachine.firstReadyTimestamp != nil {
@@ -178,17 +182,15 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         let duration = player.currentItem?.duration
         if duration != nil && self.isPlayerReady {
             eventData.isLive = CMTIME_IS_INDEFINITE(duration!)
-        }
-        else {
+        } else {
             eventData.isLive = config.isLive
         }
-        
 
         // version
         eventData.version = PlayerType.avplayer.rawValue + "-" + UIDevice.current.systemVersion
 
         if let urlAsset = (player.currentItem?.asset as? AVURLAsset),
-            let streamFormat = Util.streamType(from: urlAsset.url.absoluteString) {
+           let streamFormat = Util.streamType(from: urlAsset.url.absoluteString) {
             eventData.streamFormat = streamFormat.rawValue
             switch streamFormat {
             case .dash:
@@ -197,15 +199,16 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
                 eventData.m3u8Url = urlAsset.url.absoluteString
             case .progressive:
                 eventData.progUrl = urlAsset.url.absoluteString
-            case .unknown: break;
+            case .unknown:
+                break
             }
         }
 
         // audio bitrate
         if let asset = player.currentItem?.asset {
-            if asset.tracks.count > 0 {
+            if !asset.tracks.isEmpty {
                 let tracks = asset.tracks(withMediaType: .audio)
-                if tracks.count > 0 {
+                if !tracks.isEmpty {
                     let desc = tracks[0].formatDescriptions[0] as! CMAudioFormatDescription
                     let basic = CMAudioFormatDescriptionGetStreamBasicDescription(desc)
                     if let sampleRate = basic?.pointee.mSampleRate {
@@ -240,7 +243,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
             eventData.isMuted = true
         }
     }
-    
+
     var currentTime: CMTime? {
         get {
             return player.currentTime()
