@@ -96,10 +96,11 @@ pod install
 - The `audioCodec` property is not collected at the moment, as the information isn't available in the player.
 - `subtitleLanguage` will fallback to the `label`, if no language is defined.
 
-## Author
-
-Cory Zachman, cory.zachman@bitmovin.com
-
 ## License
 
 BitmovinAnalyticsCollector is available under the MIT license. See the LICENSE file for more info.
+
+## Contributing
+
+We are happy to accept contributions.
+Upon opening a Pull Request you will be asked to sign a Contributor License Agreement.
