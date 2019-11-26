@@ -6,7 +6,7 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
     private var events = [EventData]()
     private var config: BitmovinAnalyticsConfig
     private var sequenceNumber: Int32 = 0
-    
+
     init(config: BitmovinAnalyticsConfig) {
         httpClient = HttpClient(urlString: BitmovinAnalyticsConfig.analyticsUrl)
         self.config = config
@@ -20,9 +20,9 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
                 guard let events = self?.events.enumerated().reversed() else {
                     return
                 }
-                for (i, eventData) in events {
+                for (index, eventData) in events {
                     self?.httpClient.post(json: eventData.jsonString(), completionHandler: nil)
-                    self?.events.remove(at: i)
+                    self?.events.remove(at: index)
                 }
             } else {
                 self?.enabled = false
@@ -37,7 +37,7 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
 
     func disable() {
         enabled = false
-        self.sequenceNumber = 0;
+        self.sequenceNumber = 0
     }
 
     func add(eventData: EventData) {

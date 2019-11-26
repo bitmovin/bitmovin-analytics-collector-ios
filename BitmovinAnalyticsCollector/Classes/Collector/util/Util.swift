@@ -2,8 +2,8 @@
 import CoreTelephony
 #endif
 
-import Foundation
 import AVKit
+import Foundation
 
 class Util {
     static func mainBundleIdentifier() -> String {
@@ -65,31 +65,29 @@ class Util {
             return ""
         }
     }
-    
+
     static func getUserId() -> String {
         let defaults = UserDefaults(suiteName: "com.bitmovin.analytics.collector_defaults")
         if let userIdFromStore = defaults?.string(forKey: "user_id") {
             return userIdFromStore
         }
-        
+
         let newUserId = NSUUID().uuidString
         defaults?.set(newUserId, forKey: "user_id")
         return newUserId
-        
-        
     }
-    
+
     static func getSupportedVideoCodecs() -> [String] {
-        var codecs = ["avc"];
+        var codecs = ["avc"]
         if #available(iOS 11, tvOS 11, *) {
             codecs.append("hevc")
         }
-        return codecs;
+        return codecs
     }
-    
+
     static func streamType(from url: String) -> StreamType? {
         let path = url.lowercased()
-        
+
         if path.hasSuffix(".m3u8") {
             return StreamType.hls
         }
@@ -105,6 +103,6 @@ class Util {
 
 extension Date {
     var timeIntervalSince1970Millis: Int64 {
-        return Int64(round(Date().timeIntervalSince1970 * 1000))
+        return Int64(round(Date().timeIntervalSince1970 * 1_000))
     }
 }

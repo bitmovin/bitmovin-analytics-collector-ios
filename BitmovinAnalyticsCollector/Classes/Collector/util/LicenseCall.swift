@@ -44,28 +44,28 @@ class LicenseCall {
                     completionHandler(false)
                     return
                 }
-                
+
                 guard httpResponse.statusCode < 400 else {
                     let message = json["message"] as? String
                     DPrint("Licensing failed. Reason: \(message ?? "Unknown error")")
                     completionHandler(false)
                     return
                 }
-                
-                guard let status = json["status"] as? String else{
+
+                guard let status = json["status"] as? String else {
                     DPrint("Licensing failed. Reason: status not set")
                     completionHandler(false)
                     return
                 }
-                
+
                 guard status == "granted" else {
                     DPrint("Licensing failed. Reason given by server: \(status)")
                     completionHandler(false)
                     return
                 }
-                
+
                 completionHandler(true)
-                
+
             } catch {
                 completionHandler(false)
             }

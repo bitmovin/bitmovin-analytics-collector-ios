@@ -79,7 +79,7 @@ use_frameworks!
 To include all available collectors, add the following lines (the dependency on `BitmovinPlayer` applies here as well):
 
 ```ruby
-pod 'BitmovinAnalyticsCollector', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.7.5'
+pod 'BitmovinAnalyticsCollector', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.9.0'
 pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.11.0'
 
 use_frameworks!
@@ -96,10 +96,11 @@ pod install
 - The `audioCodec` property is not collected at the moment, as the information isn't available in the player.
 - `subtitleLanguage` will fallback to the `label`, if no language is defined.
 
-## Author
-
-Cory Zachman, cory.zachman@bitmovin.com
-
 ## License
 
 BitmovinAnalyticsCollector is available under the MIT license. See the LICENSE file for more info.
+
+## Contributing
+
+We are happy to accept contributions.
+Upon opening a Pull Request you will be asked to sign a Contributor License Agreement.

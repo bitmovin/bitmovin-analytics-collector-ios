@@ -7,8 +7,8 @@ import Foundation
 public class BitmovinAnalyticsInternal: NSObject {
     public static let ErrorMessageKey = "errorMessage"
     public static let ErrorCodeKey = "errorCode"
-    
-    static let msInSec = 1000.0
+
+    static let msInSec = 1_000.0
     internal var config: BitmovinAnalyticsConfig
     internal var stateMachine: StateMachine
     private var adapter: PlayerAdapter?
@@ -30,7 +30,7 @@ public class BitmovinAnalyticsInternal: NSObject {
         stateMachine.reset()
         adapter = nil
     }
-    
+
     internal func attach(adapter: PlayerAdapter) {
         stateMachine.delegate = self
         eventDataDispatcher.enable()
@@ -115,13 +115,13 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         switch stateMachine.state {
         case .playing:
             eventData?.played = duration
-            break
+
         case .paused:
             eventData?.paused = duration
-            break
+
         case .buffering:
             eventData?.buffered = duration
-            break
+
         default:
             break
         }
@@ -133,13 +133,13 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         eventData?.videoStartupTime = duration
         // Hard coding 1 as the player startup time to workaround a Dashboard issue
         eventData?.playerStartupTime = 1
-        eventData?.startupTime = duration+1
+        eventData?.startupTime = duration + 1
         eventData?.supportedVideoCodecs = Util.getSupportedVideoCodecs()
 
         eventData?.state = "startup"
         sendEventData(eventData: eventData)
     }
-    
+
     func stateMachineDidSubtitleChange(_ stateMachine: StateMachine) {
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
@@ -149,7 +149,7 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
     }
-    
+
     var currentTime: CMTime? {
         get {
             return self.adapter?.currentTime
