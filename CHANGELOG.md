@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Fixed
+
+- collector triggered outgoing payload in pause state
+
 ## v1.10.0
 
 ### Added
