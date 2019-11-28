@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Fixed
+
+- `videoTimeEnd` is set to `videoDuration` in the `playbackFinished` event
+- Resolution of `videoTimeStart` and `videoTimeEnd` is now in milliseconds instead of seconds
+
 ## v1.10.0
 
 ### Added
