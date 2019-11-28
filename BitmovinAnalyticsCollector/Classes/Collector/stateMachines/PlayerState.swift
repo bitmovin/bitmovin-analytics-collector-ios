@@ -25,7 +25,9 @@ public enum PlayerState: String {
                 stateMachine.firstReadyTimestamp = Date().timeIntervalSince1970Millis
                 stateMachine.delegate?.stateMachine(stateMachine, didStartupWithDuration: stateMachine.startupTime)
             }
-            stateMachine.enableHeartbeat()
+            if (self == .playing){
+                stateMachine.enableHeartbeat()
+            }
             return
         case .qualitychange:
             return
@@ -58,7 +60,6 @@ public enum PlayerState: String {
             return
         case .paused:
             stateMachine.delegate?.stateMachine(stateMachine, didExitPauseWithDuration: duration)
-            stateMachine.disableHeartbeat()
             return
         case .qualitychange:
             stateMachine.delegate?.stateMachineDidQualityChange(stateMachine)
