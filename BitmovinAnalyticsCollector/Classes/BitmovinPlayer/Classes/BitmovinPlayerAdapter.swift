@@ -159,7 +159,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onPlaybackFinished(_ event: PlaybackFinishedEvent) {
-                    stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.duration))
         stateMachine.disableHeartbeat()
     }
 

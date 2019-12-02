@@ -42,7 +42,7 @@ class Util {
 
     static func timeIntervalToCMTime(_ timeInterval: TimeInterval) -> CMTime? {
         if !timeInterval.isNaN, !timeInterval.isInfinite {
-            return CMTimeMake(value: Int64(timeInterval), timescale: 1)
+            return CMTimeMakeWithSeconds(timeInterval, preferredTimescale: 1000)
         }
         return nil
     }
