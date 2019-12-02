@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - `videoTimeEnd` is set to `videoDuration` in the `playbackFinished` event
 - Resolution of `videoTimeStart` and `videoTimeEnd` is now in milliseconds instead of seconds
+- Collector triggered outgoing payload in pause state
 
 ## v1.10.0
 
