@@ -7,6 +7,70 @@
 
 import Foundation
 public class AdEventData: Codable {
+    var videoImpressionId: String?
+    var userAgent: String?
+    var language: String?
+    var cdnProvider : String?
+    var customData1: String?
+    var customData2 : String?
+    var customData3 : String?
+    var customData4 : String?
+    var customData5 : String?
+    var customData6 : String?
+    var customData7 : String?
+    var customUserId : String?
+    var domain : String?
+    var experimentName: String?
+    var key : String?
+    var path : String?
+    var player: String?
+    var playerKey: String?
+    var playerTech: String?
+    var screenHeight: Int?
+    var screenWidth:Int?
+    var version : String?
+    var userId : String?
+    var videoId : String?
+    var videoTitle : String?
+    var videoWindowHeight:Int?
+    var videoWindowWidth:Int?
+    var platform : String?
+    var audioCodec : String?
+    var videoCodec: String?
+    
+    
+    public func setEventData(eventData: EventData){
+        self.videoImpressionId = eventData.impressionId
+        self.userAgent = eventData.userAgent
+        self.language = eventData.language
+        self.cdnProvider = eventData.cdnProvider
+        self.customData1 = eventData.customData1
+        self.customData2 = eventData.customData2
+        self.customData3 = eventData.customData3
+        self.customData4 = eventData.customData4
+        self.customData5 = eventData.customData5
+        self.customData6 = eventData.customData6
+        self.customData7 = eventData.customData7
+        self.customUserId = eventData.customUserId
+        self.domain = eventData.domain
+        self.experimentName = eventData.experimentName
+        self.key = eventData.key
+        self.path = eventData.path
+        self.player = eventData.player
+        self.playerKey = eventData.playerKey
+        self.playerTech = eventData.playerTech
+        self.screenHeight = eventData.screenHeight
+        self.screenWidth = eventData.screenWidth
+        self.version = eventData.version
+        self.userId = eventData.userId
+        self.videoId = eventData.videoId
+        self.videoTitle = eventData.videoTitle
+        self.videoWindowHeight = eventData.videoWindowHeight
+        self.videoWindowWidth = eventData.videoWindowWidth
+        self.platform = eventData.platform
+        self.audioCodec = eventData.audioCodec
+        self.videoCodec = eventData.videoCodec
+    }
     
     public func jsonString() -> String {
            let encoder = JSONEncoder()

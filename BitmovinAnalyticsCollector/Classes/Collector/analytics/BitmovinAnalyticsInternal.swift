@@ -11,7 +11,7 @@ public class BitmovinAnalyticsInternal: NSObject {
     static let msInSec = 1_000.0
     internal var config: BitmovinAnalyticsConfig
     internal var stateMachine: StateMachine
-    private var adapter: PlayerAdapter?
+    internal var adapter: PlayerAdapter?
     private var eventDataDispatcher: EventDataDispatcher
     internal var adAnalytics: BitmovinAdAnalytics?
     internal var adAdapter: AdAdapter?

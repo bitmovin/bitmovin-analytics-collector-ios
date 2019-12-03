@@ -6,11 +6,23 @@
 //
 
 import Foundation
-public class BitmovinAdAnalytics : NSObject{
+public class BitmovinAdAnalytics{
     
     private var analytics: BitmovinAnalyticsInternal
     
     internal init(analytics: BitmovinAnalyticsInternal) {
         self.analytics = analytics;
+    }
+    
+    private func sendAnalyticsRequest(){
+        let adEventData = AdEventData()
+        
+        guard let adapter = self.analytics.adapter else {
+            return
+        }
+        
+        adEventData.setEventData(eventData: adapter.createEventData())
+        
+        self.analytics.sendAdEventData(adEventData: adEventData)
     }
 }
