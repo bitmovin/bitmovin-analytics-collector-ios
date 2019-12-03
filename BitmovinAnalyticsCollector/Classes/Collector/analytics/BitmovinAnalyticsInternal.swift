@@ -45,9 +45,7 @@ public class BitmovinAnalyticsInternal: NSObject {
     }
     
     private func detachAd(){
-        if(self.adAdapter != nil){
-            self.adAdapter?.release();
-        }
+        adAdapter = nil
     }
     
     internal func attachAd(adAdapter: AdAdapter) {
