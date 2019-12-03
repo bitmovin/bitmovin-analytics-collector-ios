@@ -11,10 +11,12 @@ func DPrint(_ string: String) {
 class LicenseCall {
     var config: BitmovinAnalyticsConfig
     var httpClient: HttpClient
+    var analyticsLicenseUrl: String
 
     init(config: BitmovinAnalyticsConfig) {
         self.config = config
-        httpClient = HttpClient(urlString: BitmovinAnalyticsConfig.analyticsLicenseUrl)
+        httpClient = HttpClient()
+        self.analyticsLicenseUrl = BitmovinAnalyticsConfig.analyticsLicenseUrl
     }
 
     public func authenticate(_ completionHandler: @escaping LicenseCallCompletionHandler) {
@@ -22,7 +24,7 @@ class LicenseCall {
         licenseCallData.key = config.key
         licenseCallData.domain = Util.mainBundleIdentifier()
         licenseCallData.analyticsVersion = Util.version()
-        httpClient.post(json: Util.toJson(object: licenseCallData)) { data, response, error in
+        httpClient.post(urlString: self.analyticsLicenseUrl, json: Util.toJson(object: licenseCallData)) { data, response, error in
             guard error == nil else { // check for fundamental networking error
                 completionHandler(false)
                 return

@@ -4,6 +4,7 @@ import UIKit
 @objcMembers
 public class BitmovinAnalyticsConfig: NSObject {
     static var analyticsUrl: String = "https://analytics-ingress-global.bitmovin.com/analytics"
+    static var adAnalyticsUrl: String = "https://analytics-ingress-global.bitmovin.com/analytics/a"
     static var analyticsLicenseUrl: String = "https://analytics-ingress-global.bitmovin.com/licensing"
 
     /**

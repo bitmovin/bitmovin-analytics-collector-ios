@@ -64,6 +64,13 @@ public class BitmovinAnalyticsInternal: NSObject {
         }
         eventDataDispatcher.add(eventData: data)
     }
+    
+    internal func sendAdEventData(adEventData: AdEventData?) {
+        guard let data = adEventData else {
+            return
+        }
+        eventDataDispatcher.addAd(adEventData: data)
+    }
 
     private func createEventData(duration: Int64) -> EventData? {
         guard let eventData = adapter?.createEventData() else {
