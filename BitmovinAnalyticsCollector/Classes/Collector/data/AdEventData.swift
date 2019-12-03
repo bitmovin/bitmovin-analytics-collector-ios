@@ -38,6 +38,22 @@ public class AdEventData: Codable {
     var audioCodec : String?
     var videoCodec: String?
     
+    var adIdPlayer: String?
+    var adPosition: String?
+    var adOffset: String?
+    var adScheduleTime: Double?
+    var adReplaceContentDuration: Double?
+    var adPreloadOffset: Double?
+    var adTagType: String?
+    var adTagUrl: String?
+    var adTagServer: String?
+    var adTagPath: String?
+    var adIsPersistent: Bool?
+    var adFallbackIndex: Double = 0
+    
+    init(){
+    }
+    
     
     public func setEventData(eventData: EventData){
         self.videoImpressionId = eventData.impressionId
@@ -70,6 +86,20 @@ public class AdEventData: Codable {
         self.platform = eventData.platform
         self.audioCodec = eventData.audioCodec
         self.videoCodec = eventData.videoCodec
+    }
+    
+    public func setAdBreak(adBreak: AdBreak){
+        self.adPosition = adBreak.position!.rawValue
+        self.adOffset = adBreak.offset
+        self.adScheduleTime = adBreak.scheduleTime
+        self.adReplaceContentDuration = adBreak.replaceContentDuration
+        self.adPreloadOffset = adBreak.preloadOffset
+        (self.adTagServer, self.adTagPath) = Util.getHostNameAndPath(uriString: adBreak.tagUrl)
+        self.adTagType = adBreak.tagType!.rawValue
+        self.adTagUrl = adBreak.tagUrl
+        self.adIsPersistent = adBreak.persistent
+        self.adIdPlayer = adBreak.id
+        self.adFallbackIndex = adBreak.fallbackIndex
     }
     
     public func jsonString() -> String {

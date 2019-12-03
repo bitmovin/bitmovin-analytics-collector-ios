@@ -99,6 +99,14 @@ class Util {
         }
         return nil
     }
+    
+    static func getHostNameAndPath(uriString: String?) -> (String?, String?){
+        guard let uri = URL(string: uriString!) else {
+            return (nil, nil)
+        }
+        
+        return (uri.host, uri.path)
+    }
 }
 
 extension Date {
