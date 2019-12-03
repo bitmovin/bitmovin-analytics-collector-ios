@@ -15,6 +15,12 @@ public class BitmovinAdAdapter: NSObject, AdAdapter{
     internal init(bitmovinPlayer: BitmovinPlayer, adAnalytics: BitmovinAdAnalytics){
         self.adAnalytics = adAnalytics;
         self.bitmovinPlayer = bitmovinPlayer;
+        super.init()
+        self.bitmovinPlayer.add(listener: self)
+    }
+
+    func releaseAdapter() {
+        self.bitmovinPlayer.remove(listener: self)
     }
 }
 

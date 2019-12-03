@@ -6,5 +6,6 @@
 //
 
 import Foundation
-protocol AdAdapter{    
+protocol AdAdapter{
+    func releaseAdapter()
 }
