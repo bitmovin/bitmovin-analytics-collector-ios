@@ -31,11 +31,30 @@ class BitmovinViewController: UIViewController {
         config.videoId = "iOSHLSStaticBitmovin"
         config.title = "iOS HLS Static Asset with Bitmovin Player"
         config.path = "/vod/breadcrumb/"
-        config.isLive = true
+        config.isLive = false
+        config.ads = true
         analyticsCollector = BitmovinPlayerCollector(config: config)
         print("Setup of collector finished")
 
         super.init(coder: aDecoder)
+    }
+    
+    static let AD_SOURCE_1 = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dredirecterror&nofb=1&correlator=";
+    static let AD_SOURCE_2 = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator=";
+    static let AD_SOURCE_3 = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator=";
+    static let AD_SOURCE_4 = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dredirectlinear&correlator=";
+    static let AD_SOURCE_5  = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dredirecterror&nofb=1&correlator=";
+
+    
+    func getAdvertisingConfiguration() -> AdvertisingConfiguration{
+        let adScource = AdSource(tag: urlWithCorrelator(adTag: BitmovinViewController.AD_SOURCE_3), ofType: BMPAdSourceType.IMA)
+        let preroll = AdItem(adSources: [adScource], atPosition: "pre")
+        
+        return AdvertisingConfiguration(schedule: [preroll])
+    }
+    
+    func urlWithCorrelator(adTag: String) -> URL {
+        return URL(string: String(format: "%@%d", adTag, Int(arc4random_uniform(100000))))!
     }
 
     override func viewDidLoad() {
@@ -48,15 +67,16 @@ class BitmovinViewController: UIViewController {
 
         // Create player configuration
         let config = PlayerConfiguration()
-
+        config.advertisingConfiguration = getAdvertisingConfiguration()
+        
         do {
             try config.setSourceItem(url: streamUrl)
-
+            
             // Create player based on player configuration
             let player = BitmovinPlayer(configuration: config)
 
             analyticsCollector.attachPlayer(player: player)
-
+            
             // Create player view and pass the player instance to it
             let playerBoundary = BMPBitmovinPlayerView(player: player, frame: .zero)
 
@@ -99,6 +119,7 @@ class BitmovinViewController: UIViewController {
 
         do {
             let config = PlayerConfiguration()
+            config.advertisingConfiguration = getAdvertisingConfiguration()
             try config.setSourceItem(url: streamUrl)
 
             // Create player based on player configuration

@@ -28,8 +28,8 @@ DESC
 
   s.subspec 'BitmovinPlayer' do |bitmovinplayer|
     bitmovinplayer.source_files = 'BitmovinAnalyticsCollector/Classes/BitmovinPlayer/**/*.{swift}'    
-    bitmovinplayer.tvos.dependency 'BitmovinPlayer', '~>2.22'
-    bitmovinplayer.ios.dependency 'BitmovinPlayer', '~>2.22'
+    bitmovinplayer.tvos.dependency 'BitmovinPlayer', '~>2.35'
+    bitmovinplayer.ios.dependency 'BitmovinPlayer', '~>2.35'
   end
 
   s.subspec 'AVPlayer' do |avplayer|
