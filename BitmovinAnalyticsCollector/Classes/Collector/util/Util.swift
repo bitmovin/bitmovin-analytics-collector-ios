@@ -4,6 +4,7 @@ import CoreTelephony
 
 import AVKit
 import Foundation
+import BitmovinPlayer
 
 class Util {
     static func mainBundleIdentifier() -> String {
@@ -38,6 +39,10 @@ class Util {
 
     static func version() -> String? {
         return Bundle(for: self).infoDictionary?["CFBundleShortVersionString"] as? String
+    }
+    
+    static func playerVersion() -> String?{
+        return Bundle(for: BitmovinPlayer.self).object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
     }
 
     static func timeIntervalToCMTime(_ timeInterval: TimeInterval) -> CMTime? {
@@ -75,6 +80,10 @@ class Util {
         let newUserId = NSUUID().uuidString
         defaults?.set(newUserId, forKey: "user_id")
         return newUserId
+    }
+    
+    static func getUUID() -> String{
+        return NSUUID().uuidString
     }
 
     static func getSupportedVideoCodecs() -> [String] {
