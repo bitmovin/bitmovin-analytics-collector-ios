@@ -34,7 +34,7 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
                     self?.events.remove(at: index)
                 }
                 for (index, adEventData) in adEvents {
-                    self?.httpClient.post(urlString: self!.adAnalyticsBackendUrl, json: adEventData.jsonString(), completionHandler: nil)
+                    self?.httpClient.post(urlString: self!.adAnalyticsBackendUrl, json: Util.toJson(object: adEventData), completionHandler: nil)
                     self?.adEvents.remove(at: index)
                 }
             } else {
@@ -65,7 +65,9 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
     
     func addAd(adEventData: AdEventData) {
         if enabled {
-            httpClient.post(urlString: self.adAnalyticsBackendUrl, json: adEventData.jsonString(), completionHandler: nil)
+            let json = Util.toJson(object: adEventData)
+            print("send Ad payload: " + json)
+            httpClient.post(urlString: self.adAnalyticsBackendUrl, json: json, completionHandler: nil)
         } else {
             adEvents.append(adEventData)
         }

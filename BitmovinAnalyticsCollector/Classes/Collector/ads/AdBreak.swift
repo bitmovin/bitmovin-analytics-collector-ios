@@ -11,13 +11,13 @@ public class AdBreak {
     var ads: Array<Ad>
     var position: AdPosition?
     var offset: String?
-    var scheduleTime: Double?
-    var replaceContentDuration: Double?
-    var preloadOffset: Double?
+    var scheduleTime: Int64?
+    var replaceContentDuration: Int64?
+    var preloadOffset: Int64?
     var tagType: AdTagType?
     var tagUrl: String?
     var persistent: Bool?
-    var fallbackIndex: Double = 0
+    var fallbackIndex: Int = 0
     
     init(id: String, ads: Array<Ad>) {
         self.id = id

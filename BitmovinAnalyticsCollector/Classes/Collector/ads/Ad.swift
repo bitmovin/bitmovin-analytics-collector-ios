@@ -27,17 +27,17 @@ public class Ad {
     var universalAdIdRegistry: String?
     var universalAdIdValue: String?
     var description: String?
-    var minSuggestedDuration: Double?
+    var minSuggestedDuration: Int64?
     var surveyUrl: String?
     var surveyType: String?
     var title: String?
     var wrapperAdsCount: Int?
     var codec: String?
-    var pricingValue: Double?
+    var pricingValue: Int64?
     var pricingModel: String?
     var pricingCurrency: String?
-    var skippableAfter: Double?
+    var skippableAfter: Int64?
     var skippable: Bool?
-    var duration: Double?
+    var duration: Int64?
     var dealId: String?
 }

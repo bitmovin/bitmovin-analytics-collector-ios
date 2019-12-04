@@ -40,14 +40,14 @@ public class AdEventData: Codable {
     var videoWindowWidth:Int?
     
     //  AdBreak data
-    var adFallbackIndex: Double = 0
+    var adFallbackIndex: Int = 0
     var adIdPlayer: String?
     var adIsPersistent: Bool?
     var adOffset: String?
     var adPosition: String?
-    var adPreloadOffset: Double?
-    var adReplaceContentDuration: Double?
-    var adScheduleTime: Double?
+    var adPreloadOffset: Int64?
+    var adReplaceContentDuration: Int64?
+    var adScheduleTime: Int64?
     var adTagType: String?
     var adTagUrl: String?
     var adTagServer: String?
@@ -58,41 +58,41 @@ public class AdEventData: Codable {
     //    var timeInViewport: Double?
     //    var timeUntilHover: Double?
     var adPodPosition: Int?
-    var adStartupTime: Double?
-    var clicked: Double = 0
+    var adStartupTime: Int64?
+    var clicked: Int = 0
     var clickPercentage: Int?
-    var clickPosition: Double?
-    var closed: Double = 0
+    var clickPosition: Int64?
+    var closed: Int = 0
     var closePercentage: Int?
-    var closePosition: Double?
-    var completed: Double = 0
+    var closePosition: Int64?
+    var completed: Int = 0
     var errorCode: Int?
     var errorData: String?
     var errorMessage: String?
     var errorPercentage: Int?
-    var errorPosition: Double?
-    var exitPosition: Double?
-    var midpoint: Double?
+    var errorPosition: Int64?
+    var exitPosition: Int64?
+    var midpoint: Int?
     var playPercentage: Int?
-    var quartile1: Double = 0
-    var quartile3: Double = 0
-    var skipped: Double = 0
+    var quartile1: Int = 0
+    var quartile3: Int = 0
+    var skipped: Int = 0
     var skipPercentage: Int?
-    var skipPosition: Double?
-    var started: Double = 0
-    var timeFromContent: Double?
-    var timePlayed: Double?
-    var timeToContent: Double?
+    var skipPosition: Int64?
+    var started: Int = 0
+    var timeFromContent: Int64?
+    var timePlayed: Int64?
+    var timeToContent: Int64?
     
     // Ad data
     var adClickThroughUrl: String?
     var adDescription: String?
-    var adDuration: Double?
+    var adDuration: Int64?
     var adId: String?
     var adPlaybackHeight: Int?
     var adPlaybackWidth: Int?
     var adSkippable: Bool?
-    var adSkippableAfter: Double?
+    var adSkippableAfter: Int64?
     var adSystem: String?
     var adTitle: String?
     var advertiserName: String?
@@ -105,7 +105,7 @@ public class AdEventData: Codable {
     var mediaPath: String?
     var mediaServer: String?
     var mediaUrl: String?
-    var minSuggestedDuration: Double?
+    var minSuggestedDuration: Int64?
     var streamFormat: String?
     var surveyUrl: String?
     var universalAdIdRegistry: String?
@@ -113,13 +113,13 @@ public class AdEventData: Codable {
     var videoBitrate: Int?
     var wrapperAdsCount: Int?
     
-    var manifestDownloadTime: Double?
+    var manifestDownloadTime: Int64?
     var analyticsVersion: String?
     var adModule: String?
     var adModuleVersion: String?
     var playerStartuptime: Int?
     var autoplay: Bool?
-    var time: Double?
+    var time: Int64?
     var adImpressionId: String?
     
     init(){
@@ -133,6 +133,7 @@ public class AdEventData: Codable {
     
     
     public func setEventData(eventData: EventData){
+        self.analyticsVersion = eventData.analyticsVersion
         self.audioCodec = eventData.audioCodec
         self.cdnProvider = eventData.cdnProvider
         self.customData1 = eventData.customData1
@@ -235,23 +236,4 @@ public class AdEventData: Codable {
         self.videoBitrate = ad.bitrate
         self.wrapperAdsCount = ad.wrapperAdsCount
     }
-    
-    public func jsonString() -> String {
-           let encoder = JSONEncoder()
-           if #available(iOS 11.0, tvOS 11.0, *) {
-               encoder.outputFormatting = [.sortedKeys]
-           }
-
-           encoder.nonConformingFloatEncodingStrategy = .convertToString(positiveInfinity: "Infinity", negativeInfinity: "Negative Infinity", nan: "nan")
-           do {
-               let jsonData = try encoder.encode(self)
-               guard let jsonString = String(data: jsonData, encoding: .utf8) else {
-                   return ""
-               }
-
-               return jsonString
-           } catch {
-               return ""
-           }
-       }
 }
