@@ -110,11 +110,19 @@ class Util {
     }
     
     static func getHostNameAndPath(uriString: String?) -> (String?, String?){
-        guard let uri = URL(string: uriString!) else {
+        guard let uri = URL(string: uriString ?? "") else {
             return (nil, nil)
         }
         
         return (uri.host, uri.path)
+    }
+    
+    static func calculatePercentage(numerator: Int64?, denominator: Int64?, clamp: Bool = false) -> Int?{
+        if (denominator == nil || denominator == 0 || numerator == nil) {
+            return nil;
+        }
+        let result = Int(round(Double(numerator!) / Double(denominator!)) * 100)
+        return clamp ? min(result, 100) : result;
     }
 }
 

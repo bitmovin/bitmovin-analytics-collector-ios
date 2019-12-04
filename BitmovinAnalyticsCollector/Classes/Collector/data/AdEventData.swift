@@ -207,6 +207,8 @@ public class AdEventData: Codable {
         self.timeFromContent = adSample.timeFromContent
         self.timePlayed = adSample.timePlayed
         self.timeToContent = adSample.timeToContent
+        
+        setAd(ad: adSample.ad)
     }
     
     private func setAd(ad: Ad){
