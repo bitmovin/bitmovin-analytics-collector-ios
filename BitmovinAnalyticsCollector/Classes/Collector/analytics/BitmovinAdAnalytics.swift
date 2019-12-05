@@ -114,9 +114,7 @@ public class BitmovinAdAnalytics{
         
     public func onAdError(code: Int?, message: String?) {
         print("onAdError")
-        guard let adSample = self.activeAdSample else {
-            return
-        }
+        let adSample = self.activeAdSample ?? AdSample()
         
         adSample.errorCode = code
         adSample.errorMessage = message
