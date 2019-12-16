@@ -14,6 +14,7 @@ public class BitmovinAdAnalytics{
     private var adStartupTimestamp: Int64? = nil
     private var beginPlayingTimestamp: Int64? = nil
     private var activeAdSample: AdSample? = nil
+    private var activeAdBreak: AnalyticsAdBreak? = nil
     private var isPlaying = false
     private var adManifestDownloadTimes = [String: Int64]()
         
@@ -77,9 +78,12 @@ public class BitmovinAdAnalytics{
         guard let adSample = self.activeAdSample else {
             return
         }
+        guard let adBreak = self.activeAdBreak else {
+            return
+        }
         
         adSample.completed = 1
-        completeAd(adSample:adSample, exitPosition: adSample.ad.duration)
+        completeAd(adBreak: adBreak, adSample:adSample, exitPosition: adSample.ad.duration)
     }
     
     public func onAdBreakStarted() {
@@ -110,12 +114,15 @@ public class BitmovinAdAnalytics{
         guard let adSample = self.activeAdSample else {
             return
         }
+        guard let adBreak = self.activeAdBreak else {
+            return
+        }
         
         adSample.skipped = 1
         adSample.skipPosition = self.currentTime
         adSample.skipPercentage = Util.calculatePercentage(numerator: adSample.clickPosition, denominator: adSample.ad.duration, clamp: true)
         
-        completeAd(adSample: adSample, exitPosition: adSample.skipPosition)
+        completeAd(adBreak: adBreak, adSample: adSample, exitPosition: adSample.skipPosition)
     }
         
     public func onAdError(adBreak: AnalyticsAdBreak, code: Int?, message: String?) {
@@ -130,7 +137,7 @@ public class BitmovinAdAnalytics{
         adSample.errorCode = code
         adSample.errorMessage = message
         
-        completeAd(adSample: adSample, exitPosition: adSample.errorPosition ?? 0)
+        completeAd(adBreak: adBreak, adSample: adSample, exitPosition: adSample.errorPosition ?? 0)
     }
     
     public func onAdQuartile(quartile: AdQuartile){
@@ -155,7 +162,7 @@ public class BitmovinAdAnalytics{
         self.currentTime = nil
     }
     
-    private func completeAd(adSample: AdSample, exitPosition: Int64? = 0){
+    private func completeAd(adBreak: AnalyticsAdBreak, adSample: AdSample, exitPosition: Int64? = 0){
         adSample.exitPosition = exitPosition
         adSample.timePlayed = exitPosition
         adSample.playPercentage = Util.calculatePercentage(numerator: adSample.timePlayed, denominator: adSample.ad.duration, clamp: true)
@@ -163,7 +170,7 @@ public class BitmovinAdAnalytics{
         // reset startupTimestamp for the next ad, in case there are multiple ads in one ad break
         self.adStartupTimestamp = Date().timeIntervalSince1970Millis
         self.isPlaying = false
-        sendAnalyticsRequest(adSample: adSample)
+        sendAnalyticsRequest(adBreak: adBreak, adSample: adSample)
         resetActiveAd()
     }
     
