@@ -14,29 +14,31 @@ public class AdMapper{
     }
     
     func fromPlayerAd(collectorAd: AnalyticsAd, playerAd: Ad) -> AnalyticsAd{
-        collectorAd.isLinear = playerAd.isLinear;
-        collectorAd.width = Int(playerAd.width);
-        collectorAd.height = Int(playerAd.height);
-        collectorAd.id = playerAd.identifier;
+        collectorAd.isLinear = playerAd.isLinear
+        collectorAd.width = Int(playerAd.width)
+        collectorAd.height = Int(playerAd.height)
+        collectorAd.id = playerAd.identifier
         collectorAd.mediaFileUrl = playerAd.mediaFileUrl
-        if(playerAd.data != nil){
-            collectorAd.minBitrate = playerAd.data!.minBitrate;
-            collectorAd.maxBitrate = playerAd.data!.maxBitrate;
-            collectorAd.mimeType = playerAd.data!.mimeType;
-            collectorAd.bitrate = playerAd.data!.bitrate
+        if case let data? = playerAd.data {
+            collectorAd.minBitrate = data.minBitrate == nil ? nil : Int(data.minBitrate!.pointee)
+            collectorAd.maxBitrate = data.minBitrate == nil ? nil : Int(data.maxBitrate!.pointee)
+            collectorAd.mimeType = data.mimeType
+            collectorAd.bitrate = data.minBitrate == nil ? nil : Int(data.bitrate!.pointee)
+            
+            if(playerAd.data is VastAdData){
+                fromVastAdData(collectorAd: collectorAd, vastData: playerAd.data as! VastAdData)
+            }
+
+            if(playerAd.data is ImaAdData){
+                collectorAd.dealId = (playerAd.data as! ImaAdData).dealId
+            }
         }
         
-        if(playerAd.data is VastAdData){
-            fromVastAdData(collectorAd: collectorAd, vastData: playerAd.data as! VastAdData)
-        }
-        
-        if(playerAd.data is ImaAdData){
-            collectorAd.dealId = (playerAd.data as! ImaAdData).dealId;
-        }
+       
         if(playerAd is LinearAd){
             fromLinearAd(collectorAd: collectorAd, linearAd: playerAd as! LinearAd)
         }
-        return collectorAd;
+        return collectorAd
     }
     
     func fromVastAdData(collectorAd:AnalyticsAd, vastData: VastAdData){
