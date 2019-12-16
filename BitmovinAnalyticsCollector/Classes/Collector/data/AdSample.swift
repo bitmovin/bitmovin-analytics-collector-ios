@@ -38,5 +38,5 @@ public class AdSample{
     var errorCode: Int?
     var errorData: String?
     var errorMessage: String?
-    var ad: Ad = Ad()
+    var ad: AnalyticsAd = AnalyticsAd()
 }

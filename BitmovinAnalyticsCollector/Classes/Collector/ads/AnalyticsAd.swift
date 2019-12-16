@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public class Ad {
+public class AnalyticsAd {
     var isLinear: Bool = false
     var width: Int = 0
     var height: Int = 0

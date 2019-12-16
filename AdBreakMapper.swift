@@ -10,7 +10,7 @@ import BitmovinPlayer
 public class AdBreakMapper {
     
     func fromPlayerAdConfiguration(adConfiguration: AdConfiguration?) -> AnalyticsAdBreak {
-        let collectorAdBreak = AnalyticsAdBreak(id: "notset",  ads: Array<Ad>() );
+        let collectorAdBreak = AnalyticsAdBreak(id: "notset",  ads: Array<AnalyticsAd>() );
         if(adConfiguration != nil){
             fromPlayerAdConfiguration(collectorAdBreak: collectorAdBreak, adConfiguration: adConfiguration!);
         }
@@ -30,10 +30,10 @@ public class AdBreakMapper {
     
     func fromPlayerAdBreak(collectorAdBreak: AnalyticsAdBreak, playerAdBreak:AdBreak){
         
-        var ads = Array<Ad>();
+        var ads = Array<AnalyticsAd>();
         if(playerAdBreak.ads != nil && !playerAdBreak.ads.isEmpty){
             for ad in playerAdBreak.ads {
-                ads.append(ad as! Ad);
+                ads.append(ad as! AnalyticsAd);
             }
         }
         

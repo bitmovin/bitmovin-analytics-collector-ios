@@ -8,7 +8,7 @@
 import Foundation
 public class AnalyticsAdBreak {
     var id: String
-    var ads: Array<Ad>
+    var ads: Array<AnalyticsAd>
     var position: AdPosition?
     var offset: String?
     var scheduleTime: Int64?
@@ -19,7 +19,7 @@ public class AnalyticsAdBreak {
     var persistent: Bool?
     var fallbackIndex: Int = 0
     
-    init(id: String, ads: Array<Ad>) {
+    init(id: String, ads: Array<AnalyticsAd>) {
         self.id = id
         self.ads = ads
     }

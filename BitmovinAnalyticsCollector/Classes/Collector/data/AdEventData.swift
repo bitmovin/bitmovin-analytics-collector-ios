@@ -211,7 +211,7 @@ public class AdEventData: Codable {
         setAd(ad: adSample.ad)
     }
     
-    private func setAd(ad: Ad){
+    private func setAd(ad: AnalyticsAd){
         self.adClickThroughUrl = ad.clickThroughUrl
         self.adDescription = ad.description
         self.adDuration = ad.duration
