@@ -86,14 +86,16 @@ public class BitmovinAdAnalytics{
         completeAd(adBreak: adBreak, adSample:adSample, exitPosition: adSample.ad.duration)
     }
     
-    public func onAdBreakStarted() {
+    public func onAdBreakStarted(adBreak: AnalyticsAdBreak) {
         print("onAdBreakStarted")
         self.adPodPosition = 0
+        self.activeAdBreak = adBreak
         self.adStartupTimestamp = Date().timeIntervalSince1970Millis
     }
     
     public func onAdBreakFinished() {
         print("onAdBreakFinished")
+        self.activeAdBreak = nil
         resetActiveAd()
     }
     
