@@ -170,13 +170,13 @@ public class AdEventData: Codable {
         self.adFallbackIndex = adBreak.fallbackIndex
         self.adIsPersistent = adBreak.persistent
         self.adIdPlayer = adBreak.id
-        self.adPosition = adBreak.position!.rawValue
+        self.adPosition = adBreak.position?.rawValue
         self.adOffset = adBreak.offset
         self.adPreloadOffset = adBreak.preloadOffset
         self.adReplaceContentDuration = adBreak.replaceContentDuration
         self.adScheduleTime = adBreak.scheduleTime
         (self.adTagServer, self.adTagPath) = Util.getHostNameAndPath(uriString: adBreak.tagUrl)
-        self.adTagType = adBreak.tagType!.rawValue
+        self.adTagType = adBreak.tagType?.rawValue
         self.adTagUrl = adBreak.tagUrl
     }
     

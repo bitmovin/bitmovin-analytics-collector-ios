@@ -39,6 +39,13 @@ public class BitmovinAdAnalytics{
     
     internal init(analytics: BitmovinAnalyticsInternal) {
         self.analytics = analytics;
+        self.adManifestDownloadTimes = [String: Int64]()
+    }
+    
+    deinit {
+        self.activeAdBreak = nil;
+        self.activeAdSample = nil;
+        self.currentTime = nil;
     }
     
     public func onAdManifestLoaded(adBreak: AnalyticsAdBreak, downloadTime: Int64) {
@@ -46,7 +53,7 @@ public class BitmovinAdAnalytics{
         if(adBreak.tagType == AdTagType.VMAP){
             sendAnalyticsRequest(adBreak: adBreak);
         }
-        print("OnAdManifestLoaded")
+        print("OnAdManifestLoaded in \(downloadTime)")
     }
     
     public func onAdStarted(){
@@ -177,7 +184,7 @@ public class BitmovinAdAnalytics{
     }
     
     private func getAdManifestDownloadTime(adBreak: AnalyticsAdBreak?) -> Int64?{
-        if(adBreak == nil || self.adManifestDownloadTimes[adBreak!.id] != nil){
+        if(adBreak == nil || self.adManifestDownloadTimes[adBreak!.id] == nil){
             return nil;
         }
         return self.adManifestDownloadTimes[adBreak!.id];
