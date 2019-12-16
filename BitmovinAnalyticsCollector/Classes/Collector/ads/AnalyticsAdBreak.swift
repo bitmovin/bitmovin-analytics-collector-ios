@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public class AdBreak {
+public class AnalyticsAdBreak {
     var id: String
     var ads: Array<Ad>
     var position: AdPosition?

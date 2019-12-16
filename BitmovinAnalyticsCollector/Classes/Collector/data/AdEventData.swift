@@ -125,7 +125,7 @@ public class AdEventData: Codable {
     init(){
     }
     
-    init(eventData: EventData, adBreak: AdBreak, adSample: AdSample){
+    init(eventData: EventData, adBreak: AnalyticsAdBreak, adSample: AdSample){
         setEventData(eventData: eventData);
         setAdBreak(adBreak: adBreak)
         setAdSample(adSample: adSample)
@@ -166,7 +166,7 @@ public class AdEventData: Codable {
         self.videoImpressionId = eventData.impressionId
     }
     
-    public func setAdBreak(adBreak: AdBreak){
+    public func setAdBreak(adBreak: AnalyticsAdBreak){
         self.adFallbackIndex = adBreak.fallbackIndex
         self.adIsPersistent = adBreak.persistent
         self.adIdPlayer = adBreak.id
