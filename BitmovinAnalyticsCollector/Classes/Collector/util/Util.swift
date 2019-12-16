@@ -151,6 +151,17 @@ class Util {
             return AdTagType.UNKNOWN;
         }
     }
+    
+    static func getAdQuartileFromPlayerAdQuartile(adQuartile: BMPAdQuartile) -> AdQuartile{
+        switch adQuartile {
+        case BMPAdQuartile.firstQuartile:
+            return AdQuartile.FIRST_QUARTILE;
+        case BMPAdQuartile.midpoint:
+            return AdQuartile.MIDPOINT;
+        case BMPAdQuartile.thirdQuartile:
+            return AdQuartile.THIRD_QUARTILE;
+        }
+    }
 }
 
 extension Date {

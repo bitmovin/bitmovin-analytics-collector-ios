@@ -67,5 +67,9 @@ extension BitmovinAdAdapter : PlayerListener {
     public func onAdError(_ event: AdErrorEvent) {
         self.adAnalytics.onAdError(adBreak: adBreakMapper.fromPlayerAdConfiguration(adConfiguration: event.adConfig), code: Int(event.code), message: event.message)
     }
+    
+    public func onAdQuartile(_ event: AdQuartileEvent) {
+        self.adAnalytics.onAdQuartile(quartile: Util.getAdQuartileFromPlayerAdQuartile(adQuartile: event.adQuartile))
+    }
 }
 

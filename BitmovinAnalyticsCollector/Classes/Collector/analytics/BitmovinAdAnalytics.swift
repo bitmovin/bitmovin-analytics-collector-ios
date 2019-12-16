@@ -16,7 +16,7 @@ public class BitmovinAdAnalytics{
     private var activeAdSample: AdSample? = nil
     private var isPlaying = false
     private var adManifestDownloadTimes = [String: Int64]()
-    
+        
     private var _currentTime: Int64?
     private var currentTime: Int64? {
         get {
@@ -128,6 +128,23 @@ public class BitmovinAdAnalytics{
         adSample.errorPercentage = Util.calculatePercentage(numerator: adSample.clickPosition, denominator: adSample.ad.duration, clamp: true)
         
         completeAd(adSample: adSample, exitPosition: adSample.errorPosition ?? 0)
+    }
+    
+    public func onAdQuartile(quartile: AdQuartile){
+        guard self.activeAdSample != nil else {
+            return;
+        }
+        
+        switch quartile {
+            case AdQuartile.FIRST_QUARTILE:
+                self.activeAdSample!.quartile1 = 1;
+
+            case AdQuartile.MIDPOINT:
+                self.activeAdSample!.midpoint = 1;
+
+            case AdQuartile.THIRD_QUARTILE:
+                self.activeAdSample!.quartile3 = 1;
+        }
     }
     
     private func resetActiveAd(){
