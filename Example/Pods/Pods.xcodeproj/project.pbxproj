@@ -80,6 +80,27 @@
 		E0B98791FBFA71CACA9F470196FA9783 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB437091012F8197A05565B083D067A /* StateMachine.swift */; };
 		E62845F935B69CB890C8818A35096CB6 /* BitmovinPlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294DA6E1799B4DCD87460ACB68E87A8F /* BitmovinPlayerAdapter.swift */; };
 		E8EB7F20B2FAF1827033834FE52B0142 /* PlayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D584404EBCD5F364F44D06A5BBCA059E /* PlayerType.swift */; };
+		EC94BE2223A7BB3C00B1F557 /* BitmovinAdAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE2123A7BB3C00B1F557 /* BitmovinAdAnalytics.swift */; };
+		EC94BE2423A7BB4900B1F557 /* AdAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE2323A7BB4900B1F557 /* AdAdapter.swift */; };
+		EC94BE2823A7BB7000B1F557 /* AdBreakMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE2623A7BB7000B1F557 /* AdBreakMapper.swift */; };
+		EC94BE2923A7BB7000B1F557 /* AdMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE2723A7BB7000B1F557 /* AdMapper.swift */; };
+		EC94BE2A23A7BB8000B1F557 /* AdBreakMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE2623A7BB7000B1F557 /* AdBreakMapper.swift */; };
+		EC94BE2B23A7BB8500B1F557 /* AdMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE2723A7BB7000B1F557 /* AdMapper.swift */; };
+		EC94BE2C23A7BB9200B1F557 /* AdAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE2323A7BB4900B1F557 /* AdAdapter.swift */; };
+		EC94BE2D23A7BB9500B1F557 /* BitmovinAdAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE2123A7BB3C00B1F557 /* BitmovinAdAnalytics.swift */; };
+		EC94BE3123A7BBC800B1F557 /* AdEventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE2E23A7BBC700B1F557 /* AdEventData.swift */; };
+		EC94BE3223A7BBC800B1F557 /* AdModuleInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE2F23A7BBC700B1F557 /* AdModuleInformation.swift */; };
+		EC94BE3323A7BBC800B1F557 /* AdSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE3023A7BBC800B1F557 /* AdSample.swift */; };
+		EC94BE3423A7BBCB00B1F557 /* AdEventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE2E23A7BBC700B1F557 /* AdEventData.swift */; };
+		EC94BE3523A7BBCE00B1F557 /* AdModuleInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE2F23A7BBC700B1F557 /* AdModuleInformation.swift */; };
+		EC94BE3623A7BBD100B1F557 /* AdSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE3023A7BBC800B1F557 /* AdSample.swift */; };
+		EC94BE4023A7BC7500B1F557 /* AdQuartile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE3B23A7BC7400B1F557 /* AdQuartile.swift */; };
+		EC94BE4123A7BC7500B1F557 /* AnalyticsAdBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE3C23A7BC7400B1F557 /* AnalyticsAdBreak.swift */; };
+		EC94BE4223A7BC7500B1F557 /* AnalyticsAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE3D23A7BC7400B1F557 /* AnalyticsAd.swift */; };
+		EC94BE4323A7BC7500B1F557 /* AdTagType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE3E23A7BC7400B1F557 /* AdTagType.swift */; };
+		EC94BE4423A7BC7500B1F557 /* AdPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE3F23A7BC7400B1F557 /* AdPosition.swift */; };
+		EC94BE4623A7BC9D00B1F557 /* BitmovinAdAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE4523A7BC9C00B1F557 /* BitmovinAdAdapter.swift */; };
+		EC94BE4723A7BC9D00B1F557 /* BitmovinAdAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94BE4523A7BC9C00B1F557 /* BitmovinAdAdapter.swift */; };
 		EF9D1B852B3DF073B31321D945477437 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D50031945639C9CFCD3CBF24E18561 /* Foundation.framework */; };
 		F1A2A822A998499DF43F0560EC61139A /* EventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE590A5543E07D82E68F116DA16E71DC /* EventData.swift */; };
 		F3EA09B67EEC66D485625B41AFF081C8 /* CdnProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DA84372F01472D9A8B510EDD4E2CC /* CdnProvider.swift */; };
@@ -196,6 +217,19 @@
 		E2061DA928C83A29C120513DAB826B93 /* Pods-BitmovinAnalyticsCollector_tvOSExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BitmovinAnalyticsCollector_tvOSExample.release.xcconfig"; sourceTree = "<group>"; };
 		E63591D7422A4A222E5DACE55D967405 /* Pods_BitmovinAnalyticsCollector_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA321D5EFC05273F971830061914C4CC /* BitmovinAnalyticsInternal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BitmovinAnalyticsInternal.swift; sourceTree = "<group>"; };
+		EC94BE2123A7BB3C00B1F557 /* BitmovinAdAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitmovinAdAnalytics.swift; sourceTree = "<group>"; };
+		EC94BE2323A7BB4900B1F557 /* AdAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdAdapter.swift; sourceTree = "<group>"; };
+		EC94BE2623A7BB7000B1F557 /* AdBreakMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdBreakMapper.swift; sourceTree = "<group>"; };
+		EC94BE2723A7BB7000B1F557 /* AdMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdMapper.swift; sourceTree = "<group>"; };
+		EC94BE2E23A7BBC700B1F557 /* AdEventData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdEventData.swift; sourceTree = "<group>"; };
+		EC94BE2F23A7BBC700B1F557 /* AdModuleInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdModuleInformation.swift; sourceTree = "<group>"; };
+		EC94BE3023A7BBC800B1F557 /* AdSample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdSample.swift; sourceTree = "<group>"; };
+		EC94BE3B23A7BC7400B1F557 /* AdQuartile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdQuartile.swift; path = BitmovinAnalyticsCollector/Classes/Collector/ads/AdQuartile.swift; sourceTree = "<group>"; };
+		EC94BE3C23A7BC7400B1F557 /* AnalyticsAdBreak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnalyticsAdBreak.swift; path = BitmovinAnalyticsCollector/Classes/Collector/ads/AnalyticsAdBreak.swift; sourceTree = "<group>"; };
+		EC94BE3D23A7BC7400B1F557 /* AnalyticsAd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnalyticsAd.swift; path = BitmovinAnalyticsCollector/Classes/Collector/ads/AnalyticsAd.swift; sourceTree = "<group>"; };
+		EC94BE3E23A7BC7400B1F557 /* AdTagType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdTagType.swift; path = BitmovinAnalyticsCollector/Classes/Collector/ads/AdTagType.swift; sourceTree = "<group>"; };
+		EC94BE3F23A7BC7400B1F557 /* AdPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdPosition.swift; path = BitmovinAnalyticsCollector/Classes/Collector/ads/AdPosition.swift; sourceTree = "<group>"; };
+		EC94BE4523A7BC9C00B1F557 /* BitmovinAdAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinAdAdapter.swift; path = BitmovinAnalyticsCollector/Classes/BitmovinPlayer/Classes/BitmovinAdAdapter.swift; sourceTree = "<group>"; };
 		F9A9ACD1D6758D934B5E6A116D993C0C /* BitmovinAnalyticsCollector-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BitmovinAnalyticsCollector-iOS-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -246,6 +280,7 @@
 		058240C7D423F1A030906EF9F58A3ECE /* adapters */ = {
 			isa = PBXGroup;
 			children = (
+				EC94BE2323A7BB4900B1F557 /* AdAdapter.swift */,
 				4621AA4FB6ACD889C4703B19827F3C88 /* PlayerAdapter.swift */,
 			);
 			name = adapters;
@@ -297,7 +332,9 @@
 		1E5F5234B14EB9EC21C0A368C7B8E160 /* BitmovinPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				EC94BE2523A7BB5B00B1F557 /* util */,
 				E06E19B6C665340494940F3309B53401 /* BitmovinAnalytics.swift */,
+				EC94BE4523A7BC9C00B1F557 /* BitmovinAdAdapter.swift */,
 				294DA6E1799B4DCD87460ACB68E87A8F /* BitmovinPlayerAdapter.swift */,
 				CCBFEC2E4717D2207A8D8180D9C2AD47 /* BitmovinPlayerCollector.swift */,
 			);
@@ -307,6 +344,9 @@
 		2B1BF7F4E3126DFC8F544AD27EA71159 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				EC94BE2E23A7BBC700B1F557 /* AdEventData.swift */,
+				EC94BE2F23A7BBC700B1F557 /* AdModuleInformation.swift */,
+				EC94BE3023A7BBC800B1F557 /* AdSample.swift */,
 				BE590A5543E07D82E68F116DA16E71DC /* EventData.swift */,
 				54465302BB43C140CAB85BA4846E8349 /* EventDataDispatcher.swift */,
 				1D06DFF9FA29E2936528A51497FABD9A /* LicenseCallData.swift */,
@@ -357,6 +397,7 @@
 		6D433D2F0E21025BE179712F7BD2036E /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				EC94BE3A23A7BC5900B1F557 /* ads */,
 				058240C7D423F1A030906EF9F58A3ECE /* adapters */,
 				B1939CD1983BB0E828730F0F55DE6D39 /* analytics */,
 				2B1BF7F4E3126DFC8F544AD27EA71159 /* data */,
@@ -404,6 +445,7 @@
 		B1939CD1983BB0E828730F0F55DE6D39 /* analytics */ = {
 			isa = PBXGroup;
 			children = (
+				EC94BE2123A7BB3C00B1F557 /* BitmovinAdAnalytics.swift */,
 				09273FA8C7486F9E1247896E60463BD6 /* BitmovinAnalyticsConfig.swift */,
 				EA321D5EFC05273F971830061914C4CC /* BitmovinAnalyticsInternal.swift */,
 			);
@@ -462,6 +504,27 @@
 				197C67F8CB45450D72A8A7352D433339 /* Products */,
 				F2F48BC2B402F4E55FE0F9C38C46BCFB /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		EC94BE2523A7BB5B00B1F557 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				EC94BE2623A7BB7000B1F557 /* AdBreakMapper.swift */,
+				EC94BE2723A7BB7000B1F557 /* AdMapper.swift */,
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
+		EC94BE3A23A7BC5900B1F557 /* ads */ = {
+			isa = PBXGroup;
+			children = (
+				EC94BE3F23A7BC7400B1F557 /* AdPosition.swift */,
+				EC94BE3B23A7BC7400B1F557 /* AdQuartile.swift */,
+				EC94BE3E23A7BC7400B1F557 /* AdTagType.swift */,
+				EC94BE3D23A7BC7400B1F557 /* AnalyticsAd.swift */,
+				EC94BE3C23A7BC7400B1F557 /* AnalyticsAdBreak.swift */,
+			);
+			name = ads;
 			sourceTree = "<group>";
 		};
 		F189AAF26884209204EB5F83FD680585 /* Pods */ = {
@@ -743,24 +806,32 @@
 				3AC8B809DA6F2F1E3034BEEDF933AC46 /* AVPlayerCollector.swift in Sources */,
 				C963465E058BC096ACA1C0530F20E197 /* BitmovinAnalytics.swift in Sources */,
 				15E81BC2830A54BCD1C774BCAE1516E8 /* BitmovinAnalyticsCollector-tvOS-dummy.m in Sources */,
+				EC94BE4723A7BC9D00B1F557 /* BitmovinAdAdapter.swift in Sources */,
 				FBBD2951E97F4E36879FD0B6A2FC9CDF /* BitmovinAnalyticsConfig.swift in Sources */,
 				4FC2EEC249A357FC1478E825389CB7F4 /* BitmovinAnalyticsInternal.swift in Sources */,
 				5BAF87A7C4B74050F5779FC0B9AA7F65 /* BitmovinPlayerAdapter.swift in Sources */,
 				8EEA2524A4CD77BD019A8F4CA786947F /* BitmovinPlayerCollector.swift in Sources */,
 				F3EA09B67EEC66D485625B41AFF081C8 /* CdnProvider.swift in Sources */,
+				EC94BE3423A7BBCB00B1F557 /* AdEventData.swift in Sources */,
 				F1A2A822A998499DF43F0560EC61139A /* EventData.swift in Sources */,
 				AEE932C4A396062A699AFF68E1589197 /* EventDataDispatcher.swift in Sources */,
+				EC94BE2B23A7BB8500B1F557 /* AdMapper.swift in Sources */,
 				1C9E330B0FF894D0278DCE6030764B6C /* HttpClient.swift in Sources */,
 				405A7809921780A4CB23A5519DAB5F62 /* LicenseCall.swift in Sources */,
 				A2A249DBD8F32E35B56C802A083451A2 /* LicenseCallData.swift in Sources */,
 				4894FEB0F95616E0F07836BB5DE1F007 /* PlayerAdapter.swift in Sources */,
 				9F5796F708837621AAAD3161EDED2E0B /* PlayerState.swift in Sources */,
 				E8EB7F20B2FAF1827033834FE52B0142 /* PlayerType.swift in Sources */,
+				EC94BE2C23A7BB9200B1F557 /* AdAdapter.swift in Sources */,
 				88D6A08D7A3AA7B69988E9C8EF97DC10 /* SimpleEventDataDispatcher.swift in Sources */,
+				EC94BE3523A7BBCE00B1F557 /* AdModuleInformation.swift in Sources */,
 				E0B98791FBFA71CACA9F470196FA9783 /* StateMachine.swift in Sources */,
+				EC94BE2D23A7BB9500B1F557 /* BitmovinAdAnalytics.swift in Sources */,
 				3B7442D698EC6D26A4ECF48DE149BCC0 /* StateMachineDelegate.swift in Sources */,
 				46B93874816114C8A81EA229F00DADC9 /* StreamType.swift in Sources */,
+				EC94BE2A23A7BB8000B1F557 /* AdBreakMapper.swift in Sources */,
 				B028B9FECDEAE2172B751FEDAE7CAFA4 /* Util.swift in Sources */,
+				EC94BE3623A7BBD100B1F557 /* AdSample.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -777,27 +848,40 @@
 			buildActionMask = 2147483647;
 			files = (
 				B846AFA9AC05CB484EA46704B23F7DA8 /* AVPlayerAdapter.swift in Sources */,
+				EC94BE2823A7BB7000B1F557 /* AdBreakMapper.swift in Sources */,
+				EC94BE2223A7BB3C00B1F557 /* BitmovinAdAnalytics.swift in Sources */,
 				C75EEBDE7FE568DE7DBE9F04ED06EB69 /* AVPlayerCollector.swift in Sources */,
 				A610C8C75B5BC171177371C04BB67678 /* BitmovinAnalytics.swift in Sources */,
 				C48DDB3671532F23B03431010135B341 /* BitmovinAnalyticsCollector-iOS-dummy.m in Sources */,
 				40A38EB0A737F849965B25710B3E723C /* BitmovinAnalyticsConfig.swift in Sources */,
 				35B683B0CFBFC497B1CC5087C6CB92F5 /* BitmovinAnalyticsInternal.swift in Sources */,
 				E62845F935B69CB890C8818A35096CB6 /* BitmovinPlayerAdapter.swift in Sources */,
+				EC94BE4623A7BC9D00B1F557 /* BitmovinAdAdapter.swift in Sources */,
+				EC94BE3123A7BBC800B1F557 /* AdEventData.swift in Sources */,
 				B04BB03F0DE5A5EE088ED157E5970BD0 /* BitmovinPlayerCollector.swift in Sources */,
 				68E363210592B213E5D20B5D9F2AE40F /* CdnProvider.swift in Sources */,
 				BFAD049F7B40DAF3B10DC97AEBF4CF78 /* EventData.swift in Sources */,
 				9EBEEC298A3BDA00389CF4348DF1486F /* EventDataDispatcher.swift in Sources */,
 				9D00E4139C19329771D21DF75F6F6D0F /* HttpClient.swift in Sources */,
+				EC94BE4123A7BC7500B1F557 /* AnalyticsAdBreak.swift in Sources */,
+				EC94BE4023A7BC7500B1F557 /* AdQuartile.swift in Sources */,
 				5883DB6074E94133C7859586E642473C /* LicenseCall.swift in Sources */,
 				B2DCEBD4D131C949824EA14940FC5235 /* LicenseCallData.swift in Sources */,
 				533E35DB2F19D726EA2E67226AC7D7F2 /* PlayerAdapter.swift in Sources */,
+				EC94BE2423A7BB4900B1F557 /* AdAdapter.swift in Sources */,
 				0EEF4A97375F15DF35B2B1D0EBED91EF /* PlayerState.swift in Sources */,
 				60318C55A210A0CFA57FA17544375C3B /* PlayerType.swift in Sources */,
+				EC94BE3223A7BBC800B1F557 /* AdModuleInformation.swift in Sources */,
 				A716A8D081DDCF6BCD684E9C51F80F53 /* SimpleEventDataDispatcher.swift in Sources */,
+				EC94BE4223A7BC7500B1F557 /* AnalyticsAd.swift in Sources */,
+				EC94BE4323A7BC7500B1F557 /* AdTagType.swift in Sources */,
 				80855EDF408360BD2A341CB1658559BA /* StateMachine.swift in Sources */,
 				9FAA9015F8964FC660D25CE42C6C6AFD /* StateMachineDelegate.swift in Sources */,
+				EC94BE4423A7BC7500B1F557 /* AdPosition.swift in Sources */,
 				6ACD3E96BD72659A587B34049CCF65F0 /* StreamType.swift in Sources */,
 				6F1BC00664F6AB451AEE0E92D31FB4E3 /* Util.swift in Sources */,
+				EC94BE2923A7BB7000B1F557 /* AdMapper.swift in Sources */,
+				EC94BE3323A7BBC800B1F557 /* AdSample.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
