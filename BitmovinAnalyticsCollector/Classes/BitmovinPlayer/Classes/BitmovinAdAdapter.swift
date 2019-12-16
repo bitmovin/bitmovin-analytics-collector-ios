@@ -11,10 +11,12 @@ public class BitmovinAdAdapter: NSObject, AdAdapter{
     
     private var bitmovinPlayer: BitmovinPlayer
     private var adAnalytics: BitmovinAdAnalytics
+    private let adBreakMapper: AdBreakMapper
     
     internal init(bitmovinPlayer: BitmovinPlayer, adAnalytics: BitmovinAdAnalytics){
         self.adAnalytics = adAnalytics;
         self.bitmovinPlayer = bitmovinPlayer;
+        self.adBreakMapper = AdBreakMapper();
         super.init()
         self.bitmovinPlayer.add(listener: self)
     }
@@ -35,7 +37,7 @@ public class BitmovinAdAdapter: NSObject, AdAdapter{
 
 extension BitmovinAdAdapter : PlayerListener {
     public func onAdManifestLoaded(_ event: AdManifestLoadedEvent) {
-        self.adAnalytics.onAdManifestLoaded()
+        self.adAnalytics.onAdManifestLoaded(adBreak: adBreakMapper.fromPlayerAdConfiguration(adConfiguration: event.adConfig), downloadTime: event.manifestDownloadTime)
     }
     
     public func onAdStarted(_ event: AdStartedEvent) {
@@ -63,7 +65,7 @@ extension BitmovinAdAdapter : PlayerListener {
     }
         
     public func onAdError(_ event: AdErrorEvent) {
-        self.adAnalytics.onAdError(code: Int(event.code), message: event.message)
+        self.adAnalytics.onAdError(adBreak: adBreakMapper.fromPlayerAdConfiguration(adConfiguration: event.adConfig), code: Int(event.code), message: event.message)
     }
 }
 

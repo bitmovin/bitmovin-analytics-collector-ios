@@ -15,6 +15,8 @@ public class BitmovinAdAnalytics{
     private var beginPlayingTimestamp: Int64? = nil
     private var activeAdSample: AdSample? = nil
     private var isPlaying = false
+    private var adManifestDownloadTimes = [String: Int64]()
+    
     private var _currentTime: Int64?
     private var currentTime: Int64? {
         get {
@@ -38,7 +40,11 @@ public class BitmovinAdAnalytics{
         self.analytics = analytics;
     }
     
-    public func onAdManifestLoaded() {
+    public func onAdManifestLoaded(adBreak: AnalyticsAdBreak, downloadTime: Int64) {
+        self.adManifestDownloadTimes[adBreak.id] = downloadTime;
+        if(adBreak.tagType == AdTagType.VMAP){
+            sendAnalyticsRequest(adBreak: adBreak);
+        }
         print("OnAdManifestLoaded")
     }
     
@@ -112,7 +118,7 @@ public class BitmovinAdAnalytics{
         completeAd(adSample: adSample, exitPosition: adSample.skipPosition)
     }
         
-    public func onAdError(code: Int?, message: String?) {
+    public func onAdError(adBreak: AnalyticsAdBreak, code: Int?, message: String?) {
         print("onAdError")
         let adSample = self.activeAdSample ?? AdSample()
         
@@ -141,7 +147,14 @@ public class BitmovinAdAnalytics{
         resetActiveAd()
     }
     
-    private func sendAnalyticsRequest(adSample: AdSample? = nil){
+    private func getAdManifestDownloadTime(adBreak: AnalyticsAdBreak?) -> Int64?{
+        if(adBreak == nil || self.adManifestDownloadTimes[adBreak!.id] != nil){
+            return nil;
+        }
+        return self.adManifestDownloadTimes[adBreak!.id];
+    }
+    
+    private func sendAnalyticsRequest(adBreak: AnalyticsAdBreak, adSample: AdSample? = nil){
         
         guard let adapter = self.analytics.adapter else {
             return
@@ -150,6 +163,7 @@ public class BitmovinAdAnalytics{
         let adEventData = AdEventData()
         
         adEventData.setEventData(eventData: adapter.createEventData())
+        adEventData.setAdBreak(adBreak: adBreak);
         if case let adSample? = adSample {
             adEventData.setAdSample(adSample: adSample)
         }
@@ -160,6 +174,7 @@ public class BitmovinAdAnalytics{
             adEventData.adModuleVersion = moduleInfo?.version
         }
         
+        adEventData.manifestDownloadTime = getAdManifestDownloadTime(adBreak: adBreak);
         adEventData.autoplay = analytics.adAdapter?.isAutoPlayEnabled()
         adEventData.playerStartuptime = 1
         adEventData.time = Date().timeIntervalSince1970Millis

@@ -124,6 +124,33 @@ class Util {
         let result = Int(round(Double(numerator!) / Double(denominator!)) * 100)
         return clamp ? min(result, 100) : result;
     }
+    
+    static func getAdPositionFromString(string: String?)-> AdPosition?{
+         if(string == nil){
+            return nil;
+        }
+        switch string {
+        case "pre":
+            return AdPosition.pre
+        case "post":
+            return AdPosition.post;
+        case "mid":
+            return AdPosition.mid;
+        default:
+            return AdPosition.mid;
+        }
+    }
+    
+    static func getAdTagTypeFromAdTag(adTag: AdTag)-> AdTagType{
+        switch adTag.type {
+        case BMPAdTagType.VAST:
+            return AdTagType.VAST;
+        case BMPAdTagType.VMAP:
+            return AdTagType.VMAP;
+        default:
+            return AdTagType.UNKNOWN;
+        }
+    }
 }
 
 extension Date {
