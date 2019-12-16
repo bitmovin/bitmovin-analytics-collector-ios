@@ -122,10 +122,13 @@ public class BitmovinAdAnalytics{
         print("onAdError")
         let adSample = self.activeAdSample ?? AdSample()
         
+        if(adSample.ad.id != nil && adBreak.ads.contains { $0.id == adSample.ad.id}){
+            adSample.errorPosition = self.currentTime
+            adSample.errorPercentage = Util.calculatePercentage(numerator: adSample.clickPosition, denominator: adSample.ad.duration, clamp: true)
+        }
+        
         adSample.errorCode = code
         adSample.errorMessage = message
-        adSample.errorPosition = self.currentTime
-        adSample.errorPercentage = Util.calculatePercentage(numerator: adSample.clickPosition, denominator: adSample.ad.duration, clamp: true)
         
         completeAd(adSample: adSample, exitPosition: adSample.errorPosition ?? 0)
     }
