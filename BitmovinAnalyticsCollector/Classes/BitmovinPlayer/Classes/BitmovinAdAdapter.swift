@@ -12,6 +12,7 @@ public class BitmovinAdAdapter: NSObject, AdAdapter{
     private var bitmovinPlayer: BitmovinPlayer
     private var adAnalytics: BitmovinAdAnalytics
     private let adBreakMapper: AdBreakMapper
+    private let adMapper: AdMapper
     
     internal init(bitmovinPlayer: BitmovinPlayer, adAnalytics: BitmovinAdAnalytics){
         self.adAnalytics = adAnalytics;
@@ -37,11 +38,15 @@ public class BitmovinAdAdapter: NSObject, AdAdapter{
 
 extension BitmovinAdAdapter : PlayerListener {
     public func onAdManifestLoaded(_ event: AdManifestLoadedEvent) {
-        self.adAnalytics.onAdManifestLoaded(adBreak: adBreakMapper.fromPlayerAdConfiguration(adConfiguration: event.adBreak), downloadTime: Int64(event.manifestDownloadTime))
+        self.adAnalytics.onAdManifestLoaded(adBreak: adBreakMapper.fromPlayerAdConfiguration(adConfiguration: event.adBreak), downloadTime: Int64(event.manifestDownloadTime * 1000))
     }
     
     public func onAdStarted(_ event: AdStartedEvent) {
-        self.adAnalytics.onAdStarted()
+        if(event.ad == nil){
+            return;
+        }
+        
+        self.adAnalytics.onAdStarted(ad: adMapper.fromPlayerAd(playerAd: event.ad!))
     }
     
     public func onAdFinished(_ event: AdFinishedEvent) {
@@ -49,7 +54,11 @@ extension BitmovinAdAdapter : PlayerListener {
     }
     
     public func onAdBreakStarted(_ event: AdBreakStartedEvent) {
-        self.adAnalytics.onAdBreakStarted()
+        if(event.adBreak == nil){
+            return;
+        }
+        
+        self.adAnalytics.onAdBreakStarted(adBreak: adBreakMapper.fromPlayerAdConfiguration(adConfiguration: event.adBreak))
     }
     
     public func onAdBreakFinished(_ event: AdBreakFinishedEvent) {

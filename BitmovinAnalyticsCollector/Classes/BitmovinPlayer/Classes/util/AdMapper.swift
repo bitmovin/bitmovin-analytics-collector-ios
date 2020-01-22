@@ -75,7 +75,7 @@ public class AdMapper{
         }
     }
     
-    func fromLinearAd(collectorAd: AnalyticsAd, linearAd:LinearAd){
+    func fromLinearAd(collectorAd: AnalyticsAd, linearAd: LinearAd){
         collectorAd.duration = linearAd.duration?.int64Value;
         collectorAd.skippable = linearAd.skippable;
         collectorAd.skippableAfter = linearAd.skippableAfter?.int64Value;

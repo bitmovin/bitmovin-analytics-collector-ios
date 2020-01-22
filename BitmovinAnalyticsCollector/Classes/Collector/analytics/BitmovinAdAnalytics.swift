@@ -56,12 +56,14 @@ public class BitmovinAdAnalytics{
         print("OnAdManifestLoaded in \(downloadTime)")
     }
     
-    public func onAdStarted(){
+    public func onAdStarted(ad: AnalyticsAd){
         print("onAdStarted")
         
         let currentTimestamp = Date().timeIntervalSince1970Millis
         
+        resetActiveAd()
         let adSample = AdSample()
+        adSample.ad = ad
         
         if case let adStartupTime? = self.adStartupTimestamp {
             adSample.adStartupTime = currentTimestamp - adStartupTime
