@@ -9,7 +9,7 @@ import Foundation
 import BitmovinPlayer
 public class AdBreakMapper {
     
-    func fromPlayerAdConfiguration(adConfiguration: AdConfiguration?) -> AnalyticsAdBreak {
+    func fromPlayerAdConfiguration(adConfiguration: AdConfig?) -> AnalyticsAdBreak {
         let collectorAdBreak = AnalyticsAdBreak(id: "notset",  ads: Array<AnalyticsAd>() );
         if(adConfiguration != nil){
             fromPlayerAdConfiguration(collectorAdBreak: collectorAdBreak, adConfiguration: adConfiguration!);
@@ -18,7 +18,7 @@ public class AdBreakMapper {
         return collectorAdBreak;
     }
     
-    func fromPlayerAdConfiguration(collectorAdBreak: AnalyticsAdBreak, adConfiguration: AdConfiguration){
+    func fromPlayerAdConfiguration(collectorAdBreak: AnalyticsAdBreak, adConfiguration: AdConfig){
         
         collectorAdBreak.replaceContentDuration = adConfiguration.replaceContentDuration as? Int64;
         
@@ -31,7 +31,7 @@ public class AdBreakMapper {
     func fromPlayerAdBreak(collectorAdBreak: AnalyticsAdBreak, playerAdBreak:AdBreak){
         
         var ads = Array<AnalyticsAd>();
-        if(playerAdBreak.ads != nil && !playerAdBreak.ads.isEmpty){
+        if(playerAdBreak.ads != nil && playerAdBreak.ads.count != 0){
             for ad in playerAdBreak.ads {
                 ads.append(ad as! AnalyticsAd);
             }
@@ -48,9 +48,9 @@ public class AdBreakMapper {
     
     func fromImaAdBreak(collectorAdBreak: AnalyticsAdBreak, imaAdBreak: ImaAdBreak){
         collectorAdBreak.position = Util.getAdPositionFromString(string: imaAdBreak.position);
-        collectorAdBreak.fallbackIndex = Int(truncating: imaAdBreak.currentFallbackIndex ?? 0);
+//        collectorAdBreak.fallbackIndex = Int(truncating: imaAdBreak.currentFallbackIndex ?? 0);
         collectorAdBreak.tagType = Util.getAdTagTypeFromAdTag(adTag: imaAdBreak.tag);
-        collectorAdBreak.tagUrl = imaAdBreak.tag.url;
+        collectorAdBreak.tagUrl = imaAdBreak.tag.url.absoluteString;
     }
     
 }

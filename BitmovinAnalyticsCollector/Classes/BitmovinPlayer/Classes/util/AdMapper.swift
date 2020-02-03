@@ -18,12 +18,12 @@ public class AdMapper{
         collectorAd.width = Int(playerAd.width)
         collectorAd.height = Int(playerAd.height)
         collectorAd.id = playerAd.identifier
-        collectorAd.mediaFileUrl = playerAd.mediaFileUrl
+        collectorAd.mediaFileUrl = playerAd.mediaFileUrl?.absoluteString
         if case let data? = playerAd.data {
-            collectorAd.minBitrate = data.minBitrate == nil ? nil : Int(data.minBitrate!.pointee)
-            collectorAd.maxBitrate = data.minBitrate == nil ? nil : Int(data.maxBitrate!.pointee)
+            collectorAd.minBitrate = data.minBitrate == -1 ? nil : Int(data.minBitrate)
+            collectorAd.maxBitrate = data.minBitrate == -1 ? nil : Int(data.maxBitrate)
             collectorAd.mimeType = data.mimeType
-            collectorAd.bitrate = data.minBitrate == nil ? nil : Int(data.bitrate!.pointee)
+            collectorAd.bitrate = data.minBitrate == -1 ? nil : Int(data.bitrate)
             
             if(playerAd.data is VastAdData){
                 fromVastAdData(collectorAd: collectorAd, vastData: playerAd.data as! VastAdData)
@@ -59,25 +59,24 @@ public class AdMapper{
             collectorAd.universalAdIdValue = creative.universalAdId?.value
         }
         
-        if case let duration? = vastData.minSuggestedDuration{
-            collectorAd.minSuggestedDuration = duration.int64Value * 1000
-        }
+        collectorAd.minSuggestedDuration = Int64(vastData.minSuggestedDuration * Double.init(1000))
+        
         
         if case let pricing? = vastData.pricing{
             collectorAd.pricingCurrency = pricing.currency
             collectorAd.pricingModel = pricing.model
-            collectorAd.pricingValue = pricing.value?.int64Value
+            collectorAd.pricingValue = Int64(pricing.value)
         }
         
         if case let survey? = vastData.survey{
             collectorAd.surveyType = survey.type
-            collectorAd.surveyUrl = survey.uri
+            collectorAd.surveyUrl = survey.uri.absoluteString
         }
     }
     
     func fromLinearAd(collectorAd: AnalyticsAd, linearAd: LinearAd){
-        collectorAd.duration = linearAd.duration?.int64Value;
-        collectorAd.skippable = linearAd.skippable;
-        collectorAd.skippableAfter = linearAd.skippableAfter?.int64Value;
+        collectorAd.duration = Int64(linearAd.duration);
+        collectorAd.skippable = false;
+        collectorAd.skippableAfter = Int64(linearAd.skippableAfter);
     }
 }

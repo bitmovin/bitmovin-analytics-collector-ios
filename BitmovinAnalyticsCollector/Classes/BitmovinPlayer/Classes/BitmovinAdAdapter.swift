@@ -39,7 +39,7 @@ public class BitmovinAdAdapter: NSObject, AdAdapter{
 
 extension BitmovinAdAdapter : PlayerListener {
     public func onAdManifestLoaded(_ event: AdManifestLoadedEvent) {
-        self.adAnalytics.onAdManifestLoaded(adBreak: adBreakMapper.fromPlayerAdConfiguration(adConfiguration: event.adBreak), downloadTime: Int64(event.manifestDownloadTime * 1000))
+        self.adAnalytics.onAdManifestLoaded(adBreak: adBreakMapper.fromPlayerAdConfiguration(adConfiguration: event.adBreak), downloadTime: Int64(event.downloadTime * 1000))
     }
     
     public func onAdStarted(_ event: AdStartedEvent) {
