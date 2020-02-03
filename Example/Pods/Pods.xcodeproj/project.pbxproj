@@ -39,7 +39,7 @@
 /* Begin PBXBuildFile section */
 		0667DE2731CFCCF81825EA5FD8C62B8F /* LicenseCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A1AB34A7D05A7598EF34DDA18238DB /* LicenseCall.swift */; };
 		090DEEFFEED66E0E0F62FBE742460C9E /* BitmovinPlayerCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979AFF433BCB3019CF3A3AA3EA936C5F /* BitmovinPlayerCollector.swift */; };
-		0B345CD3E2089A080C238CF94BD34800 /* AdQuartile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEAEF645310BA5D0755E08685BEC6E4 /* AdQuartile.swift */; };
+		0B345CD3E2089A080C238CF94BD34800 /* AnalyticsAdQuartile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEAEF645310BA5D0755E08685BEC6E4 /* AnalyticsAdQuartile.swift */; };
 		0CE5EBD624A544AAB09B642F56E23327 /* AdModuleInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952825C69C6A6C311E2D013DBE7B8E0 /* AdModuleInformation.swift */; };
 		0F12E8C65A0F03EE281E9B0630BE06F8 /* AdEventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B12230F320697E99500001ECEE972CF /* AdEventData.swift */; };
 		124233D0431BFC4AFF9DC847714E641C /* StateMachineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FB4E4E91B5BF8B85D75A3D4294D083 /* StateMachineDelegate.swift */; };
@@ -94,7 +94,7 @@
 		A948DF51DBB633D515CF0E5CBF3A2A9F /* Pods-BitmovinAnalyticsCollector_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 66BC2C77B2F61E9E83254185401BFB43 /* Pods-BitmovinAnalyticsCollector_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA6FBB713209ADF230230AC6A15E5544 /* AdPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4345E4775BB3DC66472B51DF53DF4E14 /* AdPosition.swift */; };
 		B318B44EBBDA531271F39E1F3F1F4A89 /* SimpleEventDataDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397EE276B6D5FDE2480B5E32A3064F3C /* SimpleEventDataDispatcher.swift */; };
-		B6470D8BF89C4C3C4F2AB226C81D6284 /* AdQuartile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEAEF645310BA5D0755E08685BEC6E4 /* AdQuartile.swift */; };
+		B6470D8BF89C4C3C4F2AB226C81D6284 /* AnalyticsAdQuartile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEAEF645310BA5D0755E08685BEC6E4 /* AnalyticsAdQuartile.swift */; };
 		B94C394962FF89527DEE37010CADE454 /* BitmovinAnalyticsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A2632F5A4A2981980542FE9F025B9 /* BitmovinAnalyticsConfig.swift */; };
 		B9A81C181EC4ADC0F874E804927100E2 /* PlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741DB639E940EBD37F317BC334DEC0CE /* PlayerAdapter.swift */; };
 		BE2BCCFA3F7A1FD62182AEB233229F02 /* AnalyticsAdBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E82DD26546D5275CDFF5D70EB1AAD5 /* AnalyticsAdBreak.swift */; };
@@ -190,7 +190,7 @@
 		397EE276B6D5FDE2480B5E32A3064F3C /* SimpleEventDataDispatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SimpleEventDataDispatcher.swift; sourceTree = "<group>"; };
 		3A3F9EEF01CC5DF1C8AC058445026B4E /* Pods-BitmovinAnalyticsCollector_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BitmovinAnalyticsCollector_Example-frameworks.sh"; sourceTree = "<group>"; };
 		3C3CE9B0ED2C83C00B5BC86772B9459E /* BitmovinAnalyticsCollector-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BitmovinAnalyticsCollector-iOS-prefix.pch"; sourceTree = "<group>"; };
-		3EEAEF645310BA5D0755E08685BEC6E4 /* AdQuartile.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AdQuartile.swift; sourceTree = "<group>"; };
+		3EEAEF645310BA5D0755E08685BEC6E4 /* AnalyticsAdQuartile.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnalyticsAdQuartile.swift; sourceTree = "<group>"; };
 		4345E4775BB3DC66472B51DF53DF4E14 /* AdPosition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AdPosition.swift; sourceTree = "<group>"; };
 		448A2632F5A4A2981980542FE9F025B9 /* BitmovinAnalyticsConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BitmovinAnalyticsConfig.swift; sourceTree = "<group>"; };
 		4AC878E620D46BB2C1A021891F034B86 /* BitmovinAnalyticsCollector-tvOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "BitmovinAnalyticsCollector-tvOS-prefix.pch"; path = "../BitmovinAnalyticsCollector-tvOS/BitmovinAnalyticsCollector-tvOS-prefix.pch"; sourceTree = "<group>"; };
@@ -419,7 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				4345E4775BB3DC66472B51DF53DF4E14 /* AdPosition.swift */,
-				3EEAEF645310BA5D0755E08685BEC6E4 /* AdQuartile.swift */,
+				3EEAEF645310BA5D0755E08685BEC6E4 /* AnalyticsAdQuartile.swift */,
 				6FD9C37787BC33E6283E4B6662119EA7 /* AdTagType.swift */,
 				762FBF4FAC05AA9DED1DC7601B655B0E /* AnalyticsAd.swift */,
 				52E82DD26546D5275CDFF5D70EB1AAD5 /* AnalyticsAdBreak.swift */,
@@ -824,7 +824,7 @@
 				7520F6DBD92FBB3D535C2F2904D30E27 /* AdMapper.swift in Sources */,
 				A5D015978357C2BEEA7C3AF08C5C347B /* AdModuleInformation.swift in Sources */,
 				9904C84B0B8D12C9F1621B0921A4B3F5 /* AdPosition.swift in Sources */,
-				0B345CD3E2089A080C238CF94BD34800 /* AdQuartile.swift in Sources */,
+				0B345CD3E2089A080C238CF94BD34800 /* AnalyticsAdQuartile.swift in Sources */,
 				E718DC62694885A39DAF15598DF39AB8 /* AdSample.swift in Sources */,
 				1536E472FB626B473B92CE842104246F /* AdTagType.swift in Sources */,
 				C843E75AB2D82AAC74CFA9F0295B1DD8 /* AnalyticsAd.swift in Sources */,
@@ -866,7 +866,7 @@
 				38157771DE3219AB45D79E108C289E80 /* AdMapper.swift in Sources */,
 				0CE5EBD624A544AAB09B642F56E23327 /* AdModuleInformation.swift in Sources */,
 				AA6FBB713209ADF230230AC6A15E5544 /* AdPosition.swift in Sources */,
-				B6470D8BF89C4C3C4F2AB226C81D6284 /* AdQuartile.swift in Sources */,
+				B6470D8BF89C4C3C4F2AB226C81D6284 /* AnalyticsAdQuartile.swift in Sources */,
 				EBD1A95DC351DC3FB1DE2550FE425C5F /* AdSample.swift in Sources */,
 				A02A07FA97306965AE20256CC1D5824E /* AdTagType.swift in Sources */,
 				93E34B8B46E7EDFB11CD8D2105DBD19A /* AnalyticsAd.swift in Sources */,

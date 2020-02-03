@@ -152,14 +152,16 @@ class Util {
         }
     }
     
-    static func getAdQuartileFromPlayerAdQuartile(adQuartile: BMPAdQuartile) -> AdQuartile{
+    static func getAdQuartileFromPlayerAdQuartile(adQuartile: AdQuartile) -> AnalyticsAdQuartile{
         switch adQuartile {
-        case BMPAdQuartile.firstQuartile:
-            return AdQuartile.FIRST_QUARTILE;
-        case BMPAdQuartile.midpoint:
-            return AdQuartile.MIDPOINT;
-        case BMPAdQuartile.thirdQuartile:
-            return AdQuartile.THIRD_QUARTILE;
+        case AdQuartile.firstQuartile:
+            return AnalyticsAdQuartile.FIRST_QUARTILE;
+        case AdQuartile.midpoint:
+            return AnalyticsAdQuartile.MIDPOINT;
+        case AdQuartile.thirdQuartile:
+            return AnalyticsAdQuartile.THIRD_QUARTILE;
+        @unknown default:
+            fatalError()
         }
     }
 }

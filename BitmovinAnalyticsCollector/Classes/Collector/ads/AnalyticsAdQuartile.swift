@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public enum AdQuartile{
+public enum AnalyticsAdQuartile{
     case FIRST_QUARTILE
     case MIDPOINT
     case THIRD_QUARTILE

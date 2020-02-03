@@ -151,19 +151,19 @@ public class BitmovinAdAnalytics{
         completeAd(adBreak: adBreak, adSample: adSample, exitPosition: adSample.errorPosition ?? 0)
     }
     
-    public func onAdQuartile(quartile: AdQuartile){
+    public func onAdQuartile(quartile: AnalyticsAdQuartile){
         guard self.activeAdSample != nil else {
             return;
         }
         
         switch quartile {
-            case AdQuartile.FIRST_QUARTILE:
+            case AnalyticsAdQuartile.FIRST_QUARTILE:
                 self.activeAdSample!.quartile1 = 1;
 
-            case AdQuartile.MIDPOINT:
+            case AnalyticsAdQuartile.MIDPOINT:
                 self.activeAdSample!.midpoint = 1;
 
-            case AdQuartile.THIRD_QUARTILE:
+            case AnalyticsAdQuartile.THIRD_QUARTILE:
                 self.activeAdSample!.quartile3 = 1;
         }
     }
