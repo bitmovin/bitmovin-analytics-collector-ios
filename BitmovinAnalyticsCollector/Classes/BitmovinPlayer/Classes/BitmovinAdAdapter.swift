@@ -18,6 +18,7 @@ public class BitmovinAdAdapter: NSObject, AdAdapter{
         self.adAnalytics = adAnalytics;
         self.bitmovinPlayer = bitmovinPlayer;
         self.adBreakMapper = AdBreakMapper();
+        self.adMapper = AdMapper();
         super.init()
         self.bitmovinPlayer.add(listener: self)
     }
