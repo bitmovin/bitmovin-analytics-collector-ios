@@ -43,11 +43,7 @@ extension BitmovinAdAdapter : PlayerListener {
     }
     
     public func onAdStarted(_ event: AdStartedEvent) {
-        if(event.ad == nil){
-            return;
-        }
-        
-        self.adAnalytics.onAdStarted(ad: adMapper.fromPlayerAd(playerAd: event.ad!))
+        self.adAnalytics.onAdStarted(ad: adMapper.fromPlayerAd(playerAd: event.ad))
     }
     
     public func onAdFinished(_ event: AdFinishedEvent) {
@@ -55,10 +51,6 @@ extension BitmovinAdAdapter : PlayerListener {
     }
     
     public func onAdBreakStarted(_ event: AdBreakStartedEvent) {
-        if(event.adBreak == nil){
-            return;
-        }
-        
         self.adAnalytics.onAdBreakStarted(adBreak: adBreakMapper.fromPlayerAdConfiguration(adConfiguration: event.adBreak))
     }
     
