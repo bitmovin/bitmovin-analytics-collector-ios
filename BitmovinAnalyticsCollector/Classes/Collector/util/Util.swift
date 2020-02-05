@@ -121,7 +121,7 @@ class Util {
         if (denominator == nil || denominator == 0 || numerator == nil) {
             return nil;
         }
-        let result = Int(round(Double(numerator!) / Double(denominator!)) * 100)
+        let result = Int(Double(numerator!) / Double(denominator!) * 100)
         return clamp ? min(result, 100) : result;
     }
     
