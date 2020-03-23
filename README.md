@@ -58,12 +58,12 @@ it, simply add the following line to your Podfile:
 
 ### Bitmovin Player
 
-The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` version `>= 2.35.0`.
+The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` version `>= 2.40.0`.
 
 ```ruby
   pod 'BitmovinAnalyticsCollector/Core', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.10.1'
   pod 'BitmovinAnalyticsCollector/BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.10.1'
-  pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.35.0'
+  pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.40.0'
 
   use_frameworks!
 ```
@@ -81,7 +81,7 @@ To include all available collectors, add the following lines (the dependency on 
 
 ```ruby
 pod 'BitmovinAnalyticsCollector', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.10.1'
-pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.35.0'
+pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.40.0'
 
 use_frameworks!
 ```
