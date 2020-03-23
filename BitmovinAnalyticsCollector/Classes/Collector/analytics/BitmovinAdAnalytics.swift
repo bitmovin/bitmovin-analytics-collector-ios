@@ -1,12 +1,6 @@
-//
-//  BitmovinAdAnalytics.swift
-//  BitmovinAnalyticsCollector-iOS
-//
-//  Created by Thomas Sabe on 03.12.19.
-//
-
 import Foundation
-public class BitmovinAdAnalytics{
+
+public class BitmovinAdAnalytics {
     
     private var analytics: BitmovinAnalyticsInternal
     
@@ -21,14 +15,13 @@ public class BitmovinAdAnalytics{
     private var _currentTime: Int64?
     private var currentTime: Int64? {
         get {
-            if(self.isPlaying){
-                if(_currentTime == nil || self.beginPlayingTimestamp == nil){
+            if (self.isPlaying) {
+                if (_currentTime == nil || self.beginPlayingTimestamp == nil) {
                     return nil
                 } else {
                     return _currentTime! + Date().timeIntervalSince1970Millis - self.beginPlayingTimestamp!
                 }
-            }
-            else {
+            } else {
                 return _currentTime
             }
         }
@@ -56,7 +49,7 @@ public class BitmovinAdAnalytics{
         print("OnAdManifestLoaded in \(downloadTime)")
     }
     
-    public func onAdStarted(ad: AnalyticsAd){
+    public func onAdStarted(ad: AnalyticsAd) {
         print("onAdStarted")
         
         let currentTimestamp = Date().timeIntervalSince1970Millis
@@ -144,7 +137,7 @@ public class BitmovinAdAnalytics{
         print("onAdError")
         let adSample = self.activeAdSample ?? AdSample()
         
-        if(adSample.ad.id != nil && adBreak.ads.contains { $0.id == adSample.ad.id}){
+        if (adSample.ad.id != nil && adBreak.ads.contains { $0.id == adSample.ad.id }) {
             adSample.errorPosition = self.currentTime
             if let duration = adSample.ad.duration {
                 adSample.errorPercentage = Util.calculatePercentage(numerator: adSample.errorPosition, denominator: duration * 1000, clamp: true)
@@ -191,15 +184,14 @@ public class BitmovinAdAnalytics{
         resetActiveAd()
     }
     
-    private func getAdManifestDownloadTime(adBreak: AnalyticsAdBreak?) -> Int64?{
-        if(adBreak == nil || self.adManifestDownloadTimes[adBreak!.id] == nil){
+    private func getAdManifestDownloadTime(adBreak: AnalyticsAdBreak?) -> Int64? {
+        if(adBreak == nil || self.adManifestDownloadTimes[adBreak!.id] == nil) {
             return nil;
         }
         return self.adManifestDownloadTimes[adBreak!.id];
     }
     
-    private func sendAnalyticsRequest(adBreak: AnalyticsAdBreak, adSample: AdSample? = nil){
-        
+    private func sendAnalyticsRequest(adBreak: AnalyticsAdBreak, adSample: AdSample? = nil) {
         guard let adapter = self.analytics.adapter else {
             return
         }
@@ -208,12 +200,12 @@ public class BitmovinAdAnalytics{
         
         adEventData.setEventData(eventData: adapter.createEventData())
         adEventData.setAdBreak(adBreak: adBreak);
-        if case let adSample? = adSample {
+        if let adSample = adSample {
             adEventData.setAdSample(adSample: adSample)
         }
         
         let moduleInfo = self.analytics.adAdapter?.getModuleInformation()
-        if(moduleInfo != nil){
+        if(moduleInfo != nil) {
             adEventData.adModule = moduleInfo?.name
             adEventData.adModuleVersion = moduleInfo?.version
         }

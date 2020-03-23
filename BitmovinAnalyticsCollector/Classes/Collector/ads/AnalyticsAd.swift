@@ -1,11 +1,5 @@
-//
-//  Ad.swift
-//  BitmovinAnalyticsCollector-iOS
-//
-//  Created by Thomas Sabe on 03.12.19.
-//
-
 import Foundation
+
 public class AnalyticsAd {
     var isLinear: Bool = false
     var width: Int = 0

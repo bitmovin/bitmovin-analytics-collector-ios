@@ -1,20 +1,13 @@
-//
-//  BitmovinAdAdapter.swift
-//  Pods
-//
-//  Created by Thomas Sabe on 03.12.19.
-//
-
 import BitmovinPlayer
 import Foundation
-public class BitmovinAdAdapter: NSObject, AdAdapter{
-    
+
+public class BitmovinAdAdapter : NSObject, AdAdapter {
     private var bitmovinPlayer: BitmovinPlayer
     private var adAnalytics: BitmovinAdAnalytics
     private let adBreakMapper: AdBreakMapper
     private let adMapper: AdMapper
     
-    internal init(bitmovinPlayer: BitmovinPlayer, adAnalytics: BitmovinAdAnalytics){
+    internal init(bitmovinPlayer: BitmovinPlayer, adAnalytics: BitmovinAdAnalytics) {
         self.adAnalytics = adAnalytics;
         self.bitmovinPlayer = bitmovinPlayer;
         self.adBreakMapper = AdBreakMapper();
@@ -27,12 +20,12 @@ public class BitmovinAdAdapter: NSObject, AdAdapter{
         self.bitmovinPlayer.remove(listener: self)
     }
     
-    func getModuleInformation()-> AdModuleInformation{
+    func getModuleInformation() -> AdModuleInformation {
         let playerVersion = Util.playerVersion() ?? ""
-        return AdModuleInformation(name: "DefaultAdvertisingService", version: playerVersion)
+        return AdModuleInformation(name: "BMPDefaultAdvertisingService", version: playerVersion)
     }
     
-    func isAutoPlayEnabled() -> Bool{
+    func isAutoPlayEnabled() -> Bool {
         self.bitmovinPlayer.config.playbackConfiguration.isAutoplayEnabled
     }
 }

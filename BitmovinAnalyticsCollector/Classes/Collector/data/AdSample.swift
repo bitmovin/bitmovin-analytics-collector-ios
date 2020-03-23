@@ -1,12 +1,6 @@
-//
-//  AdSample.swift
-//  Pods
-//
-//  Created by Thomas Sabe on 03.12.19.
-//
-
 import Foundation
-public class AdSample{
+
+public class AdSample {
     var adStartupTime: Int64?
     var clicked: Int = 0
     var clickPosition: Int64?

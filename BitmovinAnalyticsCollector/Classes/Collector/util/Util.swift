@@ -41,7 +41,7 @@ class Util {
         return Bundle(for: self).infoDictionary?["CFBundleShortVersionString"] as? String
     }
     
-    static func playerVersion() -> String?{
+    static func playerVersion() -> String? {
         return Bundle(for: BitmovinPlayer.self).object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
     }
 
