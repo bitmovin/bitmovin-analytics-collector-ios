@@ -58,7 +58,7 @@ public class BitmovinAdAnalytics {
         let adSample = AdSample()
         adSample.ad = ad
         
-        if case let adStartupTime? = self.adStartupTimestamp {
+        if let adStartupTime = self.adStartupTimestamp {
             adSample.adStartupTime = currentTimestamp - adStartupTime
         }
         

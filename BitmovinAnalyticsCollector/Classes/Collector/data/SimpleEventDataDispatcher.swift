@@ -23,19 +23,17 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
         licenseCall.authenticate { [weak self] success in
             if success {
                 self?.enabled = true
-                guard let events = self?.events.enumerated().reversed() else {
-                    return
+                if let events = self?.events.enumerated().reversed() {
+                    for (index, eventData) in events {
+                        self?.httpClient.post(urlString: self!.analyticsBackendUrl, json: eventData.jsonString(), completionHandler: nil)
+                        self?.events.remove(at: index)
+                    }
                 }
-                guard let adEvents = self?.adEvents.enumerated().reversed() else {
-                    return
-                }
-                for (index, eventData) in events {
-                    self?.httpClient.post(urlString: self!.analyticsBackendUrl, json: eventData.jsonString(), completionHandler: nil)
-                    self?.events.remove(at: index)
-                }
-                for (index, adEventData) in adEvents {
-                    self?.httpClient.post(urlString: self!.adAnalyticsBackendUrl, json: Util.toJson(object: adEventData), completionHandler: nil)
-                    self?.adEvents.remove(at: index)
+                if let adEvents = self?.adEvents.enumerated().reversed() {
+                    for (index, adEventData) in adEvents {
+                        self?.httpClient.post(urlString: self!.adAnalyticsBackendUrl, json: Util.toJson(object: adEventData), completionHandler: nil)
+                        self?.adEvents.remove(at: index)
+                    }
                 }
             } else {
                 self?.enabled = false

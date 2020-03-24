@@ -17,7 +17,7 @@ public class BitmovinAdAdapter : NSObject, AdAdapter {
     }
     
     func getModuleInformation() -> AdModuleInformation {
-        let playerVersion = BitmovinPlayerUtil.playerVersion() ?? ""
+        let playerVersion = BitmovinPlayerUtil.playerVersion()
         return AdModuleInformation(name: "BMPDefaultAdvertisingService", version: playerVersion)
     }
     
