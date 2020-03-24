@@ -4,14 +4,10 @@ import Foundation
 public class BitmovinAdAdapter : NSObject, AdAdapter {
     private var bitmovinPlayer: BitmovinPlayer
     private var adAnalytics: BitmovinAdAnalytics
-    private let adBreakMapper: AdBreakMapper
-    private let adMapper: AdMapper
     
     internal init(bitmovinPlayer: BitmovinPlayer, adAnalytics: BitmovinAdAnalytics) {
         self.adAnalytics = adAnalytics;
         self.bitmovinPlayer = bitmovinPlayer;
-        self.adBreakMapper = AdBreakMapper();
-        self.adMapper = AdMapper();
         super.init()
         self.bitmovinPlayer.add(listener: self)
     }
@@ -32,11 +28,11 @@ public class BitmovinAdAdapter : NSObject, AdAdapter {
 
 extension BitmovinAdAdapter : PlayerListener {
     public func onAdManifestLoaded(_ event: AdManifestLoadedEvent) {
-        self.adAnalytics.onAdManifestLoaded(adBreak: adBreakMapper.fromPlayerAdConfiguration(adConfiguration: event.adBreak), downloadTime: Int64(event.downloadTime * 1000))
+        self.adAnalytics.onAdManifestLoaded(adBreak: AdModelMapper.fromPlayerAdConfiguration(adConfiguration: event.adBreak), downloadTime: Int64(event.downloadTime * 1000))
     }
     
     public func onAdStarted(_ event: AdStartedEvent) {
-        self.adAnalytics.onAdStarted(ad: adMapper.fromPlayerAd(playerAd: event.ad))
+        self.adAnalytics.onAdStarted(ad: AdModelMapper.fromPlayerAd(playerAd: event.ad))
     }
     
     public func onAdFinished(_ event: AdFinishedEvent) {
@@ -44,7 +40,7 @@ extension BitmovinAdAdapter : PlayerListener {
     }
     
     public func onAdBreakStarted(_ event: AdBreakStartedEvent) {
-        self.adAnalytics.onAdBreakStarted(adBreak: adBreakMapper.fromPlayerAdConfiguration(adConfiguration: event.adBreak))
+        self.adAnalytics.onAdBreakStarted(adBreak: AdModelMapper.fromPlayerAdConfiguration(adConfiguration: event.adBreak))
     }
     
     public func onAdBreakFinished(_ event: AdBreakFinishedEvent) {
@@ -60,7 +56,7 @@ extension BitmovinAdAdapter : PlayerListener {
     }
         
     public func onAdError(_ event: AdErrorEvent) {
-        self.adAnalytics.onAdError(adBreak: adBreakMapper.fromPlayerAdConfiguration(adConfiguration: event.adConfig), code: Int(event.code), message: event.message)
+        self.adAnalytics.onAdError(adBreak: AdModelMapper.fromPlayerAdConfiguration(adConfiguration: event.adConfig), code: Int(event.code), message: event.message)
     }
     
     public func onAdQuartile(_ event: AdQuartileEvent) {

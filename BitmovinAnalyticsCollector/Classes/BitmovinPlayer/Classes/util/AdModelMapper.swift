@@ -1,19 +1,67 @@
 //
-//  AdMapper.swift
+//  AdBreakMapper.swift
 //  BitmovinAnalyticsCollector-iOS
 //
-//  Created by Thomas Sabe on 16.12.19.
+//  Created by Thomas Sabe on 13.12.19.
 //
 
 import Foundation
 import BitmovinPlayer
-public class AdMapper{
+public class AdModelMapper {
     
-    func fromPlayerAd(playerAd: Ad) -> AnalyticsAd{
+    // AdBreak Mapper
+    static func fromPlayerAdConfiguration(adConfiguration: AdConfig?) -> AnalyticsAdBreak {
+        let collectorAdBreak = AnalyticsAdBreak(id: "notset",  ads: Array<AnalyticsAd>() );
+        if(adConfiguration != nil){
+            fromPlayerAdConfiguration(collectorAdBreak: collectorAdBreak, adConfiguration: adConfiguration!);
+        }
+        
+        return collectorAdBreak;
+    }
+    
+    static func fromPlayerAdConfiguration(collectorAdBreak: AnalyticsAdBreak, adConfiguration: AdConfig){
+        
+        if (!adConfiguration.replaceContentDuration.isNaN) {
+            collectorAdBreak.replaceContentDuration = Int64(adConfiguration.replaceContentDuration * 1000)
+        }
+        
+        
+        if(adConfiguration is AdBreak) {
+            fromPlayerAdBreak(collectorAdBreak: collectorAdBreak, playerAdBreak:adConfiguration as! AdBreak);
+        }
+    }
+    
+    static func fromPlayerAdBreak(collectorAdBreak: AnalyticsAdBreak, playerAdBreak:AdBreak){
+        
+        var ads = Array<AnalyticsAd>();
+        if(playerAdBreak.ads != nil && playerAdBreak.ads.count != 0){
+            for ad in playerAdBreak.ads {
+                ads.append(ad as! AnalyticsAd);
+            }
+        }
+        
+        collectorAdBreak.id = playerAdBreak.identifier;
+        collectorAdBreak.ads = ads;
+        
+        collectorAdBreak.scheduleTime = Int64(playerAdBreak.scheduleTime);
+        if(playerAdBreak is ImaAdBreak){
+            fromImaAdBreak(collectorAdBreak: collectorAdBreak, imaAdBreak:  playerAdBreak as! ImaAdBreak);
+        }
+    }
+    
+    static func fromImaAdBreak(collectorAdBreak: AnalyticsAdBreak, imaAdBreak: ImaAdBreak){
+        collectorAdBreak.position = BitmovinPlayerUtil.getAdPositionFromString(string: imaAdBreak.position);
+//        collectorAdBreak.fallbackIndex = Int(truncating: imaAdBreak.currentFallbackIndex ?? 0);
+        collectorAdBreak.tagType = BitmovinPlayerUtil.getAdTagTypeFromAdTag(adTag: imaAdBreak.tag);
+        collectorAdBreak.tagUrl = imaAdBreak.tag.url.absoluteString;
+    }
+    
+    // Ad Mapper Methods
+    static func fromPlayerAd(playerAd: Ad) -> AnalyticsAd{
         return fromPlayerAd(collectorAd: AnalyticsAd(), playerAd: playerAd);
     }
     
-    func fromPlayerAd(collectorAd: AnalyticsAd, playerAd: Ad) -> AnalyticsAd{
+    static func fromPlayerAd(collectorAd: AnalyticsAd, playerAd: Ad) -> AnalyticsAd{
         collectorAd.isLinear = playerAd.isLinear
         collectorAd.width = Int(playerAd.width)
         collectorAd.height = Int(playerAd.height)
@@ -43,7 +91,7 @@ public class AdMapper{
         return collectorAd
     }
     
-    func fromVastAdData(collectorAd:AnalyticsAd, vastData: VastAdData){
+    static func fromVastAdData(collectorAd:AnalyticsAd, vastData: VastAdData){
         collectorAd.title = vastData.adTitle
         collectorAd.adSystemName = vastData.adSystem?.name
         collectorAd.adSystemVersion = vastData.adSystem?.version
@@ -76,7 +124,7 @@ public class AdMapper{
         }
     }
     
-    func fromLinearAd(collectorAd: AnalyticsAd, linearAd: LinearAd){
+    static func fromLinearAd(collectorAd: AnalyticsAd, linearAd: LinearAd){
         collectorAd.duration = Int64(linearAd.duration);
         collectorAd.skippable = false;
         collectorAd.skippableAfter = Int64(linearAd.skippableAfter);
