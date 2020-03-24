@@ -111,7 +111,7 @@ public class BitmovinAdAnalytics {
         adSample.clicked = 1
         adSample.clickPosition = self.currentTime
         if let duration = adSample.ad.duration {
-            adSample.clickPercentage = Util.calculatePercentage(numerator: adSample.clickPosition, denominator: duration * 1000, clamp: true)
+            adSample.clickPercentage = Util.calculatePercentage(numerator: adSample.clickPosition, denominator: duration, clamp: true)
         }
     }
     
@@ -127,7 +127,7 @@ public class BitmovinAdAnalytics {
         adSample.skipped = 1
         adSample.skipPosition = self.currentTime
         if let duration = adSample.ad.duration {
-            adSample.skipPercentage = Util.calculatePercentage(numerator: adSample.skipPosition, denominator: duration * 1000, clamp: true)
+            adSample.skipPercentage = Util.calculatePercentage(numerator: adSample.skipPosition, denominator: duration, clamp: true)
         }
         
         completeAd(adBreak: adBreak, adSample: adSample, exitPosition: adSample.skipPosition)
@@ -140,7 +140,7 @@ public class BitmovinAdAnalytics {
         if (adSample.ad.id != nil && adBreak.ads.contains { $0.id == adSample.ad.id }) {
             adSample.errorPosition = self.currentTime
             if let duration = adSample.ad.duration {
-                adSample.errorPercentage = Util.calculatePercentage(numerator: adSample.errorPosition, denominator: duration * 1000, clamp: true)
+                adSample.errorPercentage = Util.calculatePercentage(numerator: adSample.errorPosition, denominator: duration, clamp: true)
             }
         }
         

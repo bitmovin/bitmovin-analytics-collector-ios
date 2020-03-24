@@ -15,9 +15,8 @@ public class AdModelMapper {
     static func fromPlayerAdConfiguration(collectorAdBreak: AnalyticsAdBreak, adConfiguration: AdConfig) {
         
         if (!adConfiguration.replaceContentDuration.isNaN) {
-            collectorAdBreak.replaceContentDuration = Int64(adConfiguration.replaceContentDuration * 1000)
+            collectorAdBreak.replaceContentDuration = Int64(adConfiguration.replaceContentDuration) * 1000
         }
-        
         
         if (adConfiguration is AdBreak) {
             fromPlayerAdBreak(collectorAdBreak: collectorAdBreak, playerAdBreak:adConfiguration as! AdBreak);
@@ -27,16 +26,16 @@ public class AdModelMapper {
     static func fromPlayerAdBreak(collectorAdBreak: AnalyticsAdBreak, playerAdBreak:AdBreak) {
         
         var ads = Array<AnalyticsAd>();
-        if (playerAdBreak.ads != nil && playerAdBreak.ads.count != 0) {
-            for ad in playerAdBreak.ads {
-                ads.append(ad as! AnalyticsAd);
-            }
+        for ad in playerAdBreak.ads {
+            ads.append(fromPlayerAd(playerAd:ad));
         }
         
         collectorAdBreak.id = playerAdBreak.identifier;
         collectorAdBreak.ads = ads;
         
-        collectorAdBreak.scheduleTime = Int64(playerAdBreak.scheduleTime);
+        if (!playerAdBreak.scheduleTime.isNaN) {
+            collectorAdBreak.scheduleTime = Int64(playerAdBreak.scheduleTime) * 1000;
+        }
         if (playerAdBreak is ImaAdBreak) {
             fromImaAdBreak(collectorAdBreak: collectorAdBreak, imaAdBreak:  playerAdBreak as! ImaAdBreak);
         }
@@ -62,7 +61,7 @@ public class AdModelMapper {
         collectorAd.mediaFileUrl = playerAd.mediaFileUrl?.absoluteString
         if case let data? = playerAd.data {
             if (data.minBitrate != -1) {
-            collectorAd.minBitrate = Int(data.minBitrate)
+                collectorAd.minBitrate = Int(data.minBitrate)
             }
             collectorAd.maxBitrate = data.minBitrate == -1 ? nil : Int(data.maxBitrate)
             collectorAd.mimeType = data.mimeType
@@ -102,8 +101,9 @@ public class AdModelMapper {
             collectorAd.universalAdIdValue = creative.universalAdId?.value
         }
         
-        collectorAd.minSuggestedDuration = Int64(vastData.minSuggestedDuration * Double.init(1000))
-        
+        if (!vastData.minSuggestedDuration.isNaN){
+            collectorAd.minSuggestedDuration = Int64(vastData.minSuggestedDuration) * 1000
+        }
         
         if case let pricing? = vastData.pricing {
             collectorAd.pricingCurrency = pricing.currency
@@ -118,8 +118,14 @@ public class AdModelMapper {
     }
     
     static func fromLinearAd(collectorAd: AnalyticsAd, linearAd: LinearAd) {
-        collectorAd.duration = Int64(linearAd.duration);
-        collectorAd.skippable = false;
-        collectorAd.skippableAfter = Int64(linearAd.skippableAfter);
+        
+        if (!linearAd.duration.isNaN){
+            collectorAd.duration = Int64(linearAd.duration) * 1000;
+        }
+        
+        if (!linearAd.skippableAfter.isNaN){
+            collectorAd.skippableAfter = Int64(linearAd.skippableAfter) * 1000;
+            collectorAd.skippable = collectorAd.skippableAfter! > Int64(0) ? true : false;
+        }
     }
 }
