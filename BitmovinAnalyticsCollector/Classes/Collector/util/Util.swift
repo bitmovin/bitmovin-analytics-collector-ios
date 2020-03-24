@@ -76,10 +76,6 @@ class Util {
         defaults?.set(newUserId, forKey: "user_id")
         return newUserId
     }
-    
-    static func getUUID() -> String{
-        return NSUUID().uuidString
-    }
 
     static func getSupportedVideoCodecs() -> [String] {
         var codecs = ["avc"]
@@ -104,7 +100,7 @@ class Util {
         return nil
     }
     
-    static func getHostNameAndPath(uriString: String?) -> (String?, String?){
+    static func getHostNameAndPath(uriString: String?) -> (String?, String?) {
         guard let uri = URL(string: uriString ?? "") else {
             return (nil, nil)
         }
@@ -112,7 +108,7 @@ class Util {
         return (uri.host, uri.path)
     }
     
-    static func calculatePercentage(numerator: Int64?, denominator: Int64?, clamp: Bool = false) -> Int?{
+    static func calculatePercentage(numerator: Int64?, denominator: Int64?, clamp: Bool = false) -> Int? {
         if (denominator == nil || denominator == 0 || numerator == nil) {
             return nil;
         }

@@ -116,16 +116,6 @@ public class AdEventData: Codable {
     var time: Int64?
     var adImpressionId: String?
     
-    init(){
-    }
-    
-    init(eventData: EventData, adBreak: AnalyticsAdBreak, adSample: AdSample){
-        setEventData(eventData: eventData);
-        setAdBreak(adBreak: adBreak)
-        setAdSample(adSample: adSample)
-    }
-    
-    
     public func setEventData(eventData: EventData){
         self.analyticsVersion = eventData.analyticsVersion
         self.audioCodec = eventData.audioCodec

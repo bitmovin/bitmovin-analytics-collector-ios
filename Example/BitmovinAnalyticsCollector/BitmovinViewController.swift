@@ -47,7 +47,7 @@ class BitmovinViewController: UIViewController {
     static let AD_SOURCE_VMAP = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpostoptimizedpod&cmsid=496&vid=short_onecue&correlator=";
 
     
-    func getAdvertisingConfiguration() -> AdvertisingConfiguration{
+    func getAdvertisingConfiguration() -> AdvertisingConfiguration {
         let adScource1 = AdSource(tag: urlWithCorrelator(adTag: BitmovinViewController.AD_SOURCE_1), ofType: BMPAdSourceType.IMA)
         let adScource2 = AdSource(tag: urlWithCorrelator(adTag: BitmovinViewController.AD_SOURCE_2), ofType: BMPAdSourceType.IMA)
         let adScource3 = AdSource(tag: urlWithCorrelator(adTag: BitmovinViewController.AD_SOURCE_3), ofType: BMPAdSourceType.IMA)

@@ -4,9 +4,6 @@ typealias HttpCompletionHandlerType = ((_ data: Data?, _ response: URLResponse?,
 
 class HttpClient {
 
-    init() {
-    }
-
     func post(urlString: String, json: String, completionHandler: HttpCompletionHandlerType?) {
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)

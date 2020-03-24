@@ -43,7 +43,7 @@ public class BitmovinAdAnalytics {
     
     public func onAdManifestLoaded(adBreak: AnalyticsAdBreak, downloadTime: Int64) {
         self.adManifestDownloadTimes[adBreak.id] = downloadTime;
-        if(adBreak.tagType == AdTagType.VMAP){
+        if (adBreak.tagType == AdTagType.VMAP) {
             sendAnalyticsRequest(adBreak: adBreak);
         }
         print("OnAdManifestLoaded in \(downloadTime)")
@@ -150,7 +150,7 @@ public class BitmovinAdAnalytics {
         completeAd(adBreak: adBreak, adSample: adSample, exitPosition: adSample.errorPosition ?? 0)
     }
     
-    public func onAdQuartile(quartile: AnalyticsAdQuartile){
+    public func onAdQuartile(quartile: AnalyticsAdQuartile) {
         guard self.activeAdSample != nil else {
             return;
         }
@@ -167,12 +167,12 @@ public class BitmovinAdAnalytics {
         }
     }
     
-    private func resetActiveAd(){
+    private func resetActiveAd() {
         self.activeAdSample = nil
         self.currentTime = nil
     }
     
-    private func completeAd(adBreak: AnalyticsAdBreak, adSample: AdSample, exitPosition: Int64? = 0){
+    private func completeAd(adBreak: AnalyticsAdBreak, adSample: AdSample, exitPosition: Int64? = 0) {
         adSample.exitPosition = exitPosition
         adSample.timePlayed = exitPosition
         adSample.playPercentage = Util.calculatePercentage(numerator: adSample.timePlayed, denominator: adSample.ad.duration, clamp: true)
@@ -185,7 +185,7 @@ public class BitmovinAdAnalytics {
     }
     
     private func getAdManifestDownloadTime(adBreak: AnalyticsAdBreak?) -> Int64? {
-        if(adBreak == nil || self.adManifestDownloadTimes[adBreak!.id] == nil) {
+        if (adBreak == nil || self.adManifestDownloadTimes[adBreak!.id] == nil) {
             return nil;
         }
         return self.adManifestDownloadTimes[adBreak!.id];
@@ -205,7 +205,7 @@ public class BitmovinAdAnalytics {
         }
         
         let moduleInfo = self.analytics.adAdapter?.getModuleInformation()
-        if(moduleInfo != nil) {
+        if (moduleInfo != nil) {
             adEventData.adModule = moduleInfo?.name
             adEventData.adModuleVersion = moduleInfo?.version
         }
@@ -214,7 +214,7 @@ public class BitmovinAdAnalytics {
         adEventData.autoplay = analytics.adAdapter?.isAutoPlayEnabled()
         adEventData.playerStartuptime = 1
         adEventData.time = Date().timeIntervalSince1970Millis
-        adEventData.adImpressionId = Util.getUUID()
+        adEventData.adImpressionId = NSUUID().uuidString
         
         self.analytics.sendAdEventData(adEventData: adEventData)
     }
