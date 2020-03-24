@@ -20,7 +20,9 @@ public class AdMapper{
         collectorAd.id = playerAd.identifier
         collectorAd.mediaFileUrl = playerAd.mediaFileUrl?.absoluteString
         if case let data? = playerAd.data {
-            collectorAd.minBitrate = data.minBitrate == -1 ? nil : Int(data.minBitrate)
+            if(data.minBitrate != -1) {
+            collectorAd.minBitrate = Int(data.minBitrate)
+            }
             collectorAd.maxBitrate = data.minBitrate == -1 ? nil : Int(data.maxBitrate)
             collectorAd.mimeType = data.mimeType
             collectorAd.bitrate = data.minBitrate == -1 ? nil : Int(data.bitrate)
