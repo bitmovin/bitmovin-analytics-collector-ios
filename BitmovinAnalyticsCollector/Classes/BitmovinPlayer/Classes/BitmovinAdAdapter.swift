@@ -21,7 +21,7 @@ public class BitmovinAdAdapter : NSObject, AdAdapter {
     }
     
     func getModuleInformation() -> AdModuleInformation {
-        let playerVersion = Util.playerVersion() ?? ""
+        let playerVersion = BitmovinPlayerUtil.playerVersion() ?? ""
         return AdModuleInformation(name: "BMPDefaultAdvertisingService", version: playerVersion)
     }
     
@@ -64,7 +64,7 @@ extension BitmovinAdAdapter : PlayerListener {
     }
     
     public func onAdQuartile(_ event: AdQuartileEvent) {
-        self.adAnalytics.onAdQuartile(quartile: Util.getAdQuartileFromPlayerAdQuartile(adQuartile: event.adQuartile))
+        self.adAnalytics.onAdQuartile(quartile: BitmovinPlayerUtil.getAdQuartileFromPlayerAdQuartile(adQuartile: event.adQuartile))
     }
 }
 

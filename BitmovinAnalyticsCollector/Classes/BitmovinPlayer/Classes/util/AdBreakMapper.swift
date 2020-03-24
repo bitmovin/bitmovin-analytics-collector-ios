@@ -49,9 +49,9 @@ if (!adConfiguration.replaceContentDuration.isNaN) {
     }
     
     func fromImaAdBreak(collectorAdBreak: AnalyticsAdBreak, imaAdBreak: ImaAdBreak){
-        collectorAdBreak.position = Util.getAdPositionFromString(string: imaAdBreak.position);
+        collectorAdBreak.position = BitmovinPlayerUtil.getAdPositionFromString(string: imaAdBreak.position);
 //        collectorAdBreak.fallbackIndex = Int(truncating: imaAdBreak.currentFallbackIndex ?? 0);
-        collectorAdBreak.tagType = Util.getAdTagTypeFromAdTag(adTag: imaAdBreak.tag);
+        collectorAdBreak.tagType = BitmovinPlayerUtil.getAdTagTypeFromAdTag(adTag: imaAdBreak.tag);
         collectorAdBreak.tagUrl = imaAdBreak.tag.url.absoluteString;
     }
     

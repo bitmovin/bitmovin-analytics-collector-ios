@@ -52,7 +52,7 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         eventData.isLive = self.isPlayerReady ? player.isLive : self.config.isLive
 
         //version
-        if let sdkVersion = Util.playerVersion() {
+        if let sdkVersion = BitmovinPlayerUtil.playerVersion() {
             eventData.version = PlayerType.bitmovin.rawValue + "-" + sdkVersion
         }
         
