@@ -20,7 +20,9 @@ public class AdBreakMapper {
     
     func fromPlayerAdConfiguration(collectorAdBreak: AnalyticsAdBreak, adConfiguration: AdConfig){
         
-        collectorAdBreak.replaceContentDuration = adConfiguration.replaceContentDuration as? Int64;
+if (!adConfiguration.replaceContentDuration.isNaN) {
+            collectorAdBreak.replaceContentDuration = Int64(adConfiguration.replaceContentDuration * 1000)
+        }
         
         
         if(adConfiguration is AdBreak) {
