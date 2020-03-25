@@ -94,7 +94,7 @@ public class AdModelMapper {
         collectorAd.apiFramework = vastData.apiFramework
         collectorAd.codec = vastData.codec
         
-        if case let creative? = vastData.creative {
+        if let creative = vastData.creative {
             collectorAd.creativeAdId = creative.adId
             collectorAd.creativeId = creative.identifier
             collectorAd.universalAdIdRegistry = creative.universalAdId?.idRegistry
