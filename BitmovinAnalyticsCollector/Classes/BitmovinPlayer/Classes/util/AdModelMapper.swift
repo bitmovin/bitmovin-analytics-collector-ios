@@ -15,7 +15,7 @@ public class AdModelMapper {
     static func fromPlayerAdConfiguration(collectorAdBreak: AnalyticsAdBreak, adConfiguration: AdConfig) {
         
         if (!adConfiguration.replaceContentDuration.isNaN) {
-            collectorAdBreak.replaceContentDuration = Int64(adConfiguration.replaceContentDuration) * 1000
+            collectorAdBreak.replaceContentDuration = adConfiguration.replaceContentDuration;
         }
         
         if (adConfiguration is AdBreak) {
@@ -34,7 +34,7 @@ public class AdModelMapper {
         collectorAdBreak.ads = ads;
         
         if (!playerAdBreak.scheduleTime.isNaN) {
-            collectorAdBreak.scheduleTime = Int64(playerAdBreak.scheduleTime) * 1000;
+            collectorAdBreak.scheduleTime = playerAdBreak.scheduleTime;
         }
         if (playerAdBreak is ImaAdBreak) {
             fromImaAdBreak(collectorAdBreak: collectorAdBreak, imaAdBreak:  playerAdBreak as! ImaAdBreak);
@@ -63,10 +63,14 @@ public class AdModelMapper {
             if (data.minBitrate != -1) {
                 collectorAd.minBitrate = Int(data.minBitrate)
             }
-            collectorAd.maxBitrate = data.minBitrate == -1 ? nil : Int(data.maxBitrate)
-            collectorAd.mimeType = data.mimeType
-            collectorAd.bitrate = data.minBitrate == -1 ? nil : Int(data.bitrate)
+            if (data.maxBitrate != -1) {
+                collectorAd.maxBitrate = Int(data.maxBitrate)
+            }
+            if (data.bitrate != -1) {
+                collectorAd.bitrate = Int(data.bitrate)
+            }
             
+            collectorAd.mimeType = data.mimeType
             if (playerAd.data is VastAdData) {
                 fromVastAdData(collectorAd: collectorAd, vastData: playerAd.data as! VastAdData)
             }
@@ -102,7 +106,7 @@ public class AdModelMapper {
         }
         
         if (!vastData.minSuggestedDuration.isNaN) {
-            collectorAd.minSuggestedDuration = Int64(vastData.minSuggestedDuration) * 1000
+            collectorAd.minSuggestedDuration = vastData.minSuggestedDuration
         }
         
         if case let pricing? = vastData.pricing {
@@ -120,12 +124,12 @@ public class AdModelMapper {
     static func fromLinearAd(collectorAd: AnalyticsAd, linearAd: LinearAd) {
         
         if (!linearAd.duration.isNaN){
-            collectorAd.duration = Int64(linearAd.duration) * 1000;
+            collectorAd.duration = linearAd.duration;
         }
         
         if (!linearAd.skippableAfter.isNaN){
-            collectorAd.skippableAfter = Int64(linearAd.skippableAfter) * 1000;
-            collectorAd.skippable = collectorAd.skippableAfter! > Int64(0) ? true : false;
+            collectorAd.skippableAfter = linearAd.skippableAfter.isNaN ? nil : linearAd.skippableAfter;
+            collectorAd.skippable = !linearAd.skippableAfter.isNaN;
         }
     }
 }

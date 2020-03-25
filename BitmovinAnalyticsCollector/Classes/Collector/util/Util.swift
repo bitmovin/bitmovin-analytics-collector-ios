@@ -115,6 +115,14 @@ class Util {
         let result = Int(Double(numerator!) / Double(denominator!) * 100)
         return clamp ? min(result, 100) : result;
     }
+    
+    static func calculatePercentageForTimeInterval(numerator: TimeInterval?, denominator: TimeInterval?, clamp: Bool = false) -> Int? {
+        if (denominator == nil || denominator == 0 || numerator == nil) {
+            return nil;
+        }
+        let result = Int(Double(numerator!) / Double(denominator!) * 100)
+        return clamp ? min(result, 100) : result;
+    }
 }
 
 extension Date {

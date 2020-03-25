@@ -1,34 +1,34 @@
 import Foundation
 
 public class AdSample {
-    var adStartupTime: Int64?
+    var adStartupTime: TimeInterval?
     var clicked: Int = 0
-    var clickPosition: Int64?
+    var clickPosition: TimeInterval?
     var closed: Int = 0
-    var closePosition: Int64?
+    var closePosition: TimeInterval?
     var completed: Int = 0
     var midpoint: Int?
     var percentageInViewport: Int?
     var quartile1: Int = 0
     var quartile3: Int = 0
     var skipped: Int = 0
-    var skipPosition: Int64?
+    var skipPosition: TimeInterval?
     var started: Int = 0
-    var timeHovered: Int64?
-    var timeInViewport: Int64?
-    var timePlayed: Int64?
-    var timeUntilHover: Int64?
+    var timeHovered: TimeInterval?
+    var timeInViewport: TimeInterval?
+    var timePlayed: TimeInterval?
+    var timeUntilHover: TimeInterval?
     var adPodPosition: Int?
-    var exitPosition: Int64?
+    var exitPosition: TimeInterval?
     var playPercentage: Int?
     var skipPercentage: Int?
     var clickPercentage: Int?
     var closePercentage: Int?
-    var errorPosition: Int64?
+    var errorPosition: TimeInterval?
     var errorPercentage: Int?
-    var timeToContent: Int64?
-    var timeFromContent: Int64?
-    var manifestDownloadTime: Int64?
+    var timeToContent: TimeInterval?
+    var timeFromContent: TimeInterval?
+    var manifestDownloadTime: TimeInterval?
     var errorCode: Int?
     var errorData: String?
     var errorMessage: String?

@@ -5,21 +5,21 @@ public class BitmovinAdAnalytics {
     private var analytics: BitmovinAnalyticsInternal
     
     private var adPodPosition = 0
-    private var adStartupTimestamp: Int64? = nil
-    private var beginPlayingTimestamp: Int64? = nil
+    private var adStartupTimestamp: TimeInterval? = nil
+    private var beginPlayingTimestamp: TimeInterval? = nil
     private var activeAdSample: AdSample? = nil
     private var activeAdBreak: AnalyticsAdBreak? = nil
     private var isPlaying = false
-    private var adManifestDownloadTimes = [String: Int64]()
+    private var adManifestDownloadTimes = [String: TimeInterval]()
         
-    private var _currentTime: Int64?
-    private var currentTime: Int64? {
+    private var _currentTime: TimeInterval?
+    private var currentTime: TimeInterval? {
         get {
             if (self.isPlaying) {
                 if (_currentTime == nil || self.beginPlayingTimestamp == nil) {
                     return nil
                 } else {
-                    return _currentTime! + Date().timeIntervalSince1970Millis - self.beginPlayingTimestamp!
+                    return _currentTime! + Date().timeIntervalSince1970 - self.beginPlayingTimestamp!
                 }
             } else {
                 return _currentTime
@@ -32,7 +32,7 @@ public class BitmovinAdAnalytics {
     
     internal init(analytics: BitmovinAnalyticsInternal) {
         self.analytics = analytics;
-        self.adManifestDownloadTimes = [String: Int64]()
+        self.adManifestDownloadTimes = [String: TimeInterval]()
     }
     
     deinit {
@@ -41,7 +41,7 @@ public class BitmovinAdAnalytics {
         self.currentTime = nil;
     }
     
-    public func onAdManifestLoaded(adBreak: AnalyticsAdBreak, downloadTime: Int64) {
+    public func onAdManifestLoaded(adBreak: AnalyticsAdBreak, downloadTime: TimeInterval) {
         self.adManifestDownloadTimes[adBreak.id] = downloadTime;
         if (adBreak.tagType == AdTagType.VMAP) {
             sendAnalyticsRequest(adBreak: adBreak);
@@ -52,7 +52,7 @@ public class BitmovinAdAnalytics {
     public func onAdStarted(ad: AnalyticsAd) {
         print("onAdStarted")
         
-        let currentTimestamp = Date().timeIntervalSince1970Millis
+        let currentTimestamp = Date().timeIntervalSince1970
         
         resetActiveAd()
         let adSample = AdSample()
@@ -92,7 +92,7 @@ public class BitmovinAdAnalytics {
         print("onAdBreakStarted")
         self.adPodPosition = 0
         self.activeAdBreak = adBreak
-        self.adStartupTimestamp = Date().timeIntervalSince1970Millis
+        self.adStartupTimestamp = Date().timeIntervalSince1970
     }
     
     public func onAdBreakFinished() {
@@ -111,7 +111,7 @@ public class BitmovinAdAnalytics {
         adSample.clicked = 1
         adSample.clickPosition = self.currentTime
         if let duration = adSample.ad.duration {
-            adSample.clickPercentage = Util.calculatePercentage(numerator: adSample.clickPosition, denominator: duration, clamp: true)
+            adSample.clickPercentage = Util.calculatePercentageForTimeInterval(numerator: adSample.clickPosition, denominator: duration, clamp: true)
         }
     }
     
@@ -127,7 +127,7 @@ public class BitmovinAdAnalytics {
         adSample.skipped = 1
         adSample.skipPosition = self.currentTime
         if let duration = adSample.ad.duration {
-            adSample.skipPercentage = Util.calculatePercentage(numerator: adSample.skipPosition, denominator: duration, clamp: true)
+            adSample.skipPercentage = Util.calculatePercentageForTimeInterval(numerator: adSample.skipPosition, denominator: duration, clamp: true)
         }
         
         completeAd(adBreak: adBreak, adSample: adSample, exitPosition: adSample.skipPosition)
@@ -140,7 +140,7 @@ public class BitmovinAdAnalytics {
         if (adSample.ad.id != nil && adBreak.ads.contains { $0.id == adSample.ad.id }) {
             adSample.errorPosition = self.currentTime
             if let duration = adSample.ad.duration {
-                adSample.errorPercentage = Util.calculatePercentage(numerator: adSample.errorPosition, denominator: duration, clamp: true)
+                adSample.errorPercentage = Util.calculatePercentageForTimeInterval(numerator: adSample.errorPosition, denominator: duration, clamp: true)
             }
         }
         
@@ -172,19 +172,19 @@ public class BitmovinAdAnalytics {
         self.currentTime = nil
     }
     
-    private func completeAd(adBreak: AnalyticsAdBreak, adSample: AdSample, exitPosition: Int64? = 0) {
+    private func completeAd(adBreak: AnalyticsAdBreak, adSample: AdSample, exitPosition: TimeInterval? = 0) {
         adSample.exitPosition = exitPosition
         adSample.timePlayed = exitPosition
-        adSample.playPercentage = Util.calculatePercentage(numerator: adSample.timePlayed, denominator: adSample.ad.duration, clamp: true)
+        adSample.playPercentage = Util.calculatePercentageForTimeInterval(numerator: adSample.timePlayed, denominator: adSample.ad.duration, clamp: true)
         
         // reset startupTimestamp for the next ad, in case there are multiple ads in one ad break
-        self.adStartupTimestamp = Date().timeIntervalSince1970Millis
+        self.adStartupTimestamp = Date().timeIntervalSince1970
         self.isPlaying = false
         sendAnalyticsRequest(adBreak: adBreak, adSample: adSample)
         resetActiveAd()
     }
     
-    private func getAdManifestDownloadTime(adBreak: AnalyticsAdBreak?) -> Int64? {
+    private func getAdManifestDownloadTime(adBreak: AnalyticsAdBreak?) -> TimeInterval? {
         if (adBreak == nil || self.adManifestDownloadTimes[adBreak!.id] == nil) {
             return nil;
         }
@@ -210,7 +210,9 @@ public class BitmovinAdAnalytics {
             adEventData.adModuleVersion = moduleInfo?.version
         }
         
-        adEventData.manifestDownloadTime = getAdManifestDownloadTime(adBreak: adBreak);
+        if let manifestDownloadTime = getAdManifestDownloadTime(adBreak: adBreak){
+            adEventData.manifestDownloadTime = Int64(manifestDownloadTime  * 1_000);
+        }
         adEventData.autoplay = analytics.adAdapter?.isAutoPlayEnabled()
         adEventData.playerStartuptime = 1
         adEventData.time = Date().timeIntervalSince1970Millis

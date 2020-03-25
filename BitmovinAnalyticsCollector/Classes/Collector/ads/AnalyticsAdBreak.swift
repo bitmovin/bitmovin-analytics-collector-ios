@@ -5,8 +5,8 @@ public class AnalyticsAdBreak {
     var ads: Array<AnalyticsAd>
     var position: AdPosition?
     var offset: String?
-    var scheduleTime: Int64?
-    var replaceContentDuration: Int64?
+    var scheduleTime: TimeInterval?
+    var replaceContentDuration: TimeInterval?
     var preloadOffset: Int64?
     var tagType: AdTagType?
     var tagUrl: String?

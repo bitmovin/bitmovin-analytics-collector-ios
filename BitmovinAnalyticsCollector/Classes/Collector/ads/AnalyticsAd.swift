@@ -21,7 +21,7 @@ public class AnalyticsAd {
     var universalAdIdRegistry: String?
     var universalAdIdValue: String?
     var description: String?
-    var minSuggestedDuration: Int64?
+    var minSuggestedDuration: TimeInterval?
     var surveyUrl: String?
     var surveyType: String?
     var title: String?
@@ -30,8 +30,8 @@ public class AnalyticsAd {
     var pricingValue: Int64?
     var pricingModel: String?
     var pricingCurrency: String?
-    var skippableAfter: Int64?
+    var skippableAfter: TimeInterval?
     var skippable: Bool?
-    var duration: Int64?
+    var duration: TimeInterval?
     var dealId: String?
 }
