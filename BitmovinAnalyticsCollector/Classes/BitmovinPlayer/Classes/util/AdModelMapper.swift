@@ -101,7 +101,7 @@ public class AdModelMapper {
             collectorAd.universalAdIdValue = creative.universalAdId?.value
         }
         
-        if (!vastData.minSuggestedDuration.isNaN){
+        if (!vastData.minSuggestedDuration.isNaN) {
             collectorAd.minSuggestedDuration = Int64(vastData.minSuggestedDuration) * 1000
         }
         
