@@ -3,13 +3,14 @@ target 'BitmovinAnalyticsCollector_Example' do
     use_frameworks!
     platform :ios, '9.0'
     pod 'BitmovinAnalyticsCollector', :path => '../'
-    pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.22.0'
+    pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.40.0'
+    pod 'GoogleAds-IMA-iOS-SDK', '3.9.2'
 end
 
 target 'BitmovinAnalyticsCollector_tvOSExample' do
     pod 'BitmovinAnalyticsCollector', :path => '../'
     use_frameworks!
     platform :tvos
-    pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.22.0'
+    pod 'BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod.git', tag: '2.40.0'
 
 end

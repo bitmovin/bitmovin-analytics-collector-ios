@@ -3,13 +3,8 @@ import Foundation
 typealias HttpCompletionHandlerType = ((_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void)
 
 class HttpClient {
-    var urlString: String
 
-    init(urlString: String) {
-        self.urlString = urlString
-    }
-
-    func post(json: String, completionHandler: HttpCompletionHandlerType?) {
+    func post(urlString: String, json: String, completionHandler: HttpCompletionHandlerType?) {
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")

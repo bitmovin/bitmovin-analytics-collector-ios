@@ -11,8 +11,10 @@ public class BitmovinAnalyticsInternal: NSObject {
     static let msInSec = 1_000.0
     internal var config: BitmovinAnalyticsConfig
     internal var stateMachine: StateMachine
-    private var adapter: PlayerAdapter?
+    internal var adapter: PlayerAdapter?
     private var eventDataDispatcher: EventDataDispatcher
+    internal var adAnalytics: BitmovinAdAnalytics?
+    internal var adAdapter: AdAdapter?
 
     internal init(config: BitmovinAnalyticsConfig) {
         self.config = config
@@ -20,12 +22,17 @@ public class BitmovinAnalyticsInternal: NSObject {
         eventDataDispatcher = SimpleEventDataDispatcher(config: config)
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(licenseFailed(notification:)), name: .licenseFailed, object: eventDataDispatcher)
+        
+        if (config.ads) {
+            self.adAnalytics = BitmovinAdAnalytics(analytics: self);
+        }
     }
 
     /**
      * Detach the current player that is being used with Bitmovin Analytics.
      */
     @objc public func detachPlayer() {
+        detachAd();
         eventDataDispatcher.disable()
         stateMachine.reset()
         adapter = nil
@@ -36,7 +43,15 @@ public class BitmovinAnalyticsInternal: NSObject {
         eventDataDispatcher.enable()
         self.adapter = adapter
     }
-
+    
+    private func detachAd() {
+        adAdapter?.releaseAdapter()
+    }
+    
+    internal func attachAd(adAdapter: AdAdapter) {
+        self.adAdapter = adAdapter;
+    }
+    
     @objc private func licenseFailed(notification _: Notification) {
         detachPlayer()
     }
@@ -46,6 +61,13 @@ public class BitmovinAnalyticsInternal: NSObject {
             return
         }
         eventDataDispatcher.add(eventData: data)
+    }
+    
+    internal func sendAdEventData(adEventData: AdEventData?) {
+        guard let data = adEventData else {
+            return
+        }
+        eventDataDispatcher.addAd(adEventData: data)
     }
 
     private func createEventData(duration: Int64) -> EventData? {

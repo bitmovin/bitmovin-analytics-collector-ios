@@ -12,5 +12,8 @@ public class BitmovinPlayerCollector : BitmovinAnalyticsInternal {
      */
     @objc public func attachPlayer(player: BitmovinPlayer) {
         attach(adapter: BitmovinPlayerAdapter(player: player, config: config, stateMachine: stateMachine))
+        if (self.adAnalytics != nil) {
+            attachAd(adAdapter: BitmovinAdAdapter(bitmovinPlayer: player, adAnalytics: self.adAnalytics!))
+        }
     }
 }

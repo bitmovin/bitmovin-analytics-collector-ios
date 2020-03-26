@@ -4,6 +4,7 @@ import UIKit
 @objcMembers
 public class BitmovinAnalyticsConfig: NSObject {
     static var analyticsUrl: String = "https://analytics-ingress-global.bitmovin.com/analytics"
+    static var adAnalyticsUrl: String = "https://analytics-ingress-global.bitmovin.com/analytics/a"
     static var analyticsLicenseUrl: String = "https://analytics-ingress-global.bitmovin.com/licensing"
 
     /**
@@ -85,7 +86,12 @@ public class BitmovinAnalyticsConfig: NSObject {
      * Flag to see if stream is live before stream metadata is available (default: false)
      */
     @objc public var isLive: Bool = false
-
+    
+    /**
+     * Flag to enable Ad tracking
+     */
+    @objc public var ads: Bool = false
+    
     /**
      * How often the video engine should heartbeat
      */

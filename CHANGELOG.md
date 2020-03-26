@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Added
+
+- Added Analytics AdAdapter for Bitmovin Player
+- New boolean configuration field called `ads` to indicate that Ads should be tracked.
+
 ## v1.10.1
 
 ### Fixed
