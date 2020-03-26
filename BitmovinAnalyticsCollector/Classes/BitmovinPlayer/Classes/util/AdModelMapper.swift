@@ -43,8 +43,10 @@ public class AdModelMapper {
     
     static func fromImaAdBreak(collectorAdBreak: AnalyticsAdBreak, imaAdBreak: ImaAdBreak) {
         collectorAdBreak.position = BitmovinPlayerUtil.getAdPositionFromString(string: imaAdBreak.position);
-        if let fallbackIndex = (imaAdBreak as! NSObject).value(forKey: "_currentFallbackIndex") as? Int{
-            collectorAdBreak.fallbackIndex = fallbackIndex
+        if let currentFallbackIndexVariable = class_getInstanceVariable(type(of: imaAdBreak), "_currentFallbackIndex") {
+            if let currentFallbackIndex = object_getIvar(imaAdBreak, currentFallbackIndexVariable) as? Int? {
+                collectorAdBreak.fallbackIndex = (currentFallbackIndex ?? -1) + 1;
+            }
         }
         collectorAdBreak.tagType = BitmovinPlayerUtil.getAdTagTypeFromAdTag(adTag: imaAdBreak.tag);
         collectorAdBreak.tagUrl = imaAdBreak.tag.url.absoluteString;
