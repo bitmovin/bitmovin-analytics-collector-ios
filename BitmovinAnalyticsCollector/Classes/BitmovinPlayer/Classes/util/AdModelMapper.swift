@@ -43,11 +43,12 @@ public class AdModelMapper {
     
     static func fromImaAdBreak(collectorAdBreak: AnalyticsAdBreak, imaAdBreak: ImaAdBreak) {
         collectorAdBreak.position = BitmovinPlayerUtil.getAdPositionFromString(string: imaAdBreak.position);
-        if let currentFallbackIndexVariable = class_getInstanceVariable(type(of: imaAdBreak), "_currentFallbackIndex") {
-            if let currentFallbackIndex = object_getIvar(imaAdBreak, currentFallbackIndexVariable) as? Int? {
-                collectorAdBreak.fallbackIndex = (currentFallbackIndex ?? -1) + 1;
-            }
-        }
+        // TODO this property will be removed in future, so we need to retrieve this value from the configuration
+//        if let currentFallbackIndexVariable = class_getInstanceVariable(type(of: imaAdBreak), "_currentFallbackIndex") {
+//            if let currentFallbackIndex = object_getIvar(imaAdBreak, currentFallbackIndexVariable) as? Int? {
+//                collectorAdBreak.fallbackIndex = (currentFallbackIndex ?? -1) + 1;
+//            }
+//        }
         collectorAdBreak.tagType = BitmovinPlayerUtil.getAdTagTypeFromAdTag(adTag: imaAdBreak.tag);
         collectorAdBreak.tagUrl = imaAdBreak.tag.url.absoluteString;
     }
