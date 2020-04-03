@@ -114,6 +114,8 @@
 		EBD1A95DC351DC3FB1DE2550FE425C5F /* AdSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF2CFAF293A09F7F2E2F496EB7783C /* AdSample.swift */; };
 		EC2CC1AD242A074100443B2B /* BitmovinPlayerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2CC1AC242A074100443B2B /* BitmovinPlayerUtil.swift */; };
 		EC2CC1AE242A075900443B2B /* BitmovinPlayerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2CC1AC242A074100443B2B /* BitmovinPlayerUtil.swift */; };
+		ECC21DC92436F5B900697A88 /* VideoStartFailedReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC21DC82436F5B900697A88 /* VideoStartFailedReason.swift */; };
+		ECC21DCA2436F5B900697A88 /* VideoStartFailedReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC21DC82436F5B900697A88 /* VideoStartFailedReason.swift */; };
 		EF24AF53C7CB8D0E608E2F8530AC0389 /* BitmovinAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDA3B8EAF6D4E2BAB88D9625C2BF198 /* BitmovinAnalytics.swift */; };
 		F320FCCF57BB6580DF7C1B42DA6FDD02 /* BitmovinAdAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B58EBD1B79659D576C504629E5622 /* BitmovinAdAnalytics.swift */; };
 		FAB9A37D6713E83F7DBBFA5FA28EE01C /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52576EE8A09AEFE9F9B213609E2BF964 /* StateMachine.swift */; };
@@ -247,6 +249,7 @@
 		E77FC1037B60FCAAA19E99D1D60842EF /* BitmovinAnalyticsCollector-tvOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "BitmovinAnalyticsCollector-tvOS.xcconfig"; path = "../BitmovinAnalyticsCollector-tvOS/BitmovinAnalyticsCollector-tvOS.xcconfig"; sourceTree = "<group>"; };
 		EA7E7F41514B70B5FD1C46253B14E048 /* StreamType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StreamType.swift; sourceTree = "<group>"; };
 		EC2CC1AC242A074100443B2B /* BitmovinPlayerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitmovinPlayerUtil.swift; sourceTree = "<group>"; };
+		ECC21DC82436F5B900697A88 /* VideoStartFailedReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStartFailedReason.swift; sourceTree = "<group>"; };
 		F00E1EFC92D5A2F3A1AAFB3EDC53B0A6 /* BitmovinAnalyticsCollector-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BitmovinAnalyticsCollector-iOS-Info.plist"; sourceTree = "<group>"; };
 		F6A9FAEC770604A4F9B03ADB55CF861B /* AVPlayerAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AVPlayerAdapter.swift; path = BitmovinAnalyticsCollector/Classes/AVPlayer/Classes/AVPlayerAdapter.swift; sourceTree = "<group>"; };
 		F88114769B72BACBA0C311BB41CCCD76 /* BitmovinPlayerAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BitmovinPlayerAdapter.swift; path = BitmovinAnalyticsCollector/Classes/BitmovinPlayer/Classes/BitmovinPlayerAdapter.swift; sourceTree = "<group>"; };
@@ -393,6 +396,7 @@
 				2AD1FC40B9066EE8BCD7D55EECE01A24 /* CdnProvider.swift */,
 				71CF13E2EF16D9EF854ADB54549C2814 /* PlayerType.swift */,
 				EA7E7F41514B70B5FD1C46253B14E048 /* StreamType.swift */,
+				ECC21DC82436F5B900697A88 /* VideoStartFailedReason.swift */,
 			);
 			name = enums;
 			path = BitmovinAnalyticsCollector/Classes/Collector/enums;
@@ -839,6 +843,7 @@
 				EB0E0BED4C6FC6B8FA1E098EFB15278D /* BitmovinPlayerAdapter.swift in Sources */,
 				090DEEFFEED66E0E0F62FBE742460C9E /* BitmovinPlayerCollector.swift in Sources */,
 				16B33D9FB86E8F2F2AFCE3C3F4A856AC /* CdnProvider.swift in Sources */,
+				ECC21DC92436F5B900697A88 /* VideoStartFailedReason.swift in Sources */,
 				7FD4BC6B02AFEA1ED8140C5D05D0C99D /* EventData.swift in Sources */,
 				EAF7B71A818D2B312E951AB53B72F693 /* EventDataDispatcher.swift in Sources */,
 				E27F6FEA3C9488F2B6FF45AEF31ED37F /* HttpClient.swift in Sources */,
@@ -881,6 +886,7 @@
 				1C43280495DB7B080E790C43A3B3C57F /* BitmovinPlayerAdapter.swift in Sources */,
 				9E06394E3371226AC9E88C7ED22EC6F1 /* BitmovinPlayerCollector.swift in Sources */,
 				4F02AC318D353C0EE7CB65CD9DD8C8C5 /* CdnProvider.swift in Sources */,
+				ECC21DCA2436F5B900697A88 /* VideoStartFailedReason.swift in Sources */,
 				96603565E4B14DF53CE70AA8155AD998 /* EventData.swift in Sources */,
 				E6190D108851527FE468659416ACD965 /* EventDataDispatcher.swift in Sources */,
 				7A75CE9331D7798094A21310D3277F93 /* HttpClient.swift in Sources */,
