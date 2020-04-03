@@ -7,6 +7,8 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
     private var player: BitmovinPlayer
     private var errorCode: Int?
     private var errorDescription: String?
+    private var videoStartFailed: Bool = false
+    private var videoStartFailedReason: String? = nil
     private var isPlayerReady: Bool
 
     init(player: BitmovinPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
@@ -106,6 +108,11 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         }
 
         eventData.audioLanguage = player.audio?.language
+        
+        if (videoStartFailed) {
+            eventData.videoStartFailed = videoStartFailed
+            eventData.videoStartFailedReason = videoStartFailedReason
+        }
     }
 
     func startMonitoring() {
@@ -166,6 +173,10 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onError(_ event: ErrorEvent) {
         errorCode = Int(event.code)
         errorDescription = event.description
+        if (stateMachine.state == PlayerState.setup) {
+            videoStartFailed = true
+            videoStartFailedReason = VideoStartFailedReason.playerError
+        }
         stateMachine.transitionState(destinationState: .error, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
 
