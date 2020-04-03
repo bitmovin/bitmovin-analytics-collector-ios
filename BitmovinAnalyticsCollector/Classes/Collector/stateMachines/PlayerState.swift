@@ -11,7 +11,7 @@ public enum PlayerState: String {
     case subtitlechange
     case audiochange
 
-    func onEntry(stateMachine: StateMachine, timestamp _: Int64, destinationState _: PlayerState, data: [AnyHashable: Any]?) {
+    func onEntry(stateMachine: StateMachine, timestamp _: Int64, previousState : PlayerState, data: [AnyHashable: Any]?) {
         switch self {
         case .setup:
             return
