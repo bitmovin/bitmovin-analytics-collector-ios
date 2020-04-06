@@ -18,6 +18,9 @@ class ViewController: UIViewController {
     @IBOutlet var reloadButton: UIButton!
     @IBOutlet var rewindButton: UIButton!
     @IBOutlet var playerView: PlayerView!
+    let url = URL(string: "http://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
+    let corruptedUrl = URL(string: "http://bitdash-a.akamaihd.net/content/analytics-teststreams/redbull-parkour/corrupted_first_segment.mpd")
+
 
     var duration: Double {
         guard let currentItem = player.currentItem else { return 0.0 }
@@ -66,8 +69,7 @@ class ViewController: UIViewController {
 
     @IBAction func createPlayer() {
         addObserver(self, forKeyPath: #keyPath(ViewController.player.currentItem.duration), options: [.new, .initial], context: &ViewController.playerViewControllerKVOContext)
-        let movieURL = URL(string: "http://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
-        let asset = AVURLAsset(url: movieURL!, options: nil)
+        let asset = AVURLAsset(url: corruptedUrl!, options: nil)
         player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
 //        player.play()
         let interval = CMTimeMake(value: 1, timescale: 1)

@@ -12,6 +12,9 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     @objc private var player: AVPlayer
     let lockQueue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
     var statusObserver: NSKeyValueObservation?
+    private var videoStartFailed: Bool = false
+    private var videoStartFailedReason: String? = nil
+    
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.stateMachine = stateMachine
@@ -89,6 +92,11 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     private func errorOccured(error: NSError?) {
         let errorCode = error?.code ?? 1
         let errorMessage = error?.localizedDescription ?? "Unkown"
+        
+        if (stateMachine.state == PlayerState.setup) {
+            videoStartFailed = true
+            videoStartFailedReason = VideoStartFailedReason.playerError
+        }
 
         stateMachine.transitionState(destinationState: .error,
                                      time: player.currentTime(),
@@ -241,6 +249,14 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         // isMuted
         if player.volume == 0 {
             eventData.isMuted = true
+        }
+        
+        // play attempt
+        if (videoStartFailed) {
+            eventData.videoStartFailed = videoStartFailed
+            eventData.videoStartFailedReason = videoStartFailedReason ?? VideoStartFailedReason.unknown
+            videoStartFailed = false
+            videoStartFailedReason = nil
         }
     }
 
