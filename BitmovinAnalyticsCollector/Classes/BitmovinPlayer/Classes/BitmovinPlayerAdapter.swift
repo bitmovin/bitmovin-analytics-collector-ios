@@ -9,6 +9,8 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
     private var errorDescription: String?
     private var videoStartFailed: Bool = false
     private var videoStartFailedReason: String? = nil
+    private var videoStartTimer: Timer? = nil
+    private let videoStartTimeoutSeconds: TimeInterval = 600
     private var isPlayerReady: Bool
 
     init(player: BitmovinPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
@@ -111,7 +113,9 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         
         if (videoStartFailed) {
             eventData.videoStartFailed = videoStartFailed
-            eventData.videoStartFailedReason = videoStartFailedReason
+            eventData.videoStartFailedReason = videoStartFailedReason ?? VideoStartFailedReason.unknown
+            videoStartFailed = false
+            videoStartFailedReason = nil
         }
     }
 
@@ -128,11 +132,39 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
             return Util.timeIntervalToCMTime(_: player.currentTime)
         }
     }
+    
+    func setVideoStartTimer() {
+        if (self.videoStartTimer != nil) {
+            clearVideoStartTimer()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + self.videoStartTimeoutSeconds) {
+            self.onVideoStartTimeout()
+        }
+    }
+    
+    func clearVideoStartTimer() {
+        if (self.videoStartTimer == nil) {
+            return
+        }
+        self.videoStartTimer?.invalidate()
+        self.videoStartTimer = nil
+    }
+    
+    func onVideoStartTimeout() {
+        videoStartFailed = true
+        videoStartFailedReason = VideoStartFailedReason.timeout
+        stateMachine.transitionState(destinationState: .videoStartTimeout, time: Util.timeIntervalToCMTime(_: player.currentTime))
+    }
 }
 
 extension BitmovinPlayerAdapter: PlayerListener {
     func onPlay(_ event: PlayEvent) {
+        setVideoStartTimer()
         stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
+    }
+    
+    func onPlaying(_ event: PlayingEvent) {
+        clearVideoStartTimer()
     }
 
     func onPaused(_ event: PausedEvent) {

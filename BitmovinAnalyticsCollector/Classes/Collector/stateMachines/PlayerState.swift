@@ -10,12 +10,15 @@ public enum PlayerState: String {
     case seeking
     case subtitlechange
     case audiochange
+    case videoStartTimeout
 
     func onEntry(stateMachine: StateMachine, timestamp _: Int64, previousState : PlayerState, data: [AnyHashable: Any]?) {
         switch self {
         case .setup:
             return
         case .buffering:
+            return
+        case .videoStartTimeout:
             return
         case .error:
             stateMachine.delegate?.stateMachineDidEnterError(stateMachine, data: data)
@@ -44,13 +47,19 @@ public enum PlayerState: String {
         // Get the duration we were in the state we are exiting
         let enterTimestamp = stateMachine.enterTimestamp ?? 0
         let duration = timestamp - enterTimestamp
-
+        if (destinationState == .videoStartTimeout) {
+            stateMachine.delegate?.stateMachineExitBeforeVideoStart(stateMachine: stateMachine)
+            return
+        }
+        
         switch self {
         case .setup:
             stateMachine.delegate?.stateMachineDidExitSetup(stateMachine)
             return
         case .buffering:
             stateMachine.delegate?.stateMachine(stateMachine, didExitBufferingWithDuration: duration)
+            return
+        case .videoStartTimeout:
             return
         case .error:
             return

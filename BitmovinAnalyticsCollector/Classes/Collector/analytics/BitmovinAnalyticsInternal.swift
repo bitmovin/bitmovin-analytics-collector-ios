@@ -92,6 +92,11 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
     func stateMachineDidExitSetup(_ stateMachine: StateMachine) {
     }
 
+    func stateMachineExitBeforeVideoStart(stateMachine: StateMachine) {
+        let eventData = createEventData(duration: 0)
+        sendEventData(eventData: eventData)
+    }
+    
     func stateMachine(_ stateMachine: StateMachine, didExitBufferingWithDuration duration: Int64) {
         let eventData = createEventData(duration: duration)
         eventData?.buffered = duration
