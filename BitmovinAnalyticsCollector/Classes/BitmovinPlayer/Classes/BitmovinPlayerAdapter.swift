@@ -167,6 +167,10 @@ extension BitmovinPlayerAdapter: PlayerListener {
         clearVideoStartTimer()
     }
 
+    func onAdBreakStarted(_ event: AdBreakStartedEvent) {
+        clearVideoStartTimer()
+    }
+    
     func onPaused(_ event: PausedEvent) {
         stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
