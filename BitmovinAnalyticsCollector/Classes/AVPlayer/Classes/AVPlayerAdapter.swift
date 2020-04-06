@@ -176,7 +176,6 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
             if (player.timeControlStatus == AVPlayer.TimeControlStatus.waitingToPlayAtSpecifiedRate) {
                     setVideoStartTimer()
             } else if (player.timeControlStatus == AVPlayer.TimeControlStatus.playing){
-                    sleep(3)
                     clearVideoStartTimer()
                     didVideoPlay = true
             }
@@ -185,7 +184,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     }
     
     func setVideoStartTimer() {
-        DispatchQueue.init(label:"newThread").asyncAfter(deadline: .now() + self.videoStartTimeoutSeconds) {
+        DispatchQueue.init(label:"videoStartTimeout").asyncAfter(deadline: .now() + self.videoStartTimeoutSeconds) {
             if (self.isVideoStartTimerActive)
             {
                 self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout)
