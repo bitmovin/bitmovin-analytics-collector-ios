@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Added
+
+- Bitmovin Player: Track playback start failure and reason
+
 ## v1.11.0
 
 ### Added
