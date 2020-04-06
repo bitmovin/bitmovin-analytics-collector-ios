@@ -30,6 +30,10 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     }
 
     deinit {
+        if (didAttemptPlay && !didVideoPlay) {
+            onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed)
+        }
+        
         self.isPlayerReady = false
         if let playerItem = player.currentItem {
             stopMonitoringPlayerItem(playerItem: playerItem)
@@ -174,10 +178,11 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
             errorOccured(error: self.player.currentItem?.error as NSError?)
         } else if #available(iOS 10.0, *), keyPath == #keyPath(player.timeControlStatus) && !didVideoPlay {
             if (player.timeControlStatus == AVPlayer.TimeControlStatus.waitingToPlayAtSpecifiedRate) {
-                    setVideoStartTimer()
+                setVideoStartTimer()
+                didAttemptPlay = true
             } else if (player.timeControlStatus == AVPlayer.TimeControlStatus.playing){
-                    clearVideoStartTimer()
-                    didVideoPlay = true
+                clearVideoStartTimer()
+                didVideoPlay = true
             }
         }
     }
