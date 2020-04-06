@@ -7,18 +7,25 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
     private var player: BitmovinPlayer
     private var errorCode: Int?
     private var errorDescription: String?
-    private var videoStartFailed: Bool = false
-    private var videoStartFailedReason: String? = nil
-    private var isVideoStartTimerActive: Bool = false
-    private let videoStartTimeoutSeconds: TimeInterval = 600
-    private var didVideoPlay: Bool = false
+    private var videoStartFailed: Bool
+    private var videoStartFailedReason: String?
+    private var isVideoStartTimerActive: Bool
+    private var didVideoPlay: Bool
     private var isPlayerReady: Bool
+    private var didAttemptPlay: Bool
+    
+    private let videoStartTimeoutSeconds: TimeInterval = 600
 
     init(player: BitmovinPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.stateMachine = stateMachine
         self.config = config
         self.isPlayerReady = false
+        self.didAttemptPlay = false
+        self.didVideoPlay = false
+        self.isVideoStartTimerActive = false
+        self.videoStartFailedReason = nil
+        self.videoStartFailed = false
         super.init()
         startMonitoring()
     }
@@ -159,6 +166,7 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
 extension BitmovinPlayerAdapter: PlayerListener {
     func onPlay(_ event: PlayEvent) {
         setVideoStartTimer()
+        didAttemptPlay = true
         stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
     
@@ -225,7 +233,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
     
     func onSourceUnloaded(_ event: SourceUnloadedEvent) {
-        if (!didVideoPlay) {
+        if (!didVideoPlay && didAttemptPlay) {
             self.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed)
         }
         stateMachine.reset()
