@@ -14,6 +14,10 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     var statusObserver: NSKeyValueObservation?
     private var videoStartFailed: Bool = false
     private var videoStartFailedReason: String? = nil
+    private var didVideoPlay: Bool = false
+    
+    private var isVideoStartTimerActive: Bool = false
+    private let videoStartTimeoutSeconds: TimeInterval = 1
     
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
@@ -37,6 +41,9 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         addObserver(self, forKeyPath: #keyPath(player.rate), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
         addObserver(self, forKeyPath: #keyPath(player.currentItem), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
         addObserver(self, forKeyPath: #keyPath(player.status), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
+        if #available(iOS 10.0, *) {
+            addObserver(self, forKeyPath: #keyPath(player.timeControlStatus), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
+        }
     }
 
     public func stopMonitoring() {
@@ -162,7 +169,37 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
             }
         } else if keyPath == #keyPath(player.status) && player.status == .failed {
             errorOccured(error: self.player.currentItem?.error as NSError?)
+        } else if #available(iOS 10.0, *), keyPath == #keyPath(player.timeControlStatus) && !didVideoPlay {
+            if (player.timeControlStatus == AVPlayer.TimeControlStatus.waitingToPlayAtSpecifiedRate) {
+                    setVideoStartTimer()
+            } else if (player.timeControlStatus == AVPlayer.TimeControlStatus.playing){
+                    sleep(3)
+                    clearVideoStartTimer()
+                    didVideoPlay = true
+            }
+            print(player.timeControlStatus.rawValue)
         }
+    }
+    
+    func setVideoStartTimer() {
+        DispatchQueue.init(label:"newThread").asyncAfter(deadline: .now() + self.videoStartTimeoutSeconds) {
+            if (self.isVideoStartTimerActive)
+            {
+                self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout)
+            }
+        }
+        isVideoStartTimerActive = true
+    }
+    
+    func clearVideoStartTimer() {
+        isVideoStartTimerActive = false
+    }
+    
+    func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown) {
+        print("onPlayAttemptFailed with Reason \(reason)")
+        videoStartFailed = true
+        videoStartFailedReason = reason
+        stateMachine.transitionState(destinationState: .playAttemptFailed, time: self.player.currentTime())
     }
 
     public func createEventData() -> EventData {

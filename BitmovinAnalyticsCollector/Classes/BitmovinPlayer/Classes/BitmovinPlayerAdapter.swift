@@ -9,7 +9,7 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
     private var errorDescription: String?
     private var videoStartFailed: Bool = false
     private var videoStartFailedReason: String? = nil
-    private var videoStartTimer: Timer? = nil
+    private var isVideoStartTimerActive: Bool = false
     private let videoStartTimeoutSeconds: TimeInterval = 600
     private var didVideoPlay: Bool = false
     private var isPlayerReady: Bool
@@ -135,20 +135,17 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
     }
     
     func setVideoStartTimer() {
-        if (self.videoStartTimer != nil) {
-            clearVideoStartTimer()
-        }
         DispatchQueue.main.asyncAfter(deadline: .now() + self.videoStartTimeoutSeconds) {
-            self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout)
+            if (self.isVideoStartTimerActive)
+            {
+                self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout)
+            }
         }
+        isVideoStartTimerActive = true
     }
     
     func clearVideoStartTimer() {
-        if (self.videoStartTimer == nil) {
-            return
-        }
-        self.videoStartTimer?.invalidate()
-        self.videoStartTimer = nil
+        isVideoStartTimerActive = false
     }
     
     func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown) {
