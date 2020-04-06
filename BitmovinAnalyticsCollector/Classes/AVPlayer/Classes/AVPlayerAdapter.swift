@@ -179,12 +179,11 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
                     clearVideoStartTimer()
                     didVideoPlay = true
             }
-            print(player.timeControlStatus.rawValue)
         }
     }
     
     func setVideoStartTimer() {
-        DispatchQueue.init(label:"videoStartTimeout").asyncAfter(deadline: .now() + self.videoStartTimeoutSeconds) {
+        lockQueue.asyncAfter(deadline: .now() + self.videoStartTimeoutSeconds) {
             if (self.isVideoStartTimerActive)
             {
                 self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout)
