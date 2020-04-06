@@ -92,7 +92,7 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
     func stateMachineDidExitSetup(_ stateMachine: StateMachine) {
     }
 
-    func stateMachineExitBeforeVideoStart(stateMachine: StateMachine) {
+    func stateMachineEnterPlayAttemptFailed(stateMachine: StateMachine) {
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
     }

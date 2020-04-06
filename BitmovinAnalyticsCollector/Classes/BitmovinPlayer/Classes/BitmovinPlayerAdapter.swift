@@ -138,7 +138,7 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
             clearVideoStartTimer()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + self.videoStartTimeoutSeconds) {
-            self.onVideoStartTimeout()
+            self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout)
         }
     }
     
@@ -150,10 +150,11 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         self.videoStartTimer = nil
     }
     
-    func onVideoStartTimeout() {
+    func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown) {
+        print("onPlayAttemptFailed with Reason \(reason)")
         videoStartFailed = true
-        videoStartFailedReason = VideoStartFailedReason.timeout
-        stateMachine.transitionState(destinationState: .videoStartTimeout, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        videoStartFailedReason = reason
+        stateMachine.transitionState(destinationState: .playAttemptFailed, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
 }
 
