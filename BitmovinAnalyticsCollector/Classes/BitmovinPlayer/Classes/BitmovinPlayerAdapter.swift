@@ -11,6 +11,7 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
     private var videoStartFailedReason: String? = nil
     private var videoStartTimer: Timer? = nil
     private let videoStartTimeoutSeconds: TimeInterval = 600
+    private var didVideoPlay: Bool = false
     private var isPlayerReady: Bool
 
     init(player: BitmovinPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
@@ -166,6 +167,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     
     func onPlaying(_ event: PlayingEvent) {
         clearVideoStartTimer()
+        didVideoPlay = true
     }
 
     func onAdBreakStarted(_ event: AdBreakStartedEvent) {
@@ -226,6 +228,9 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
     
     func onSourceUnloaded(_ event: SourceUnloadedEvent) {
+        if (!didVideoPlay) {
+            self.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed)
+        }
         stateMachine.reset()
     }
     
