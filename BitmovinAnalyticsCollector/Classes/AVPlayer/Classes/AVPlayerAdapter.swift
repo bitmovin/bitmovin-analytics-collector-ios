@@ -12,18 +12,23 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     @objc private var player: AVPlayer
     let lockQueue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
     var statusObserver: NSKeyValueObservation?
-    private var videoStartFailed: Bool = false
-    private var videoStartFailedReason: String? = nil
-    private var didVideoPlay: Bool = false
-    
-    private var isVideoStartTimerActive: Bool = false
-    private let videoStartTimeoutSeconds: TimeInterval = 1
+    private var videoStartFailed: Bool
+    private var videoStartFailedReason: String?
+    private var didVideoPlay: Bool
+    private var didAttemptPlay: Bool
+    private var isVideoStartTimerActive: Bool
+    private let videoStartTimeoutSeconds: TimeInterval = 600    
     
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.stateMachine = stateMachine
         self.config = config
         self.isPlayerReady = false
+        self.videoStartFailed = false
+        self.videoStartFailedReason = nil
+        self.didVideoPlay = false
+        self.didAttemptPlay = false
+        self.isVideoStartTimerActive = false
         lastBitrate = 0
         super.init()
         startMonitoring()
