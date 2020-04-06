@@ -50,6 +50,9 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         removeObserver(self, forKeyPath: #keyPath(player.rate), context: &AVPlayerAdapter.playerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(player.currentItem), context: &AVPlayerAdapter.playerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(player.status), context: &AVPlayerAdapter.playerKVOContext)
+        if #available(iOS 10.0, *) {
+            removeObserver(self, forKeyPath: #keyPath(player.timeControlStatus), context: &AVPlayerAdapter.playerKVOContext)
+        }
     }
 
     private func startMonitoringPlayerItem(playerItem: AVPlayerItem) {
