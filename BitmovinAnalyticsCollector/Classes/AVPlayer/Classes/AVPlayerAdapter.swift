@@ -17,7 +17,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     private var didVideoPlay: Bool
     private var didAttemptPlay: Bool
     private var isVideoStartTimerActive: Bool
-    private let videoStartTimeoutSeconds: TimeInterval = 600    
+    private let videoStartTimeoutSeconds: TimeInterval = 600
     
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
@@ -112,7 +112,7 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         let errorCode = error?.code ?? 1
         let errorMessage = error?.localizedDescription ?? "Unkown"
         
-        if (stateMachine.state == PlayerState.setup) {
+        if (!didVideoPlay) {
             videoStartFailed = true
             videoStartFailedReason = VideoStartFailedReason.playerError
         }

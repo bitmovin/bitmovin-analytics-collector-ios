@@ -217,7 +217,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onError(_ event: ErrorEvent) {
         errorCode = Int(event.code)
         errorDescription = event.description
-        if (stateMachine.state == PlayerState.setup) {
+        if (!didVideoPlay) {
             videoStartFailed = true
             videoStartFailedReason = VideoStartFailedReason.playerError
         }
