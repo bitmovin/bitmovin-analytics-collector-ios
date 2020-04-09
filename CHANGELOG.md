@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Bitmovin Player: Track playback start failure and reason
+- Bitmovin Player: Track playback start failure and reason (AN-1084)
 
 ## v1.11.0
 

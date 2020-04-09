@@ -156,7 +156,6 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
     }
     
     func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown) {
-        print("onPlayAttemptFailed with Reason \(reason)")
         videoStartFailed = true
         videoStartFailedReason = reason
         stateMachine.transitionState(destinationState: .playAttemptFailed, time: Util.timeIntervalToCMTime(_: player.currentTime))
