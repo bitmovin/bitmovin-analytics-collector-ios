@@ -142,6 +142,10 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
     }
     
     func setVideoStartTimer() {
+        if(!didAttemptPlay){
+            return
+        }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + self.videoStartTimeoutSeconds) {
             if (self.isVideoStartTimerActive)
             {
@@ -149,6 +153,7 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
             }
         }
         isVideoStartTimerActive = true
+        didAttemptPlay = true
     }
     
     func clearVideoStartTimer() {
@@ -165,7 +170,6 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
 extension BitmovinPlayerAdapter: PlayerListener {
     func onPlay(_ event: PlayEvent) {
         setVideoStartTimer()
-        didAttemptPlay = true
         stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
     
@@ -176,6 +180,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
 
     func onAdBreakStarted(_ event: AdBreakStartedEvent) {
         clearVideoStartTimer()
+        didAttemptPlay = false
     }
     
     func onPaused(_ event: PausedEvent) {
