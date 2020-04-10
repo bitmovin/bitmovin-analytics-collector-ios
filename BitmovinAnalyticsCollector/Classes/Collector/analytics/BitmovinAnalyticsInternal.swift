@@ -22,17 +22,26 @@ public class BitmovinAnalyticsInternal: NSObject {
         eventDataDispatcher = SimpleEventDataDispatcher(config: config)
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(licenseFailed(notification:)), name: .licenseFailed, object: eventDataDispatcher)
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(applicationWillTerminate(notification:)),
+            name: UIApplication.willTerminateNotification,
+            object: nil)
         
         if (config.ads) {
             self.adAnalytics = BitmovinAdAnalytics(analytics: self);
         }
     }
-
+    
+    deinit {
+        self.detachPlayer()
+    }
+    
     /**
      * Detach the current player that is being used with Bitmovin Analytics.
      */
     @objc public func detachPlayer() {
         detachAd();
+        adapter?.destroy()
         eventDataDispatcher.disable()
         stateMachine.reset()
         adapter = nil
@@ -53,6 +62,10 @@ public class BitmovinAnalyticsInternal: NSObject {
     }
     
     @objc private func licenseFailed(notification _: Notification) {
+        detachPlayer()
+    }
+    
+    @objc private func applicationWillTerminate(notification _: Notification) {
         detachPlayer()
     }
 

@@ -35,12 +35,7 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         decorateEventData(eventData: eventData)
         return eventData
     }
-
-    deinit {
-        self.isPlayerReady = false
-        stopMonitoring()
-    }
-
+    
     private func decorateEventData(eventData: EventData) {
         //PlayerType
         eventData.player = PlayerType.bitmovin.rawValue

@@ -34,18 +34,6 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         startMonitoring()
     }
 
-    deinit {
-        if (didAttemptPlay && !didVideoPlay) {
-            onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed)
-        }
-        
-        self.isPlayerReady = false
-        if let playerItem = player.currentItem {
-            stopMonitoringPlayerItem(playerItem: playerItem)
-        }
-        stopMonitoring()
-    }
-
     public func startMonitoring() {
         addObserver(self, forKeyPath: #keyPath(player.rate), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
         addObserver(self, forKeyPath: #keyPath(player.currentItem), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
@@ -56,12 +44,16 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     }
 
     public func stopMonitoring() {
+        if let playerItem = player.currentItem {
+            stopMonitoringPlayerItem(playerItem: playerItem)
+        }
         removeObserver(self, forKeyPath: #keyPath(player.rate), context: &AVPlayerAdapter.playerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(player.currentItem), context: &AVPlayerAdapter.playerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(player.status), context: &AVPlayerAdapter.playerKVOContext)
         if #available(iOS 10.0, *) {
             removeObserver(self, forKeyPath: #keyPath(player.timeControlStatus), context: &AVPlayerAdapter.playerKVOContext)
         }
+        
     }
 
     private func startMonitoringPlayerItem(playerItem: AVPlayerItem) {
