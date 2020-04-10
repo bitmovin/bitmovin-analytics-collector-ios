@@ -38,6 +38,16 @@ class CorePlayerAdapter: NSObject {
         self.isPlayerReady = false
     }
     
+    func setVideoStartFailed(withReason reason: String) {
+        videoStartFailed = true
+        videoStartFailedReason = reason
+    }
+    
+    func resetVideoStartFailed() {
+        videoStartFailed = false
+        videoStartFailedReason = nil
+    }
+    
     func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown) {
         videoStartFailed = true
         videoStartFailedReason = reason

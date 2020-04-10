@@ -105,8 +105,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         if (videoStartFailed) {
             eventData.videoStartFailed = videoStartFailed
             eventData.videoStartFailedReason = videoStartFailedReason ?? VideoStartFailedReason.unknown
-            videoStartFailed = false
-            videoStartFailedReason = nil
+            resetVideoStartFailed()
         }
     }
 
@@ -199,8 +198,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
         errorCode = Int(event.code)
         errorDescription = event.description
         if (!didVideoPlay) {
-            videoStartFailed = true
-            videoStartFailedReason = VideoStartFailedReason.playerError
+            setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
         }
         stateMachine.transitionState(destinationState: .error, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }

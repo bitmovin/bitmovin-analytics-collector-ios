@@ -91,8 +91,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         let errorMessage = error?.localizedDescription ?? "Unkown"
         
         if (!didVideoPlay) {
-            videoStartFailed = true
-            videoStartFailedReason = VideoStartFailedReason.playerError
+            setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
         }
 
         stateMachine.transitionState(destinationState: .error,
@@ -260,8 +259,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         if (videoStartFailed) {
             eventData.videoStartFailed = videoStartFailed
             eventData.videoStartFailedReason = videoStartFailedReason ?? VideoStartFailedReason.unknown
-            videoStartFailed = false
-            videoStartFailedReason = nil
+            resetVideoStartFailed()
         }
     }
 
