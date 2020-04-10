@@ -7,8 +7,10 @@ class CorePlayerAdapter: NSObject {
     internal var didAttemptPlay: Bool
     internal var videoStartFailed: Bool
     internal var videoStartFailedReason: String?
-    internal var isVideoStartTimerActive: Bool
-    internal var videoStartTimeoutSeconds: TimeInterval = 60
+    private var videoStartTimer: DispatchWorkItem?
+    
+    private var videoStartTimeoutSeconds: TimeInterval = 2
+    private var videoStartTimerId: String = "com.bitmovin.analytics.coreplayeradapter"
     
     internal var delegate: PlayerAdapter!
     
@@ -16,13 +18,15 @@ class CorePlayerAdapter: NSObject {
         self.stateMachine = stateMachine
         self.didAttemptPlay = false
         self.didVideoPlay = false
-        self.isVideoStartTimerActive = false
         self.videoStartFailedReason = nil
         self.videoStartFailed = false
         self.isPlayerReady = false
+        
         super.init()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive(notification:)), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForegroundNotification(notification:)), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
-    
     
     func destroy() {
         self.delegate.stopMonitoring()
@@ -41,17 +45,37 @@ class CorePlayerAdapter: NSObject {
     }
     
     func setVideoStartTimer() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + self.videoStartTimeoutSeconds) {
-            if (self.isVideoStartTimerActive)
-            {
-                self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout)
-            }
+        if (didVideoPlay) {
+            return
         }
-        isVideoStartTimerActive = true
+        
+        if (videoStartTimer != nil) {
+            clearVideoStartTimer()
+        }
+        
+        videoStartTimer = DispatchWorkItem {
+            self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout)
+            
+        }
+        DispatchQueue.init(label: videoStartTimerId).asyncAfter(deadline: .now() + self.videoStartTimeoutSeconds, execute: videoStartTimer!)
     }
     
     func clearVideoStartTimer() {
-        isVideoStartTimerActive = false
+        if (videoStartTimer == nil) {
+            return
+        }
+        videoStartTimer?.cancel()
+        videoStartTimer = nil
     }
 
+    @objc func willResignActive(notification _: Notification){
+        clearVideoStartTimer()
+    }
+    
+    @objc func willEnterForegroundNotification(notification _: Notification){
+        if(!didVideoPlay && didAttemptPlay) {
+            setVideoStartTimer()
+        }
+    }
+    
 }

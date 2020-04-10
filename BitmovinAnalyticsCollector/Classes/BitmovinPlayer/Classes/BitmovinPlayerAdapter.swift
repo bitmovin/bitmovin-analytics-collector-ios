@@ -6,12 +6,12 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var player: BitmovinPlayer
     private var errorCode: Int?
     private var errorDescription: String?
-    private var needForVideoStartTimer: Bool
+    private var isPlayingAd: Bool
 
     init(player: BitmovinPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.config = config
-        self.needForVideoStartTimer = true
+        self.isPlayingAd = false
         super.init(stateMachine: stateMachine)
         self.delegate = self
         startMonitoring()
@@ -125,13 +125,17 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
     
     override func setVideoStartTimer() {
-        if(!needForVideoStartTimer){
+        if(isPlayingAd){
             return
         }
         
         super.setVideoStartTimer()
-        
-        needForVideoStartTimer = false
+    }
+    
+    @objc override func willEnterForegroundNotification(notification: Notification){
+        if(!didVideoPlay && didAttemptPlay && !isPlayingAd){
+            setVideoStartTimer()
+        }
     }
 }
 
@@ -149,7 +153,11 @@ extension BitmovinPlayerAdapter: PlayerListener {
 
     func onAdBreakStarted(_ event: AdBreakStartedEvent) {
         clearVideoStartTimer()
-        needForVideoStartTimer = true
+        isPlayingAd = true
+    }
+    
+    func onAdBreakFinished(_ event: AdBreakFinishedEvent) {
+        isPlayingAd = false
     }
     
     func onPaused(_ event: PausedEvent) {
