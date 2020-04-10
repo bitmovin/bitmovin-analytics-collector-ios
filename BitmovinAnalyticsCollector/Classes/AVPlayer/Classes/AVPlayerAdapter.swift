@@ -1,45 +1,45 @@
 import AVFoundation
 import Foundation
 
-class AVPlayerAdapter: NSObject, PlayerAdapter {
+class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     static let timeJumpedDuplicateTolerance = 1_000
     static let maxSeekOperation = 10_000
     private static var playerKVOContext = 0
-    private let stateMachine: StateMachine
     private let config: BitmovinAnalyticsConfig
     private var lastBitrate: Double = 0
-    private var isPlayerReady: Bool
     @objc private var player: AVPlayer
     let lockQueue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
     var statusObserver: NSKeyValueObservation?
+    
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
-        self.stateMachine = stateMachine
         self.config = config
-        self.isPlayerReady = false
         lastBitrate = 0
-        super.init()
+        super.init(stateMachine: stateMachine)
+        self.delegate = self
         startMonitoring()
-    }
-
-    deinit {
-        self.isPlayerReady = false
-        if let playerItem = player.currentItem {
-            stopMonitoringPlayerItem(playerItem: playerItem)
-        }
-        stopMonitoring()
     }
 
     public func startMonitoring() {
         addObserver(self, forKeyPath: #keyPath(player.rate), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
         addObserver(self, forKeyPath: #keyPath(player.currentItem), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
         addObserver(self, forKeyPath: #keyPath(player.status), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
+        if #available(iOS 10.0, *) {
+            addObserver(self, forKeyPath: #keyPath(player.timeControlStatus), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
+        }
     }
 
     public func stopMonitoring() {
+        if let playerItem = player.currentItem {
+            stopMonitoringPlayerItem(playerItem: playerItem)
+        }
         removeObserver(self, forKeyPath: #keyPath(player.rate), context: &AVPlayerAdapter.playerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(player.currentItem), context: &AVPlayerAdapter.playerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(player.status), context: &AVPlayerAdapter.playerKVOContext)
+        if #available(iOS 10.0, *) {
+            removeObserver(self, forKeyPath: #keyPath(player.timeControlStatus), context: &AVPlayerAdapter.playerKVOContext)
+        }
+        
     }
 
     private func startMonitoringPlayerItem(playerItem: AVPlayerItem) {
@@ -89,6 +89,10 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
     private func errorOccured(error: NSError?) {
         let errorCode = error?.code ?? 1
         let errorMessage = error?.localizedDescription ?? "Unkown"
+        
+        if (!didVideoPlay) {
+            setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
+        }
 
         stateMachine.transitionState(destinationState: .error,
                                      time: player.currentTime(),
@@ -154,6 +158,14 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
             }
         } else if keyPath == #keyPath(player.status) && player.status == .failed {
             errorOccured(error: self.player.currentItem?.error as NSError?)
+        } else if #available(iOS 10.0, *), keyPath == #keyPath(player.timeControlStatus) && !didVideoPlay {
+            if (player.timeControlStatus == AVPlayer.TimeControlStatus.waitingToPlayAtSpecifiedRate) {
+                setVideoStartTimer()
+                didAttemptPlay = true
+            } else if (player.timeControlStatus == AVPlayer.TimeControlStatus.playing){
+                clearVideoStartTimer()
+                didVideoPlay = true
+            }
         }
     }
 
@@ -241,6 +253,13 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
         // isMuted
         if player.volume == 0 {
             eventData.isMuted = true
+        }
+        
+        // play attempt
+        if (videoStartFailed) {
+            eventData.videoStartFailed = videoStartFailed
+            eventData.videoStartFailedReason = videoStartFailedReason ?? VideoStartFailedReason.unknown
+            resetVideoStartFailed()
         }
     }
 

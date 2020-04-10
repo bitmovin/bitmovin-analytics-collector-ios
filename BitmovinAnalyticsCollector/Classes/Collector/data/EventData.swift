@@ -79,6 +79,8 @@ public class EventData: Codable {
     var subtitleEnabled: Bool?
     var subtitleLanguage: String?
     var audioLanguage: String?
+    var videoStartFailed: Bool?
+    var videoStartFailedReason: String?
 
     public init(config: BitmovinAnalyticsConfig, impressionId: String) {
         domain = Util.mainBundleIdentifier()

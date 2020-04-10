@@ -50,12 +50,13 @@ public class StateMachine {
             return
         } else {
             let timestamp = Date().timeIntervalSince1970Millis
+            let previousState = state
             videoTimeEnd = time
             state.onExit(stateMachine: self, timestamp: timestamp, destinationState: destinationState)
             state = destinationState
             enterTimestamp = timestamp
             videoTimeStart = videoTimeEnd
-            state.onEntry(stateMachine: self, timestamp: timestamp, destinationState: destinationState, data: data)
+            state.onEntry(stateMachine: self, timestamp: timestamp, previousState: previousState, data: data)
         }
     }
 

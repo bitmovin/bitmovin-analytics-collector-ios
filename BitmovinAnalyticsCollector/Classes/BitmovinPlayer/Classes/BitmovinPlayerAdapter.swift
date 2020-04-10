@@ -1,20 +1,19 @@
 import Foundation
 import BitmovinPlayer
 
-class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
-    private let stateMachine: StateMachine
+class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
     private var player: BitmovinPlayer
     private var errorCode: Int?
     private var errorDescription: String?
-    private var isPlayerReady: Bool
+    private var isPlayingAd: Bool
 
     init(player: BitmovinPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
-        self.stateMachine = stateMachine
         self.config = config
-        self.isPlayerReady = false
-        super.init()
+        self.isPlayingAd = false
+        super.init(stateMachine: stateMachine)
+        self.delegate = self
         startMonitoring()
     }
 
@@ -23,12 +22,8 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         decorateEventData(eventData: eventData)
         return eventData
     }
-
-    deinit {
-        self.isPlayerReady = false
-        stopMonitoring()
-    }
-
+    
+    
     private func decorateEventData(eventData: EventData) {
         //PlayerType
         eventData.player = PlayerType.bitmovin.rawValue
@@ -106,6 +101,12 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         }
 
         eventData.audioLanguage = player.audio?.language
+        
+        if (videoStartFailed) {
+            eventData.videoStartFailed = videoStartFailed
+            eventData.videoStartFailedReason = videoStartFailedReason ?? VideoStartFailedReason.unknown
+            resetVideoStartFailed()
+        }
     }
 
     func startMonitoring() {
@@ -121,13 +122,43 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
             return Util.timeIntervalToCMTime(_: player.currentTime)
         }
     }
+    
+    override func setVideoStartTimer() {
+        if(isPlayingAd){
+            return
+        }
+        
+        super.setVideoStartTimer()
+    }
+    
+    @objc override func willEnterForegroundNotification(notification: Notification){
+        if(!didVideoPlay && didAttemptPlay && !isPlayingAd){
+            setVideoStartTimer()
+        }
+    }
 }
 
 extension BitmovinPlayerAdapter: PlayerListener {
     func onPlay(_ event: PlayEvent) {
+        setVideoStartTimer()
+        didAttemptPlay = true
         stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
+    
+    func onPlaying(_ event: PlayingEvent) {
+        clearVideoStartTimer()
+        didVideoPlay = true
+    }
 
+    func onAdBreakStarted(_ event: AdBreakStartedEvent) {
+        clearVideoStartTimer()
+        isPlayingAd = true
+    }
+    
+    func onAdBreakFinished(_ event: AdBreakFinishedEvent) {
+        isPlayingAd = false
+    }
+    
     func onPaused(_ event: PausedEvent) {
         stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
@@ -166,6 +197,9 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onError(_ event: ErrorEvent) {
         errorCode = Int(event.code)
         errorDescription = event.description
+        if (!didVideoPlay) {
+            setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
+        }
         stateMachine.transitionState(destinationState: .error, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
 
@@ -174,6 +208,12 @@ extension BitmovinPlayerAdapter: PlayerListener {
             stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.currentTime))
         } else {
             stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        }
+    }
+    
+    func onSourceWillUnload(_ event: SourceWillUnloadEvent) {
+        if (!didVideoPlay && didAttemptPlay) {
+            self.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed)
         }
     }
     

@@ -8,6 +8,7 @@ class BitmovinViewController: UIViewController {
     private var analyticsCollector: BitmovinPlayerCollector
     private var config: BitmovinAnalyticsConfig
     let url = URL(string: "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
+    let corruptedUrl = URL(string: "http://bitdash-a.akamaihd.net/content/analytics-teststreams/redbull-parkour/corrupted_first_segment.mpd")
     @IBOutlet var playerView: UIView!
     @IBOutlet var doneButton: UIButton!
     @IBOutlet var reloadButton: UIButton!
@@ -69,39 +70,52 @@ class BitmovinViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let streamUrl = url else {
-            return
-        }
-
         self.playerView.backgroundColor = .black
 
         // Create player configuration
+        guard let config = getPlayerConfig() else {
+            return
+        }
+            
+        // Create player based on player configuration
+        let player = BitmovinPlayer(configuration: config)
+
+        analyticsCollector.attachPlayer(player: player)
+        
+        // Create player view and pass the player instance to it
+        let playerBoundary = BMPBitmovinPlayerView(player: player, frame: .zero)
+
+        playerBoundary.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        playerBoundary.frame = playerView.bounds
+
+        playerView.addSubview(playerBoundary)
+        playerView.bringSubviewToFront(playerBoundary)
+
+        self.player = player
+    }
+    
+    func getPlayerConfig(enableAds: Bool = false) -> PlayerConfiguration? {
+        guard let streamUrl = corruptedUrl else {
+            return nil
+        }
+        
+        // Create player configuration
         let config = PlayerConfiguration()
-        config.advertisingConfiguration = getAdvertisingConfiguration()
+        
+        if (enableAds) {
+            config.advertisingConfiguration = getAdvertisingConfiguration()
+        }
         
         do {
             try config.setSourceItem(url: streamUrl)
             
             config.playbackConfiguration.isMuted = true
-            config.playbackConfiguration.isAutoplayEnabled = true
-            
-            // Create player based on player configuration
-            let player = BitmovinPlayer(configuration: config)
-
-            analyticsCollector.attachPlayer(player: player)
-            
-            // Create player view and pass the player instance to it
-            let playerBoundary = BMPBitmovinPlayerView(player: player, frame: .zero)
-
-            playerBoundary.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-            playerBoundary.frame = playerView.bounds
-
-            playerView.addSubview(playerBoundary)
-            playerView.bringSubviewToFront(playerBoundary)
-
-            self.player = player
+            config.playbackConfiguration.isAutoplayEnabled = false
         } catch {
+            
         }
+        
+        return config
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -125,22 +139,13 @@ class BitmovinViewController: UIViewController {
             return
         }
 
-        // Define needed resources
-        guard let streamUrl = url else {
+        guard let config = getPlayerConfig() else {
             return
         }
+        
+        // Create player based on player configuration
+        self.player?.load(sourceConfiguration: config.sourceConfiguration)
 
-        do {
-            let config = PlayerConfiguration()
-            config.advertisingConfiguration = getAdvertisingConfiguration()
-            try config.setSourceItem(url: streamUrl)
-
-            // Create player based on player configuration
-            self.player?.load(sourceConfiguration: config.sourceConfiguration)
-
-            analyticsCollector.attachPlayer(player: player)
-
-        } catch {
-        }
+        analyticsCollector.attachPlayer(player: player)
     }
 }
