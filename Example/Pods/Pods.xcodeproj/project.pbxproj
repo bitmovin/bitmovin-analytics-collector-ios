@@ -114,6 +114,7 @@
 		EBD1A95DC351DC3FB1DE2550FE425C5F /* AdSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF2CFAF293A09F7F2E2F496EB7783C /* AdSample.swift */; };
 		EC2CC1AD242A074100443B2B /* BitmovinPlayerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2CC1AC242A074100443B2B /* BitmovinPlayerUtil.swift */; };
 		EC2CC1AE242A075900443B2B /* BitmovinPlayerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2CC1AC242A074100443B2B /* BitmovinPlayerUtil.swift */; };
+		EC74F38D24403C2D009634F3 /* CorePlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC74F38C24403C2D009634F3 /* CorePlayerAdapter.swift */; };
 		ECC21DC92436F5B900697A88 /* VideoStartFailedReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC21DC82436F5B900697A88 /* VideoStartFailedReason.swift */; };
 		ECC21DCA2436F5B900697A88 /* VideoStartFailedReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC21DC82436F5B900697A88 /* VideoStartFailedReason.swift */; };
 		EF24AF53C7CB8D0E608E2F8530AC0389 /* BitmovinAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDA3B8EAF6D4E2BAB88D9625C2BF198 /* BitmovinAnalytics.swift */; };
@@ -249,6 +250,7 @@
 		E77FC1037B60FCAAA19E99D1D60842EF /* BitmovinAnalyticsCollector-tvOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "BitmovinAnalyticsCollector-tvOS.xcconfig"; path = "../BitmovinAnalyticsCollector-tvOS/BitmovinAnalyticsCollector-tvOS.xcconfig"; sourceTree = "<group>"; };
 		EA7E7F41514B70B5FD1C46253B14E048 /* StreamType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StreamType.swift; sourceTree = "<group>"; };
 		EC2CC1AC242A074100443B2B /* BitmovinPlayerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitmovinPlayerUtil.swift; sourceTree = "<group>"; };
+		EC74F38C24403C2D009634F3 /* CorePlayerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorePlayerAdapter.swift; sourceTree = "<group>"; };
 		ECC21DC82436F5B900697A88 /* VideoStartFailedReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStartFailedReason.swift; sourceTree = "<group>"; };
 		F00E1EFC92D5A2F3A1AAFB3EDC53B0A6 /* BitmovinAnalyticsCollector-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BitmovinAnalyticsCollector-iOS-Info.plist"; sourceTree = "<group>"; };
 		F6A9FAEC770604A4F9B03ADB55CF861B /* AVPlayerAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AVPlayerAdapter.swift; path = BitmovinAnalyticsCollector/Classes/AVPlayer/Classes/AVPlayerAdapter.swift; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 		316E07B33B3379E3C2D1D47B531963F9 /* adapters */ = {
 			isa = PBXGroup;
 			children = (
+				EC74F38C24403C2D009634F3 /* CorePlayerAdapter.swift */,
 				DA919D4EEDF874BC58DA424C289FD971 /* AdAdapter.swift */,
 				741DB639E940EBD37F317BC334DEC0CE /* PlayerAdapter.swift */,
 			);
@@ -828,6 +831,7 @@
 				A5D015978357C2BEEA7C3AF08C5C347B /* AdModuleInformation.swift in Sources */,
 				9904C84B0B8D12C9F1621B0921A4B3F5 /* AdPosition.swift in Sources */,
 				0B345CD3E2089A080C238CF94BD34800 /* AnalyticsAdQuartile.swift in Sources */,
+				EC74F38D24403C2D009634F3 /* CorePlayerAdapter.swift in Sources */,
 				E718DC62694885A39DAF15598DF39AB8 /* AdSample.swift in Sources */,
 				1536E472FB626B473B92CE842104246F /* AdTagType.swift in Sources */,
 				C843E75AB2D82AAC74CFA9F0295B1DD8 /* AnalyticsAd.swift in Sources */,
