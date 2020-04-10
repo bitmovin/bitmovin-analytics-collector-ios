@@ -1,36 +1,22 @@
 import AVFoundation
 import Foundation
 
-class AVPlayerAdapter: NSObject, PlayerAdapter {
+class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     static let timeJumpedDuplicateTolerance = 1_000
     static let maxSeekOperation = 10_000
     private static var playerKVOContext = 0
-    private let stateMachine: StateMachine
     private let config: BitmovinAnalyticsConfig
     private var lastBitrate: Double = 0
-    private var isPlayerReady: Bool
     @objc private var player: AVPlayer
     let lockQueue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
     var statusObserver: NSKeyValueObservation?
-    private var videoStartFailed: Bool
-    private var videoStartFailedReason: String?
-    private var didVideoPlay: Bool
-    private var didAttemptPlay: Bool
-    private var isVideoStartTimerActive: Bool
-    private let videoStartTimeoutSeconds: TimeInterval = 600
     
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
-        self.stateMachine = stateMachine
         self.config = config
-        self.isPlayerReady = false
-        self.videoStartFailed = false
-        self.videoStartFailedReason = nil
-        self.didVideoPlay = false
-        self.didAttemptPlay = false
-        self.isVideoStartTimerActive = false
         lastBitrate = 0
-        super.init()
+        super.init(stateMachine: stateMachine)
+        self.delegate = self
         startMonitoring()
     }
 
@@ -182,26 +168,6 @@ class AVPlayerAdapter: NSObject, PlayerAdapter {
                 didVideoPlay = true
             }
         }
-    }
-    
-    func setVideoStartTimer() {
-        lockQueue.asyncAfter(deadline: .now() + self.videoStartTimeoutSeconds) {
-            if (self.isVideoStartTimerActive)
-            {
-                self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout)
-            }
-        }
-        isVideoStartTimerActive = true
-    }
-    
-    func clearVideoStartTimer() {
-        isVideoStartTimerActive = false
-    }
-    
-    func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown) {
-        videoStartFailed = true
-        videoStartFailedReason = reason
-        stateMachine.transitionState(destinationState: .playAttemptFailed, time: self.player.currentTime())
     }
 
     public func createEventData() -> EventData {

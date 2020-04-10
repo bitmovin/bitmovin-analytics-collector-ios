@@ -1,32 +1,19 @@
 import Foundation
 import BitmovinPlayer
 
-class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
-    private let stateMachine: StateMachine
+class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
     private var player: BitmovinPlayer
     private var errorCode: Int?
     private var errorDescription: String?
-    private var videoStartFailed: Bool
-    private var videoStartFailedReason: String?
-    private var isVideoStartTimerActive: Bool
-    private var didVideoPlay: Bool
-    private var isPlayerReady: Bool
-    private var didAttemptPlay: Bool
-    
-    private let videoStartTimeoutSeconds: TimeInterval = 600
+    private var needForVideoStartTimer: Bool
 
     init(player: BitmovinPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
-        self.stateMachine = stateMachine
         self.config = config
-        self.isPlayerReady = false
-        self.didAttemptPlay = false
-        self.didVideoPlay = false
-        self.isVideoStartTimerActive = false
-        self.videoStartFailedReason = nil
-        self.videoStartFailed = false
-        super.init()
+        self.needForVideoStartTimer = true
+        super.init(stateMachine: stateMachine)
+        self.delegate = self
         startMonitoring()
     }
 
@@ -35,6 +22,7 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         decorateEventData(eventData: eventData)
         return eventData
     }
+    
     
     private func decorateEventData(eventData: EventData) {
         //PlayerType
@@ -136,35 +124,21 @@ class BitmovinPlayerAdapter: NSObject, PlayerAdapter {
         }
     }
     
-    func setVideoStartTimer() {
-        if(!didAttemptPlay){
+    override func setVideoStartTimer() {
+        if(!needForVideoStartTimer){
             return
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + self.videoStartTimeoutSeconds) {
-            if (self.isVideoStartTimerActive)
-            {
-                self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout)
-            }
-        }
-        isVideoStartTimerActive = true
-        didAttemptPlay = true
-    }
-    
-    func clearVideoStartTimer() {
-        isVideoStartTimerActive = false
-    }
-    
-    func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown) {
-        videoStartFailed = true
-        videoStartFailedReason = reason
-        stateMachine.transitionState(destinationState: .playAttemptFailed, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        super.setVideoStartTimer()
+        
+        needForVideoStartTimer = false
     }
 }
 
 extension BitmovinPlayerAdapter: PlayerListener {
     func onPlay(_ event: PlayEvent) {
         setVideoStartTimer()
+        didAttemptPlay = true
         stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
     
@@ -175,7 +149,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
 
     func onAdBreakStarted(_ event: AdBreakStartedEvent) {
         clearVideoStartTimer()
-        didAttemptPlay = false
+        needForVideoStartTimer = true
     }
     
     func onPaused(_ event: PausedEvent) {
