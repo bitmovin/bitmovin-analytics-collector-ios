@@ -205,10 +205,13 @@ extension BitmovinPlayerAdapter: PlayerListener {
         }
     }
     
-    func onSourceUnloaded(_ event: SourceUnloadedEvent) {
+    func onSourceWillUnload(_ event: SourceWillUnloadEvent) {
         if (!didVideoPlay && didAttemptPlay) {
             self.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed)
         }
+    }
+    
+    func onSourceUnloaded(_ event: SourceUnloadedEvent) {
         stateMachine.reset()
     }
     
