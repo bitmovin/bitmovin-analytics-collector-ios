@@ -58,7 +58,7 @@ class BitmovinViewController: UIViewController {
         
         let preRoll = AdItem(adSources: [adScource4], atPosition: "pre")
 //        let midRoll = AdItem(adSources: [adScource], atPosition: "mid")
-        let cusotmMidRoll = AdItem(adSources: [adScource4], atPosition: "10%")
+        let customMidRoll = AdItem(adSources: [adScource4], atPosition: "10%")
 //        let postRoll = AdItem(adSources: [adScource], atPosition: "post")
 
         return AdvertisingConfiguration(schedule: [preRoll])
