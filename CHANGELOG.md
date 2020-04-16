@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Fixed
+
+- Bitmovin Player: use correct error message from `ErrorEvent` (AN-1325)
+
 ## 1.12.0
 
 ### Added
