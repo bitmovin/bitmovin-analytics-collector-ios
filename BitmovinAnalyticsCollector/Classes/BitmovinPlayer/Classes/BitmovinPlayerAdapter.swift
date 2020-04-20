@@ -5,7 +5,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
     private var player: BitmovinPlayer
     private var errorCode: Int?
-    private var errorDescription: String?
+    private var errorMessage: String?
     private var isPlayingAd: Bool
 
     init(player: BitmovinPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
@@ -33,7 +33,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
         //ErrorCode
         eventData.errorCode = errorCode
-        eventData.errorMessage = errorDescription
+        eventData.errorMessage = errorMessage
 
         //Duration
         if !player.duration.isNaN && !player.duration.isInfinite {
@@ -196,7 +196,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
 
     func onError(_ event: ErrorEvent) {
         errorCode = Int(event.code)
-        errorDescription = event.description
+        errorMessage = event.message
         if (!didVideoPlay) {
             setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
         }
