@@ -14,6 +14,10 @@ public class StateMachine {
     private(set) var impressionId: String
     weak var delegate: StateMachineDelegate?
     weak private var heartbeatTimer: Timer?
+    let rebufferHeartbeatQueue = DispatchQueue.init(label: "com.bitmovin.analytics.core.statemachine")
+    private var rebufferHeartbeatTimer: DispatchWorkItem?
+    private var currentRebufferIntervalIndex: Int = 0
+    private let rebufferHeartbeatInterval: [Int64] = [3000, 5000, 10000, 59700]
 
     var startupTime: Int64 {
         guard let firstReadyTimestamp = firstReadyTimestamp else {
@@ -31,7 +35,8 @@ public class StateMachine {
     }
 
     deinit {
-        heartbeatTimer?.invalidate()
+        disableHeartbeat()
+        disableRebufferHeartbeat()
     }
 
     public func reset() {
@@ -39,6 +44,7 @@ public class StateMachine {
         initialTimestamp = Date().timeIntervalSince1970Millis
         firstReadyTimestamp = nil
         disableHeartbeat()
+        disableRebufferHeartbeat()
         state = .setup
         print("Generated Bitmovin Analytics impression ID: " +  impressionId.lowercased())
     }
@@ -75,6 +81,26 @@ public class StateMachine {
 
     func disableHeartbeat() {
         heartbeatTimer?.invalidate()
+    }
+    
+    func enableRebufferHeartbeat() {
+        self.rebufferHeartbeatTimer = DispatchWorkItem {
+            self.onHeartbeat()
+            self.currentRebufferIntervalIndex = min(self.currentRebufferIntervalIndex + 1, self.rebufferHeartbeatInterval.count - 1)
+            self.rebufferHeartbeatQueue.asyncAfter(deadline: self.getRebufferDeadline(), execute: self.rebufferHeartbeatTimer!)
+        }
+        self.rebufferHeartbeatQueue.asyncAfter(deadline: getRebufferDeadline(), execute: self.rebufferHeartbeatTimer!)
+    }
+
+    func disableRebufferHeartbeat() {
+        self.rebufferHeartbeatTimer?.cancel()
+        self.rebufferHeartbeatTimer = nil
+        self.currentRebufferIntervalIndex = 0
+    }
+    
+    private func getRebufferDeadline() -> DispatchTime {
+        let interval = Double(rebufferHeartbeatInterval[currentRebufferIntervalIndex]) / 1_000.0
+        return DispatchTime.now() + interval
     }
 
     @objc func onHeartbeat() {

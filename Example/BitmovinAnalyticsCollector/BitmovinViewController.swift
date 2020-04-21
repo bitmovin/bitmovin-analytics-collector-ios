@@ -95,7 +95,7 @@ class BitmovinViewController: UIViewController {
     }
     
     func getPlayerConfig(enableAds: Bool = false) -> PlayerConfiguration? {
-        guard let streamUrl = corruptedUrl else {
+        guard let streamUrl = url else {
             return nil
         }
         

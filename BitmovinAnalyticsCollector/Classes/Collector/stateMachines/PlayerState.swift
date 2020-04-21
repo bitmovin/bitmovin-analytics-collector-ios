@@ -17,6 +17,7 @@ public enum PlayerState: String {
         case .setup:
             return
         case .buffering:
+            stateMachine.enableRebufferHeartbeat()
             return
         case .playAttemptFailed:
             return
@@ -57,6 +58,7 @@ public enum PlayerState: String {
             stateMachine.delegate?.stateMachineDidExitSetup(stateMachine)
             return
         case .buffering:
+            stateMachine.disableRebufferHeartbeat()
             stateMachine.delegate?.stateMachine(stateMachine, didExitBufferingWithDuration: duration)
             return
         case .playAttemptFailed:

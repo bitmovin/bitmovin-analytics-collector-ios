@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Added
+
+- heartbeat during Rebuffer state (AN-1283)
+
 ### Fixed
 
 - Bitmovin Player: use correct error message from `ErrorEvent` (AN-1325)
