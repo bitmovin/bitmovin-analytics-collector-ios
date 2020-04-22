@@ -85,6 +85,10 @@ public class StateMachine {
     
     func enableRebufferHeartbeat() {
         self.rebufferHeartbeatTimer = DispatchWorkItem {
+            if (self.rebufferHeartbeatTimer == nil){
+                return
+            }
+            
             self.onHeartbeat()
             self.currentRebufferIntervalIndex = min(self.currentRebufferIntervalIndex + 1, self.rebufferHeartbeatInterval.count - 1)
             self.rebufferHeartbeatQueue.asyncAfter(deadline: self.getRebufferDeadline(), execute: self.rebufferHeartbeatTimer!)
