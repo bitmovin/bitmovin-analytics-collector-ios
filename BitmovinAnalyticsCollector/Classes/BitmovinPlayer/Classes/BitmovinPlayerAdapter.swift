@@ -145,7 +145,12 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onPlay(_ event: PlayEvent) {
         setVideoStartTimer()
         didAttemptPlay = true
-        stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        if (!isStalling){
+            stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
+            
+        } else {
+            stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        }
     }
     
     func onPlaying(_ event: PlayingEvent) {
@@ -191,7 +196,9 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onSeeked(_ event: SeekedEvent) {
-        transitionToPausedOrBufferingOrPlaying()
+        if (!isStalling){
+            transitionToPausedOrBufferingOrPlaying()
+        }
     }
 
     func onPlaybackFinished(_ event: PlaybackFinishedEvent) {
@@ -209,11 +216,11 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func transitionToPausedOrBufferingOrPlaying() {
-        if player.isPaused {
-            stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.currentTime))
-        } else if isStalling {
+        if isStalling {
             // Player reports isPlaying=true although onStallEnded has not been called yet -- still stalling
             stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        } else if player.isPaused {
+            stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.currentTime))
         } else {
             stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
         }
