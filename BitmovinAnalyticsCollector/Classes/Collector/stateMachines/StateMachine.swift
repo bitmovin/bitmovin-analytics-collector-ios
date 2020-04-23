@@ -85,7 +85,7 @@ public class StateMachine {
     
     func enableRebufferHeartbeat() {
         self.rebufferHeartbeatTimer = DispatchWorkItem {
-            if (self.rebufferHeartbeatTimer == nil){
+            guard self.rebufferHeartbeatTimer != nil else {
                 return
             }
             
