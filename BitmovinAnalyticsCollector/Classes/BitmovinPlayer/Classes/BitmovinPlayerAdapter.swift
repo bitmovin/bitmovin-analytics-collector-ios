@@ -7,11 +7,13 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var errorCode: Int?
     private var errorMessage: String?
     private var isPlayingAd: Bool
+    private var isStalling: Bool
 
     init(player: BitmovinPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.config = config
         self.isPlayingAd = false
+        self.isStalling = false
         super.init(stateMachine: stateMachine)
         self.delegate = self
         startMonitoring()
@@ -115,6 +117,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
     func stopMonitoring() {
         player.remove(listener: self)
+        isStalling = false
     }
     
     var currentTime: CMTime? {
@@ -142,7 +145,12 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onPlay(_ event: PlayEvent) {
         setVideoStartTimer()
         didAttemptPlay = true
-        stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        if (!isStalling){
+            stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
+            
+        } else {
+            stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        }
     }
     
     func onPlaying(_ event: PlayingEvent) {
@@ -165,15 +173,17 @@ extension BitmovinPlayerAdapter: PlayerListener {
 
     func onReady(_ event: ReadyEvent) {
         self.isPlayerReady = true
-        transitionToPausedOrPlaying()
+        transitionToPausedOrBufferingOrPlaying()
     }
 
     func onStallStarted(_ event: StallStartedEvent) {
+        isStalling = true
         stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
 
     func onStallEnded(_ event: StallEndedEvent) {
-        transitionToPausedOrPlaying()
+        isStalling = false
+        transitionToPausedOrBufferingOrPlaying()
     }
 
     func onSeek(_ event: SeekEvent) {
@@ -182,11 +192,13 @@ extension BitmovinPlayerAdapter: PlayerListener {
 
     func onVideoDownloadQualityChanged(_ event: VideoDownloadQualityChangedEvent) {
         stateMachine.transitionState(destinationState: .qualitychange, time: Util.timeIntervalToCMTime(_: player.currentTime))
-        transitionToPausedOrPlaying()
+        transitionToPausedOrBufferingOrPlaying()
     }
 
     func onSeeked(_ event: SeekedEvent) {
-        transitionToPausedOrPlaying()
+        if (!isStalling){
+            transitionToPausedOrBufferingOrPlaying()
+        }
     }
 
     func onPlaybackFinished(_ event: PlaybackFinishedEvent) {
@@ -203,8 +215,11 @@ extension BitmovinPlayerAdapter: PlayerListener {
         stateMachine.transitionState(destinationState: .error, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
 
-    func transitionToPausedOrPlaying() {
-        if player.isPaused {
+    func transitionToPausedOrBufferingOrPlaying() {
+        if isStalling {
+            // Player reports isPlaying=true although onStallEnded has not been called yet -- still stalling
+            stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        } else if player.isPaused {
             stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.currentTime))
         } else {
             stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
@@ -226,7 +241,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
             return
         }
         stateMachine.transitionState(destinationState: .subtitlechange, time: Util.timeIntervalToCMTime(_: player.currentTime))
-        transitionToPausedOrPlaying()
+        transitionToPausedOrBufferingOrPlaying()
     }
 
     func onAudioChanged(_ event: AudioChangedEvent) {
@@ -234,6 +249,6 @@ extension BitmovinPlayerAdapter: PlayerListener {
             return
         }
         stateMachine.transitionState(destinationState: .audiochange, time: Util.timeIntervalToCMTime(_: player.currentTime))
-        transitionToPausedOrPlaying()
+        transitionToPausedOrBufferingOrPlaying()
     }
 }

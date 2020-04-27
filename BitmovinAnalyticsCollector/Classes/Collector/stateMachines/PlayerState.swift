@@ -49,6 +49,7 @@ public enum PlayerState: String {
         let enterTimestamp = stateMachine.enterTimestamp ?? 0
         let duration = timestamp - enterTimestamp
         if (destinationState == .playAttemptFailed) {
+            stateMachine.disableRebufferHeartbeat()
             stateMachine.delegate?.stateMachineEnterPlayAttemptFailed(stateMachine: stateMachine)
             return
         }
