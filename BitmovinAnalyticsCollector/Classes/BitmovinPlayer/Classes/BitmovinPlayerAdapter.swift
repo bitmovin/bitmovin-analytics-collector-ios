@@ -147,7 +147,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onPlay(_ event: PlayEvent) {
         setVideoStartTimer()
         didAttemptPlay = true
-        if (!isSeeking && !isStalling){
+        if (!isSeeking && !isStalling) {
             stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
         } else if (isStalling && stateMachine.state != .seeking && stateMachine.state != .buffering) {
              stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
@@ -180,9 +180,8 @@ extension BitmovinPlayerAdapter: PlayerListener {
 
     func onStallStarted(_ event: StallStartedEvent) {
         isStalling = true
-        if (stateMachine.state != .seeking) {
-            stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
-        }
+        stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        
     }
 
     func onStallEnded(_ event: StallEndedEvent) {
@@ -196,7 +195,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onVideoDownloadQualityChanged(_ event: VideoDownloadQualityChangedEvent) {
-        if (!isStalling && !isSeeking){
+        if (!isStalling && !isSeeking) {
             stateMachine.transitionState(destinationState: .qualitychange, time: Util.timeIntervalToCMTime(_: player.currentTime))
             transitionToPausedOrBufferingOrPlaying()
         }
