@@ -65,7 +65,7 @@ public class StateMachine {
     }
     
     private func checkUnallowedTransitions(destinationState: PlayerState) -> Bool{
-        let allowed = true
+        var allowed = true
         if state == destinationState {
             allowed = false
         } else if state == .buffering && destinationState == .qualitychange {
