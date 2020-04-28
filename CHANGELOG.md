@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+## 1.13.0
+
 ### Added
 
 - heartbeat during Rebuffer state (AN-1283)
