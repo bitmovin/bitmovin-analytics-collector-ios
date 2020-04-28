@@ -24,7 +24,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         addObserver(self, forKeyPath: #keyPath(player.rate), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
         addObserver(self, forKeyPath: #keyPath(player.currentItem), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
         addObserver(self, forKeyPath: #keyPath(player.status), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
-        if #available(iOS 10.0, *) {
+        if #available(iOS 10.0, *), #available(tvOS 10.0, *) {
             addObserver(self, forKeyPath: #keyPath(player.timeControlStatus), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
         }
     }
@@ -36,7 +36,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         removeObserver(self, forKeyPath: #keyPath(player.rate), context: &AVPlayerAdapter.playerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(player.currentItem), context: &AVPlayerAdapter.playerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(player.status), context: &AVPlayerAdapter.playerKVOContext)
-        if #available(iOS 10.0, *) {
+        if #available(iOS 10.0, *), #available(tvOS 10.0, *) {
             removeObserver(self, forKeyPath: #keyPath(player.timeControlStatus), context: &AVPlayerAdapter.playerKVOContext)
         }
         
@@ -158,7 +158,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             }
         } else if keyPath == #keyPath(player.status) && player.status == .failed {
             errorOccured(error: self.player.currentItem?.error as NSError?)
-        } else if #available(iOS 10.0, *), keyPath == #keyPath(player.timeControlStatus) && !didVideoPlay {
+        } else if #available(iOS 10.0, *), #available(tvOS 10.0, *) , keyPath == #keyPath(player.timeControlStatus) && !didVideoPlay {
             if (player.timeControlStatus == AVPlayer.TimeControlStatus.waitingToPlayAtSpecifiedRate) {
                 setVideoStartTimer()
                 didAttemptPlay = true
