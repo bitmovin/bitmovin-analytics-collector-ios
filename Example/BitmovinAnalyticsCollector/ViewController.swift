@@ -69,9 +69,9 @@ class ViewController: UIViewController {
 
     @IBAction func createPlayer() {
         addObserver(self, forKeyPath: #keyPath(ViewController.player.currentItem.duration), options: [.new, .initial], context: &ViewController.playerViewControllerKVOContext)
-        let asset = AVURLAsset(url: corruptedUrl!, options: nil)
+        let asset = AVURLAsset(url: url!, options: nil)
         player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
-//        player.play()
+        player.play()
         let interval = CMTimeMake(value: 1, timescale: 1)
         timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { [unowned self] time in
             let position = Float(CMTimeGetSeconds(time))

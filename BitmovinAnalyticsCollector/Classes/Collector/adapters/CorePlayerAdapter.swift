@@ -9,7 +9,7 @@ class CorePlayerAdapter: NSObject {
     internal var videoStartFailedReason: String?
     private var videoStartTimer: DispatchWorkItem?
     
-    private var videoStartTimeoutSeconds: TimeInterval = 2
+    private var videoStartTimeoutSeconds: TimeInterval = 60
     private var videoStartTimerId: String = "com.bitmovin.analytics.coreplayeradapter"
     
     internal var delegate: PlayerAdapter!

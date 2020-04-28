@@ -7,6 +7,7 @@ class BitmovinViewController: UIViewController {
     var player: BitmovinPlayer?
     private var analyticsCollector: BitmovinPlayerCollector
     private var config: BitmovinAnalyticsConfig
+    private let debugger: DebugBitmovinPlayerEvents = DebugBitmovinPlayerEvents()
     let url = URL(string: "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
     let corruptedUrl = URL(string: "http://bitdash-a.akamaihd.net/content/analytics-teststreams/redbull-parkour/corrupted_first_segment.mpd")
     @IBOutlet var playerView: UIView!
@@ -80,8 +81,8 @@ class BitmovinViewController: UIViewController {
         // Create player based on player configuration
         let player = BitmovinPlayer(configuration: config)
 
+        player.add(listener: debugger)
         analyticsCollector.attachPlayer(player: player)
-        
         // Create player view and pass the player instance to it
         let playerBoundary = BMPBitmovinPlayerView(player: player, frame: .zero)
 

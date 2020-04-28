@@ -8,12 +8,14 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var errorMessage: String?
     private var isPlayingAd: Bool
     private var isStalling: Bool
+    private var isSeeking: Bool
 
     init(player: BitmovinPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.config = config
         self.isPlayingAd = false
         self.isStalling = false
+        self.isSeeking = false
         super.init(stateMachine: stateMachine)
         self.delegate = self
         startMonitoring()
@@ -145,11 +147,10 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onPlay(_ event: PlayEvent) {
         setVideoStartTimer()
         didAttemptPlay = true
-        if (!isStalling){
+        if (!isSeeking && !isStalling) {
             stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
-            
-        } else {
-            stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        } else if (isStalling && stateMachine.state != .seeking && stateMachine.state != .buffering) {
+             stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
         }
     }
     
@@ -168,6 +169,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
     
     func onPaused(_ event: PausedEvent) {
+        isSeeking = false
         stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
 
@@ -179,6 +181,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onStallStarted(_ event: StallStartedEvent) {
         isStalling = true
         stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        
     }
 
     func onStallEnded(_ event: StallEndedEvent) {
@@ -187,15 +190,19 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onSeek(_ event: SeekEvent) {
+        isSeeking = true
         stateMachine.transitionState(destinationState: .seeking, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
 
     func onVideoDownloadQualityChanged(_ event: VideoDownloadQualityChangedEvent) {
-        stateMachine.transitionState(destinationState: .qualitychange, time: Util.timeIntervalToCMTime(_: player.currentTime))
-        transitionToPausedOrBufferingOrPlaying()
+        if (!isStalling && !isSeeking) {
+            stateMachine.transitionState(destinationState: .qualitychange, time: Util.timeIntervalToCMTime(_: player.currentTime))
+            transitionToPausedOrBufferingOrPlaying()
+        }
     }
 
     func onSeeked(_ event: SeekedEvent) {
+        isSeeking = false
         if (!isStalling){
             transitionToPausedOrBufferingOrPlaying()
         }

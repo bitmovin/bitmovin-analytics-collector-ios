@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 - Bitmovin Player: use correct error message from `ErrorEvent` (AN-1325)
-- Bitmovin Player: not going back to `buffering` state after seeking finished (AN-1400)
+- Bitmovin Player: seeking transitioned into play although seeking still present (AN-1411, AN-1400)
 
 ## 1.12.0
 

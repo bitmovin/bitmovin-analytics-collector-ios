@@ -50,11 +50,9 @@ public class StateMachine {
     }
 
     public func transitionState(destinationState: PlayerState, time: CMTime?, data: [AnyHashable: Any]? = nil) {
-        if state == destinationState {
-            return
-        } else if state == .buffering && destinationState == .qualitychange {
-            return
-        } else {
+        let performTransition = checkUnallowedTransitions(destinationState: destinationState)
+        
+        if performTransition {
             let timestamp = Date().timeIntervalSince1970Millis
             let previousState = state
             videoTimeEnd = time
@@ -64,6 +62,21 @@ public class StateMachine {
             videoTimeStart = videoTimeEnd
             state.onEntry(stateMachine: self, timestamp: timestamp, previousState: previousState, data: data)
         }
+    }
+    
+    private func checkUnallowedTransitions(destinationState: PlayerState) -> Bool{
+        let allowed = true
+        if state == destinationState {
+            allowed = false
+        } else if state == .buffering && destinationState == .qualitychange {
+            allowed = false
+        } else if state == .seeking && destinationState == .qualitychange {
+            allowed = false
+        } else if state == .seeking && destinationState == .buffering {
+            allowed = false
+        }
+        
+        return allowed
     }
 
     public func confirmSeek() {
