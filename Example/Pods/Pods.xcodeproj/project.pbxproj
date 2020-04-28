@@ -115,6 +115,7 @@
 		EC2CC1AD242A074100443B2B /* BitmovinPlayerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2CC1AC242A074100443B2B /* BitmovinPlayerUtil.swift */; };
 		EC2CC1AE242A075900443B2B /* BitmovinPlayerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2CC1AC242A074100443B2B /* BitmovinPlayerUtil.swift */; };
 		EC74F38D24403C2D009634F3 /* CorePlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC74F38C24403C2D009634F3 /* CorePlayerAdapter.swift */; };
+		EC93565D2458372A007B6F45 /* CorePlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC74F38C24403C2D009634F3 /* CorePlayerAdapter.swift */; };
 		ECC21DC92436F5B900697A88 /* VideoStartFailedReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC21DC82436F5B900697A88 /* VideoStartFailedReason.swift */; };
 		ECC21DCA2436F5B900697A88 /* VideoStartFailedReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC21DC82436F5B900697A88 /* VideoStartFailedReason.swift */; };
 		EF24AF53C7CB8D0E608E2F8530AC0389 /* BitmovinAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDA3B8EAF6D4E2BAB88D9625C2BF198 /* BitmovinAnalytics.swift */; };
@@ -875,6 +876,7 @@
 				0CE5EBD624A544AAB09B642F56E23327 /* AdModuleInformation.swift in Sources */,
 				AA6FBB713209ADF230230AC6A15E5544 /* AdPosition.swift in Sources */,
 				B6470D8BF89C4C3C4F2AB226C81D6284 /* AnalyticsAdQuartile.swift in Sources */,
+				EC93565D2458372A007B6F45 /* CorePlayerAdapter.swift in Sources */,
 				EBD1A95DC351DC3FB1DE2550FE425C5F /* AdSample.swift in Sources */,
 				A02A07FA97306965AE20256CC1D5824E /* AdTagType.swift in Sources */,
 				93E34B8B46E7EDFB11CD8D2105DBD19A /* AnalyticsAd.swift in Sources */,
