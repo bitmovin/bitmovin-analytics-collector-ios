@@ -22,6 +22,7 @@
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
+		EC93565C2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC93565B2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		BFA47D64722F56ECC84F9EBC /* Pods_BitmovinAnalyticsCollector_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D26E0639414C1849B0DDDC4B /* Pods-BitmovinAnalyticsCollector_tvOSExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector_tvOSExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-BitmovinAnalyticsCollector_tvOSExample/Pods-BitmovinAnalyticsCollector_tvOSExample.release.xcconfig"; sourceTree = "<group>"; };
 		D75FCEB6F320EC31EEBDD4B8 /* Pods_BitmovinAnalyticsCollector_tvOSExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_tvOSExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC93565B2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugBitmovinPlayerListener.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 				01C26BE32083ED7B001A0D76 /* WelcomeViewController.swift */,
 				01C26BE52083F14D001A0D76 /* BitmovinViewController.swift */,
+				EC93565B2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift */,
 			);
 			name = "iOS Example for BitmovinAnalyticsCollector";
 			path = BitmovinAnalyticsCollector;
@@ -373,6 +376,7 @@
 				01C26BE42083ED7B001A0D76 /* WelcomeViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				EC93565C2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift in Sources */,
 				01C26BE62083F14D001A0D76 /* BitmovinViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
