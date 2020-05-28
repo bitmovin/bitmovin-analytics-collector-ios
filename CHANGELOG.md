@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Added
+
+- AVPlayer: `error_data` to sample (AN-1453)
+
 ## 1.13.0
 
 ### Added
