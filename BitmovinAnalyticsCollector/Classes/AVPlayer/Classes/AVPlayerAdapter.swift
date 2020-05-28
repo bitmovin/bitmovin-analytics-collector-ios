@@ -89,7 +89,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private func errorOccured(error: NSError?) {
         let errorCode = error?.code ?? 1
         let errorMessage = error?.localizedDescription ?? "Unkown"
-        
+        let errorData = error?.localizedFailureReason
         if (!didVideoPlay) {
             setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
         }
@@ -97,7 +97,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         stateMachine.transitionState(destinationState: .error,
                                      time: player.currentTime(),
                                      data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode,
-                                            BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage])
+                                            BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage,
+                                            BitmovinAnalyticsInternal.ErrorDataKey: errorData])
     }
 
     @objc private func failedToPlayToEndTime(notification: Notification) {
