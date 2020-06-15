@@ -7,6 +7,7 @@ import Foundation
 public class BitmovinAnalyticsInternal: NSObject {
     public static let ErrorMessageKey = "errorMessage"
     public static let ErrorCodeKey = "errorCode"
+    public static let ErrorDataKey = "errorData"
 
     static let msInSec = 1_000.0
     internal var config: BitmovinAnalyticsConfig
@@ -123,6 +124,9 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         }
         if let errorMessage = data?[BitmovinAnalyticsInternal.ErrorMessageKey] {
             eventData?.errorMessage = errorMessage as? String
+        }
+        if let errorData = data?[BitmovinAnalyticsInternal.ErrorDataKey] {
+            eventData?.errorData = errorData as? String
         }
         sendEventData(eventData: eventData)
     }

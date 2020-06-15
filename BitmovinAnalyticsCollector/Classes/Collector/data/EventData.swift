@@ -7,6 +7,7 @@ public class EventData: Codable {
     var userAgent: String?
     var errorCode: Int?
     var errorMessage: String?
+    var errorData: String?
     var screenWidth: Int?
     var screenHeight: Int?
     var isLive: Bool = false
