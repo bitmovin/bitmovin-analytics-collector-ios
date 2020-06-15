@@ -195,7 +195,8 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onVideoDownloadQualityChanged(_ event: VideoDownloadQualityChangedEvent) {
-        if (!isStalling && !isSeeking) {
+        let didVideoBitrateChange = event.videoQualityOld?.bitrate != event.videoQualityNew?.bitrate
+        if (!isStalling && !isSeeking && didVideoBitrateChange) {
             stateMachine.transitionState(destinationState: .qualitychange, time: Util.timeIntervalToCMTime(_: player.currentTime))
             transitionToPausedOrBufferingOrPlaying()
         }
