@@ -201,7 +201,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
         if (old == nil || new == nil) {
             return true
         }
-        return old!.bitrate != new!.bitrate
+        return old?.bitrate != new?.bitrate
     }
 
     func onVideoDownloadQualityChanged(_ event: VideoDownloadQualityChangedEvent) {
