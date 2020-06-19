@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - AVPlayer: `errorData` to sample (AN-1453)
 
+### Changed
+
+- Bitmovin Player: send `qualitychange` samples only when bitrate changed (AN-1512)
+
 ## 1.13.0
 
 ### Added
