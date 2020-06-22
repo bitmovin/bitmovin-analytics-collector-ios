@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+## 1.14.0
+
 ### Added
 
 - AVPlayer: `errorData` to sample (AN-1453)
