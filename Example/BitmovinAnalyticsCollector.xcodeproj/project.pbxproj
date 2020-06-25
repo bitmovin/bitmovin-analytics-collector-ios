@@ -22,6 +22,7 @@
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
+		8F54717224A37D8D008B31C2 /* BitmovinDrmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F54717124A37D8D008B31C2 /* BitmovinDrmViewController.swift */; };
 		EC93565C2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC93565B2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		67D7D3032E40EEFC258C6F8D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		6C25EC86D83FCAD97DE9E11C /* Pods-BitmovinAnalyticsCollector_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-BitmovinAnalyticsCollector_Example/Pods-BitmovinAnalyticsCollector_Example.release.xcconfig"; sourceTree = "<group>"; };
 		76A4CC2782BA260CFC7363C9 /* BitmovinAnalyticsCollector.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BitmovinAnalyticsCollector.podspec; path = ../BitmovinAnalyticsCollector.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		8F54717124A37D8D008B31C2 /* BitmovinDrmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitmovinDrmViewController.swift; sourceTree = "<group>"; };
 		9BE46B46332B0CC91790556A /* Pods-BitmovinAnalyticsCollector_tvOSExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector_tvOSExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BitmovinAnalyticsCollector_tvOSExample/Pods-BitmovinAnalyticsCollector_tvOSExample.debug.xcconfig"; sourceTree = "<group>"; };
 		A13FCB967E22402182A70074 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		BFA47D64722F56ECC84F9EBC /* Pods_BitmovinAnalyticsCollector_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +127,7 @@
 				01C26BE32083ED7B001A0D76 /* WelcomeViewController.swift */,
 				01C26BE52083F14D001A0D76 /* BitmovinViewController.swift */,
 				EC93565B2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift */,
+				8F54717124A37D8D008B31C2 /* BitmovinDrmViewController.swift */,
 			);
 			name = "iOS Example for BitmovinAnalyticsCollector";
 			path = BitmovinAnalyticsCollector;
@@ -224,13 +227,13 @@
 				TargetAttributes = {
 					010952B420EF22940010173A = {
 						CreatedOnToolsVersion = 9.4.1;
-						DevelopmentTeam = 7UXPEM3WRB;
+						DevelopmentTeam = BR5V5F75MC;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 7UXPEM3WRB;
+						DevelopmentTeam = BR5V5F75MC;
 						LastSwiftMigration = 1020;
 					};
 				};
@@ -378,6 +381,7 @@
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				EC93565C2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift in Sources */,
 				01C26BE62083F14D001A0D76 /* BitmovinViewController.swift in Sources */,
+				8F54717224A37D8D008B31C2 /* BitmovinDrmViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,11 +431,11 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7UXPEM3WRB;
+				DEVELOPMENT_TEAM = BR5V5F75MC;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "tvOS Example for BitmovinAnalyticsCollector/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.BitmovinAnalyticsCollector-tvOSExample";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.bitmovin.demo.BitmovinAnalyticsCollector-tvOSExample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -456,11 +460,11 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7UXPEM3WRB;
+				DEVELOPMENT_TEAM = BR5V5F75MC;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "tvOS Example for BitmovinAnalyticsCollector/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.BitmovinAnalyticsCollector-tvOSExample";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.bitmovin.demo.BitmovinAnalyticsCollector-tvOSExample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
@@ -579,11 +583,11 @@
 			baseConfigurationReference = 50BDD2BA49B6C287A5B1F940 /* Pods-BitmovinAnalyticsCollector_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7UXPEM3WRB;
+				DEVELOPMENT_TEAM = BR5V5F75MC;
 				INFOPLIST_FILE = BitmovinAnalyticsCollector/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.bitmovin.BitmovinAnalyticsCollector-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -594,11 +598,11 @@
 			baseConfigurationReference = 6C25EC86D83FCAD97DE9E11C /* Pods-BitmovinAnalyticsCollector_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7UXPEM3WRB;
+				DEVELOPMENT_TEAM = BR5V5F75MC;
 				INFOPLIST_FILE = BitmovinAnalyticsCollector/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.bitmovin.BitmovinAnalyticsCollector-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
