@@ -86,6 +86,7 @@
                                 </constraints>
                                 <state key="normal" title="Done"/>
                                 <connections>
+                                    <action selector="doneButtonWasPressed:" destination="WKG-UI-yDS" eventType="touchUpInside" id="0rP-3E-PMH"/>
                                     <action selector="doneButtonWasPressed:" destination="D7c-6d-M5W" eventType="touchUpOutside" id="mc4-at-sj4"/>
                                     <action selector="doneButtonWasPressed:" destination="D7c-6d-M5W" eventType="touchUpInside" id="t6s-Bw-vOK"/>
                                 </connections>
@@ -100,6 +101,7 @@
                                 <connections>
                                     <action selector="reloadButtonWasPressed:" destination="D7c-6d-M5W" eventType="touchUpInside" id="G1T-6A-DPi"/>
                                     <action selector="reloadButtonWasPressed:" destination="D7c-6d-M5W" eventType="touchUpOutside" id="exH-12-2HU"/>
+                                    <action selector="reloadButtonWasPressed:" destination="WKG-UI-yDS" eventType="touchUpInside" id="fbf-vs-WkZ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -335,11 +337,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Jump Backwards" width="33" height="33"/>
-        <image name="Jump Forward" width="33" height="33"/>
+        <image name="Jump Backwards" width="33.333332061767578" height="33.333332061767578"/>
+        <image name="Jump Forward" width="33.333332061767578" height="33.333332061767578"/>
         <image name="PlayButton" width="21" height="22"/>
         <image name="Reload" width="176" height="176"/>
-        <image name="ScanBackwardButton" width="30" height="17"/>
-        <image name="ScanForwardButton" width="30" height="17"/>
+        <image name="ScanBackwardButton" width="30.666666030883789" height="17"/>
+        <image name="ScanForwardButton" width="30.666666030883789" height="17"/>
     </resources>
 </document>

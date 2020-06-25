@@ -124,12 +124,11 @@ class BitmovinDrmViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
 
-    @IBAction func doneButtonWasPressed() {
+    @IBAction func doneButtonWasPressed(_ : UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func reloadButtonWasPressed() {
-        
+    @IBAction func reloadButtonWasPressed(_ : UIButton) {
         analyticsCollector.detachPlayer()
 
         guard let player = player else {
@@ -139,7 +138,7 @@ class BitmovinDrmViewController: UIViewController {
         guard let config = getPlayerConfig() else {
             return
         }
-       
+
         // Create player based on player configuration
         self.player?.load(sourceConfiguration: config.sourceConfiguration)
 
