@@ -6,6 +6,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var player: BitmovinPlayer
     private var errorCode: Int?
     private var errorMessage: String?
+    private var drmPerformanceInfo: DrmPerformanceInfo?
     private var isPlayingAd: Bool
     private var isStalling: Bool
     private var isSeeking: Bool
@@ -25,6 +26,13 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         let eventData: EventData = EventData(config: config, impressionId: stateMachine.impressionId)
         decorateEventData(eventData: eventData)
         return eventData
+    }
+    
+    private func getDrmPerformanceInfo() -> DrmPerformanceInfo? {
+        guard player.config.sourceItem?.drmConfigurations == nil else {
+            return DrmPerformanceInfo(drmType: DrmType.fairplay)
+        }
+        return nil
     }
     
     
@@ -68,6 +76,16 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             eventData.progUrl = sourceUrl?.absoluteString
         default: break;
         }
+
+        // drmPerformanceInfo
+        if (self.drmPerformanceInfo == nil) {
+            self.drmPerformanceInfo = getDrmPerformanceInfo()
+        }
+        // drmType
+        if let drmType = self.drmPerformanceInfo?.drmType {
+            eventData.drmType = drmType
+        }
+        
 
         // videoBitrate
         if let bitrate = player.videoQuality?.bitrate {

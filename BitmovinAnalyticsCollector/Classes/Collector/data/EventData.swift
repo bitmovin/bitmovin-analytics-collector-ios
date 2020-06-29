@@ -61,6 +61,7 @@ public class EventData: Codable {
     var pageLoadTime: Int64 = 0
     var version: String?
     var sequenceNumber: Int32 = 0
+    var drmType: String?
     #if os(iOS)
     var platform: String = "iOS"
     #elseif os(tvOS)
