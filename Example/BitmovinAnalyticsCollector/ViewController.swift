@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     }()
 
     required init?(coder aDecoder: NSCoder) {
-        config = BitmovinAnalyticsConfig(key: "9ae0b480-f2ee-4c10-bc3c-cb88e982e0ac")
+        config = BitmovinAnalyticsConfig(key: "e73a3577-d91c-4214-9e6d-938fb936818a")
         config.cdnProvider = CdnProvider.bitmovin
         config.customData1 = "customData1"
         config.customData2 = "customData2"
