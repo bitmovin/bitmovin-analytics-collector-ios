@@ -2,7 +2,7 @@ import AVKit
 import BitmovinAnalyticsCollector
 import UIKit
 
-class ViewController: UIViewController {
+class AVFoundationViewController: UIViewController {
     private static var playerViewControllerKVOContext = 0
     private var analyticsCollector: AVPlayerCollector
     private var isSeeking: Bool = false
@@ -62,13 +62,13 @@ class ViewController: UIViewController {
 
     override func viewWillAppear(_: Bool) {
         playerView.playerLayer.player = player
-        addObserver(self, forKeyPath: #keyPath(ViewController.player.rate), options: [.new, .initial], context: &ViewController.playerViewControllerKVOContext)
+        addObserver(self, forKeyPath: #keyPath(AVFoundationViewController.player.rate), options: [.new, .initial], context: &AVFoundationViewController.playerViewControllerKVOContext)
         createPlayer()
         analyticsCollector.attachPlayer(player: player)
     }
 
     @IBAction func createPlayer() {
-        addObserver(self, forKeyPath: #keyPath(ViewController.player.currentItem.duration), options: [.new, .initial], context: &ViewController.playerViewControllerKVOContext)
+        addObserver(self, forKeyPath: #keyPath(AVFoundationViewController.player.currentItem.duration), options: [.new, .initial], context: &AVFoundationViewController.playerViewControllerKVOContext)
         let asset = AVURLAsset(url: url!, options: nil)
         player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
         player.play()
@@ -99,12 +99,12 @@ class ViewController: UIViewController {
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        guard context == &ViewController.playerViewControllerKVOContext else {
+        guard context == &AVFoundationViewController.playerViewControllerKVOContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
 
-        if keyPath == #keyPath(ViewController.player.currentItem.duration) {
+        if keyPath == #keyPath(AVPlayerViewController.player.currentItem.duration) {
             let newDuration: CMTime
             if let newDurationAsValue = change?[NSKeyValueChangeKey.newKey] as? NSValue {
                 newDuration = newDurationAsValue.timeValue
@@ -132,7 +132,7 @@ class ViewController: UIViewController {
 
             endDuration.isEnabled = hasValidDuration
             endDuration.text = createTimeString(time: Float(newDurationSeconds))
-        } else if keyPath == #keyPath(ViewController.player.rate) {
+        } else if keyPath == #keyPath(AVFoundationViewController.player.rate) {
             // Update `playPauseButton` image.
             let newRate = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).doubleValue
             let buttonImageName = newRate > 0.0 ? "PauseButton" : "PlayButton"
