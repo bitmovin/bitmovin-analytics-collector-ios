@@ -84,12 +84,12 @@ class ViewController: UIViewController {
         analyticsCollector.detachPlayer()
         createPlayer()
         config.cdnProvider = CdnProvider.bitmovin
-        config.customData1 = "customData6"
-        config.customData2 = "customData7"
-        config.customData3 = "customData8"
-        config.customData4 = "customData9"
-        config.customData5 = "customData10"
-        config.customerUserId = "customUserId2"
+        config.customData1 = "customData1_2"
+        config.customData2 = "customData2_2"
+        config.customData3 = "customData3_2"
+        config.customData4 = "customData4_2"
+        config.customData5 = "customData5_2"
+        config.customerUserId = "customUserId_2"
         config.experimentName = "experiment-12"
         config.videoId = "iOSHLSStatic2"
         config.title = "ios static with AVFoundation"
