@@ -27,15 +27,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         decorateEventData(eventData: eventData)
         return eventData
     }
-    
-    private func getDrmPerformanceInfo() -> DrmPerformanceInfo? {
-        guard player.config.sourceItem?.drmConfigurations == nil else {
-            return DrmPerformanceInfo(drmType: DrmType.fairplay)
-        }
-        return nil
-    }
-    
-    
+
     private func decorateEventData(eventData: EventData) {
         //PlayerType
         eventData.player = PlayerType.bitmovin.rawValue
@@ -77,15 +69,10 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         default: break;
         }
 
-        // drmPerformanceInfo
-        if (self.drmPerformanceInfo == nil) {
-            self.drmPerformanceInfo = getDrmPerformanceInfo()
-        }
         // drmType
         if let drmType = self.drmPerformanceInfo?.drmType {
             eventData.drmType = drmType
         }
-        
 
         // videoBitrate
         if let bitrate = player.videoQuality?.bitrate {
@@ -210,6 +197,12 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onSeek(_ event: SeekEvent) {
         isSeeking = true
         stateMachine.transitionState(destinationState: .seeking, time: Util.timeIntervalToCMTime(_: player.currentTime))
+    }
+
+    func onDownloadFinished(_ event: DownloadFinishedEvent) {
+        if event.wasSuccessful && event.downloadType == BMPHttpRequestTypeDrmCertificateFairplay{
+            self.drmPerformanceInfo = DrmPerformanceInfo(drmType: DrmType.fairplay)
+        }
     }
 
     func didVideoBitrateChange(old: VideoQuality?, new: VideoQuality?) -> Bool {

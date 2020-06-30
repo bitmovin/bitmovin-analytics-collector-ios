@@ -38,7 +38,7 @@ class BitmovinDrmViewController: UIViewController {
         config.title = "iOS HLS Static Asset with Bitmovin Player and DRM"
         config.path = "/vod/breadcrumb/"
         config.isLive = false
-        config.ads = true
+        config.ads = false
         analyticsCollector = BitmovinPlayerCollector(config: config)
         debugger = DebugBitmovinPlayerEvents()
         print("Setup of collector finished")
