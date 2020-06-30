@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Bitmovin Player: `drmType` to samples if `fairplay` DRM system is used (AN-1515)
+- `drmType` to samples if `fairplay` DRM system is used (AN-1515)
 
 ## 1.14.0
 
