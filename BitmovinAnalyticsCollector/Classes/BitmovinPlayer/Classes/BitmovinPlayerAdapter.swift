@@ -200,7 +200,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onDownloadFinished(_ event: DownloadFinishedEvent) {
-        if event.downloadType == "drm/license/fairplay" {
+        if event.wasSuccessful && event.downloadType == BMPHttpRequestTypeDrmCertificateFairplay{
             self.drmPerformanceInfo = DrmPerformanceInfo(drmType: DrmType.fairplay)
         }
     }
