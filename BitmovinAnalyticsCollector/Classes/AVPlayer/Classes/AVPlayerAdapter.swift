@@ -6,6 +6,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     static let maxSeekOperation = 10_000
     private static var playerKVOContext = 0
     private let config: BitmovinAnalyticsConfig
+    private var drmPerformanceInfo: DrmPerformanceInfo?
     private var lastBitrate: Double = 0
     @objc private var player: AVPlayer
     let lockQueue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
@@ -42,6 +43,12 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         
     }
 
+    private func updateDrmPerformanceInfo(_ playerItem: AVPlayerItem) {
+        if playerItem.asset.hasProtectedContent {
+            self.drmPerformanceInfo = DrmPerformanceInfo(drmType: DrmType.fairplay)
+        }
+    }
+
     private func startMonitoringPlayerItem(playerItem: AVPlayerItem) {
         statusObserver = playerItem.observe(\.status) {[weak self] (item, _) in
             self?.playerItemStatusObserver(playerItem: item)
@@ -50,6 +57,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(failedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
+        updateDrmPerformanceInfo(playerItem)
     }
 
     private func stopMonitoringPlayerItem(playerItem: AVPlayerItem) {
@@ -191,6 +199,11 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
         // isCasting
         eventData.isCasting = player.isExternalPlaybackActive
+
+        // DRM Type
+        if self.drmPerformanceInfo?.drmType != nil {
+            eventData.drmType = drmPerformanceInfo?.drmType
+        }
 
         // isLive
         let duration = player.currentItem?.duration
