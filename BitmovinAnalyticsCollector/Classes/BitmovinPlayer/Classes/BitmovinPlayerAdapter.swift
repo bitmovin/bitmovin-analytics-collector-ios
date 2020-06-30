@@ -29,10 +29,10 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
     
     private func getDrmPerformanceInfo() -> DrmPerformanceInfo? {
-        guard player.config.sourceItem?.drmConfigurations == nil else {
-            return DrmPerformanceInfo(drmType: DrmType.fairplay)
+        if player.config.sourceItem?.drmConfigurations == nil {
+            return nil
         }
-        return nil
+        return DrmPerformanceInfo(drmType: DrmType.fairplay)
     }
     
     
