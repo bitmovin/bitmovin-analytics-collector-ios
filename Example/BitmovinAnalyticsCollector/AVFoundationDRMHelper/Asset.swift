@@ -29,7 +29,7 @@ class Asset {
 /// Extends `Asset` to conform to the `Equatable` protocol.
 extension Asset: Equatable {
     static func ==(lhs: Asset, rhs: Asset) -> Bool {
-        return (lhs.urlAsset == rhs.urlAsset) && (lhs.urlAsset == rhs.urlAsset)
+        return lhs.urlAsset == rhs.urlAsset
     }
 }
 
@@ -46,7 +46,7 @@ extension Asset {
         /// The asset has a download in progress.
         case downloading
         
-        /// The asset is downloaded and saved on diek.
+        /// The asset is downloaded and saved on disk.
         case downloaded
     }
 }
