@@ -5,6 +5,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     static let timeJumpedDuplicateTolerance = 1_000
     static let maxSeekOperation = 10_000
     private static var playerKVOContext = 0
+    let drmPerformanceInfo: DrmPerformanceInfo?
     private let config: BitmovinAnalyticsConfig
     private var lastBitrate: Double = 0
     @objc private var player: AVPlayer
@@ -15,6 +16,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.player = player
         self.config = config
         lastBitrate = 0
+        self.drmPerformanceInfo = nil
         super.init(stateMachine: stateMachine)
         self.delegate = self
         startMonitoring()
@@ -263,6 +265,10 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             eventData.videoStartFailedReason = videoStartFailedReason ?? VideoStartFailedReason.unknown
             resetVideoStartFailed()
         }
+    }
+
+    func getDrmPerformanceInfo() -> DrmPerformanceInfo? {
+        return self.drmPerformanceInfo
     }
 
     var currentTime: CMTime? {

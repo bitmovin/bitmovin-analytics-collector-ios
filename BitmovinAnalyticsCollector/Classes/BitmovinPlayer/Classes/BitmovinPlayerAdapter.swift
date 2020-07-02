@@ -128,6 +128,10 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         isStalling = false
     }
     
+    func getDrmPerformanceInfo() -> DrmPerformanceInfo? {
+        return self.drmPerformanceInfo
+    }
+    
     var currentTime: CMTime? {
         get {
             return Util.timeIntervalToCMTime(_: player.currentTime)

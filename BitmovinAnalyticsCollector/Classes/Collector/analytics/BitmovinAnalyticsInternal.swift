@@ -180,6 +180,10 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         eventData?.startupTime = duration + 1
         eventData?.supportedVideoCodecs = Util.getSupportedVideoCodecs()
 
+        if let drmLoadTime = self.adapter?.getDrmPerformanceInfo()?.drmLoadTime {
+            eventData?.drmLoadTime = drmLoadTime
+        }
+
         eventData?.state = "startup"
         sendEventData(eventData: eventData)
     }
