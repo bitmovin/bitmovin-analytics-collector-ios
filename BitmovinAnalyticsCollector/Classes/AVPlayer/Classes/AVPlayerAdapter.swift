@@ -16,6 +16,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.player = player
         self.config = config
         lastBitrate = 0
+        self.drmPerformanceInfo = nil
         super.init(stateMachine: stateMachine)
         self.delegate = self
         startMonitoring()
@@ -278,6 +279,10 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             eventData.videoStartFailedReason = videoStartFailedReason ?? VideoStartFailedReason.unknown
             resetVideoStartFailed()
         }
+    }
+
+    func getDrmPerformanceInfo() -> DrmPerformanceInfo? {
+        return self.drmPerformanceInfo
     }
 
     var currentTime: CMTime? {

@@ -16,6 +16,7 @@ public class BitmovinAnalyticsInternal: NSObject {
     private var eventDataDispatcher: EventDataDispatcher
     internal var adAnalytics: BitmovinAdAnalytics?
     internal var adAdapter: AdAdapter?
+    internal var didSendDrmLoadTime = false
 
     internal init(config: BitmovinAnalyticsConfig) {
         self.config = config
@@ -90,6 +91,11 @@ public class BitmovinAnalyticsInternal: NSObject {
         }
         eventData.state = stateMachine.state.rawValue
         eventData.duration = duration
+
+        if !self.didSendDrmLoadTime,  let drmLoadTime = self.adapter?.getDrmPerformanceInfo()?.drmLoadTime {
+            self.didSendDrmLoadTime = true
+            eventData.drmLoadTime = drmLoadTime
+        }
 
         if let timeStart = stateMachine.videoTimeStart, CMTIME_IS_NUMERIC(_: timeStart) {
             eventData.videoTimeStart = Int64(CMTimeGetSeconds(timeStart) * BitmovinAnalyticsInternal.msInSec)

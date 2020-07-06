@@ -157,8 +157,8 @@ public class AdEventData: Codable {
         self.adPosition = adBreak.position?.rawValue
         self.adOffset = adBreak.offset
         self.adPreloadOffset = adBreak.preloadOffset
-        self.adReplaceContentDuration = ms(t:adBreak.replaceContentDuration)
-        self.adScheduleTime = ms(t:adBreak.scheduleTime)
+        self.adReplaceContentDuration = BitmovinPlayerUtil.ms(t:adBreak.replaceContentDuration)
+        self.adScheduleTime = BitmovinPlayerUtil.ms(t:adBreak.scheduleTime)
         (self.adTagServer, self.adTagPath) = Util.getHostNameAndPath(uriString: adBreak.tagUrl)
         self.adTagType = adBreak.tagType?.rawValue
         self.adTagUrl = adBreak.tagUrl
@@ -166,31 +166,31 @@ public class AdEventData: Codable {
     
     public func setAdSample(adSample: AdSample){
         self.adPodPosition = adSample.adPodPosition
-        self.adStartupTime = ms(t:adSample.adStartupTime)
+        self.adStartupTime = BitmovinPlayerUtil.ms(t:adSample.adStartupTime)
         self.clicked = adSample.clicked
         self.clickPercentage = adSample.clickPercentage
-        self.clickPosition = ms(t:adSample.clickPosition)
+        self.clickPosition = BitmovinPlayerUtil.ms(t:adSample.clickPosition)
         self.closed = adSample.closed
         self.closePercentage = adSample.closePercentage
-        self.closePosition = ms(t:adSample.closePosition)
+        self.closePosition = BitmovinPlayerUtil.ms(t:adSample.closePosition)
         self.completed = adSample.completed
         self.errorCode = adSample.errorCode
         self.errorData  = adSample.errorData
         self.errorMessage = adSample.errorMessage
         self.errorPercentage = adSample.errorPercentage
-        self.errorPosition = ms(t:adSample.errorPosition)
-        self.exitPosition = ms(t:adSample.exitPosition)
+        self.errorPosition = BitmovinPlayerUtil.ms(t:adSample.errorPosition)
+        self.exitPosition = BitmovinPlayerUtil.ms(t:adSample.exitPosition)
         self.midpoint = adSample.midpoint
         self.playPercentage = adSample.playPercentage
         self.quartile1 = adSample.quartile1
         self.quartile3 = adSample.quartile3
         self.skipped = adSample.skipped
         self.skipPercentage = adSample.skipPercentage
-        self.skipPosition = ms(t:adSample.skipPosition)
+        self.skipPosition = BitmovinPlayerUtil.ms(t:adSample.skipPosition)
         self.started = adSample.started
-        self.timeFromContent = ms(t:adSample.timeFromContent)
-        self.timePlayed = ms(t:adSample.timePlayed)
-        self.timeToContent = ms(t:adSample.timeToContent)
+        self.timeFromContent = BitmovinPlayerUtil.ms(t:adSample.timeFromContent)
+        self.timePlayed = BitmovinPlayerUtil.ms(t:adSample.timePlayed)
+        self.timeToContent = BitmovinPlayerUtil.ms(t:adSample.timeToContent)
         
         setAd(ad: adSample.ad)
     }
@@ -198,12 +198,12 @@ public class AdEventData: Codable {
     private func setAd(ad: AnalyticsAd){
         self.adClickThroughUrl = ad.clickThroughUrl
         self.adDescription = ad.description
-        self.adDuration =  ms(t:ad.duration)
+        self.adDuration =  BitmovinPlayerUtil.ms(t:ad.duration)
         self.adId = ad.id
         self.adPlaybackHeight = ad.height
         self.adPlaybackWidth = ad.width
         self.adSkippable = ad.skippable
-        self.adSkippableAfter =  ms(t:ad.skippableAfter)
+        self.adSkippableAfter =  BitmovinPlayerUtil.ms(t:ad.skippableAfter)
         self.adSystem = ad.adSystemName
         self.adTitle = ad.title
         self.advertiserName = ad.advertiserName
@@ -214,20 +214,12 @@ public class AdEventData: Codable {
         self.isLinear = ad.isLinear
         (self.mediaServer, self.mediaPath) = Util.getHostNameAndPath(uriString: ad.mediaFileUrl)
         self.mediaUrl = ad.mediaFileUrl
-        self.minSuggestedDuration = ms(t:ad.minSuggestedDuration)
+        self.minSuggestedDuration = BitmovinPlayerUtil.ms(t:ad.minSuggestedDuration)
         self.streamFormat = ad.mimeType
         self.surveyUrl = ad.surveyUrl
         self.universalAdIdRegistry = ad.universalAdIdRegistry
         self.universalAdIdValue = ad.universalAdIdValue
         self.videoBitrate = ad.bitrate
         self.wrapperAdsCount = ad.wrapperAdsCount
-    }
-    
-    private func ms(t: TimeInterval?) -> Int64? {
-        guard let time = t else {
-            return nil
-        }
-        
-        return Int64(time * 1_000)
     }
 }

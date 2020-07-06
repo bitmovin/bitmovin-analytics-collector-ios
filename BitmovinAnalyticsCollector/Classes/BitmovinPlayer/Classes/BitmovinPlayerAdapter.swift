@@ -10,6 +10,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var isPlayingAd: Bool
     private var isStalling: Bool
     private var isSeeking: Bool
+    private var drmLoadTimeMs: Int64?
 
     init(player: BitmovinPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
@@ -127,6 +128,10 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         isStalling = false
     }
     
+    func getDrmPerformanceInfo() -> DrmPerformanceInfo? {
+        return self.drmPerformanceInfo
+    }
+    
     var currentTime: CMTime? {
         get {
             return Util.timeIntervalToCMTime(_: player.currentTime)
@@ -200,8 +205,17 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onDownloadFinished(_ event: DownloadFinishedEvent) {
-        if event.wasSuccessful && event.downloadType == BMPHttpRequestTypeDrmCertificateFairplay{
-            self.drmPerformanceInfo = DrmPerformanceInfo(drmType: DrmType.fairplay)
+        let downloadTimeInMs = BitmovinPlayerUtil.ms(t: event.downloadTime)
+
+        switch event.downloadType {
+        case BMPHttpRequestTypeDrmCertificateFairplay:
+            // This request is the first that happens when initializing the DRM system
+            self.drmLoadTimeMs = downloadTimeInMs
+        case BMPHttpRequestTypeDrmLicenseFairplay:
+            self.drmLoadTimeMs = (self.drmLoadTimeMs ?? 0) + (downloadTimeInMs ?? 0)
+            self.drmPerformanceInfo = DrmPerformanceInfo(drmType: DrmType.fairplay, drmLoadTime: self.drmLoadTimeMs)
+        default:
+            return
         }
     }
 
@@ -211,7 +225,8 @@ extension BitmovinPlayerAdapter: PlayerListener {
 
     func onVideoDownloadQualityChanged(_ event: VideoDownloadQualityChangedEvent) {
         let videoBitrateDidChange = didVideoBitrateChange(old: event.videoQualityOld, new: event.videoQualityNew)
-        if (!isStalling && !isSeeking && videoBitrateDidChange) {
+        if (!isPlayerReady && !isStalling && !isSeeking && videoBitrateDidChange) {
+            // there is a qualityChange event happening before the `onReady` method. Do not transition into any state.
             stateMachine.transitionState(destinationState: .qualitychange, time: Util.timeIntervalToCMTime(_: player.currentTime))
             transitionToPausedOrBufferingOrPlaying()
         }
