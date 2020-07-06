@@ -204,8 +204,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         eventData.isCasting = player.isExternalPlaybackActive
 
         // DRM Type
-        if self.drmPerformanceInfo?.drmType != nil {
-            eventData.drmType = drmPerformanceInfo?.drmType
+        if let drmType = self.drmPerformanceInfo?.drmType {
+            eventData.drmType = drmType
         }
 
         // isLive
