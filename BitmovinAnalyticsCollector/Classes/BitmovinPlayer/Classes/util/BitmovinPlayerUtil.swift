@@ -46,12 +46,4 @@ public class BitmovinPlayerUtil {
                 fatalError()
         }
     }
-
-    static func ms(t: TimeInterval?) -> Int64? {
-        guard let time = t, time > Double(Int64.min) && time < Double(Int64.max) else {
-            return nil
-        }
-        
-        return Int64(time * 1_000)
-    }
 }

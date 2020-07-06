@@ -206,7 +206,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onDownloadFinished(_ event: DownloadFinishedEvent) {
-        let downloadTimeInMs = BitmovinPlayerUtil.ms(t: event.downloadTime)
+        let downloadTimeInMs = event.downloadTime.milliseconds
 
         switch event.downloadType {
         case BMPHttpRequestTypeDrmCertificateFairplay:
