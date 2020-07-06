@@ -46,6 +46,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private func updateDrmPerformanceInfo(_ playerItem: AVPlayerItem) {
         if playerItem.asset.hasProtectedContent {
             self.drmPerformanceInfo = DrmPerformanceInfo(drmType: DrmType.fairplay)
+        } else {
+            self.drmPerformanceInfo = nil
         }
     }
 
