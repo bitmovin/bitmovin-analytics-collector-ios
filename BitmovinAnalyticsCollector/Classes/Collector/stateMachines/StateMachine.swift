@@ -4,11 +4,11 @@ import Foundation
 public class StateMachine {
     private(set) var state: PlayerState
     private var config: BitmovinAnalyticsConfig
-    private var initialTimestamp: Int64
     private(set) var enterTimestamp: Int64?
     var potentialSeekStart: Int64 = 0
     var potentialSeekVideoTimeStart: CMTime?
-    var firstReadyTimestamp: Int64?
+    var didStartPlayingVideo: Bool = false
+    var startupTime: Int64 = 0
     private(set) var videoTimeStart: CMTime?
     private(set) var videoTimeEnd: CMTime?
     private(set) var impressionId: String
@@ -19,17 +19,9 @@ public class StateMachine {
     private var currentRebufferIntervalIndex: Int = 0
     private let rebufferHeartbeatInterval: [Int64] = [3000, 5000, 10000, 59700]
 
-    var startupTime: Int64 {
-        guard let firstReadyTimestamp = firstReadyTimestamp else {
-            return 0
-        }
-        return firstReadyTimestamp - initialTimestamp
-    }
-
     init(config: BitmovinAnalyticsConfig) {
         self.config = config
-        state = .setup
-        initialTimestamp = Date().timeIntervalSince1970Millis
+        state = .ready
         impressionId = NSUUID().uuidString
         print("Generated Bitmovin Analytics impression ID: " + impressionId.lowercased())
     }
@@ -41,17 +33,17 @@ public class StateMachine {
 
     public func reset() {
         impressionId = NSUUID().uuidString
-        initialTimestamp = Date().timeIntervalSince1970Millis
-        firstReadyTimestamp = nil
+        didStartPlayingVideo = false
+        startupTime = 0
         disableHeartbeat()
         disableRebufferHeartbeat()
-        state = .setup
+        state = .ready
         print("Generated Bitmovin Analytics impression ID: " +  impressionId.lowercased())
     }
 
     public func transitionState(destinationState: PlayerState, time: CMTime?, data: [AnyHashable: Any]? = nil) {
         let performTransition = checkUnallowedTransitions(destinationState: destinationState)
-        
+        print("transitioning from \(state) to \(destinationState): \(performTransition)")
         if performTransition {
             let timestamp = Date().timeIntervalSince1970Millis
             let previousState = state
@@ -64,6 +56,16 @@ public class StateMachine {
         }
     }
     
+    public func play(time: CMTime?) {
+        let destinationState = didStartPlayingVideo ? PlayerState.playing : PlayerState.startup
+        transitionState(destinationState: destinationState, time: time)
+    }
+    
+    public func pause(time: CMTime?) {
+        let destinationState = didStartPlayingVideo ? PlayerState.paused : PlayerState.ready
+        transitionState(destinationState: destinationState, time: time)
+    }
+    
     private func checkUnallowedTransitions(destinationState: PlayerState) -> Bool{
         var allowed = true
         if state == destinationState {
@@ -73,6 +75,10 @@ public class StateMachine {
         } else if state == .seeking && destinationState == .qualitychange {
             allowed = false
         } else if state == .seeking && destinationState == .buffering {
+            allowed = false
+        } else if state == .ready && (destinationState != .error && destinationState != .playAttemptFailed && destinationState != .startup) {
+            allowed = false
+        } else if state == .startup && (destinationState != .error && destinationState != .playAttemptFailed && destinationState != .ready && destinationState != .playing) {
             allowed = false
         }
         
