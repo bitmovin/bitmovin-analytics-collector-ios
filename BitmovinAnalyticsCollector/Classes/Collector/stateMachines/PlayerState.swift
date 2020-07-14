@@ -1,7 +1,8 @@
 import Foundation
 
 public enum PlayerState: String {
-    case setup
+    case ready
+    case startup
     case buffering
     case error
     case playing
@@ -14,7 +15,9 @@ public enum PlayerState: String {
 
     func onEntry(stateMachine: StateMachine, timestamp _: Int64, previousState : PlayerState, data: [AnyHashable: Any]?) {
         switch self {
-        case .setup:
+        case .ready:
+            return
+        case .startup:
             return
         case .buffering:
             stateMachine.enableRebufferHeartbeat()
@@ -24,14 +27,10 @@ public enum PlayerState: String {
         case .error:
             stateMachine.delegate?.stateMachineDidEnterError(stateMachine, data: data)
             return
-        case .playing, .paused:
-            if stateMachine.firstReadyTimestamp == nil {
-                stateMachine.firstReadyTimestamp = Date().timeIntervalSince1970Millis
-                stateMachine.delegate?.stateMachine(stateMachine, didStartupWithDuration: stateMachine.startupTime)
-            }
-            if (self == .playing){
-                stateMachine.enableHeartbeat()
-            }
+        case .paused:
+            return
+        case .playing:
+            stateMachine.enableHeartbeat()
             return
         case .qualitychange:
             return
@@ -55,9 +54,14 @@ public enum PlayerState: String {
         }
         
         switch self {
-        case .setup:
-            stateMachine.delegate?.stateMachineDidExitSetup(stateMachine)
+        case .ready:
             return
+        case .startup:
+            stateMachine.startupTime += duration
+            if(destinationState == .playing) {
+                stateMachine.isSourceLoaded = true
+                stateMachine.delegate?.stateMachine(stateMachine, didStartupWithDuration: stateMachine.startupTime)
+            }
         case .buffering:
             stateMachine.disableRebufferHeartbeat()
             stateMachine.delegate?.stateMachine(stateMachine, didExitBufferingWithDuration: duration)
