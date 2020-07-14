@@ -59,7 +59,7 @@ public enum PlayerState: String {
         case .startup:
             stateMachine.startupTime += duration
             if(destinationState == .playing) {
-                stateMachine.isSourceLoaded = true
+                stateMachine.didStartPlayingVideo = true
                 stateMachine.delegate?.stateMachine(stateMachine, didStartupWithDuration: stateMachine.startupTime)
             }
         case .buffering:
