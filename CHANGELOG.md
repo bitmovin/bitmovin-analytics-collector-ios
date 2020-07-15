@@ -9,8 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Bitmovin Player: `drmType` to samples if `fairplay` DRM system is used (AN-1515)
-- Bitmovin Player: send `drmLoadTime` with next available sample (AN-195)
+- Tracking of drm metrics (`drmType`, `drmLoadTime`) for Bitmovin player if Fairplay is used (AN-195, AN-1515)
 
 ## 1.14.0
 
