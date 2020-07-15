@@ -72,16 +72,11 @@ public class StateMachine {
             return
         }
         didAttemptPlayingVideo = true
-        startVideoStartFailedTimer()
         transitionState(destinationState: .startup, time: time)
     }
     
     public func pause(time: CMTime?) {
-        var destinationState = PlayerState.paused
-        if(didStartPlayingVideo) {
-            clearVideoStartFailedTimer()
-            destinationState = PlayerState.ready
-        }
+        let destinationState = didStartPlayingVideo ? PlayerState.paused : PlayerState.ready
         transitionState(destinationState: destinationState, time: time)
     }
     
@@ -91,7 +86,6 @@ public class StateMachine {
     
     public func setDidStartPlayingVideo() {
         didStartPlayingVideo = true
-        clearVideoStartFailedTimer();
     }
     
     public func startVideoStartFailedTimer() {

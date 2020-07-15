@@ -18,6 +18,7 @@ public enum PlayerState: String {
         case .ready:
             return
         case .startup:
+            stateMachine.startVideoStartFailedTimer()
             return
         case .buffering:
             stateMachine.enableRebufferHeartbeat()
