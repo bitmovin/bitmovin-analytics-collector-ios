@@ -2,6 +2,7 @@ import Foundation
 
 public enum PlayerState: String {
     case ad
+    case adFinished
     case ready
     case startup
     case buffering
@@ -17,6 +18,8 @@ public enum PlayerState: String {
     func onEntry(stateMachine: StateMachine, timestamp _: Int64, previousState : PlayerState, data: [AnyHashable: Any]?) {
         switch self {
             case .ad:
+                return
+            case .adFinished:
                 return
             case .ready:
                 return
@@ -59,6 +62,8 @@ public enum PlayerState: String {
         
         switch self {
             case .ad:
+                return
+            case .adFinished:
                 return
             case .ready:
                 return
