@@ -1,6 +1,7 @@
 import Foundation
 
 public enum PlayerState: String {
+    case ad
     case ready
     case startup
     case buffering
@@ -15,6 +16,8 @@ public enum PlayerState: String {
 
     func onEntry(stateMachine: StateMachine, timestamp _: Int64, previousState : PlayerState, data: [AnyHashable: Any]?) {
         switch self {
+        case .ad
+            return
         case .ready:
             return
         case .startup:
@@ -55,6 +58,8 @@ public enum PlayerState: String {
         }
         
         switch self {
+        case .ad
+            return
         case .ready:
             return
         case .startup:
