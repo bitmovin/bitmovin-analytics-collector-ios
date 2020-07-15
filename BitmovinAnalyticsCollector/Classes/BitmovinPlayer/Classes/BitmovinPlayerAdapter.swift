@@ -6,14 +6,12 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var player: BitmovinPlayer
     private var errorCode: Int?
     private var errorMessage: String?
-    private var isPlayingAd: Bool
     private var isStalling: Bool
     private var isSeeking: Bool
 
     init(player: BitmovinPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.config = config
-        self.isPlayingAd = false
         self.isStalling = false
         self.isSeeking = false
         super.init(stateMachine: stateMachine)
@@ -127,20 +125,6 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return Util.timeIntervalToCMTime(_: player.currentTime)
         }
     }
-    
-    override func setVideoStartTimer() {
-        if(isPlayingAd){
-            return
-        }
-        
-        super.setVideoStartTimer()
-    }
-    
-    @objc override func willEnterForegroundNotification(notification: Notification){
-        if(!stateMachine.didStartPlayingVideo && didAttemptPlay && !isPlayingAd){
-            setVideoStartTimer()
-        }
-    }
 }
 
 extension BitmovinPlayerAdapter: PlayerListener {
@@ -154,17 +138,16 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onAdBreakStarted(_ event: AdBreakStartedEvent) {
-        clearVideoStartTimer()
-        isPlayingAd = true
+        stateMachine.transitionState(destinationState: .ad, time: currentTime)
     }
     
     func onAdBreakFinished(_ event: AdBreakFinishedEvent) {
-        isPlayingAd = false
+        stateMachine.transitionState(destinationState: .adFinished, time: currentTime)
     }
     
     func onPaused(_ event: PausedEvent) {
         isSeeking = false
-        stateMachine.pause(time: Util.timeIntervalToCMTime(_: player.currentTime))
+        stateMachine.pause(time: currentTime)
     }
 
     func onReady(_ event: ReadyEvent) {
