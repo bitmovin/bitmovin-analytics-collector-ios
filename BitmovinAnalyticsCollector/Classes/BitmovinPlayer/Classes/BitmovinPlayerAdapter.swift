@@ -106,10 +106,10 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
         eventData.audioLanguage = player.audio?.language
         
-        if (videoStartFailed) {
-            eventData.videoStartFailed = videoStartFailed
-            eventData.videoStartFailedReason = videoStartFailedReason ?? VideoStartFailedReason.unknown
-            resetVideoStartFailed()
+        if (stateMachine.videoStartFailed) {
+            eventData.videoStartFailed = stateMachine.videoStartFailed
+            eventData.videoStartFailedReason = stateMachine.videoStartFailedReason ?? VideoStartFailedReason.unknown
+            stateMachine.resetVideoStartFailed()
         }
     }
 
@@ -146,8 +146,6 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 extension BitmovinPlayerAdapter: PlayerListener {
     func onPlay(_ event: PlayEvent) {
         print("onPlay")
-        setVideoStartTimer()
-        didAttemptPlay = true
         stateMachine.play(time: nil)
         
         if (isStalling && stateMachine.state != .seeking && stateMachine.state != .buffering) {
@@ -218,7 +216,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
         errorCode = Int(event.code)
         errorMessage = event.message
         if (!stateMachine.didStartPlayingVideo) {
-            setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
+            stateMachine.setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
         }
         stateMachine.transitionState(destinationState: .error, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
@@ -239,8 +237,8 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
     
     func onSourceWillUnload(_ event: SourceWillUnloadEvent) {
-        if (!stateMachine.didStartPlayingVideo && didAttemptPlay) {
-            self.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed)
+        if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
+            stateMachine.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed, time: delegate.currentTime)
         }
     }
     
@@ -265,7 +263,6 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
     
     func onPlaying(_ event: PlayingEvent) {
-        clearVideoStartTimer()
         if (!isSeeking && !isStalling) {
             stateMachine.playing(time: Util.timeIntervalToCMTime(_: player.currentTime))
         }
