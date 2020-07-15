@@ -20,7 +20,7 @@ class CorePlayerAdapter: NSObject {
         self.delegate.stopMonitoring()
         
         if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
-            stateMachine.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed)
+            stateMachine.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed, time: delegate.currentTime)
         }
         
         self.isPlayerReady = false
