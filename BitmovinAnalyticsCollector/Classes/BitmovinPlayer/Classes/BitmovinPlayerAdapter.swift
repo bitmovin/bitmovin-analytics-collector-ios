@@ -137,7 +137,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
     
     @objc override func willEnterForegroundNotification(notification: Notification){
-        if(!didVideoPlay && didAttemptPlay && !isPlayingAd){
+        if(!stateMachine.didStartPlayingVideo && didAttemptPlay && !isPlayingAd){
             setVideoStartTimer()
         }
     }
@@ -145,18 +145,16 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
 extension BitmovinPlayerAdapter: PlayerListener {
     func onPlay(_ event: PlayEvent) {
+        print("onPlay")
         setVideoStartTimer()
         didAttemptPlay = true
-        if (!isSeeking && !isStalling) {
+        if(!stateMachine.didStartPlayingVideo) {
+            stateMachine.transitionState(destinationState: .startup, time: nil)
+        } else if (!isSeeking && !isStalling) {
             stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
         } else if (isStalling && stateMachine.state != .seeking && stateMachine.state != .buffering) {
              stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
         }
-    }
-    
-    func onPlaying(_ event: PlayingEvent) {
-        clearVideoStartTimer()
-        didVideoPlay = true
     }
 
     func onAdBreakStarted(_ event: AdBreakStartedEvent) {
@@ -170,12 +168,12 @@ extension BitmovinPlayerAdapter: PlayerListener {
     
     func onPaused(_ event: PausedEvent) {
         isSeeking = false
-        stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        stateMachine.pause(time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
 
     func onReady(_ event: ReadyEvent) {
+        print("onReady")
         self.isPlayerReady = true
-        transitionToPausedOrBufferingOrPlaying()
     }
 
     func onStallStarted(_ event: StallStartedEvent) {
@@ -221,7 +219,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onError(_ event: ErrorEvent) {
         errorCode = Int(event.code)
         errorMessage = event.message
-        if (!didVideoPlay) {
+        if (!stateMachine.didStartPlayingVideo) {
             setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
         }
         stateMachine.transitionState(destinationState: .error, time: Util.timeIntervalToCMTime(_: player.currentTime))
@@ -239,7 +237,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
     
     func onSourceWillUnload(_ event: SourceWillUnloadEvent) {
-        if (!didVideoPlay && didAttemptPlay) {
+        if (!stateMachine.didStartPlayingVideo && didAttemptPlay) {
             self.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed)
         }
     }
@@ -262,5 +260,10 @@ extension BitmovinPlayerAdapter: PlayerListener {
         }
         stateMachine.transitionState(destinationState: .audiochange, time: Util.timeIntervalToCMTime(_: player.currentTime))
         transitionToPausedOrBufferingOrPlaying()
+    }
+    
+    func onTimeChanged(_ event: TimeChangedEvent) {
+        clearVideoStartTimer()
+        stateMachine.timeChanged(time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
 }
