@@ -96,6 +96,7 @@ public class StateMachine {
         clearVideoStartFailedTimer()
         
         videoStartFailedWorkItem = DispatchWorkItem {
+            self.clearVideoStartFailedTimer()
             self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout, time: nil)
         }
         DispatchQueue.init(label: StateMachine.kvideoStartFailedTimerId).asyncAfter(deadline: .now() + StateMachine.kVideoStartFailedTimeoutSeconds, execute: videoStartFailedWorkItem!)
@@ -134,9 +135,9 @@ public class StateMachine {
             allowed = false
         } else if state == .seeking && destinationState == .buffering {
             allowed = false
-        } else if state == .ready && (destinationState != .error && destinationState != .playAttemptFailed && destinationState != .startup) {
+        } else if state == .ready && (destinationState != .error && destinationState != .playAttemptFailed && destinationState != .startup && destinationState != .ad) {
             allowed = false
-        } else if state == .startup && (destinationState != .error && destinationState != .playAttemptFailed && destinationState != .ready && destinationState != .playing) {
+        } else if state == .startup && (destinationState != .error && destinationState != .playAttemptFailed && destinationState != .ready && destinationState != .playing && destinationState != .ad) {
             allowed = false
         } else if state == .ad && (destinationState != .error && destinationState != .adFinished) {
             allowed = false
