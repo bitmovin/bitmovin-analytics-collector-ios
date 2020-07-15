@@ -173,8 +173,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             sendTimeUpdates = false
             stateMachine.pause(time: player.currentTime())
         } else if(newRate.floatValue > 0 && oldRate.floatValue == 0) {
-            didAttemptPlay = true
-            setVideoStartTimer()
             sendTimeUpdates = true
             stateMachine.play(time: player.currentTime())
         }
@@ -197,7 +195,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return;
         }
         
-        clearVideoStartTimer()
         stateMachine.playing(time: player.currentTime())
         isPlayingEmitted = true;
     }
