@@ -129,7 +129,6 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
 extension BitmovinPlayerAdapter: PlayerListener {
     func onPlay(_ event: PlayEvent) {
-        print("onPlay")
         stateMachine.play(time: nil)
         
         if (isStalling && stateMachine.state != .seeking && stateMachine.state != .buffering) {
@@ -151,7 +150,6 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onReady(_ event: ReadyEvent) {
-        print("onReady")
         self.isPlayerReady = true
     }
 

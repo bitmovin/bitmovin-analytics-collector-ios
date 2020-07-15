@@ -54,7 +54,7 @@ public class StateMachine {
 
     public func transitionState(destinationState: PlayerState, time: CMTime?, data: [AnyHashable: Any]? = nil) {
         let performTransition = checkUnallowedTransitions(destinationState: destinationState)
-        print("transitioning from \(state) to \(destinationState): \(performTransition)")
+
         if performTransition {
             let timestamp = Date().timeIntervalSince1970Millis
             let previousState = state
