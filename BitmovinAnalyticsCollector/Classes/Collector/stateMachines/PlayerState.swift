@@ -58,9 +58,10 @@ public enum PlayerState: String {
         case .ready:
             return
         case .startup:
+            stateMachine.clearVideoStartFailedTimer()
             stateMachine.startupTime += duration
             if(destinationState == .playing) {
-                stateMachine.didStartPlayingVideo = true
+                stateMachine.setDidStartPlayingVideo()
                 stateMachine.delegate?.stateMachine(stateMachine, didStartupWithDuration: stateMachine.startupTime)
             }
         case .buffering:
