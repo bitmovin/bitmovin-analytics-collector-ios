@@ -101,7 +101,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         let errorData = error?.localizedFailureReason
 
         if (!stateMachine.didStartPlayingVideo) {
-            setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
+            stateMachine.setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
         }
 
         stateMachine.transitionState(destinationState: .error,
@@ -286,10 +286,10 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
         
         // play attempt
-        if (videoStartFailed) {
-            eventData.videoStartFailed = videoStartFailed
-            eventData.videoStartFailedReason = videoStartFailedReason ?? VideoStartFailedReason.unknown
-            resetVideoStartFailed()
+        if (stateMachine.videoStartFailed) {
+            eventData.videoStartFailed = stateMachine.videoStartFailed
+            eventData.videoStartFailedReason = stateMachine.videoStartFailedReason ?? VideoStartFailedReason.unknown
+            stateMachine.resetVideoStartFailed()
         }
     }
 
