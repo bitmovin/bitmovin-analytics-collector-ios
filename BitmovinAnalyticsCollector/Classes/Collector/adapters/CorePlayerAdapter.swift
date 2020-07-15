@@ -66,6 +66,8 @@ class CorePlayerAdapter: NSObject {
             
         }
         DispatchQueue.init(label: videoStartTimerId).asyncAfter(deadline: .now() + self.videoStartTimeoutSeconds, execute: videoStartTimer!)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     func clearVideoStartTimer() {
