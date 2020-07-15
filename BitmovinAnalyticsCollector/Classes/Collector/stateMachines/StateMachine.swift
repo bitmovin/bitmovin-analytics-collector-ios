@@ -2,22 +2,31 @@ import AVFoundation
 import Foundation
 
 public class StateMachine {
+    private static var kVideoStartFailedTimeoutSeconds: TimeInterval = 60
+    private static var kvideoStartFailedTimerId: String = "com.bitmovin.analytics.coreplayeradapter"
+    
     private(set) var state: PlayerState
     private var config: BitmovinAnalyticsConfig
     private(set) var enterTimestamp: Int64?
     var potentialSeekStart: Int64 = 0
     var potentialSeekVideoTimeStart: CMTime?
-    var didStartPlayingVideo: Bool = false
+    var didAttemptPlayingVideo: Bool = false
+    private(set) var didStartPlayingVideo: Bool = false
     var startupTime: Int64 = 0
     private(set) var videoTimeStart: CMTime?
     private(set) var videoTimeEnd: CMTime?
     private(set) var impressionId: String
     weak var delegate: StateMachineDelegate?
+    
     weak private var heartbeatTimer: Timer?
     let rebufferHeartbeatQueue = DispatchQueue.init(label: "com.bitmovin.analytics.core.statemachine")
     private var rebufferHeartbeatTimer: DispatchWorkItem?
     private var currentRebufferIntervalIndex: Int = 0
     private let rebufferHeartbeatInterval: [Int64] = [3000, 5000, 10000, 59700]
+
+    private var videoStartFailedWorkItem: DispatchWorkItem?
+    private(set) var videoStartFailed: Bool = false
+    private(set) var videoStartFailedReason: String?
 
     init(config: BitmovinAnalyticsConfig) {
         self.config = config
@@ -33,11 +42,13 @@ public class StateMachine {
 
     public func reset() {
         impressionId = NSUUID().uuidString
+        didAttemptPlayingVideo = false
         didStartPlayingVideo = false
         startupTime = 0
         disableHeartbeat()
         disableRebufferHeartbeat()
         state = .ready
+        resetVideoStartFailed()
         print("Generated Bitmovin Analytics impression ID: " +  impressionId.lowercased())
     }
 
@@ -60,16 +71,62 @@ public class StateMachine {
         if(didStartPlayingVideo) {
             return
         }
+        didAttemptPlayingVideo = true
+        startVideoStartFailedTimer()
         transitionState(destinationState: .startup, time: time)
     }
     
     public func pause(time: CMTime?) {
-        let destinationState = didStartPlayingVideo ? PlayerState.paused : PlayerState.ready
+        var destinationState = PlayerState.paused
+        if(didStartPlayingVideo) {
+            clearVideoStartFailedTimer()
+            destinationState = PlayerState.ready
+        }
         transitionState(destinationState: destinationState, time: time)
     }
     
     public func playing(time: CMTime?) {
         transitionState(destinationState: .playing, time: time)
+    }
+    
+    public func setDidStartPlayingVideo() {
+        didStartPlayingVideo = true
+        clearVideoStartFailedTimer();
+    }
+    
+    public func startVideoStartFailedTimer() {
+        if(didStartPlayingVideo) {
+            return
+        }
+        clearVideoStartFailedTimer()
+        
+        videoStartFailedWorkItem = DispatchWorkItem {
+            self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout, time: nil)
+        }
+        DispatchQueue.init(label: StateMachine.kvideoStartFailedTimerId).asyncAfter(deadline: .now() + StateMachine.kVideoStartFailedTimeoutSeconds, execute: videoStartFailedWorkItem!)
+    }
+    
+    public func clearVideoStartFailedTimer() {
+        if (videoStartFailedWorkItem == nil) {
+            return
+        }
+        videoStartFailedWorkItem!.cancel()
+        videoStartFailedWorkItem = nil
+    }
+    
+    public func setVideoStartFailed(withReason reason: String) {
+        videoStartFailed = true
+        videoStartFailedReason = reason
+    }
+    
+    public func resetVideoStartFailed() {
+        videoStartFailed = false
+        videoStartFailedReason = nil
+    }
+    
+    public func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown, time: CMTime?) {
+        setVideoStartFailed(withReason: reason)
+        transitionState(destinationState: .playAttemptFailed, time: time)
     }
     
     private func checkUnallowedTransitions(destinationState: PlayerState) -> Bool{
