@@ -2,7 +2,6 @@ import Foundation
 
 class CorePlayerAdapter: NSObject {
     internal var stateMachine: StateMachine
-    internal var didVideoPlay: Bool
     internal var isPlayerReady: Bool
     internal var didAttemptPlay: Bool
     internal var videoStartFailed: Bool
@@ -17,7 +16,6 @@ class CorePlayerAdapter: NSObject {
     init(stateMachine: StateMachine){
         self.stateMachine = stateMachine
         self.didAttemptPlay = false
-        self.didVideoPlay = false
         self.videoStartFailedReason = nil
         self.videoStartFailed = false
         self.isPlayerReady = false
@@ -31,7 +29,7 @@ class CorePlayerAdapter: NSObject {
     func destroy() {
         self.delegate.stopMonitoring()
         
-        if (!didVideoPlay && didAttemptPlay) {
+        if (!stateMachine.didStartPlayingVideo && didAttemptPlay) {
             self.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed)
         }
         
@@ -55,7 +53,7 @@ class CorePlayerAdapter: NSObject {
     }
     
     func setVideoStartTimer() {
-        if (didVideoPlay) {
+        if (stateMachine.didStartPlayingVideo) {
             return
         }
         
@@ -83,7 +81,7 @@ class CorePlayerAdapter: NSObject {
     }
     
     @objc func willEnterForegroundNotification(notification _: Notification){
-        if(!didVideoPlay && didAttemptPlay) {
+        if(!stateMachine.didStartPlayingVideo && didAttemptPlay) {
             setVideoStartTimer()
         }
     }
