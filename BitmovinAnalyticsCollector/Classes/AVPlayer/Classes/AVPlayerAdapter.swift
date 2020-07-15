@@ -10,6 +10,10 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     @objc private var player: AVPlayer
     let lockQueue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
     var statusObserver: NSKeyValueObservation?
+    private var isPlayingEmitted: Bool = false
+    private var sendTimeUpdates = false
+    private var lastTime: CMTime?
+    private var timeObserver: Any?
     
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
@@ -20,13 +24,22 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         startMonitoring()
     }
 
+    private func resetState() {
+        isPlayingEmitted = false
+        lastBitrate = 0
+    }
+    
     public func startMonitoring() {
-        addObserver(self, forKeyPath: #keyPath(player.rate), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
-        addObserver(self, forKeyPath: #keyPath(player.currentItem), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
-        addObserver(self, forKeyPath: #keyPath(player.status), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
-        if #available(iOS 10.0, *), #available(tvOS 10.0, *) {
-            addObserver(self, forKeyPath: #keyPath(player.timeControlStatus), options: [.new, .initial], context: &AVPlayerAdapter.playerKVOContext)
+        if(timeObserver != nil) {
+            player.removeTimeObserver(timeObserver!)
         }
+        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(0.2, preferredTimescale: Int32(NSEC_PER_SEC)), queue: .main) { [weak self] time in
+            self?.onPlayerDidChangeTime(currentTime: time)
+        }
+        
+        addObserver(self, forKeyPath: #keyPath(player.rate), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
+        addObserver(self, forKeyPath: #keyPath(player.currentItem), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
+        addObserver(self, forKeyPath: #keyPath(player.status), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
     }
 
     public func stopMonitoring() {
@@ -36,10 +49,12 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         removeObserver(self, forKeyPath: #keyPath(player.rate), context: &AVPlayerAdapter.playerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(player.currentItem), context: &AVPlayerAdapter.playerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(player.status), context: &AVPlayerAdapter.playerKVOContext)
-        if #available(iOS 10.0, *), #available(tvOS 10.0, *) {
-            removeObserver(self, forKeyPath: #keyPath(player.timeControlStatus), context: &AVPlayerAdapter.playerKVOContext)
+        
+        if(timeObserver != nil) {
+            player.removeTimeObserver(timeObserver!)
         }
         
+        resetState()
     }
 
     private func startMonitoringPlayerItem(playerItem: AVPlayerItem) {
@@ -63,26 +78,20 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private func playerItemStatusObserver(playerItem: AVPlayerItem) {
         let timestamp = Date().timeIntervalSince1970Millis
         switch playerItem.status {
-        case .readyToPlay:
-            self.isPlayerReady = true
-            lockQueue.sync {
-                if stateMachine.firstReadyTimestamp != nil && stateMachine.potentialSeekStart > 0 && (timestamp - stateMachine.potentialSeekStart) <= AVPlayerAdapter.maxSeekOperation {
-                    stateMachine.confirmSeek()
-                    stateMachine.transitionState(destinationState: .seeking, time: player.currentTime())
+            case .readyToPlay:
+                self.isPlayerReady = true
+                lockQueue.sync {
+                    if stateMachine.didStartPlayingVideo && stateMachine.potentialSeekStart > 0 && (timestamp - stateMachine.potentialSeekStart) <= AVPlayerAdapter.maxSeekOperation {
+                        stateMachine.confirmSeek()
+                        stateMachine.transitionState(destinationState: .seeking, time: player.currentTime())
+                    }
                 }
-            }
+            
+            case .failed:
+                errorOccured(error: playerItem.error as NSError?)
 
-            if player.rate == 0 {
-                stateMachine.transitionState(destinationState: .paused, time: player.currentTime())
-            } else if player.rate > 0.0 {
-                stateMachine.transitionState(destinationState: .playing, time: player.currentTime())
-            }
-
-        case .failed:
-            errorOccured(error: playerItem.error as NSError?)
-
-        default:
-            break
+            default:
+                break
         }
     }
 
@@ -91,7 +100,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         let errorMessage = error?.localizedDescription ?? "Unkown"
         let errorData = error?.localizedFailureReason
 
-        if (!didVideoPlay) {
+        if (!stateMachine.didStartPlayingVideo) {
             setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
         }
 
@@ -140,15 +149,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
 
         if keyPath == #keyPath(player.rate) {
-            guard let newRateNumber = change?[NSKeyValueChangeKey.newKey] as? NSNumber else {
-                return
-            }
-            let newRate = newRateNumber.doubleValue
-            if newRate == 0.0 && stateMachine.firstReadyTimestamp != nil {
-                stateMachine.transitionState(destinationState: .paused, time: self.player.currentTime())
-            } else if newRate > 0.0 && stateMachine.firstReadyTimestamp != nil {
-                stateMachine.transitionState(destinationState: .playing, time: self.player.currentTime())
-            }
+            onRateChanged(change)
         } else if keyPath == #keyPath(player.currentItem) {
             if let oldItem = change?[NSKeyValueChangeKey.oldKey] as? AVPlayerItem {
                 NSLog("Current Item Changed: %@", oldItem.debugDescription)
@@ -160,15 +161,45 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             }
         } else if keyPath == #keyPath(player.status) && player.status == .failed {
             errorOccured(error: self.player.currentItem?.error as NSError?)
-        } else if #available(iOS 10.0, *), #available(tvOS 10.0, *) , keyPath == #keyPath(player.timeControlStatus) && !didVideoPlay {
-            if (player.timeControlStatus == AVPlayer.TimeControlStatus.waitingToPlayAtSpecifiedRate) {
-                setVideoStartTimer()
-                didAttemptPlay = true
-            } else if (player.timeControlStatus == AVPlayer.TimeControlStatus.playing){
-                clearVideoStartTimer()
-                didVideoPlay = true
-            }
         }
+    }
+    
+    private func onRateChanged(_ change: [NSKeyValueChangeKey: Any]?) {
+        let oldRate = change?[NSKeyValueChangeKey.oldKey] as? NSNumber ?? 0;
+        let newRate = change?[NSKeyValueChangeKey.newKey] as? NSNumber ?? 0;
+        
+        if(newRate.floatValue == 0 && oldRate.floatValue > 0) {
+            isPlayingEmitted = false
+            sendTimeUpdates = false
+            stateMachine.pause(time: player.currentTime())
+        } else if(newRate.floatValue > 0 && oldRate.floatValue == 0) {
+            didAttemptPlay = true
+            setVideoStartTimer()
+            sendTimeUpdates = true
+            stateMachine.play(time: player.currentTime())
+        }
+    }
+    
+    private func onPlayerDidChangeTime(currentTime: CMTime) {
+        if(currentTime == lastTime || !sendTimeUpdates) {
+            return
+        }
+        lastTime = currentTime
+        onTimeChanged()
+    }
+    
+    private func onTimeChanged() {
+        emitPlayingEventIfNotYetEmitted()
+    }
+
+    private func emitPlayingEventIfNotYetEmitted() {
+        if (!(player.currentItem?.isPlaybackLikelyToKeepUp ?? false) || isPlayingEmitted) {
+            return;
+        }
+        
+        clearVideoStartTimer()
+        stateMachine.playing(time: player.currentTime())
+        isPlayingEmitted = true;
     }
 
     public func createEventData() -> EventData {
