@@ -16,7 +16,7 @@ public enum PlayerState: String {
 
     func onEntry(stateMachine: StateMachine, timestamp _: Int64, previousState : PlayerState, data: [AnyHashable: Any]?) {
         switch self {
-            case .ad
+            case .ad:
                 return
             case .ready:
                 return
@@ -58,7 +58,7 @@ public enum PlayerState: String {
         }
         
         switch self {
-            case .ad
+            case .ad:
                 return
             case .ready:
                 return
