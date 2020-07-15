@@ -57,13 +57,19 @@ public class StateMachine {
     }
     
     public func play(time: CMTime?) {
-        let destinationState = didStartPlayingVideo ? PlayerState.playing : PlayerState.startup
-        transitionState(destinationState: destinationState, time: time)
+        if(didStartPlayingVideo) {
+            return
+        }
+        transitionState(destinationState: .startup, time: time)
     }
     
     public func pause(time: CMTime?) {
         let destinationState = didStartPlayingVideo ? PlayerState.paused : PlayerState.ready
         transitionState(destinationState: destinationState, time: time)
+    }
+    
+    public func playing(time: CMTime?) {
+        transitionState(destinationState: .playing, time: time)
     }
     
     private func checkUnallowedTransitions(destinationState: PlayerState) -> Bool{
