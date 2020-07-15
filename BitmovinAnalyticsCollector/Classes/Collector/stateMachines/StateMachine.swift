@@ -89,7 +89,8 @@ public class StateMachine {
     }
     
     public func startVideoStartFailedTimer() {
-        if(didStartPlayingVideo) {
+        // The second test makes sure to not start the timer during an ad or if the player is paused on resuming from background
+        if(didStartPlayingVideo || state != .startup) {
             return
         }
         clearVideoStartFailedTimer()
@@ -136,6 +137,8 @@ public class StateMachine {
         } else if state == .ready && (destinationState != .error && destinationState != .playAttemptFailed && destinationState != .startup) {
             allowed = false
         } else if state == .startup && (destinationState != .error && destinationState != .playAttemptFailed && destinationState != .ready && destinationState != .playing) {
+            allowed = false
+        } else if state == .ad && (destinationState != .error && destinationState != .adFinished) {
             allowed = false
         }
         
