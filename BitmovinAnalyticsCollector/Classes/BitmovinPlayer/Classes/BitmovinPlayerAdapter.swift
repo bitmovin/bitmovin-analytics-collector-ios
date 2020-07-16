@@ -135,6 +135,12 @@ extension BitmovinPlayerAdapter: PlayerListener {
              stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
         }
     }
+    
+    func onPlaying(_ event: PlayingEvent) {
+        if (!isSeeking && !isStalling) {
+            stateMachine.playing(time: Util.timeIntervalToCMTime(_: player.currentTime))
+        }
+    }
 
     func onAdBreakStarted(_ event: AdBreakStartedEvent) {
         stateMachine.transitionState(destinationState: .ad, time: currentTime)
@@ -241,11 +247,5 @@ extension BitmovinPlayerAdapter: PlayerListener {
         }
         stateMachine.transitionState(destinationState: .audiochange, time: Util.timeIntervalToCMTime(_: player.currentTime))
         transitionToPausedOrBufferingOrPlaying()
-    }
-    
-    func onPlaying(_ event: PlayingEvent) {
-        if (!isSeeking && !isStalling) {
-            stateMachine.playing(time: Util.timeIntervalToCMTime(_: player.currentTime))
-        }
     }
 }
