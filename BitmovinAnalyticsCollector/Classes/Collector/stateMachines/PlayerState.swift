@@ -24,6 +24,7 @@ public enum PlayerState: String {
             case .ready:
                 return
             case .startup:
+                stateMachine.didAttemptPlayingVideo = true
                 stateMachine.startVideoStartFailedTimer()
                 return
             case .buffering:

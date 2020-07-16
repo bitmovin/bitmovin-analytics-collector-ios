@@ -71,7 +71,6 @@ public class StateMachine {
         if(didStartPlayingVideo) {
             return
         }
-        didAttemptPlayingVideo = true
         transitionState(destinationState: .startup, time: time)
     }
     
