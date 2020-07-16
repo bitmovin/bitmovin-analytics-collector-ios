@@ -100,7 +100,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         let errorMessage = error?.localizedDescription ?? "Unkown"
         let errorData = error?.localizedFailureReason
 
-        if (!stateMachine.didStartPlayingVideo) {
+        if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
             stateMachine.setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
         }
 
