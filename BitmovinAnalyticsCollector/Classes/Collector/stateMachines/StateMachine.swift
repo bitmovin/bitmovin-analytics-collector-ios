@@ -2,34 +2,35 @@ import AVFoundation
 import Foundation
 
 public class StateMachine {
+    private static var kVideoStartFailedTimeoutSeconds: TimeInterval = 60
+    private static var kvideoStartFailedTimerId: String = "com.bitmovin.analytics.core.statemachine.startupFailedTimer"
+    
     private(set) var state: PlayerState
     private var config: BitmovinAnalyticsConfig
-    private var initialTimestamp: Int64
     private(set) var enterTimestamp: Int64?
     var potentialSeekStart: Int64 = 0
     var potentialSeekVideoTimeStart: CMTime?
-    var firstReadyTimestamp: Int64?
+    var didAttemptPlayingVideo: Bool = false
+    private(set) var didStartPlayingVideo: Bool = false
+    var startupTime: Int64 = 0
     private(set) var videoTimeStart: CMTime?
     private(set) var videoTimeEnd: CMTime?
     private(set) var impressionId: String
     weak var delegate: StateMachineDelegate?
+    
     weak private var heartbeatTimer: Timer?
-    let rebufferHeartbeatQueue = DispatchQueue.init(label: "com.bitmovin.analytics.core.statemachine")
+    let rebufferHeartbeatQueue = DispatchQueue.init(label: "com.bitmovin.analytics.core.statemachine.heartBeatQueue")
     private var rebufferHeartbeatTimer: DispatchWorkItem?
     private var currentRebufferIntervalIndex: Int = 0
     private let rebufferHeartbeatInterval: [Int64] = [3000, 5000, 10000, 59700]
 
-    var startupTime: Int64 {
-        guard let firstReadyTimestamp = firstReadyTimestamp else {
-            return 0
-        }
-        return firstReadyTimestamp - initialTimestamp
-    }
+    private var videoStartFailedWorkItem: DispatchWorkItem?
+    private(set) var videoStartFailed: Bool = false
+    private(set) var videoStartFailedReason: String?
 
     init(config: BitmovinAnalyticsConfig) {
         self.config = config
-        state = .setup
-        initialTimestamp = Date().timeIntervalSince1970Millis
+        state = .ready
         impressionId = NSUUID().uuidString
         print("Generated Bitmovin Analytics impression ID: " + impressionId.lowercased())
     }
@@ -41,17 +42,19 @@ public class StateMachine {
 
     public func reset() {
         impressionId = NSUUID().uuidString
-        initialTimestamp = Date().timeIntervalSince1970Millis
-        firstReadyTimestamp = nil
+        didAttemptPlayingVideo = false
+        didStartPlayingVideo = false
+        startupTime = 0
         disableHeartbeat()
         disableRebufferHeartbeat()
-        state = .setup
+        state = .ready
+        resetVideoStartFailed()
         print("Generated Bitmovin Analytics impression ID: " +  impressionId.lowercased())
     }
 
     public func transitionState(destinationState: PlayerState, time: CMTime?, data: [AnyHashable: Any]? = nil) {
         let performTransition = checkUnallowedTransitions(destinationState: destinationState)
-        
+
         if performTransition {
             let timestamp = Date().timeIntervalSince1970Millis
             let previousState = state
@@ -64,19 +67,81 @@ public class StateMachine {
         }
     }
     
+    public func play(time: CMTime?) {
+        if(didStartPlayingVideo) {
+            return
+        }
+        transitionState(destinationState: .startup, time: time)
+    }
+    
+    public func pause(time: CMTime?) {
+        let destinationState = didStartPlayingVideo ? PlayerState.paused : PlayerState.ready
+        transitionState(destinationState: destinationState, time: time)
+    }
+    
+    public func playing(time: CMTime?) {
+        transitionState(destinationState: .playing, time: time)
+    }
+    
+    public func setDidStartPlayingVideo() {
+        didStartPlayingVideo = true
+    }
+    
+    public func startVideoStartFailedTimer() {
+        // The second test makes sure to not start the timer during an ad or if the player is paused on resuming from background
+        if(didStartPlayingVideo || state != .startup) {
+            return
+        }
+        clearVideoStartFailedTimer()
+        
+        videoStartFailedWorkItem = DispatchWorkItem {
+            self.clearVideoStartFailedTimer()
+            self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout, time: nil)
+        }
+        DispatchQueue.init(label: StateMachine.kvideoStartFailedTimerId).asyncAfter(deadline: .now() + StateMachine.kVideoStartFailedTimeoutSeconds, execute: videoStartFailedWorkItem!)
+    }
+    
+    public func clearVideoStartFailedTimer() {
+        if (videoStartFailedWorkItem == nil) {
+            return
+        }
+        videoStartFailedWorkItem!.cancel()
+        videoStartFailedWorkItem = nil
+    }
+    
+    public func setVideoStartFailed(withReason reason: String) {
+        videoStartFailed = true
+        videoStartFailedReason = reason
+    }
+    
+    public func resetVideoStartFailed() {
+        videoStartFailed = false
+        videoStartFailedReason = nil
+    }
+    
+    public func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown, time: CMTime?) {
+        setVideoStartFailed(withReason: reason)
+        transitionState(destinationState: .playAttemptFailed, time: time)
+    }
+    
     private func checkUnallowedTransitions(destinationState: PlayerState) -> Bool{
-        var allowed = true
         if state == destinationState {
-            allowed = false
+            return false
         } else if state == .buffering && destinationState == .qualitychange {
-            allowed = false
+            return false
         } else if state == .seeking && destinationState == .qualitychange {
-            allowed = false
+            return false
         } else if state == .seeking && destinationState == .buffering {
-            allowed = false
+            return false
+        } else if state == .ready && (destinationState != .error && destinationState != .playAttemptFailed && destinationState != .startup && destinationState != .ad) {
+            return false
+        } else if state == .startup && (destinationState != .error && destinationState != .playAttemptFailed && destinationState != .ready && destinationState != .playing && destinationState != .ad) {
+            return false
+        } else if state == .ad && (destinationState != .error && destinationState != .adFinished) {
+            return false
         }
         
-        return allowed
+        return true
     }
 
     public func confirmSeek() {

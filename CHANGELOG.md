@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Tracking of drm metrics (`drmType`, `drmLoadTime`) for Bitmovin player if Fairplay is used (AN-195, AN-1515)
 
+### Changed
+
+- Changed the way how we track video startup times when having autoplay enabled to be consistent with web platform (AN-1617)
+
 ## 1.14.0
 
 ### Added
