@@ -1,7 +1,10 @@
 import Foundation
 
 public enum PlayerState: String {
-    case setup
+    case ad
+    case adFinished
+    case ready
+    case startup
     case buffering
     case error
     case playing
@@ -14,33 +17,37 @@ public enum PlayerState: String {
 
     func onEntry(stateMachine: StateMachine, timestamp _: Int64, previousState : PlayerState, data: [AnyHashable: Any]?) {
         switch self {
-        case .setup:
-            return
-        case .buffering:
-            stateMachine.enableRebufferHeartbeat()
-            return
-        case .playAttemptFailed:
-            return
-        case .error:
-            stateMachine.delegate?.stateMachineDidEnterError(stateMachine, data: data)
-            return
-        case .playing, .paused:
-            if stateMachine.firstReadyTimestamp == nil {
-                stateMachine.firstReadyTimestamp = Date().timeIntervalSince1970Millis
-                stateMachine.delegate?.stateMachine(stateMachine, didStartupWithDuration: stateMachine.startupTime)
-            }
-            if (self == .playing){
+            case .ad:
+                return
+            case .adFinished:
+                return
+            case .ready:
+                return
+            case .startup:
+                stateMachine.didAttemptPlayingVideo = true
+                stateMachine.startVideoStartFailedTimer()
+                return
+            case .buffering:
+                stateMachine.enableRebufferHeartbeat()
+                return
+            case .playAttemptFailed:
+                return
+            case .error:
+                stateMachine.delegate?.stateMachineDidEnterError(stateMachine, data: data)
+                return
+            case .paused:
+                return
+            case .playing:
                 stateMachine.enableHeartbeat()
-            }
-            return
-        case .qualitychange:
-            return
-        case .seeking:
-            return
-        case .subtitlechange:
-            return
-        case .audiochange:
-            return
+                return
+            case .qualitychange:
+                return
+            case .seeking:
+                return
+            case .subtitlechange:
+                return
+            case .audiochange:
+                return
         }
     }
 
@@ -55,36 +62,46 @@ public enum PlayerState: String {
         }
         
         switch self {
-        case .setup:
-            stateMachine.delegate?.stateMachineDidExitSetup(stateMachine)
-            return
-        case .buffering:
-            stateMachine.disableRebufferHeartbeat()
-            stateMachine.delegate?.stateMachine(stateMachine, didExitBufferingWithDuration: duration)
-            return
-        case .playAttemptFailed:
-            return
-        case .error:
-            return
-        case .playing:
-            stateMachine.delegate?.stateMachine(stateMachine, didExitPlayingWithDuration: duration)
-            stateMachine.disableHeartbeat()
-            return
-        case .paused:
-            stateMachine.delegate?.stateMachine(stateMachine, didExitPauseWithDuration: duration)
-            return
-        case .qualitychange:
-            stateMachine.delegate?.stateMachineDidQualityChange(stateMachine)
-            return
-        case .seeking:
-            stateMachine.delegate?.stateMachine(stateMachine, didExitSeekingWithDuration: duration, destinationPlayerState: destinationState)
-            return
-        case .subtitlechange:
-            stateMachine.delegate?.stateMachineDidSubtitleChange(stateMachine)
-            return
-        case .audiochange:
-            stateMachine.delegate?.stateMachineDidAudioChange(stateMachine)
-            return
+            case .ad:
+                return
+            case .adFinished:
+                return
+            case .ready:
+                return
+            case .startup:
+                stateMachine.clearVideoStartFailedTimer()
+                stateMachine.startupTime += duration
+                if(destinationState == .playing) {
+                    stateMachine.setDidStartPlayingVideo()
+                    stateMachine.delegate?.stateMachine(stateMachine, didStartupWithDuration: stateMachine.startupTime)
+                }
+            case .buffering:
+                stateMachine.disableRebufferHeartbeat()
+                stateMachine.delegate?.stateMachine(stateMachine, didExitBufferingWithDuration: duration)
+                return
+            case .playAttemptFailed:
+                return
+            case .error:
+                return
+            case .playing:
+                stateMachine.delegate?.stateMachine(stateMachine, didExitPlayingWithDuration: duration)
+                stateMachine.disableHeartbeat()
+                return
+            case .paused:
+                stateMachine.delegate?.stateMachine(stateMachine, didExitPauseWithDuration: duration)
+                return
+            case .qualitychange:
+                stateMachine.delegate?.stateMachineDidQualityChange(stateMachine)
+                return
+            case .seeking:
+                stateMachine.delegate?.stateMachine(stateMachine, didExitSeekingWithDuration: duration, destinationPlayerState: destinationState)
+                return
+            case .subtitlechange:
+                stateMachine.delegate?.stateMachineDidSubtitleChange(stateMachine)
+                return
+            case .audiochange:
+                stateMachine.delegate?.stateMachineDidAudioChange(stateMachine)
+                return
         }
     }
 }
