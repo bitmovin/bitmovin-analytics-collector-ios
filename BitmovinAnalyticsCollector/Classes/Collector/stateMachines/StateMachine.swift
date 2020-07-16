@@ -3,7 +3,7 @@ import Foundation
 
 public class StateMachine {
     private static var kVideoStartFailedTimeoutSeconds: TimeInterval = 60
-    private static var kvideoStartFailedTimerId: String = "com.bitmovin.analytics.coreplayeradapter"
+    private static var kvideoStartFailedTimerId: String = "com.bitmovin.analytics.core.statemachine.startupFailedTimer"
     
     private(set) var state: PlayerState
     private var config: BitmovinAnalyticsConfig
@@ -19,7 +19,7 @@ public class StateMachine {
     weak var delegate: StateMachineDelegate?
     
     weak private var heartbeatTimer: Timer?
-    let rebufferHeartbeatQueue = DispatchQueue.init(label: "com.bitmovin.analytics.core.statemachine")
+    let rebufferHeartbeatQueue = DispatchQueue.init(label: "com.bitmovin.analytics.core.statemachine.heartBeatQueue")
     private var rebufferHeartbeatTimer: DispatchWorkItem?
     private var currentRebufferIntervalIndex: Int = 0
     private let rebufferHeartbeatInterval: [Int64] = [3000, 5000, 10000, 59700]
