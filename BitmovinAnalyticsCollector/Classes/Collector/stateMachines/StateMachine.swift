@@ -125,24 +125,23 @@ public class StateMachine {
     }
     
     private func checkUnallowedTransitions(destinationState: PlayerState) -> Bool{
-        var allowed = true
         if state == destinationState {
-            allowed = false
+            return false
         } else if state == .buffering && destinationState == .qualitychange {
-            allowed = false
+            return false
         } else if state == .seeking && destinationState == .qualitychange {
-            allowed = false
+            return false
         } else if state == .seeking && destinationState == .buffering {
-            allowed = false
+            return false
         } else if state == .ready && (destinationState != .error && destinationState != .playAttemptFailed && destinationState != .startup && destinationState != .ad) {
-            allowed = false
+            return false
         } else if state == .startup && (destinationState != .error && destinationState != .playAttemptFailed && destinationState != .ready && destinationState != .playing && destinationState != .ad) {
-            allowed = false
+            return false
         } else if state == .ad && (destinationState != .error && destinationState != .adFinished) {
-            allowed = false
+            return false
         }
         
-        return allowed
+        return true
     }
 
     public func confirmSeek() {
