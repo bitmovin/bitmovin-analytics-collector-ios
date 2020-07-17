@@ -5,11 +5,11 @@ public class DrmPerformanceInfo {
     /// DRM download time in milliseconds
     var drmLoadTime: Int64?
     
-    init(drmType: String?) {
+    init(drmType: String) {
         self.drmType = drmType
     }
 
-    init(drmType: String?, drmLoadTime: Int64?) {
+    init(drmType: String, drmLoadTime: Int64?) {
         self.drmType = drmType
         self.drmLoadTime = drmLoadTime
     }

@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Tracking of drm metrics (`drmType`, `drmLoadTime`) for Bitmovin player if Fairplay is used (AN-195, AN-1515)
+- Tracking of drm metrics (`drmType`, `drmLoadTime`) for Bitmovin player if Fairplay DRM system is used (AN-195, AN-1515)
+- Tracking of `drmType` for AVFoundation player if Fairplay DRM system is used (AN-1515)
 
 ### Changed
 
