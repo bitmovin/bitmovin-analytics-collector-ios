@@ -9,8 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Tracking of `drmType` for AVFoundation if `Fairplay` DRM system is used (AN-1515)
-- Bitmovin Player: send `drmLoadTime` with next available sample (AN-195)
+- Tracking of drm metrics (`drmType`, `drmLoadTime`) for Bitmovin player if Fairplay DRM system is used (AN-195, AN-1515)
+- Tracking of `drmType` for AVFoundation player if Fairplay DRM system is used (AN-1515)
+
+### Changed
+
+- Changed the way how we track video startup times when having autoplay enabled to be consistent with web platform (AN-1617)
 
 ## 1.14.0
 

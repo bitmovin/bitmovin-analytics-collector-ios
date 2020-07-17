@@ -49,10 +49,13 @@ public class BitmovinAnalyticsInternal: NSObject {
         adapter = nil
     }
 
-    internal func attach(adapter: PlayerAdapter) {
+    internal func attach(adapter: PlayerAdapter, autoplay: Bool) {
         stateMachine.delegate = self
         eventDataDispatcher.enable()
         self.adapter = adapter
+        if(autoplay) {
+            stateMachine.transitionState(destinationState: .startup, time: nil)
+        }
     }
     
     private func detachAd() {

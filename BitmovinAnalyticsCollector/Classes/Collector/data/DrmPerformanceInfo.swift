@@ -1,8 +1,9 @@
 import Foundation
 
 public class DrmPerformanceInfo {
-    var drmType: String
-    var drmLoadTime: Int64? // in milliseconds
+    var drmType: String?
+    /// DRM download time in milliseconds
+    var drmLoadTime: Int64?
     
     init(drmType: String) {
         self.drmType = drmType
