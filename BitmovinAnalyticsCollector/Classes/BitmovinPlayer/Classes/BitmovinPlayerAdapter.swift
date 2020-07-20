@@ -6,14 +6,15 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var player: BitmovinPlayer
     private var errorCode: Int?
     private var errorMessage: String?
-    private var isPlayingAd: Bool
+    private var drmPerformanceInfo: DrmPerformanceInfo?
     private var isStalling: Bool
     private var isSeeking: Bool
+    /// DRM certificate download time in milliseconds
+    private var drmCertificateDownloadTime: Int64?
 
     init(player: BitmovinPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.config = config
-        self.isPlayingAd = false
         self.isStalling = false
         self.isSeeking = false
         super.init(stateMachine: stateMachine)
@@ -26,8 +27,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         decorateEventData(eventData: eventData)
         return eventData
     }
-    
-    
+
     private func decorateEventData(eventData: EventData) {
         //PlayerType
         eventData.player = PlayerType.bitmovin.rawValue
@@ -69,6 +69,11 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         default: break;
         }
 
+        // drmType
+        if let drmType = self.drmPerformanceInfo?.drmType {
+            eventData.drmType = drmType
+        }
+
         // videoBitrate
         if let bitrate = player.videoQuality?.bitrate {
             eventData.videoBitrate = Double(bitrate)
@@ -106,10 +111,10 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
         eventData.audioLanguage = player.audio?.language
         
-        if (videoStartFailed) {
-            eventData.videoStartFailed = videoStartFailed
-            eventData.videoStartFailedReason = videoStartFailedReason ?? VideoStartFailedReason.unknown
-            resetVideoStartFailed()
+        if (stateMachine.videoStartFailed) {
+            eventData.videoStartFailed = stateMachine.videoStartFailed
+            eventData.videoStartFailedReason = stateMachine.videoStartFailedReason ?? VideoStartFailedReason.unknown
+            stateMachine.resetVideoStartFailed()
         }
     }
 
@@ -122,60 +127,47 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         isStalling = false
     }
     
+    func getDrmPerformanceInfo() -> DrmPerformanceInfo? {
+        return self.drmPerformanceInfo
+    }
+    
     var currentTime: CMTime? {
         get {
             return Util.timeIntervalToCMTime(_: player.currentTime)
-        }
-    }
-    
-    override func setVideoStartTimer() {
-        if(isPlayingAd){
-            return
-        }
-        
-        super.setVideoStartTimer()
-    }
-    
-    @objc override func willEnterForegroundNotification(notification: Notification){
-        if(!didVideoPlay && didAttemptPlay && !isPlayingAd){
-            setVideoStartTimer()
         }
     }
 }
 
 extension BitmovinPlayerAdapter: PlayerListener {
     func onPlay(_ event: PlayEvent) {
-        setVideoStartTimer()
-        didAttemptPlay = true
-        if (!isSeeking && !isStalling) {
-            stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
-        } else if (isStalling && stateMachine.state != .seeking && stateMachine.state != .buffering) {
+        stateMachine.play(time: nil)
+        
+        if (isStalling && stateMachine.state != .seeking && stateMachine.state != .buffering) {
              stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
         }
     }
     
     func onPlaying(_ event: PlayingEvent) {
-        clearVideoStartTimer()
-        didVideoPlay = true
+        if (!isSeeking && !isStalling) {
+            stateMachine.playing(time: Util.timeIntervalToCMTime(_: player.currentTime))
+        }
     }
 
     func onAdBreakStarted(_ event: AdBreakStartedEvent) {
-        clearVideoStartTimer()
-        isPlayingAd = true
+        stateMachine.transitionState(destinationState: .ad, time: currentTime)
     }
     
     func onAdBreakFinished(_ event: AdBreakFinishedEvent) {
-        isPlayingAd = false
+        stateMachine.transitionState(destinationState: .adFinished, time: currentTime)
     }
     
     func onPaused(_ event: PausedEvent) {
         isSeeking = false
-        stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        stateMachine.pause(time: currentTime)
     }
 
     func onReady(_ event: ReadyEvent) {
         self.isPlayerReady = true
-        transitionToPausedOrBufferingOrPlaying()
     }
 
     func onStallStarted(_ event: StallStartedEvent) {
@@ -194,13 +186,30 @@ extension BitmovinPlayerAdapter: PlayerListener {
         stateMachine.transitionState(destinationState: .seeking, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
 
+    func onDownloadFinished(_ event: DownloadFinishedEvent) {
+        let downloadTimeInMs = event.downloadTime.milliseconds
+
+        switch event.downloadType {
+        case BMPHttpRequestTypeDrmCertificateFairplay:
+            // This request is the first that happens when initializing the DRM system
+            self.drmCertificateDownloadTime = downloadTimeInMs
+        case BMPHttpRequestTypeDrmLicenseFairplay:
+            let drmLoadTimeMs = (self.drmCertificateDownloadTime ?? 0) + (downloadTimeInMs ?? 0)
+            self.drmPerformanceInfo = DrmPerformanceInfo(drmType: DrmType.fairplay, drmLoadTime: drmLoadTimeMs)
+            self.drmCertificateDownloadTime = nil
+        default:
+            return
+        }
+    }
+
     func didVideoBitrateChange(old: VideoQuality?, new: VideoQuality?) -> Bool {
         return old?.bitrate != new?.bitrate
     }
 
     func onVideoDownloadQualityChanged(_ event: VideoDownloadQualityChangedEvent) {
         let videoBitrateDidChange = didVideoBitrateChange(old: event.videoQualityOld, new: event.videoQualityNew)
-        if (!isStalling && !isSeeking && videoBitrateDidChange) {
+        if (!isPlayerReady && !isStalling && !isSeeking && videoBitrateDidChange) {
+            // there is a qualityChange event happening before the `onReady` method. Do not transition into any state.
             stateMachine.transitionState(destinationState: .qualitychange, time: Util.timeIntervalToCMTime(_: player.currentTime))
             transitionToPausedOrBufferingOrPlaying()
         }
@@ -221,13 +230,17 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onError(_ event: ErrorEvent) {
         errorCode = Int(event.code)
         errorMessage = event.message
-        if (!didVideoPlay) {
-            setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
+        if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
+            stateMachine.setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
         }
         stateMachine.transitionState(destinationState: .error, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
 
     func transitionToPausedOrBufferingOrPlaying() {
+        if(!stateMachine.didStartPlayingVideo) {
+            return
+        }
+        
         if isStalling {
             // Player reports isPlaying=true although onStallEnded has not been called yet -- still stalling
             stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
@@ -239,8 +252,8 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
     
     func onSourceWillUnload(_ event: SourceWillUnloadEvent) {
-        if (!didVideoPlay && didAttemptPlay) {
-            self.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed)
+        if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
+            stateMachine.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed, time: delegate.currentTime)
         }
     }
     

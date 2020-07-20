@@ -130,3 +130,12 @@ extension Date {
         return Int64(round(Date().timeIntervalSince1970 * 1_000))
     }
 }
+
+extension TimeInterval {
+    var milliseconds: Int64? {
+        if self > Double(Int64.min) && self < Double(Int64.max) {
+            return Int64(self * 1_000)
+        }
+        return nil
+    }
+}
