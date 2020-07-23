@@ -83,6 +83,10 @@ public class StateMachine {
         transitionState(destinationState: .playing, time: time)
     }
     
+    public func videoQualityChange(time: CMTime?) {
+        transitionState(destinationState: .qualitychange, time: time)
+    }
+    
     public func setDidStartPlayingVideo() {
         didStartPlayingVideo = true
     }
