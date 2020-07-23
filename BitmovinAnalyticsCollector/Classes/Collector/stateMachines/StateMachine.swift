@@ -27,11 +27,13 @@ public class StateMachine {
     private var videoStartFailedWorkItem: DispatchWorkItem?
     private(set) var videoStartFailed: Bool = false
     private(set) var videoStartFailedReason: String?
+    internal var qualityChangeCounter: QualityChangeCounter
 
     init(config: BitmovinAnalyticsConfig) {
         self.config = config
         state = .ready
         impressionId = NSUUID().uuidString
+        qualityChangeCounter =  QualityChangeCounter()
         print("Generated Bitmovin Analytics impression ID: " + impressionId.lowercased())
     }
 
@@ -49,6 +51,7 @@ public class StateMachine {
         disableRebufferHeartbeat()
         state = .ready
         resetVideoStartFailed()
+        qualityChangeCounter.resetInterval()
         print("Generated Bitmovin Analytics impression ID: " +  impressionId.lowercased())
     }
 
@@ -84,6 +87,7 @@ public class StateMachine {
     }
     
     public func videoQualityChange(time: CMTime?) {
+        
         transitionState(destinationState: .qualitychange, time: time)
     }
     

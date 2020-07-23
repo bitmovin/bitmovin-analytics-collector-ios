@@ -41,6 +41,7 @@ public enum PlayerState: String {
                 stateMachine.enableHeartbeat()
                 return
             case .qualitychange:
+                stateMachine.qualityChangeCounter.increaseCounter()
                 return
             case .seeking:
                 return
@@ -91,7 +92,14 @@ public enum PlayerState: String {
                 stateMachine.delegate?.stateMachine(stateMachine, didExitPauseWithDuration: duration)
                 return
             case .qualitychange:
-                stateMachine.delegate?.stateMachineDidQualityChange(stateMachine)
+                if(stateMachine.qualityChangeCounter.isQualityChangeEnabled()){
+                       stateMachine.delegate?.stateMachineDidQualityChange(stateMachine)
+                }
+                else {
+                    stateMachine.delegate?.stateMachineDidEnterError(stateMachine,
+                            data: [BitmovinAnalyticsInternal.ErrorCodeKey: 10000,
+                            BitmovinAnalyticsInternal.ErrorMessageKey: "ANALYTICS_QUALITY_CHANGE_THRESHOLD_EXCEEDED"])
+                }
                 return
             case .seeking:
                 stateMachine.delegate?.stateMachine(stateMachine, didExitSeekingWithDuration: duration, destinationPlayerState: destinationState)

@@ -35,4 +35,15 @@ class QualityChangeCounter {
         qualityResetWorkItem?.cancel()
         qualityResetWorkItem = nil
     }
+    
+    func increaseCounter(){
+        if( qualityChangeCounter == 0) {
+            startInterval()
+        }
+        qualityChangeCounter+=1
+    }
+    
+    func isQualityChangeEnabled() -> Bool {
+        return qualityChangeCounter <= QualityChangeCounter.kAnalyticsQualityChangeThreshold
+    }
 }
