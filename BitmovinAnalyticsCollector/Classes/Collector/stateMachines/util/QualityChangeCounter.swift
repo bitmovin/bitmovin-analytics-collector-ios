@@ -9,17 +9,14 @@ import Foundation
 
 public class QualityChangeCounter {
     private static var kAnalyticsQualityChangeThreshold = 2
-    private static var kAnalyticsQualityChangeResetIntervalSeconds: TimeInterval = 60 * 60
+    private static var kAnalyticsQualityChangeResetIntervalSeconds: TimeInterval = 10
     private static var kAnalyticsQualityChangeIntervalId = "com.bitmovin.analytics.core.utils.QualityChangeCounter"
      
     private var qualityResetWorkItem: DispatchWorkItem?
-    
     private var qualityChangeCounter = 0
     
     func startInterval(){
-        
         resetInterval()
-        
         qualityResetWorkItem = DispatchWorkItem {
             self.qualityChangeCounter = 0
         }
@@ -28,7 +25,7 @@ public class QualityChangeCounter {
     }
     
     func resetInterval() {
-        if (qualityResetWorkItem == nil){
+        if (qualityResetWorkItem == nil) {
             return
         }
         
@@ -37,10 +34,10 @@ public class QualityChangeCounter {
     }
     
     func increaseCounter(){
-        if( qualityChangeCounter == 0) {
+        if (qualityChangeCounter == 0) {
             startInterval()
         }
-        qualityChangeCounter+=1
+        qualityChangeCounter += 1
     }
     
     func isQualityChangeEnabled() -> Bool {

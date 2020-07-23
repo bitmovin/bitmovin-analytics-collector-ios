@@ -227,7 +227,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
 
     func onSeeked(_ event: SeekedEvent) {
         isSeeking = false
-        if (!isStalling){
+        if (!isStalling) {
             transitionToPausedOrBufferingOrPlaying()
         }
     }
