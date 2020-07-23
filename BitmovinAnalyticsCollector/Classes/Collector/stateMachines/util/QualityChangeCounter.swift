@@ -7,7 +7,7 @@
 
 import Foundation
 
-class QualityChangeCounter {
+public class QualityChangeCounter {
     private static var kAnalyticsQualityChangeThreshold = 2
     private static var kAnalyticsQualityChangeResetIntervalSeconds: TimeInterval = 60 * 60
     private static var kAnalyticsQualityChangeIntervalId = "com.bitmovin.analytics.core.utils.QualityChangeCounter"

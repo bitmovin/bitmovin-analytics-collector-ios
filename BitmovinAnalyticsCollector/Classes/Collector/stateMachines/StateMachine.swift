@@ -27,7 +27,7 @@ public class StateMachine {
     private var videoStartFailedWorkItem: DispatchWorkItem?
     private(set) var videoStartFailed: Bool = false
     private(set) var videoStartFailedReason: String?
-    internal var qualityChangeCounter: QualityChangeCounter
+    public var qualityChangeCounter: QualityChangeCounter
 
     init(config: BitmovinAnalyticsConfig) {
         self.config = config
