@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Added
+- `error` sample sent if continuous buffering exceeds threshold (ANALYTICS_BUFFERING_TIMEOUT_REACHED) (AN-1558)
+
 ## 1.15.0
 
 ### Added
