@@ -1,8 +1,8 @@
 import Foundation
 
 public class QualityChangeCounter {
-    private static var kAnalyticsQualityChangeThreshold = 2
-    private static var kAnalyticsQualityChangeResetIntervalSeconds: TimeInterval = 10
+    private static var kAnalyticsQualityChangeThreshold = 50
+    private static var kAnalyticsQualityChangeResetIntervalSeconds: TimeInterval = 60 * 60
     private static var kAnalyticsQualityChangeIntervalId = "com.bitmovin.analytics.core.utils.QualityChangeCounter"
      
     private var qualityResetWorkItem: DispatchWorkItem?
