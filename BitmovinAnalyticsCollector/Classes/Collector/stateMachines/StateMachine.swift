@@ -87,7 +87,6 @@ public class StateMachine {
     }
     
     public func videoQualityChange(time: CMTime?) {
-        
         transitionState(destinationState: .qualitychange, time: time)
     }
     

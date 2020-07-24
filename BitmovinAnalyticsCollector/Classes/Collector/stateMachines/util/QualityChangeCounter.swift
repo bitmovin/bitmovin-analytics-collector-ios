@@ -8,7 +8,7 @@ public class QualityChangeCounter {
     private var qualityResetWorkItem: DispatchWorkItem?
     private var qualityChangeCounter = 0
     
-    func startInterval(){
+    func startInterval() {
         resetInterval()
         qualityResetWorkItem = DispatchWorkItem {
             self.qualityChangeCounter = 0
@@ -26,7 +26,7 @@ public class QualityChangeCounter {
         qualityResetWorkItem = nil
     }
     
-    func increaseCounter(){
+    func increaseCounter() {
         if (qualityChangeCounter == 0) {
             startInterval()
         }
