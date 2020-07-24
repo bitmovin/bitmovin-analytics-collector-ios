@@ -7,19 +7,22 @@ public class RebufferingTimeoutHandler {
     private static var kAnalyticsRebufferingTimeoutErrorMessage = "ANALYTICS_BUFFERING_TIMEOUT_REACHED"
     
     private var rebufferingTimeoutWorkItem: DispatchWorkItem?
-    private var stateMachine: StateMachine
+    private var stateMachine: StateMachine?
     
-    
-    init(stateMachine: StateMachine) {
+    func initialise(stateMachine: StateMachine) {
         self.stateMachine = stateMachine
     }
     
     func startInterval() {
         resetInterval()
         rebufferingTimeoutWorkItem = DispatchWorkItem {
-            self.stateMachine.delegate?.stateMachineDidEnterError(self.stateMachine,
-                                                                  data:[BitmovinAnalyticsInternal.ErrorCodeKey: RebufferingTimeoutHandler.kAnalyticsRebufferingTimeoutErrorCode,
-                                                                        BitmovinAnalyticsInternal.ErrorMessageKey: RebufferingTimeoutHandler.kAnalyticsRebufferingTimeoutErrorMessage] )
+            guard let machine = self.stateMachine else {
+                return
+            }
+            machine.delegate?.stateMachineDidEnterError(machine,
+                                                        data:[BitmovinAnalyticsInternal.ErrorCodeKey: RebufferingTimeoutHandler.kAnalyticsRebufferingTimeoutErrorCode,
+                                                              BitmovinAnalyticsInternal.ErrorMessageKey: RebufferingTimeoutHandler.kAnalyticsRebufferingTimeoutErrorMessage] )
+            self.resetInterval()
         }
 
         DispatchQueue.init(label: RebufferingTimeoutHandler.kAnalyticsRebufferingTimeoutIntervalId).asyncAfter(deadline: .now() + RebufferingTimeoutHandler.kAnalyticsRebufferingTimeoutSeconds, execute: rebufferingTimeoutWorkItem!)
