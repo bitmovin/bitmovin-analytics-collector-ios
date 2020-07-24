@@ -97,8 +97,7 @@ public enum PlayerState: String {
                 }
                 else {
                     stateMachine.delegate?.stateMachineDidEnterError(stateMachine,
-                                                                     data: [BitmovinAnalyticsInternal.ErrorCodeKey: ErrorCodes.ANALYTICS_QUALITY_CHANGE_THRESHOLD_EXCEEDED,
-                                                                            BitmovinAnalyticsInternal.ErrorMessageKey: ErrorCodes.ANALYTICS_QUALITY_CHANGE_THRESHOLD_EXCEEDED.rawValue])
+                                                                     data: ErrorCode.ANALYTICS_QUALITY_CHANGE_THRESHOLD_EXCEEDED.getErrorObject())
                 }
                 return
             case .seeking:
