@@ -1,10 +1,3 @@
-//
-//  QualityChangeCounter.swift
-//  Pods
-//
-//  Created by Thomas Sabe on 23.07.20.
-//
-
 import Foundation
 
 public class QualityChangeCounter {
