@@ -3,8 +3,6 @@ import Foundation
 public class RebufferingTimeoutHandler {
     private static var kAnalyticsRebufferingTimeoutIntervalId = "com.bitmovin.analytics.core.utils.RebufferingTimeoutHandler"
     private static var kAnalyticsRebufferingTimeoutSeconds: TimeInterval = 2 * 60
-    private static var kAnalyticsRebufferingTimeoutErrorCode = 10001
-    private static var kAnalyticsRebufferingTimeoutErrorMessage = "ANALYTICS_BUFFERING_TIMEOUT_REACHED"
     
     private var rebufferingTimeoutWorkItem: DispatchWorkItem?
     private var stateMachine: StateMachine?
@@ -20,8 +18,8 @@ public class RebufferingTimeoutHandler {
                 return
             }
             machine.delegate?.stateMachineDidEnterError(machine,
-                                                        data:[BitmovinAnalyticsInternal.ErrorCodeKey: RebufferingTimeoutHandler.kAnalyticsRebufferingTimeoutErrorCode,
-                                                              BitmovinAnalyticsInternal.ErrorMessageKey: RebufferingTimeoutHandler.kAnalyticsRebufferingTimeoutErrorMessage] )
+                                                        data:[BitmovinAnalyticsInternal.ErrorCodeKey: ErrorCodes.ANALYTICS_BUFFERING_TIMEOUT_REACHED,
+                                                              BitmovinAnalyticsInternal.ErrorMessageKey: ErrorCodes.ANALYTICS_BUFFERING_TIMEOUT_REACHED.rawValue] )
             self.resetInterval()
         }
 
