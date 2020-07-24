@@ -17,9 +17,7 @@ public class RebufferingTimeoutHandler {
             guard let machine = self.stateMachine else {
                 return
             }
-            machine.delegate?.stateMachineDidEnterError(machine,
-                                                        data:[BitmovinAnalyticsInternal.ErrorCodeKey: ErrorCodes.ANALYTICS_BUFFERING_TIMEOUT_REACHED,
-                                                              BitmovinAnalyticsInternal.ErrorMessageKey: ErrorCodes.ANALYTICS_BUFFERING_TIMEOUT_REACHED.rawValue] )
+            machine.delegate?.stateMachineDidEnterError(machine, data:ErrorCode.ANALYTICS_BUFFERING_TIMEOUT_REACHED.getErrorObject())
             self.resetInterval()
         }
 
