@@ -212,7 +212,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
             return
         }
         // there is a qualityChange event happening before the `onReady` method. Do not transition into any state.
-        stateMachine.videoQualityChange(time: Util.timeIntervalToCMTime(_: player.currentTime))
+        stateMachine.videoQualityChange(time: currentTime)
         transitionToPausedOrBufferingOrPlaying()
     }
     
