@@ -143,9 +143,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         guard let item = notification.object as? AVPlayerItem, let event = item.accessLog()?.events.last else {
             return
         }
-        if !stateMachine.qualityChangeCounter.isQualityChangeEnabled() {
-            return
-        }
         
         if lastBitrate == 0 {
             lastBitrate = event.indicatedBitrate
