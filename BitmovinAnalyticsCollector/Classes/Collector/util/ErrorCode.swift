@@ -1,16 +1,13 @@
 import Foundation
 
-enum ErrorCode: Int {
+struct ErrorCode {
+    let code: Int
+    let message: String
     
-    case ANALYTICS_BUFFERING_TIMEOUT_REACHED = 10001
+    static let ANALYTICS_BUFFERING_TIMEOUT_REACHED = ErrorCode(code: 10001, message: "ANALYTICS_BUFFERING_TIMEOUT_REACHED")
     
-    func getErrorObject() -> [AnyHashable: Any] {
-        var errorObject: [AnyHashable: Any] = [BitmovinAnalyticsInternal.ErrorCodeKey: self.rawValue]
-        switch self {
-        case .ANALYTICS_BUFFERING_TIMEOUT_REACHED:
-            errorObject[BitmovinAnalyticsInternal.ErrorMessageKey] = "ANALYTICS_BUFFERING_TIMEOUT_REACHED"
-        }
-        
-        return errorObject
+    var data: [Int: String] {
+        return [BitmovinAnalyticsInternal.ErrorCodeKey: code,
+                BitmovinAnalyticsInternal.ErrorMessageKey: message]
     }
 }
