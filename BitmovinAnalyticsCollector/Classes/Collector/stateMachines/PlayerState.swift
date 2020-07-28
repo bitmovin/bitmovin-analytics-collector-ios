@@ -97,7 +97,7 @@ public enum PlayerState: String {
                 }
                 else {
                     stateMachine.delegate?.stateMachineDidEnterError(stateMachine,
-                                                                     data: ErrorCode.ANALYTICS_QUALITY_CHANGE_THRESHOLD_EXCEEDED.getErrorObject())
+                                                                     data: ErrorCode.ANALYTICS_QUALITY_CHANGE_THRESHOLD_EXCEEDED.data)
                 }
                 return
             case .seeking:
