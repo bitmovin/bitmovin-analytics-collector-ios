@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Added
+
+- Restricted number of quality changes tracked per period of time (AN-1561)
+
 ## 1.15.0
 
 ### Added
