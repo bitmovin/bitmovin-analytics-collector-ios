@@ -87,7 +87,17 @@ public class StateMachine {
     }
     
     public func videoQualityChange(time: CMTime?) {
+        if !qualityChangeCounter.isQualityChangeEnabled() {
+            return
+        }
         transitionState(destinationState: .qualitychange, time: time)
+    }
+    
+    public func audioQualityChange(time: CMTime?) {
+        if !qualityChangeCounter.isQualityChangeEnabled() {
+            return
+        }
+        transitionState(destinationState: .audiochange, time: time)
     }
     
     public func setDidStartPlayingVideo() {
