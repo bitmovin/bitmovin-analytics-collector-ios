@@ -33,7 +33,7 @@ public class StateMachine {
         self.config = config
         state = .ready
         impressionId = NSUUID().uuidString
-        qualityChangeCounter =  QualityChangeCounter()
+        qualityChangeCounter = QualityChangeCounter()
         print("Generated Bitmovin Analytics impression ID: " + impressionId.lowercased())
     }
 
