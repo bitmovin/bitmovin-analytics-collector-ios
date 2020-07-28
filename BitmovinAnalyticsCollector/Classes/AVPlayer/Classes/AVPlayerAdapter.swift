@@ -143,7 +143,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         guard let item = notification.object as? AVPlayerItem, let event = item.accessLog()?.events.last else {
             return
         }
-        guard stateMachine.qualityChangeCounter.isQualityChangeEnabled() else {
+        if !stateMachine.qualityChangeCounter.isQualityChangeEnabled() {
             return
         }
         
