@@ -40,97 +40,100 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		0160DE39B5C91B0A8FB63554A126E036 /* AnalyticsAdBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69A01C9CEBEE680FECA1E90D589814 /* AnalyticsAdBreak.swift */; };
-		07E78DA8601CE82C497BEE549642E7E5 /* BitmovinAnalyticsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8DEC04F6D2628A647E17BA2B51D396 /* BitmovinAnalyticsConfig.swift */; };
-		083C822297F06AC34D78A65C85545275 /* DrmType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719510C7A2E2A5D66A56F70FB72C5B4C /* DrmType.swift */; };
-		0A04A701C2C79DDB892D668FDB30BA22 /* BitmovinAnalyticsInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F124F06C9718F92DD3DAF27C0402758C /* BitmovinAnalyticsInternal.swift */; };
-		0B6EA1C33A6712F0742B0FA3006ED7E8 /* AdAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF36DF7AFE632E32FB0585FE8C6FB847 /* AdAdapter.swift */; };
-		0C1607012D83B17B2A473F770D887E27 /* VideoStartFailedReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53225674134FAD15D30B8A8149B85C1A /* VideoStartFailedReason.swift */; };
+		0098F5956432624C7C6881408053536B /* AnalyticsAdQuartile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C065B031AF5B78EED4F78DF45E61C6A /* AnalyticsAdQuartile.swift */; };
+		03D63E9A855ADF8A7B61CC46F524E1B2 /* AdModuleInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C4866FD249C14ECCDE99B9E879C28C /* AdModuleInformation.swift */; };
+		05B88F0E0BCBEC43678AF6F8B2FD1D74 /* StreamType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBA2CCA7CA8DFB537828C2EEE1FA119 /* StreamType.swift */; };
+		090AE8359A08A2AA015D6D1B45E36C78 /* VideoStartFailedReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53225674134FAD15D30B8A8149B85C1A /* VideoStartFailedReason.swift */; };
+		0ADE4A0B63D2AA81EA14E10B80C08B3F /* BitmovinPlayerCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979AFF433BCB3019CF3A3AA3EA936C5F /* BitmovinPlayerCollector.swift */; };
 		0CE822C3A8D288915234E15BCA715D5A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B712C7D27EB7CD8F8A18A3EDE52765C0 /* Foundation.framework */; };
-		15828BDD0E56403E9EFF5B73497C2B78 /* AVPlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A9FAEC770604A4F9B03ADB55CF861B /* AVPlayerAdapter.swift */; };
-		19D13A5B56A6B356FF9BAF248B080743 /* CorePlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E92520D846FC846E05876C6323E3C71 /* CorePlayerAdapter.swift */; };
-		1C9CC3F6463F21C973D30C4086DC2F47 /* VideoStartFailedReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53225674134FAD15D30B8A8149B85C1A /* VideoStartFailedReason.swift */; };
-		25379834F7777A4BF7992F544FB7B598 /* LicenseCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53258AFD430F5BC59845E727E7C38441 /* LicenseCall.swift */; };
+		100CECE3B4175C3158DF0D75C7C8E2C7 /* AVPlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A9FAEC770604A4F9B03ADB55CF861B /* AVPlayerAdapter.swift */; };
+		133092D8DF3FC6CF274112CEAAB1DCF9 /* LicenseCallData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635888907FB6AAA7FD9B5DC2C773D066 /* LicenseCallData.swift */; };
+		19426A0761B8BD61EA5BD2E95DB5A34D /* BitmovinPlayerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6114EDFA9D1F8029393BC7442ED25120 /* BitmovinPlayerUtil.swift */; };
+		1A993AC826EE7898C4C77AE2EEAADEFC /* AdEventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82DAB9BA429C444FF5256887B801DA5 /* AdEventData.swift */; };
+		1D298324E69167E960259C81EBCE7086 /* BitmovinAnalyticsInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F124F06C9718F92DD3DAF27C0402758C /* BitmovinAnalyticsInternal.swift */; };
+		1E56F769B2D3D8169805359220EECDC5 /* StateMachineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23E938CC24A7C84D74FDDA374649BAE /* StateMachineDelegate.swift */; };
+		1F0C20F208F07037F7EEED67973368C5 /* BitmovinPlayerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6114EDFA9D1F8029393BC7442ED25120 /* BitmovinPlayerUtil.swift */; };
+		1F33E53B83382EF84A51959A9DE35A86 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8297B7B573A15218CCD218823A0D5A /* ErrorCode.swift */; };
+		2281F1A8CA78C45ECB63C94A7C8D8C5C /* BitmovinAdAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1176A120231951583347F03A4F4DBC /* BitmovinAdAnalytics.swift */; };
+		2353EB3D5FBD343D29CAB3B23BDDC459 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8297B7B573A15218CCD218823A0D5A /* ErrorCode.swift */; };
+		242FBCA6AF55489840B0DEB6717C0163 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD29C99E87BEEE2B71EE0208450EC3B2 /* Util.swift */; };
+		2490669D24D18CB100DEAAE9 /* QualityChangeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2490669C24D18CB100DEAAE9 /* QualityChangeCounter.swift */; };
+		2490669E24D18CB100DEAAE9 /* QualityChangeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2490669C24D18CB100DEAAE9 /* QualityChangeCounter.swift */; };
 		25429BDF25E849589758FFA6E4B17D39 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B712C7D27EB7CD8F8A18A3EDE52765C0 /* Foundation.framework */; };
-		25486A2E13CDF1D93AFDAC4B2521CE4E /* LicenseCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53258AFD430F5BC59845E727E7C38441 /* LicenseCall.swift */; };
-		2627AFDCDB5F01969D908105B7FD6177 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0673C404281ACDC19F1978AA8C5166AD /* HttpClient.swift */; };
-		26C73C8DBDE46F08F5EC4B148ECCE937 /* StateMachineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23E938CC24A7C84D74FDDA374649BAE /* StateMachineDelegate.swift */; };
-		271574D89FD4F64AA11861526D8D57EE /* AdTagType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321E6391D56DF76F5B2EB83964087125 /* AdTagType.swift */; };
 		2DF41B94BCDAFE97AC288AA359790D0B /* Pods-BitmovinAnalyticsCollector_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE26CFA996489A1BFFFBA5B6A2A70B5 /* Pods-BitmovinAnalyticsCollector_Example-dummy.m */; };
-		2EC0696302CC011E19697BBF699A4F74 /* BitmovinPlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88114769B72BACBA0C311BB41CCCD76 /* BitmovinPlayerAdapter.swift */; };
-		2FE3A57C522626AD0D8BB554A168174A /* EventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A1CEBCDE98BC470043B1612F0C363 /* EventData.swift */; };
-		31532BC9F8748E379821A0C648E42CEB /* BitmovinPlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88114769B72BACBA0C311BB41CCCD76 /* BitmovinPlayerAdapter.swift */; };
-		3BCC6865089B990C4AD1FA84A9796416 /* EventDataDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD730A8BC7FF574C18C13440EEA9951D /* EventDataDispatcher.swift */; };
+		2FD33B72BB2461B74E6801ACD0E37C46 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD29C99E87BEEE2B71EE0208450EC3B2 /* Util.swift */; };
+		36E615ED397383794ADD3EDAC1D28057 /* BitmovinAdAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1176A120231951583347F03A4F4DBC /* BitmovinAdAnalytics.swift */; };
 		3D839EA4C414703961BBD63673FE2479 /* BitmovinAnalyticsCollector-tvOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D9CDB621A073284A4D72A0E0D62AA382 /* BitmovinAnalyticsCollector-tvOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3DD3CA53912900AAC94F58E96599A5F8 /* BitmovinAdAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70667ACADB9F966666805900C906455B /* BitmovinAdAdapter.swift */; };
-		3DE8B2111E8530649E81172084522307 /* BitmovinPlayerCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979AFF433BCB3019CF3A3AA3EA936C5F /* BitmovinPlayerCollector.swift */; };
-		3E344EAD054F1F18A5D7849F07E7117F /* LicenseCallData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635888907FB6AAA7FD9B5DC2C773D066 /* LicenseCallData.swift */; };
-		411C62CD48AC569A8D750DE85A1E13A8 /* BitmovinAnalyticsInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F124F06C9718F92DD3DAF27C0402758C /* BitmovinAnalyticsInternal.swift */; };
-		456FC9C4CE8505C8DF049DDFA88D83C6 /* BitmovinPlayerCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979AFF433BCB3019CF3A3AA3EA936C5F /* BitmovinPlayerCollector.swift */; };
-		46F10757348CF2AF91736BB8B91D3540 /* AdModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C952DADCF3832EC0456A3494222CA4 /* AdModelMapper.swift */; };
-		48946C9F2FE9F8C333CE1C833AF283CF /* PlayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D640B9C01B1B2F880E9CB5A8C47D612C /* PlayerType.swift */; };
-		4BAF9D07402E55AADEC3069F0998BFD2 /* AnalyticsAdQuartile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C065B031AF5B78EED4F78DF45E61C6A /* AnalyticsAdQuartile.swift */; };
-		4C77E9036A8A81AB8CAD4D4470155367 /* AdEventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82DAB9BA429C444FF5256887B801DA5 /* AdEventData.swift */; };
-		4CCFE455932A3191F19AB5F183E3A4FB /* AnalyticsAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58AB1A52A76D4033A2FAAEEB7761FA9 /* AnalyticsAd.swift */; };
-		53352E8BD7E37A5E07DF38CD11935DC7 /* BitmovinPlayerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6114EDFA9D1F8029393BC7442ED25120 /* BitmovinPlayerUtil.swift */; };
-		53AB84F4FBEA3E1DACDBC4A031482C7B /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA164C19069F9BB0E0FFE8B32C9DE4D4 /* PlayerState.swift */; };
-		56F83435645202F3466FB345E340DDEF /* CdnProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A963575BAF3BCEEFDC1DFCEA43A48F /* CdnProvider.swift */; };
-		59270729B3981CD6CC160A40E85640F5 /* AdSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C2B8696BCF5296F31C4F4F0E71F68 /* AdSample.swift */; };
-		5A9A921C370D5A3764348320B45A2BB2 /* AVPlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A9FAEC770604A4F9B03ADB55CF861B /* AVPlayerAdapter.swift */; };
-		5C1F1EA2601CA4BD24114FA230358B32 /* AdModuleInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C4866FD249C14ECCDE99B9E879C28C /* AdModuleInformation.swift */; };
-		5DB0A14AE04746E60C0AD2A0D62FCC38 /* AVPlayerCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC28304530393586F31E03A62A8FAC /* AVPlayerCollector.swift */; };
-		5FB5F4D6F3ED1C98BA9ED06A6DFAC836 /* LicenseCallData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635888907FB6AAA7FD9B5DC2C773D066 /* LicenseCallData.swift */; };
+		3E2AF808AC8DD069F4DFAB9F03AE49CF /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA164C19069F9BB0E0FFE8B32C9DE4D4 /* PlayerState.swift */; };
+		429A7C5E0493B945F66AE32BE719E9DC /* PlayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D640B9C01B1B2F880E9CB5A8C47D612C /* PlayerType.swift */; };
+		44D54CE941F746281E00CC879F88E211 /* CdnProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A963575BAF3BCEEFDC1DFCEA43A48F /* CdnProvider.swift */; };
+		5530F0AF498A25C6B10BD0CFD7F08094 /* BitmovinAdAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70667ACADB9F966666805900C906455B /* BitmovinAdAdapter.swift */; };
+		582DAF4D546ED349A95922ADFEC08720 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8005F3C1CF56E40AB99DEE67DF2C52E6 /* StateMachine.swift */; };
+		5A707898CCB0C6E3EF9D7AB4AB445703 /* AVPlayerCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC28304530393586F31E03A62A8FAC /* AVPlayerCollector.swift */; };
+		5D7BE9FE0C336DA2F286261E4EACB427 /* EventDataDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD730A8BC7FF574C18C13440EEA9951D /* EventDataDispatcher.swift */; };
+		5F110B67C77357199818F159FE5D5956 /* AnalyticsAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58AB1A52A76D4033A2FAAEEB7761FA9 /* AnalyticsAd.swift */; };
+		626B48362C6C3C069930A7384589C065 /* BitmovinAnalyticsInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F124F06C9718F92DD3DAF27C0402758C /* BitmovinAnalyticsInternal.swift */; };
+		63C8C8360A63636CB00D0CEC8C33D80B /* CorePlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E92520D846FC846E05876C6323E3C71 /* CorePlayerAdapter.swift */; };
+		63DF023D89B395A4061CFFF7757108FD /* AnalyticsAdBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69A01C9CEBEE680FECA1E90D589814 /* AnalyticsAdBreak.swift */; };
+		64FF6D86C3BEBC00D5C473BCA5DDA565 /* AnalyticsAdQuartile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C065B031AF5B78EED4F78DF45E61C6A /* AnalyticsAdQuartile.swift */; };
+		65429C7593474A810C3E16F0C141C7F0 /* CorePlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E92520D846FC846E05876C6323E3C71 /* CorePlayerAdapter.swift */; };
+		65A7C99DD6DE6EC8E1BBC66FEFDCAA3F /* PlayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D640B9C01B1B2F880E9CB5A8C47D612C /* PlayerType.swift */; };
 		65F14073A47FAFA33845E40895A76573 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D50031945639C9CFCD3CBF24E18561 /* Foundation.framework */; };
-		6B9AC9154307B30908623DFD546CC470 /* AdPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71A1761247B7224F3A088B846A1EEEA /* AdPosition.swift */; };
-		6D5FACFB2BBD814EC3E6AD2B3F5CE42A /* DrmType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719510C7A2E2A5D66A56F70FB72C5B4C /* DrmType.swift */; };
+		6630084949E37811AADBEFC8495D6EB2 /* BitmovinPlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88114769B72BACBA0C311BB41CCCD76 /* BitmovinPlayerAdapter.swift */; };
+		6F4A3104C1CD06080D1FC43786E4247C /* SimpleEventDataDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E99B40253CAE1368596A50A00FF20B7 /* SimpleEventDataDispatcher.swift */; };
+		722B3B4056F98A4B61AD405B91418371 /* BitmovinPlayerCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979AFF433BCB3019CF3A3AA3EA936C5F /* BitmovinPlayerCollector.swift */; };
+		7473A9ED57E5723F0716BC461D85699B /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0673C404281ACDC19F1978AA8C5166AD /* HttpClient.swift */; };
+		7570C46952698ED372EA9665213BDAEA /* AdTagType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321E6391D56DF76F5B2EB83964087125 /* AdTagType.swift */; };
 		761D369D7EA7CC04A35B61471C0D01E6 /* Pods-BitmovinAnalyticsCollector_tvOSExample-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 13BD85C305C804E958D289F93279533C /* Pods-BitmovinAnalyticsCollector_tvOSExample-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7668D56F4E42EB6A55FAF5B06C7FC72A /* AVPlayerCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC28304530393586F31E03A62A8FAC /* AVPlayerCollector.swift */; };
-		76ADBCD8F5A34728EA0588ACC730840A /* PlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0F9F7500185365C10870EB1EC22954 /* PlayerAdapter.swift */; };
-		773B529B29DC3DB242391AC1A49B3E58 /* BitmovinPlayerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6114EDFA9D1F8029393BC7442ED25120 /* BitmovinPlayerUtil.swift */; };
-		8189797448FD6ADAF63A660D8AB31115 /* BitmovinAnalyticsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8DEC04F6D2628A647E17BA2B51D396 /* BitmovinAnalyticsConfig.swift */; };
-		865330611EE239F07AC119F199EB4A18 /* AdEventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82DAB9BA429C444FF5256887B801DA5 /* AdEventData.swift */; };
-		880E12BD7E3058FACFEBC1F133D90922 /* PlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0F9F7500185365C10870EB1EC22954 /* PlayerAdapter.swift */; };
-		8A494CAA1275335713F81C1B0FE28509 /* BitmovinAdAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70667ACADB9F966666805900C906455B /* BitmovinAdAdapter.swift */; };
-		8B25E31B784CA3A6AAB89BB5A298380D /* BitmovinAnalyticsCollector-tvOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D66E78DA1BC5217B5796CE6C5E2295A3 /* BitmovinAnalyticsCollector-tvOS-dummy.m */; };
-		8D6E702A922C416C989C67D7F419C65F /* AdModuleInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C4866FD249C14ECCDE99B9E879C28C /* AdModuleInformation.swift */; };
-		8E1A57CD82B6AB2D49947AA67907380C /* StateMachineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23E938CC24A7C84D74FDDA374649BAE /* StateMachineDelegate.swift */; };
-		8FDC879A4C1421ADC2A81BF05F084F66 /* BitmovinAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDA3B8EAF6D4E2BAB88D9625C2BF198 /* BitmovinAnalytics.swift */; };
-		903763BFD7CF619D02573B4895553AC2 /* AdModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C952DADCF3832EC0456A3494222CA4 /* AdModelMapper.swift */; };
-		903C61D276B25ED15BCBF356E7F04843 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8005F3C1CF56E40AB99DEE67DF2C52E6 /* StateMachine.swift */; };
-		916BECE2D6F5548AD9B5657B21F5DD1E /* DrmPerformanceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E85B082467EB217DAA1D61B45535794 /* DrmPerformanceInfo.swift */; };
-		938BFC59E80876644653F10D8499A64F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD29C99E87BEEE2B71EE0208450EC3B2 /* Util.swift */; };
-		A5550C86E14CC523C9F53843D1433058 /* QualityChangeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704779CF3F54EDF9110B6A9FF61BED4D /* QualityChangeCounter.swift */; };
-		A86E12D36DA7E786F27EBFF8C5C84424 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD29C99E87BEEE2B71EE0208450EC3B2 /* Util.swift */; };
+		7CF2977DEDF9DF401E9E5E3344BD27FC /* BitmovinAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDA3B8EAF6D4E2BAB88D9625C2BF198 /* BitmovinAnalytics.swift */; };
+		7DF424A43783872E51108CE8CB66681E /* AdPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71A1761247B7224F3A088B846A1EEEA /* AdPosition.swift */; };
+		81EEF690E278F4D4CA4C6885F529826A /* DrmType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719510C7A2E2A5D66A56F70FB72C5B4C /* DrmType.swift */; };
+		8349CDA37F0E1FA4585F743626FABFF3 /* BitmovinAnalyticsCollector-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FAF465E456909A528A9ED38B66990C /* BitmovinAnalyticsCollector-iOS-dummy.m */; };
+		83AC1F8D1D85B138527DFA3258B65A42 /* AdAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF36DF7AFE632E32FB0585FE8C6FB847 /* AdAdapter.swift */; };
+		8667781AFBE883B653FDBDC376F9A8FD /* SimpleEventDataDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E99B40253CAE1368596A50A00FF20B7 /* SimpleEventDataDispatcher.swift */; };
+		86B555C9A2FCCB94F667249F4EF02762 /* RebufferingTimeoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A600549566ED41EDF2E137C895726A /* RebufferingTimeoutHandler.swift */; };
+		8BB5AA45ECCC354E8A8261B0F8112AEA /* EventDataDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD730A8BC7FF574C18C13440EEA9951D /* EventDataDispatcher.swift */; };
+		8D0EFDEAB3ED7D0C0449162FC0277385 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8005F3C1CF56E40AB99DEE67DF2C52E6 /* StateMachine.swift */; };
+		935D92591FEF2B61BFD53CFC0616BCA7 /* DrmPerformanceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E85B082467EB217DAA1D61B45535794 /* DrmPerformanceInfo.swift */; };
+		956FE3A94E093053E0808D65BB0A6A67 /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA164C19069F9BB0E0FFE8B32C9DE4D4 /* PlayerState.swift */; };
+		996FA872B98A8AE90268DB4A75702C93 /* DrmType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719510C7A2E2A5D66A56F70FB72C5B4C /* DrmType.swift */; };
+		99723AF1E604737B452F164D3514B0F8 /* AdSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C2B8696BCF5296F31C4F4F0E71F68 /* AdSample.swift */; };
+		9AD14D03DE0A42DEC74D951E011F01BB /* StateMachineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23E938CC24A7C84D74FDDA374649BAE /* StateMachineDelegate.swift */; };
+		9CE92A8D3C7BD57EAE13BC37DE64C2A9 /* StreamType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBA2CCA7CA8DFB537828C2EEE1FA119 /* StreamType.swift */; };
+		9DCD639B86A18EB79A7BCCA8EFBBC335 /* AdTagType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321E6391D56DF76F5B2EB83964087125 /* AdTagType.swift */; };
+		9EBBCC1343E292D2588EC9C355D2F17F /* AdPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71A1761247B7224F3A088B846A1EEEA /* AdPosition.swift */; };
+		A4D09BA1585C93B1191ED38109301568 /* CdnProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A963575BAF3BCEEFDC1DFCEA43A48F /* CdnProvider.swift */; };
+		A4DA22CF1D6F9FC8B27B3F16F585D48E /* AdModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C952DADCF3832EC0456A3494222CA4 /* AdModelMapper.swift */; };
 		A948DF51DBB633D515CF0E5CBF3A2A9F /* Pods-BitmovinAnalyticsCollector_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 66BC2C77B2F61E9E83254185401BFB43 /* Pods-BitmovinAnalyticsCollector_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A9ABDF2484EB7A37E1A4E6B89B551A87 /* StreamType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBA2CCA7CA8DFB537828C2EEE1FA119 /* StreamType.swift */; };
-		AA252B47E867D74BDEF4696A0257DD96 /* CdnProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A963575BAF3BCEEFDC1DFCEA43A48F /* CdnProvider.swift */; };
-		AA28CDCB0BAFCB81048E0007A08EA113 /* StreamType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBA2CCA7CA8DFB537828C2EEE1FA119 /* StreamType.swift */; };
-		AAB11FAF32ED2A2CCB0E89C3B9156417 /* BitmovinAnalyticsCollector-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FAF465E456909A528A9ED38B66990C /* BitmovinAnalyticsCollector-iOS-dummy.m */; };
-		AE6102251CA35DDF7498E5486B96CE78 /* QualityChangeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704779CF3F54EDF9110B6A9FF61BED4D /* QualityChangeCounter.swift */; };
-		B1586FD2DE8A54B8C254582249D868BA /* BitmovinAdAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1176A120231951583347F03A4F4DBC /* BitmovinAdAnalytics.swift */; };
-		B3623AED66D42D82947C347BBEF05B6B /* AnalyticsAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58AB1A52A76D4033A2FAAEEB7761FA9 /* AnalyticsAd.swift */; };
-		BF00CE171BBF132172898532E2DB65C0 /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA164C19069F9BB0E0FFE8B32C9DE4D4 /* PlayerState.swift */; };
-		BF9B027D102BD61DB994B3F778FAD707 /* AdTagType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321E6391D56DF76F5B2EB83964087125 /* AdTagType.swift */; };
-		C2F66231EB9E387CC5FC65D87F3AF41A /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0673C404281ACDC19F1978AA8C5166AD /* HttpClient.swift */; };
-		C80331784338B3D885B52F70FAF52E11 /* EventDataDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD730A8BC7FF574C18C13440EEA9951D /* EventDataDispatcher.swift */; };
+		ACDD0C0370008252FAE236A0D11F3602 /* AdSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C2B8696BCF5296F31C4F4F0E71F68 /* AdSample.swift */; };
+		AF23931DE57AD1E2FA1768EB69B6B679 /* BitmovinPlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88114769B72BACBA0C311BB41CCCD76 /* BitmovinPlayerAdapter.swift */; };
+		AFB9CB5F9ECAF77B6D3506CD6822F478 /* LicenseCallData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635888907FB6AAA7FD9B5DC2C773D066 /* LicenseCallData.swift */; };
+		B0B96003BA99C616F79860FC8F5BDB3E /* RebufferingTimeoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A600549566ED41EDF2E137C895726A /* RebufferingTimeoutHandler.swift */; };
+		B394003264415226CE7578B793C4306C /* AdAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF36DF7AFE632E32FB0585FE8C6FB847 /* AdAdapter.swift */; };
+		B53DC86EC1123E6868BDE8823EB06AF9 /* AnalyticsAdBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69A01C9CEBEE680FECA1E90D589814 /* AnalyticsAdBreak.swift */; };
+		B59115B1B57159CB9CDEF3338D286F47 /* BitmovinAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDA3B8EAF6D4E2BAB88D9625C2BF198 /* BitmovinAnalytics.swift */; };
+		B93B835880013FAB774994A9CB7D57AE /* EventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A1CEBCDE98BC470043B1612F0C363 /* EventData.swift */; };
+		BBA69461701A6771A261FBFE85D4563B /* PlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0F9F7500185365C10870EB1EC22954 /* PlayerAdapter.swift */; };
+		BF60CA9BACC58D9ED8DD3CCEDF38A5DB /* BitmovinAnalyticsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8DEC04F6D2628A647E17BA2B51D396 /* BitmovinAnalyticsConfig.swift */; };
+		C038C1C2C8BC121197E98D17DEAFED8C /* AVPlayerCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC28304530393586F31E03A62A8FAC /* AVPlayerCollector.swift */; };
+		C05F223CEB029782FCFE21BDCD97D311 /* LicenseCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53258AFD430F5BC59845E727E7C38441 /* LicenseCall.swift */; };
+		C7043C5AED679436064E43DC2FF00B2D /* VideoStartFailedReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53225674134FAD15D30B8A8149B85C1A /* VideoStartFailedReason.swift */; };
+		C79A87BE8FF06423BD36AAEE2001D761 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0673C404281ACDC19F1978AA8C5166AD /* HttpClient.swift */; };
+		CBFC728D17BC2D83B27B3756B2BED654 /* DrmPerformanceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E85B082467EB217DAA1D61B45535794 /* DrmPerformanceInfo.swift */; };
 		CCF1F9BD4C6F3DB81CAEBD959956E885 /* Pods-BitmovinAnalyticsCollector_tvOSExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C194C6E15571223DF8CC4FB4D41F0E76 /* Pods-BitmovinAnalyticsCollector_tvOSExample-dummy.m */; };
-		CD00573DAB30D9D5C3902C20D66097C4 /* SimpleEventDataDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E99B40253CAE1368596A50A00FF20B7 /* SimpleEventDataDispatcher.swift */; };
-		CD084D7DDA41630619C971D48384F81F /* AdSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C2B8696BCF5296F31C4F4F0E71F68 /* AdSample.swift */; };
-		CD49024EA0DAA4807A38830B81210BCE /* BitmovinAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDA3B8EAF6D4E2BAB88D9625C2BF198 /* BitmovinAnalytics.swift */; };
-		D58112F04DBF42B288BD13B56989D745 /* AdPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71A1761247B7224F3A088B846A1EEEA /* AdPosition.swift */; };
-		DB8909BCF648129E9C9BEE5567B9792C /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8005F3C1CF56E40AB99DEE67DF2C52E6 /* StateMachine.swift */; };
+		D07D89E04171005AFF6E473CCF550613 /* BitmovinAnalyticsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8DEC04F6D2628A647E17BA2B51D396 /* BitmovinAnalyticsConfig.swift */; };
+		D2C0BD8DBFB8C8449EBE6ABCA9275FAB /* LicenseCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53258AFD430F5BC59845E727E7C38441 /* LicenseCall.swift */; };
+		D8FDFC770891BE5E3366025A35468E71 /* PlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0F9F7500185365C10870EB1EC22954 /* PlayerAdapter.swift */; };
+		DB3AA8E8298B6FF90A05D49CE7FCF0F6 /* EventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A1CEBCDE98BC470043B1612F0C363 /* EventData.swift */; };
 		DBCEAB11027D671E302DFDD83BC85AF3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D50031945639C9CFCD3CBF24E18561 /* Foundation.framework */; };
-		E05ADD4D637B70ED515FBDDCFF97FB88 /* AnalyticsAdQuartile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C065B031AF5B78EED4F78DF45E61C6A /* AnalyticsAdQuartile.swift */; };
-		E647106AD79B796E5BDF5D57B9499F52 /* EventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A1CEBCDE98BC470043B1612F0C363 /* EventData.swift */; };
-		ECB8293124CAE80900A76B5C /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB8293024CAE80800A76B5C /* ErrorCode.swift */; };
-		ED7B1C7EB9C63A479B6CEA5CD163F5D5 /* BitmovinAdAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1176A120231951583347F03A4F4DBC /* BitmovinAdAnalytics.swift */; };
-		F3183E895A8C1122AE118ED107762FC6 /* AdAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF36DF7AFE632E32FB0585FE8C6FB847 /* AdAdapter.swift */; };
+		DCF6BF28C8F0D6574F50F528A0BB4F81 /* AdEventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82DAB9BA429C444FF5256887B801DA5 /* AdEventData.swift */; };
+		EC08BC4A31B18828D29C8A8BDACB73B6 /* AdModuleInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C4866FD249C14ECCDE99B9E879C28C /* AdModuleInformation.swift */; };
+		EE8C28156A91117E50F56F1DA9642820 /* BitmovinAdAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70667ACADB9F966666805900C906455B /* BitmovinAdAdapter.swift */; };
 		F3C80DD6283504D095F38AB71E689F90 /* BitmovinAnalyticsCollector-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C11CEDC90C4ED7D067221D99E1132460 /* BitmovinAnalyticsCollector-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F6882E08E7FEF9293A7A7B28DCDD7016 /* CorePlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E92520D846FC846E05876C6323E3C71 /* CorePlayerAdapter.swift */; };
-		F7059BE1574AE378740E31EAB44D4C89 /* DrmPerformanceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E85B082467EB217DAA1D61B45535794 /* DrmPerformanceInfo.swift */; };
-		F89F3E1E1269BE13051C68D0B6AAE62B /* PlayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D640B9C01B1B2F880E9CB5A8C47D612C /* PlayerType.swift */; };
-		FBDF669F8265ECFA9CDC642962112AC9 /* AnalyticsAdBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69A01C9CEBEE680FECA1E90D589814 /* AnalyticsAdBreak.swift */; };
-		FCEE82CFB12C9B1FA20FB9E0E1D5D00C /* SimpleEventDataDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E99B40253CAE1368596A50A00FF20B7 /* SimpleEventDataDispatcher.swift */; };
+		F44542246F18D532C082409C65AA7ED5 /* AdModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C952DADCF3832EC0456A3494222CA4 /* AdModelMapper.swift */; };
+		F6BC1DE73689D0B041F5C1B8FA05CBB9 /* BitmovinAnalyticsCollector-tvOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D66E78DA1BC5217B5796CE6C5E2295A3 /* BitmovinAnalyticsCollector-tvOS-dummy.m */; };
+		FBFB9EF3762F99CB026E09A315062DE4 /* AVPlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A9FAEC770604A4F9B03ADB55CF861B /* AVPlayerAdapter.swift */; };
+		FD4D40FF747EEA06BD4F93F126519C62 /* AnalyticsAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58AB1A52A76D4033A2FAAEEB7761FA9 /* AnalyticsAd.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -195,6 +198,7 @@
 		18DC28304530393586F31E03A62A8FAC /* AVPlayerCollector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AVPlayerCollector.swift; path = BitmovinAnalyticsCollector/Classes/AVPlayer/Classes/AVPlayerCollector.swift; sourceTree = "<group>"; };
 		1C065B031AF5B78EED4F78DF45E61C6A /* AnalyticsAdQuartile.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnalyticsAdQuartile.swift; sourceTree = "<group>"; };
 		20FAF465E456909A528A9ED38B66990C /* BitmovinAnalyticsCollector-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BitmovinAnalyticsCollector-iOS-dummy.m"; sourceTree = "<group>"; };
+		2490669C24D18CB100DEAAE9 /* QualityChangeCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QualityChangeCounter.swift; sourceTree = "<group>"; };
 		24D8C1BEE3608D3518F09AF3B6C860AF /* BitmovinAnalyticsCollector-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "BitmovinAnalyticsCollector-iOS.modulemap"; sourceTree = "<group>"; };
 		2CC68967C0898AC242F68E77465B1A17 /* Pods-BitmovinAnalyticsCollector_tvOSExample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BitmovinAnalyticsCollector_tvOSExample-acknowledgements.markdown"; sourceTree = "<group>"; };
 		2E85B082467EB217DAA1D61B45535794 /* DrmPerformanceInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DrmPerformanceInfo.swift; sourceTree = "<group>"; };
@@ -218,7 +222,6 @@
 		66BC2C77B2F61E9E83254185401BFB43 /* Pods-BitmovinAnalyticsCollector_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BitmovinAnalyticsCollector_Example-umbrella.h"; sourceTree = "<group>"; };
 		69788C95A705F8A4DC00AB19C261B203 /* Pods-BitmovinAnalyticsCollector_tvOSExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BitmovinAnalyticsCollector_tvOSExample.debug.xcconfig"; sourceTree = "<group>"; };
 		6C877FA93A537C5E598E2D200AB53B62 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		704779CF3F54EDF9110B6A9FF61BED4D /* QualityChangeCounter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QualityChangeCounter.swift; sourceTree = "<group>"; };
 		70667ACADB9F966666805900C906455B /* BitmovinAdAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BitmovinAdAdapter.swift; path = BitmovinAnalyticsCollector/Classes/BitmovinPlayer/Classes/BitmovinAdAdapter.swift; sourceTree = "<group>"; };
 		70AB6F3D9ECAF2B9FC83916C74ACC8D6 /* Pods-BitmovinAnalyticsCollector_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BitmovinAnalyticsCollector_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		719510C7A2E2A5D66A56F70FB72C5B4C /* DrmType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DrmType.swift; sourceTree = "<group>"; };
@@ -246,8 +249,10 @@
 		AD29C99E87BEEE2B71EE0208450EC3B2 /* Util.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		B712C7D27EB7CD8F8A18A3EDE52765C0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		BA0714E576A6D7DE05E6B0FB9FA53009 /* Pods-BitmovinAnalyticsCollector_tvOSExample-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BitmovinAnalyticsCollector_tvOSExample-frameworks.sh"; sourceTree = "<group>"; };
+		BA8297B7B573A15218CCD218823A0D5A /* ErrorCode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
 		C11CEDC90C4ED7D067221D99E1132460 /* BitmovinAnalyticsCollector-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BitmovinAnalyticsCollector-iOS-umbrella.h"; sourceTree = "<group>"; };
 		C194C6E15571223DF8CC4FB4D41F0E76 /* Pods-BitmovinAnalyticsCollector_tvOSExample-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BitmovinAnalyticsCollector_tvOSExample-dummy.m"; sourceTree = "<group>"; };
+		C3A600549566ED41EDF2E137C895726A /* RebufferingTimeoutHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RebufferingTimeoutHandler.swift; sourceTree = "<group>"; };
 		CA164C19069F9BB0E0FFE8B32C9DE4D4 /* PlayerState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
 		CBE26CFA996489A1BFFFBA5B6A2A70B5 /* Pods-BitmovinAnalyticsCollector_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BitmovinAnalyticsCollector_Example-dummy.m"; sourceTree = "<group>"; };
 		CF36DF7AFE632E32FB0585FE8C6FB847 /* AdAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AdAdapter.swift; sourceTree = "<group>"; };
@@ -263,7 +268,6 @@
 		E50A1CEBCDE98BC470043B1612F0C363 /* EventData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EventData.swift; sourceTree = "<group>"; };
 		E63591D7422A4A222E5DACE55D967405 /* Pods_BitmovinAnalyticsCollector_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E77FC1037B60FCAAA19E99D1D60842EF /* BitmovinAnalyticsCollector-tvOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "BitmovinAnalyticsCollector-tvOS.xcconfig"; path = "../BitmovinAnalyticsCollector-tvOS/BitmovinAnalyticsCollector-tvOS.xcconfig"; sourceTree = "<group>"; };
-		ECB8293024CAE80800A76B5C /* ErrorCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
 		F00E1EFC92D5A2F3A1AAFB3EDC53B0A6 /* BitmovinAnalyticsCollector-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BitmovinAnalyticsCollector-iOS-Info.plist"; sourceTree = "<group>"; };
 		F124F06C9718F92DD3DAF27C0402758C /* BitmovinAnalyticsInternal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BitmovinAnalyticsInternal.swift; sourceTree = "<group>"; };
 		F6A9FAEC770604A4F9B03ADB55CF861B /* AVPlayerAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AVPlayerAdapter.swift; path = BitmovinAnalyticsCollector/Classes/AVPlayer/Classes/AVPlayerAdapter.swift; sourceTree = "<group>"; };
@@ -313,7 +317,7 @@
 		01B38CE6AF901DF44ADE146982F81630 /* util */ = {
 			isa = PBXGroup;
 			children = (
-				ECB8293024CAE80800A76B5C /* ErrorCode.swift */,
+				BA8297B7B573A15218CCD218823A0D5A /* ErrorCode.swift */,
 				0673C404281ACDC19F1978AA8C5166AD /* HttpClient.swift */,
 				53258AFD430F5BC59845E727E7C38441 /* LicenseCall.swift */,
 				AD29C99E87BEEE2B71EE0208450EC3B2 /* Util.swift */,
@@ -488,14 +492,6 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		B53C7BEEFD33DD0F67858842605D0ABD /* util */ = {
-			isa = PBXGroup;
-			children = (
-				704779CF3F54EDF9110B6A9FF61BED4D /* QualityChangeCounter.swift */,
-			);
-			path = util;
-			sourceTree = "<group>";
-		};
 		BB41228D5BF5CD6AC6ED25D28A7F56D9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -573,6 +569,15 @@
 			name = BitmovinPlayer;
 			sourceTree = "<group>";
 		};
+		DEB8EBE325C95C53C40A52E0C7FCEAFC /* util */ = {
+			isa = PBXGroup;
+			children = (
+				2490669C24D18CB100DEAAE9 /* QualityChangeCounter.swift */,
+				C3A600549566ED41EDF2E137C895726A /* RebufferingTimeoutHandler.swift */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
 		E6D73B8E3A117E2FAEE818857112D703 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -604,7 +609,7 @@
 				CA164C19069F9BB0E0FFE8B32C9DE4D4 /* PlayerState.swift */,
 				8005F3C1CF56E40AB99DEE67DF2C52E6 /* StateMachine.swift */,
 				D23E938CC24A7C84D74FDDA374649BAE /* StateMachineDelegate.swift */,
-				B53C7BEEFD33DD0F67858842605D0ABD /* util */,
+				DEB8EBE325C95C53C40A52E0C7FCEAFC /* util */,
 			);
 			name = stateMachines;
 			path = BitmovinAnalyticsCollector/Classes/Collector/stateMachines;
@@ -719,7 +724,7 @@
 			buildConfigurationList = 724748919A00C22BB2917D58FBC253C3 /* Build configuration list for PBXNativeTarget "BitmovinAnalyticsCollector-iOS" */;
 			buildPhases = (
 				C0B91FAD503F8DF6F5BE6719ACF49D79 /* Headers */,
-				1FC51AD3F200722BDA1F2D69C3E8F094 /* Sources */,
+				677ACF0F23ED06696C344C5375ADABE5 /* Sources */,
 				A7FA5C4C6D94A7F96E9C377D953915C0 /* Frameworks */,
 				0D9D3554063B95C0185E7903ECDC7952 /* Resources */,
 			);
@@ -738,7 +743,7 @@
 			buildConfigurationList = 95D58E94818AF34B29E6BE9709940802 /* Build configuration list for PBXNativeTarget "BitmovinAnalyticsCollector-tvOS" */;
 			buildPhases = (
 				43AF60410DA35F04FC1F3AA2B91166E8 /* Headers */,
-				D22E202C64085BFD767364CF2B4144BC /* Sources */,
+				481F4D9096507BA43DC0561DB7C99EA8 /* Sources */,
 				DB0DDC44E93648DE1E4B0E943D999731 /* Frameworks */,
 				8D5EF4F1208ECCC06FFABA556CB9D70E /* Resources */,
 			);
@@ -846,98 +851,101 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1FC51AD3F200722BDA1F2D69C3E8F094 /* Sources */ = {
+		481F4D9096507BA43DC0561DB7C99EA8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3183E895A8C1122AE118ED107762FC6 /* AdAdapter.swift in Sources */,
-				865330611EE239F07AC119F199EB4A18 /* AdEventData.swift in Sources */,
-				903763BFD7CF619D02573B4895553AC2 /* AdModelMapper.swift in Sources */,
-				5C1F1EA2601CA4BD24114FA230358B32 /* AdModuleInformation.swift in Sources */,
-				6B9AC9154307B30908623DFD546CC470 /* AdPosition.swift in Sources */,
-				CD084D7DDA41630619C971D48384F81F /* AdSample.swift in Sources */,
-				BF9B027D102BD61DB994B3F778FAD707 /* AdTagType.swift in Sources */,
-				B3623AED66D42D82947C347BBEF05B6B /* AnalyticsAd.swift in Sources */,
-				FBDF669F8265ECFA9CDC642962112AC9 /* AnalyticsAdBreak.swift in Sources */,
-				E05ADD4D637B70ED515FBDDCFF97FB88 /* AnalyticsAdQuartile.swift in Sources */,
-				5A9A921C370D5A3764348320B45A2BB2 /* AVPlayerAdapter.swift in Sources */,
-				7668D56F4E42EB6A55FAF5B06C7FC72A /* AVPlayerCollector.swift in Sources */,
-				8A494CAA1275335713F81C1B0FE28509 /* BitmovinAdAdapter.swift in Sources */,
-				B1586FD2DE8A54B8C254582249D868BA /* BitmovinAdAnalytics.swift in Sources */,
-				8FDC879A4C1421ADC2A81BF05F084F66 /* BitmovinAnalytics.swift in Sources */,
-				AAB11FAF32ED2A2CCB0E89C3B9156417 /* BitmovinAnalyticsCollector-iOS-dummy.m in Sources */,
-				8189797448FD6ADAF63A660D8AB31115 /* BitmovinAnalyticsConfig.swift in Sources */,
-				ECB8293124CAE80900A76B5C /* ErrorCode.swift in Sources */,
-				411C62CD48AC569A8D750DE85A1E13A8 /* BitmovinAnalyticsInternal.swift in Sources */,
-				2EC0696302CC011E19697BBF699A4F74 /* BitmovinPlayerAdapter.swift in Sources */,
-				456FC9C4CE8505C8DF049DDFA88D83C6 /* BitmovinPlayerCollector.swift in Sources */,
-				53352E8BD7E37A5E07DF38CD11935DC7 /* BitmovinPlayerUtil.swift in Sources */,
-				AA252B47E867D74BDEF4696A0257DD96 /* CdnProvider.swift in Sources */,
-				F6882E08E7FEF9293A7A7B28DCDD7016 /* CorePlayerAdapter.swift in Sources */,
-				F7059BE1574AE378740E31EAB44D4C89 /* DrmPerformanceInfo.swift in Sources */,
-				083C822297F06AC34D78A65C85545275 /* DrmType.swift in Sources */,
-				2FE3A57C522626AD0D8BB554A168174A /* EventData.swift in Sources */,
-				C80331784338B3D885B52F70FAF52E11 /* EventDataDispatcher.swift in Sources */,
-				C2F66231EB9E387CC5FC65D87F3AF41A /* HttpClient.swift in Sources */,
-				25486A2E13CDF1D93AFDAC4B2521CE4E /* LicenseCall.swift in Sources */,
-				3E344EAD054F1F18A5D7849F07E7117F /* LicenseCallData.swift in Sources */,
-				880E12BD7E3058FACFEBC1F133D90922 /* PlayerAdapter.swift in Sources */,
-				53AB84F4FBEA3E1DACDBC4A031482C7B /* PlayerState.swift in Sources */,
-				F89F3E1E1269BE13051C68D0B6AAE62B /* PlayerType.swift in Sources */,
-				A5550C86E14CC523C9F53843D1433058 /* QualityChangeCounter.swift in Sources */,
-				CD00573DAB30D9D5C3902C20D66097C4 /* SimpleEventDataDispatcher.swift in Sources */,
-				DB8909BCF648129E9C9BEE5567B9792C /* StateMachine.swift in Sources */,
-				8E1A57CD82B6AB2D49947AA67907380C /* StateMachineDelegate.swift in Sources */,
-				AA28CDCB0BAFCB81048E0007A08EA113 /* StreamType.swift in Sources */,
-				A86E12D36DA7E786F27EBFF8C5C84424 /* Util.swift in Sources */,
-				0C1607012D83B17B2A473F770D887E27 /* VideoStartFailedReason.swift in Sources */,
+				B394003264415226CE7578B793C4306C /* AdAdapter.swift in Sources */,
+				1A993AC826EE7898C4C77AE2EEAADEFC /* AdEventData.swift in Sources */,
+				F44542246F18D532C082409C65AA7ED5 /* AdModelMapper.swift in Sources */,
+				EC08BC4A31B18828D29C8A8BDACB73B6 /* AdModuleInformation.swift in Sources */,
+				9EBBCC1343E292D2588EC9C355D2F17F /* AdPosition.swift in Sources */,
+				ACDD0C0370008252FAE236A0D11F3602 /* AdSample.swift in Sources */,
+				7570C46952698ED372EA9665213BDAEA /* AdTagType.swift in Sources */,
+				5F110B67C77357199818F159FE5D5956 /* AnalyticsAd.swift in Sources */,
+				63DF023D89B395A4061CFFF7757108FD /* AnalyticsAdBreak.swift in Sources */,
+				64FF6D86C3BEBC00D5C473BCA5DDA565 /* AnalyticsAdQuartile.swift in Sources */,
+				100CECE3B4175C3158DF0D75C7C8E2C7 /* AVPlayerAdapter.swift in Sources */,
+				C038C1C2C8BC121197E98D17DEAFED8C /* AVPlayerCollector.swift in Sources */,
+				EE8C28156A91117E50F56F1DA9642820 /* BitmovinAdAdapter.swift in Sources */,
+				2281F1A8CA78C45ECB63C94A7C8D8C5C /* BitmovinAdAnalytics.swift in Sources */,
+				B59115B1B57159CB9CDEF3338D286F47 /* BitmovinAnalytics.swift in Sources */,
+				F6BC1DE73689D0B041F5C1B8FA05CBB9 /* BitmovinAnalyticsCollector-tvOS-dummy.m in Sources */,
+				D07D89E04171005AFF6E473CCF550613 /* BitmovinAnalyticsConfig.swift in Sources */,
+				626B48362C6C3C069930A7384589C065 /* BitmovinAnalyticsInternal.swift in Sources */,
+				6630084949E37811AADBEFC8495D6EB2 /* BitmovinPlayerAdapter.swift in Sources */,
+				0ADE4A0B63D2AA81EA14E10B80C08B3F /* BitmovinPlayerCollector.swift in Sources */,
+				19426A0761B8BD61EA5BD2E95DB5A34D /* BitmovinPlayerUtil.swift in Sources */,
+				44D54CE941F746281E00CC879F88E211 /* CdnProvider.swift in Sources */,
+				65429C7593474A810C3E16F0C141C7F0 /* CorePlayerAdapter.swift in Sources */,
+				CBFC728D17BC2D83B27B3756B2BED654 /* DrmPerformanceInfo.swift in Sources */,
+				81EEF690E278F4D4CA4C6885F529826A /* DrmType.swift in Sources */,
+				1F33E53B83382EF84A51959A9DE35A86 /* ErrorCode.swift in Sources */,
+				DB3AA8E8298B6FF90A05D49CE7FCF0F6 /* EventData.swift in Sources */,
+				8BB5AA45ECCC354E8A8261B0F8112AEA /* EventDataDispatcher.swift in Sources */,
+				2490669E24D18CB100DEAAE9 /* QualityChangeCounter.swift in Sources */,
+				7473A9ED57E5723F0716BC461D85699B /* HttpClient.swift in Sources */,
+				D2C0BD8DBFB8C8449EBE6ABCA9275FAB /* LicenseCall.swift in Sources */,
+				133092D8DF3FC6CF274112CEAAB1DCF9 /* LicenseCallData.swift in Sources */,
+				D8FDFC770891BE5E3366025A35468E71 /* PlayerAdapter.swift in Sources */,
+				956FE3A94E093053E0808D65BB0A6A67 /* PlayerState.swift in Sources */,
+				65A7C99DD6DE6EC8E1BBC66FEFDCAA3F /* PlayerType.swift in Sources */,
+				B0B96003BA99C616F79860FC8F5BDB3E /* RebufferingTimeoutHandler.swift in Sources */,
+				8667781AFBE883B653FDBDC376F9A8FD /* SimpleEventDataDispatcher.swift in Sources */,
+				8D0EFDEAB3ED7D0C0449162FC0277385 /* StateMachine.swift in Sources */,
+				9AD14D03DE0A42DEC74D951E011F01BB /* StateMachineDelegate.swift in Sources */,
+				9CE92A8D3C7BD57EAE13BC37DE64C2A9 /* StreamType.swift in Sources */,
+				242FBCA6AF55489840B0DEB6717C0163 /* Util.swift in Sources */,
+				090AE8359A08A2AA015D6D1B45E36C78 /* VideoStartFailedReason.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D22E202C64085BFD767364CF2B4144BC /* Sources */ = {
+		677ACF0F23ED06696C344C5375ADABE5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B6EA1C33A6712F0742B0FA3006ED7E8 /* AdAdapter.swift in Sources */,
-				4C77E9036A8A81AB8CAD4D4470155367 /* AdEventData.swift in Sources */,
-				46F10757348CF2AF91736BB8B91D3540 /* AdModelMapper.swift in Sources */,
-				8D6E702A922C416C989C67D7F419C65F /* AdModuleInformation.swift in Sources */,
-				D58112F04DBF42B288BD13B56989D745 /* AdPosition.swift in Sources */,
-				59270729B3981CD6CC160A40E85640F5 /* AdSample.swift in Sources */,
-				271574D89FD4F64AA11861526D8D57EE /* AdTagType.swift in Sources */,
-				4CCFE455932A3191F19AB5F183E3A4FB /* AnalyticsAd.swift in Sources */,
-				0160DE39B5C91B0A8FB63554A126E036 /* AnalyticsAdBreak.swift in Sources */,
-				4BAF9D07402E55AADEC3069F0998BFD2 /* AnalyticsAdQuartile.swift in Sources */,
-				15828BDD0E56403E9EFF5B73497C2B78 /* AVPlayerAdapter.swift in Sources */,
-				5DB0A14AE04746E60C0AD2A0D62FCC38 /* AVPlayerCollector.swift in Sources */,
-				3DD3CA53912900AAC94F58E96599A5F8 /* BitmovinAdAdapter.swift in Sources */,
-				ED7B1C7EB9C63A479B6CEA5CD163F5D5 /* BitmovinAdAnalytics.swift in Sources */,
-				CD49024EA0DAA4807A38830B81210BCE /* BitmovinAnalytics.swift in Sources */,
-				8B25E31B784CA3A6AAB89BB5A298380D /* BitmovinAnalyticsCollector-tvOS-dummy.m in Sources */,
-				07E78DA8601CE82C497BEE549642E7E5 /* BitmovinAnalyticsConfig.swift in Sources */,
-				0A04A701C2C79DDB892D668FDB30BA22 /* BitmovinAnalyticsInternal.swift in Sources */,
-				31532BC9F8748E379821A0C648E42CEB /* BitmovinPlayerAdapter.swift in Sources */,
-				3DE8B2111E8530649E81172084522307 /* BitmovinPlayerCollector.swift in Sources */,
-				773B529B29DC3DB242391AC1A49B3E58 /* BitmovinPlayerUtil.swift in Sources */,
-				56F83435645202F3466FB345E340DDEF /* CdnProvider.swift in Sources */,
-				19D13A5B56A6B356FF9BAF248B080743 /* CorePlayerAdapter.swift in Sources */,
-				916BECE2D6F5548AD9B5657B21F5DD1E /* DrmPerformanceInfo.swift in Sources */,
-				6D5FACFB2BBD814EC3E6AD2B3F5CE42A /* DrmType.swift in Sources */,
-				E647106AD79B796E5BDF5D57B9499F52 /* EventData.swift in Sources */,
-				3BCC6865089B990C4AD1FA84A9796416 /* EventDataDispatcher.swift in Sources */,
-				2627AFDCDB5F01969D908105B7FD6177 /* HttpClient.swift in Sources */,
-				25379834F7777A4BF7992F544FB7B598 /* LicenseCall.swift in Sources */,
-				5FB5F4D6F3ED1C98BA9ED06A6DFAC836 /* LicenseCallData.swift in Sources */,
-				76ADBCD8F5A34728EA0588ACC730840A /* PlayerAdapter.swift in Sources */,
-				BF00CE171BBF132172898532E2DB65C0 /* PlayerState.swift in Sources */,
-				48946C9F2FE9F8C333CE1C833AF283CF /* PlayerType.swift in Sources */,
-				AE6102251CA35DDF7498E5486B96CE78 /* QualityChangeCounter.swift in Sources */,
-				FCEE82CFB12C9B1FA20FB9E0E1D5D00C /* SimpleEventDataDispatcher.swift in Sources */,
-				903C61D276B25ED15BCBF356E7F04843 /* StateMachine.swift in Sources */,
-				26C73C8DBDE46F08F5EC4B148ECCE937 /* StateMachineDelegate.swift in Sources */,
-				A9ABDF2484EB7A37E1A4E6B89B551A87 /* StreamType.swift in Sources */,
-				938BFC59E80876644653F10D8499A64F /* Util.swift in Sources */,
-				1C9CC3F6463F21C973D30C4086DC2F47 /* VideoStartFailedReason.swift in Sources */,
+				83AC1F8D1D85B138527DFA3258B65A42 /* AdAdapter.swift in Sources */,
+				DCF6BF28C8F0D6574F50F528A0BB4F81 /* AdEventData.swift in Sources */,
+				A4DA22CF1D6F9FC8B27B3F16F585D48E /* AdModelMapper.swift in Sources */,
+				03D63E9A855ADF8A7B61CC46F524E1B2 /* AdModuleInformation.swift in Sources */,
+				7DF424A43783872E51108CE8CB66681E /* AdPosition.swift in Sources */,
+				99723AF1E604737B452F164D3514B0F8 /* AdSample.swift in Sources */,
+				9DCD639B86A18EB79A7BCCA8EFBBC335 /* AdTagType.swift in Sources */,
+				FD4D40FF747EEA06BD4F93F126519C62 /* AnalyticsAd.swift in Sources */,
+				B53DC86EC1123E6868BDE8823EB06AF9 /* AnalyticsAdBreak.swift in Sources */,
+				0098F5956432624C7C6881408053536B /* AnalyticsAdQuartile.swift in Sources */,
+				FBFB9EF3762F99CB026E09A315062DE4 /* AVPlayerAdapter.swift in Sources */,
+				5A707898CCB0C6E3EF9D7AB4AB445703 /* AVPlayerCollector.swift in Sources */,
+				5530F0AF498A25C6B10BD0CFD7F08094 /* BitmovinAdAdapter.swift in Sources */,
+				36E615ED397383794ADD3EDAC1D28057 /* BitmovinAdAnalytics.swift in Sources */,
+				7CF2977DEDF9DF401E9E5E3344BD27FC /* BitmovinAnalytics.swift in Sources */,
+				8349CDA37F0E1FA4585F743626FABFF3 /* BitmovinAnalyticsCollector-iOS-dummy.m in Sources */,
+				BF60CA9BACC58D9ED8DD3CCEDF38A5DB /* BitmovinAnalyticsConfig.swift in Sources */,
+				1D298324E69167E960259C81EBCE7086 /* BitmovinAnalyticsInternal.swift in Sources */,
+				AF23931DE57AD1E2FA1768EB69B6B679 /* BitmovinPlayerAdapter.swift in Sources */,
+				722B3B4056F98A4B61AD405B91418371 /* BitmovinPlayerCollector.swift in Sources */,
+				1F0C20F208F07037F7EEED67973368C5 /* BitmovinPlayerUtil.swift in Sources */,
+				A4D09BA1585C93B1191ED38109301568 /* CdnProvider.swift in Sources */,
+				63C8C8360A63636CB00D0CEC8C33D80B /* CorePlayerAdapter.swift in Sources */,
+				935D92591FEF2B61BFD53CFC0616BCA7 /* DrmPerformanceInfo.swift in Sources */,
+				996FA872B98A8AE90268DB4A75702C93 /* DrmType.swift in Sources */,
+				2353EB3D5FBD343D29CAB3B23BDDC459 /* ErrorCode.swift in Sources */,
+				B93B835880013FAB774994A9CB7D57AE /* EventData.swift in Sources */,
+				5D7BE9FE0C336DA2F286261E4EACB427 /* EventDataDispatcher.swift in Sources */,
+				2490669D24D18CB100DEAAE9 /* QualityChangeCounter.swift in Sources */,
+				C79A87BE8FF06423BD36AAEE2001D761 /* HttpClient.swift in Sources */,
+				C05F223CEB029782FCFE21BDCD97D311 /* LicenseCall.swift in Sources */,
+				AFB9CB5F9ECAF77B6D3506CD6822F478 /* LicenseCallData.swift in Sources */,
+				BBA69461701A6771A261FBFE85D4563B /* PlayerAdapter.swift in Sources */,
+				3E2AF808AC8DD069F4DFAB9F03AE49CF /* PlayerState.swift in Sources */,
+				429A7C5E0493B945F66AE32BE719E9DC /* PlayerType.swift in Sources */,
+				86B555C9A2FCCB94F667249F4EF02762 /* RebufferingTimeoutHandler.swift in Sources */,
+				6F4A3104C1CD06080D1FC43786E4247C /* SimpleEventDataDispatcher.swift in Sources */,
+				582DAF4D546ED349A95922ADFEC08720 /* StateMachine.swift in Sources */,
+				1E56F769B2D3D8169805359220EECDC5 /* StateMachineDelegate.swift in Sources */,
+				05B88F0E0BCBEC43678AF6F8B2FD1D74 /* StreamType.swift in Sources */,
+				2FD33B72BB2461B74E6801ACD0E37C46 /* Util.swift in Sources */,
+				C7043C5AED679436064E43DC2FF00B2D /* VideoStartFailedReason.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

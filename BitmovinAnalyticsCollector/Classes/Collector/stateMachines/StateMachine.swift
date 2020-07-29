@@ -28,13 +28,18 @@ public class StateMachine {
     private(set) var videoStartFailed: Bool = false
     private(set) var videoStartFailedReason: String?
     public var qualityChangeCounter: QualityChangeCounter
+    public var rebufferingTimeoutHandler: RebufferingTimeoutHandler
 
     init(config: BitmovinAnalyticsConfig) {
         self.config = config
         state = .ready
         impressionId = NSUUID().uuidString
         qualityChangeCounter = QualityChangeCounter()
-        print("Generated Bitmovin Analytics impression ID: " + impressionId.lowercased())
+        self.rebufferingTimeoutHandler = RebufferingTimeoutHandler()
+        print("Generated Bitmovin Analytics  impression ID: " + impressionId.lowercased())
+        
+        // needs to happen after init of properties
+        self.rebufferingTimeoutHandler.initialise(stateMachine: self)
     }
 
     deinit {
@@ -52,6 +57,7 @@ public class StateMachine {
         state = .ready
         resetVideoStartFailed()
         qualityChangeCounter.resetInterval()
+        rebufferingTimeoutHandler.resetInterval()
         print("Generated Bitmovin Analytics impression ID: " +  impressionId.lowercased())
     }
 
