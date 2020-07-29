@@ -147,7 +147,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             lastBitrate = event.indicatedBitrate
         } else if lastBitrate != event.indicatedBitrate {
             let previousState = stateMachine.state
-            stateMachine.transitionState(destinationState: .qualitychange, time: player.currentTime())
+            stateMachine.videoQualityChange(time: player.currentTime())
             stateMachine.transitionState(destinationState: previousState, time: player.currentTime())
             lastBitrate = event.indicatedBitrate
         }

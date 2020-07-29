@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Development
 
 ### Added
+
+- Restricted number of quality changes tracked per period of time (AN-1561)
 - `error` sample sent if continuous buffering exceeds threshold (ANALYTICS_BUFFERING_TIMEOUT_REACHED) (AN-1558)
 
 ## 1.15.0

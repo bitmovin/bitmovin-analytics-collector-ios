@@ -208,16 +208,24 @@ extension BitmovinPlayerAdapter: PlayerListener {
 
     func onVideoDownloadQualityChanged(_ event: VideoDownloadQualityChangedEvent) {
         let videoBitrateDidChange = didVideoBitrateChange(old: event.videoQualityOld, new: event.videoQualityNew)
-        if (!isPlayerReady && !isStalling && !isSeeking && videoBitrateDidChange) {
-            // there is a qualityChange event happening before the `onReady` method. Do not transition into any state.
-            stateMachine.transitionState(destinationState: .qualitychange, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        // there is a qualityChange event happening before the `onReady` method. Do not transition into any state.
+        if isPlayerReady && !isStalling && !isSeeking && videoBitrateDidChange {
+            stateMachine.videoQualityChange(time: currentTime)
+            transitionToPausedOrBufferingOrPlaying()
+        }
+    }
+    
+    // No check if audioBitrate changes because no data available
+    func onAudioChanged(_ event: AudioChangedEvent) {
+        if isPlayerReady && !isStalling && !isSeeking {
+            stateMachine.audioQualityChange(time: currentTime)
             transitionToPausedOrBufferingOrPlaying()
         }
     }
 
     func onSeeked(_ event: SeekedEvent) {
         isSeeking = false
-        if (!isStalling){
+        if (!isStalling) {
             transitionToPausedOrBufferingOrPlaying()
         }
     }
@@ -269,11 +277,4 @@ extension BitmovinPlayerAdapter: PlayerListener {
         transitionToPausedOrBufferingOrPlaying()
     }
 
-    func onAudioChanged(_ event: AudioChangedEvent) {
-        guard stateMachine.state == .paused || stateMachine.state == .playing else {
-            return
-        }
-        stateMachine.transitionState(destinationState: .audiochange, time: Util.timeIntervalToCMTime(_: player.currentTime))
-        transitionToPausedOrBufferingOrPlaying()
-    }
 }
