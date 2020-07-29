@@ -36,7 +36,7 @@ public class StateMachine {
         impressionId = NSUUID().uuidString
         qualityChangeCounter = QualityChangeCounter()
         self.rebufferingTimeoutHandler = RebufferingTimeoutHandler()
-        print("Generated Bitmovin Analytics  impression ID: " + impressionId.lowercased())
+        print("Generated Bitmovin Analytics impression ID: " + impressionId.lowercased())
         
         // needs to happen after init of properties
         self.rebufferingTimeoutHandler.initialise(stateMachine: self)
