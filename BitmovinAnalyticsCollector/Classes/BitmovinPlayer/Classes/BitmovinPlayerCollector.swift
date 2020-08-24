@@ -10,7 +10,7 @@ public class BitmovinPlayerCollector : BitmovinAnalyticsInternal {
      * Attach a player instance to this analytics plugin. After this is completed, BitmovinAnalytics
      * will start monitoring and sending analytics data based on the attached player instance.
      */
-    @objc public func attachPlayer(player: BitmovinPlayer) {
+    @objc public func attachPlayer(player: Player) {
         let autoplay = getIsAutoplayEnabled(player.config)
         attach(adapter: BitmovinPlayerAdapter(player: player, config: config, stateMachine: stateMachine), autoplay: autoplay)
         if (self.adAnalytics != nil) {

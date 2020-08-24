@@ -3,7 +3,7 @@ import BitmovinPlayer
 
 class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
-    private var player: BitmovinPlayer
+    private var player: Player
     private var errorCode: Int?
     private var errorMessage: String?
     private var drmPerformanceInfo: DrmPerformanceInfo?
@@ -12,7 +12,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     /// DRM certificate download time in milliseconds
     private var drmCertificateDownloadTime: Int64?
 
-    init(player: BitmovinPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
+    init(player: Player, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.config = config
         self.isStalling = false

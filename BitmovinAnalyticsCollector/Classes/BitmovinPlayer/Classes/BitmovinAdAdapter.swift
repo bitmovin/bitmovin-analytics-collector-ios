@@ -2,10 +2,10 @@ import BitmovinPlayer
 import Foundation
 
 public class BitmovinAdAdapter : NSObject, AdAdapter {
-    private var bitmovinPlayer: BitmovinPlayer
+    private var bitmovinPlayer: Player
     private var adAnalytics: BitmovinAdAnalytics
     
-    internal init(bitmovinPlayer: BitmovinPlayer, adAnalytics: BitmovinAdAnalytics) {
+    internal init(bitmovinPlayer: Player, adAnalytics: BitmovinAdAnalytics) {
         self.adAnalytics = adAnalytics;
         self.bitmovinPlayer = bitmovinPlayer;
         super.init()
