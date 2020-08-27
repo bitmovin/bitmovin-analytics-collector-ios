@@ -727,7 +727,6 @@
 				61EEB79D0E576644744AACAF159E895B /* Sources */,
 				EB7767122F1B5B74B23EF04F904BA022 /* Frameworks */,
 				B7C3EF94EEC57ECE4014A275C4D57F3F /* Resources */,
-				24DB9A7A2359D51A00198600 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -747,7 +746,6 @@
 				68A3FF18C53E1C01861562835392A337 /* Sources */,
 				2AC41DA0A49497171DB4360677CD4AC9 /* Frameworks */,
 				52E5F7DCE0A207228A532C081BAD7156 /* Resources */,
-				24DB9A792359B55C00198600 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -842,43 +840,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		24DB9A792359B55C00198600 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nFRAMEWORK_NAME=\"BitmovinAnalyticsCollector\"\nFRAMEWORK=\"${FRAMEWORK_NAME}.framework\"\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-appletvos/${FRAMEWORK_NAME}-tvOS/${FRAMEWORK}\"\nOUTPUT_DIR=\"../../tvOS/\"\nrm -rf \"$OUTPUT_DIR\"\nmkdir -p \"$OUTPUT_DIR\"\ncp -r \"${DEVICE_LIBRARY_PATH}/.\" \"${OUTPUT_DIR}/${FRAMEWORK}\"\n";
-		};
-		24DB9A7A2359D51A00198600 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# Type a script or drag a script file from your workspace to insert its path.\nFRAMEWORK_NAME=\"BitmovinAnalyticsCollector\"\nFRAMEWORK=\"${FRAMEWORK_NAME}.framework\"\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${FRAMEWORK_NAME}-iOS/${FRAMEWORK}\"\nOUTPUT_DIR=\"../../iOS/\"\nrm -rf \"$OUTPUT_DIR\"\nmkdir -p \"$OUTPUT_DIR\"\ncp -r \"${DEVICE_LIBRARY_PATH}/.\" \"${OUTPUT_DIR}/${FRAMEWORK}\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		12BFA71C342474EFB156F15EE5BBAD5F /* Sources */ = {
