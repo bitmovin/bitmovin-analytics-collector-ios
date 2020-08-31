@@ -71,3 +71,5 @@ fastlane/test_output
 .idea
 xcshareddata
 **/.DS_Store
+
+.GITHUB_TOKEN
