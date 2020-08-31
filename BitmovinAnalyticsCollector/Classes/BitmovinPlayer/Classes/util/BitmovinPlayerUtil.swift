@@ -4,7 +4,7 @@ import BitmovinPlayer
 public class BitmovinPlayerUtil {
 
     static func playerVersion() -> String? {
-        return Bundle(for: BitmovinPlayer.self).object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+        return Bundle(for: Player.self).object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
     }
     
     static func getAdPositionFromString(string: String?)-> AdPosition? {

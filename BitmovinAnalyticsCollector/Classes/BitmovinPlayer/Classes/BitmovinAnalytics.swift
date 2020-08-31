@@ -1,5 +1,4 @@
 import Foundation
-import Foundation
 import BitmovinPlayer
 
 public class BitmovinAnalytics : BitmovinPlayerCollector {
@@ -12,7 +11,7 @@ public class BitmovinAnalytics : BitmovinPlayerCollector {
      * Attach a player instance to this analytics plugin. After this is completed, BitmovinAnalytics
      * will start monitoring and sending analytics data based on the attached player instance.
      */
-    @objc public func attachBitmovinPlayer(player: BitmovinPlayer) {
+    @objc public func attachBitmovinPlayer(player: Player) {
         super.attachPlayer(player: player)
     }
 }

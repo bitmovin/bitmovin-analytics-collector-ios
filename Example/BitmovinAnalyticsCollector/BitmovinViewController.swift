@@ -4,7 +4,7 @@ import BitmovinAnalyticsCollector
 import UIKit
 
 class BitmovinViewController: UIViewController {
-    var player: BitmovinPlayer?
+    var player: Player?
     private var analyticsCollector: BitmovinPlayerCollector
     private var config: BitmovinAnalyticsConfig
     private let debugger: DebugBitmovinPlayerEvents = DebugBitmovinPlayerEvents()
@@ -79,7 +79,7 @@ class BitmovinViewController: UIViewController {
         }
             
         // Create player based on player configuration
-        let player = BitmovinPlayer(configuration: config)
+        let player = Player(configuration: config)
 
         player.add(listener: debugger)
         analyticsCollector.attachPlayer(player: player)

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Changed
+
+- Updated `BitmovinPlayer` dependency to `2.51.0` (AN-1706) 
+
 ## 1.16.0
 
 ### Added
