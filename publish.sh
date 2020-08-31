@@ -1,5 +1,12 @@
 #!/bin/sh
 
+if test -e ~/.bashrc; then
+  source ~/.bashrc
+fi
+if test -e ~/.bash_profile; then
+  source ~/.bash_profile
+fi
+
 if [ -z "$ANALYTICS_GH_TOKEN" ]; then
     echo "ANALYTICS_GH_TOKEN not found in environment variables. You need to provide the Github Access Token for the user bitAnalyticsCircleCi. This can be found in LastPass."
     echo "Enter the token:"
@@ -7,11 +14,9 @@ if [ -z "$ANALYTICS_GH_TOKEN" ]; then
     EXPORT_TOKEN="\nexport ANALYTICS_GH_TOKEN=$ANALYTICS_GH_TOKEN"
     if test -e ~/.bashrc; then
         echo $EXPORT_TOKEN >> ~/.bashrc
-        source ~/.bashrc
     fi
     if test -e ~/.bash_profile; then
         echo $EXPORT_TOKEN >> ~/.bash_profile
-        source ~/.bash_profile
     fi
 fi
 
