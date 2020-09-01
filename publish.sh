@@ -44,4 +44,4 @@ curl \
 
 echo "Created release in public repo."
 echo "Don't forget to update the changelog in Contentful."
-echo "https://app.contentful.com/spaces/blfijbdi3ei3/entries"
+open "https://app.contentful.com/spaces/blfijbdi3ei3/entries"
