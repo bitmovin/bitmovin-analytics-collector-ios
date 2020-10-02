@@ -15,12 +15,14 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var sendTimeUpdates = false
     private var lastTime: CMTime?
     private var timeObserver: Any?
+    private let errorHandler: ErrorHandler
     
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.config = config
         lastBitrate = 0
         self.drmPerformanceInfo = nil
+        self.errorHandler = ErrorHandler()
         super.init(stateMachine: stateMachine)
         self.delegate = self
         startMonitoring()
@@ -113,6 +115,10 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
         if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
             stateMachine.setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
+        }
+        
+        if (!errorHandler.shouldSendError(errorCode: errorCode)){
+            return
         }
 
         stateMachine.transitionState(destinationState: .error,
