@@ -4,7 +4,7 @@ import Foundation
 // this solves issues with one error repeatedly occuring too often whitout losing track of the error itself
 class ErrorHandler {
 
-    private let ANALYTICS_ERROR_TIMEOUT = 60 * 1000 // 1 minute
+    private let ANALYTICS_ERROR_TIMEOUT = 10 * 1000 // 1 minute
     private var errorMap: [Int:Int64]
     
     init() {
@@ -16,6 +16,7 @@ class ErrorHandler {
         if let errorTimestamp = errorMap[errorCode] {
             let diffSinceErrorOccured = now - errorTimestamp
             if diffSinceErrorOccured < ANALYTICS_ERROR_TIMEOUT {
+                errorMap[errorCode] = now
                 return false
             }
         }
