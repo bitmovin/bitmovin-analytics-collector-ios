@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Changed
+
+- errors will have a timeout of 1 minute before they will occur again (AN-1777)
+
 ## 1.17.0
 
 ### Changed

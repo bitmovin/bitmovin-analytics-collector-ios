@@ -127,6 +127,8 @@
 		E4CBCE3D09793BD31CE8F680742F5644 /* BitmovinAnalyticsInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F124F06C9718F92DD3DAF27C0402758C /* BitmovinAnalyticsInternal.swift */; };
 		E6C23203D6DEE3BA7F1DBDF44FD13CAD /* AVPlayerCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC28304530393586F31E03A62A8FAC /* AVPlayerCollector.swift */; };
 		E83AF782CB5F895022C9CF989D6C6DAA /* AVPlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A9FAEC770604A4F9B03ADB55CF861B /* AVPlayerAdapter.swift */; };
+		EC6CB4522527264D007B718C /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6CB4512527264D007B718C /* ErrorHandler.swift */; };
+		EC6CB4532527264D007B718C /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6CB4512527264D007B718C /* ErrorHandler.swift */; };
 		EEB07F543078756E0A5ECECC090AB8AF /* SimpleEventDataDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E99B40253CAE1368596A50A00FF20B7 /* SimpleEventDataDispatcher.swift */; };
 		EEE08784CADC436D41337B54FAD7AF30 /* BitmovinAdAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70667ACADB9F966666805900C906455B /* BitmovinAdAdapter.swift */; };
 		F8EC94338D08AF4F8036B316E9E4A92B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B712C7D27EB7CD8F8A18A3EDE52765C0 /* Foundation.framework */; };
@@ -262,6 +264,7 @@
 		E50A1CEBCDE98BC470043B1612F0C363 /* EventData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EventData.swift; sourceTree = "<group>"; };
 		E63591D7422A4A222E5DACE55D967405 /* Pods_BitmovinAnalyticsCollector_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_BitmovinAnalyticsCollector_Example.framework; path = "Pods-BitmovinAnalyticsCollector_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E77FC1037B60FCAAA19E99D1D60842EF /* BitmovinAnalyticsCollector-tvOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "BitmovinAnalyticsCollector-tvOS.xcconfig"; path = "../BitmovinAnalyticsCollector-tvOS/BitmovinAnalyticsCollector-tvOS.xcconfig"; sourceTree = "<group>"; };
+		EC6CB4512527264D007B718C /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		ED83D2F0F6C3B9DE66EE4B4721CF72D3 /* QualityChangeCounter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QualityChangeCounter.swift; sourceTree = "<group>"; };
 		F00E1EFC92D5A2F3A1AAFB3EDC53B0A6 /* BitmovinAnalyticsCollector-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BitmovinAnalyticsCollector-iOS-Info.plist"; sourceTree = "<group>"; };
 		F124F06C9718F92DD3DAF27C0402758C /* BitmovinAnalyticsInternal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BitmovinAnalyticsInternal.swift; sourceTree = "<group>"; };
@@ -564,6 +567,7 @@
 			children = (
 				F6A9FAEC770604A4F9B03ADB55CF861B /* AVPlayerAdapter.swift */,
 				18DC28304530393586F31E03A62A8FAC /* AVPlayerCollector.swift */,
+				EC6CB4512527264D007B718C /* ErrorHandler.swift */,
 			);
 			name = AVPlayer;
 			sourceTree = "<group>";
@@ -862,6 +866,7 @@
 				CDBD515E14821B0027F1AAB03FB6AEDE /* AdSample.swift in Sources */,
 				02841058BD41C57A44DEE09F3EFB235A /* AdTagType.swift in Sources */,
 				16C8DF765ABE514CB6B577FB8AA0C60E /* AnalyticsAd.swift in Sources */,
+				EC6CB4522527264D007B718C /* ErrorHandler.swift in Sources */,
 				02C60622C331FC7282507257EA48A913 /* AnalyticsAdBreak.swift in Sources */,
 				4D95A7FE78A1AA1E5AF361236DFEB80E /* AnalyticsAdQuartile.swift in Sources */,
 				BABC651B69A0FF580E0E96602606E38A /* AVPlayerAdapter.swift in Sources */,
@@ -911,6 +916,7 @@
 				3915B348CB0FF7665709E21DC20A49B0 /* AdSample.swift in Sources */,
 				C65E0FDEA35D35F9C52FEE38C3622F98 /* AdTagType.swift in Sources */,
 				387375B80A4450E9C0ECD5EDD2D9C380 /* AnalyticsAd.swift in Sources */,
+				EC6CB4532527264D007B718C /* ErrorHandler.swift in Sources */,
 				398756AF4FA2B3DBFF0F72BA742E2229 /* AnalyticsAdBreak.swift in Sources */,
 				B1F5597BC69462CDFFB36876864A31E1 /* AnalyticsAdQuartile.swift in Sources */,
 				E83AF782CB5F895022C9CF989D6C6DAA /* AVPlayerAdapter.swift in Sources */,
