@@ -4,12 +4,8 @@ import Foundation
 // this solves issues with one error repeatedly occuring too often whitout losing track of the error itself
 class ErrorHandler {
 
-    private let ANALYTICS_ERROR_TIMEOUT = 10 * 1000 // 1 minute
-    private var errorMap: [Int:Int64]
-    
-    init() {
-        self.errorMap = [Int:Int64]()
-    }
+    private let ANALYTICS_ERROR_TIMEOUT = 10_000 // 10 sec
+    private var errorMap: [Int:Int64] = [Int:Int64]()
     
     public func shouldSendError(errorCode: Int) -> Bool {
         let now = Date().timeIntervalSince1970Millis
