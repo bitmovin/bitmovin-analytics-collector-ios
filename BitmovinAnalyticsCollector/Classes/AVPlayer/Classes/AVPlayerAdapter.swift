@@ -117,7 +117,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             stateMachine.setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
         }
         
-        if (!errorHandler.shouldSendError(errorCode: errorCode)){
+        guard errorHandler.shouldSendError(errorCode: errorCode) else {
             return
         }
 
