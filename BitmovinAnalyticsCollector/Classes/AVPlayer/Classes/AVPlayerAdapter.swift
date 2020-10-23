@@ -114,7 +114,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         let errorData = error?.localizedFailureReason
 
         if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
-            stateMachine.setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
+            stateMachine.onPlayAttemptFailed(withReason: VideoStartFailedReason.playerError, time: player.currentTime())
+            return
         }
         
         guard errorHandler.shouldSendError(errorCode: errorCode) else {
