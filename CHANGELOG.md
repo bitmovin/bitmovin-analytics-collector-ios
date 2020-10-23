@@ -7,8 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Added
+
+- If the video startup fails due to a timeout, we add a `ANALYTICS_VIDEOSTART_TIMEOUT_REACHED` error to the sample, so it can be easily filtered in the dashboard
+
 ### Changed
 
+- We now stop collecting events after the collector encounters a video startup failure
 - errors will have a timeout of 1 minute before they will occur again (AN-1777)
 
 ## 1.17.0
