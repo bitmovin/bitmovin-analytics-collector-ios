@@ -110,12 +110,6 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
 
         eventData.audioLanguage = player.audio?.language
-        
-        if (stateMachine.videoStartFailed) {
-            eventData.videoStartFailed = stateMachine.videoStartFailed
-            eventData.videoStartFailedReason = stateMachine.videoStartFailedReason ?? VideoStartFailedReason.unknown
-            stateMachine.resetVideoStartFailed()
-        }
     }
 
     func startMonitoring() {

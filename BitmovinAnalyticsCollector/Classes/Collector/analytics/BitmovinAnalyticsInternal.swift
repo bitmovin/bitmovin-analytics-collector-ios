@@ -106,8 +106,16 @@ public class BitmovinAnalyticsInternal: NSObject {
         if let timeEnd = stateMachine.videoTimeEnd, CMTIME_IS_NUMERIC(_: timeEnd) {
             eventData.videoTimeEnd = Int64(CMTimeGetSeconds(timeEnd) * BitmovinAnalyticsInternal.msInSec)
         }
+        
+        //play attempt failed
+        if (stateMachine.videoStartFailed) {
+            eventData.videoStartFailed = stateMachine.videoStartFailed
+            eventData.videoStartFailedReason = stateMachine.videoStartFailedReason ?? VideoStartFailedReason.unknown
+            stateMachine.resetVideoStartFailed()
+        }
         return eventData
     }
+    
 }
 
 extension BitmovinAnalyticsInternal: StateMachineDelegate {

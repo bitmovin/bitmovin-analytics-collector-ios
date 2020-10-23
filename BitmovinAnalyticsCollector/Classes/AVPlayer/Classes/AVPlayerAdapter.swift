@@ -306,13 +306,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         if player.volume == 0 {
             eventData.isMuted = true
         }
-        
-        // play attempt
-        if (stateMachine.videoStartFailed) {
-            eventData.videoStartFailed = stateMachine.videoStartFailed
-            eventData.videoStartFailedReason = stateMachine.videoStartFailedReason ?? VideoStartFailedReason.unknown
-            stateMachine.resetVideoStartFailed()
-        }
     }
 
     func getDrmPerformanceInfo() -> DrmPerformanceInfo? {
