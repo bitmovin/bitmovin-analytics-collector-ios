@@ -183,6 +183,8 @@ public class StateMachine {
             return false
         } else if state == .ad && (destinationState != .error && destinationState != .adFinished) {
             return false
+        } else if state == .playAttemptFailed {
+            return false
         }
         
         return true
