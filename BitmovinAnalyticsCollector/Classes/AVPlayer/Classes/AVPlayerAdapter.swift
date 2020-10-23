@@ -110,23 +110,17 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
     private func errorOccured(error: NSError?) {
         let errorCode = error?.code ?? 1
-        let errorMessage = error?.localizedDescription ?? "Unkown"
-        let errorData = error?.localizedFailureReason
-
-        if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
-            stateMachine.onPlayAttemptFailed(withReason: VideoStartFailedReason.playerError, time: player.currentTime())
-            return
-        }
-        
         guard errorHandler.shouldSendError(errorCode: errorCode) else {
             return
         }
-
-        stateMachine.transitionState(destinationState: .error,
-                                     time: player.currentTime(),
-                                     data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode,
-                                            BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage,
-                                            BitmovinAnalyticsInternal.ErrorDataKey: errorData])
+        
+        let errorData = ErrorData(code: errorCode, message: error?.localizedDescription ?? "Unkown", data: error?.localizedFailureReason)
+        
+        if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
+            stateMachine.onPlayAttemptFailed(withError: errorData, time: player.currentTime())
+        } else {
+            stateMachine.error(withError: errorData, time: player.currentTime())
+        }
     }
 
     @objc private func failedToPlayToEndTime(notification: Notification) {

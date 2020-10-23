@@ -4,8 +4,6 @@ import BitmovinPlayer
 class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
     private var player: Player
-    private var errorCode: Int?
-    private var errorMessage: String?
     private var drmPerformanceInfo: DrmPerformanceInfo?
     private var isStalling: Bool
     private var isSeeking: Bool
@@ -34,10 +32,6 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
         //PlayerTech
         eventData.playerTech = "ios:bitmovin"
-
-        //ErrorCode
-        eventData.errorCode = errorCode
-        eventData.errorMessage = errorMessage
 
         //Duration
         if !player.duration.isNaN && !player.duration.isInfinite {
@@ -230,12 +224,11 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onError(_ event: ErrorEvent) {
-        errorCode = Int(event.code)
-        errorMessage = event.message
+        let errorData = ErrorData(code: Int(event.code), message: event.message, data: nil)
         if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
-            stateMachine.onPlayAttemptFailed(withReason: VideoStartFailedReason.playerError, time: Util.timeIntervalToCMTime(_: player.currentTime))
+            stateMachine.onPlayAttemptFailed(withError: errorData, time: Util.timeIntervalToCMTime(_: player.currentTime))
         } else {
-            stateMachine.transitionState(destinationState: .error, time: Util.timeIntervalToCMTime(_: player.currentTime))
+            stateMachine.error(withError: errorData, time: Util.timeIntervalToCMTime(_: player.currentTime))
         }
     }
 
