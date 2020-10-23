@@ -7,26 +7,32 @@ public class StateMachine {
     
     private(set) var state: PlayerState
     private var config: BitmovinAnalyticsConfig
-    private(set) var enterTimestamp: Int64?
-    var potentialSeekStart: Int64 = 0
-    var potentialSeekVideoTimeStart: CMTime?
-    var didAttemptPlayingVideo: Bool = false
-    private(set) var didStartPlayingVideo: Bool = false
-    var startupTime: Int64 = 0
-    private(set) var videoTimeStart: CMTime?
-    private(set) var videoTimeEnd: CMTime?
     private(set) var impressionId: String
     weak var delegate: StateMachineDelegate?
     
+    //tracked player times
+    private(set) var enterTimestamp: Int64?
+    var potentialSeekStart: Int64 = 0
+    var potentialSeekVideoTimeStart: CMTime?
+    var startupTime: Int64 = 0
+    private(set) var videoTimeStart: CMTime?
+    private(set) var videoTimeEnd: CMTime?
+    
+    // heartbeat
     weak private var heartbeatTimer: Timer?
     let rebufferHeartbeatQueue = DispatchQueue.init(label: "com.bitmovin.analytics.core.statemachine.heartBeatQueue")
     private var rebufferHeartbeatTimer: DispatchWorkItem?
     private var currentRebufferIntervalIndex: Int = 0
     private let rebufferHeartbeatInterval: [Int64] = [3000, 5000, 10000, 59700]
-
+    
+    //play attempt
+    var didAttemptPlayingVideo: Bool = false
+    private(set) var didStartPlayingVideo: Bool = false
     private var videoStartFailedWorkItem: DispatchWorkItem?
     private(set) var videoStartFailed: Bool = false
     private(set) var videoStartFailedReason: String?
+    
+    // features objects
     public var qualityChangeCounter: QualityChangeCounter
     public var rebufferingTimeoutHandler: RebufferingTimeoutHandler
 
