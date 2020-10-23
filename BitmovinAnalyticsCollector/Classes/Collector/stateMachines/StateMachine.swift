@@ -246,7 +246,7 @@ public class StateMachine {
         self.errorData
     }
     
-    public func setErrorData(error: ErrorData?){
+    public func setErrorData(error: ErrorData?) {
         self.errorData = error
     }
 }
