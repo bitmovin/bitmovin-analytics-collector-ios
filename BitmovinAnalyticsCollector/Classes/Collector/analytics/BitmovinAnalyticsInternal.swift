@@ -113,14 +113,6 @@ public class BitmovinAnalyticsInternal: NSObject {
             eventData.videoStartFailedReason = stateMachine.videoStartFailedReason ?? VideoStartFailedReason.unknown
             stateMachine.resetVideoStartFailed()
         }
-        
-        if let errorData = stateMachine.getErrorData() {
-            eventData.errorCode = errorData.code
-            eventData.errorMessage = errorData.message
-            eventData.errorData = errorData.data
-            // error data is only send in the payload once and then cleared from state machine
-            stateMachine.setErrorData(error: nil)
-        }
         return eventData
     }
     
@@ -144,6 +136,14 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
 
     func stateMachineDidEnterError(_ stateMachine: StateMachine) {
         let eventData = createEventData(duration: 0)
+        
+        if let errorData = stateMachine.getErrorData() {
+            eventData?.errorCode = errorData.code
+            eventData?.errorMessage = errorData.message
+            eventData?.errorData = errorData.data
+            // error data is only send in the payload once and then cleared from state machine
+            stateMachine.setErrorData(error: nil)
+        }
         sendEventData(eventData: eventData)
     }
 
