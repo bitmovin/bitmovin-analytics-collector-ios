@@ -148,6 +148,7 @@ public class StateMachine {
     }
     
     public func setVideoStartFailed(withReason reason: String) {
+        clearVideoStartFailedTimer()
         videoStartFailed = true
         videoStartFailedReason = reason
     }

@@ -134,7 +134,6 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
     func stateMachineEnterPlayAttemptFailed(stateMachine: StateMachine) {
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
-        self.detachPlayer()
     }
     
     func stateMachine(_ stateMachine: StateMachine, didExitBufferingWithDuration duration: Int64) {

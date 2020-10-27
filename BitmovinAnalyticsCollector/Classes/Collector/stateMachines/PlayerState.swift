@@ -32,6 +32,7 @@ public enum PlayerState: String {
                 stateMachine.enableRebufferHeartbeat()
                 return
             case .playAttemptFailed:
+                stateMachine.reset()
                 return
             case .error:
                 stateMachine.delegate?.stateMachineDidEnterError(stateMachine)
