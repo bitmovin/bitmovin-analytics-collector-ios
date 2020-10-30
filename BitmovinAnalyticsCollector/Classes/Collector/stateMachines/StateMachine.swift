@@ -132,9 +132,8 @@ public class StateMachine {
         clearVideoStartFailedTimer()
         
         videoStartFailedWorkItem = DispatchWorkItem {
-            self.clearVideoStartFailedTimer()
             self.errorData = ErrorData.ANALYTICS_VIDEOSTART_TIMEOUT_REACHED
-            self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout, time: nil)
+            self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout)
         }
         DispatchQueue.init(label: StateMachine.kvideoStartFailedTimerId).asyncAfter(deadline: .now() + StateMachine.kVideoStartFailedTimeoutSeconds, execute: videoStartFailedWorkItem!)
     }
@@ -158,15 +157,15 @@ public class StateMachine {
         videoStartFailedReason = nil
     }
     
-    public func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown, time: CMTime?) {
+    public func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown) {
         setVideoStartFailed(withReason: reason)
-        transitionState(destinationState: .playAttemptFailed, time: time)
+        transitionState(destinationState: .playAttemptFailed, time: nil)
     }
     
-    public func onPlayAttemptFailed(withError error: ErrorData, time: CMTime?) {
+    public func onPlayAttemptFailed(withError error: ErrorData) {
         setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
         self.errorData = error
-        transitionState(destinationState: .playAttemptFailed, time: time)
+        transitionState(destinationState: .playAttemptFailed, time: nil)
     }
     
     private func checkUnallowedTransitions(destinationState: PlayerState) -> Bool{

@@ -117,7 +117,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         let errorData = ErrorData(code: errorCode, message: error?.localizedDescription ?? "Unkown", data: error?.localizedFailureReason)
         
         if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
-            stateMachine.onPlayAttemptFailed(withError: errorData, time: player.currentTime())
+            stateMachine.onPlayAttemptFailed(withError: errorData)
         } else {
             stateMachine.error(withError: errorData, time: player.currentTime())
         }
