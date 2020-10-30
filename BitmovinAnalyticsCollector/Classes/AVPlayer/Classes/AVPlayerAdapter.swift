@@ -110,22 +110,17 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
     private func errorOccured(error: NSError?) {
         let errorCode = error?.code ?? 1
-        let errorMessage = error?.localizedDescription ?? "Unkown"
-        let errorData = error?.localizedFailureReason
-
-        if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
-            stateMachine.setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
-        }
-        
         guard errorHandler.shouldSendError(errorCode: errorCode) else {
             return
         }
-
-        stateMachine.transitionState(destinationState: .error,
-                                     time: player.currentTime(),
-                                     data: [BitmovinAnalyticsInternal.ErrorCodeKey: errorCode,
-                                            BitmovinAnalyticsInternal.ErrorMessageKey: errorMessage,
-                                            BitmovinAnalyticsInternal.ErrorDataKey: errorData])
+        
+        let errorData = ErrorData(code: errorCode, message: error?.localizedDescription ?? "Unkown", data: error?.localizedFailureReason)
+        
+        if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
+            stateMachine.onPlayAttemptFailed(withError: errorData)
+        } else {
+            stateMachine.error(withError: errorData, time: player.currentTime())
+        }
     }
 
     @objc private func failedToPlayToEndTime(notification: Notification) {
@@ -305,13 +300,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         // isMuted
         if player.volume == 0 {
             eventData.isMuted = true
-        }
-        
-        // play attempt
-        if (stateMachine.videoStartFailed) {
-            eventData.videoStartFailed = stateMachine.videoStartFailed
-            eventData.videoStartFailedReason = stateMachine.videoStartFailedReason ?? VideoStartFailedReason.unknown
-            stateMachine.resetVideoStartFailed()
         }
     }
 

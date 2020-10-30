@@ -15,7 +15,7 @@ public enum PlayerState: String {
     case audiochange
     case playAttemptFailed
 
-    func onEntry(stateMachine: StateMachine, timestamp _: Int64, previousState : PlayerState, data: [AnyHashable: Any]?) {
+    func onEntry(stateMachine: StateMachine, timestamp _: Int64, previousState : PlayerState) {
         switch self {
             case .ad:
                 return
@@ -32,9 +32,10 @@ public enum PlayerState: String {
                 stateMachine.enableRebufferHeartbeat()
                 return
             case .playAttemptFailed:
+                stateMachine.reset()
                 return
             case .error:
-                stateMachine.delegate?.stateMachineDidEnterError(stateMachine, data: data)
+                stateMachine.delegate?.stateMachineDidEnterError(stateMachine)
                 return
             case .paused:
                 return
@@ -98,8 +99,8 @@ public enum PlayerState: String {
                        stateMachine.delegate?.stateMachineDidQualityChange(stateMachine)
                 }
                 else {
-                    stateMachine.delegate?.stateMachineDidEnterError(stateMachine,
-                                                                     data: ErrorCode.ANALYTICS_QUALITY_CHANGE_THRESHOLD_EXCEEDED.data)
+                    stateMachine.setErrorData(error: ErrorData.ANALYTICS_QUALITY_CHANGE_THRESHOLD_EXCEEDED)
+                    stateMachine.delegate?.stateMachineDidEnterError(stateMachine)
                 }
                 return
             case .seeking:

@@ -106,8 +106,16 @@ public class BitmovinAnalyticsInternal: NSObject {
         if let timeEnd = stateMachine.videoTimeEnd, CMTIME_IS_NUMERIC(_: timeEnd) {
             eventData.videoTimeEnd = Int64(CMTimeGetSeconds(timeEnd) * BitmovinAnalyticsInternal.msInSec)
         }
+        
+        //play attempt failed
+        if (stateMachine.videoStartFailed) {
+            eventData.videoStartFailed = stateMachine.videoStartFailed
+            eventData.videoStartFailedReason = stateMachine.videoStartFailedReason ?? VideoStartFailedReason.unknown
+            stateMachine.resetVideoStartFailed()
+        }
         return eventData
     }
+    
 }
 
 extension BitmovinAnalyticsInternal: StateMachineDelegate {
@@ -126,16 +134,15 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         sendEventData(eventData: eventData)
     }
 
-    func stateMachineDidEnterError(_ stateMachine: StateMachine, data: [AnyHashable: Any]?) {
+    func stateMachineDidEnterError(_ stateMachine: StateMachine) {
         let eventData = createEventData(duration: 0)
-        if let errorCode = data?[BitmovinAnalyticsInternal.ErrorCodeKey] {
-            eventData?.errorCode = errorCode as? Int
-        }
-        if let errorMessage = data?[BitmovinAnalyticsInternal.ErrorMessageKey] {
-            eventData?.errorMessage = errorMessage as? String
-        }
-        if let errorData = data?[BitmovinAnalyticsInternal.ErrorDataKey] {
-            eventData?.errorData = errorData as? String
+        
+        if let errorData = stateMachine.getErrorData() {
+            eventData?.errorCode = errorData.code
+            eventData?.errorMessage = errorData.message
+            eventData?.errorData = errorData.data
+            // error data is only send in the payload once and then cleared from state machine
+            stateMachine.setErrorData(error: nil)
         }
         sendEventData(eventData: eventData)
     }

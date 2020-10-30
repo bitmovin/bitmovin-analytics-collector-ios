@@ -120,8 +120,6 @@
 		CCF1F9BD4C6F3DB81CAEBD959956E885 /* Pods-BitmovinAnalyticsCollector_tvOSExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C194C6E15571223DF8CC4FB4D41F0E76 /* Pods-BitmovinAnalyticsCollector_tvOSExample-dummy.m */; };
 		CDBD515E14821B0027F1AAB03FB6AEDE /* AdSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C2B8696BCF5296F31C4F4F0E71F68 /* AdSample.swift */; };
 		D3E1FB94DE249EB5DD7E3AA853355FB6 /* EventDataDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD730A8BC7FF574C18C13440EEA9951D /* EventDataDispatcher.swift */; };
-		D5A8834BC22D7B2DE5D9F38CA081B0DC /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56C2E8E0FF1D4E83EF67E8477793602 /* ErrorCode.swift */; };
-		DA4736D685554B948AFC1802625FCBC6 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56C2E8E0FF1D4E83EF67E8477793602 /* ErrorCode.swift */; };
 		DBDFCFF3E9DE1824CBCD75EB3E57B957 /* DrmPerformanceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E85B082467EB217DAA1D61B45535794 /* DrmPerformanceInfo.swift */; };
 		DEEA104F11892E649E3EFF2018B42706 /* CorePlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E92520D846FC846E05876C6323E3C71 /* CorePlayerAdapter.swift */; };
 		DFE55B0A3ADB7FDAB4B55DDA3511080B /* LicenseCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31987DFB38D728B09E42D95B0D55B79F /* LicenseCall.swift */; };
@@ -132,6 +130,8 @@
 		E4CBCE3D09793BD31CE8F680742F5644 /* BitmovinAnalyticsInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F124F06C9718F92DD3DAF27C0402758C /* BitmovinAnalyticsInternal.swift */; };
 		E6C23203D6DEE3BA7F1DBDF44FD13CAD /* AVPlayerCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC28304530393586F31E03A62A8FAC /* AVPlayerCollector.swift */; };
 		E83AF782CB5F895022C9CF989D6C6DAA /* AVPlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A9FAEC770604A4F9B03ADB55CF861B /* AVPlayerAdapter.swift */; };
+		EC3A89B52542CE4C007C05D5 /* ErrorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A89B42542CE4C007C05D5 /* ErrorData.swift */; };
+		EC3A89B62542CE4C007C05D5 /* ErrorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A89B42542CE4C007C05D5 /* ErrorData.swift */; };
 		EEB07F543078756E0A5ECECC090AB8AF /* SimpleEventDataDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E99B40253CAE1368596A50A00FF20B7 /* SimpleEventDataDispatcher.swift */; };
 		EEE08784CADC436D41337B54FAD7AF30 /* BitmovinAdAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70667ACADB9F966666805900C906455B /* BitmovinAdAdapter.swift */; };
 		F8EC94338D08AF4F8036B316E9E4A92B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B712C7D27EB7CD8F8A18A3EDE52765C0 /* Foundation.framework */; };
@@ -268,10 +268,10 @@
 		E50A1CEBCDE98BC470043B1612F0C363 /* EventData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EventData.swift; sourceTree = "<group>"; };
 		E63591D7422A4A222E5DACE55D967405 /* Pods_BitmovinAnalyticsCollector_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E77FC1037B60FCAAA19E99D1D60842EF /* BitmovinAnalyticsCollector-tvOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "BitmovinAnalyticsCollector-tvOS.xcconfig"; path = "../BitmovinAnalyticsCollector-tvOS/BitmovinAnalyticsCollector-tvOS.xcconfig"; sourceTree = "<group>"; };
+		EC3A89B42542CE4C007C05D5 /* ErrorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorData.swift; sourceTree = "<group>"; };
 		ED83D2F0F6C3B9DE66EE4B4721CF72D3 /* QualityChangeCounter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QualityChangeCounter.swift; sourceTree = "<group>"; };
 		F00E1EFC92D5A2F3A1AAFB3EDC53B0A6 /* BitmovinAnalyticsCollector-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BitmovinAnalyticsCollector-iOS-Info.plist"; sourceTree = "<group>"; };
 		F124F06C9718F92DD3DAF27C0402758C /* BitmovinAnalyticsInternal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BitmovinAnalyticsInternal.swift; sourceTree = "<group>"; };
-		F56C2E8E0FF1D4E83EF67E8477793602 /* ErrorCode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
 		F6A9FAEC770604A4F9B03ADB55CF861B /* AVPlayerAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AVPlayerAdapter.swift; path = BitmovinAnalyticsCollector/Classes/AVPlayer/Classes/AVPlayerAdapter.swift; sourceTree = "<group>"; };
 		F82DAB9BA429C444FF5256887B801DA5 /* AdEventData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AdEventData.swift; sourceTree = "<group>"; };
 		F88114769B72BACBA0C311BB41CCCD76 /* BitmovinPlayerAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BitmovinPlayerAdapter.swift; path = BitmovinAnalyticsCollector/Classes/BitmovinPlayer/Classes/BitmovinPlayerAdapter.swift; sourceTree = "<group>"; };
@@ -336,6 +336,7 @@
 				DD730A8BC7FF574C18C13440EEA9951D /* EventDataDispatcher.swift */,
 				635888907FB6AAA7FD9B5DC2C773D066 /* LicenseCallData.swift */,
 				5E99B40253CAE1368596A50A00FF20B7 /* SimpleEventDataDispatcher.swift */,
+				EC3A89B42542CE4C007C05D5 /* ErrorData.swift */,
 			);
 			name = data;
 			path = BitmovinAnalyticsCollector/Classes/Collector/data;
@@ -507,7 +508,6 @@
 		B9ECC6CF55B5A3E9B263BB511D72DDE3 /* util */ = {
 			isa = PBXGroup;
 			children = (
-				F56C2E8E0FF1D4E83EF67E8477793602 /* ErrorCode.swift */,
 				C88B7EB481CBC80ED0F77BBF71A54257 /* HttpClient.swift */,
 				31987DFB38D728B09E42D95B0D55B79F /* LicenseCall.swift */,
 				B309659A0ABB7C8ADA43589F2B21359F /* Util.swift */,
@@ -883,7 +883,6 @@
 				DEEA104F11892E649E3EFF2018B42706 /* CorePlayerAdapter.swift in Sources */,
 				8DC601F3FD223194C4DB62826206BF1B /* DrmPerformanceInfo.swift in Sources */,
 				27E035FEBC4F357A85F26F0E7BF9B2A8 /* DrmType.swift in Sources */,
-				D5A8834BC22D7B2DE5D9F38CA081B0DC /* ErrorCode.swift in Sources */,
 				4A398EDFCCB9BCB3E0ADBC0282A6BAFC /* EventData.swift in Sources */,
 				E097A10225B7FFC8B1864C8BC6199104 /* EventDataDispatcher.swift in Sources */,
 				AF80AA29A2E46DC7E945BC64125F5754 /* HttpClient.swift in Sources */,
@@ -892,6 +891,7 @@
 				C3B3F3802AA63BB4566DEDBBE30D7BF8 /* PlayerAdapter.swift in Sources */,
 				A53A513838EA9DB5B226C8E5D1F8305D /* PlayerState.swift in Sources */,
 				FE52C66AC8A67FBDBBE9FBE8F15A8DB9 /* PlayerType.swift in Sources */,
+				EC3A89B52542CE4C007C05D5 /* ErrorData.swift in Sources */,
 				B58E499AABF396BBA712EC58EB9341D2 /* QualityChangeCounter.swift in Sources */,
 				CA2D149FE0AA8C120C90A1E9205721D7 /* RebufferingTimeoutHandler.swift in Sources */,
 				24A3DDDC2530639900B28067 /* ErrorHandler.swift in Sources */,
@@ -933,7 +933,6 @@
 				5077D9FB8FA998189921921E0D71AA90 /* CorePlayerAdapter.swift in Sources */,
 				DBDFCFF3E9DE1824CBCD75EB3E57B957 /* DrmPerformanceInfo.swift in Sources */,
 				B06E5F976FD9DF834D2F2FE4C65E1CE5 /* DrmType.swift in Sources */,
-				DA4736D685554B948AFC1802625FCBC6 /* ErrorCode.swift in Sources */,
 				7D9408F07A0CA3E38E6695EB90822370 /* EventData.swift in Sources */,
 				D3E1FB94DE249EB5DD7E3AA853355FB6 /* EventDataDispatcher.swift in Sources */,
 				A62BE2A9929F6475C4FF973972CD6F03 /* HttpClient.swift in Sources */,
@@ -942,6 +941,7 @@
 				014EE066D41CE856A31FA3A949353B49 /* PlayerAdapter.swift in Sources */,
 				3606FB7E54DFE6DBEE9AFB753461DFB1 /* PlayerState.swift in Sources */,
 				1A1D1265B04BFE65700F88231FE28B85 /* PlayerType.swift in Sources */,
+				EC3A89B62542CE4C007C05D5 /* ErrorData.swift in Sources */,
 				1A4639B8C3355A4F5B38AD3665A703C4 /* QualityChangeCounter.swift in Sources */,
 				C2BFABACC00D903DB4C0AA8A77A77E8D /* RebufferingTimeoutHandler.swift in Sources */,
 				24A3DDDD2530639900B28067 /* ErrorHandler.swift in Sources */,

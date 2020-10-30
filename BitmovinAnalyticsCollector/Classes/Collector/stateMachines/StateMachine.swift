@@ -7,28 +7,37 @@ public class StateMachine {
     
     private(set) var state: PlayerState
     private var config: BitmovinAnalyticsConfig
-    private(set) var enterTimestamp: Int64?
-    var potentialSeekStart: Int64 = 0
-    var potentialSeekVideoTimeStart: CMTime?
-    var didAttemptPlayingVideo: Bool = false
-    private(set) var didStartPlayingVideo: Bool = false
-    var startupTime: Int64 = 0
-    private(set) var videoTimeStart: CMTime?
-    private(set) var videoTimeEnd: CMTime?
     private(set) var impressionId: String
     weak var delegate: StateMachineDelegate?
     
+    //tracked player times
+    private(set) var enterTimestamp: Int64?
+    var potentialSeekStart: Int64 = 0
+    var potentialSeekVideoTimeStart: CMTime?
+    var startupTime: Int64 = 0
+    private(set) var videoTimeStart: CMTime?
+    private(set) var videoTimeEnd: CMTime?
+    
+    // heartbeat
     weak private var heartbeatTimer: Timer?
     let rebufferHeartbeatQueue = DispatchQueue.init(label: "com.bitmovin.analytics.core.statemachine.heartBeatQueue")
     private var rebufferHeartbeatTimer: DispatchWorkItem?
     private var currentRebufferIntervalIndex: Int = 0
     private let rebufferHeartbeatInterval: [Int64] = [3000, 5000, 10000, 59700]
-
+    
+    //play attempt
+    var didAttemptPlayingVideo: Bool = false
+    private(set) var didStartPlayingVideo: Bool = false
     private var videoStartFailedWorkItem: DispatchWorkItem?
     private(set) var videoStartFailed: Bool = false
     private(set) var videoStartFailedReason: String?
+    
+    // features objects
     public var qualityChangeCounter: QualityChangeCounter
     public var rebufferingTimeoutHandler: RebufferingTimeoutHandler
+    
+    // error tracking
+    private var errorData: ErrorData? = nil
 
     init(config: BitmovinAnalyticsConfig) {
         self.config = config
@@ -61,7 +70,7 @@ public class StateMachine {
         print("Generated Bitmovin Analytics impression ID: " +  impressionId.lowercased())
     }
 
-    public func transitionState(destinationState: PlayerState, time: CMTime?, data: [AnyHashable: Any]? = nil) {
+    public func transitionState(destinationState: PlayerState, time: CMTime?) {
         let performTransition = checkUnallowedTransitions(destinationState: destinationState)
 
         if performTransition {
@@ -72,7 +81,7 @@ public class StateMachine {
             state = destinationState
             enterTimestamp = timestamp
             videoTimeStart = videoTimeEnd
-            state.onEntry(stateMachine: self, timestamp: timestamp, previousState: previousState, data: data)
+            state.onEntry(stateMachine: self, timestamp: timestamp, previousState: previousState)
         }
     }
     
@@ -106,6 +115,11 @@ public class StateMachine {
         transitionState(destinationState: .audiochange, time: time)
     }
     
+    public func error(withError error: ErrorData, time: CMTime?) {
+        self.errorData = error
+        transitionState(destinationState: .error, time: time)
+    }
+    
     public func setDidStartPlayingVideo() {
         didStartPlayingVideo = true
     }
@@ -118,8 +132,8 @@ public class StateMachine {
         clearVideoStartFailedTimer()
         
         videoStartFailedWorkItem = DispatchWorkItem {
-            self.clearVideoStartFailedTimer()
-            self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout, time: nil)
+            self.errorData = ErrorData.ANALYTICS_VIDEOSTART_TIMEOUT_REACHED
+            self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout)
         }
         DispatchQueue.init(label: StateMachine.kvideoStartFailedTimerId).asyncAfter(deadline: .now() + StateMachine.kVideoStartFailedTimeoutSeconds, execute: videoStartFailedWorkItem!)
     }
@@ -133,6 +147,7 @@ public class StateMachine {
     }
     
     public func setVideoStartFailed(withReason reason: String) {
+        clearVideoStartFailedTimer()
         videoStartFailed = true
         videoStartFailedReason = reason
     }
@@ -142,9 +157,15 @@ public class StateMachine {
         videoStartFailedReason = nil
     }
     
-    public func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown, time: CMTime?) {
+    public func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown) {
         setVideoStartFailed(withReason: reason)
-        transitionState(destinationState: .playAttemptFailed, time: time)
+        transitionState(destinationState: .playAttemptFailed, time: nil)
+    }
+    
+    public func onPlayAttemptFailed(withError error: ErrorData) {
+        setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
+        self.errorData = error
+        transitionState(destinationState: .playAttemptFailed, time: nil)
     }
     
     private func checkUnallowedTransitions(destinationState: PlayerState) -> Bool{
@@ -161,6 +182,8 @@ public class StateMachine {
         } else if state == .startup && (destinationState != .error && destinationState != .playAttemptFailed && destinationState != .ready && destinationState != .playing && destinationState != .ad) {
             return false
         } else if state == .ad && (destinationState != .error && destinationState != .adFinished) {
+            return false
+        } else if state == .playAttemptFailed {
             return false
         }
         
@@ -217,5 +240,13 @@ public class StateMachine {
         delegate?.stateMachine(self, didHeartbeatWithDuration: timestamp - enterTime)
         videoTimeStart = videoTimeEnd
         enterTimestamp = timestamp
+    }
+    
+    public func getErrorData() -> ErrorData? {
+        self.errorData
+    }
+    
+    public func setErrorData(error: ErrorData?) {
+        self.errorData = error
     }
 }
