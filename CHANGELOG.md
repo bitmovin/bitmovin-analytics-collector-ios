@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- We now stop collecting events after the collector encounters a video startup failure
+- We now stop collecting events after the collector encounters a video startup failure and rebuffer timeout 
 - errors will have a timeout of 1 minute before they will occur again (AN-1777)
 
 ## 1.17.0
