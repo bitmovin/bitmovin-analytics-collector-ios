@@ -120,6 +120,12 @@ public class StateMachine {
         transitionState(destinationState: .error, time: time)
     }
     
+    public func rebufferTimeoutReached(time: CMTime?) {
+        self.errorData = ErrorData.ANALYTICS_BUFFERING_TIMEOUT_REACHED
+        transitionState(destinationState: .error, time: time)
+        self.delegate?.stateMachineStopsCollecting()
+    }
+    
     public func setDidStartPlayingVideo() {
         didStartPlayingVideo = true
     }
@@ -160,12 +166,14 @@ public class StateMachine {
     public func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown) {
         setVideoStartFailed(withReason: reason)
         transitionState(destinationState: .playAttemptFailed, time: nil)
+        self.delegate?.stateMachineStopsCollecting()
     }
     
     public func onPlayAttemptFailed(withError error: ErrorData) {
         setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
         self.errorData = error
         transitionState(destinationState: .playAttemptFailed, time: nil)
+        self.delegate?.stateMachineStopsCollecting()
     }
     
     private func checkUnallowedTransitions(destinationState: PlayerState) -> Bool{

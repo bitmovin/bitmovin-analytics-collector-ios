@@ -209,6 +209,10 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
     }
+    
+    func stateMachineStopsCollecting() {
+        detachPlayer()
+    }
 
     var currentTime: CMTime? {
         get {
