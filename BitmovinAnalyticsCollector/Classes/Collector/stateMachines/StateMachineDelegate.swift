@@ -14,5 +14,6 @@ protocol StateMachineDelegate: class {
     func stateMachine(_ stateMachine: StateMachine, didStartupWithDuration duration: Int64)
     func stateMachineDidSubtitleChange(_ stateMachine: StateMachine)
     func stateMachineDidAudioChange(_ stateMachine: StateMachine)
+    func stateMachineStopsCollecting()
     var currentTime: CMTime? { get }
 }

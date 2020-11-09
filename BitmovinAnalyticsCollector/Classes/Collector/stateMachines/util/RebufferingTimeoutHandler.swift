@@ -14,7 +14,7 @@ public class RebufferingTimeoutHandler {
     func startInterval() {
         resetInterval()
         rebufferingTimeoutWorkItem = DispatchWorkItem {
-            self.stateMachine?.error(withError: ErrorData.ANALYTICS_BUFFERING_TIMEOUT_REACHED, time: self.stateMachine?.delegate?.currentTime)
+            self.stateMachine?.rebufferTimeoutReached(time: self.stateMachine?.delegate?.currentTime)
             self.resetInterval()
         }
 
