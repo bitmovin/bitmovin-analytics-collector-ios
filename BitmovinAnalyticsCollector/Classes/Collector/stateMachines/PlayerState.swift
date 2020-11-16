@@ -29,7 +29,7 @@ public enum PlayerState: String {
                 return
             case .buffering:
                 stateMachine.rebufferingTimeoutHandler.startInterval()
-                stateMachine.enableRebufferHeartbeat()
+                stateMachine.scheduleRebufferHeartbeat()
                 return
             case .playAttemptFailed:
                 return
