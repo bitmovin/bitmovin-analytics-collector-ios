@@ -216,8 +216,9 @@ public class StateMachine {
     }
     
     func scheduleRebufferHeartbeat() {
-        self.rebufferHeartbeatTimer = DispatchWorkItem {
-            guard self.rebufferHeartbeatTimer != nil else {
+        self.rebufferHeartbeatTimer = DispatchWorkItem { [weak self] in
+            guard let self = self,
+                self.rebufferHeartbeatTimer != nil else {
                 return
             }
             self.onHeartbeat()
