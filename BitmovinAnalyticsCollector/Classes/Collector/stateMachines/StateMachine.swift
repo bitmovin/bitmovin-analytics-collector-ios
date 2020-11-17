@@ -215,23 +215,25 @@ public class StateMachine {
         heartbeatTimer?.invalidate()
     }
     
-    func enableRebufferHeartbeat() {
-        self.rebufferHeartbeatTimer = DispatchWorkItem {
-            guard self.rebufferHeartbeatTimer != nil else {
+    func scheduleRebufferHeartbeat() {
+        self.rebufferHeartbeatTimer = DispatchWorkItem { [weak self] in
+            guard let self = self,
+                self.rebufferHeartbeatTimer != nil else {
                 return
             }
-            
             self.onHeartbeat()
             self.currentRebufferIntervalIndex = min(self.currentRebufferIntervalIndex + 1, self.rebufferHeartbeatInterval.count - 1)
-            self.rebufferHeartbeatQueue.asyncAfter(deadline: self.getRebufferDeadline(), execute: self.rebufferHeartbeatTimer!)
+            self.scheduleRebufferHeartbeat()
         }
         self.rebufferHeartbeatQueue.asyncAfter(deadline: getRebufferDeadline(), execute: self.rebufferHeartbeatTimer!)
     }
 
     func disableRebufferHeartbeat() {
-        self.rebufferHeartbeatTimer?.cancel()
-        self.rebufferHeartbeatTimer = nil
-        self.currentRebufferIntervalIndex = 0
+        self.rebufferHeartbeatQueue.sync {
+            self.rebufferHeartbeatTimer?.cancel()
+            self.rebufferHeartbeatTimer = nil
+            self.currentRebufferIntervalIndex = 0
+        }
     }
     
     private func getRebufferDeadline() -> DispatchTime {
