@@ -16,3 +16,10 @@ target 'BitmovinAnalyticsCollector_tvOSExample' do
     source 'https://github.com/bitmovin/cocoapod-specs.git'
     pod 'BitmovinPlayer', '2.51.0'
 end
+
+target 'BitmovinAnalyticsCollector_Tests' do
+    use_frameworks!
+    platform :ios, '9.0'
+    pod 'BitmovinAnalyticsCollector', :path => '../', :testspecs => ['CoreTests', 'BitmovinPlayerTests', 'AVPlayerTests']
+    pod 'BitmovinPlayer', '2.51.0'
+end
