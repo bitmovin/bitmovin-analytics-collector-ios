@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "247ADA67256C102B00AF9A4F"
+               BlueprintIdentifier = "247ADA86256C149F00AF9A4F"
                BuildableName = "BitmovinAnalyticsCollector_Tests.xctest"
                BlueprintName = "BitmovinAnalyticsCollector_Tests"
                ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
@@ -51,46 +51,6 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "247ADA67256C102B00AF9A4F"
-               BuildableName = "BitmovinAnalyticsCollector_Tests.xctest"
-               BlueprintName = "BitmovinAnalyticsCollector_Tests"
-               ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4F62F37944ACFA709818CC4E26B835F7"
-               BuildableName = "BitmovinAnalyticsCollector-iOS-Unit-AVPlayerTests.xctest"
-               BlueprintName = "BitmovinAnalyticsCollector-iOS-Unit-AVPlayerTests"
-               ReferencedContainer = "container:Pods/Pods.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FA72E9AC891BE3D346F0DEE5927BCD16"
-               BuildableName = "BitmovinAnalyticsCollector-iOS-Unit-BitmovinPlayerTests.xctest"
-               BlueprintName = "BitmovinAnalyticsCollector-iOS-Unit-BitmovinPlayerTests"
-               ReferencedContainer = "container:Pods/Pods.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "268381CA7817FBA4BEF5D92F028CF76D"
-               BuildableName = "BitmovinAnalyticsCollector-iOS-Unit-CoreTests.xctest"
-               BlueprintName = "BitmovinAnalyticsCollector-iOS-Unit-CoreTests"
-               ReferencedContainer = "container:Pods/Pods.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
