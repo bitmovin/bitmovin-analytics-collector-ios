@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Added
+
+- [Internal] Added Unit Testing projects (AN-1873)
+
 ## 1.18.0
 
 ### Added
