@@ -51,7 +51,6 @@
 		011096142028C83E00A70D38 /* Pods_BitmovinAnalyticsCollector_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_BitmovinAnalyticsCollector_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C26BE32083ED7B001A0D76 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		01C26BE52083F14D001A0D76 /* BitmovinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitmovinViewController.swift; sourceTree = "<group>"; };
-		24472EA1256FE8BA00025B68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		247ADA87256C149F00AF9A4F /* BitmovinAnalyticsCollector_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BitmovinAnalyticsCollector_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D05B6C5E9270B2AAD7EDA6B /* Pods_BitmovinAnalyticsCollector_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50BDD2BA49B6C287A5B1F940 /* Pods-BitmovinAnalyticsCollector_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BitmovinAnalyticsCollector_Example/Pods-BitmovinAnalyticsCollector_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -122,7 +121,6 @@
 		247ADA88256C149F00AF9A4F /* BitmovinAnalyticsCollector Tests */ = {
 			isa = PBXGroup;
 			children = (
-				24472EA1256FE8BA00025B68 /* Info.plist */,
 			);
 			path = "BitmovinAnalyticsCollector Tests";
 			sourceTree = "<group>";
