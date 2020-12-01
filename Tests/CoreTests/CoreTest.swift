@@ -1,11 +1,3 @@
-//
-//  CoreTests_iOS.swift
-//  CoreTests-iOS
-//
-//  Created by Roland Grießer on 17.11.20.
-//  Copyright © 2020 CocoaPods. All rights reserved.
-//
-
 import XCTest
 @testable import BitmovinAnalyticsCollector
 
