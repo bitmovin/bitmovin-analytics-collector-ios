@@ -13,8 +13,8 @@ class CoreTests_iOS: XCTestCase {
 
     func testExample() throws {
         // This is an example of a functional test case
-        var test = Util.getHostNameAndPath(uriString: "asdf")
-        XCTAssertEqual(test.0, "1")
+//        var test = Util.getHostNameAndPath(uriString: "asdf")
+//        XCTAssertEqual(test.0, "1")
     }
 
     func testPerformanceExample() throws {
