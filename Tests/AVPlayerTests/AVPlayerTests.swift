@@ -40,7 +40,7 @@ class CoreTests_iOS: XCTestCase {
     }
     
     func testCollectorWontCallDetachPlayerMultipleTimesOnPlayAttemptFailed() {
-        let player = AVPlayerMock()
+        let player = AVPlayer()
         let collector = AVPlayerCollector(config: BitmovinAnalyticsConfig(key: ""))
         collector.attachPlayer(player: player)
         player.play()
