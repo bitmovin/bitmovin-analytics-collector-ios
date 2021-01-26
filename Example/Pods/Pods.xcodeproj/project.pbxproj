@@ -57,6 +57,7 @@
 		1BE73A6E4A9C91288671EEE7F060422D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23CC3180D75B78748CE5286AA85161A9 /* Foundation.framework */; };
 		1C5828BC829F1E733398D7FCA9FBFD5E /* BitmovinAnalyticsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CD213040B1259EDB708CC3BC46D92 /* BitmovinAnalyticsConfig.swift */; };
 		24B875E125C0603A00514DBB /* AVPlayerAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B875E025C0603A00514DBB /* AVPlayerAdapterTests.swift */; };
+		24B875FA25C063DF00514DBB /* BitmovinPlayerAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B875ED25C063D300514DBB /* BitmovinPlayerAdapterTests.swift */; };
 		25429BDF25E849589758FFA6E4B17D39 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D64629921959F9E7DBFD721255652DC /* Foundation.framework */; };
 		26353B7119856FB6312E50A290D9FD2B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23CC3180D75B78748CE5286AA85161A9 /* Foundation.framework */; };
 		271A0746501F9A649748765ECE0A472B /* SimpleEventDataDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F9F436F05E82B61B110C77EA8D46F /* SimpleEventDataDispatcher.swift */; };
@@ -261,6 +262,7 @@
 		23CC3180D75B78748CE5286AA85161A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		243288F1186362BE7053D468B1837818 /* BitmovinAnalyticsCollector-tvOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "BitmovinAnalyticsCollector-tvOS-prefix.pch"; path = "../BitmovinAnalyticsCollector-tvOS/BitmovinAnalyticsCollector-tvOS-prefix.pch"; sourceTree = "<group>"; };
 		24B875E025C0603A00514DBB /* AVPlayerAdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AVPlayerAdapterTests.swift; path = Tests/AVPlayerTests/AVPlayerAdapterTests.swift; sourceTree = "<group>"; };
+		24B875ED25C063D300514DBB /* BitmovinPlayerAdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BitmovinPlayerAdapterTests.swift; path = Tests/BitmovinPlayerTests/BitmovinPlayerAdapterTests.swift; sourceTree = "<group>"; };
 		250B938515D9060FBBD97FB57A0E3750 /* BitmovinAnalyticsCollector-iOS-Unit-AVPlayerTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "BitmovinAnalyticsCollector-iOS-Unit-AVPlayerTests-resources.sh"; sourceTree = "<group>"; };
 		28B8204AD042079E90EA4AA155311A39 /* BitmovinAnalyticsCollector-iOS-Unit-AVPlayerTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BitmovinAnalyticsCollector-iOS-Unit-AVPlayerTests-Info.plist"; sourceTree = "<group>"; };
 		2A5BDB1262794F2A26129E285D39FC86 /* StateMachineDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StateMachineDelegate.swift; sourceTree = "<group>"; };
@@ -546,6 +548,7 @@
 			isa = PBXGroup;
 			children = (
 				59C1E8E3EE60640979A1255FBB503F83 /* BitmovinPlayerTest.swift */,
+				24B875ED25C063D300514DBB /* BitmovinPlayerAdapterTests.swift */,
 			);
 			name = BitmovinPlayerTests;
 			sourceTree = "<group>";
@@ -1276,6 +1279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24B875FA25C063DF00514DBB /* BitmovinPlayerAdapterTests.swift in Sources */,
 				E65BC7A8E25E722D941BD316CE3373A8 /* BitmovinPlayerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
