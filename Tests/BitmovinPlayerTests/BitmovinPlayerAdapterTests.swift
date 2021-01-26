@@ -2,7 +2,7 @@ import XCTest
 import BitmovinPlayer
 @testable import BitmovinAnalyticsCollector
 
-class AVPlayerAdapterTests: XCTestCase {
+class BitmovinPlayerAdapterTests: XCTestCase {
     
     func testStopMonitoringWontFailOnMultipleCalls() throws {
         let playerConfig = PlayerConfiguration()
