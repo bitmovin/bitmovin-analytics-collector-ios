@@ -5,7 +5,7 @@ class CorePlayerAdapter: NSObject {
     internal var isPlayerReady: Bool
     private var isDestroyed = false
     
-    internal var delegate: PlayerAdapter!
+    internal var delegate: PlayerAdapter?
     
     init(stateMachine: StateMachine){
         self.stateMachine = stateMachine
@@ -22,7 +22,7 @@ class CorePlayerAdapter: NSObject {
             return
         }
         isDestroyed = true
-        self.delegate.stopMonitoring()
+        self.delegate?.stopMonitoring()
         
         if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
             stateMachine.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed)
