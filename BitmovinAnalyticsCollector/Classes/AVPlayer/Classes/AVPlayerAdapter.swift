@@ -40,9 +40,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
         isMonitoring = true
         
-        if(timeObserver != nil) {
-            player.removeTimeObserver(timeObserver!)
-        }
         timeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(0.2, preferredTimescale: Int32(NSEC_PER_SEC)), queue: .main) { [weak self] time in
             self?.onPlayerDidChangeTime(currentTime: time)
         }
@@ -67,6 +64,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         
         if(timeObserver != nil) {
             player.removeTimeObserver(timeObserver!)
+            timeObserver = nil
         }
         
         resetState()
