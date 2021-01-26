@@ -3,6 +3,7 @@ import Foundation
 class CorePlayerAdapter: NSObject {
     internal var stateMachine: StateMachine
     internal var isPlayerReady: Bool
+    private var isDestroyed = false
     
     internal var delegate: PlayerAdapter!
     
@@ -17,6 +18,10 @@ class CorePlayerAdapter: NSObject {
     }
     
     func destroy() {
+        guard !isDestroyed else {
+            return
+        }
+        isDestroyed = true
         self.delegate.stopMonitoring()
         
         if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
