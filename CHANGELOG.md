@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - [Internal] Added Unit Testing projects (AN-1873)
 
+### Fixed
+
+- In case of a startup failure or rebuffer timeout, the collector tried to recursively detach the player, which resulted in a collector crash
+
 ## 1.18.0
 
 ### Added
