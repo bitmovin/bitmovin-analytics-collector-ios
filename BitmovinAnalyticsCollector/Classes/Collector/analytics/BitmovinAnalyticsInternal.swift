@@ -17,6 +17,7 @@ public class BitmovinAnalyticsInternal: NSObject {
     internal var adAnalytics: BitmovinAdAnalytics?
     internal var adAdapter: AdAdapter?
     internal var didSendDrmLoadTime = false
+    private var isPlayerAttached = false
 
     internal init(config: BitmovinAnalyticsConfig) {
         self.config = config
@@ -42,6 +43,10 @@ public class BitmovinAnalyticsInternal: NSObject {
      * Detach the current player that is being used with Bitmovin Analytics.
      */
     @objc public func detachPlayer() {
+        guard isPlayerAttached else {
+            return
+        }
+        isPlayerAttached = false
         detachAd();
         adapter?.destroy()
         eventDataDispatcher.disable()
@@ -50,6 +55,10 @@ public class BitmovinAnalyticsInternal: NSObject {
     }
 
     internal func attach(adapter: PlayerAdapter, autoplay: Bool) {
+        if isPlayerAttached {
+            detachPlayer()
+        }
+        isPlayerAttached = true
         stateMachine.delegate = self
         eventDataDispatcher.enable()
         self.adapter = adapter
