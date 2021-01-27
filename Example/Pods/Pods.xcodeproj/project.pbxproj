@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = "BitmovinPlayer-iOS";
+			productName = "BitmovinPlayer-iOS";
 		};
 		664746F7CBD330DC541D0A1F81113952 /* BitmovinPlayer-tvOS */ = {
 			isa = PBXAggregateTarget;
@@ -24,6 +25,7 @@
 			dependencies = (
 			);
 			name = "BitmovinPlayer-tvOS";
+			productName = "BitmovinPlayer-tvOS";
 		};
 		7362DAB47E2EFA5452F30DD7E9830B56 /* GoogleAds-IMA-iOS-SDK */ = {
 			isa = PBXAggregateTarget;
@@ -33,6 +35,7 @@
 			dependencies = (
 			);
 			name = "GoogleAds-IMA-iOS-SDK";
+			productName = "GoogleAds-IMA-iOS-SDK";
 		};
 /* End PBXAggregateTarget section */
 
@@ -53,6 +56,8 @@
 		1933D941E67DF56B1B03F5184F179B87 /* BitmovinPlayerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA48D9715CBFD2BFD6D6456C31B7037B /* BitmovinPlayerUtil.swift */; };
 		1BE73A6E4A9C91288671EEE7F060422D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23CC3180D75B78748CE5286AA85161A9 /* Foundation.framework */; };
 		1C5828BC829F1E733398D7FCA9FBFD5E /* BitmovinAnalyticsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CD213040B1259EDB708CC3BC46D92 /* BitmovinAnalyticsConfig.swift */; };
+		24B875E125C0603A00514DBB /* AVPlayerAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B875E025C0603A00514DBB /* AVPlayerAdapterTests.swift */; };
+		24B875FA25C063DF00514DBB /* BitmovinPlayerAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B875ED25C063D300514DBB /* BitmovinPlayerAdapterTests.swift */; };
 		25429BDF25E849589758FFA6E4B17D39 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D64629921959F9E7DBFD721255652DC /* Foundation.framework */; };
 		26353B7119856FB6312E50A290D9FD2B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23CC3180D75B78748CE5286AA85161A9 /* Foundation.framework */; };
 		271A0746501F9A649748765ECE0A472B /* SimpleEventDataDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F9F436F05E82B61B110C77EA8D46F /* SimpleEventDataDispatcher.swift */; };
@@ -256,6 +261,8 @@
 		1FBDCF3111B2B144B1063FA247A39BD1 /* Pods-BitmovinAnalyticsCollector_tvOSExample-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BitmovinAnalyticsCollector_tvOSExample-frameworks.sh"; sourceTree = "<group>"; };
 		23CC3180D75B78748CE5286AA85161A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		243288F1186362BE7053D468B1837818 /* BitmovinAnalyticsCollector-tvOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "BitmovinAnalyticsCollector-tvOS-prefix.pch"; path = "../BitmovinAnalyticsCollector-tvOS/BitmovinAnalyticsCollector-tvOS-prefix.pch"; sourceTree = "<group>"; };
+		24B875E025C0603A00514DBB /* AVPlayerAdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AVPlayerAdapterTests.swift; path = Tests/AVPlayerTests/AVPlayerAdapterTests.swift; sourceTree = "<group>"; };
+		24B875ED25C063D300514DBB /* BitmovinPlayerAdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BitmovinPlayerAdapterTests.swift; path = Tests/BitmovinPlayerTests/BitmovinPlayerAdapterTests.swift; sourceTree = "<group>"; };
 		250B938515D9060FBBD97FB57A0E3750 /* BitmovinAnalyticsCollector-iOS-Unit-AVPlayerTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "BitmovinAnalyticsCollector-iOS-Unit-AVPlayerTests-resources.sh"; sourceTree = "<group>"; };
 		28B8204AD042079E90EA4AA155311A39 /* BitmovinAnalyticsCollector-iOS-Unit-AVPlayerTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BitmovinAnalyticsCollector-iOS-Unit-AVPlayerTests-Info.plist"; sourceTree = "<group>"; };
 		2A5BDB1262794F2A26129E285D39FC86 /* StateMachineDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StateMachineDelegate.swift; sourceTree = "<group>"; };
@@ -275,28 +282,28 @@
 		4209F4A30237454E15EB10F52742738E /* BitmovinAnalyticsCollector-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "BitmovinAnalyticsCollector-iOS.modulemap"; sourceTree = "<group>"; };
 		4BD7DDF3EBC1A363BE785F1BC87792C1 /* Pods-BitmovinAnalyticsCollector_tvOSExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BitmovinAnalyticsCollector_tvOSExample.debug.xcconfig"; sourceTree = "<group>"; };
 		4C90EC9F3D81A003FF15F9EEA34855AC /* Pods-BitmovinAnalyticsCollector_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BitmovinAnalyticsCollector_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		4F18A5BA33B17E29266FFBB5A4F0D340 /* Pods_BitmovinAnalyticsCollector_tvOSExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_BitmovinAnalyticsCollector_tvOSExample.framework; path = "Pods-BitmovinAnalyticsCollector_tvOSExample.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F18A5BA33B17E29266FFBB5A4F0D340 /* Pods_BitmovinAnalyticsCollector_tvOSExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_tvOSExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5331D98DEA642FF3CA4F4F0BDC086B08 /* Pods-BitmovinAnalyticsCollector_tvOSExample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BitmovinAnalyticsCollector_tvOSExample-acknowledgements.markdown"; sourceTree = "<group>"; };
 		5908559F1AB7470624D0BEAB50DD1EA8 /* Pods-BitmovinAnalyticsCollector_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BitmovinAnalyticsCollector_Example-dummy.m"; sourceTree = "<group>"; };
 		5977CEB98EEEB845FDC170414E4FED2D /* BitmovinAnalyticsCollector-iOS-Unit-CoreTests */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "BitmovinAnalyticsCollector-iOS-Unit-CoreTests"; path = "BitmovinAnalyticsCollector-iOS-Unit-CoreTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		59C1E8E3EE60640979A1255FBB503F83 /* BitmovinPlayerTest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BitmovinPlayerTest.swift; path = Tests/BitmovinPlayerTests/BitmovinPlayerTest.swift; sourceTree = "<group>"; };
 		5B55748DEE269E65D37412BBE8162EA5 /* BitmovinAnalyticsCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BitmovinAnalyticsCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5BF626844103F05799C362E2048D0E52 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		5BF626844103F05799C362E2048D0E52 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5F9008D6E691BA6DAB19F11701889B74 /* PlayerAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PlayerAdapter.swift; sourceTree = "<group>"; };
 		60FBAA2F503990F374862403502E3A3D /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleInteractiveMediaAds.framework; sourceTree = "<group>"; };
 		62F6192C98FCFACF83F7187F76E07E3E /* Pods-BitmovinAnalyticsCollector_tvOSExample-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BitmovinAnalyticsCollector_tvOSExample-umbrella.h"; sourceTree = "<group>"; };
-		63726271E5FBA4EDBFBCF048BCF6F24D /* Pods_BitmovinAnalyticsCollector_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_BitmovinAnalyticsCollector_Tests.framework; path = "Pods-BitmovinAnalyticsCollector_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		63726271E5FBA4EDBFBCF048BCF6F24D /* Pods_BitmovinAnalyticsCollector_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B4BCEE31A4DBE4A5A3B06890898D79 /* LicenseCall.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LicenseCall.swift; sourceTree = "<group>"; };
 		6604F974BF1211175273B14F9BE0EC13 /* StateMachine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		67499DFF3FE06F699141BCA4E51984F5 /* Pods-BitmovinAnalyticsCollector_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BitmovinAnalyticsCollector_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		6CDECEDFEC4D23AD4639D49B61158588 /* BitmovinAnalyticsCollector-iOS-Unit-CoreTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "BitmovinAnalyticsCollector-iOS-Unit-CoreTests-resources.sh"; sourceTree = "<group>"; };
 		72BE19923973605C274816C6E23BD630 /* BitmovinAnalyticsCollector-iOS-Unit-CoreTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "BitmovinAnalyticsCollector-iOS-Unit-CoreTests-frameworks.sh"; sourceTree = "<group>"; };
-		736519D0B36D57818DC1D5ABEA44F83C /* BitmovinAnalyticsCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BitmovinAnalyticsCollector.framework; path = "BitmovinAnalyticsCollector-tvOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		79542E024B13B267980C9DEB80B00393 /* BitmovinAnalyticsCollector.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = BitmovinAnalyticsCollector.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		736519D0B36D57818DC1D5ABEA44F83C /* BitmovinAnalyticsCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BitmovinAnalyticsCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		79542E024B13B267980C9DEB80B00393 /* BitmovinAnalyticsCollector.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = BitmovinAnalyticsCollector.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		7BB319F2859F03D8F7D959F7257E6E18 /* Pods-BitmovinAnalyticsCollector_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-BitmovinAnalyticsCollector_Tests.modulemap"; sourceTree = "<group>"; };
 		7C8CF7C869A74CBDFA43AA8F6B1A91D3 /* Pods-BitmovinAnalyticsCollector_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-BitmovinAnalyticsCollector_Example.modulemap"; sourceTree = "<group>"; };
 		7C9330D7F67EC8F7B8DACDE6D104F8C5 /* AnalyticsAd.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnalyticsAd.swift; sourceTree = "<group>"; };
-		7D4DD46638028F39C0A2DB43A3BB0119 /* BitmovinAnalyticsCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BitmovinAnalyticsCollector.framework; path = "BitmovinAnalyticsCollector-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D4DD46638028F39C0A2DB43A3BB0119 /* BitmovinAnalyticsCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BitmovinAnalyticsCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		805EC0154E56EADF814F08720AA26085 /* Pods-BitmovinAnalyticsCollector_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BitmovinAnalyticsCollector_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		8872E4F3613CB35E601259739B62417D /* BitmovinPlayer-tvOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "BitmovinPlayer-tvOS.xcconfig"; path = "../BitmovinPlayer-tvOS/BitmovinPlayer-tvOS.xcconfig"; sourceTree = "<group>"; };
 		8B30F7D7F0A2CCD1B5329E0D0DE1838B /* BitmovinAnalyticsCollector-iOS-Unit-AVPlayerTests-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BitmovinAnalyticsCollector-iOS-Unit-AVPlayerTests-prefix.pch"; sourceTree = "<group>"; };
@@ -307,7 +314,7 @@
 		957918B72536C1741EB81986DCCF4024 /* ErrorHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ErrorHandler.swift; path = BitmovinAnalyticsCollector/Classes/AVPlayer/Classes/ErrorHandler.swift; sourceTree = "<group>"; };
 		9A92E534DED6BAE36E6984A5596759A1 /* AnalyticsAdBreak.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnalyticsAdBreak.swift; sourceTree = "<group>"; };
 		9B0739A656AE6739CBC035C2B38D267B /* RebufferingTimeoutHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RebufferingTimeoutHandler.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DE6AAAB3B121622DC6E586679555D99 /* StreamType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StreamType.swift; sourceTree = "<group>"; };
 		9FC3D64EA9C01DEAC442B5126FFEFD5F /* BitmovinAnalyticsInternal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BitmovinAnalyticsInternal.swift; sourceTree = "<group>"; };
 		A1CDCEF15EAAB8C659EDEAD07A725F14 /* DrmType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DrmType.swift; sourceTree = "<group>"; };
@@ -328,7 +335,7 @@
 		C1870CDAD071A48139D0433FFC1103FB /* BitmovinAnalyticsCollector-iOS.unit-bitmovinplayertests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "BitmovinAnalyticsCollector-iOS.unit-bitmovinplayertests.xcconfig"; sourceTree = "<group>"; };
 		C32037B70B3E435C0D7119581A0C6D44 /* BitmovinAnalyticsCollector-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BitmovinAnalyticsCollector-iOS-prefix.pch"; sourceTree = "<group>"; };
 		C641F3FF4945CA62200C58FF4594A4EC /* VideoStartFailedReason.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoStartFailedReason.swift; sourceTree = "<group>"; };
-		C927E2EB250D4670F6929997E53C40D8 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		C927E2EB250D4670F6929997E53C40D8 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		CA48D9715CBFD2BFD6D6456C31B7037B /* BitmovinPlayerUtil.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BitmovinPlayerUtil.swift; sourceTree = "<group>"; };
 		CB3C57220907CE8199F81E808198DBA1 /* AVPlayerAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AVPlayerAdapter.swift; path = BitmovinAnalyticsCollector/Classes/AVPlayer/Classes/AVPlayerAdapter.swift; sourceTree = "<group>"; };
 		CE003C66F04F3E830DAB1B5B5D534A2A /* Pods-BitmovinAnalyticsCollector_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BitmovinAnalyticsCollector_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -342,7 +349,7 @@
 		E0ED97240B42D78A8D48382217BBCD24 /* DrmPerformanceInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DrmPerformanceInfo.swift; sourceTree = "<group>"; };
 		E40A1F19973416A201D2E625B66A42F8 /* Pods-BitmovinAnalyticsCollector_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BitmovinAnalyticsCollector_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		E561C142250E9A695C397AF1DBC54229 /* BitmovinAnalyticsCollector-iOS-Unit-CoreTests-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BitmovinAnalyticsCollector-iOS-Unit-CoreTests-prefix.pch"; sourceTree = "<group>"; };
-		E63591D7422A4A222E5DACE55D967405 /* Pods_BitmovinAnalyticsCollector_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_BitmovinAnalyticsCollector_Example.framework; path = "Pods-BitmovinAnalyticsCollector_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E63591D7422A4A222E5DACE55D967405 /* Pods_BitmovinAnalyticsCollector_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7CCF71CD21347B68FAD1DDCB0C3EA9B /* CdnProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CdnProvider.swift; sourceTree = "<group>"; };
 		E83A6252EADDA1A632710680DA5CAF55 /* BitmovinAnalyticsCollector-tvOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = "BitmovinAnalyticsCollector-tvOS.modulemap"; path = "../BitmovinAnalyticsCollector-tvOS/BitmovinAnalyticsCollector-tvOS.modulemap"; sourceTree = "<group>"; };
 		E9674E29D799F67F66181F833386CF53 /* AdModelMapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AdModelMapper.swift; sourceTree = "<group>"; };
@@ -444,7 +451,6 @@
 				49825B286F1BF6C281891ABD5898F70E /* Frameworks */,
 				5464FE59F9DEC97CB570F641D7958264 /* Support Files */,
 			);
-			name = "GoogleAds-IMA-iOS-SDK";
 			path = "GoogleAds-IMA-iOS-SDK";
 			sourceTree = "<group>";
 		};
@@ -535,7 +541,6 @@
 				3634DB48D896C28617293D108CB46BCF /* QualityChangeCounter.swift */,
 				9B0739A656AE6739CBC035C2B38D267B /* RebufferingTimeoutHandler.swift */,
 			);
-			name = util;
 			path = util;
 			sourceTree = "<group>";
 		};
@@ -543,6 +548,7 @@
 			isa = PBXGroup;
 			children = (
 				59C1E8E3EE60640979A1255FBB503F83 /* BitmovinPlayerTest.swift */,
+				24B875ED25C063D300514DBB /* BitmovinPlayerAdapterTests.swift */,
 			);
 			name = BitmovinPlayerTests;
 			sourceTree = "<group>";
@@ -771,7 +777,6 @@
 				745FE533B1DA4464C26055CA52357C93 /* Frameworks */,
 				8439A200AE4CB5E872C30806AC340AF0 /* Support Files */,
 			);
-			name = BitmovinPlayer;
 			path = BitmovinPlayer;
 			sourceTree = "<group>";
 		};
@@ -840,6 +845,7 @@
 			isa = PBXGroup;
 			children = (
 				A4AF087DC285BC0D3B6099682F8A1009 /* AVPlayerTests.swift */,
+				24B875E025C0603A00514DBB /* AVPlayerAdapterTests.swift */,
 			);
 			name = AVPlayerTests;
 			sourceTree = "<group>";
@@ -1273,6 +1279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24B875FA25C063DF00514DBB /* BitmovinPlayerAdapterTests.swift in Sources */,
 				E65BC7A8E25E722D941BD316CE3373A8 /* BitmovinPlayerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1390,6 +1397,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B82FD686DD64EFE62AFA0900A52DDE6D /* AVPlayerTests.swift in Sources */,
+				24B875E125C0603A00514DBB /* AVPlayerAdapterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1967,8 +1975,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 				TVOS_DEPLOYMENT_TARGET = 9.0;

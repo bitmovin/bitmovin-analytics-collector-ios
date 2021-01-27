@@ -16,6 +16,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var lastTime: CMTime?
     private var timeObserver: Any?
     private let errorHandler: ErrorHandler
+    private var isMonitoring = false
     
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
@@ -34,9 +35,11 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
     
     public func startMonitoring() {
-        if(timeObserver != nil) {
-            player.removeTimeObserver(timeObserver!)
+        if isMonitoring  {
+            stopMonitoring()
         }
+        isMonitoring = true
+        
         timeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(0.2, preferredTimescale: Int32(NSEC_PER_SEC)), queue: .main) { [weak self] time in
             self?.onPlayerDidChangeTime(currentTime: time)
         }
@@ -47,6 +50,11 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
 
     public func stopMonitoring() {
+        guard isMonitoring else {
+            return
+        }
+        isMonitoring = false
+        
         if let playerItem = player.currentItem {
             stopMonitoringPlayerItem(playerItem: playerItem)
         }
@@ -56,6 +64,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         
         if(timeObserver != nil) {
             player.removeTimeObserver(timeObserver!)
+            timeObserver = nil
         }
         
         resetState()

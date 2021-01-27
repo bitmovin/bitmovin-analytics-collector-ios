@@ -9,6 +9,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var isSeeking: Bool
     /// DRM certificate download time in milliseconds
     private var drmCertificateDownloadTime: Int64?
+    private var isMonitoring = false
 
     init(player: Player, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
@@ -107,10 +108,17 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
 
     func startMonitoring() {
+        if isMonitoring {
+            stopMonitoring()
+        }
+        isMonitoring = true
         player.add(listener: self)
     }
 
     func stopMonitoring() {
+        guard isMonitoring else {
+            return
+        }
         player.remove(listener: self)
         isStalling = false
     }
