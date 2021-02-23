@@ -5,7 +5,7 @@ public class RebufferingTimeoutHandler {
     private static var kAnalyticsRebufferingTimeoutSeconds: TimeInterval = 2 * 60
     
     private var rebufferingTimeoutWorkItem: DispatchWorkItem?
-    private var stateMachine: StateMachine?
+    private weak var stateMachine: StateMachine?
     
     func initialise(stateMachine: StateMachine) {
         self.stateMachine = stateMachine
