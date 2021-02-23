@@ -49,7 +49,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         addObserver(self, forKeyPath: #keyPath(player.status), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
     }
 
-    public func stopMonitoring() {
+    override public func stopMonitoring() {
         guard isMonitoring else {
             return
         }
