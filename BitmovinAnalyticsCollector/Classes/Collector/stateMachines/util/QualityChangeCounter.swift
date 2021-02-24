@@ -11,7 +11,8 @@ public class QualityChangeCounter {
     
     func startInterval() {
         resetInterval()
-        qualityResetWorkItem = DispatchWorkItem {
+        qualityResetWorkItem = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
             self.qualityChangeCounter = 0
         }
         queue.asyncAfter(deadline: .now() + QualityChangeCounter.kAnalyticsQualityChangeResetIntervalSeconds, execute: qualityResetWorkItem!)
