@@ -11,7 +11,7 @@ import BitmovinPlayer
 import BitmovinAnalyticsCollector
 
 class ViewController: UIViewController {
-    private var player: BitmovinPlayer?
+    private var player: Player?
     private var analyticsCollector: BitmovinAnalytics
     private var config: BitmovinAnalyticsConfig
 
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
             try config.setSourceItem(url: streamUrl)
             config.playbackConfiguration = playbackConfig
             // Create player based on player configuration
-            let player = BitmovinPlayer(configuration: config)
+            let player = Player(configuration: config)
             analyticsCollector.attachBitmovinPlayer(player: player)
 
             // Create player view and pass the player instance to it

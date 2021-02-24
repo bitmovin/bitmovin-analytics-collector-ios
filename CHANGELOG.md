@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Fixed
+
+- tvOS example project did not work anymore due to naming change of `BitmovinPlayer` to `Player` in `2.51.0`
+
 ## 1.18.1
 
 ### Added
