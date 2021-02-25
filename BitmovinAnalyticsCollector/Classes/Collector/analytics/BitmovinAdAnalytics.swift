@@ -205,10 +205,9 @@ public class BitmovinAdAnalytics {
             adEventData.setAdSample(adSample: adSample)
         }
         
-        let moduleInfo = analytics.adAdapter?.getModuleInformation()
-        if (moduleInfo != nil) {
-            adEventData.adModule = moduleInfo?.name
-            adEventData.adModuleVersion = moduleInfo?.version
+        if let moduleInfo = analytics.adAdapter?.getModuleInformation() {
+            adEventData.adModule = moduleInfo.name
+            adEventData.adModuleVersion = moduleInfo.version
         }
         
         if let manifestDownloadTime = getAdManifestDownloadTime(adBreak: adBreak){
