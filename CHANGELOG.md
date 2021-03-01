@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+## 1.18.2
+
 ### Fixed
 
 - A strong reference to the player adapter prevented the collector from being removed from memory after calling `detachPlayer` (AN-2136)
