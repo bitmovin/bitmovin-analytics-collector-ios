@@ -25,7 +25,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.drmPerformanceInfo = nil
         self.errorHandler = ErrorHandler()
         super.init(stateMachine: stateMachine)
-        self.delegate = self
         startMonitoring()
     }
 
@@ -49,7 +48,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         addObserver(self, forKeyPath: #keyPath(player.status), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
     }
 
-    public func stopMonitoring() {
+    override public func stopMonitoring() {
         guard isMonitoring else {
             return
         }

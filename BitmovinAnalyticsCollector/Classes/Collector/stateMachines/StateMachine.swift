@@ -137,7 +137,8 @@ public class StateMachine {
         }
         clearVideoStartFailedTimer()
         
-        videoStartFailedWorkItem = DispatchWorkItem {
+        videoStartFailedWorkItem = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
             self.errorData = ErrorData.ANALYTICS_VIDEOSTART_TIMEOUT_REACHED
             self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout)
         }

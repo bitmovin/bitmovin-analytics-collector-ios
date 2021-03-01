@@ -17,7 +17,6 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.isStalling = false
         self.isSeeking = false
         super.init(stateMachine: stateMachine)
-        self.delegate = self
         startMonitoring()
     }
 
@@ -115,7 +114,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         player.add(listener: self)
     }
 
-    func stopMonitoring() {
+    override func stopMonitoring() {
         guard isMonitoring else {
             return
         }
