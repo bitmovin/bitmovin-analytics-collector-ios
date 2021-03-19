@@ -4,7 +4,7 @@ import BitmovinPlayer
 class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
     private var player: Player
-    private var drmPerformanceInfo: DrmPerformanceInfo?
+    internal var drmPerformanceInfo: DrmPerformanceInfo?
     private var isStalling: Bool
     private var isSeeking: Bool
     /// DRM certificate download time in milliseconds

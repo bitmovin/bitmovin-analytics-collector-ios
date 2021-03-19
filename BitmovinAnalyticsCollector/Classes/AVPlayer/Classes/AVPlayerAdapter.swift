@@ -6,7 +6,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     static let maxSeekOperation = 10_000
     private static var playerKVOContext = 0
     private let config: BitmovinAnalyticsConfig
-    private var drmPerformanceInfo: DrmPerformanceInfo?
     private var lastBitrate: Double = 0
     @objc private var player: AVPlayer
     let lockQueue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
@@ -14,6 +13,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var isPlayingEmitted: Bool = false
     private var sendTimeUpdates = false
     private var lastTime: CMTime?
+    
+    internal var drmPerformanceInfo: DrmPerformanceInfo?
+    
     private var timeObserver: Any?
     private let errorHandler: ErrorHandler
     private var isMonitoring = false
@@ -22,15 +24,16 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.player = player
         self.config = config
         lastBitrate = 0
-        self.drmPerformanceInfo = nil
         self.errorHandler = ErrorHandler()
         super.init(stateMachine: stateMachine)
+        resetState()
         startMonitoring()
     }
 
     private func resetState() {
         isPlayingEmitted = false
         lastBitrate = 0
+        drmPerformanceInfo = nil
     }
     
     public func startMonitoring() {
@@ -71,9 +74,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
     private func updateDrmPerformanceInfo(_ playerItem: AVPlayerItem) {
         if playerItem.asset.hasProtectedContent {
-            self.drmPerformanceInfo = DrmPerformanceInfo(drmType: DrmType.fairplay)
+            drmPerformanceInfo = DrmPerformanceInfo(drmType: DrmType.fairplay)
         } else {
-            self.drmPerformanceInfo = nil
+            drmPerformanceInfo = nil
         }
     }
 
@@ -309,10 +312,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         if player.volume == 0 {
             eventData.isMuted = true
         }
-    }
-
-    func getDrmPerformanceInfo() -> DrmPerformanceInfo? {
-        return self.drmPerformanceInfo
     }
 
     var currentTime: CMTime? {
