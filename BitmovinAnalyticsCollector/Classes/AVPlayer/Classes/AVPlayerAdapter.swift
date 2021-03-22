@@ -4,11 +4,14 @@ import Foundation
 class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     static let timeJumpedDuplicateTolerance = 1_000
     static let maxSeekOperation = 10_000
+    
     private static var playerKVOContext = 0
     private let config: BitmovinAnalyticsConfig
     @objc private var player: AVPlayer
     let lockQueue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
     var statusObserver: NSKeyValueObservation?
+    
+    private var isMonitoring = false
     private var isPlaying = false
     private var currentVideoBitrate: Double = 0
     private var previousTime: CMTime?
@@ -17,7 +20,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     
     private var timeObserver: Any?
     private let errorHandler: ErrorHandler
-    private var isMonitoring = false
     
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
