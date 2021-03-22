@@ -69,6 +69,7 @@ class AVFoundationViewController: UIViewController {
 
     @IBAction func createPlayer() {
         addObserver(self, forKeyPath: #keyPath(AVFoundationViewController.player.currentItem.duration), options: [.new, .initial], context: &AVFoundationViewController.playerViewControllerKVOContext)
+        player.isMuted = true
         let asset = AVURLAsset(url: url!, options: nil)
         player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
         player.play()
