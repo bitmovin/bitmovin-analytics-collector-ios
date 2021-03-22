@@ -6,11 +6,11 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     static let maxSeekOperation = 10_000
     private static var playerKVOContext = 0
     private let config: BitmovinAnalyticsConfig
-    private var lastBitrate: Double = 0
     @objc private var player: AVPlayer
     let lockQueue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
     var statusObserver: NSKeyValueObservation?
     private var isPlaying = false
+    private var currentVideoBitrate: Double = 0
     private var previousTime: CMTime?
     
     internal var drmPerformanceInfo: DrmPerformanceInfo?
@@ -22,7 +22,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.config = config
-        lastBitrate = 0
         self.errorHandler = ErrorHandler()
         super.init(stateMachine: stateMachine)
         resetState()
@@ -30,9 +29,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
 
     private func resetState() {
-        isPlayingEmitted = false
-        lastBitrate = 0
         isPlaying = false
+        currentVideoBitrate = 0
         previousTime = nil
         drmPerformanceInfo = nil
     }
@@ -156,13 +154,13 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         guard let item = notification.object as? AVPlayerItem, let event = item.accessLog()?.events.last else {
             return
         }
-        if lastBitrate == 0 {
-            lastBitrate = event.indicatedBitrate
-        } else if lastBitrate != event.indicatedBitrate {
+        if currentVideoBitrate == 0 {
+            currentVideoBitrate = event.indicatedBitrate
+        } else if currentVideoBitrate != event.indicatedBitrate {
             let previousState = stateMachine.state
             stateMachine.videoQualityChange(time: player.currentTime())
             stateMachine.transitionState(destinationState: previousState, time: player.currentTime())
-            lastBitrate = event.indicatedBitrate
+            currentVideoBitrate = event.indicatedBitrate
         }
     }
 
@@ -283,7 +281,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
 
         // video bitrate
-        eventData.videoBitrate = lastBitrate
+        eventData.videoBitrate = currentVideoBitrate
 
         // videoPlaybackWidth
         if let width = player.currentItem?.presentationSize.width {
