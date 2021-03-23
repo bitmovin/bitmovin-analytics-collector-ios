@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Fixed
+- the collector didn't transitioned from `buffering` back to `playing`
+
 ## 1.18.2
 
 ### Fixed
