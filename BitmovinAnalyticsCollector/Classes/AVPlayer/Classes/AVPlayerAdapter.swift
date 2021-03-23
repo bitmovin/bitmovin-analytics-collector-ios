@@ -29,6 +29,10 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         resetState()
         startMonitoring()
     }
+    
+    deinit {
+        self.destroy()
+    }
 
     private func resetState() {
         isPlaying = false
