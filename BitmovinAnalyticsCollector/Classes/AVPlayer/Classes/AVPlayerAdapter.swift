@@ -86,7 +86,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
 
     private func startMonitoringPlayerItem(playerItem: AVPlayerItem) {
-        // TODO reset the values accordingly for a new asset
         statusObserver = playerItem.observe(\.status) {[weak self] (item, _) in
             self?.playerItemStatusObserver(playerItem: item)
         }
@@ -110,11 +109,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         
         switch playerItem.status {
             case .readyToPlay:
-                print("ReadyToPlay. isPlaybackLikelyToKeepUp: \(playerItem.isPlaybackLikelyToKeepUp), isPlaybackBufferFull: \(playerItem.isPlaybackBufferFull), isPlaybackBufferEmpty: \(playerItem.isPlaybackBufferEmpty)")
                 isPlayerReady = true
                 lockQueue.sync {
                     if stateMachine.didStartPlayingVideo && stateMachine.potentialSeekStart > 0 && (timestamp - stateMachine.potentialSeekStart) <= AVPlayerAdapter.maxSeekOperation {
-                        print("seeking")
                         stateMachine.confirmSeek()
                         stateMachine.transitionState(destinationState: .seeking, time: player.currentTime())
                     }
@@ -153,7 +150,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
 
     @objc private func timeJumped(notification _: Notification) {
-        print("timeJumped")
         let timestamp = Date().timeIntervalSince1970Millis
         if (timestamp - stateMachine.potentialSeekStart) > AVPlayerAdapter.timeJumpedDuplicateTolerance {
             stateMachine.potentialSeekStart = timestamp
@@ -202,11 +198,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         let newRate = change?[NSKeyValueChangeKey.newKey] as? NSNumber ?? 0;
 
         if(newRate.floatValue == 0 && oldRate.floatValue != 0) {
-            print("IsPlaying: false")
             isPlaying = false
             stateMachine.pause(time: player.currentTime())
         } else if (newRate.floatValue != 0 && oldRate.floatValue == 0) {
-            print("IsPlaying: true")
             isPlaying = true
             stateMachine.play(time: player.currentTime())
         }

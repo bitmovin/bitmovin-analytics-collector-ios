@@ -40,7 +40,7 @@ class AVPlayerAdapterTests: XCTestCase {
 //        player.play()
 //        Thread.sleep(forTimeInterval: 20)
 //        player.seek(to: CMTimeMakeWithSeconds(0, preferredTimescale: 1))
-        adapter.destroy()
+//        adapter.destroy()
     }
     
     func testStopMonitoringWontFailOnMultipleCalls() throws {
