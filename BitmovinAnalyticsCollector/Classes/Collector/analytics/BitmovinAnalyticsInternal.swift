@@ -104,7 +104,7 @@ public class BitmovinAnalyticsInternal: NSObject {
         eventData.state = stateMachine.state.rawValue
         eventData.duration = duration
 
-        if !self.didSendDrmLoadTime,  let drmLoadTime = self.adapter?.getDrmPerformanceInfo()?.drmLoadTime {
+        if !self.didSendDrmLoadTime,  let drmLoadTime = self.adapter?.drmPerformanceInfo?.drmLoadTime {
             self.didSendDrmLoadTime = true
             eventData.drmLoadTime = drmLoadTime
         }

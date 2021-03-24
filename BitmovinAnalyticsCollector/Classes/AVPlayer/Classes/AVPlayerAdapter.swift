@@ -4,34 +4,41 @@ import Foundation
 class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     static let timeJumpedDuplicateTolerance = 1_000
     static let maxSeekOperation = 10_000
+    
     private static var playerKVOContext = 0
     private let config: BitmovinAnalyticsConfig
-    private var drmPerformanceInfo: DrmPerformanceInfo?
-    private var lastBitrate: Double = 0
     @objc private var player: AVPlayer
     let lockQueue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
     var statusObserver: NSKeyValueObservation?
-    private var isPlayingEmitted: Bool = false
-    private var sendTimeUpdates = false
-    private var lastTime: CMTime?
+    
+    private var isMonitoring = false
+    private var isPlaying = false
+    private var currentVideoBitrate: Double = 0
+    private var previousTime: CMTime?
+    
+    internal var drmPerformanceInfo: DrmPerformanceInfo?
+    
     private var timeObserver: Any?
     private let errorHandler: ErrorHandler
-    private var isMonitoring = false
     
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.config = config
-        lastBitrate = 0
-        self.drmPerformanceInfo = nil
         self.errorHandler = ErrorHandler()
         super.init(stateMachine: stateMachine)
-        self.delegate = self
+        resetState()
         startMonitoring()
+    }
+    
+    deinit {
+        self.destroy()
     }
 
     private func resetState() {
-        isPlayingEmitted = false
-        lastBitrate = 0
+        isPlaying = false
+        currentVideoBitrate = 0
+        previousTime = nil
+        drmPerformanceInfo = nil
     }
     
     public func startMonitoring() {
@@ -49,7 +56,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         addObserver(self, forKeyPath: #keyPath(player.status), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
     }
 
-    public func stopMonitoring() {
+    override public func stopMonitoring() {
         guard isMonitoring else {
             return
         }
@@ -72,9 +79,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
     private func updateDrmPerformanceInfo(_ playerItem: AVPlayerItem) {
         if playerItem.asset.hasProtectedContent {
-            self.drmPerformanceInfo = DrmPerformanceInfo(drmType: DrmType.fairplay)
+            drmPerformanceInfo = DrmPerformanceInfo(drmType: DrmType.fairplay)
         } else {
-            self.drmPerformanceInfo = nil
+            drmPerformanceInfo = nil
         }
     }
 
@@ -99,9 +106,10 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
     private func playerItemStatusObserver(playerItem: AVPlayerItem) {
         let timestamp = Date().timeIntervalSince1970Millis
+        
         switch playerItem.status {
             case .readyToPlay:
-                self.isPlayerReady = true
+                isPlayerReady = true
                 lockQueue.sync {
                     if stateMachine.didStartPlayingVideo && stateMachine.potentialSeekStart > 0 && (timestamp - stateMachine.potentialSeekStart) <= AVPlayerAdapter.maxSeekOperation {
                         stateMachine.confirmSeek()
@@ -153,13 +161,13 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         guard let item = notification.object as? AVPlayerItem, let event = item.accessLog()?.events.last else {
             return
         }
-        if lastBitrate == 0 {
-            lastBitrate = event.indicatedBitrate
-        } else if lastBitrate != event.indicatedBitrate {
+        if currentVideoBitrate == 0 {
+            currentVideoBitrate = event.indicatedBitrate
+        } else if currentVideoBitrate != event.indicatedBitrate {
             let previousState = stateMachine.state
             stateMachine.videoQualityChange(time: player.currentTime())
             stateMachine.transitionState(destinationState: previousState, time: player.currentTime())
-            lastBitrate = event.indicatedBitrate
+            currentVideoBitrate = event.indicatedBitrate
         }
     }
 
@@ -188,36 +196,29 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private func onRateChanged(_ change: [NSKeyValueChangeKey: Any]?) {
         let oldRate = change?[NSKeyValueChangeKey.oldKey] as? NSNumber ?? 0;
         let newRate = change?[NSKeyValueChangeKey.newKey] as? NSNumber ?? 0;
-        
-        if(newRate.floatValue == 0 && oldRate.floatValue > 0) {
-            isPlayingEmitted = false
-            sendTimeUpdates = false
+
+        if(newRate.floatValue == 0 && oldRate.floatValue != 0) {
+            isPlaying = false
             stateMachine.pause(time: player.currentTime())
-        } else if(newRate.floatValue > 0 && oldRate.floatValue == 0) {
-            sendTimeUpdates = true
+        } else if (newRate.floatValue != 0 && oldRate.floatValue == 0) {
+            isPlaying = true
             stateMachine.play(time: player.currentTime())
         }
     }
     
     private func onPlayerDidChangeTime(currentTime: CMTime) {
-        if(currentTime == lastTime || !sendTimeUpdates) {
+        if currentTime == previousTime || !isPlaying {
             return
         }
-        lastTime = currentTime
-        onTimeChanged()
-    }
-    
-    private func onTimeChanged() {
-        emitPlayingEventIfNotYetEmitted()
+        previousTime = currentTime
+        emitPlayingEvent()
     }
 
-    private func emitPlayingEventIfNotYetEmitted() {
-        if (!(player.currentItem?.isPlaybackLikelyToKeepUp ?? false) || isPlayingEmitted) {
+    private func emitPlayingEvent() {
+        if !isPlaying || player.currentItem?.isPlaybackLikelyToKeepUp == false {
             return;
         }
-        
         stateMachine.playing(time: player.currentTime())
-        isPlayingEmitted = true;
     }
 
     public func createEventData() -> EventData {
@@ -287,7 +288,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
 
         // video bitrate
-        eventData.videoBitrate = lastBitrate
+        eventData.videoBitrate = currentVideoBitrate
 
         // videoPlaybackWidth
         if let width = player.currentItem?.presentationSize.width {
@@ -310,10 +311,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         if player.volume == 0 {
             eventData.isMuted = true
         }
-    }
-
-    func getDrmPerformanceInfo() -> DrmPerformanceInfo? {
-        return self.drmPerformanceInfo
     }
 
     var currentTime: CMTime? {

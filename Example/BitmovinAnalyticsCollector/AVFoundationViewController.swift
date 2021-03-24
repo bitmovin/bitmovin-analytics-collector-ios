@@ -69,14 +69,17 @@ class AVFoundationViewController: UIViewController {
 
     @IBAction func createPlayer() {
         addObserver(self, forKeyPath: #keyPath(AVFoundationViewController.player.currentItem.duration), options: [.new, .initial], context: &AVFoundationViewController.playerViewControllerKVOContext)
+        player.isMuted = true
         let asset = AVURLAsset(url: url!, options: nil)
         player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
         player.play()
         let interval = CMTimeMake(value: 1, timescale: 1)
-        timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { [unowned self] time in
-            let position = Float(CMTimeGetSeconds(time))
-            self.slider.value = Float(position)
-            self.position.text = self.createTimeString(time: position)
+        timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { [weak self] time in
+            if let this = self {
+                let position = Float(CMTimeGetSeconds(time))
+                this.slider.value = Float(position)
+                this.position.text = this.createTimeString(time: position)
+            }
         }
     }
 

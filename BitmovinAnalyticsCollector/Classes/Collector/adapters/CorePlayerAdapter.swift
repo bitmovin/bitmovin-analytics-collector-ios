@@ -5,8 +5,6 @@ class CorePlayerAdapter: NSObject {
     internal var isPlayerReady: Bool
     private var isDestroyed = false
     
-    internal var delegate: PlayerAdapter?
-    
     init(stateMachine: StateMachine){
         self.stateMachine = stateMachine
         self.isPlayerReady = false
@@ -17,12 +15,14 @@ class CorePlayerAdapter: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForegroundNotification(notification:)), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
+    func stopMonitoring() {}
+    
     func destroy() {
         guard !isDestroyed else {
             return
         }
         isDestroyed = true
-        self.delegate?.stopMonitoring()
+        stopMonitoring()
         
         if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
             stateMachine.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed)

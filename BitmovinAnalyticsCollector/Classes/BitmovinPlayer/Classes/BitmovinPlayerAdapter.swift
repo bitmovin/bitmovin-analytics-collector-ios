@@ -4,7 +4,7 @@ import BitmovinPlayer
 class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
     private var player: Player
-    private var drmPerformanceInfo: DrmPerformanceInfo?
+    internal var drmPerformanceInfo: DrmPerformanceInfo?
     private var isStalling: Bool
     private var isSeeking: Bool
     /// DRM certificate download time in milliseconds
@@ -17,7 +17,6 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.isStalling = false
         self.isSeeking = false
         super.init(stateMachine: stateMachine)
-        self.delegate = self
         startMonitoring()
     }
 
@@ -115,7 +114,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         player.add(listener: self)
     }
 
-    func stopMonitoring() {
+    override func stopMonitoring() {
         guard isMonitoring else {
             return
         }

@@ -2,7 +2,7 @@ import Foundation
 
 public class BitmovinAdAnalytics {
     
-    private var analytics: BitmovinAnalyticsInternal
+    private weak var analytics: BitmovinAnalyticsInternal?
     
     private var adPodPosition = 0
     private var adStartupTimestamp: TimeInterval? = nil
@@ -192,7 +192,8 @@ public class BitmovinAdAnalytics {
     }
     
     private func sendAnalyticsRequest(adBreak: AnalyticsAdBreak, adSample: AdSample? = nil) {
-        guard let adapter = self.analytics.adapter else {
+        guard let analytics = self.analytics,
+              let adapter = analytics.adapter else {
             return
         }
         
@@ -204,10 +205,9 @@ public class BitmovinAdAnalytics {
             adEventData.setAdSample(adSample: adSample)
         }
         
-        let moduleInfo = self.analytics.adAdapter?.getModuleInformation()
-        if (moduleInfo != nil) {
-            adEventData.adModule = moduleInfo?.name
-            adEventData.adModuleVersion = moduleInfo?.version
+        if let moduleInfo = analytics.adAdapter?.getModuleInformation() {
+            adEventData.adModule = moduleInfo.name
+            adEventData.adModuleVersion = moduleInfo.version
         }
         
         if let manifestDownloadTime = getAdManifestDownloadTime(adBreak: adBreak){
@@ -218,6 +218,6 @@ public class BitmovinAdAnalytics {
         adEventData.time = Date().timeIntervalSince1970Millis
         adEventData.adImpressionId = NSUUID().uuidString
         
-        self.analytics.sendAdEventData(adEventData: adEventData)
+        analytics.sendAdEventData(adEventData: adEventData)
     }
 }
