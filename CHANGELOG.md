@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Fixed
+- AVPlayer collector didn't correctly detect resuming of playback after a buffering event
+
 ## 1.18.2
 
 ### Fixed

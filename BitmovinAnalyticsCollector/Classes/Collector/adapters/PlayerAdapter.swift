@@ -6,6 +6,6 @@ protocol PlayerAdapter {
     func startMonitoring()
     func stopMonitoring()
     func destroy()
-    func getDrmPerformanceInfo() -> DrmPerformanceInfo?
+    var drmPerformanceInfo: DrmPerformanceInfo? { get }
     var currentTime: CMTime? { get }
 }

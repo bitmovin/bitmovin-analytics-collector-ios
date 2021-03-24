@@ -74,6 +74,7 @@ public class StateMachine {
         let performTransition = checkUnallowedTransitions(destinationState: destinationState)
 
         if performTransition {
+            print("[StateMachine] Transitioning from state \(state) to \(destinationState)")
             let timestamp = Date().timeIntervalSince1970Millis
             let previousState = state
             videoTimeEnd = time
