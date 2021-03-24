@@ -7,15 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
-### Fixed
-
-- tvOS example project did not work anymore due to naming change of `BitmovinPlayer` to `Player` in `2.51.0`
-
 ## 1.18.3
 
 ### Fixed
 
 - AVPlayer collector didn't correctly detect resuming of playback after a buffering event
+- tvOS example project did not work anymore due to naming change of `BitmovinPlayer` to `Player` in `2.51.0`
 
 ## 1.18.2
 
