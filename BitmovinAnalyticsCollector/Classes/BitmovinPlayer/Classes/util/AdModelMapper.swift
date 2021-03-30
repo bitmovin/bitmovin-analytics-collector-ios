@@ -122,7 +122,12 @@ public class AdModelMapper {
         
         if case let survey? = vastData.survey {
             collectorAd.surveyType = survey.type
-            collectorAd.surveyUrl = survey.uri.absoluteString
+            let surveyUri: Any = survey.uri as Any
+            if surveyUri is String {
+                collectorAd.surveyUrl = surveyUri as? String
+            } else if surveyUri is URL {
+                collectorAd.surveyUrl = (surveyUri as? URL)?.absoluteString
+            }
         }
     }
     
