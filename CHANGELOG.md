@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- Extraction of `vastAdData.survey.uri` to support both String and URL data types (required for `BitmovinPlayer >= 2.62.0`)
+- Extraction of `vastAdData.survey.uri` now supports both String and URL data types for compatibility with `BitmovinPlayer >= 2.62.0`
 
 ## 1.18.3
 
