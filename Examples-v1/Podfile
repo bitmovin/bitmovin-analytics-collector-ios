@@ -1,0 +1,34 @@
+workspace 'Examples-v1'
+
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/bitmovin/cocoapod-specs.git'
+
+def BitmovinPlayer
+    pod 'BitmovinPlayer', '2.51.0'
+end
+
+def BitmovinAnalyticsCollectorV1
+    pod 'BitmovinAnalyticsCollector', :path => '../BitmovinAnalyticsCollector-v1'
+end
+
+target 'BitmovinAnalyticsCollectorExamples-iOS' do
+    use_frameworks!
+    platform :ios, '9.0'
+    BitmovinAnalyticsCollectorV1
+    BitmovinPlayer
+    pod 'GoogleAds-IMA-iOS-SDK', '3.11.1'
+end
+
+target 'BitmovinAnalyticsCollectorExamples-tvOS' do
+    use_frameworks!
+    platform :tvos
+    BitmovinAnalyticsCollectorV1
+    BitmovinPlayer
+end
+
+target 'BitmovinAnalyticsCollectorTests-v1' do
+    use_frameworks!
+    platform :ios, '9.0'
+    BitmovinAnalyticsCollectorV1, :testspecs => ['CoreTests', 'BitmovinPlayerTests', 'AVPlayerTests']
+    BitmovinPlayer
+end
