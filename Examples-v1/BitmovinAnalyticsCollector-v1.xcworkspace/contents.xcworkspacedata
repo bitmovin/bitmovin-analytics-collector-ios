@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../BitmovinAnalyticsCollector-v1/BitmovinAnalyticsCollector-v1.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:BitmovinAnalyticsCollectorExamples-tvOS/BitmovinAnalyticsCollectorExamples-tvOS.xcodeproj">
    </FileRef>
    <FileRef
