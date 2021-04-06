@@ -26,7 +26,7 @@ DESC
     core.source_files = '../BitmovinAnalyticsCollector/Classes/Collector/**/*.{swift}'
     
     s.test_spec 'CoreTests' do |core_test_spec|
-      core_test_spec.source_files = 'Tests/CoreTests/**/*'
+      core_test_spec.source_files = '../BitmovinAnalyticsCollector/Tests/CollectorTests/**/*'
     end
   end
 
@@ -36,7 +36,7 @@ DESC
     bitmovinplayer.ios.dependency 'BitmovinPlayer', '~>2.51'
     
     s.test_spec 'BitmovinPlayerTests' do |bitmovinplayer_test_spec|
-      bitmovinplayer_test_spec.source_files = 'Tests/BitmovinPlayerTests/**/*'
+      bitmovinplayer_test_spec.source_files = '../BitmovinAnalyticsCollector/Tests/BitmovinPlayerTests-v1/**/*'
     end
   end
 
@@ -44,7 +44,7 @@ DESC
     avplayer.source_files = '../BitmovinAnalyticsCollector/Classes/AVPlayer/**/*.{swift}'
     
     s.test_spec 'AVPlayerTests' do |avplayer_test_spec|
-      avplayer_test_spec.source_files = 'Tests/AVPlayerTests/**/*'
+      avplayer_test_spec.source_files = '../BitmovinAnalyticsCollector/Tests/AVPlayerTests/**/*'
     end
   end
 
