@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -38,6 +38,7 @@
 		24DB7FDF261D7BD5009F7AE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		24DB7FE2261D7BD5009F7AE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		24DB7FE4261D7BD5009F7AE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		24DB801A261D805B009F7AE7 /* BitmovinAnalyticsCollector-v1-Tests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BitmovinAnalyticsCollector-v1-Tests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E5AAB45C4DD6532B12C64D9 /* Pods-BitmovinAnalyticsCollector-v1-Example-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-v1-Example-iOS.release.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-v1-Example-iOS/Pods-BitmovinAnalyticsCollector-v1-Example-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		94E92FFDF2C4FD3FDF42D78C /* Pods-BitmovinAnalyticsCollector-v1-Example-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-v1-Example-iOS.debug.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-v1-Example-iOS/Pods-BitmovinAnalyticsCollector-v1-Example-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		962A2CD519A407AD03A013F1 /* Pods_BitmovinAnalyticsCollector_v1_Example_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_v1_Example_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +64,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		24DB8017261D805B009F7AE7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -71,6 +79,7 @@
 			children = (
 				24DB7FBD261D7BB9009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-iOS */,
 				24DB7FD7261D7BD4009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-tvOS */,
+				24DB801B261D805B009F7AE7 /* BitmovinAnalyticsCollector-v1-Tests-iOS */,
 				24DB7F9F261D7AD1009F7AE7 /* Products */,
 				369A7FB98144423DEF003AA2 /* Pods */,
 				5C8C295479B748F14C63D5CB /* Frameworks */,
@@ -82,6 +91,7 @@
 			children = (
 				24DB7FBC261D7BB9009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-iOS.app */,
 				24DB7FD6261D7BD4009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-tvOS.app */,
+				24DB801A261D805B009F7AE7 /* BitmovinAnalyticsCollector-v1-Tests-iOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,6 +123,13 @@
 			path = "BitmovinAnalyticsCollector-v1-Example-tvOS";
 			sourceTree = "<group>";
 		};
+		24DB801B261D805B009F7AE7 /* BitmovinAnalyticsCollector-v1-Tests-iOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "BitmovinAnalyticsCollector-v1-Tests-iOS";
+			sourceTree = "<group>";
+		};
 		369A7FB98144423DEF003AA2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,7 +138,6 @@
 				D0CDB82D7D17DD46A4ADC6A3 /* Pods-BitmovinAnalyticsCollector-v1-Example-tvOS.debug.xcconfig */,
 				B7B396750776B44F1C585B91 /* Pods-BitmovinAnalyticsCollector-v1-Example-tvOS.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -175,6 +191,23 @@
 			productReference = 24DB7FD6261D7BD4009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
+		24DB8019261D805B009F7AE7 /* BitmovinAnalyticsCollector-v1-Tests-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 24DB8021261D805B009F7AE7 /* Build configuration list for PBXNativeTarget "BitmovinAnalyticsCollector-v1-Tests-iOS" */;
+			buildPhases = (
+				24DB8016261D805B009F7AE7 /* Sources */,
+				24DB8017261D805B009F7AE7 /* Frameworks */,
+				24DB8018261D805B009F7AE7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BitmovinAnalyticsCollector-v1-Tests-iOS";
+			productName = "BitmovinAnalyticsCollector-v1-Tests-iOS";
+			productReference = 24DB801A261D805B009F7AE7 /* BitmovinAnalyticsCollector-v1-Tests-iOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,13 +217,13 @@
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
-					24DB7F9D261D7AD1009F7AE7 = {
-						CreatedOnToolsVersion = 12.4;
-					};
 					24DB7FBB261D7BB9009F7AE7 = {
 						CreatedOnToolsVersion = 12.4;
 					};
 					24DB7FD5261D7BD4009F7AE7 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					24DB8019261D805B009F7AE7 = {
 						CreatedOnToolsVersion = 12.4;
 					};
 				};
@@ -210,6 +243,7 @@
 			targets = (
 				24DB7FBB261D7BB9009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-iOS */,
 				24DB7FD5261D7BD4009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-tvOS */,
+				24DB8019261D805B009F7AE7 /* BitmovinAnalyticsCollector-v1-Tests-iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -232,6 +266,13 @@
 				24DB7FE3261D7BD5009F7AE7 /* LaunchScreen.storyboard in Resources */,
 				24DB7FE0261D7BD5009F7AE7 /* Assets.xcassets in Resources */,
 				24DB7FDE261D7BD4009F7AE7 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24DB8018261D805B009F7AE7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +376,13 @@
 			files = (
 				24DB7FDB261D7BD4009F7AE7 /* ViewController.swift in Sources */,
 				24DB7FD9261D7BD4009F7AE7 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24DB8016261D805B009F7AE7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,6 +620,40 @@
 			};
 			name = Release;
 		};
+		24DB801F261D805B009F7AE7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "BitmovinAnalyticsCollector-v1-Tests-iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bitmovin.analytics.BitmovinAnalyticsCollector-v1-Tests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		24DB8020261D805B009F7AE7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "BitmovinAnalyticsCollector-v1-Tests-iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bitmovin.analytics.BitmovinAnalyticsCollector-v1-Tests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -598,6 +680,15 @@
 			buildConfigurations = (
 				24DB7FE6261D7BD5009F7AE7 /* Debug */,
 				24DB7FE7261D7BD5009F7AE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24DB8021261D805B009F7AE7 /* Build configuration list for PBXNativeTarget "BitmovinAnalyticsCollector-v1-Tests-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24DB801F261D805B009F7AE7 /* Debug */,
+				24DB8020261D805B009F7AE7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
