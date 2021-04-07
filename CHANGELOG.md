@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Changed
+
+- [Internal] Split project structure to support both BitmovinPlayer v2 and v3
+
 ## 1.19.0
 
 ### Changed
