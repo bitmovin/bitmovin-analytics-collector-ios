@@ -160,7 +160,6 @@
 				24DB7FDA261D7BD4009F7AE7 /* ViewController.swift */,
 				24DB7FDC261D7BD4009F7AE7 /* Main.storyboard */,
 				24DB7FDF261D7BD5009F7AE7 /* Assets.xcassets */,
-				24DB7FE1261D7BD5009F7AE7 /* LaunchScreen.storyboard */,
 				24DB7FE4261D7BD5009F7AE7 /* Info.plist */,
 			);
 			path = "BitmovinAnalyticsCollector-v1-Example-tvOS";
