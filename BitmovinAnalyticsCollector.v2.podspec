@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BitmovinAnalyticsCollector'
-  s.version          = '1.19.0'
+  s.version          = '2.0.0'
   s.summary          = 'iOS library that allows you to monitor your iOS video playback with Bitmovin Analytics'
 
   s.description      = <<-DESC
@@ -23,10 +23,10 @@ DESC
       'ENABLE_BITCOD' => 'YES'
   }
   s.subspec 'Core' do |core|
-    core.source_files = 'BitmovinAnalyticsCollector/Classes/Collector/**/*.{swift}'
+    core.source_files = 'BitmovinAnalyticsCollector-v1/Classes/Collector/**/*.{swift}'
     
     s.test_spec 'CoreTests' do |core_test_spec|
-      core_test_spec.source_files = 'Tests/CoreTests/**/*'
+      core_test_spec.source_files = 'BitmovinAnalyticsCollector-v1/Tests/CoreTests/**/*'
     end
   end
 
@@ -36,15 +36,7 @@ DESC
     bitmovinplayer.ios.dependency 'BitmovinPlayer', '~>2.51'
     
     s.test_spec 'BitmovinPlayerTests' do |bitmovinplayer_test_spec|
-      bitmovinplayer_test_spec.source_files = 'Tests/BitmovinPlayerTests/**/*'
-    end
-  end
-
-  s.subspec 'AVPlayer' do |avplayer|
-    avplayer.source_files = 'BitmovinAnalyticsCollector/Classes/AVPlayer/**/*.{swift}'
-    
-    s.test_spec 'AVPlayerTests' do |avplayer_test_spec|
-      avplayer_test_spec.source_files = 'Tests/AVPlayerTests/**/*'
+      bitmovinplayer_test_spec.source_files = 'BitmovinAnalyticsCollector/Tests/BitmovinPlayerTests/**/*'
     end
   end
 
