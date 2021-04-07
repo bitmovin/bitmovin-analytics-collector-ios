@@ -1,34 +1,23 @@
-workspace 'Examples-v1'
-
 source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/bitmovin/cocoapod-specs.git'
 
-def BitmovinPlayer
-    pod 'BitmovinPlayer', '2.51.0'
-end
+pod 'BitmovinPlayer', '2.51.0'
 
-def BitmovinAnalyticsCollectorV1
-    pod 'BitmovinAnalyticsCollector', :path => '../BitmovinAnalyticsCollector-v1'
-end
-
-target 'BitmovinAnalyticsCollectorExamples-iOS' do
+target 'BitmovinAnalyticsCollector-v1-Example-iOS' do
     use_frameworks!
     platform :ios, '9.0'
-    BitmovinAnalyticsCollectorV1
-    BitmovinPlayer
+    pod 'BitmovinAnalyticsCollector', :podspec => '../BitmovinAnalyticsCollector.v1.podspec'
     pod 'GoogleAds-IMA-iOS-SDK', '3.11.1'
 end
 
-target 'BitmovinAnalyticsCollectorExamples-tvOS' do
+target 'BitmovinAnalyticsCollector-v1-Example-tvOS' do
     use_frameworks!
     platform :tvos
-    BitmovinAnalyticsCollectorV1
-    BitmovinPlayer
+    pod 'BitmovinAnalyticsCollector', :podspec => '../BitmovinAnalyticsCollector.v1.podspec'
 end
 
-target 'BitmovinAnalyticsCollectorTests-v1' do
-    use_frameworks!
-    platform :ios, '9.0'
-    BitmovinAnalyticsCollectorV1, :testspecs => ['CoreTests', 'BitmovinPlayerTests', 'AVPlayerTests']
-    BitmovinPlayer
-end
+# target 'BitmovinAnalyticsCollectorTests-v1' do
+#     use_frameworks!
+#     platform :ios, '9.0'
+#     pod 'BitmovinAnalyticsCollector', :path => '../BitmovinAnalyticsCollector-v1', :testspecs => ['CoreTests', 'BitmovinPlayerTests', 'AVPlayerTests']
+# end
