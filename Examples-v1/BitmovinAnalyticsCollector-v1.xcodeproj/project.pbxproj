@@ -17,6 +17,7 @@
 		24DB7FDB261D7BD4009F7AE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7FDA261D7BD4009F7AE7 /* ViewController.swift */; };
 		24DB7FDE261D7BD4009F7AE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7FDC261D7BD4009F7AE7 /* Main.storyboard */; };
 		24DB7FE0261D7BD5009F7AE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7FDF261D7BD5009F7AE7 /* Assets.xcassets */; };
+		24DB7FDE261D7BD4009F7AE7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0110960E2028C7B800A70D38 /* Images.xcassets */; };
 		24DB7FE3261D7BD5009F7AE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7FE1261D7BD5009F7AE7 /* LaunchScreen.storyboard */; };
 		8F1713A624AB3D64009ACECA /* AssetResourceLoaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713A524AB3D64009ACECA /* AssetResourceLoaderDelegate.swift */; };
 		8F1713A724AB3D64009ACECA /* AssetResourceLoaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713A524AB3D64009ACECA /* AssetResourceLoaderDelegate.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0110960E2028C7B800A70D38 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		131DEC3EA3701F8CAE9AF90F /* Pods-BitmovinAnalyticsCollector-v1-Tests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-v1-Tests-iOS.debug.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-v1-Tests-iOS/Pods-BitmovinAnalyticsCollector-v1-Tests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		24DB7FBC261D7BB9009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BitmovinAnalyticsCollector-v1-Example-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24DB7FBE261D7BB9009F7AE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				24DB7FC9261D7BBB009F7AE7 /* LaunchScreen.storyboard */,
 				24DB7FCC261D7BBB009F7AE7 /* Info.plist */,
 				8F1713A424AB3D3F009ACECA /* AVFoundationDRMHelper */,
+				0110960E2028C7B800A70D38 /* Images.xcassets */,
 			);
 			path = "BitmovinAnalyticsCollector-v1-Example-iOS";
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				24DB7FCB261D7BBB009F7AE7 /* LaunchScreen.storyboard in Resources */,
 				24DB7FC8261D7BBB009F7AE7 /* Assets.xcassets in Resources */,
 				24DB7FC6261D7BB9009F7AE7 /* Main.storyboard in Resources */,
+				24DB7FDE261D7BD4009F7AE7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
