@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "24DB7FD5261D7BD4009F7AE7"
-               BuildableName = "BitmovinAnalyticsCollector-v1-Example-tvOS.app"
-               BlueprintName = "BitmovinAnalyticsCollector-v1-Example-tvOS"
-               ReferencedContainer = "container:BitmovinAnalyticsCollector-v1.xcodeproj">
+               BuildableName = "BitmovinAnalyticsCollector-Example-tvOS.app"
+               BlueprintName = "BitmovinAnalyticsCollector-Example-tvOS"
+               ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "24DB7FD5261D7BD4009F7AE7"
-            BuildableName = "BitmovinAnalyticsCollector-v1-Example-tvOS.app"
-            BlueprintName = "BitmovinAnalyticsCollector-v1-Example-tvOS"
-            ReferencedContainer = "container:BitmovinAnalyticsCollector-v1.xcodeproj">
+            BuildableName = "BitmovinAnalyticsCollector-Example-tvOS.app"
+            BlueprintName = "BitmovinAnalyticsCollector-Example-tvOS"
+            ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -69,9 +69,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "24DB7FD5261D7BD4009F7AE7"
-            BuildableName = "BitmovinAnalyticsCollector-v1-Example-tvOS.app"
-            BlueprintName = "BitmovinAnalyticsCollector-v1-Example-tvOS"
-            ReferencedContainer = "container:BitmovinAnalyticsCollector-v1.xcodeproj">
+            BuildableName = "BitmovinAnalyticsCollector-Example-tvOS.app"
+            BlueprintName = "BitmovinAnalyticsCollector-Example-tvOS"
+            ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
