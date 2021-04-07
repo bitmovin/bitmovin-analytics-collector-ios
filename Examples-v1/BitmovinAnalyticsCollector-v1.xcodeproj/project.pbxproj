@@ -61,6 +61,9 @@
 		CBF29EF0479CB721B1870DAD /* Pods_BitmovinAnalyticsCollector_v1_Tests_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_v1_Tests_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0CDB82D7D17DD46A4ADC6A3 /* Pods-BitmovinAnalyticsCollector-v1-Example-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-v1-Example-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-v1-Example-tvOS/Pods-BitmovinAnalyticsCollector-v1-Example-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		ED5FD4D2B184576B1B267C78 /* Pods_BitmovinAnalyticsCollector_v1_Example_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_v1_Example_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		67D7D3032E40EEFC258C6F8D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		A13FCB967E22402182A70074 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		76A4CC2782BA260CFC7363C9 /* BitmovinAnalyticsCollector.v1.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BitmovinAnalyticsCollector.v1.podspec; path = ../BitmovinAnalyticsCollector.v1.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +103,7 @@
 				24DB7F9F261D7AD1009F7AE7 /* Products */,
 				369A7FB98144423DEF003AA2 /* Pods */,
 				5C8C295479B748F14C63D5CB /* Frameworks */,
+				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,6 +141,16 @@
 				8F1713A524AB3D64009ACECA /* AssetResourceLoaderDelegate.swift */,
 			);
 			path = AVFoundationDRMHelper;
+			sourceTree = "<group>";
+		};
+		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				76A4CC2782BA260CFC7363C9 /* BitmovinAnalyticsCollector.podspec */,
+				67D7D3032E40EEFC258C6F8D /* README.md */,
+				A13FCB967E22402182A70074 /* LICENSE */,
+			);
+			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
 		24DB7FD7261D7BD4009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-tvOS */ = {
