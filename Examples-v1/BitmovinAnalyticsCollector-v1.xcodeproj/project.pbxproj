@@ -11,14 +11,18 @@
 		24DB7FC1261D7BB9009F7AE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7FC0261D7BB9009F7AE7 /* SceneDelegate.swift */; };
 		24DB7FC3261D7BB9009F7AE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7FC2261D7BB9009F7AE7 /* ViewController.swift */; };
 		24DB7FC6261D7BB9009F7AE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7FC4261D7BB9009F7AE7 /* Main.storyboard */; };
+		011096092028C74C00A70D38 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011096082028C74C00A70D38 /* PlayerView.swift */; };
 		24DB7FC8261D7BBB009F7AE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7FC7261D7BBB009F7AE7 /* Assets.xcassets */; };
 		24DB7FCB261D7BBB009F7AE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7FC9261D7BBB009F7AE7 /* LaunchScreen.storyboard */; };
 		24DB7FD9261D7BD4009F7AE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7FD8261D7BD4009F7AE7 /* AppDelegate.swift */; };
 		24DB7FDB261D7BD4009F7AE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7FDA261D7BD4009F7AE7 /* ViewController.swift */; };
 		24DB7FDE261D7BD4009F7AE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7FDC261D7BD4009F7AE7 /* Main.storyboard */; };
+		01C26BE62083F14D001A0D76 /* BitmovinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C26BE52083F14D001A0D76 /* BitmovinViewController.swift */; };
 		24DB7FE0261D7BD5009F7AE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7FDF261D7BD5009F7AE7 /* Assets.xcassets */; };
 		24DB7FDE261D7BD4009F7AE7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0110960E2028C7B800A70D38 /* Images.xcassets */; };
 		24DB7FE3261D7BD5009F7AE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7FE1261D7BD5009F7AE7 /* LaunchScreen.storyboard */; };
+		607FACD81AFB9204008FA782 /* AVFoundationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* AVFoundationViewController.swift */; };
+		01C26BE42083ED7B001A0D76 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C26BE32083ED7B001A0D76 /* WelcomeViewController.swift */; };
 		8F1713A624AB3D64009ACECA /* AssetResourceLoaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713A524AB3D64009ACECA /* AssetResourceLoaderDelegate.swift */; };
 		8F1713A724AB3D64009ACECA /* AssetResourceLoaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713A524AB3D64009ACECA /* AssetResourceLoaderDelegate.swift */; };
 		8F1713AB24AB3FAD009ACECA /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713A824AB3FAD009ACECA /* Asset.swift */; };
@@ -28,19 +32,26 @@
 		8F1713AF24AB3FAD009ACECA /* FairPlayConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713AA24AB3FAD009ACECA /* FairPlayConfiguration.swift */; };
 		8F1713B024AB3FAD009ACECA /* FairPlayConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713AA24AB3FAD009ACECA /* FairPlayConfiguration.swift */; };
 		25643918D3639EC8B78196DA /* Pods_BitmovinAnalyticsCollector_v1_Tests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF29EF0479CB721B1870DAD /* Pods_BitmovinAnalyticsCollector_v1_Tests_iOS.framework */; };
+		8F54717224A37D8D008B31C2 /* BitmovinDrmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F54717124A37D8D008B31C2 /* BitmovinDrmViewController.swift */; };
 		4CF1F7D0FC81396A51ECA245 /* Pods_BitmovinAnalyticsCollector_v1_Example_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 962A2CD519A407AD03A013F1 /* Pods_BitmovinAnalyticsCollector_v1_Example_iOS.framework */; };
 		B02F5F40A7D5B7ABE5DD61FA /* Pods_BitmovinAnalyticsCollector_v1_Example_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED5FD4D2B184576B1B267C78 /* Pods_BitmovinAnalyticsCollector_v1_Example_tvOS.framework */; };
+		EC93565C2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC93565B2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0110960E2028C7B800A70D38 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		131DEC3EA3701F8CAE9AF90F /* Pods-BitmovinAnalyticsCollector-v1-Tests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-v1-Tests-iOS.debug.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-v1-Tests-iOS/Pods-BitmovinAnalyticsCollector-v1-Tests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		24DB7FBC261D7BB9009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BitmovinAnalyticsCollector-v1-Example-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24DB7FBE261D7BB9009F7AE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24DB7FC0261D7BB9009F7AE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		24DB7FC2261D7BB9009F7AE7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		24DB7FC5261D7BB9009F7AE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		607FACD71AFB9204008FA782 /* AVFoundationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundationViewController.swift; sourceTree = "<group>"; };
 		24DB7FC7261D7BBB009F7AE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		011096082028C74C00A70D38 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		01C26BE52083F14D001A0D76 /* BitmovinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitmovinViewController.swift; sourceTree = "<group>"; };
+		0110960E2028C7B800A70D38 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8FAA118824AA1D5A00F7922B /* AVFoundationDrmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundationDrmViewController.swift; sourceTree = "<group>"; };
+		01C26BE32083ED7B001A0D76 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		24DB7FCA261D7BBB009F7AE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		24DB7FCC261D7BBB009F7AE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24DB7FD6261D7BD4009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BitmovinAnalyticsCollector-v1-Example-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +65,7 @@
 		8F1713A524AB3D64009ACECA /* AssetResourceLoaderDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetResourceLoaderDelegate.swift; sourceTree = "<group>"; };
 		8F1713A824AB3FAD009ACECA /* Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		8F1713A924AB3FAD009ACECA /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
+		8F54717124A37D8D008B31C2 /* BitmovinDrmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitmovinDrmViewController.swift; sourceTree = "<group>"; };
 		8F1713AA24AB3FAD009ACECA /* FairPlayConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FairPlayConfiguration.swift; sourceTree = "<group>"; };
 		38D18A53F31D6A43C2BA9E31 /* Pods-BitmovinAnalyticsCollector-v1-Tests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-v1-Tests-iOS.release.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-v1-Tests-iOS/Pods-BitmovinAnalyticsCollector-v1-Tests-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		5E5AAB45C4DD6532B12C64D9 /* Pods-BitmovinAnalyticsCollector-v1-Example-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-v1-Example-iOS.release.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-v1-Example-iOS/Pods-BitmovinAnalyticsCollector-v1-Example-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -66,6 +78,7 @@
 		67D7D3032E40EEFC258C6F8D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		A13FCB967E22402182A70074 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		76A4CC2782BA260CFC7363C9 /* BitmovinAnalyticsCollector.v1.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BitmovinAnalyticsCollector.v1.podspec; path = ../BitmovinAnalyticsCollector.v1.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		EC93565B2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugBitmovinPlayerListener.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,14 +136,19 @@
 			isa = PBXGroup;
 			children = (
 				24DB7FBE261D7BB9009F7AE7 /* AppDelegate.swift */,
-				24DB7FC0261D7BB9009F7AE7 /* SceneDelegate.swift */,
-				24DB7FC2261D7BB9009F7AE7 /* ViewController.swift */,
 				24DB7FC4261D7BB9009F7AE7 /* Main.storyboard */,
 				24DB7FC7261D7BBB009F7AE7 /* Assets.xcassets */,
+				0110960E2028C7B800A70D38 /* Images.xcassets */,
 				24DB7FC9261D7BBB009F7AE7 /* LaunchScreen.storyboard */,
 				24DB7FCC261D7BBB009F7AE7 /* Info.plist */,
 				8F1713A424AB3D3F009ACECA /* AVFoundationDRMHelper */,
-				0110960E2028C7B800A70D38 /* Images.xcassets */,
+				011096082028C74C00A70D38 /* PlayerView.swift */,
+				607FACD71AFB9204008FA782 /* AVFoundationViewController.swift */,
+				8FAA118824AA1D5A00F7922B /* AVFoundationDrmViewController.swift */,
+				01C26BE32083ED7B001A0D76 /* WelcomeViewController.swift */,
+				01C26BE52083F14D001A0D76 /* BitmovinViewController.swift */,
+				EC93565B2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift */,
+				8F54717124A37D8D008B31C2 /* BitmovinDrmViewController.swift */,
 			);
 			path = "BitmovinAnalyticsCollector-v1-Example-iOS";
 			sourceTree = "<group>";
