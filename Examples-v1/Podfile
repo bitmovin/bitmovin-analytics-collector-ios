@@ -6,14 +6,14 @@ pod 'BitmovinPlayer', '2.51.0'
 target 'BitmovinAnalyticsCollector-v1-Example-iOS' do
     use_frameworks!
     platform :ios, '9.0'
-    pod 'BitmovinAnalyticsCollector', :podspec => '../BitmovinAnalyticsCollector.v1.podspec'
+    pod 'BitmovinAnalyticsCollector', :path => '../BitmovinAnalyticsCollector.v1.podspec'
     pod 'GoogleAds-IMA-iOS-SDK', '3.11.1'
 end
 
 target 'BitmovinAnalyticsCollector-v1-Example-tvOS' do
     use_frameworks!
     platform :tvos
-    pod 'BitmovinAnalyticsCollector', :podspec => '../BitmovinAnalyticsCollector.v1.podspec'
+    pod 'BitmovinAnalyticsCollector', :path => '../BitmovinAnalyticsCollector.v1.podspec'
 end
 
 # target 'BitmovinAnalyticsCollectorTests-v1' do
