@@ -18,6 +18,14 @@
 		24DB7FDE261D7BD4009F7AE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7FDC261D7BD4009F7AE7 /* Main.storyboard */; };
 		24DB7FE0261D7BD5009F7AE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7FDF261D7BD5009F7AE7 /* Assets.xcassets */; };
 		24DB7FE3261D7BD5009F7AE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7FE1261D7BD5009F7AE7 /* LaunchScreen.storyboard */; };
+		8F1713A624AB3D64009ACECA /* AssetResourceLoaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713A524AB3D64009ACECA /* AssetResourceLoaderDelegate.swift */; };
+		8F1713A724AB3D64009ACECA /* AssetResourceLoaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713A524AB3D64009ACECA /* AssetResourceLoaderDelegate.swift */; };
+		8F1713AB24AB3FAD009ACECA /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713A824AB3FAD009ACECA /* Asset.swift */; };
+		8F1713AC24AB3FAD009ACECA /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713A824AB3FAD009ACECA /* Asset.swift */; };
+		8F1713AD24AB3FAD009ACECA /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713A924AB3FAD009ACECA /* Stream.swift */; };
+		8F1713AE24AB3FAD009ACECA /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713A924AB3FAD009ACECA /* Stream.swift */; };
+		8F1713AF24AB3FAD009ACECA /* FairPlayConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713AA24AB3FAD009ACECA /* FairPlayConfiguration.swift */; };
+		8F1713B024AB3FAD009ACECA /* FairPlayConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713AA24AB3FAD009ACECA /* FairPlayConfiguration.swift */; };
 		25643918D3639EC8B78196DA /* Pods_BitmovinAnalyticsCollector_v1_Tests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF29EF0479CB721B1870DAD /* Pods_BitmovinAnalyticsCollector_v1_Tests_iOS.framework */; };
 		4CF1F7D0FC81396A51ECA245 /* Pods_BitmovinAnalyticsCollector_v1_Example_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 962A2CD519A407AD03A013F1 /* Pods_BitmovinAnalyticsCollector_v1_Example_iOS.framework */; };
 		B02F5F40A7D5B7ABE5DD61FA /* Pods_BitmovinAnalyticsCollector_v1_Example_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED5FD4D2B184576B1B267C78 /* Pods_BitmovinAnalyticsCollector_v1_Example_tvOS.framework */; };
@@ -41,6 +49,10 @@
 		24DB7FE2261D7BD5009F7AE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		24DB7FE4261D7BD5009F7AE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24DB801A261D805B009F7AE7 /* BitmovinAnalyticsCollector-v1-Tests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BitmovinAnalyticsCollector-v1-Tests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F1713A524AB3D64009ACECA /* AssetResourceLoaderDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetResourceLoaderDelegate.swift; sourceTree = "<group>"; };
+		8F1713A824AB3FAD009ACECA /* Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
+		8F1713A924AB3FAD009ACECA /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
+		8F1713AA24AB3FAD009ACECA /* FairPlayConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FairPlayConfiguration.swift; sourceTree = "<group>"; };
 		38D18A53F31D6A43C2BA9E31 /* Pods-BitmovinAnalyticsCollector-v1-Tests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-v1-Tests-iOS.release.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-v1-Tests-iOS/Pods-BitmovinAnalyticsCollector-v1-Tests-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		5E5AAB45C4DD6532B12C64D9 /* Pods-BitmovinAnalyticsCollector-v1-Example-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-v1-Example-iOS.release.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-v1-Example-iOS/Pods-BitmovinAnalyticsCollector-v1-Example-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		94E92FFDF2C4FD3FDF42D78C /* Pods-BitmovinAnalyticsCollector-v1-Example-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-v1-Example-iOS.debug.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-v1-Example-iOS/Pods-BitmovinAnalyticsCollector-v1-Example-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -111,8 +123,20 @@
 				24DB7FC7261D7BBB009F7AE7 /* Assets.xcassets */,
 				24DB7FC9261D7BBB009F7AE7 /* LaunchScreen.storyboard */,
 				24DB7FCC261D7BBB009F7AE7 /* Info.plist */,
+				8F1713A424AB3D3F009ACECA /* AVFoundationDRMHelper */,
 			);
 			path = "BitmovinAnalyticsCollector-v1-Example-iOS";
+			sourceTree = "<group>";
+		};
+		8F1713A424AB3D3F009ACECA /* AVFoundationDRMHelper */ = {
+			isa = PBXGroup;
+			children = (
+				8F1713A824AB3FAD009ACECA /* Asset.swift */,
+				8F1713AA24AB3FAD009ACECA /* FairPlayConfiguration.swift */,
+				8F1713A924AB3FAD009ACECA /* Stream.swift */,
+				8F1713A524AB3D64009ACECA /* AssetResourceLoaderDelegate.swift */,
+			);
+			path = AVFoundationDRMHelper;
 			sourceTree = "<group>";
 		};
 		24DB7FD7261D7BD4009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-tvOS */ = {
