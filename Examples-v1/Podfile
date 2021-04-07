@@ -16,8 +16,8 @@ target 'BitmovinAnalyticsCollector-v1-Example-tvOS' do
     pod 'BitmovinAnalyticsCollector', :path => '../BitmovinAnalyticsCollector.v1.podspec'
 end
 
-# target 'BitmovinAnalyticsCollectorTests-v1' do
-#     use_frameworks!
-#     platform :ios, '9.0'
-#     pod 'BitmovinAnalyticsCollector', :path => '../BitmovinAnalyticsCollector-v1', :testspecs => ['CoreTests', 'BitmovinPlayerTests', 'AVPlayerTests']
-# end
+target 'BitmovinAnalyticsCollector-v1-Tests-iOS' do
+    use_frameworks!
+    platform :ios, '9.0'
+    pod 'BitmovinAnalyticsCollector', :path => '../BitmovinAnalyticsCollector.v1.podspec', :testspecs => ['CollectorTests', 'BitmovinPlayerTests', 'AVPlayerTests']
+end
