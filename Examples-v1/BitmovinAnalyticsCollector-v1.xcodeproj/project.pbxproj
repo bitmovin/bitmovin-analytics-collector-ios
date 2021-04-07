@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		24DB7FBF261D7BB9009F7AE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7FBE261D7BB9009F7AE7 /* AppDelegate.swift */; };
-		24DB7FC1261D7BB9009F7AE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7FC0261D7BB9009F7AE7 /* SceneDelegate.swift */; };
-		24DB7FC3261D7BB9009F7AE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7FC2261D7BB9009F7AE7 /* ViewController.swift */; };
 		24DB7FC6261D7BB9009F7AE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7FC4261D7BB9009F7AE7 /* Main.storyboard */; };
 		011096092028C74C00A70D38 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011096082028C74C00A70D38 /* PlayerView.swift */; };
 		24DB7FC8261D7BBB009F7AE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7FC7261D7BBB009F7AE7 /* Assets.xcassets */; };
@@ -42,8 +40,6 @@
 		131DEC3EA3701F8CAE9AF90F /* Pods-BitmovinAnalyticsCollector-v1-Tests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-v1-Tests-iOS.debug.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-v1-Tests-iOS/Pods-BitmovinAnalyticsCollector-v1-Tests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		24DB7FBC261D7BB9009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BitmovinAnalyticsCollector-v1-Example-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24DB7FBE261D7BB9009F7AE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		24DB7FC0261D7BB9009F7AE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		24DB7FC2261D7BB9009F7AE7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		24DB7FC5261D7BB9009F7AE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACD71AFB9204008FA782 /* AVFoundationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundationViewController.swift; sourceTree = "<group>"; };
 		24DB7FC7261D7BBB009F7AE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -472,9 +468,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24DB7FC3261D7BB9009F7AE7 /* ViewController.swift in Sources */,
 				24DB7FBF261D7BB9009F7AE7 /* AppDelegate.swift in Sources */,
-				24DB7FC1261D7BB9009F7AE7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
