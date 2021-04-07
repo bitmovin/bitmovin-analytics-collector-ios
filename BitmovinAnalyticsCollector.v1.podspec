@@ -23,28 +23,28 @@ DESC
       'ENABLE_BITCOD' => 'YES'
   }
   s.subspec 'Core' do |core|
-    core.source_files = 'BitmovinAnalyticsCollector/Classes/Collector/**/*.{swift}'
+    core.source_files = 'BitmovinAnalyticsCollector-v1/Classes/Collector/**/*.{swift}'
     
-    s.test_spec 'CoreTests' do |core_test_spec|
-      core_test_spec.source_files = 'Tests/CoreTests/**/*'
+    s.test_spec 'CollectorTests' do |core_test_spec|
+      core_test_spec.source_files = 'BitmovinAnalyticsCollector-v1/Classes/CollectorTests/**/*'
     end
   end
 
   s.subspec 'BitmovinPlayer' do |bitmovinplayer|
-    bitmovinplayer.source_files = 'BitmovinAnalyticsCollector/Classes/BitmovinPlayer-v1/**/*.{swift}'    
+    bitmovinplayer.source_files = 'BitmovinAnalyticsCollector-v1/Classes/BitmovinPlayer/**/*.{swift}'    
     bitmovinplayer.tvos.dependency 'BitmovinPlayer', '~>2.51'
     bitmovinplayer.ios.dependency 'BitmovinPlayer', '~>2.51'
     
     s.test_spec 'BitmovinPlayerTests' do |bitmovinplayer_test_spec|
-      bitmovinplayer_test_spec.source_files = 'Tests/BitmovinPlayerTests/**/*'
+      bitmovinplayer_test_spec.source_files = 'BitmovinAnalyticsCollector-v1/Tests/BitmovinPlayerTests/**/*'
     end
   end
 
   s.subspec 'AVPlayer' do |avplayer|
-    avplayer.source_files = 'BitmovinAnalyticsCollector/Classes/AVPlayer/**/*.{swift}'
+    avplayer.source_files = 'BitmovinAnalyticsCollector-v1/Classes/AVPlayer/**/*.{swift}'
     
     s.test_spec 'AVPlayerTests' do |avplayer_test_spec|
-      avplayer_test_spec.source_files = 'Tests/AVPlayerTests/**/*'
+      avplayer_test_spec.source_files = 'BitmovinAnalyticsCollector-v1/Tests/AVPlayerTests/**/*'
     end
   end
 
