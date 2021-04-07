@@ -19,5 +19,5 @@ end
 target 'BitmovinAnalyticsCollector-v1-Tests-iOS' do
     use_frameworks!
     platform :ios, '9.0'
-    pod 'BitmovinAnalyticsCollector', :path => '../BitmovinAnalyticsCollector.v1.podspec', :testspecs => ['CollectorTests', 'BitmovinPlayerTests', 'AVPlayerTests']
+    pod 'BitmovinAnalyticsCollector', :path => '../BitmovinAnalyticsCollector.v1.podspec', :testspecs => ['CoreTests', 'BitmovinPlayerTests', 'AVPlayerTests']
 end

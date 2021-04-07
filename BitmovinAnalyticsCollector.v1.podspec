@@ -25,8 +25,8 @@ DESC
   s.subspec 'Core' do |core|
     core.source_files = 'BitmovinAnalyticsCollector-v1/Classes/Collector/**/*.{swift}'
     
-    s.test_spec 'CollectorTests' do |core_test_spec|
-      core_test_spec.source_files = 'BitmovinAnalyticsCollector-v1/Tests/CollectorTests/**/*'
+    s.test_spec 'CoreTests' do |core_test_spec|
+      core_test_spec.source_files = 'BitmovinAnalyticsCollector-v1/Tests/CoreTests/**/*'
     end
   end
 
