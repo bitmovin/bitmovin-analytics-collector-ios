@@ -17,7 +17,7 @@
 		24DB7FDE261D7BD4009F7AE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7FDC261D7BD4009F7AE7 /* Main.storyboard */; };
 		01C26BE62083F14D001A0D76 /* BitmovinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C26BE52083F14D001A0D76 /* BitmovinViewController.swift */; };
 		24DB7FE0261D7BD5009F7AE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7FDF261D7BD5009F7AE7 /* Assets.xcassets */; };
-		24DB7FDE261D7BD4009F7AE7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0110960E2028C7B800A70D38 /* Images.xcassets */; };
+		011096102028C7B800A70D38 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0110960E2028C7B800A70D38 /* Images.xcassets */; };
 		24DB7FE3261D7BD5009F7AE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7FE1261D7BD5009F7AE7 /* LaunchScreen.storyboard */; };
 		607FACD81AFB9204008FA782 /* AVFoundationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* AVFoundationViewController.swift */; };
 		01C26BE42083ED7B001A0D76 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C26BE32083ED7B001A0D76 /* WelcomeViewController.swift */; };
@@ -321,7 +321,7 @@
 				24DB7FCB261D7BBB009F7AE7 /* LaunchScreen.storyboard in Resources */,
 				24DB7FC8261D7BBB009F7AE7 /* Assets.xcassets in Resources */,
 				24DB7FC6261D7BB9009F7AE7 /* Main.storyboard in Resources */,
-				24DB7FDE261D7BD4009F7AE7 /* Images.xcassets in Resources */,
+				011096102028C7B800A70D38 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
