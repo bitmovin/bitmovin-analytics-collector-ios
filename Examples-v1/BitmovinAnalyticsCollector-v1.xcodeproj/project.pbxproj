@@ -21,7 +21,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		24DB7F9E261D7AD1009F7AE7 /* BitmovinAnalyticsCollector-v1-Examples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BitmovinAnalyticsCollector-v1-Examples.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24DB7FBC261D7BB9009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BitmovinAnalyticsCollector-v1-Example-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24DB7FBE261D7BB9009F7AE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24DB7FC0261D7BB9009F7AE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,7 +75,6 @@
 		24DB7F9F261D7AD1009F7AE7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				24DB7F9E261D7AD1009F7AE7 /* BitmovinAnalyticsCollector-v1-Examples.app */,
 				24DB7FBC261D7BB9009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-iOS.app */,
 				24DB7FD6261D7BD4009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-tvOS.app */,
 			);
@@ -113,23 +111,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		24DB7F9D261D7AD1009F7AE7 /* BitmovinAnalyticsCollector-v1-Examples */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 24DB7FB2261D7AD4009F7AE7 /* Build configuration list for PBXNativeTarget "BitmovinAnalyticsCollector-v1-Examples" */;
-			buildPhases = (
-				24DB7F9A261D7AD1009F7AE7 /* Sources */,
-				24DB7F9B261D7AD1009F7AE7 /* Frameworks */,
-				24DB7F9C261D7AD1009F7AE7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "BitmovinAnalyticsCollector-v1-Examples";
-			productName = "BitmovinAnalyticsCollector-v1-Examples";
-			productReference = 24DB7F9E261D7AD1009F7AE7 /* BitmovinAnalyticsCollector-v1-Examples.app */;
-			productType = "com.apple.product-type.application";
-		};
 		24DB7FBB261D7BB9009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 24DB7FCD261D7BBB009F7AE7 /* Build configuration list for PBXNativeTarget "BitmovinAnalyticsCollector-v1-Example-iOS" */;
@@ -184,7 +165,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 24DB7F99261D7AD1009F7AE7 /* Build configuration list for PBXProject "BitmovinAnalyticsCollector-v1-Examples" */;
+			buildConfigurationList = 24DB7F99261D7AD1009F7AE7 /* Build configuration list for PBXProject "BitmovinAnalyticsCollector-v1" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -197,7 +178,6 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				24DB7F9D261D7AD1009F7AE7 /* BitmovinAnalyticsCollector-v1-Examples */,
 				24DB7FBB261D7BB9009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-iOS */,
 				24DB7FD5261D7BD4009F7AE7 /* BitmovinAnalyticsCollector-v1-Example-tvOS */,
 			);
@@ -415,42 +395,6 @@
 			};
 			name = Release;
 		};
-		24DB7FB3261D7AD4009F7AE7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "BitmovinAnalyticsCollector-v1-Examples/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bitmovin.analytics.BitmovinAnalyticsCollector-v1-Examples";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		24DB7FB4261D7AD4009F7AE7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "BitmovinAnalyticsCollector-v1-Examples/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bitmovin.analytics.BitmovinAnalyticsCollector-v1-Examples";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		24DB7FCE261D7BBB009F7AE7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -530,20 +474,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		24DB7F99261D7AD1009F7AE7 /* Build configuration list for PBXProject "BitmovinAnalyticsCollector-v1-Examples" */ = {
+		24DB7F99261D7AD1009F7AE7 /* Build configuration list for PBXProject "BitmovinAnalyticsCollector-v1" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				24DB7FB0261D7AD4009F7AE7 /* Debug */,
 				24DB7FB1261D7AD4009F7AE7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		24DB7FB2261D7AD4009F7AE7 /* Build configuration list for PBXNativeTarget "BitmovinAnalyticsCollector-v1-Examples" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				24DB7FB3261D7AD4009F7AE7 /* Debug */,
-				24DB7FB4261D7AD4009F7AE7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
