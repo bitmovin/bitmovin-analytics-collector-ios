@@ -25,7 +25,7 @@ DESC
   s.subspec 'Core' do |core|
     core.source_files = 'BitmovinAnalyticsCollector/Classes/Collector/**/*.{swift}'
     
-    s.test_spec 'CoreTests' do |core_test_spec|
+    core.test_spec 'CoreTests' do |core_test_spec|
       core_test_spec.source_files = 'BitmovinAnalyticsCollector/Tests/CoreTests/**/*'
     end
   end
@@ -35,7 +35,7 @@ DESC
     bitmovinplayer.tvos.dependency 'BitmovinPlayer', '~>2.51'
     bitmovinplayer.ios.dependency 'BitmovinPlayer', '~>2.51'
     
-    s.test_spec 'BitmovinPlayerTests' do |bitmovinplayer_test_spec|
+    bitmovinplayer.test_spec 'BitmovinPlayerTests' do |bitmovinplayer_test_spec|
       bitmovinplayer_test_spec.source_files = 'BitmovinAnalyticsCollector/Tests/BitmovinPlayerTests/**/*'
     end
   end
@@ -43,18 +43,21 @@ DESC
   s.subspec 'AVPlayer' do |avplayer|
     avplayer.source_files = 'BitmovinAnalyticsCollector/Classes/AVPlayer/**/*.{swift}'
     
-    s.test_spec 'AVPlayerTests' do |avplayer_test_spec|
+    avplayer.test_spec 'AVPlayerTests' do |avplayer_test_spec|
       avplayer_test_spec.source_files = 'BitmovinAnalyticsCollector/Tests/AVPlayerTests/**/*'
     end
   end
 
-  s.subspec 'BitmovinPlayerV3' do |bitmovinplayer|
-    bitmovinplayer.source_files = 'BitmovinAnalyticsCollector/Classes/BitmovinPlayerV3/**/*.{swift}'    
-    bitmovinplayer.tvos.dependency 'BitmovinPlayer', '~>3.0'
-    bitmovinplayer.ios.dependency 'BitmovinPlayer', '~>3.0'
+  s.subspec 'BitmovinPlayerV3' do |bitmovinplayerv3|
+    bitmovinplayerv3.ios.deployment_target = '12.0'
+    bitmovinplayerv3.tvos.deployment_target = '12.0'
+
+    bitmovinplayerv3.source_files = 'BitmovinAnalyticsCollector/Classes/BitmovinPlayerV3/**/*.{swift}'    
+    bitmovinplayerv3.tvos.dependency 'BitmovinPlayer', '~>3.0.0-rc.4'
+    bitmovinplayerv3.ios.dependency 'BitmovinPlayer', '~>3.0.0-rc.4'
     
-    s.test_spec 'BitmovinPlayerV3Tests' do |bitmovinplayer_test_spec|
-      bitmovinplayer_test_spec.source_files = 'BitmovinAnalyticsCollector/Tests/BitmovinPlayerV3Tests/**/*'
+    bitmovinplayerv3.test_spec 'BitmovinPlayerV3Tests' do |bitmovinplayerv3_test_spec|
+      bitmovinplayerv3_test_spec.source_files = 'BitmovinAnalyticsCollector/Tests/BitmovinPlayerV3Tests/**/*'
     end
   end
 
