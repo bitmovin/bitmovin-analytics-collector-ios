@@ -96,8 +96,7 @@ pod 'BitmovinAnalyticsCollector/AVPlayer', git: 'https://github.com/bitmovin/bit
 use_frameworks!
 ```
 
-As of version 1.20.0, the possibility to include all available collectors at once was deprecated, as this would result in an incompatible
-dependency on both `BitmovinPlayer` v2 and v3. Instead, you will have to include all subspecs and specify the correct BitmovinPlayer version.
+As of v1.20.0 we support both Bitmovin v2 and v3 and thus had to change the default Podspec behavior. You now have to specify the correct Subspec referencing the correct player version.
 
 ### For Bitmovin Analytics Collector > 1.19.0
 
