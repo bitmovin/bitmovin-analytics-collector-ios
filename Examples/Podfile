@@ -3,20 +3,20 @@ source 'https://github.com/bitmovin/cocoapod-specs.git'
 
 pod 'BitmovinPlayer', '2.51.0'
 
-target 'BitmovinAnalyticsCollector-v1-Example-iOS' do
+target 'BitmovinAnalyticsCollector-Example-iOS' do
     use_frameworks!
     platform :ios, '9.0'
     pod 'BitmovinAnalyticsCollector', :path => '../BitmovinAnalyticsCollector.v1.podspec'
     pod 'GoogleAds-IMA-iOS-SDK', '3.11.1'
 end
 
-target 'BitmovinAnalyticsCollector-v1-Example-tvOS' do
+target 'BitmovinAnalyticsCollector-Example-tvOS' do
     use_frameworks!
     platform :tvos
     pod 'BitmovinAnalyticsCollector', :path => '../BitmovinAnalyticsCollector.v1.podspec'
 end
 
-target 'BitmovinAnalyticsCollector-v1-Tests-iOS' do
+target 'BitmovinAnalyticsCollector-Tests-iOS' do
     use_frameworks!
     platform :ios, '9.0'
     pod 'BitmovinAnalyticsCollector', :path => '../BitmovinAnalyticsCollector.v1.podspec', :testspecs => ['CoreTests', 'BitmovinPlayerTests', 'AVPlayerTests']
