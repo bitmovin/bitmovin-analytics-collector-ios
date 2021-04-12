@@ -49,12 +49,16 @@ DESC
   end
 
   s.subspec 'BitmovinPlayerV3' do |bitmovinplayerv3|
-    bitmovinplayerv3.ios.deployment_target = '12.0'
-    bitmovinplayerv3.tvos.deployment_target = '12.0'
+    #TODO Uncomment for PlayerV3
+    #bitmovinplayerv3.ios.deployment_target = '12.0'
+    #bitmovinplayerv3.tvos.deployment_target = '12.0'
 
     bitmovinplayerv3.source_files = 'BitmovinAnalyticsCollector/Classes/BitmovinPlayerV3/**/*.{swift}'    
-    bitmovinplayerv3.tvos.dependency 'BitmovinPlayer', '~>3.0.0-rc.4'
-    bitmovinplayerv3.ios.dependency 'BitmovinPlayer', '~>3.0.0-rc.4'
+    #TODO Uncomment for PlayerV3
+    #bitmovinplayerv3.tvos.dependency 'BitmovinPlayer', '~>3.0.0-rc.4'
+    #bitmovinplayerv3.ios.dependency 'BitmovinPlayer', '~>3.0.0-rc.4'
+    bitmovinplayerv3.tvos.dependency 'BitmovinPlayer', '~>2.51'
+    bitmovinplayerv3.ios.dependency 'BitmovinPlayer', '~>2.51'
     
     bitmovinplayerv3.test_spec 'BitmovinPlayerV3Tests' do |bitmovinplayerv3_test_spec|
       bitmovinplayerv3_test_spec.source_files = 'BitmovinAnalyticsCollector/Tests/BitmovinPlayerV3Tests/**/*'
