@@ -1,7 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/bitmovin/cocoapod-specs.git'
 
-pod 'BitmovinPlayer', '2.51.0'
+pod 'BitmovinPlayer', '3.0.0'
 
 target 'BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS' do
     use_frameworks!
