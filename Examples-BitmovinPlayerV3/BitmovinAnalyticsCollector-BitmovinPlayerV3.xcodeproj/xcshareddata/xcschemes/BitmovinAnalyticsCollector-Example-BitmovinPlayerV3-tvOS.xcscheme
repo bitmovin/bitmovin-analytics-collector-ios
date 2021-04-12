@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "24DB7FBB261D7BB9009F7AE7"
-               BuildableName = "BitmovinAnalyticsCollector-Example-iOS.app"
-               BlueprintName = "BitmovinAnalyticsCollector-Example-iOS"
-               ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
+               BlueprintIdentifier = "24DB7FD5261D7BD4009F7AE7"
+               BuildableName = "BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS.app"
+               BlueprintName = "BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS"
+               ReferencedContainer = "container:BitmovinAnalyticsCollector-BitmovinPlayerV3.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,10 +44,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "24DB7FBB261D7BB9009F7AE7"
-            BuildableName = "BitmovinAnalyticsCollector-Example-iOS.app"
-            BlueprintName = "BitmovinAnalyticsCollector-Example-iOS"
-            ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
+            BlueprintIdentifier = "24DB7FD5261D7BD4009F7AE7"
+            BuildableName = "BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS.app"
+            BlueprintName = "BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS"
+            ReferencedContainer = "container:BitmovinAnalyticsCollector-BitmovinPlayerV3.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -68,10 +68,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "24DB7FBB261D7BB9009F7AE7"
-            BuildableName = "BitmovinAnalyticsCollector-Example-iOS.app"
-            BlueprintName = "BitmovinAnalyticsCollector-Example-iOS"
-            ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
+            BlueprintIdentifier = "24DB7FD5261D7BD4009F7AE7"
+            BuildableName = "BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS.app"
+            BlueprintName = "BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS"
+            ReferencedContainer = "container:BitmovinAnalyticsCollector-BitmovinPlayerV3.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
