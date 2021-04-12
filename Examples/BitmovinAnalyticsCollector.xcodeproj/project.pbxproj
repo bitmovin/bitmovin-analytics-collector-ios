@@ -38,6 +38,8 @@
 		01C26BE32083ED7B001A0D76 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		01C26BE52083F14D001A0D76 /* BitmovinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitmovinViewController.swift; sourceTree = "<group>"; };
 		131DEC3EA3701F8CAE9AF90F /* Pods-BitmovinAnalyticsCollector-Tests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-Tests-iOS.debug.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-Tests-iOS/Pods-BitmovinAnalyticsCollector-Tests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		247009F426249C6C00232413 /* BitmovinAnalyticsCollector.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = BitmovinAnalyticsCollector.podspec; path = ../BitmovinAnalyticsCollector.podspec; sourceTree = "<group>"; };
+		247009F526249C6C00232413 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 		24DB7FBC261D7BB9009F7AE7 /* BitmovinAnalyticsCollector-Example-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BitmovinAnalyticsCollector-Example-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24DB7FBE261D7BB9009F7AE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24DB7FC5261D7BB9009F7AE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -57,7 +59,6 @@
 		607FACD71AFB9204008FA782 /* AVFoundationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundationViewController.swift; sourceTree = "<group>"; };
 		67D7D3032E40EEFC258C6F8D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		6B17F6D5F2DFB27EA81EC323 /* Pods_BitmovinAnalyticsCollector_Example_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_Example_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		76A4CC2782BA260CFC7363C9 /* BitmovinAnalyticsCollector.v1.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BitmovinAnalyticsCollector.v1.podspec; path = ../BitmovinAnalyticsCollector.v1.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8F1713A524AB3D64009ACECA /* AssetResourceLoaderDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetResourceLoaderDelegate.swift; sourceTree = "<group>"; };
 		8F1713A824AB3FAD009ACECA /* Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		8F1713A924AB3FAD009ACECA /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
@@ -189,7 +190,8 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				76A4CC2782BA260CFC7363C9 /* BitmovinAnalyticsCollector.v1.podspec */,
+				247009F426249C6C00232413 /* BitmovinAnalyticsCollector.podspec */,
+				247009F526249C6C00232413 /* CHANGELOG.md */,
 				67D7D3032E40EEFC258C6F8D /* README.md */,
 				A13FCB967E22402182A70074 /* LICENSE */,
 			);
