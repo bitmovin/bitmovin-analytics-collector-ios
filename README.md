@@ -79,8 +79,8 @@ The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` versi
 The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` version `>= 3.0.0`.
 
 ```ruby
-  pod 'BitmovinAnalyticsCollector/Core', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '2.0.0'
-  pod 'BitmovinAnalyticsCollector/BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '2.0.0'
+  pod 'BitmovinAnalyticsCollector/Core', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.19.0'
+  pod 'BitmovinAnalyticsCollector/BitmovinPlayerV3', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.19.0'
   source 'https://github.com/bitmovin/cocoapod-specs.git'
   pod 'BitmovinPlayer', '3.0.0'
 
@@ -96,24 +96,39 @@ pod 'BitmovinAnalyticsCollector/AVPlayer', git: 'https://github.com/bitmovin/bit
 use_frameworks!
 ```
 
-To include all available collectors, add the following lines (the dependency on `BitmovinPlayer` applies here as well):
+As of version 1.20.0, the possibility to include all available collectors at once was deprecated, as this would result in an incompatible
+dependency on both `BitmovinPlayer` v2 and v3. Instead, you will have to include all subspecs and specify the correct BitmovinPlayer version.
 
-### For Bitmovin Player v2.x.x
+### For Bitmovin Analytics Collector > 1.19.0
 
 ```ruby
-pod 'BitmovinAnalyticsCollector', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.19.0'
+pod 'BitmovinAnalyticsCollector/Core', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.19.0'
+pod 'BitmovinAnalyticsCollector/AVPlayer', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.19.0'
+pod 'BitmovinAnalyticsCollector/BitmovinPlayer', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.19.0'
 source 'https://github.com/bitmovin/cocoapod-specs.git'
 pod 'BitmovinPlayer', '2.51.0'
 
 use_frameworks!
 ```
 
-### For Bitmovin Player v3.x.x
+or
 
 ```ruby
-pod 'BitmovinAnalyticsCollector', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '2.0.0'
+pod 'BitmovinAnalyticsCollector/Core', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.19.0'
+pod 'BitmovinAnalyticsCollector/AVPlayer', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.19.0'
+pod 'BitmovinAnalyticsCollector/BitmovinPlayerV3', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.19.0'
 source 'https://github.com/bitmovin/cocoapod-specs.git'
 pod 'BitmovinPlayer', '3.0.0'
+
+use_frameworks!
+```
+
+### For Bitmovin Analytics Collector <= 1.19.0
+
+```ruby
+pod 'BitmovinAnalyticsCollector', git: 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', tag: '1.19.0'
+source 'https://github.com/bitmovin/cocoapod-specs.git'
+pod 'BitmovinPlayer', '2.51.0'
 
 use_frameworks!
 ```
