@@ -32,23 +32,17 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         //PlayerTech
         eventData.playerTech = "ios:bitmovin"
 
-        //Duration
-        if !player.duration.isNaN && !player.duration.isInfinite {
-            eventData.videoDuration = Int64(player.duration * BitmovinAnalyticsInternal.msInSec)
-        }
-
         //isCasting
         eventData.isCasting = player.isCasting
-
-        //isLive
-        eventData.isLive = self.isPlayerReady ? player.isLive : self.config.isLive
 
         //version
         if let sdkVersion = BitmovinPlayerUtil.playerVersion() {
             eventData.version = PlayerType.bitmovin.rawValue + "-" + sdkVersion
         }
         
-        if let sourceConfig = player.source?.sourceConfig {
+        if let source = player.source {
+            let sourceConfig = source.sourceConfig
+            // streamFormat & urls
             switch sourceConfig.type {
                 case SourceType.dash:
                     eventData.streamFormat = StreamType.dash.rawValue
@@ -61,11 +55,22 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
                     eventData.progUrl = sourceConfig.url.absoluteString
                 default: break;
             }
-        }
-
-        // drmType
-        if let drmType = self.drmPerformanceInfo?.drmType {
-            eventData.drmType = drmType
+            
+            // isLive & duration
+            let duration = source.duration
+            if (duration == 0) {
+                eventData.isLive = config.isLive
+            } else {
+                if (duration.isInfinite) {
+                    eventData.isLive = true;
+                } else {
+                    eventData.isLive = false;
+                    eventData.videoDuration = duration.milliseconds ?? 0
+                }
+            }
+        } else {
+            // player active Source is not available
+            eventData.isLive = config.isLive
         }
 
         // videoBitrate

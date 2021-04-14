@@ -106,23 +106,25 @@ class BitmovinViewController: UIViewController {
     }
     
     func getPlaylistConfig() -> PlaylistConfig? {
-        guard let streamUrl = URL(string: VideoAssets.redbull) else {
+        guard let redbullURL = URL(string: VideoAssets.redbull) else {
             return nil
         }
-        guard let streamUrl2 = URL(string: VideoAssets.sintel) else {
+        guard let sintelURL = URL(string: VideoAssets.sintel) else {
+            return nil
+        }
+        guard let liveSimURL = URL(string: VideoAssets.liveSim) else {
             return nil
         }
         
         
-        let sourceConfig = SourceConfig(url: streamUrl)!
-        let source = SourceFactory.create(from: sourceConfig)
-        let sourceConfig2 = SourceConfig(url: streamUrl2)!
-        let source2 = SourceFactory.create(from: sourceConfig2)
+        let redbullSource = SourceFactory.create(from: SourceConfig(url: redbullURL)!)
+        let sintelSource = SourceFactory.create(from: SourceConfig(url: sintelURL)!)
+        let liveSimSource = SourceFactory.create(from: SourceConfig(url: liveSimURL)!)
         
         let playlistOptions = PlaylistOptions(preloadAllSources: false)
                
         return PlaylistConfig(
-            sources: [source, source2],
+            sources: [redbullSource],
            options: playlistOptions
         )
     }
