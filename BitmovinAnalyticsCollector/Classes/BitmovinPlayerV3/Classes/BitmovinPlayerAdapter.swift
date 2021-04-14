@@ -68,6 +68,19 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
                     eventData.videoDuration = duration.milliseconds ?? 0
                 }
             }
+            
+            // drmType
+            if let drmConfig = sourceConfig.drmConfig {
+                if (drmConfig is WidevineConfig) {
+                    eventData.drmType = DrmType.widevine.rawValue
+                } else if (drmConfig is PlayReadyConfig) {
+                    eventData.drmType = DrmType.playready.rawValue
+                } else if (drmConfig is FairplayConfig) {
+                    eventData.drmType = DrmType.fairplay.rawValue
+                } else if (drmConfig is ClearKeyConfig) {
+                    eventData.drmType = DrmType.clearkey.rawValue
+                }
+            }
         } else {
             // player active Source is not available
             eventData.isLive = config.isLive
@@ -203,7 +216,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
             self.drmCertificateDownloadTime = downloadTimeInMs
         case BMPHttpRequestTypeDrmLicenseFairplay:
             let drmLoadTimeMs = (self.drmCertificateDownloadTime ?? 0) + (downloadTimeInMs ?? 0)
-            self.drmPerformanceInfo = DrmPerformanceInfo(drmType: DrmType.fairplay, drmLoadTime: drmLoadTimeMs)
+            self.drmPerformanceInfo = DrmPerformanceInfo(drmType: DrmType.fairplay.rawValue, drmLoadTime: drmLoadTimeMs)
             self.drmCertificateDownloadTime = nil
         default:
             return
