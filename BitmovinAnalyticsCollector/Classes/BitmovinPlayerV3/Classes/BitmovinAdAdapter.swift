@@ -22,7 +22,7 @@ public class BitmovinAdAdapter : NSObject, AdAdapter {
     }
     
     func isAutoPlayEnabled() -> Bool {
-        self.bitmovinPlayer.config.playbackConfiguration.isAutoplayEnabled
+        self.bitmovinPlayer.config.playbackConfig.isAutoplayEnabled
     }
 }
 

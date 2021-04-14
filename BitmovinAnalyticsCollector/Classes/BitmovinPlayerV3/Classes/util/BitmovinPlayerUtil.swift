@@ -4,7 +4,14 @@ import BitmovinPlayer
 public class BitmovinPlayerUtil {
 
     static func playerVersion() -> String? {
-        return Bundle(for: Player.self).object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+        let bundle = Bundle.allFrameworks.filter { bundle in
+            return bundle.bundleIdentifier == "com.bitmovin.player"
+        }
+        if let version = bundle.first?.infoDictionary?["CFBundleShortVersionString"] as? String {
+            return version
+        }
+
+        return "invalid"
     }
     
     static func getAdPositionFromString(string: String?)-> AdPosition? {
@@ -23,14 +30,14 @@ public class BitmovinPlayerUtil {
         }
     }
     
-    static func getAdTagTypeFromAdTag(adTag: AdTag)-> AdTagType {
+    static func getAdTagTypeFromAdTag(adTag: AdTag)-> AnalyticsAdTagType {
         switch adTag.type {
-            case BMPAdTagType.VAST:
-                return AdTagType.VAST;
-            case BMPAdTagType.VMAP:
-                return AdTagType.VMAP;
+            case AdTagType.vast:
+                return AnalyticsAdTagType.VAST;
+            case AdTagType.vmap:
+                return AnalyticsAdTagType.VMAP;
             default:
-                return AdTagType.UNKNOWN;
+                return AnalyticsAdTagType.UNKNOWN;
         }
     }
     
