@@ -25,6 +25,8 @@
 		8F1713AD24AB3FAD009ACECA /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713A924AB3FAD009ACECA /* Stream.swift */; };
 		8F1713AF24AB3FAD009ACECA /* FairPlayConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713AA24AB3FAD009ACECA /* FairPlayConfiguration.swift */; };
 		8F54717224A37D8D008B31C2 /* BitmovinDrmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F54717124A37D8D008B31C2 /* BitmovinDrmViewController.swift */; };
+		EC6FFDD22626C01E00E279B5 /* AdAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6FFDD12626C01E00E279B5 /* AdAssets.swift */; };
+		EC6FFDD72626C08A00E279B5 /* VideoAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6FFDD62626C08A00E279B5 /* VideoAssets.swift */; };
 		EC93565C2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC93565B2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift */; };
 		F7A1963969BB789BF719FEE8 /* Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 860F3AF97FD280A819D3DDBB /* Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_iOS.framework */; };
 		FD9D062A7E57D8925D31C82B /* Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0A9FF2316030D6AB65BEE5B /* Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_tvOS.framework */; };
@@ -66,6 +68,8 @@
 		D0A9FF2316030D6AB65BEE5B /* Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D939952312A34A01F88A5956 /* Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS.release.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		DADEAD710CCEBACD21256FCC /* Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.debug.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		EC6FFDD12626C01E00E279B5 /* AdAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdAssets.swift; sourceTree = "<group>"; };
+		EC6FFDD62626C08A00E279B5 /* VideoAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAssets.swift; sourceTree = "<group>"; };
 		EC93565B2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugBitmovinPlayerListener.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,6 +139,8 @@
 				01C26BE52083F14D001A0D76 /* BitmovinViewController.swift */,
 				EC93565B2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift */,
 				8F54717124A37D8D008B31C2 /* BitmovinDrmViewController.swift */,
+				EC6FFDD12626C01E00E279B5 /* AdAssets.swift */,
+				EC6FFDD62626C08A00E279B5 /* VideoAssets.swift */,
 			);
 			path = "BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS";
 			sourceTree = "<group>";
@@ -460,6 +466,8 @@
 			files = (
 				24DB7FBF261D7BB9009F7AE7 /* AppDelegate.swift in Sources */,
 				8F1713AD24AB3FAD009ACECA /* Stream.swift in Sources */,
+				EC6FFDD72626C08A00E279B5 /* VideoAssets.swift in Sources */,
+				EC6FFDD22626C01E00E279B5 /* AdAssets.swift in Sources */,
 				011096092028C74C00A70D38 /* PlayerView.swift in Sources */,
 				01C26BE42083ED7B001A0D76 /* WelcomeViewController.swift in Sources */,
 				8F1713AB24AB3FAD009ACECA /* Asset.swift in Sources */,
