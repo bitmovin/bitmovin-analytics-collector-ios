@@ -131,6 +131,14 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return Util.timeIntervalToCMTime(_: player.currentTime)
         }
     }
+    
+    func onErrorEvent(_ errorData: ErrorData) {
+        if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
+            stateMachine.onPlayAttemptFailed(withError: errorData)
+        } else {
+            stateMachine.error(withError: errorData, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        }
+    }
 }
 
 extension BitmovinPlayerAdapter: PlayerListener {
@@ -232,11 +240,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
 
     func onPlayerError(_ event: PlayerErrorEvent, player: Player) {
         let errorData = ErrorData(code: Int(event.code.rawValue), message: event.message, data: nil)
-        if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
-            stateMachine.onPlayAttemptFailed(withError: errorData)
-        } else {
-            stateMachine.error(withError: errorData, time: Util.timeIntervalToCMTime(_: player.currentTime))
-        }
+        onErrorEvent(errorData)
     }
 
     func transitionToPausedOrBufferingOrPlaying() {
@@ -272,4 +276,11 @@ extension BitmovinPlayerAdapter: PlayerListener {
         transitionToPausedOrBufferingOrPlaying()
     }
 
+}
+
+extension BitmovinPlayerAdapter: SourceListener {
+    func onSourceError(_ event: SourceErrorEvent, player: Player) {
+        let errorData = ErrorData(code: Int(event.code.rawValue), message: event.message, data: nil)
+        onErrorEvent(errorData)
+    }
 }
