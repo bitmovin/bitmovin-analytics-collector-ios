@@ -1,5 +1,3 @@
-import Foundation
-
 // source: https://developers.google.com/interactive-media-ads/docs/sdks/android/client-side/tags
 class AdAssets {
 

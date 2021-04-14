@@ -1,4 +1,3 @@
-import Foundation
 import BitmovinPlayer
 
 class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {

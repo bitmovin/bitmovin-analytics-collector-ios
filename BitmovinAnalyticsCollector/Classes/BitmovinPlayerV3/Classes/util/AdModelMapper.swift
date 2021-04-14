@@ -1,5 +1,5 @@
-import Foundation
 import BitmovinPlayer
+
 public class AdModelMapper {
     
     // AdBreak Mapper

@@ -1,5 +1,4 @@
 import BitmovinPlayer
-import Foundation
 
 public class BitmovinAdAdapter : NSObject, AdAdapter {
     private var bitmovinPlayer: Player

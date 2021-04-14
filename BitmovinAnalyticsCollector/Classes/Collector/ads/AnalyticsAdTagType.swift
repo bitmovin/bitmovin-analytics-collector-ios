@@ -1,5 +1,3 @@
-import Foundation
-
 public enum AnalyticsAdTagType: String {
     case VAST = "vast"
     case VMAP = "vmap"

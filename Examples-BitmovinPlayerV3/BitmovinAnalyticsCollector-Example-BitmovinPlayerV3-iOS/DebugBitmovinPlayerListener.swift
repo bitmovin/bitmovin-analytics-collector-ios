@@ -1,12 +1,3 @@
-//
-//  DebugPlayerListener.swift
-//  BitmovinAnalyticsCollector_Example
-//
-//  Created by Thomas Sabe on 28.04.20.
-//  Copyright © 2020 CocoaPods. All rights reserved.
-//
-
-import Foundation
 import BitmovinPlayer
 
 class DebugBitmovinPlayerEvents: NSObject, PlayerListener, SourceListener {
