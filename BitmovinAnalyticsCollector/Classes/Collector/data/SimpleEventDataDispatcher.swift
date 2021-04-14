@@ -22,6 +22,7 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
         let licenseCall = LicenseCall(config: config)
         licenseCall.authenticate { [weak self] success in
             if success {
+                print("LicenseCall succeeded")
                 self?.enabled = true
                 if let events = self?.events.enumerated().reversed() {
                     for (index, eventData) in events {
@@ -36,6 +37,7 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
                     }
                 }
             } else {
+                print("LicenseCall didn't succeed")
                 self?.enabled = false
                 NotificationCenter.default.post(name: .licenseFailed, object: self)
             }
