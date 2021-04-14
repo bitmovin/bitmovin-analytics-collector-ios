@@ -8,7 +8,7 @@ public class AnalyticsAdBreak {
     var scheduleTime: TimeInterval?
     var replaceContentDuration: TimeInterval?
     var preloadOffset: Int64?
-    var tagType: AdTagType?
+    var tagType: AnalyticsAdTagType?
     var tagUrl: String?
     var persistent: Bool?
     var fallbackIndex: Int = 0
