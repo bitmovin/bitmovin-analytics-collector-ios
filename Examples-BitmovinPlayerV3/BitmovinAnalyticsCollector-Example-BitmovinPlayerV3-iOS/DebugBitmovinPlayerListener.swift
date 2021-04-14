@@ -9,40 +9,12 @@
 import Foundation
 import BitmovinPlayer
 
-class DebugBitmovinPlayerEvents: NSObject, PlayerListener {
-    func onPlay(_ event: PlayEvent) {
-        print("onPlay")
+class DebugBitmovinPlayerEvents: NSObject, PlayerListener, SourceListener {
+    func onEvent(_ event: Event, player: Player) {
+        print("onEvent PlayerListener: \(event.name)")
     }
     
-    func onPaused(_ event: PausedEvent) {
-        print("onPause")
-    }
-    
-    func onReady(_ event: ReadyEvent) {
-        print("onReady")
-    }
-    
-    func onPlaying(_ event: PlayingEvent) {
-        print("onPlaying")
-    }
-    
-    func onSeek(_ event: SeekEvent) {
-        print("onSeek")
-    }
-    
-    func onSeeked(_ event: SeekedEvent) {
-        print("onSeeked")
-    }
-    
-    func onStallStarted(_ event: StallStartedEvent) {
-        print("onStallStarted")
-    }
-    
-    func onStallEnded(_ event: StallEndedEvent) {
-        print("onStallEnded")
-    }
-     
-    func onError(_ event: ErrorEvent) {
-        print("onError")
+    func onEvent(_ event: SourceEvent, source: Source) {
+        print("onEvent SourceListener: \(event.name) for source: \(source.sourceConfig.url)")
     }
 }
