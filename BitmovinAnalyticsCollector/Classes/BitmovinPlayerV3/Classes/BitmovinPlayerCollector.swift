@@ -12,7 +12,7 @@ public class BitmovinPlayerCollector : BitmovinAnalyticsInternal {
      */
     @objc public func attachPlayer(player: Player) {
         let autoplay = getIsAutoplayEnabled(player.config, player)
-        attach(adapter: BitmovinPlayerAdapter(player: player, config: config, stateMachine: stateMachine), autoplay: autoplay)
+        attach(adapter: BitmovinPlayerAdapter(player: player, config: config, stateMachine: stateMachine, sourceMetadata: sources), autoplay: autoplay)
         if (self.adAnalytics != nil) {
             attachAd(adAdapter: BitmovinAdAdapter(bitmovinPlayer: player, adAnalytics: self.adAnalytics!))
         }

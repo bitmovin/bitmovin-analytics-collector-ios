@@ -3,6 +3,7 @@ import BitmovinPlayer
 class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
     private var player: Player
+    private var sourceMetadata: Array<BitmovinSourceMetadata>
     private var isStalling: Bool
     private var isSeeking: Bool
     private var isMonitoring = false
@@ -11,11 +12,12 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var drmCertificateDownloadTime: Int64?
     internal var drmDownloadTime: Int64?
 
-    init(player: Player, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
+    init(player: Player, config: BitmovinAnalyticsConfig, stateMachine: StateMachine, sourceMetadata: Array<BitmovinSourceMetadata>) {
         self.player = player
         self.config = config
         self.isStalling = false
         self.isSeeking = false
+        self.sourceMetadata = sourceMetadata
         super.init(stateMachine: stateMachine)
         startMonitoring()
     }
@@ -272,7 +274,20 @@ extension BitmovinPlayerAdapter: PlayerListener {
         }
     }
     
+    func onSourceMetadataChanged(_ event: SourceMetadataChangedEvent, player: Player) {
+        print("BitmovinAdapter: onSourceMetadataChanged \(event.name)")
+    }
+    
+    func onSourceLoad(_ event: SourceLoadedEvent, source: Source) {
+        print("BitmovinAdapter: onSourceLoad \(source.sourceConfig.url)")
+    }
+    
+    func onSourceLoaded(_ event: SourceLoadedEvent, source: Source) {
+        print("BitmovinAdapter: onSourceLoaded \(source.sourceConfig.url)")
+    }
+    
     func onSourceUnload(_ event: SourceUnloadEvent, player: Player) {
+        print("BitmovinAdapter: onSourceUnload")
         if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
             stateMachine.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed)
         }
@@ -280,6 +295,10 @@ extension BitmovinPlayerAdapter: PlayerListener {
     
     func onSourceUnloaded(_ event: SourceUnloadedEvent, player: Player) {
         stateMachine.reset()
+    }
+    
+    func onPlaylistTransition(_ event: PlaylistTransitionEvent, player: Player) {
+        print("BitmovinAdapter: onPlaylistTransition from: \(event.from.sourceConfig.url) to: \(event.to.sourceConfig.url)")
     }
     
     func onSubtitleChanged(_ event: SubtitleChangedEvent, player: Player) {
