@@ -3,12 +3,13 @@ import BitmovinPlayer
 class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
     private var player: Player
-    internal var drmPerformanceInfo: DrmPerformanceInfo?
     private var isStalling: Bool
     private var isSeeking: Bool
+    private var isMonitoring = false
+    
     /// DRM certificate download time in milliseconds
     private var drmCertificateDownloadTime: Int64?
-    private var isMonitoring = false
+    internal var drmDownloadTime: Int64?
 
     init(player: Player, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
@@ -140,10 +141,6 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         isStalling = false
     }
     
-    func getDrmPerformanceInfo() -> DrmPerformanceInfo? {
-        return self.drmPerformanceInfo
-    }
-    
     var currentTime: CMTime? {
         get {
             return Util.timeIntervalToCMTime(_: player.currentTime)
@@ -215,8 +212,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
             // This request is the first that happens when initializing the DRM system
             self.drmCertificateDownloadTime = downloadTimeInMs
         case BMPHttpRequestTypeDrmLicenseFairplay:
-            let drmLoadTimeMs = (self.drmCertificateDownloadTime ?? 0) + (downloadTimeInMs ?? 0)
-            self.drmPerformanceInfo = DrmPerformanceInfo(drmType: DrmType.fairplay.rawValue, drmLoadTime: drmLoadTimeMs)
+            self.drmDownloadTime = (self.drmCertificateDownloadTime ?? 0) + (downloadTimeInMs ?? 0)
             self.drmCertificateDownloadTime = nil
         default:
             return
