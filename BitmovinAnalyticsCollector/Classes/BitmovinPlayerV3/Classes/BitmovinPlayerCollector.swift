@@ -2,6 +2,7 @@ import BitmovinPlayer
 
 public class BitmovinPlayerCollector : BitmovinAnalyticsInternal {
     
+    
     @objc public override init(config: BitmovinAnalyticsConfig) {
         super.init(config: config);
     }
@@ -15,6 +16,10 @@ public class BitmovinPlayerCollector : BitmovinAnalyticsInternal {
         if (self.adAnalytics != nil) {
             attachAd(adAdapter: BitmovinAdAdapter(bitmovinPlayer: player, adAnalytics: self.adAnalytics!))
         }
+    }
+    
+    @objc public func addSourceMetadata(playerSource: Source, sourceMetadata: SourceMetadata) {
+        
     }
     
     func getIsAutoplayEnabled(_ playerConfiguration: PlayerConfig, _ player: Player) -> Bool {

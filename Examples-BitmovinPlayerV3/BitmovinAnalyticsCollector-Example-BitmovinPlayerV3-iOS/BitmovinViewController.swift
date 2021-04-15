@@ -58,7 +58,7 @@ class BitmovinViewController: UIViewController {
         self.playerView.backgroundColor = .black
 
         // Create player configuration
-        guard let config = getPlayerConfig() else {
+        guard let config = getPlayerConfig(enableAds: false) else {
             return
         }
         
@@ -111,6 +111,10 @@ class BitmovinViewController: UIViewController {
         let liveSimURL = URL(string: VideoAssets.liveSim)!
         
         let redbullSource = SourceFactory.create(from: SourceConfig(url: redbullURL)!)
+        let redbullMetadata = BitmovinSourceMetadata(
+            playerSource: redbullSource,
+            title: "redbull")
+        
         let sintelSource = SourceFactory.create(from: SourceConfig(url: sintelURL)!)
         let liveSimSource = SourceFactory.create(from: SourceConfig(url: liveSimURL)!)
         
