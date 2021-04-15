@@ -3,7 +3,7 @@ import BitmovinPlayer
 class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
     private var player: Player
-    private var sourceMetadata: Array<BitmovinSourceMetadata>
+    private var sources: Array<BitmovinSourceMetadata>
     private var isStalling: Bool
     private var isSeeking: Bool
     private var isMonitoring = false
@@ -11,13 +11,15 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     /// DRM certificate download time in milliseconds
     private var drmCertificateDownloadTime: Int64?
     internal var drmDownloadTime: Int64?
-
+    
+    internal var activeSourceMetadata: SourceMetadata? = nil
+    
     init(player: Player, config: BitmovinAnalyticsConfig, stateMachine: StateMachine, sourceMetadata: Array<BitmovinSourceMetadata>) {
         self.player = player
         self.config = config
         self.isStalling = false
         self.isSeeking = false
-        self.sourceMetadata = sourceMetadata
+        self.sources = sourceMetadata
         super.init(stateMachine: stateMachine)
         startMonitoring()
     }
@@ -274,16 +276,18 @@ extension BitmovinPlayerAdapter: PlayerListener {
         }
     }
     
+    
     func onSourceMetadataChanged(_ event: SourceMetadataChangedEvent, player: Player) {
         print("BitmovinAdapter: onSourceMetadataChanged \(event.name)")
     }
     
-    func onSourceLoad(_ event: SourceLoadedEvent, source: Source) {
-        print("BitmovinAdapter: onSourceLoad \(source.sourceConfig.url)")
-    }
     
-    func onSourceLoaded(_ event: SourceLoadedEvent, source: Source) {
-        print("BitmovinAdapter: onSourceLoaded \(source.sourceConfig.url)")
+    func onSourceLoaded(_ event: SourceLoadedEvent, player: Player) {
+        print("BitmovinAdapter: onSourceLoaded \(event.source.sourceConfig.url)")
+        // TODO some debugging here
+        activeSourceMetadata = self.sources.first(where: { (s) -> Bool in
+            s.playerSource === event.source
+        })
     }
     
     func onSourceUnload(_ event: SourceUnloadEvent, player: Player) {

@@ -71,7 +71,7 @@ class BitmovinViewController: UIViewController {
         let player = PlayerFactory.create(playerConfig: config)
 
         // Listen to player events
-        player.add(listener: debugger)
+//        player.add(listener: debugger)
         
         // attach player to collector
         analyticsCollector.attachPlayer(player: player)
@@ -121,7 +121,7 @@ class BitmovinViewController: UIViewController {
         let playlistOptions = PlaylistOptions(preloadAllSources: false)
                
         return PlaylistConfig(
-            sources: [redbullSource],
+            sources: [redbullSource, sintelSource],
            options: playlistOptions
         )
     }
