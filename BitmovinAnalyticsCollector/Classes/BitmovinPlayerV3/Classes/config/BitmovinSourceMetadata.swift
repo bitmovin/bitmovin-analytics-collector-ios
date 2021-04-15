@@ -22,7 +22,7 @@ public class BitmovinSourceMetadata: SourceMetadata {
                    experimentName: experimentName)
     }
     
-    var playerSource: Source
+    @objc public private(set) var playerSource: Source
     
     
 }
