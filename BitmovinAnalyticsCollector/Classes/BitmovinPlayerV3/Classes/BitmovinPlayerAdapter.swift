@@ -12,9 +12,17 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var drmCertificateDownloadTime: Int64?
     internal var drmDownloadTime: Int64?
     
+    private var overwriteCurrentSource: Source? = nil
+    
+    private var currentSource: Source? {
+        get {
+            return overwriteCurrentSource != nil ? overwriteCurrentSource : player.source
+        }
+    }
+    
     private var currentSourceMetadata: SourceMetadata? {
         get {
-            let playerSource = player.source
+            let playerSource = currentSource
             let sourceMetdata = sources.first { (s) -> Bool in
                 s.playerSource === playerSource
             }
@@ -30,6 +38,10 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.sources = sourceMetadata
         super.init(stateMachine: stateMachine)
         startMonitoring()
+    }
+    
+    func resetSourceState() {
+        overwriteCurrentSource = nil
     }
 
     func createEventData() -> EventData {
@@ -53,7 +65,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             eventData.version = PlayerType.bitmovin.rawValue + "-" + sdkVersion
         }
         
-        if let source = player.source {
+        if let source = currentSource{
             let sourceConfig = source.sourceConfig
             // streamFormat & urls
             switch sourceConfig.type {
@@ -174,6 +186,13 @@ extension BitmovinPlayerAdapter: PlayerListener {
         
         if (isStalling && stateMachine.state != .seeking && stateMachine.state != .buffering) {
              stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        }
+    }
+    
+    func onTimeChanged(_ event: TimeChangedEvent, player: Player) {
+        print("onTimeChanged")
+        if(player.isPlaying && !isSeeking && !isStalling){
+            stateMachine.playing(time: Util.timeIntervalToCMTime(_: player.currentTime))
         }
     }
     
@@ -307,6 +326,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     
     func onPlaylistTransition(_ event: PlaylistTransitionEvent, player: Player) {
         print("BitmovinAdapter: onPlaylistTransition from: \(event.from.sourceConfig.url) to: \(event.to.sourceConfig.url)")
+        overwriteCurrentSource = event.from
         let previousVideoDuration = Util.timeIntervalToCMTime(_:event.from.duration)
         let nextVideotimeStart = self.currentTime
         stateMachine.sourceChange(previousVideoDuration, nextVideotimeStart)

@@ -113,13 +113,15 @@ class BitmovinViewController: UIViewController {
         let redbullSource = SourceFactory.create(from: SourceConfig(url: redbullURL)!)
         let redbullMetadata = BitmovinSourceMetadata(
             playerSource: redbullSource,
-            title: "redbull")
+            title: "redbull",
+            experimentName: "experiment-bitmovin-v3-upgrade")
         self.analyticsCollector.addSourceMetadata(sourceMetadata: redbullMetadata)
         
         let sintelSource = SourceFactory.create(from: SourceConfig(url: sintelURL)!)
         let sintelMetadata = BitmovinSourceMetadata(playerSource: sintelSource,
                                                     videoId: "sintelID",
-                                                    title: "sintel")
+                                                    title: "sintel",
+                                                    experimentName: "experiment-bitmovin-v3-upgrade")
         self.analyticsCollector.addSourceMetadata(sourceMetadata: sintelMetadata)
         
         let liveSimSource = SourceFactory.create(from: SourceConfig(url: liveSimURL)!)

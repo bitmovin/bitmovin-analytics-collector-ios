@@ -125,6 +125,10 @@ public class BitmovinAnalyticsInternal: NSObject {
         return eventData
     }
     
+    internal func reset(){
+        eventDataDispatcher.reset()
+    }
+    
 }
 
 extension BitmovinAnalyticsInternal: StateMachineDelegate {
@@ -216,6 +220,11 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
     func stateMachineDidAudioChange(_ stateMachine: StateMachine) {
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
+    }
+    
+    func stateMachineSourceChange() {
+        adapter?.resetSourceState()
+        reset()
     }
     
     func stateMachineStopsCollecting() {

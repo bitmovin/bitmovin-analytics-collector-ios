@@ -6,4 +6,5 @@ protocol EventDataDispatcher {
     func enable()
     func disable()
     func clear()
+    func reset()
 }

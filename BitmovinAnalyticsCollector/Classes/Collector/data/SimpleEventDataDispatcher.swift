@@ -75,4 +75,8 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
 
     func clear() {
     }
+    
+    func reset() {
+        self.sequenceNumber = 0
+    }
 }
