@@ -33,7 +33,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
 
     func createEventData() -> EventData {
-        let eventData: EventData = EventData(config: config, impressionId: stateMachine.impressionId)
+        let eventData: EventData = EventData(config: config, sourceMetadata: currentSourceMetadata, impressionId: stateMachine.impressionId)
         decorateEventData(eventData: eventData)
         return eventData
     }
