@@ -22,6 +22,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var timeObserver: Any?
     private let errorHandler: ErrorHandler
     
+    var currentSourceMetadata: SourceMetadata? = nil
+    
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.config = config
