@@ -204,7 +204,7 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         eventData?.playerStartupTime = 1
         eventData?.startupTime = duration + 1
         eventData?.supportedVideoCodecs = Util.getSupportedVideoCodecs()
-        print("bitmovinAnalyticsInternal: startup for source \(adapter?.activeSourceMetadata?.title)")
+        print("bitmovinAnalyticsInternal: startup for source \(adapter?.currentSourceMetadata?.title)")
         eventData?.state = "startup"
         sendEventData(eventData: eventData)
     }

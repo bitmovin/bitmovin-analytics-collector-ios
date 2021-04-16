@@ -12,7 +12,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var drmCertificateDownloadTime: Int64?
     internal var drmDownloadTime: Int64?
     
-    internal var activeSourceMetadata: SourceMetadata? = nil
+    internal var currentSourceMetadata: SourceMetadata? = nil
     
     init(player: Player, config: BitmovinAnalyticsConfig, stateMachine: StateMachine, sourceMetadata: Array<BitmovinSourceMetadata>) {
         self.player = player
@@ -285,7 +285,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onSourceLoaded(_ event: SourceLoadedEvent, player: Player) {
         print("BitmovinAdapter: onSourceLoaded \(event.source.sourceConfig.url)")
         // TODO some debugging here
-        activeSourceMetadata = self.sources.first(where: { (s) -> Bool in
+        currentSourceMetadata = self.sources.first(where: { (s) -> Bool in
             s.playerSource === event.source
         })
     }
