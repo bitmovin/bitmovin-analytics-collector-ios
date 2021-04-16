@@ -8,5 +8,4 @@ protocol PlayerAdapter {
     func destroy()
     var drmDownloadTime: Int64? { get }
     var currentTime: CMTime? { get }
-    var currentSourceMetadata: SourceMetadata? { get }
 }

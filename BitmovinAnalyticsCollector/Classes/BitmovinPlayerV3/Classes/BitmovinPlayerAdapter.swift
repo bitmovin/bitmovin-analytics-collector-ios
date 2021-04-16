@@ -12,7 +12,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var drmCertificateDownloadTime: Int64?
     internal var drmDownloadTime: Int64?
     
-    internal var currentSourceMetadata: SourceMetadata? {
+    private var currentSourceMetadata: SourceMetadata? {
         get {
             let playerSource = player.source
             let sourceMetdata = sources.first { (s) -> Bool in
@@ -307,6 +307,9 @@ extension BitmovinPlayerAdapter: PlayerListener {
     
     func onPlaylistTransition(_ event: PlaylistTransitionEvent, player: Player) {
         print("BitmovinAdapter: onPlaylistTransition from: \(event.from.sourceConfig.url) to: \(event.to.sourceConfig.url)")
+        let previousVideoDuration = Util.timeIntervalToCMTime(_:event.from.duration)
+        let nextVideotimeStart = self.currentTime
+        stateMachine.sourceChange(previousVideoDuration, nextVideotimeStart)
     }
     
     func onSubtitleChanged(_ event: SubtitleChangedEvent, player: Player) {

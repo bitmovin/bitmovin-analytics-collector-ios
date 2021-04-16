@@ -117,6 +117,11 @@ class BitmovinViewController: UIViewController {
         self.analyticsCollector.addSourceMetadata(sourceMetadata: redbullMetadata)
         
         let sintelSource = SourceFactory.create(from: SourceConfig(url: sintelURL)!)
+        let sintelMetadata = BitmovinSourceMetadata(playerSource: sintelSource,
+                                                    videoId: "sintelID",
+                                                    title: "sintel")
+        self.analyticsCollector.addSourceMetadata(sourceMetadata: sintelMetadata)
+        
         let liveSimSource = SourceFactory.create(from: SourceConfig(url: liveSimURL)!)
         
         let playlistOptions = PlaylistOptions(preloadAllSources: false)

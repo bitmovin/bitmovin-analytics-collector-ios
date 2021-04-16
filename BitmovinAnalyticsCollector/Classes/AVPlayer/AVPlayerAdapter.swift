@@ -22,8 +22,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var timeObserver: Any?
     private let errorHandler: ErrorHandler
     
-    var currentSourceMetadata: SourceMetadata? = nil
-    
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.config = config
@@ -226,7 +224,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
 
     public func createEventData() -> EventData {
-        let eventData: EventData = EventData(config: config, impressionId: stateMachine.impressionId)
+        let eventData: EventData = EventData(config: config, sourceMetadata: nil, impressionId: stateMachine.impressionId)
         decorateEventData(eventData: eventData)
         return eventData
     }

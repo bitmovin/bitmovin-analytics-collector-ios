@@ -121,6 +121,12 @@ public class StateMachine {
         transitionState(destinationState: .error, time: time)
     }
     
+    public func sourceChange(_ previousVideoDuration: CMTime?, _ nextVideotimeStart: CMTime?) {
+        transitionState(destinationState: .sourceChanged, time: previousVideoDuration)
+        // TODO reset things
+        transitionState(destinationState: .startup, time: nextVideotimeStart)
+    }
+    
     public func rebufferTimeoutReached(time: CMTime?) {
         self.errorData = ErrorData.ANALYTICS_BUFFERING_TIMEOUT_REACHED
         transitionState(destinationState: .error, time: time)
