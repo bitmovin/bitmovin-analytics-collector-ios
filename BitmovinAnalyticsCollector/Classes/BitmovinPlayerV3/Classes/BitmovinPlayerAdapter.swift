@@ -43,6 +43,8 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
     
     func resetSourceState() {
+        drmDownloadTime = nil
+        drmCertificateDownloadTime = nil
         overwriteCurrentSource = nil
     }
 
@@ -296,7 +298,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
 
     func onPlaybackFinished(_ event: PlaybackFinishedEvent, player: Player) {
         stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.duration))
-        stateMachine.disableHeartbeat()
+        stateMachine.reset()
     }
 
     func onPlayerError(_ event: PlayerErrorEvent, player: Player) {

@@ -66,6 +66,7 @@ public class StateMachine {
         resetVideoStartFailed()
         qualityChangeCounter.resetInterval()
         rebufferingTimeoutHandler.resetInterval()
+        delegate?.stateMachineResetSourceState()
         print("Generated Bitmovin Analytics impression ID: " +  impressionId.lowercased())
     }
     
@@ -128,7 +129,7 @@ public class StateMachine {
     public func sourceChange(_ previousVideoDuration: CMTime?, _ nextVideotimeStart: CMTime?) {
         transitionState(destinationState: .sourceChanged, time: previousVideoDuration)
         resetSourceState()
-        delegate?.stateMachineSourceChange()
+
         transitionState(destinationState: .startup, time: nextVideotimeStart)
     }
     

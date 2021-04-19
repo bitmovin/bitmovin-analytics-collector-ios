@@ -230,7 +230,7 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         sendEventData(eventData: eventData)
     }
     
-    func stateMachineSourceChange() {
+    func stateMachineResetSourceState() {
         adapter?.resetSourceState()
         reset()
     }
