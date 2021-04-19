@@ -126,7 +126,7 @@ public class BitmovinAnalyticsInternal: NSObject {
     }
     
     internal func reset(){
-        eventDataDispatcher.reset()
+        eventDataDispatcher.resetSourceState()
     }
     
 }
