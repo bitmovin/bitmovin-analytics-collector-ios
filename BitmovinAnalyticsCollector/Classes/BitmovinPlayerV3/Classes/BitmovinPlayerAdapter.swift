@@ -14,6 +14,8 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     
     private var overwriteCurrentSource: Source? = nil
     
+    private var isSourceChange: Bool = false
+    
     private var currentSource: Source? {
         get {
             return overwriteCurrentSource != nil ? overwriteCurrentSource : player.source
@@ -182,6 +184,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
 extension BitmovinPlayerAdapter: PlayerListener {
     func onPlay(_ event: PlayEvent, player: Player) {
+        print("BitmovinAdapter: onPlay isPlaying: \(player.isPlaying) isPaused: \(player.isPaused) isStalling: \(isStalling)")
         stateMachine.play(time: nil)
         
         if (isStalling && stateMachine.state != .seeking && stateMachine.state != .buffering) {
@@ -190,13 +193,22 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
     
     func onTimeChanged(_ event: TimeChangedEvent, player: Player) {
-        print("onTimeChanged")
+        print("BitmovinAdapter: onTimeChanged \(event.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused) isStalling: \(isStalling)")
+        
+        // TODO rework this logic with physical device
+        if (isSourceChange){
+            isSourceChange = false
+            return
+        }
+        
+        
         if(player.isPlaying && !isSeeking && !isStalling){
             stateMachine.playing(time: Util.timeIntervalToCMTime(_: player.currentTime))
         }
     }
     
     func onPlaying(_ event: PlayingEvent, player: Player) {
+        print("BitmovinAdapter: onPlaying isPlaying: \(player.isPlaying) isPaused: \(player.isPaused) isStalling: \(isStalling)")
         if (!isSeeking && !isStalling) {
             stateMachine.playing(time: Util.timeIntervalToCMTime(_: player.currentTime))
         }
@@ -220,17 +232,20 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onStallStarted(_ event: StallStartedEvent, player: Player) {
+        print("BitmovinAdapter: \(player.currentTime) onStallStarted isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
         isStalling = true
         stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
         
     }
 
     func onStallEnded(_ event: StallEndedEvent, player: Player) {
+        print("BitmovinAdapter: \(player.currentTime) onStallEnded isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
         isStalling = false
         transitionToPausedOrBufferingOrPlaying()
     }
 
     func onSeek(_ event: SeekEvent, player: Player) {
+        print("BitmovinAdapter: \(player.currentTime) onSeek isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
         isSeeking = true
         stateMachine.transitionState(destinationState: .seeking, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
@@ -272,6 +287,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onSeeked(_ event: SeekedEvent, player: Player) {
+        print("BitmovinAdapter: \(player.currentTime) onSeeked isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
         isSeeking = false
         if (!isStalling) {
             transitionToPausedOrBufferingOrPlaying()
@@ -330,6 +346,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
         let previousVideoDuration = Util.timeIntervalToCMTime(_:event.from.duration)
         let nextVideotimeStart = self.currentTime
         stateMachine.sourceChange(previousVideoDuration, nextVideotimeStart)
+        isSourceChange = true
     }
     
     func onSubtitleChanged(_ event: SubtitleChangedEvent, player: Player) {
