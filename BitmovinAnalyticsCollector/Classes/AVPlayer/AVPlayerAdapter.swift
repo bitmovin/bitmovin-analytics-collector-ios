@@ -27,16 +27,15 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.config = config
         self.errorHandler = ErrorHandler()
         super.init(stateMachine: stateMachine)
-        resetState()
+        resetSourceState()
         startMonitoring()
     }
     
     deinit {
         self.destroy()
     }
-
-    private func resetState() {
-        isPlaying = false
+    
+    func resetSourceState() {
         currentVideoBitrate = 0
         previousTime = nil
         drmType = nil
@@ -63,6 +62,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return
         }
         isMonitoring = false
+        isPlaying = false
         
         if let playerItem = player.currentItem {
             stopMonitoringPlayerItem(playerItem: playerItem)
@@ -76,7 +76,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             timeObserver = nil
         }
         
-        resetState()
+        resetSourceState()
     }
 
     private func updateDrmPerformanceInfo(_ playerItem: AVPlayerItem) {
