@@ -52,6 +52,17 @@
                                     <action selector="seekToSecondSourceButtonWasPressed:" destination="qyX-aG-JwL" eventType="touchUpOutside" id="tl5-Gh-epn"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="b9U-Qc-UKN">
+                                <rect key="frame" x="189" y="5" width="122" height="53"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="122" id="TkE-Aw-s9h"/>
+                                </constraints>
+                                <state key="normal" title="Source change"/>
+                                <connections>
+                                    <action selector="sourceChangeWasPressed:" destination="qyX-aG-JwL" eventType="touchUpInside" id="I1U-pq-VPA"/>
+                                    <action selector="sourceChangeWasPressed:" destination="qyX-aG-JwL" eventType="touchUpOutside" id="M25-Ha-Co2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -59,11 +70,14 @@
                             <constraint firstAttribute="trailing" secondItem="Ycp-7C-vXc" secondAttribute="trailing" id="4s1-tz-N5J"/>
                             <constraint firstItem="Ycp-7C-vXc" firstAttribute="leading" secondItem="GA2-RJ-ciT" secondAttribute="leading" id="5ns-Hk-IuO"/>
                             <constraint firstItem="Ezi-Ba-qhC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oaP-Nr-D6S" secondAttribute="trailing" constant="8" symbolic="YES" id="6er-Vr-p9y"/>
+                            <constraint firstItem="b9U-Qc-UKN" firstAttribute="leading" secondItem="B8x-R2-uMy" secondAttribute="trailing" constant="1" id="DfV-iI-pU3"/>
                             <constraint firstItem="B8x-R2-uMy" firstAttribute="leading" secondItem="oaP-Nr-D6S" secondAttribute="trailing" constant="8" symbolic="YES" id="EIk-cz-3zI"/>
                             <constraint firstItem="Ezi-Ba-qhC" firstAttribute="trailing" secondItem="GA2-RJ-ciT" secondAttribute="trailingMargin" id="Esq-zo-Nx4"/>
+                            <constraint firstItem="b9U-Qc-UKN" firstAttribute="top" secondItem="B8x-R2-uMy" secondAttribute="top" id="Gog-BW-57I"/>
                             <constraint firstItem="Ycp-7C-vXc" firstAttribute="bottom" secondItem="2r6-uL-X9O" secondAttribute="top" id="S3N-M6-kkx"/>
                             <constraint firstItem="oaP-Nr-D6S" firstAttribute="leading" secondItem="GA2-RJ-ciT" secondAttribute="leadingMargin" constant="5" id="UjI-el-UHq"/>
                             <constraint firstItem="oaP-Nr-D6S" firstAttribute="top" secondItem="WKW-BU-uaz" secondAttribute="bottom" constant="8" symbolic="YES" id="V7n-JC-IWF"/>
+                            <constraint firstItem="Ycp-7C-vXc" firstAttribute="top" secondItem="b9U-Qc-UKN" secondAttribute="bottom" constant="8" symbolic="YES" id="Xv0-5l-dsV"/>
                             <constraint firstItem="Ycp-7C-vXc" firstAttribute="top" secondItem="B8x-R2-uMy" secondAttribute="bottom" constant="8" symbolic="YES" id="c1p-Py-KyM"/>
                             <constraint firstItem="Ycp-7C-vXc" firstAttribute="top" secondItem="oaP-Nr-D6S" secondAttribute="bottom" constant="8" id="kOQ-CX-3Yk"/>
                             <constraint firstItem="Ezi-Ba-qhC" firstAttribute="baseline" secondItem="oaP-Nr-D6S" secondAttribute="baseline" id="oBa-4X-S96"/>

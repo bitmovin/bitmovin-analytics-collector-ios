@@ -12,6 +12,7 @@ class BitmovinViewController: UIViewController {
     @IBOutlet var doneButton: UIButton!
     @IBOutlet var reloadButton: UIButton!
     @IBOutlet var seekToSecondSourceButton: UIButton!
+    @IBOutlet var sourceChange: UIButton!
 
     deinit {
         player?.destroy()
@@ -147,6 +148,18 @@ class BitmovinViewController: UIViewController {
 
     @IBAction func doneButtonWasPressed(_: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func sourceChangeWasPressed(_: UIButton) {
+        let liveSimURL = URL(string: VideoAssets.liveSim)!
+        let liveSimSource = SourceFactory.create(from: SourceConfig(url: liveSimURL)!)
+        let liveMetadata = BitmovinSourceMetadata(playerSource: liveSimSource,
+                                                    videoId: "liveSim",
+                                                    title: "liveSim",
+                                                    experimentName: "experiment-bitmovin-v3-upgrade")
+
+        self.analyticsCollector.addSourceMetadata(sourceMetadata: liveMetadata)
+        player?.load(source: liveSimSource)
     }
     
     @IBAction func seekToSecondSourceButtonWasPressed(_: UIButton) {
