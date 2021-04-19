@@ -9,7 +9,7 @@
         <!--Bitmovin View Controller-->
         <scene sceneID="uVr-af-MAr">
             <objects>
-                <viewController id="qyX-aG-JwL" customClass="BitmovinViewController" customModule="BitmovinAnalyticsCollector_Example_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="qyX-aG-JwL" customClass="BitmovinViewController" customModule="BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WKW-BU-uaz"/>
                         <viewControllerLayoutGuide type="bottom" id="2r6-uL-X9O"/>
@@ -29,8 +29,8 @@
                                     <action selector="doneButtonWasPressed:" destination="JsM-hC-usJ" eventType="touchUpInside" id="pGf-nP-Wle"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ycp-7C-vXc">
-                                <rect key="frame" x="0.0" y="46" width="375" height="678"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ycp-7C-vXc">
+                                <rect key="frame" x="0.0" y="66" width="375" height="658"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ezi-Ba-qhC">
@@ -41,16 +41,30 @@
                                     <action selector="reloadButtonWasPressed:" destination="JsM-hC-usJ" eventType="touchUpInside" id="lZX-Hv-Su3"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="B8x-R2-uMy">
+                                <rect key="frame" x="66" y="5" width="122" height="53"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="122" id="fAI-5b-H0P"/>
+                                </constraints>
+                                <state key="normal" title="Seek to Second Source"/>
+                                <connections>
+                                    <action selector="seekToSecondSourceButtonWasPressed:" destination="qyX-aG-JwL" eventType="touchUpInside" id="Ixp-cr-9ae"/>
+                                    <action selector="seekToSecondSourceButtonWasPressed:" destination="qyX-aG-JwL" eventType="touchUpOutside" id="tl5-Gh-epn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="B8x-R2-uMy" firstAttribute="top" secondItem="WKW-BU-uaz" secondAttribute="bottom" constant="5" id="0uC-xE-mrZ"/>
                             <constraint firstAttribute="trailing" secondItem="Ycp-7C-vXc" secondAttribute="trailing" id="4s1-tz-N5J"/>
                             <constraint firstItem="Ycp-7C-vXc" firstAttribute="leading" secondItem="GA2-RJ-ciT" secondAttribute="leading" id="5ns-Hk-IuO"/>
                             <constraint firstItem="Ezi-Ba-qhC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oaP-Nr-D6S" secondAttribute="trailing" constant="8" symbolic="YES" id="6er-Vr-p9y"/>
+                            <constraint firstItem="B8x-R2-uMy" firstAttribute="leading" secondItem="oaP-Nr-D6S" secondAttribute="trailing" constant="8" symbolic="YES" id="EIk-cz-3zI"/>
                             <constraint firstItem="Ezi-Ba-qhC" firstAttribute="trailing" secondItem="GA2-RJ-ciT" secondAttribute="trailingMargin" id="Esq-zo-Nx4"/>
                             <constraint firstItem="Ycp-7C-vXc" firstAttribute="bottom" secondItem="2r6-uL-X9O" secondAttribute="top" id="S3N-M6-kkx"/>
                             <constraint firstItem="oaP-Nr-D6S" firstAttribute="leading" secondItem="GA2-RJ-ciT" secondAttribute="leadingMargin" constant="5" id="UjI-el-UHq"/>
                             <constraint firstItem="oaP-Nr-D6S" firstAttribute="top" secondItem="WKW-BU-uaz" secondAttribute="bottom" constant="8" symbolic="YES" id="V7n-JC-IWF"/>
+                            <constraint firstItem="Ycp-7C-vXc" firstAttribute="top" secondItem="B8x-R2-uMy" secondAttribute="bottom" constant="8" symbolic="YES" id="c1p-Py-KyM"/>
                             <constraint firstItem="Ycp-7C-vXc" firstAttribute="top" secondItem="oaP-Nr-D6S" secondAttribute="bottom" constant="8" id="kOQ-CX-3Yk"/>
                             <constraint firstItem="Ezi-Ba-qhC" firstAttribute="baseline" secondItem="oaP-Nr-D6S" secondAttribute="baseline" id="oBa-4X-S96"/>
                         </constraints>
@@ -59,16 +73,17 @@
                     <connections>
                         <outlet property="doneButton" destination="oaP-Nr-D6S" id="8Wl-eo-Jhh"/>
                         <outlet property="playerView" destination="Ycp-7C-vXc" id="on5-ay-N2Q"/>
+                        <outlet property="seekToSecondSourceButton" destination="B8x-R2-uMy" id="uPe-f7-qEa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JsM-hC-usJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1102" y="1278"/>
+            <point key="canvasLocation" x="-1103.2" y="1277.5862068965519"/>
         </scene>
         <!--Bitmovin Drm View Controller-->
         <scene sceneID="qlK-59-hWB">
             <objects>
-                <viewController id="WKG-UI-yDS" customClass="BitmovinDrmViewController" customModule="BitmovinAnalyticsCollector_Example_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WKG-UI-yDS" customClass="BitmovinDrmViewController" customModule="BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VuN-mU-JTz"/>
                         <viewControllerLayoutGuide type="bottom" id="H6T-Co-jIe"/>
@@ -130,7 +145,7 @@
         <!--Welcome View Controller-->
         <scene sceneID="dFc-85-HjE">
             <objects>
-                <viewController id="db8-gG-r1q" customClass="WelcomeViewController" customModule="BitmovinAnalyticsCollector_Example_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="db8-gG-r1q" customClass="WelcomeViewController" customModule="BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O5y-xJ-1vu"/>
                         <viewControllerLayoutGuide type="bottom" id="lAi-8J-524"/>

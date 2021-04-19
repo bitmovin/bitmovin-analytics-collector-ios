@@ -56,6 +56,9 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
     func add(eventData: EventData) {
         eventData.sequenceNumber = self.sequenceNumber
         self.sequenceNumber += 1
+        
+        print("Sample sent: \(eventData.impressionId) \(eventData.state) startup time:\(eventData.startupTime) duration:\(eventData.duration) errorCode:\(eventData.errorCode) errorMsg:\(eventData.errorMessage) videoTimeStart:\(eventData.videoTimeStart) videoTimeEnd:\(eventData.videoTimeEnd) videoTitle:\(eventData.videoTitle)")
+        
         if enabled {
             httpClient.post(urlString: self.analyticsBackendUrl, json: eventData.jsonString(), completionHandler: nil)
         } else {

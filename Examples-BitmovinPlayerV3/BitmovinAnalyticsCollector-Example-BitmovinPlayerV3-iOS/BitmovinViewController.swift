@@ -11,6 +11,7 @@ class BitmovinViewController: UIViewController {
     @IBOutlet var playerView: UIView!
     @IBOutlet var doneButton: UIButton!
     @IBOutlet var reloadButton: UIButton!
+    @IBOutlet var seekToSecondSourceButton: UIButton!
 
     deinit {
         player?.destroy()
@@ -146,6 +147,19 @@ class BitmovinViewController: UIViewController {
 
     @IBAction func doneButtonWasPressed(_: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func seekToSecondSourceButtonWasPressed(_: UIButton) {
+        guard let p = player else {
+            return
+        }
+        
+        if (p.playlist.sources.count < 2){
+            return
+        }
+        
+        let secondSource = p.playlist.sources[1]
+        p.playlist.seek(source: secondSource, time: 10)
     }
 
     @IBAction func reloadButtonWasPressed(_: UIButton) {
