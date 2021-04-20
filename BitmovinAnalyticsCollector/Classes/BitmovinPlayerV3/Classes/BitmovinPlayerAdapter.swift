@@ -234,20 +234,20 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onStallStarted(_ event: StallStartedEvent, player: Player) {
-        print("BitmovinAdapter: \(player.currentTime) onStallStarted isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
+        print("BitmovinAdapter: onStallStarted \(player.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
         isStalling = true
         stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
         
     }
 
     func onStallEnded(_ event: StallEndedEvent, player: Player) {
-        print("BitmovinAdapter: \(player.currentTime) onStallEnded isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
+        print("BitmovinAdapter: onStallEnded \(player.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
         isStalling = false
         transitionToPausedOrBufferingOrPlaying()
     }
 
     func onSeek(_ event: SeekEvent, player: Player) {
-        print("BitmovinAdapter: \(player.currentTime) onSeek isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
+        print("BitmovinAdapter: onSeek \(player.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
         isSeeking = true
         stateMachine.transitionState(destinationState: .seeking, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
@@ -289,7 +289,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onSeeked(_ event: SeekedEvent, player: Player) {
-        print("BitmovinAdapter: \(player.currentTime) onSeeked isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
+        print("BitmovinAdapter: onSeeked \(player.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
         isSeeking = false
         if (!isStalling) {
             transitionToPausedOrBufferingOrPlaying()
@@ -343,7 +343,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
     
     func onPlaylistTransition(_ event: PlaylistTransitionEvent, player: Player) {
-        print("BitmovinAdapter: onPlaylistTransition from: \(event.from.sourceConfig.url) to: \(event.to.sourceConfig.url)")
+        print("------------- \nBitmovinAdapter: onPlaylistTransition \(player.currentTime) \n\t isPlaying: \(player.isPlaying) \n\t isPaused: \(player.isPaused) \n\t from: \(event.from.sourceConfig.url) \n\t to: \(event.to.sourceConfig.url)")
         overwriteCurrentSource = event.from
         let previousVideoDuration = Util.timeIntervalToCMTime(_:event.from.duration)
         let nextVideotimeStart = self.currentTime

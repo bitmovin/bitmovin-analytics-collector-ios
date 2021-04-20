@@ -57,7 +57,7 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
         eventData.sequenceNumber = self.sequenceNumber
         self.sequenceNumber += 1
         
-        print("Sample sent: \(eventData.impressionId) \(eventData.state) startup time:\(eventData.startupTime) duration:\(eventData.duration) errorCode:\(eventData.errorCode) errorMsg:\(eventData.errorMessage) videoTimeStart:\(eventData.videoTimeStart) videoTimeEnd:\(eventData.videoTimeEnd) videoTitle:\(eventData.videoTitle)")
+        print("Sample sent: \(eventData.impressionId) \(eventData.state) \n\t startuptime:\(eventData.startupTime) \n\t duration:\(eventData.duration) \n\t errorCode:\(eventData.errorCode) \n\t errorMsg:\(eventData.errorMessage) \n\t videoTimeStart:\(eventData.videoTimeStart) \n\t videoTimeEnd:\(eventData.videoTimeEnd) \n\t videoTitle:\(eventData.videoTitle)")
         
         if enabled {
             httpClient.post(urlString: self.analyticsBackendUrl, json: eventData.jsonString(), completionHandler: nil)
