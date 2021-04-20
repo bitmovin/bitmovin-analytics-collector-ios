@@ -26,5 +26,9 @@ internal class BitmovinSourceMetadataProvider: NSObject {
             s.playerSource === p
         })
     }
+    
+    func clear() {
+        sources.removeAll()
+    }
 }
 

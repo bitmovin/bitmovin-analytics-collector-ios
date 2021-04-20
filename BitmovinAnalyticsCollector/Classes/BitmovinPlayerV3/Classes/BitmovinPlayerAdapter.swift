@@ -38,6 +38,10 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         startMonitoring()
     }
     
+    deinit {
+        sourceMetadataProvider.clear()
+    }
+    
     func resetSourceState() {
         drmDownloadTime = nil
         drmCertificateDownloadTime = nil
