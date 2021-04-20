@@ -14,7 +14,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     
     private var overwriteCurrentSource: Source? = nil
     
-    private var isSourceChange: Bool = false
+    private var isSourceChangeing: Bool = false
     
     private var currentSource: Source? {
         get {
@@ -197,14 +197,15 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onTimeChanged(_ event: TimeChangedEvent, player: Player) {
         print("BitmovinAdapter: onTimeChanged \(event.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused) isStalling: \(isStalling)")
         
-        // TODO rework this logic with physical device
-        if (isSourceChange){
-            isSourceChange = false
+        // after PlaylistTransition the first onTimeChanged will reset the currentTime of playback to 0
+        // with this flag we ignore the first onTimeChanged event
+        if (isSourceChangeing) {
+            isSourceChangeing = false
             return
         }
         
         
-        if(player.isPlaying && !isSeeking && !isStalling){
+        if (player.isPlaying && !isSeeking && !isStalling) {
             stateMachine.playing(time: Util.timeIntervalToCMTime(_: player.currentTime))
         }
     }
@@ -345,11 +346,11 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onPlaylistTransition(_ event: PlaylistTransitionEvent, player: Player) {
         print("------------- \nBitmovinAdapter: onPlaylistTransition \(player.currentTime) \n\t isPlaying: \(player.isPlaying) \n\t isPaused: \(player.isPaused) \n\t from: \(event.from.sourceConfig.url) \n\t to: \(event.to.sourceConfig.url)")
         overwriteCurrentSource = event.from
-        let previousVideoDuration = Util.timeIntervalToCMTime(_:event.from.duration)
+        let previousVideoDuration = Util.timeIntervalToCMTime(_: event.from.duration)
         let nextVideotimeStart = self.currentTime
         let shouldStartup = player.isPlaying
         stateMachine.sourceChange(previousVideoDuration, nextVideotimeStart, shouldStartup)
-        isSourceChange = true
+        isSourceChangeing = true
     }
     
     func onSubtitleChanged(_ event: SubtitleChangedEvent, player: Player) {
