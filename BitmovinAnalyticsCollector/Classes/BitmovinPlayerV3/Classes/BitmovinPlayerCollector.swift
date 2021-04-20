@@ -1,7 +1,7 @@
 import BitmovinPlayer
 
 public class BitmovinPlayerCollector : BitmovinAnalyticsInternal {
-    private var sources: Array<BitmovinSourceMetadata> = []
+    private var sourceMetadataProvider: BitmovinSourceMetadataProvider = BitmovinSourceMetadataProvider()
     
     @objc public override init(config: BitmovinAnalyticsConfig) {
         super.init(config: config);
@@ -12,23 +12,14 @@ public class BitmovinPlayerCollector : BitmovinAnalyticsInternal {
      */
     @objc public func attachPlayer(player: Player) {
         let autoplay = getIsAutoplayEnabled(player.config, player)
-        attach(adapter: BitmovinPlayerAdapter(player: player, config: config, stateMachine: stateMachine, sourceMetadata: sources), autoplay: autoplay)
+        attach(adapter: BitmovinPlayerAdapter(player: player, config: config, stateMachine: stateMachine, sourceMetadataProvider: sourceMetadataProvider), autoplay: autoplay)
         if (self.adAnalytics != nil) {
             attachAd(adAdapter: BitmovinAdAdapter(bitmovinPlayer: player, adAnalytics: self.adAnalytics!))
         }
     }
     
     @objc public func addSourceMetadata(sourceMetadata: BitmovinSourceMetadata) {
-        
-        let sourceIndex = sources.firstIndex(where: { (s) -> Bool in
-            s.playerSource === sourceMetadata.playerSource
-        })
-        
-        if let index = sourceIndex {
-            self.sources.remove(at: index)
-        }
-        
-        self.sources.append(sourceMetadata)
+        sourceMetadataProvider.add(sourceMetadata: sourceMetadata)
     }
     
     func getIsAutoplayEnabled(_ playerConfiguration: PlayerConfig, _ player: Player) -> Bool {
