@@ -347,7 +347,8 @@ extension BitmovinPlayerAdapter: PlayerListener {
         overwriteCurrentSource = event.from
         let previousVideoDuration = Util.timeIntervalToCMTime(_:event.from.duration)
         let nextVideotimeStart = self.currentTime
-        stateMachine.sourceChange(previousVideoDuration, nextVideotimeStart)
+        let shouldStartup = player.isPlaying
+        stateMachine.sourceChange(previousVideoDuration, nextVideotimeStart, shouldStartup)
         isSourceChange = true
     }
     
