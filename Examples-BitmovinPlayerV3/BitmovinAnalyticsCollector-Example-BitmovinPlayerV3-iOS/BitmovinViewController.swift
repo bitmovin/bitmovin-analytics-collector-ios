@@ -137,7 +137,7 @@ class BitmovinViewController: UIViewController {
                
         return PlaylistConfig(
             sources: [redbullSource, sintelSource],
-           options: playlistOptions
+            options: playlistOptions
         )
     }
 

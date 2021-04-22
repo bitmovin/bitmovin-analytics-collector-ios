@@ -208,14 +208,14 @@ extension BitmovinPlayerAdapter: PlayerListener {
         
         
         if (player.isPlaying && !isSeeking && !isStalling) {
-            stateMachine.playing(time: Util.timeIntervalToCMTime(_: player.currentTime))
+            stateMachine.playing(time: currentTime)
         }
     }
     
     func onPlaying(_ event: PlayingEvent, player: Player) {
         print("BitmovinAdapter: onPlaying isPlaying: \(player.isPlaying) isPaused: \(player.isPaused) isStalling: \(isStalling)")
         if (!isSeeking && !isStalling) {
-            stateMachine.playing(time: Util.timeIntervalToCMTime(_: player.currentTime))
+            stateMachine.playing(time: currentTime)
         }
     }
 
@@ -234,7 +234,6 @@ extension BitmovinPlayerAdapter: PlayerListener {
 
     func onReady(_ event: ReadyEvent, player: Player) {
         print("BitmovinAdapter: onReady \(player.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
-        self.isPlayerReady = true
     }
 
     func onStallStarted(_ event: StallStartedEvent, player: Player) {
