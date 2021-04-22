@@ -150,6 +150,14 @@ extension BitmovinPlayerAdapter: PlayerListener {
             stateMachine.playing(time: Util.timeIntervalToCMTime(_: player.currentTime))
         }
     }
+    
+    func onTimeChanged(_ event: TimeChangedEvent) {
+        guard player.isPlaying && !isSeeking && !isStalling else {
+            return
+        }
+        
+        stateMachine.playing(time: currentTime)
+    }
 
     func onAdBreakStarted(_ event: AdBreakStartedEvent) {
         stateMachine.transitionState(destinationState: .ad, time: currentTime)
