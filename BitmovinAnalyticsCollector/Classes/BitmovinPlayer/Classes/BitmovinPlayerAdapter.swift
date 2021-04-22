@@ -205,20 +205,40 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onVideoDownloadQualityChanged(_ event: VideoDownloadQualityChangedEvent) {
-        let videoBitrateDidChange = didVideoBitrateChange(old: event.videoQualityOld, new: event.videoQualityNew)
-        // there is a qualityChange event happening before the `onReady` method. Do not transition into any state.
-        if isPlayerReady && !isStalling && !isSeeking && videoBitrateDidChange {
-            stateMachine.videoQualityChange(time: currentTime)
-            transitionToPausedOrBufferingOrPlaying()
+        // no quality change before video started
+        guard stateMachine.didStartPlayingVideo else {
+            return
         }
+        
+        // no quality change during buffering and seeking
+        guard !isStalling && !isSeeking else {
+            return
+        }
+        
+        // no quality change if quality didn't change
+        let videoBitrateDidChange = didVideoBitrateChange(old: event.videoQualityOld, new: event.videoQualityNew)
+        guard !videoBitrateDidChange else {
+            return
+        }
+        
+        stateMachine.videoQualityChange(time: currentTime)
+        transitionToPausedOrBufferingOrPlaying()
     }
     
     // No check if audioBitrate changes because no data available
     func onAudioChanged(_ event: AudioChangedEvent) {
-        if isPlayerReady && !isStalling && !isSeeking {
-            stateMachine.audioQualityChange(time: currentTime)
-            transitionToPausedOrBufferingOrPlaying()
+        // no audio change before video started
+        guard stateMachine.didStartPlayingVideo else {
+            return
         }
+        
+        // no audio change during buffering and seeking
+        guard !isStalling && !isSeeking else {
+            return
+        }
+        
+        stateMachine.audioQualityChange(time: currentTime)
+        transitionToPausedOrBufferingOrPlaying()
     }
 
     func onSeeked(_ event: SeekedEvent) {
