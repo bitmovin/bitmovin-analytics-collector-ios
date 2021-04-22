@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+- [Internal] updated Bitmovin Player dependency for BitmovinPlayerV3 to `3.0.0-rc.5`
 - [Internal] Split project structure to support both BitmovinPlayer v2 and v3
 
 ## 1.19.0

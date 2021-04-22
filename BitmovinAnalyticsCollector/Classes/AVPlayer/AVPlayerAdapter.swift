@@ -16,7 +16,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var currentVideoBitrate: Double = 0
     private var previousTime: CMTime?
     
-    internal var drmPerformanceInfo: DrmPerformanceInfo?
+    internal var drmDownloadTime: Int64?
+    private var drmType: String?
     
     private var timeObserver: Any?
     private let errorHandler: ErrorHandler
@@ -38,7 +39,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         isPlaying = false
         currentVideoBitrate = 0
         previousTime = nil
-        drmPerformanceInfo = nil
+        drmType = nil
+        drmDownloadTime = nil
     }
     
     public func startMonitoring() {
@@ -79,9 +81,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
     private func updateDrmPerformanceInfo(_ playerItem: AVPlayerItem) {
         if playerItem.asset.hasProtectedContent {
-            drmPerformanceInfo = DrmPerformanceInfo(drmType: DrmType.fairplay)
+            drmType = DrmType.fairplay.rawValue
         } else {
-            drmPerformanceInfo = nil
+            drmType = nil
         }
     }
 
@@ -243,9 +245,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         eventData.isCasting = player.isExternalPlaybackActive
 
         // DRM Type
-        if let drmType = self.drmPerformanceInfo?.drmType {
-            eventData.drmType = drmType
-        }
+        eventData.drmType = self.drmType
+        
 
         // isLive
         let duration = player.currentItem?.duration

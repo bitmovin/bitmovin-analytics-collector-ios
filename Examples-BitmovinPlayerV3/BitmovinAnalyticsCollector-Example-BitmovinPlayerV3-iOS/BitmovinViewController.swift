@@ -1,4 +1,3 @@
-import Foundation
 import BitmovinPlayer
 import BitmovinAnalyticsCollector
 import UIKit
@@ -8,8 +7,7 @@ class BitmovinViewController: UIViewController {
     private var analyticsCollector: BitmovinPlayerCollector
     private var config: BitmovinAnalyticsConfig
     private let debugger: DebugBitmovinPlayerEvents = DebugBitmovinPlayerEvents()
-    let url = URL(string: "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
-    let corruptedUrl = URL(string: "http://bitdash-a.akamaihd.net/content/analytics-teststreams/redbull-parkour/corrupted_first_segment.mpd")
+
     @IBOutlet var playerView: UIView!
     @IBOutlet var doneButton: UIButton!
     @IBOutlet var reloadButton: UIButton!
@@ -34,35 +32,21 @@ class BitmovinViewController: UIViewController {
         config.title = "iOS HLS Static Asset with Bitmovin Player"
         config.path = "/vod/breadcrumb/"
         config.isLive = false
-        config.ads = true
+        config.ads = false
         analyticsCollector = BitmovinPlayerCollector(config: config)
         print("Setup of collector finished")
 
         super.init(coder: aDecoder)
     }
     
-    static let AD_SOURCE_1 = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dredirecterror&nofb=1&correlator=";
-    static let AD_SOURCE_2 = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator=";
-    static let AD_SOURCE_3 = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator=";
-    static let AD_SOURCE_4 = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dredirectlinear&correlator=";
-    static let AD_SOURCE_5  = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dredirecterror&nofb=1&correlator=";
-    static let AD_SOURCE_VMAP = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpostoptimizedpod&cmsid=496&vid=short_onecue&correlator=";
-
-    
-    func getAdvertisingConfiguration() -> AdvertisingConfiguration {
-        let adScource1 = AdSource(tag: urlWithCorrelator(adTag: BitmovinViewController.AD_SOURCE_1), ofType: BMPAdSourceType.IMA)
-        let adScource2 = AdSource(tag: urlWithCorrelator(adTag: BitmovinViewController.AD_SOURCE_2), ofType: BMPAdSourceType.IMA)
-        let adScource3 = AdSource(tag: urlWithCorrelator(adTag: BitmovinViewController.AD_SOURCE_3), ofType: BMPAdSourceType.IMA)
-        let adScource4 = AdSource(tag: urlWithCorrelator(adTag: BitmovinViewController.AD_SOURCE_4), ofType: BMPAdSourceType.IMA)
-        let adScource5 = AdSource(tag: urlWithCorrelator(adTag: BitmovinViewController.AD_SOURCE_5), ofType: BMPAdSourceType.IMA)
-        let adScourceVMAP = AdSource(tag: urlWithCorrelator(adTag: BitmovinViewController.AD_SOURCE_VMAP), ofType: BMPAdSourceType.IMA)
+    func getAdvertisingConfiguration() -> AdvertisingConfig {
+        let adScource = AdSource(tag: urlWithCorrelator(adTag: AdAssets.SINGLE_SKIPPABLE_INLINE), ofType: AdSourceType.ima)
         
-        let preRoll = AdItem(adSources: [adScource4], atPosition: "pre")
+        let preRoll = AdItem(adSources: [adScource], atPosition: "pre")
 //        let midRoll = AdItem(adSources: [adScource], atPosition: "mid")
-        let customMidRoll = AdItem(adSources: [adScource4], atPosition: "10%")
+//        let customMidRoll = AdItem(adSources: [adScource], atPosition: "10%")
 //        let postRoll = AdItem(adSources: [adScource], atPosition: "post")
-
-        return AdvertisingConfiguration(schedule: [preRoll])
+        return AdvertisingConfig(schedule: [preRoll])
     }
     
     func urlWithCorrelator(adTag: String) -> URL {
@@ -77,46 +61,65 @@ class BitmovinViewController: UIViewController {
         guard let config = getPlayerConfig() else {
             return
         }
+        
+        // Create playlistConfig
+        guard let playlistConfig = getPlaylistConfig() else {
+            return
+        }
             
         // Create player based on player configuration
-        let player = Player(configuration: config)
+        let player = PlayerFactory.create(playerConfig: config)
 
+        // Listen to player events
         player.add(listener: debugger)
+        
+        // attach player to collector
         analyticsCollector.attachPlayer(player: player)
+        
         // Create player view and pass the player instance to it
-        let playerBoundary = BMPBitmovinPlayerView(player: player, frame: .zero)
+        let playerBoundaries = BitmovinPlayer.PlayerView(player: player, frame: .zero)
 
-        playerBoundary.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        playerBoundary.frame = playerView.bounds
+        playerBoundaries.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        playerBoundaries.frame = playerView.bounds
 
-        playerView.addSubview(playerBoundary)
-        playerView.bringSubviewToFront(playerBoundary)
+        playerView.addSubview(playerBoundaries)
+        playerView.bringSubviewToFront(playerBoundaries)
+        
+        // Load the playlist configuration into the player instance
+        player.load(playlistConfig: playlistConfig)
 
         self.player = player
     }
     
-    func getPlayerConfig(enableAds: Bool = false) -> PlayerConfiguration? {
-        guard let streamUrl = url else {
-            return nil
-        }
-        
+    func getPlayerConfig(enableAds: Bool = false) -> PlayerConfig? {
         // Create player configuration
-        let config = PlayerConfiguration()
+        let config = PlayerConfig()
         
         if (enableAds) {
-            config.advertisingConfiguration = getAdvertisingConfiguration()
+            config.advertisingConfig = getAdvertisingConfiguration()
         }
-        
-        do {
-            try config.setSourceItem(url: streamUrl)
-            
-            config.playbackConfiguration.isMuted = true
-            config.playbackConfiguration.isAutoplayEnabled = false
-        } catch {
-            
-        }
+    
+        config.playbackConfig.isMuted = true
+        config.playbackConfig.isAutoplayEnabled = false
         
         return config
+    }
+    
+    func getPlaylistConfig() -> PlaylistConfig? {
+        let redbullURL = URL(string: VideoAssets.redbull)!
+        let sintelURL = URL(string: VideoAssets.sintel)!
+        let liveSimURL = URL(string: VideoAssets.liveSim)!
+        
+        let redbullSource = SourceFactory.create(from: SourceConfig(url: redbullURL)!)
+        let sintelSource = SourceFactory.create(from: SourceConfig(url: sintelURL)!)
+        let liveSimSource = SourceFactory.create(from: SourceConfig(url: liveSimURL)!)
+        
+        let playlistOptions = PlaylistOptions(preloadAllSources: false)
+               
+        return PlaylistConfig(
+            sources: [redbullSource],
+           options: playlistOptions
+        )
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -134,19 +137,24 @@ class BitmovinViewController: UIViewController {
     }
 
     @IBAction func reloadButtonWasPressed(_: UIButton) {
-        analyticsCollector.detachPlayer()
-
         guard let player = player else {
             return
         }
-
-        guard let config = getPlayerConfig() else {
+        
+        guard let playlistConfig = getPlaylistConfig() else {
             return
         }
         
-        // Create player based on player configuration
-        self.player?.load(sourceConfiguration: config.sourceConfiguration)
-
+        // detach player from collector to have new state
+        analyticsCollector.detachPlayer()
+        
+        // unload current sources
+        player.unload()
+        
+        // attach player to collector before loading new playlist/sources
         analyticsCollector.attachPlayer(player: player)
+        
+        // Load new playlist
+        player.load(playlistConfig: playlistConfig)
     }
 }
