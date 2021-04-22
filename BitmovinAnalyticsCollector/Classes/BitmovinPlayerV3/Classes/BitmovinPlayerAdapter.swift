@@ -35,6 +35,10 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.isSeeking = false
         self.sourceMetadataProvider = sourceMetadataProvider
         super.init(stateMachine: stateMachine)
+    }
+    
+    func initialize() {
+        // checkAutoplay()
         startMonitoring()
     }
     

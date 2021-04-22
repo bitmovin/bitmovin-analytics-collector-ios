@@ -19,6 +19,9 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.isStalling = false
         self.isSeeking = false
         super.init(stateMachine: stateMachine)
+    }
+    
+    func initialize() {
         startMonitoring()
     }
     
