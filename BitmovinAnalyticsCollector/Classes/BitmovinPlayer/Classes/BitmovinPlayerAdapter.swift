@@ -22,7 +22,18 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
     
     func initialize() {
+        checkAutoplay()
         startMonitoring()
+    }
+    
+    private func checkAutoplay() {
+        let isSourceLoadedAndWillAutoPlay = player.config.playbackConfiguration.isAutoplayEnabled && player.config.sourceConfiguration.firstSourceItem != nil
+        
+        guard isSourceLoadedAndWillAutoPlay else {
+            return
+        }
+        
+        stateMachine.play(time: currentTime)
     }
     
     func resetSourceState() {
@@ -50,7 +61,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
 
         //isCasting
-        eventData.isCasting = player.isCasting
+        eventData.isCasting = player.isCasting || player.isAirPlayActive
 
         //isLive
         eventData.isLive = self.isPlayerReady ? player.isLive : self.config.isLive

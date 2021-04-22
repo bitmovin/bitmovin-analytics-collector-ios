@@ -37,13 +37,25 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         super.init(stateMachine: stateMachine)
     }
     
+    deinit {
+        sourceMetadataProvider.clear()
+    }
+    
     func initialize() {
-        // checkAutoplay()
+        checkAutoplay()
         startMonitoring()
     }
     
-    deinit {
-        sourceMetadataProvider.clear()
+    private func checkAutoplay() {
+        let isSourceLoadedAndWillAutoPlay = player.config.playbackConfig.isAutoplayEnabled && player.source != nil
+        
+        guard isSourceLoadedAndWillAutoPlay else {
+            return
+        }
+        
+        stateMachine.play(time: currentTime)
+        
+        print("BitmovinPlayerAdapter checkAutoplay \n\t isAutoplayEnabled: \(player.config.playbackConfig.isAutoplayEnabled) \n\t isPlaying: \(player.isPlaying) \n\t isPaused: \(player.isPaused) \n\t isBufferingAndWillAutoPlay: \(isSourceLoadedAndWillAutoPlay) \n\t source \n\t\t loadingState \(player.source?.loadingState.rawValue) \n\t\t isActive: \(player.source?.isActive) \n\t\t duration: \(player.source?.duration)")
     }
     
     func resetSourceState() {
@@ -353,6 +365,12 @@ extension BitmovinPlayerAdapter: PlayerListener {
         print("BitmovinAdapter: onSourceMetadataChanged \(event.name)")
     }
     
+    func onSourceLoad(_ event: SourceLoadEvent, player: Player) {
+        print("BitmovinAdapter: onSourceLoad \(event.source.sourceConfig.url)")
+        if (stateMachine.state == .ready && player.config.playbackConfig.isAutoplayEnabled){
+            stateMachine.play(time: currentTime)
+        }
+    }
     
     func onSourceLoaded(_ event: SourceLoadedEvent, player: Player) {
         print("BitmovinAdapter: onSourceLoaded \(event.source.sourceConfig.url)")

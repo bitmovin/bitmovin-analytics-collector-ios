@@ -63,7 +63,7 @@ public class BitmovinAnalyticsInternal: NSObject {
         stateMachine.delegate = self
         eventDataDispatcher.enable()
         self.adapter = adapter
-        self.adapter.initialize()
+        self.adapter!.initialize()
     }
     
     private func detachAd() {
