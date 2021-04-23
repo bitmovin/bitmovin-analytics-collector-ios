@@ -57,7 +57,8 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
         eventData.sequenceNumber = self.sequenceNumber
         self.sequenceNumber += 1
         
-        print("Sample sent: \(eventData.impressionId) \(eventData.state) \n\t startuptime:\(eventData.startupTime) \n\t duration:\(eventData.duration) \n\t errorCode:\(eventData.errorCode) \n\t errorMsg:\(eventData.errorMessage) \n\t videoTimeStart:\(eventData.videoTimeStart) \n\t videoTimeEnd:\(eventData.videoTimeEnd) \n\t videoTitle:\(eventData.videoTitle)")
+        let json = Util.toJson(object: eventData)
+        print("send payload: " + json.replacingOccurrences(of: ",", with: "\n\t"))
         
         if enabled {
             httpClient.post(urlString: self.analyticsBackendUrl, json: eventData.jsonString(), completionHandler: nil)

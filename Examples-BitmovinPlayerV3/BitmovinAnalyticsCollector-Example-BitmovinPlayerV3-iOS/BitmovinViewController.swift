@@ -60,7 +60,7 @@ class BitmovinViewController: UIViewController {
     }
     
     func attachAnalytics(player: Player) {
-        
+        print("attach Analytics to Player")
         // attach player to collector
         analyticsCollector.attachPlayer(player: player)
         
