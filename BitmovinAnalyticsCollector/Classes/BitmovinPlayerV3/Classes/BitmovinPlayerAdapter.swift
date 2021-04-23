@@ -303,7 +303,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
         
         // no quality change if quality didn't change
         let videoBitrateDidChange = didVideoBitrateChange(old: event.videoQualityOld, new: event.videoQualityNew)
-        guard !videoBitrateDidChange else {
+        guard videoBitrateDidChange else {
             return
         }
         
