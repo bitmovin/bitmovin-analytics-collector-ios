@@ -3,7 +3,7 @@ import BitmovinPlayer
 class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
     private var player: Player
-    private var sourceMetadataProvider: BitmovinSourceMetadataProvider
+    private var sourceMetadataProvider: SourceMetadataProvider<Source>
     private var isStalling: Bool
     private var isSeeking: Bool
     private var isMonitoring = false
@@ -24,11 +24,11 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     
     private var currentSourceMetadata: SourceMetadata? {
         get {
-            return sourceMetadataProvider.get(playerSource: currentSource)
+            return sourceMetadataProvider.get(source: currentSource)
         }
     }
     
-    init(player: Player, config: BitmovinAnalyticsConfig, stateMachine: StateMachine, sourceMetadataProvider:  BitmovinSourceMetadataProvider) {
+    init(player: Player, config: BitmovinAnalyticsConfig, stateMachine: StateMachine, sourceMetadataProvider:  SourceMetadataProvider<Source>) {
         self.player = player
         self.config = config
         self.isStalling = false
