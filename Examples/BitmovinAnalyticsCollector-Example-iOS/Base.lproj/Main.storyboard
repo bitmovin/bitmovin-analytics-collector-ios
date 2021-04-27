@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="db8-gG-r1q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="db8-gG-r1q">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Bitmovin View Controller-->
         <scene sceneID="uVr-af-MAr">
             <objects>
-                <viewController id="qyX-aG-JwL" customClass="BitmovinViewController" customModule="BitmovinAnalyticsCollector_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="qyX-aG-JwL" customClass="BitmovinViewController" customModule="BitmovinAnalyticsCollector_Example_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WKW-BU-uaz"/>
                         <viewControllerLayoutGuide type="bottom" id="2r6-uL-X9O"/>
@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaP-Nr-D6S">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaP-Nr-D6S">
                                 <rect key="frame" x="21" y="8" width="37" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Q4N-ns-5rj"/>
@@ -34,12 +34,21 @@
                                 <rect key="frame" x="0.0" y="46" width="375" height="678"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ezi-Ba-qhC">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ezi-Ba-qhC">
                                 <rect key="frame" x="312" y="8" width="47" height="30"/>
                                 <state key="normal" title="Reload"/>
                                 <connections>
                                     <action selector="reloadButtonWasPressed:" destination="JsM-hC-usJ" eventType="touchUpOutside" id="AcF-ab-HjU"/>
                                     <action selector="reloadButtonWasPressed:" destination="JsM-hC-usJ" eventType="touchUpInside" id="lZX-Hv-Su3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZu-3b-rhv">
+                                <rect key="frame" x="71" y="8" width="106" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Source Change"/>
+                                <connections>
+                                    <action selector="sourceChangeButtonWasPressed:" destination="qyX-aG-JwL" eventType="touchUpOutside" id="Kkr-1V-Icg"/>
+                                    <action selector="sourceChangeButtonWasPressed:" destination="qyX-aG-JwL" eventType="touchUpInside" id="pqE-Jt-FGE"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -60,6 +69,7 @@
                     <connections>
                         <outlet property="doneButton" destination="oaP-Nr-D6S" id="8Wl-eo-Jhh"/>
                         <outlet property="playerView" destination="Ycp-7C-vXc" id="on5-ay-N2Q"/>
+                        <outlet property="sourceChangeButton" destination="hZu-3b-rhv" id="D6x-cg-WnX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JsM-hC-usJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -69,7 +79,7 @@
         <!--Bitmovin Drm View Controller-->
         <scene sceneID="qlK-59-hWB">
             <objects>
-                <viewController id="WKG-UI-yDS" customClass="BitmovinDrmViewController" customModule="BitmovinAnalyticsCollector_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WKG-UI-yDS" customClass="BitmovinDrmViewController" customModule="BitmovinAnalyticsCollector_Example_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VuN-mU-JTz"/>
                         <viewControllerLayoutGuide type="bottom" id="H6T-Co-jIe"/>
@@ -78,7 +88,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MfH-Vm-glZ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MfH-Vm-glZ">
                                 <rect key="frame" x="21" y="8" width="37" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="caG-i3-rPe"/>
@@ -94,7 +104,7 @@
                                 <rect key="frame" x="0.0" y="46" width="375" height="678"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPH-P7-OAZ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPH-P7-OAZ">
                                 <rect key="frame" x="312" y="8" width="47" height="30"/>
                                 <state key="normal" title="Reload"/>
                                 <connections>
@@ -131,7 +141,7 @@
         <!--AVFoundation View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="AVFoundation View Controller" customClass="AVFoundationViewController" customModule="BitmovinAnalyticsCollector_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="AVFoundation View Controller" customClass="AVFoundationViewController" customModule="BitmovinAnalyticsCollector_Example_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -140,7 +150,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xrl-4x-Edh">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xrl-4x-Edh">
                                 <rect key="frame" x="46" y="674" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="ek6-hN-Qy1"/>
@@ -150,7 +160,7 @@
                                     <action selector="playPauseButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YJa-Y3-MGw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AcP-gW-NjJ">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AcP-gW-NjJ">
                                 <rect key="frame" x="96" y="674" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="Ggf-ZQ-6K1"/>
@@ -166,11 +176,11 @@
                                     <action selector="timeSliderDidChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="nwz-gW-JRb"/>
                                 </connections>
                             </slider>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2B-HR-6u1" customClass="PlayerView" customModule="BitmovinAnalyticsCollector_Example" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2B-HR-6u1" customClass="PlayerView" customModule="BitmovinAnalyticsCollector_Example_iOS" customModuleProvider="target">
                                 <rect key="frame" x="-4" y="0.0" width="383" height="644"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ph-2J-7JL">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ph-2J-7JL">
                                 <rect key="frame" x="-4" y="674" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="egI-Wi-Tzg"/>
@@ -186,7 +196,7 @@
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zZ-f5-2Kr">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zZ-f5-2Kr">
                                 <rect key="frame" x="146" y="674" width="40" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="I3W-Z1-9SU"/>
@@ -196,7 +206,7 @@
                                     <action selector="reloadPlayer" destination="BYZ-38-t0r" eventType="touchUpInside" id="btS-ob-LkP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPx-xu-KMD" userLabel="Jump Back Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPx-xu-KMD" userLabel="Jump Back Button">
                                 <rect key="frame" x="194" y="674" width="40" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="u0W-Dh-ihK"/>
@@ -206,7 +216,7 @@
                                     <action selector="backButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z6S-1Z-SeF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Qj-dl-K4Q" userLabel="Jump Forward Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Qj-dl-K4Q" userLabel="Jump Forward Button">
                                 <rect key="frame" x="242" y="674" width="40" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="Vuv-ag-dkk"/>
@@ -278,7 +288,7 @@
         <!--Welcome View Controller-->
         <scene sceneID="dFc-85-HjE">
             <objects>
-                <viewController id="db8-gG-r1q" customClass="WelcomeViewController" customModule="BitmovinAnalyticsCollector_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="db8-gG-r1q" customClass="WelcomeViewController" customModule="BitmovinAnalyticsCollector_Example_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O5y-xJ-1vu"/>
                         <viewControllerLayoutGuide type="bottom" id="lAi-8J-524"/>
@@ -290,7 +300,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="IWW-sI-AB0">
                                 <rect key="frame" x="32" y="221.33333333333337" width="311" height="220"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45m-YZ-KF8" userLabel="AVFoundation Player Button">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45m-YZ-KF8" userLabel="AVFoundation Player Button">
                                         <rect key="frame" x="0.0" y="0.0" width="311" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="uq5-88-abT"/>
@@ -300,7 +310,7 @@
                                             <segue destination="BYZ-38-t0r" kind="show" id="sie-qP-81A"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EgM-9p-t6S" userLabel="AVFoundation Player DRM Button">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EgM-9p-t6S" userLabel="AVFoundation Player DRM Button">
                                         <rect key="frame" x="0.0" y="64.999999999999972" width="311" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="Di4-aZ-oaE"/>
@@ -310,7 +320,7 @@
                                             <segue destination="JLp-0k-WVS" kind="show" id="60X-ha-g1w"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pwj-ea-28F">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pwj-ea-28F">
                                         <rect key="frame" x="0.0" y="129.99999999999997" width="311" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="uds-Qg-n6X"/>
@@ -320,7 +330,7 @@
                                             <segue destination="qyX-aG-JwL" kind="show" id="FI8-tP-aPA"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9tB-Iv-FDV" userLabel="Bitmovin Player DRM Button">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9tB-Iv-FDV" userLabel="Bitmovin Player DRM Button">
                                         <rect key="frame" x="0.0" y="194.99999999999997" width="311" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="bnL-nu-p5e"/>
@@ -333,9 +343,9 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bitmovin Analytics Demo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vnd-TD-pd1">
-                                <rect key="frame" x="74.333333333333329" y="68" width="226.66666666666669" height="25.333333333333329"/>
+                                <rect key="frame" x="74.000000000000014" y="68" width="227.33333333333337" height="25.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" systemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -361,7 +371,7 @@
         <!--AVFoundation DRM View Controller-->
         <scene sceneID="cj8-d0-G8U">
             <objects>
-                <viewController id="JLp-0k-WVS" userLabel="AVFoundation DRM View Controller" customClass="AVFoundationDrmViewController" customModule="BitmovinAnalyticsCollector_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JLp-0k-WVS" userLabel="AVFoundation DRM View Controller" customClass="AVFoundationDrmViewController" customModule="BitmovinAnalyticsCollector_Example_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WmC-Iq-EfD"/>
                         <viewControllerLayoutGuide type="bottom" id="vXa-iF-Y0M"/>
@@ -370,7 +380,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DeZ-Yt-dNF">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DeZ-Yt-dNF">
                                 <rect key="frame" x="46" y="674" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="XrC-xJ-Wiq"/>
@@ -380,7 +390,7 @@
                                     <action selector="playPauseButtonWasPressed:" destination="JLp-0k-WVS" eventType="touchUpInside" id="BeY-c1-S9q"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaq-O5-Cc5">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaq-O5-Cc5">
                                 <rect key="frame" x="96" y="674" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="Mmq-vj-InY"/>
@@ -396,11 +406,11 @@
                                     <action selector="timeSliderDidChange:" destination="JLp-0k-WVS" eventType="valueChanged" id="tpN-Vh-fGX"/>
                                 </connections>
                             </slider>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FwR-QR-YGq" customClass="PlayerView" customModule="BitmovinAnalyticsCollector_Example" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FwR-QR-YGq" customClass="PlayerView" customModule="BitmovinAnalyticsCollector_Example_iOS" customModuleProvider="target">
                                 <rect key="frame" x="-4" y="0.0" width="383" height="644"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vcw-QW-I2n">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vcw-QW-I2n">
                                 <rect key="frame" x="-4" y="674" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Hsj-pg-dM0"/>
@@ -416,7 +426,7 @@
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVs-yI-nW7">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVs-yI-nW7">
                                 <rect key="frame" x="146" y="674" width="40" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="NNx-FY-9Ne"/>
@@ -426,7 +436,7 @@
                                     <action selector="reloadPlayer" destination="JLp-0k-WVS" eventType="touchUpInside" id="KaS-Uw-DqC"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vPp-qM-QMd" userLabel="Jump Back Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vPp-qM-QMd" userLabel="Jump Back Button">
                                 <rect key="frame" x="194" y="674" width="40" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="ewg-4I-KwY"/>
@@ -436,7 +446,7 @@
                                     <action selector="backButtonPressed:" destination="JLp-0k-WVS" eventType="touchUpInside" id="8e9-Ba-Que"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1P-mG-nLh" userLabel="Jump Forward Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1P-mG-nLh" userLabel="Jump Forward Button">
                                 <rect key="frame" x="242" y="674" width="40" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="WoS-Nd-RHa"/>
@@ -512,5 +522,8 @@
         <image name="Reload" width="176" height="176"/>
         <image name="ScanBackwardButton" width="30.666666030883789" height="17"/>
         <image name="ScanForwardButton" width="30.666666030883789" height="17"/>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
