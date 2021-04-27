@@ -176,8 +176,8 @@
                                     <action selector="timeSliderDidChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="nwz-gW-JRb"/>
                                 </connections>
                             </slider>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2B-HR-6u1" customClass="PlayerView" customModule="BitmovinAnalyticsCollector_Example_iOS" customModuleProvider="target">
-                                <rect key="frame" x="-4" y="0.0" width="383" height="644"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k2B-HR-6u1" customClass="PlayerView" customModule="BitmovinAnalyticsCollector_Example_iOS" customModuleProvider="target">
+                                <rect key="frame" x="-4" y="38" width="383" height="606"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ph-2J-7JL">
@@ -231,8 +231,17 @@
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="piu-s9-28n">
+                                <rect key="frame" x="10" y="4" width="106" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Source Change"/>
+                                <connections>
+                                    <action selector="sourceChangeButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hfc-cC-ssn"/>
+                                    <action selector="sourceChangeButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="v8c-sr-KGx"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="k2B-HR-6u1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0CF-dY-5J7"/>
                             <constraint firstItem="xrl-4x-Edh" firstAttribute="leading" secondItem="1Ph-2J-7JL" secondAttribute="trailing" id="3VW-rO-fYj"/>
@@ -279,11 +288,12 @@
                         <outlet property="reloadButton" destination="0zZ-f5-2Kr" id="Zjn-me-3Bz"/>
                         <outlet property="rewindButton" destination="1Ph-2J-7JL" id="ihA-rZ-zBE"/>
                         <outlet property="slider" destination="zs2-tO-O9K" id="ml7-ln-yhN"/>
+                        <outlet property="sourceChangeButton" destination="piu-s9-28n" id="3lT-5z-d3L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-103" y="-381"/>
+            <point key="canvasLocation" x="-103.2" y="-381.2807881773399"/>
         </scene>
         <!--Welcome View Controller-->
         <scene sceneID="dFc-85-HjE">
@@ -512,7 +522,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bBo-kD-EYa" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1103" y="-381"/>
+            <point key="canvasLocation" x="-1103.2" y="-381.2807881773399"/>
         </scene>
     </scenes>
     <resources>
