@@ -1,17 +1,11 @@
-internal class SourceMetadataProvider<TSource>: NSObject {
-
-    private let equalComparator: (TSource, TSource) -> Bool
+internal class SourceMetadataProvider<TSource: AnyObject>: NSObject {
     private var sources: Array<(key: TSource, value: SourceMetadata)> = []
-    
-    internal init(comparer: @escaping (TSource, TSource) -> Bool) {
-        self.equalComparator = comparer
-    }
     
     func add(source: TSource, sourceMetadata: SourceMetadata) {
         
-        let sourceIndex = sources.firstIndex(where: { (s) -> Bool in
-            equalComparator(s.key, source)
-        })
+        let sourceIndex = sources.firstIndex { (s) -> Bool in
+            s.key === source
+        }
         
         if let index = sourceIndex {
             self.sources.remove(at: index)
@@ -27,9 +21,9 @@ internal class SourceMetadataProvider<TSource>: NSObject {
             return nil
         }
         
-        return sources.first(where: { (s) -> Bool in
-            equalComparator(s.key, p)
-        })?.value
+        return sources.first { (s) -> Bool in
+            s.key === p
+        }?.value
     }
     
     func clear() {

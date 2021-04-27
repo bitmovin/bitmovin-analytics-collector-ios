@@ -1,9 +1,7 @@
 import BitmovinPlayer
 
 public class BitmovinPlayerCollector : BitmovinAnalyticsInternal {
-    private var sourceMetadataProvider: SourceMetadataProvider<Source> = SourceMetadataProvider<Source>() { (lhs, rhs) -> Bool  in
-        lhs === rhs
-    }
+    private var sourceMetadataProvider = SourceMetadataProvider<Source>()
     
     @objc public override init(config: BitmovinAnalyticsConfig) {
         super.init(config: config);
