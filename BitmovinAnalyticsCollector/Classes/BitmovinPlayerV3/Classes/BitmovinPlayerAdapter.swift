@@ -14,7 +14,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     
     private var overwriteCurrentSource: Source? = nil
     
-    private var isSourceChangeing: Bool = false
+    private var isSourceChanging: Bool = false
     
     private var currentSource: Source? {
         get {
@@ -204,8 +204,8 @@ extension BitmovinPlayerAdapter: PlayerListener {
         
         // after PlaylistTransition the first onTimeChanged will reset the currentTime of playback to 0
         // with this flag we ignore the first onTimeChanged event
-        if (isSourceChangeing) {
-            isSourceChangeing = false
+        if (isSourceChanging) {
+            isSourceChanging = false
             return
         }
         
@@ -355,7 +355,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
         let nextVideotimeStart = self.currentTime
         let shouldStartup = player.isPlaying
         stateMachine.sourceChange(previousVideoDuration, nextVideotimeStart, shouldStartup)
-        isSourceChangeing = true
+        isSourceChanging = true
     }
     
     func onSubtitleChanged(_ event: SubtitleChangedEvent, player: Player) {

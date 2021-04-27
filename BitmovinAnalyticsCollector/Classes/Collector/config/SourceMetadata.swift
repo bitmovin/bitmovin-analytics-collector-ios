@@ -49,7 +49,7 @@ public class SourceMetadata: NSObject {
     @objc public private(set) var path: String?
 
     /**
-     * Flag to see if stream is live before stream metadata is available (default: false)
+     * Flag to see if stream is live before stream metadata is available
      */
     public private(set) var isLive: Bool?
     
