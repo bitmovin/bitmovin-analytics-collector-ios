@@ -3,6 +3,7 @@ import BitmovinPlayer
 class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
     private var player: Player
+    private var sourceMetadataProvider: SourceMetadataProvider<Source>
     private var isStalling: Bool
     private var isSeeking: Bool
     private var isMonitoring = false
@@ -10,18 +11,45 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     /// DRM certificate download time in milliseconds
     private var drmCertificateDownloadTime: Int64?
     internal var drmDownloadTime: Int64?
-
-    init(player: Player, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
+    
+    private var overwriteCurrentSource: Source? = nil
+    
+    private var isSourceChanging: Bool = false
+    
+    private var currentSource: Source? {
+        get {
+            return overwriteCurrentSource != nil ? overwriteCurrentSource : player.source
+        }
+    }
+    
+    private var currentSourceMetadata: SourceMetadata? {
+        get {
+            return sourceMetadataProvider.get(source: currentSource)
+        }
+    }
+    
+    init(player: Player, config: BitmovinAnalyticsConfig, stateMachine: StateMachine, sourceMetadataProvider:  SourceMetadataProvider<Source>) {
         self.player = player
         self.config = config
         self.isStalling = false
         self.isSeeking = false
+        self.sourceMetadataProvider = sourceMetadataProvider
         super.init(stateMachine: stateMachine)
         startMonitoring()
     }
+    
+    deinit {
+        sourceMetadataProvider.clear()
+    }
+    
+    func resetSourceState() {
+        drmDownloadTime = nil
+        drmCertificateDownloadTime = nil
+        overwriteCurrentSource = nil
+    }
 
     func createEventData() -> EventData {
-        let eventData: EventData = EventData(config: config, impressionId: stateMachine.impressionId)
+        let eventData: EventData = EventData(config: config, sourceMetadata: currentSourceMetadata, impressionId: stateMachine.impressionId)
         decorateEventData(eventData: eventData)
         return eventData
     }
@@ -41,7 +69,9 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             eventData.version = PlayerType.bitmovin.rawValue + "-" + sdkVersion
         }
         
-        if let source = player.source {
+        let fallbackIsLive = currentSourceMetadata?.isLive ?? config.isLive
+        
+        if let source = currentSource{
             let sourceConfig = source.sourceConfig
             // streamFormat & urls
             switch sourceConfig.type {
@@ -60,7 +90,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             // isLive & duration
             let duration = source.duration
             if (duration == 0) {
-                eventData.isLive = config.isLive
+                eventData.isLive = fallbackIsLive
             } else {
                 if (duration.isInfinite) {
                     eventData.isLive = true;
@@ -84,7 +114,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             }
         } else {
             // player active Source is not available
-            eventData.isLive = config.isLive
+            eventData.isLive = fallbackIsLive
         }
 
         // videoBitrate
@@ -158,6 +188,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
 extension BitmovinPlayerAdapter: PlayerListener {
     func onPlay(_ event: PlayEvent, player: Player) {
+        print("BitmovinAdapter: onPlay isPlaying: \(player.isPlaying) isPaused: \(player.isPaused) isStalling: \(isStalling)")
         stateMachine.play(time: nil)
         
         if (isStalling && stateMachine.state != .seeking && stateMachine.state != .buffering) {
@@ -165,7 +196,24 @@ extension BitmovinPlayerAdapter: PlayerListener {
         }
     }
     
+    func onTimeChanged(_ event: TimeChangedEvent, player: Player) {
+        print("BitmovinAdapter: onTimeChanged \(event.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused) isStalling: \(isStalling)")
+        
+        // after PlaylistTransition the first onTimeChanged will reset the currentTime of playback to 0
+        // with this flag we ignore the first onTimeChanged event
+        if (isSourceChanging) {
+            isSourceChanging = false
+            return
+        }
+        
+        
+        if (player.isPlaying && !isSeeking && !isStalling) {
+            stateMachine.playing(time: Util.timeIntervalToCMTime(_: player.currentTime))
+        }
+    }
+    
     func onPlaying(_ event: PlayingEvent, player: Player) {
+        print("BitmovinAdapter: onPlaying isPlaying: \(player.isPlaying) isPaused: \(player.isPaused) isStalling: \(isStalling)")
         if (!isSeeking && !isStalling) {
             stateMachine.playing(time: Util.timeIntervalToCMTime(_: player.currentTime))
         }
@@ -189,17 +237,20 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onStallStarted(_ event: StallStartedEvent, player: Player) {
+        print("BitmovinAdapter: onStallStarted \(player.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
         isStalling = true
         stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
         
     }
 
     func onStallEnded(_ event: StallEndedEvent, player: Player) {
+        print("BitmovinAdapter: onStallEnded \(player.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
         isStalling = false
         transitionToPausedOrBufferingOrPlaying()
     }
 
     func onSeek(_ event: SeekEvent, player: Player) {
+        print("BitmovinAdapter: onSeek \(player.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
         isSeeking = true
         stateMachine.transitionState(destinationState: .seeking, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
@@ -241,6 +292,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onSeeked(_ event: SeekedEvent, player: Player) {
+        print("BitmovinAdapter: onSeeked \(player.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
         isSeeking = false
         if (!isStalling) {
             transitionToPausedOrBufferingOrPlaying()
@@ -249,7 +301,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
 
     func onPlaybackFinished(_ event: PlaybackFinishedEvent, player: Player) {
         stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.duration))
-        stateMachine.disableHeartbeat()
+        stateMachine.reset()
     }
 
     func onPlayerError(_ event: PlayerErrorEvent, player: Player) {
@@ -272,7 +324,18 @@ extension BitmovinPlayerAdapter: PlayerListener {
         }
     }
     
+    
+    func onSourceMetadataChanged(_ event: SourceMetadataChangedEvent, player: Player) {
+        print("BitmovinAdapter: onSourceMetadataChanged \(event.name)")
+    }
+    
+    
+    func onSourceLoaded(_ event: SourceLoadedEvent, player: Player) {
+        print("BitmovinAdapter: onSourceLoaded \(event.source.sourceConfig.url)")
+    }
+    
     func onSourceUnload(_ event: SourceUnloadEvent, player: Player) {
+        print("BitmovinAdapter: onSourceUnload")
         if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
             stateMachine.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed)
         }
@@ -280,6 +343,16 @@ extension BitmovinPlayerAdapter: PlayerListener {
     
     func onSourceUnloaded(_ event: SourceUnloadedEvent, player: Player) {
         stateMachine.reset()
+    }
+    
+    func onPlaylistTransition(_ event: PlaylistTransitionEvent, player: Player) {
+        print("------------- \nBitmovinAdapter: onPlaylistTransition \(player.currentTime) \n\t isPlaying: \(player.isPlaying) \n\t isPaused: \(player.isPaused) \n\t from: \(event.from.sourceConfig.url) \n\t to: \(event.to.sourceConfig.url)")
+        overwriteCurrentSource = event.from
+        let previousVideoDuration = Util.timeIntervalToCMTime(_: event.from.duration)
+        let nextVideotimeStart = self.currentTime
+        let shouldStartup = player.isPlaying
+        stateMachine.sourceChange(previousVideoDuration, nextVideotimeStart, shouldStartup)
+        isSourceChanging = true
     }
     
     func onSubtitleChanged(_ event: SubtitleChangedEvent, player: Player) {

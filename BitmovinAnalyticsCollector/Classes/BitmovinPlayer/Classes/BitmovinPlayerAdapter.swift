@@ -21,9 +21,15 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         super.init(stateMachine: stateMachine)
         startMonitoring()
     }
+    
+    func resetSourceState() {
+        self.drmType = nil
+        self.drmDownloadTime = nil
+        self.drmCertificateDownloadTime = nil
+    }
 
     func createEventData() -> EventData {
-        let eventData: EventData = EventData(config: config, impressionId: stateMachine.impressionId)
+        let eventData: EventData = EventData(config: config, sourceMetadata: nil, impressionId: stateMachine.impressionId)
         decorateEventData(eventData: eventData)
         return eventData
     }

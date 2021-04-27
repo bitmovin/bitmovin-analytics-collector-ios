@@ -7,10 +7,16 @@ class BitmovinViewController: UIViewController {
     private var analyticsCollector: BitmovinPlayerCollector
     private var config: BitmovinAnalyticsConfig
     private let debugger: DebugBitmovinPlayerEvents = DebugBitmovinPlayerEvents()
-
+    
+    private let redbullSource = SourceFactory.create(from: SourceConfig(url: URL(string: VideoAssets.redbull)!)!)
+    private let sintelSource = SourceFactory.create(from: SourceConfig(url: URL(string: VideoAssets.sintel)!)!)
+    private let liveSimSource = SourceFactory.create(from: SourceConfig(url: URL(string: VideoAssets.liveSim)!)!)
+    
     @IBOutlet var playerView: UIView!
     @IBOutlet var doneButton: UIButton!
     @IBOutlet var reloadButton: UIButton!
+    @IBOutlet var seekToSecondSourceButton: UIButton!
+    @IBOutlet var sourceChange: UIButton!
 
     deinit {
         player?.destroy()
@@ -52,18 +58,41 @@ class BitmovinViewController: UIViewController {
     func urlWithCorrelator(adTag: String) -> URL {
         return URL(string: String(format: "%@%d", adTag, Int(arc4random_uniform(100000))))!
     }
+    
+    func attachAnalytics(player: Player) {
+        
+        // attach player to collector
+        analyticsCollector.attachPlayer(player: player)
+        
+        // setup analytics SourceMetadata for redbull Source
+        let redbullMetadata = SourceMetadata(
+            title: "redbull",
+            experimentName: "experiment-bitmovin-v3-upgrade")
+        self.analyticsCollector.addSourceMetadata(playerSource: redbullSource,sourceMetadata: redbullMetadata)
+        
+        // setup analytics SourceMetadata for Sintel Source
+        let sintelMetadata = SourceMetadata(videoId: "sintelID",
+                                            title: "sintel",
+                                            experimentName: "experiment-bitmovin-v3-upgrade")
+        self.analyticsCollector.addSourceMetadata(playerSource: sintelSource,sourceMetadata: sintelMetadata)
+    }
+    
+    func loadPlaylist(player: Player) {
+        // Create playlistConfig
+        guard let playlistConfig = getPlaylistConfig() else {
+            return
+        }
+        
+        // Load the playlist configuration into the player instance
+        player.load(playlistConfig: playlistConfig)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.playerView.backgroundColor = .black
-
-        // Create player configuration
-        guard let config = getPlayerConfig() else {
-            return
-        }
         
-        // Create playlistConfig
-        guard let playlistConfig = getPlaylistConfig() else {
+        // Create player configuration
+        guard let config = getPlayerConfig(enableAds: false) else {
             return
         }
             
@@ -73,8 +102,7 @@ class BitmovinViewController: UIViewController {
         // Listen to player events
         player.add(listener: debugger)
         
-        // attach player to collector
-        analyticsCollector.attachPlayer(player: player)
+        self.player = player
         
         // Create player view and pass the player instance to it
         let playerBoundaries = BitmovinPlayer.PlayerView(player: player, frame: .zero)
@@ -85,10 +113,9 @@ class BitmovinViewController: UIViewController {
         playerView.addSubview(playerBoundaries)
         playerView.bringSubviewToFront(playerBoundaries)
         
-        // Load the playlist configuration into the player instance
-        player.load(playlistConfig: playlistConfig)
-
-        self.player = player
+        self.attachAnalytics(player: player)
+        
+        self.loadPlaylist(player: player)
     }
     
     func getPlayerConfig(enableAds: Bool = false) -> PlayerConfig? {
@@ -106,18 +133,10 @@ class BitmovinViewController: UIViewController {
     }
     
     func getPlaylistConfig() -> PlaylistConfig? {
-        let redbullURL = URL(string: VideoAssets.redbull)!
-        let sintelURL = URL(string: VideoAssets.sintel)!
-        let liveSimURL = URL(string: VideoAssets.liveSim)!
-        
-        let redbullSource = SourceFactory.create(from: SourceConfig(url: redbullURL)!)
-        let sintelSource = SourceFactory.create(from: SourceConfig(url: sintelURL)!)
-        let liveSimSource = SourceFactory.create(from: SourceConfig(url: liveSimURL)!)
-        
         let playlistOptions = PlaylistOptions(preloadAllSources: false)
                
         return PlaylistConfig(
-            sources: [redbullSource],
+            sources: [redbullSource, sintelSource],
            options: playlistOptions
         )
     }
@@ -135,13 +154,36 @@ class BitmovinViewController: UIViewController {
     @IBAction func doneButtonWasPressed(_: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func sourceChangeWasPressed(_: UIButton) {
+        // setup sourceMetadata important for analytics
+        let liveMetadata = SourceMetadata(videoId: "liveSim",
+                                          title: "liveSim",
+                                          isLive: true,
+                                          experimentName: "experiment-bitmovin-v3-upgrade")
 
-    @IBAction func reloadButtonWasPressed(_: UIButton) {
-        guard let player = player else {
+        // add sourceMetadata to collector
+        self.analyticsCollector.addSourceMetadata(playerSource: liveSimSource, sourceMetadata: liveMetadata)
+        
+        // load new source into player
+        player?.load(source: liveSimSource)
+    }
+    
+    @IBAction func seekToSecondSourceButtonWasPressed(_: UIButton) {
+        guard let p = player else {
             return
         }
         
-        guard let playlistConfig = getPlaylistConfig() else {
+        if (p.playlist.sources.count < 2){
+            return
+        }
+        
+        let secondSource = p.playlist.sources[1]
+        p.playlist.seek(source: secondSource, time: 10)
+    }
+
+    @IBAction func reloadButtonWasPressed(_: UIButton) {
+        guard let player = player else {
             return
         }
         
@@ -151,10 +193,8 @@ class BitmovinViewController: UIViewController {
         // unload current sources
         player.unload()
         
-        // attach player to collector before loading new playlist/sources
-        analyticsCollector.attachPlayer(player: player)
+        self.attachAnalytics(player: player)
         
-        // Load new playlist
-        player.load(playlistConfig: playlistConfig)
+        self.loadPlaylist(player: player)
     }
 }

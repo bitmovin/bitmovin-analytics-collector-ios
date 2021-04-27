@@ -17,6 +17,7 @@ class AVFoundationViewController: UIViewController {
     @IBOutlet var fastForwardButton: UIButton!
     @IBOutlet var reloadButton: UIButton!
     @IBOutlet var rewindButton: UIButton!
+    @IBOutlet var sourceChangeButton: UIButton!
     @IBOutlet var playerView: PlayerView!
     let url = URL(string: "http://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
     let corruptedUrl = URL(string: "http://bitdash-a.akamaihd.net/content/analytics-teststreams/redbull-parkour/corrupted_first_segment.mpd")
@@ -146,7 +147,11 @@ class AVFoundationViewController: UIViewController {
     }
 
     // MARK: - IBActions
-
+    
+    @IBAction func sourceChangeButtonWasPressed(_: UIButton) {
+        reloadPlayer()
+    }
+    
     @IBAction func playPauseButtonWasPressed(_: UIButton) {
         if player.rate != 1.0 {
             player.play()

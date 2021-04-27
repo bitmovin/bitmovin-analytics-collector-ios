@@ -49,6 +49,7 @@ public class BitmovinAnalyticsInternal: NSObject {
         isPlayerAttached = false
         detachAd();
         adapter?.destroy()
+        eventDataDispatcher.resetSourceState()
         eventDataDispatcher.disable()
         stateMachine.reset()
         adapter = nil
@@ -125,6 +126,10 @@ public class BitmovinAnalyticsInternal: NSObject {
         return eventData
     }
     
+    internal func reset(){
+        eventDataDispatcher.resetSourceState()
+    }
+    
 }
 
 extension BitmovinAnalyticsInternal: StateMachineDelegate {
@@ -134,6 +139,13 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
 
     func stateMachineEnterPlayAttemptFailed(stateMachine: StateMachine) {
         let eventData = createEventData(duration: 0)
+        if let errorData = stateMachine.getErrorData() {
+            eventData?.errorCode = errorData.code
+            eventData?.errorMessage = errorData.message
+            eventData?.errorData = errorData.data
+            // error data is only send in the payload once and then cleared from state machine
+            stateMachine.setErrorData(error: nil)
+        }
         sendEventData(eventData: eventData)
     }
     
@@ -204,7 +216,6 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         eventData?.playerStartupTime = 1
         eventData?.startupTime = duration + 1
         eventData?.supportedVideoCodecs = Util.getSupportedVideoCodecs()
-
         eventData?.state = "startup"
         sendEventData(eventData: eventData)
     }
@@ -217,6 +228,11 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
     func stateMachineDidAudioChange(_ stateMachine: StateMachine) {
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
+    }
+    
+    func stateMachineResetSourceState() {
+        adapter?.resetSourceState()
+        reset()
     }
     
     func stateMachineStopsCollecting() {

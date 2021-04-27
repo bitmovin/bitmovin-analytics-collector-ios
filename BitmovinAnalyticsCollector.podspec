@@ -29,7 +29,7 @@ DESC
       core_test_spec.source_files = 'BitmovinAnalyticsCollector/Tests/CoreTests/**/*'
     end
   end
-
+  
   s.subspec 'BitmovinPlayer' do |bitmovinplayer|
     bitmovinplayer.source_files = 'BitmovinAnalyticsCollector/Classes/BitmovinPlayer/**/*.{swift}'    
     bitmovinplayer.tvos.dependency 'BitmovinPlayer', '~>2.51'
@@ -58,6 +58,16 @@ DESC
     
     bitmovinplayerv3.test_spec 'BitmovinPlayerV3Tests' do |bitmovinplayerv3_test_spec|
       bitmovinplayerv3_test_spec.source_files = 'BitmovinAnalyticsCollector/Tests/BitmovinPlayerV3Tests/**/*'
+    end
+  end
+
+  s.subspec 'CoreTarget12' do |coretarget12|
+    coretarget12.ios.deployment_target = '12.0'
+    coretarget12.tvos.deployment_target = '12.0'
+    coretarget12.source_files = 'BitmovinAnalyticsCollector/Classes/Collector/**/*.{swift}'
+    
+    coretarget12.test_spec 'CoreTarget12Tests' do |coretarget12_test_spec|
+      coretarget12_test_spec.source_files = 'BitmovinAnalyticsCollector/Tests/CoreTests/**/*'
     end
   end
 

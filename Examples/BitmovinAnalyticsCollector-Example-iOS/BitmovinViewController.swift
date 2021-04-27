@@ -10,9 +10,11 @@ class BitmovinViewController: UIViewController {
     private let debugger: DebugBitmovinPlayerEvents = DebugBitmovinPlayerEvents()
     let url = URL(string: "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
     let corruptedUrl = URL(string: "http://bitdash-a.akamaihd.net/content/analytics-teststreams/redbull-parkour/corrupted_first_segment.mpd")
+    let liveSimUrl = URL(string: "https://bitcdn-kronehit.bitmovin.com/v2/hls/playlist.m3u8")!
     @IBOutlet var playerView: UIView!
     @IBOutlet var doneButton: UIButton!
     @IBOutlet var reloadButton: UIButton!
+    @IBOutlet var sourceChangeButton: UIButton!
 
     deinit {
         player?.destroy()
@@ -127,6 +129,20 @@ class BitmovinViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         // Remove ViewController as event listener
         super.viewWillDisappear(animated)
+    }
+    
+    @IBAction func sourceChangeButtonWasPressed(_: UIButton) {
+        analyticsCollector.detachPlayer()
+        player!.unload()
+        
+        config.title = "New video Title"
+        let sourceConfig = SourceConfiguration()
+        do {
+            try sourceConfig.addSourceItem(url: liveSimUrl)
+        }
+        catch {}
+        analyticsCollector.attachPlayer(player: self.player!)
+        self.player!.load(sourceConfiguration: sourceConfig)
     }
 
     @IBAction func doneButtonWasPressed(_: UIButton) {

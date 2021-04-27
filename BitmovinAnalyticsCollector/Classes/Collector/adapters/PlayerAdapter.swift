@@ -6,6 +6,7 @@ protocol PlayerAdapter {
     func startMonitoring()
     func stopMonitoring()
     func destroy()
+    func resetSourceState()
     var drmDownloadTime: Int64? { get }
     var currentTime: CMTime? { get }
 }

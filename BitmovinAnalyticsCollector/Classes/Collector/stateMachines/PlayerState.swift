@@ -14,6 +14,7 @@ public enum PlayerState: String {
     case subtitlechange
     case audiochange
     case playAttemptFailed
+    case sourceChanged
 
     func onEntry(stateMachine: StateMachine, timestamp _: Int64, previousState : PlayerState) {
         switch self {
@@ -50,7 +51,9 @@ public enum PlayerState: String {
                 return
             case .audiochange:
                 return
-        }
+            case .sourceChanged:
+                return
+            }
     }
 
     func onExit(stateMachine: StateMachine, timestamp: Int64, destinationState: PlayerState) {
@@ -111,6 +114,8 @@ public enum PlayerState: String {
             case .audiochange:
                 stateMachine.delegate?.stateMachineDidAudioChange(stateMachine)
                 return
+            case .sourceChanged:
+                    return
         }
     }
 }
