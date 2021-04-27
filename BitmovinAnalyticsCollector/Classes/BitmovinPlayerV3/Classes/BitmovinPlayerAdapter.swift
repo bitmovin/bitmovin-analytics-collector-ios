@@ -70,9 +70,6 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
         
         var fallbackIsLive = config.isLive
-        if let sourceMetadataIsLive = currentSourceMetadata?.isLive {
-            fallbackIsLive = sourceMetadataIsLive
-        }
         
         if let source = currentSource{
             let sourceConfig = source.sourceConfig
@@ -91,6 +88,10 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             }
             
             // isLive & duration
+            if let sourceMetadata = currentSourceMetadata {
+                fallbackIsLive = sourceMetadata.isLive
+            }
+            
             let duration = source.duration
             if (duration == 0) {
                 eventData.isLive = fallbackIsLive
