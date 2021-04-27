@@ -159,6 +159,7 @@ class BitmovinViewController: UIViewController {
         // setup sourceMetadata important for analytics
         let liveMetadata = SourceMetadata(videoId: "liveSim",
                                           title: "liveSim",
+                                          isLive: true,
                                           experimentName: "experiment-bitmovin-v3-upgrade")
 
         // add sourceMetadata to collector

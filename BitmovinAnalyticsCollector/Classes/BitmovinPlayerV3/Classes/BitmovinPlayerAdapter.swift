@@ -69,6 +69,11 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             eventData.version = PlayerType.bitmovin.rawValue + "-" + sdkVersion
         }
         
+        var fallbackIsLive = config.isLive
+        if let sourceMetadataIsLive = currentSourceMetadata?.isLive {
+            fallbackIsLive = sourceMetadataIsLive
+        }
+        
         if let source = currentSource{
             let sourceConfig = source.sourceConfig
             // streamFormat & urls
@@ -88,7 +93,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             // isLive & duration
             let duration = source.duration
             if (duration == 0) {
-                eventData.isLive = config.isLive
+                eventData.isLive = fallbackIsLive
             } else {
                 if (duration.isInfinite) {
                     eventData.isLive = true;
@@ -112,7 +117,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             }
         } else {
             // player active Source is not available
-            eventData.isLive = config.isLive
+            eventData.isLive = fallbackIsLive
         }
 
         // videoBitrate
