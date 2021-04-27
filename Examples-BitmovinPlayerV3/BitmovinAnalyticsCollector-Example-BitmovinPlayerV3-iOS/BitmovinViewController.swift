@@ -17,6 +17,8 @@ class BitmovinViewController: UIViewController {
     @IBOutlet var reloadButton: UIButton!
     @IBOutlet var seekToSecondSourceButton: UIButton!
     @IBOutlet var sourceChange: UIButton!
+    
+    var adsActive = false
 
     deinit {
         player?.destroy()
@@ -38,7 +40,7 @@ class BitmovinViewController: UIViewController {
         config.title = "iOS HLS Static Asset with Bitmovin Player"
         config.path = "/vod/breadcrumb/"
         config.isLive = false
-        config.ads = false
+        config.ads = adsActive
         analyticsCollector = BitmovinPlayerCollector(config: config)
         print("Setup of collector finished")
 
@@ -92,7 +94,7 @@ class BitmovinViewController: UIViewController {
         self.playerView.backgroundColor = .black
         
         // Create player configuration
-        guard let config = getPlayerConfig(enableAds: false) else {
+        guard let config = getPlayerConfig(enableAds: adsActive) else {
             return
         }
             
