@@ -367,9 +367,6 @@ extension BitmovinPlayerAdapter: PlayerListener {
     
     func onSourceLoad(_ event: SourceLoadEvent, player: Player) {
         print("BitmovinAdapter: onSourceLoad \(event.source.sourceConfig.url)")
-        if (stateMachine.state == .ready && player.config.playbackConfig.isAutoplayEnabled){
-            stateMachine.play(time: currentTime)
-        }
     }
     
     func onSourceLoaded(_ event: SourceLoadedEvent, player: Player) {
