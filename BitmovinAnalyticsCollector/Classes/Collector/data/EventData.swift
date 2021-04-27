@@ -102,8 +102,6 @@ public class EventData: Codable {
         customUserId = config.customerUserId
         
         if let metadata = sourceMetadata {
-            mpdUrl = metadata.mpdUrl
-            m3u8Url = metadata.m3u8Url
             cdnProvider = metadata.cdnProvider
             customData1 = metadata.customData1
             customData2 = metadata.customData2
