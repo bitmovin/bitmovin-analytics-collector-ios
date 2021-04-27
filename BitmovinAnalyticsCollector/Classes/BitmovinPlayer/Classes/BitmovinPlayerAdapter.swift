@@ -61,7 +61,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
 
         //isCasting
-        eventData.isCasting = player.isCasting || player.isAirPlayActive
+        eventData.isCasting = player.isCasting
 
         //isLive
         eventData.isLive = self.isPlayerReady ? player.isLive : self.config.isLive
