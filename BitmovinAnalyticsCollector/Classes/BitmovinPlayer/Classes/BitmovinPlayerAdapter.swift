@@ -4,12 +4,16 @@ import BitmovinPlayer
 class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
     private var player: Player
-    internal var drmPerformanceInfo: DrmPerformanceInfo?
     private var isStalling: Bool
     private var isSeeking: Bool
+    private var isMonitoring = false
+    
     /// DRM certificate download time in milliseconds
     private var drmCertificateDownloadTime: Int64?
-    private var isMonitoring = false
+    internal var drmDownloadTime: Int64?
+    private var drmType: String?
+    
+    private var isPlayerReady: Bool = false
 
     init(player: Player, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
@@ -17,11 +21,31 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.isStalling = false
         self.isSeeking = false
         super.init(stateMachine: stateMachine)
+    }
+    
+    func initialize() {
+        checkAutoplay()
         startMonitoring()
+    }
+    
+    private func checkAutoplay() {
+        let isSourceLoadedAndWillAutoPlay = player.config.playbackConfiguration.isAutoplayEnabled && player.config.sourceConfiguration.firstSourceItem != nil
+        
+        guard isSourceLoadedAndWillAutoPlay else {
+            return
+        }
+        
+        stateMachine.play(time: currentTime)
+    }
+    
+    func resetSourceState() {
+        self.drmType = nil
+        self.drmDownloadTime = nil
+        self.drmCertificateDownloadTime = nil
     }
 
     func createEventData() -> EventData {
-        let eventData: EventData = EventData(config: config, impressionId: stateMachine.impressionId)
+        let eventData: EventData = EventData(config: config, sourceMetadata: nil, impressionId: stateMachine.impressionId)
         decorateEventData(eventData: eventData)
         return eventData
     }
@@ -64,9 +88,8 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
 
         // drmType
-        if let drmType = self.drmPerformanceInfo?.drmType {
-            eventData.drmType = drmType
-        }
+        eventData.drmType = self.drmType
+        
 
         // videoBitrate
         if let bitrate = player.videoQuality?.bitrate {
@@ -122,10 +145,6 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         isStalling = false
     }
     
-    func getDrmPerformanceInfo() -> DrmPerformanceInfo? {
-        return self.drmPerformanceInfo
-    }
-    
     var currentTime: CMTime? {
         get {
             return Util.timeIntervalToCMTime(_: player.currentTime)
@@ -146,6 +165,14 @@ extension BitmovinPlayerAdapter: PlayerListener {
         if (!isSeeking && !isStalling) {
             stateMachine.playing(time: Util.timeIntervalToCMTime(_: player.currentTime))
         }
+    }
+    
+    func onTimeChanged(_ event: TimeChangedEvent) {
+        guard player.isPlaying && !isSeeking && !isStalling else {
+            return
+        }
+        
+        stateMachine.playing(time: currentTime)
     }
 
     func onAdBreakStarted(_ event: AdBreakStartedEvent) {
@@ -189,8 +216,8 @@ extension BitmovinPlayerAdapter: PlayerListener {
             // This request is the first that happens when initializing the DRM system
             self.drmCertificateDownloadTime = downloadTimeInMs
         case BMPHttpRequestTypeDrmLicenseFairplay:
-            let drmLoadTimeMs = (self.drmCertificateDownloadTime ?? 0) + (downloadTimeInMs ?? 0)
-            self.drmPerformanceInfo = DrmPerformanceInfo(drmType: DrmType.fairplay, drmLoadTime: drmLoadTimeMs)
+            self.drmDownloadTime = (self.drmCertificateDownloadTime ?? 0) + (downloadTimeInMs ?? 0)
+            self.drmType = DrmType.fairplay.rawValue
             self.drmCertificateDownloadTime = nil
         default:
             return
@@ -202,20 +229,40 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onVideoDownloadQualityChanged(_ event: VideoDownloadQualityChangedEvent) {
-        let videoBitrateDidChange = didVideoBitrateChange(old: event.videoQualityOld, new: event.videoQualityNew)
-        // there is a qualityChange event happening before the `onReady` method. Do not transition into any state.
-        if isPlayerReady && !isStalling && !isSeeking && videoBitrateDidChange {
-            stateMachine.videoQualityChange(time: currentTime)
-            transitionToPausedOrBufferingOrPlaying()
+        // no quality change before video started
+        guard stateMachine.didStartPlayingVideo else {
+            return
         }
+        
+        // no quality change during buffering and seeking
+        guard !isStalling && !isSeeking else {
+            return
+        }
+        
+        // no quality change if quality didn't change
+        let videoBitrateDidChange = didVideoBitrateChange(old: event.videoQualityOld, new: event.videoQualityNew)
+        guard videoBitrateDidChange else {
+            return
+        }
+        
+        stateMachine.videoQualityChange(time: currentTime)
+        transitionToPausedOrBufferingOrPlaying()
     }
     
     // No check if audioBitrate changes because no data available
     func onAudioChanged(_ event: AudioChangedEvent) {
-        if isPlayerReady && !isStalling && !isSeeking {
-            stateMachine.audioQualityChange(time: currentTime)
-            transitionToPausedOrBufferingOrPlaying()
+        // no audio change before video started
+        guard stateMachine.didStartPlayingVideo else {
+            return
         }
+        
+        // no audio change during buffering and seeking
+        guard !isStalling && !isSeeking else {
+            return
+        }
+        
+        stateMachine.audioQualityChange(time: currentTime)
+        transitionToPausedOrBufferingOrPlaying()
     }
 
     func onSeeked(_ event: SeekedEvent) {

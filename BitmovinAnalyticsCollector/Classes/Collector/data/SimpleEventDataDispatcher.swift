@@ -22,6 +22,7 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
         let licenseCall = LicenseCall(config: config)
         licenseCall.authenticate { [weak self] success in
             if success {
+                print("LicenseCall succeeded")
                 self?.enabled = true
                 if let events = self?.events.enumerated().reversed() {
                     for (index, eventData) in events {
@@ -36,6 +37,7 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
                     }
                 }
             } else {
+                print("LicenseCall didn't succeed")
                 self?.enabled = false
                 NotificationCenter.default.post(name: .licenseFailed, object: self)
             }
@@ -54,6 +56,10 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
     func add(eventData: EventData) {
         eventData.sequenceNumber = self.sequenceNumber
         self.sequenceNumber += 1
+        
+        let json = Util.toJson(object: eventData)
+        print("send payload: " + json.replacingOccurrences(of: ",", with: "\n\t"))
+        
         if enabled {
             httpClient.post(urlString: self.analyticsBackendUrl, json: eventData.jsonString(), completionHandler: nil)
         } else {
@@ -72,5 +78,9 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
     }
 
     func clear() {
+    }
+    
+    func resetSourceState() {
+        self.sequenceNumber = 0
     }
 }

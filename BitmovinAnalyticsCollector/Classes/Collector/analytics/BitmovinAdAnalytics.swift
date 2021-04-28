@@ -43,7 +43,7 @@ public class BitmovinAdAnalytics {
     
     public func onAdManifestLoaded(adBreak: AnalyticsAdBreak, downloadTime: TimeInterval) {
         self.adManifestDownloadTimes[adBreak.id] = downloadTime;
-        if (adBreak.tagType == AdTagType.VMAP) {
+        if (adBreak.tagType == AnalyticsAdTagType.VMAP) {
             sendAnalyticsRequest(adBreak: adBreak);
         }
         print("OnAdManifestLoaded in \(downloadTime)")
