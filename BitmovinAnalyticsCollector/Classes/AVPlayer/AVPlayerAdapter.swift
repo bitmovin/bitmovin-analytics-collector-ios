@@ -27,6 +27,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.config = config
         self.errorHandler = ErrorHandler()
         super.init(stateMachine: stateMachine)
+    }
+    
+    func initialize() {
         resetSourceState()
         startMonitoring()
     }

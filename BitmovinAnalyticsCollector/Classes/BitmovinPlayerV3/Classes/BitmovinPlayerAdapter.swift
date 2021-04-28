@@ -35,11 +35,27 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.isSeeking = false
         self.sourceMetadataProvider = sourceMetadataProvider
         super.init(stateMachine: stateMachine)
-        startMonitoring()
     }
     
     deinit {
         sourceMetadataProvider.clear()
+    }
+    
+    func initialize() {
+        checkAutoplay()
+        startMonitoring()
+    }
+    
+    private func checkAutoplay() {
+        let isSourceLoadedAndWillAutoPlay = player.config.playbackConfig.isAutoplayEnabled && player.source != nil
+        
+        guard isSourceLoadedAndWillAutoPlay else {
+            return
+        }
+        
+        stateMachine.play(time: currentTime)
+        
+        print("BitmovinPlayerAdapter checkAutoplay \n\t isAutoplayEnabled: \(player.config.playbackConfig.isAutoplayEnabled) \n\t isPlaying: \(player.isPlaying) \n\t isPaused: \(player.isPaused) \n\t isBufferingAndWillAutoPlay: \(isSourceLoadedAndWillAutoPlay) \n\t source \n\t\t loadingState \(player.source?.loadingState.rawValue) \n\t\t isActive: \(player.source?.isActive) \n\t\t duration: \(player.source?.duration)")
     }
     
     func resetSourceState() {
@@ -208,14 +224,14 @@ extension BitmovinPlayerAdapter: PlayerListener {
         
         
         if (player.isPlaying && !isSeeking && !isStalling) {
-            stateMachine.playing(time: Util.timeIntervalToCMTime(_: player.currentTime))
+            stateMachine.playing(time: currentTime)
         }
     }
     
     func onPlaying(_ event: PlayingEvent, player: Player) {
         print("BitmovinAdapter: onPlaying isPlaying: \(player.isPlaying) isPaused: \(player.isPaused) isStalling: \(isStalling)")
         if (!isSeeking && !isStalling) {
-            stateMachine.playing(time: Util.timeIntervalToCMTime(_: player.currentTime))
+            stateMachine.playing(time: currentTime)
         }
     }
 
@@ -233,7 +249,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onReady(_ event: ReadyEvent, player: Player) {
-        self.isPlayerReady = true
+        print("BitmovinAdapter: onReady \(player.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
     }
 
     func onStallStarted(_ event: StallStartedEvent, player: Player) {
@@ -275,20 +291,40 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onVideoDownloadQualityChanged(_ event: VideoDownloadQualityChangedEvent, player: Player) {
-        let videoBitrateDidChange = didVideoBitrateChange(old: event.videoQualityOld, new: event.videoQualityNew)
-        // there is a qualityChange event happening before the `onReady` method. Do not transition into any state.
-        if isPlayerReady && !isStalling && !isSeeking && videoBitrateDidChange {
-            stateMachine.videoQualityChange(time: currentTime)
-            transitionToPausedOrBufferingOrPlaying()
+        // no quality change before video started
+        guard stateMachine.didStartPlayingVideo else {
+            return
         }
+        
+        // no quality change during buffering and seeking
+        guard !isStalling && !isSeeking else {
+            return
+        }
+        
+        // no quality change if quality didn't change
+        let videoBitrateDidChange = didVideoBitrateChange(old: event.videoQualityOld, new: event.videoQualityNew)
+        guard videoBitrateDidChange else {
+            return
+        }
+        
+        stateMachine.videoQualityChange(time: currentTime)
+        transitionToPausedOrBufferingOrPlaying()
     }
     
     // No check if audioBitrate changes because no data available
     func onAudioChanged(_ event: AudioChangedEvent, player: Player) {
-        if isPlayerReady && !isStalling && !isSeeking {
-            stateMachine.audioQualityChange(time: currentTime)
-            transitionToPausedOrBufferingOrPlaying()
+        // no audio change before video started
+        guard stateMachine.didStartPlayingVideo else {
+            return
         }
+        
+        // no audio change during buffering and seeking
+        guard !isStalling && !isSeeking else {
+            return
+        }
+        
+        stateMachine.audioQualityChange(time: currentTime)
+        transitionToPausedOrBufferingOrPlaying()
     }
 
     func onSeeked(_ event: SeekedEvent, player: Player) {
@@ -329,6 +365,9 @@ extension BitmovinPlayerAdapter: PlayerListener {
         print("BitmovinAdapter: onSourceMetadataChanged \(event.name)")
     }
     
+    func onSourceLoad(_ event: SourceLoadEvent, player: Player) {
+        print("BitmovinAdapter: onSourceLoad \(event.source.sourceConfig.url)")
+    }
     
     func onSourceLoaded(_ event: SourceLoadedEvent, player: Player) {
         print("BitmovinAdapter: onSourceLoaded \(event.source.sourceConfig.url)")

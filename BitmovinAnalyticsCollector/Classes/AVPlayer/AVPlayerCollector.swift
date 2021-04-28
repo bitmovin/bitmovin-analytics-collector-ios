@@ -12,6 +12,6 @@ public class AVPlayerCollector: BitmovinAnalyticsInternal {
      * will start monitoring and sending analytics data based on the attached player instance.
      */
     public func attachPlayer(player: AVPlayer) {
-        attach(adapter: AVPlayerAdapter(player: player, config: config, stateMachine: stateMachine), autoplay: false)
+        attach(adapter: AVPlayerAdapter(player: player, config: config, stateMachine: stateMachine))
     }
 }

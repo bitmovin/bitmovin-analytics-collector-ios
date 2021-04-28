@@ -3,7 +3,7 @@ import Foundation
 
 protocol PlayerAdapter {
     func createEventData() -> EventData
-    func startMonitoring()
+    func initialize()
     func stopMonitoring()
     func destroy()
     func resetSourceState()
