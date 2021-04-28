@@ -2,12 +2,10 @@ import Foundation
 
 class CorePlayerAdapter: NSObject {
     internal var stateMachine: StateMachine
-    internal var isPlayerReady: Bool
     private var isDestroyed = false
     
     init(stateMachine: StateMachine){
         self.stateMachine = stateMachine
-        self.isPlayerReady = false
         
         super.init()
         
@@ -27,8 +25,6 @@ class CorePlayerAdapter: NSObject {
         if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
             stateMachine.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed)
         }
-        
-        self.isPlayerReady = false
         
         NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)

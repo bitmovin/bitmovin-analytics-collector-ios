@@ -12,7 +12,7 @@ class BitmovinPlayerAdapterTests: XCTestCase {
         let player = PlayerFactory.create(playerConfig: playerConfig)
         let config = BitmovinAnalyticsConfig(key: "")
         let stateMachine = StateMachine(config: config)
-        let adapter = BitmovinPlayerAdapter(player: player, config: config, stateMachine: stateMachine, sourceMetadataProvider: BitmovinSourceMetadataProvider())
+        let adapter = BitmovinPlayerAdapter(player: player, config: config, stateMachine: stateMachine, sourceMetadataProvider: SourceMetadataProvider<Source>())
         
         adapter.stopMonitoring()
         adapter.stopMonitoring()
@@ -24,7 +24,7 @@ class BitmovinPlayerAdapterTests: XCTestCase {
         let player = PlayerFactory.create(playerConfig: playerConfig)
         let config = BitmovinAnalyticsConfig(key: "")
         let stateMachine = StateMachine(config: config)
-        let adapter = BitmovinPlayerAdapter(player: player, config: config, stateMachine: stateMachine, sourceMetadataProvider: BitmovinSourceMetadataProvider())
+        let adapter = BitmovinPlayerAdapter(player: player, config: config, stateMachine: stateMachine, sourceMetadataProvider: SourceMetadataProvider<Source>())
         
         adapter.startMonitoring()
         adapter.startMonitoring()

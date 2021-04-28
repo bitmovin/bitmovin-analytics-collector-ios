@@ -61,14 +61,4 @@ DESC
     end
   end
 
-  s.subspec 'CoreTarget12' do |coretarget12|
-    coretarget12.ios.deployment_target = '12.0'
-    coretarget12.tvos.deployment_target = '12.0'
-    coretarget12.source_files = 'BitmovinAnalyticsCollector/Classes/Collector/**/*.{swift}'
-    
-    coretarget12.test_spec 'CoreTarget12Tests' do |coretarget12_test_spec|
-      coretarget12_test_spec.source_files = 'BitmovinAnalyticsCollector/Tests/CoreTests/**/*'
-    end
-  end
-
 end
