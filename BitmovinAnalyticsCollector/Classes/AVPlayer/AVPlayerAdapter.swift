@@ -15,6 +15,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var isPlaying = false
     private var currentVideoBitrate: Double = 0
     private var previousTime: CMTime?
+    private var isPlayerReady = false
     
     internal var drmDownloadTime: Int64?
     private var drmType: String?
