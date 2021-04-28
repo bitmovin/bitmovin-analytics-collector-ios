@@ -7,10 +7,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+## 1.20.0-beta1
+
+### Added
+
+- Support for BitmovinPlayer v3
+
 ### Changed
 
 - [Internal] updated Bitmovin Player dependency for BitmovinPlayerV3 to `3.0.0-rc.5`
 - [Internal] Split project structure to support both BitmovinPlayer v2 and v3
+
+### Removed
+
+- Possibility to include all adapters available in `BitmovinPlayerCollector` at one time using CocoaPods
 
 ## 1.19.0
 
