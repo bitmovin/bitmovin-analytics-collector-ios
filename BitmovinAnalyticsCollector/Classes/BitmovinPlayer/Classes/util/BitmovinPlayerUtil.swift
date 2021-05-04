@@ -13,35 +13,35 @@ public class BitmovinPlayerUtil {
         }
         switch string {
             case "pre":
-                return AdPosition.pre
+                return .pre;
             case "post":
-                return AdPosition.post;
+                return .post;
             case "mid":
-                return AdPosition.mid;
+                return .mid;
             default:
-                return AdPosition.mid;
+                return .mid;
         }
     }
     
     static func getAdTagTypeFromAdTag(adTag: AdTag)-> AdTagType {
         switch adTag.type {
-            case BMPAdTagType.VAST:
-                return AdTagType.VAST;
-            case BMPAdTagType.VMAP:
-                return AdTagType.VMAP;
+            case .VAST:
+                return .VAST;
+            case .VMAP:
+                return .VMAP;
             default:
-                return AdTagType.UNKNOWN;
+                return .UNKNOWN;
         }
     }
     
     static func getAdQuartileFromPlayerAdQuartile(adQuartile: AdQuartile) -> AnalyticsAdQuartile {
         switch adQuartile {
-            case AdQuartile.firstQuartile:
-                return AnalyticsAdQuartile.FIRST_QUARTILE;
-            case AdQuartile.midpoint:
-                return AnalyticsAdQuartile.MIDPOINT;
-            case AdQuartile.thirdQuartile:
-                return AnalyticsAdQuartile.THIRD_QUARTILE;
+            case .firstQuartile:
+                return .FIRST_QUARTILE;
+            case .midpoint:
+                return .MIDPOINT;
+            case .thirdQuartile:
+                return .THIRD_QUARTILE;
             @unknown default:
                 fatalError()
         }
