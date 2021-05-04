@@ -56,18 +56,23 @@ public class StateMachine {
         disableRebufferHeartbeat()
     }
 
-    public func reset() {
+    private func resetSourceState() {
         impressionId = NSUUID().uuidString
         didAttemptPlayingVideo = false
         didStartPlayingVideo = false
         startupTime = 0
         disableHeartbeat()
         disableRebufferHeartbeat()
-        state = .ready
         resetVideoStartFailed()
         qualityChangeCounter.resetInterval()
         rebufferingTimeoutHandler.resetInterval()
+        delegate?.stateMachineResetSourceState()
         print("Generated Bitmovin Analytics impression ID: " +  impressionId.lowercased())
+    }
+    
+    public func reset(){
+        state = .ready
+        resetSourceState()
     }
 
     public func transitionState(destinationState: PlayerState, time: CMTime?) {
@@ -119,6 +124,15 @@ public class StateMachine {
     public func error(withError error: ErrorData, time: CMTime?) {
         self.errorData = error
         transitionState(destinationState: .error, time: time)
+    }
+    
+    public func sourceChange(_ previousVideoDuration: CMTime?, _ nextVideotimeStart: CMTime?, _ shouldStartup: Bool) {
+        transitionState(destinationState: .sourceChanged, time: previousVideoDuration)
+        resetSourceState()
+        
+        if (shouldStartup) {
+            transitionState(destinationState: .startup, time: nextVideotimeStart)
+        }
     }
     
     public func rebufferTimeoutReached(time: CMTime?) {

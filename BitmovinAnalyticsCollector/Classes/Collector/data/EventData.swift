@@ -85,7 +85,7 @@ public class EventData: Codable {
     var videoStartFailed: Bool?
     var videoStartFailedReason: String?
 
-    public init(config: BitmovinAnalyticsConfig, impressionId: String) {
+    public init(config: BitmovinAnalyticsConfig, sourceMetadata: SourceMetadata?, impressionId: String) {
         domain = Util.mainBundleIdentifier()
         userId = Util.getUserId()
 
@@ -99,19 +99,37 @@ public class EventData: Codable {
         self.impressionId = impressionId
         key = config.key
         playerKey = config.playerKey
-        cdnProvider = config.cdnProvider
         customUserId = config.customerUserId
-        customData1 = config.customData1
-        customData2 = config.customData2
-        customData3 = config.customData3
-        customData4 = config.customData4
-        customData5 = config.customData5
-        customData6 = config.customData6
-        customData7 = config.customData7
-        videoId = config.videoId
-        videoTitle = config.title
-        experimentName = config.experimentName
-        path = config.path
+        
+        if let metadata = sourceMetadata {
+            cdnProvider = metadata.cdnProvider
+            customData1 = metadata.customData1
+            customData2 = metadata.customData2
+            customData3 = metadata.customData3
+            customData4 = metadata.customData4
+            customData5 = metadata.customData5
+            customData6 = metadata.customData6
+            customData7 = metadata.customData7
+            videoId = metadata.videoId
+            videoTitle = metadata.title
+            experimentName = metadata.experimentName
+            path = metadata.path
+        }
+        else {
+            cdnProvider = config.cdnProvider
+            customData1 = config.customData1
+            customData2 = config.customData2
+            customData3 = config.customData3
+            customData4 = config.customData4
+            customData5 = config.customData5
+            customData6 = config.customData6
+            customData7 = config.customData7
+            videoId = config.videoId
+            videoTitle = config.title
+            experimentName = config.experimentName
+            path = config.path
+        }
+      
     }
 
     public func jsonString() -> String {

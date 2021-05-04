@@ -3,9 +3,10 @@ import Foundation
 
 protocol PlayerAdapter {
     func createEventData() -> EventData
-    func startMonitoring()
+    func initialize()
     func stopMonitoring()
     func destroy()
-    var drmPerformanceInfo: DrmPerformanceInfo? { get }
+    func resetSourceState()
+    var drmDownloadTime: Int64? { get }
     var currentTime: CMTime? { get }
 }
