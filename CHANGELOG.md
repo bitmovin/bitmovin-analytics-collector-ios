@@ -22,6 +22,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Possibility to include all adapters available in `BitmovinPlayerCollector` at one time using CocoaPods
 
+## 1.19.1
+
+### Fixed
+
+- full-class enum reference lead to compile error
+
 ## 1.19.0
 
 ### Changed
