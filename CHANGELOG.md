@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+### Fixed
+
+- compile error in XCode 12.5 due to wrong enum class import for BitmovinPlayer v3
+
 ## 1.20.0-beta1
 
 ### Added
@@ -26,7 +30,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-- full-class enum reference lead to compile error
+- compile error in XCode 12.5 due to wrong enum class import
 
 ## 1.19.0
 
