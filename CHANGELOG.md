@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development
 
+## 1.19.1
+
+### Fixed
+
+- full-class enum reference lead to compile error
+
 ## 1.19.0
 
 ### Changed
