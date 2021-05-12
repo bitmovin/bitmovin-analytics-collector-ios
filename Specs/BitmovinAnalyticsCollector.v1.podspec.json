@@ -40,6 +40,9 @@
     {
       "name": "BitmovinPlayer",
       "source_files": "BitmovinAnalyticsCollector/Classes/BitmovinPlayer/**/*.{swift}",
+      "dependencies": {
+        "BitmovinAnalyticsCollector/Core": []
+      },
       "tvos": {
         "dependencies": {
           "BitmovinPlayer": [
@@ -65,6 +68,9 @@
     {
       "name": "AVPlayer",
       "source_files": "BitmovinAnalyticsCollector/Classes/AVPlayer/**/*.{swift}",
+      "dependencies": {
+        "BitmovinAnalyticsCollector/Core": []
+      },
       "testspecs": [
         {
           "name": "AVPlayerTests",

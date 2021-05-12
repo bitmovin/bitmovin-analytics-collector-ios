@@ -40,6 +40,9 @@
     {
       "name": "BitmovinPlayer",
       "source_files": "BitmovinAnalyticsCollector/Classes/BitmovinPlayerV3/**/*.{swift}",
+      "dependencies": {
+        "BitmovinAnalyticsCollector/Core": []
+      },
       "tvos": {
         "dependencies": {
           "BitmovinPlayer": [
