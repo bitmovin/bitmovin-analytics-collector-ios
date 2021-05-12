@@ -38,7 +38,7 @@
       ]
     },
     {
-      "name": "BitmovinPlayerV3",
+      "name": "BitmovinPlayer",
       "source_files": "BitmovinAnalyticsCollector/Classes/BitmovinPlayerV3/**/*.{swift}",
       "tvos": {
         "dependencies": {
@@ -56,20 +56,9 @@
       },
       "testspecs": [
         {
-          "name": "BitmovinPlayerV3Tests",
+          "name": "BitmovinPlayerTests",
           "test_type": "unit",
           "source_files": "BitmovinAnalyticsCollector/Tests/BitmovinPlayerV3Tests/**/*"
-        }
-      ]
-    },
-    {
-      "name": "AVPlayer",
-      "source_files": "BitmovinAnalyticsCollector/Classes/AVPlayer/**/*.{swift}",
-      "testspecs": [
-        {
-          "name": "AVPlayerTests",
-          "test_type": "unit",
-          "source_files": "BitmovinAnalyticsCollector/Tests/AVPlayerTests/**/*"
         }
       ]
     }
