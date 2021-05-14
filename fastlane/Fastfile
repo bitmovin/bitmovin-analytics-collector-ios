@@ -3,7 +3,7 @@ lane :release do
     release_version = sh("git describe").strip
     release_track = ""
     pod_name = "BitmovinAnalyticsCollector"
-    COCOA_DEPLOY_REPO = "cocoa-pods"
+    COCOA_DEPLOY_REPO = "cocoapod-specs"
 
     if release_version.start_with?("1")
         release_track = "v1"
@@ -37,7 +37,7 @@ lane :release do
             puts "Cocoa deploy repo already exists"
         else
             puts "Cloning cocoa deploy repo"
-            sh("git clone git@github.com:rolandgriesser/#{COCOA_DEPLOY_REPO}.git;")
+            sh("git clone git@github.com:bitmovin/#{COCOA_DEPLOY_REPO}.git;")
         end
         Dir.chdir(COCOA_DEPLOY_REPO) do
             sh("git pull")
