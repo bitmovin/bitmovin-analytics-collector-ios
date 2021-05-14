@@ -42,7 +42,7 @@ lane :release do
         Dir.chdir(COCOA_DEPLOY_REPO) do
             sh("git pull")
             repo_spec_output_path = "Specs/#{pod_name}/#{release_version}"
-            Dir.mkdir(repo_spec_output_path) unless File.exists?(repo_spec_output_path)
+            FileUtils.mkdir_p(repo_spec_output_path) unless File.exists?(repo_spec_output_path)
             FileUtils.cp("../#{spec_output_name}", repo_spec_output_path)
             sh("git add .;"\
                 "git commit -m \"#{pod_name} (#{release_version})\";"\
