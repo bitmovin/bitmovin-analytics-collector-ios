@@ -1,7 +1,8 @@
 desc "push release cocoapod"
 lane :release do
-    release_version = "1.20.0-beta2" #sh("git describe").strip
+    release_version = sh("git describe").strip
     release_track = ""
+    pod_name = "BitmovinAnalyticsCollector"
     COCOA_DEPLOY_REPO = "cocoa-pods"
 
     if release_version.start_with?("1")
@@ -14,7 +15,7 @@ lane :release do
     release_dir = '.release'
 
     spec = read_podspec(path: "Specs/BitmovinAnalyticsCollector.#{release_track}.podspec.json")
-    spec_output_path = "#{release_dir}/BitmovinAnalyticsCollector.podspec.json"
+    spec_output_name = "#{pod_name}.podspec.json"
     spec["version"] = release_version
     spec["source"]["tag"] = release_version
 
@@ -29,15 +30,33 @@ lane :release do
 
     Dir.chdir("..") do
       Dir.mkdir(release_dir) unless File.exists?(release_dir)
-      File.write(spec_output_path,JSON.pretty_generate(spec))
+      File.write("#{release_dir}/#{spec_output_name}",JSON.pretty_generate(spec))
 
+      Dir.chdir(release_dir) do
+        if Dir.exist?(COCOA_DEPLOY_REPO)
+            puts "Cocoa deploy repo already exists"
+        else
+            puts "Cloning cocoa deploy repo"
+            sh("git clone git@github.com:rolandgriesser/#{COCOA_DEPLOY_REPO}.git;")
+        end
+        Dir.chdir(COCOA_DEPLOY_REPO) do
+            sh("git pull")
+            repo_spec_output_path = "Specs/#{pod_name}/#{release_version}"
+            Dir.mkdir(repo_spec_output_path) unless File.exists?(repo_spec_output_path)
+            FileUtils.cp("../#{spec_output_name}", repo_spec_output_path)
+            sh("git add .;"\
+                "git commit -m \"#{pod_name} (#{release_version})\";"\
+                "git push;")
+        end
+        FileUtils.remove_dir(COCOA_DEPLOY_REPO)
+      end
     #   sh("ssh-agent", "sh", "-c",
-      sh(#"sh", "-c",
+    #   sh(#"sh", "-c",
         # "chmod 0600 #{cocoapod_deploy_key_path};"\
         # "ssh-add #{cocoapod_deploy_key_path};"\
-        "git config --global user.name 'Bitmovin Release Automation';"\
-        "git config --global user.email support@bitmovin.com;"\
-        "bundle exec pod repo add bm-#{COCOA_DEPLOY_REPO} git@github.com:rolandgriesser/#{COCOA_DEPLOY_REPO}.git || bundle exec pod repo update bm-#{COCOA_DEPLOY_REPO};"\
-        "bundle exec pod repo push bm-#{COCOA_DEPLOY_REPO} #{spec_output_path} --allow-warnings --skip-import-validation --skip-tests")
+        # "git config --global user.name 'Bitmovin Release Automation';"\
+        # "git config --global user.email support@bitmovin.com;"\
+        # "bundle exec pod repo add bm-#{COCOA_DEPLOY_REPO} git@github.com:rolandgriesser/#{COCOA_DEPLOY_REPO}.git || bundle exec pod repo update bm-#{COCOA_DEPLOY_REPO};"\
+        # "bundle exec pod repo push bm-#{COCOA_DEPLOY_REPO} #{spec_output_path} --allow-warnings --skip-import-validation --skip-tests")
     end
 end
