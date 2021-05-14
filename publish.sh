@@ -48,7 +48,7 @@ if [ -z "$ANALYTICS_API_RELEASE_TOKEN" ]; then
     setEnvVariable "ANALYTICS_API_RELEASE_TOKEN" $ANALYTICS_API_RELEASE_TOKEN
 fi
 
-echo "Make sure you have fastlane installed on your computer before releasing: brew install fastlane"
+echo "Make sure you have fastlane installed on your computer before releasing: (sudo gem install fastlane -NV)"
 echo "Make sure to bump the version in the .podspec, README and CHANGELOG first and merge that PR into develop."
 echo "Version (without leading \"v\")":
 read VERSION
