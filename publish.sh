@@ -75,6 +75,8 @@ echo "Created release in public repo."
 
 bundle exec fastlane release
 
+echo "Don't forget to create and merge the pull request in the cocoapod-specs repo."
+
 notifyApi "ios" $VERSION
 notifyApi "tvos" $VERSION
 
