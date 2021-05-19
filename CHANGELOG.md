@@ -5,7 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## Development
+## Development v2
+
+## Development v1
+
+## 2.0.0-beta1
+
+- Support for BitmovinPlayer v3
+- Switched to cocoapods-spec repo for releases
+
+## 1.20.0-beta3
+
+- Switched to cocoapods-spec repo for releases
 
 ## 1.20.0-beta2
 
