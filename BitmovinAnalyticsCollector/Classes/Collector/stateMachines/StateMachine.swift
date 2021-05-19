@@ -275,4 +275,40 @@ public class StateMachine {
     public func setErrorData(error: ErrorData?) {
         self.errorData = error
     }
+    
+    internal func changeCustomData(customData: CustomData, time: CMTime?){
+        let originalState = state
+        let shouldTransition = (originalState == PlayerState.paused || originalState == PlayerState.playing)
+        if shouldTransition {
+            transitionState(destinationState: PlayerState.customdatachange,time: time)
+        }
+        self.setCustomDataToConfig(customData: customData)
+        if shouldTransition {
+            transitionState(destinationState: originalState, time: time)
+        }
+    }
+    
+   internal func getCustomDataFromConfig() -> CustomData {
+        let customData = CustomData()
+        customData.customData1 = self.config.customData1
+        customData.customData2 = self.config.customData2
+        customData.customData3 = self.config.customData3
+        customData.customData4 = self.config.customData4
+        customData.customData5 = self.config.customData5
+        customData.customData6 = self.config.customData6
+        customData.customData7 = self.config.customData7
+        customData.experimentName = self.config.experimentName
+        return customData
+    }
+
+    internal func setCustomDataToConfig(customData: CustomData) {
+        self.config.customData1 = customData.customData1
+        self.config.customData2 = customData.customData2
+        self.config.customData3 = customData.customData3
+        self.config.customData4 = customData.customData4
+        self.config.customData5 = customData.customData5
+        self.config.customData6 = customData.customData6
+        self.config.customData7 = customData.customData7
+        self.config.experimentName = customData.experimentName
+    }
 }

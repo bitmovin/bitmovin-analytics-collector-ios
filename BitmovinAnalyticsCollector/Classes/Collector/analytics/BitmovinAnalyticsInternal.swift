@@ -81,6 +81,28 @@ public class BitmovinAnalyticsInternal: NSObject {
     @objc private func applicationWillTerminate(notification _: Notification) {
         detachPlayer()
     }
+    
+    @objc public func getCustomData() -> CustomData {
+        return self.stateMachine.getCustomDataFromConfig()
+    }
+    
+    @objc public func setCustomData(customData: CustomData) {
+        self.stateMachine.changeCustomData(customData: customData, time: self.currentTime)
+    }
+    
+    @objc public func setCustomDataOnce(customData: CustomData) {
+        //do we need guard here?
+        guard self.adapter != nil else {
+            return
+        }
+        
+        let currentCustomData = self.stateMachine.getCustomDataFromConfig()
+        self.stateMachine.setCustomDataToConfig(customData: customData)
+        let eventData = createEventData(duration: 0)
+        eventData?.state = PlayerState.customdatachange.rawValue
+        sendEventData(eventData: eventData)
+        self.stateMachine.setCustomDataToConfig(customData: currentCustomData)
+    }
 
     private func sendEventData(eventData: EventData?) {
         guard let data = eventData else {
