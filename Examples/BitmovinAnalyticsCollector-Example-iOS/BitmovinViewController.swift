@@ -15,6 +15,7 @@ class BitmovinViewController: UIViewController {
     @IBOutlet var doneButton: UIButton!
     @IBOutlet var reloadButton: UIButton!
     @IBOutlet var sourceChangeButton: UIButton!
+    @IBOutlet var setCustomDataButton: UIButton!
 
     deinit {
         player?.destroy()
@@ -164,5 +165,12 @@ class BitmovinViewController: UIViewController {
         self.player?.load(sourceConfiguration: config.sourceConfiguration)
 
         analyticsCollector.attachPlayer(player: player)
+    }
+    
+    @IBAction func setCustomDataButtonWasPressed(_: UIButton) {
+        let currentCustomData = analyticsCollector.getCustomData()
+        currentCustomData.customData1 = "some test"
+        currentCustomData.customData2 = "other test"
+        analyticsCollector.setCustomDataOnce(customData: currentCustomData)
     }
 }

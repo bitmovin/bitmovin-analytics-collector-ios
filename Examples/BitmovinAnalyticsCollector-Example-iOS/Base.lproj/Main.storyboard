@@ -51,6 +51,15 @@
                                     <action selector="sourceChangeButtonWasPressed:" destination="qyX-aG-JwL" eventType="touchUpInside" id="pqE-Jt-FGE"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ld4-qY-mHz">
+                                <rect key="frame" x="189" y="8" width="115" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Set Custom data"/>
+                                <connections>
+                                    <action selector="setCustomDataButtonWasPressed:" destination="qyX-aG-JwL" eventType="touchUpInside" id="NaF-i5-6Nn"/>
+                                    <action selector="setCustomDataButtonWasPressed:" destination="qyX-aG-JwL" eventType="touchUpOutside" id="zJA-07-a4e"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -240,6 +249,15 @@
                                     <action selector="sourceChangeButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="v8c-sr-KGx"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iOr-98-ayF">
+                                <rect key="frame" x="121" y="4" width="112" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Set custom data"/>
+                                <connections>
+                                    <action selector="setCustomDataButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="t0W-Ox-IQZ"/>
+                                    <action selector="setCustomDataButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xAq-Cd-in4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -287,6 +305,7 @@
                         <outlet property="position" destination="lSE-mk-Glu" id="c1k-4g-whb"/>
                         <outlet property="reloadButton" destination="0zZ-f5-2Kr" id="Zjn-me-3Bz"/>
                         <outlet property="rewindButton" destination="1Ph-2J-7JL" id="ihA-rZ-zBE"/>
+                        <outlet property="setCustomDataButton" destination="iOr-98-ayF" id="HBi-5L-KeK"/>
                         <outlet property="slider" destination="zs2-tO-O9K" id="ml7-ln-yhN"/>
                         <outlet property="sourceChangeButton" destination="piu-s9-28n" id="3lT-5z-d3L"/>
                     </connections>
