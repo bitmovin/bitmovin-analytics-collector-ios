@@ -1,0 +1,69 @@
+{
+  "name": "BitmovinAnalyticsCollector",
+  "version": "2.0.0-beta1",
+  "summary": "iOS library that allows you to monitor your iOS video playback with Bitmovin Analytics",
+  "description": "iOS library that allows you to monitor your iOS video playback with Bitmovin Analytics. This SDK can monitor an AVPlayer or a Bitmovin Player",
+  "homepage": "https://github.com/bitmovin/bitmovin-analytics-collector-ios",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Bitmovin Inc": "admin@bitmovin.com"
+  },
+  "source": {
+    "git": "https://github.com/bitmovin/bitmovin-analytics-collector-ios.git",
+    "tag": "2.0.0-beta1"
+  },
+  "platforms": {
+    "ios": "12.0",
+    "tvos": "12.0"
+  },
+  "swift_versions": "5.0",
+  "pod_target_xcconfig": {
+    "FRAMEWORK_SEARCH_PATHS": "\"${PODS_ROOT}\"/*",
+    "OTHER_LDFLAGS": "$(inherited) -ObjC",
+    "ENABLE_BITCOD": "YES"
+  },
+  "subspecs": [
+    {
+      "name": "Core",
+      "source_files": "BitmovinAnalyticsCollector/Classes/Collector/**/*.{swift}",
+      "testspecs": [
+        {
+          "name": "CoreTests",
+          "test_type": "unit",
+          "source_files": "BitmovinAnalyticsCollector/Tests/CoreTests/**/*"
+        }
+      ]
+    },
+    {
+      "name": "BitmovinPlayer",
+      "source_files": "BitmovinAnalyticsCollector/Classes/BitmovinPlayerV3/**/*.{swift}",
+      "dependencies": {
+        "BitmovinAnalyticsCollector/Core": []
+      },
+      "tvos": {
+        "dependencies": {
+          "BitmovinPlayer": [
+            "~>3.0.0"
+          ]
+        }
+      },
+      "ios": {
+        "dependencies": {
+          "BitmovinPlayer": [
+            "~>3.0.0"
+          ]
+        }
+      },
+      "testspecs": [
+        {
+          "name": "BitmovinPlayerTests",
+          "test_type": "unit",
+          "source_files": "BitmovinAnalyticsCollector/Tests/BitmovinPlayerV3Tests/**/*"
+        }
+      ]
+    }
+  ]
+}

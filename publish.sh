@@ -48,7 +48,8 @@ if [ -z "$ANALYTICS_API_RELEASE_TOKEN" ]; then
     setEnvVariable "ANALYTICS_API_RELEASE_TOKEN" $ANALYTICS_API_RELEASE_TOKEN
 fi
 
-echo "Make sure to bump the version in the .podspec, README and CHANGELOG first and merge that PR into develop."
+echo "Make sure you have fastlane installed on your computer before releasing: (sudo gem install fastlane -NV)"
+echo "Make sure to bump the version in the .podspec (use the latest v1 version), README and CHANGELOG first and merge that PR into develop."
 echo "Version (without leading \"v\")":
 read VERSION
 git checkout develop
@@ -71,6 +72,10 @@ curl \
   -d "{\"tag_name\":\"$VERSION\", \"name\": \"v$VERSION\", \"draft\": false}"
 
 echo "Created release in public repo."
+
+bundle exec fastlane release
+
+echo "Don't forget to create and merge the pull request in the cocoapod-specs repo."
 
 notifyApi "ios" $VERSION
 notifyApi "tvos" $VERSION

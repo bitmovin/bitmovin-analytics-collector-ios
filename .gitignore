@@ -19,6 +19,7 @@ playground.xcworkspace
 # Package.pins
 # Package.resolved
 .build/
+.release/
 
 # CocoaPods
 #
@@ -47,6 +48,7 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
+fastlane/README.md
 
 .idea
 **/.DS_Store
