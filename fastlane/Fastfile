@@ -40,13 +40,15 @@ lane :release do
             sh("git clone git@github.com:bitmovin/#{COCOA_DEPLOY_REPO}.git;")
         end
         Dir.chdir(COCOA_DEPLOY_REPO) do
-            sh("git pull")
+            branch_name = "release/analytics-#{release_version}"
+            sh("git pull;"\
+                "git checkout -B #{branch_name};")
             repo_spec_output_path = "Specs/#{pod_name}/#{release_version}"
-            FileUtils.mkdir_p(repo_spec_output_path) unless File.exists?(repo_spec_output_path)
+            FileUtils.mkdir_p(repo_spec_output_path) unless Dir.exist?(repo_spec_output_path)
             FileUtils.cp("../#{spec_output_name}", repo_spec_output_path)
             sh("git add .;"\
                 "git commit -m \"#{pod_name} (#{release_version})\";"\
-                "git push;")
+                "git push origin #{branch_name};")
         end
         FileUtils.remove_dir(COCOA_DEPLOY_REPO)
       end
