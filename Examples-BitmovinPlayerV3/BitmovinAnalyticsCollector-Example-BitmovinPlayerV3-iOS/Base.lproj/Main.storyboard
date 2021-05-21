@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="db8-gG-r1q">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,70 +19,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaP-Nr-D6S">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaP-Nr-D6S">
                                 <rect key="frame" x="21" y="8" width="37" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Q4N-ns-5rj"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Done"/>
                                 <connections>
                                     <action selector="doneButtonWasPressed:" destination="JsM-hC-usJ" eventType="touchUpOutside" id="LSk-x1-U3e"/>
                                     <action selector="doneButtonWasPressed:" destination="JsM-hC-usJ" eventType="touchUpInside" id="pGf-nP-Wle"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ycp-7C-vXc">
-                                <rect key="frame" x="0.0" y="66" width="375" height="658"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ycp-7C-vXc">
+                                <rect key="frame" x="0.0" y="89" width="375" height="635"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ezi-Ba-qhC">
-                                <rect key="frame" x="312" y="8" width="47" height="30"/>
-                                <state key="normal" title="Reload"/>
-                                <connections>
-                                    <action selector="reloadButtonWasPressed:" destination="JsM-hC-usJ" eventType="touchUpOutside" id="AcF-ab-HjU"/>
-                                    <action selector="reloadButtonWasPressed:" destination="JsM-hC-usJ" eventType="touchUpInside" id="lZX-Hv-Su3"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="B8x-R2-uMy">
-                                <rect key="frame" x="66" y="5" width="122" height="53"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="122" id="fAI-5b-H0P"/>
-                                </constraints>
-                                <state key="normal" title="Seek to Second Source"/>
-                                <connections>
-                                    <action selector="seekToSecondSourceButtonWasPressed:" destination="qyX-aG-JwL" eventType="touchUpInside" id="Ixp-cr-9ae"/>
-                                    <action selector="seekToSecondSourceButtonWasPressed:" destination="qyX-aG-JwL" eventType="touchUpOutside" id="tl5-Gh-epn"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="b9U-Qc-UKN">
-                                <rect key="frame" x="189" y="5" width="122" height="53"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="122" id="TkE-Aw-s9h"/>
-                                </constraints>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="b9U-Qc-UKN">
+                                <rect key="frame" x="237" y="8" width="122" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Source change"/>
                                 <connections>
                                     <action selector="sourceChangeWasPressed:" destination="qyX-aG-JwL" eventType="touchUpInside" id="I1U-pq-VPA"/>
                                     <action selector="sourceChangeWasPressed:" destination="qyX-aG-JwL" eventType="touchUpOutside" id="M25-Ha-Co2"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ezi-Ba-qhC">
+                                <rect key="frame" x="21" y="46" width="47" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Reload"/>
+                                <connections>
+                                    <action selector="reloadButtonWasPressed:" destination="JsM-hC-usJ" eventType="touchUpOutside" id="AcF-ab-HjU"/>
+                                    <action selector="reloadButtonWasPressed:" destination="JsM-hC-usJ" eventType="touchUpInside" id="lZX-Hv-Su3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="S2m-7j-jBR">
+                                <rect key="frame" x="76" y="46" width="122" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Set custom data"/>
+                                <connections>
+                                    <action selector="setCustomDataButtonWasPressed:" destination="qyX-aG-JwL" eventType="touchUpInside" id="OmE-Tt-uYM"/>
+                                    <action selector="setCustomDataButtonWasPressed:" destination="qyX-aG-JwL" eventType="touchUpOutside" id="mqZ-kj-dvA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="B8x-R2-uMy">
+                                <rect key="frame" x="71" y="8" width="163" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Seek to Second Source"/>
+                                <connections>
+                                    <action selector="seekToSecondSourceButtonWasPressed:" destination="qyX-aG-JwL" eventType="touchUpInside" id="Ixp-cr-9ae"/>
+                                    <action selector="seekToSecondSourceButtonWasPressed:" destination="qyX-aG-JwL" eventType="touchUpOutside" id="tl5-Gh-epn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="B8x-R2-uMy" firstAttribute="top" secondItem="WKW-BU-uaz" secondAttribute="bottom" constant="5" id="0uC-xE-mrZ"/>
-                            <constraint firstAttribute="trailing" secondItem="Ycp-7C-vXc" secondAttribute="trailing" id="4s1-tz-N5J"/>
-                            <constraint firstItem="Ycp-7C-vXc" firstAttribute="leading" secondItem="GA2-RJ-ciT" secondAttribute="leading" id="5ns-Hk-IuO"/>
-                            <constraint firstItem="Ezi-Ba-qhC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oaP-Nr-D6S" secondAttribute="trailing" constant="8" symbolic="YES" id="6er-Vr-p9y"/>
-                            <constraint firstItem="b9U-Qc-UKN" firstAttribute="leading" secondItem="B8x-R2-uMy" secondAttribute="trailing" constant="1" id="DfV-iI-pU3"/>
-                            <constraint firstItem="B8x-R2-uMy" firstAttribute="leading" secondItem="oaP-Nr-D6S" secondAttribute="trailing" constant="8" symbolic="YES" id="EIk-cz-3zI"/>
-                            <constraint firstItem="Ezi-Ba-qhC" firstAttribute="trailing" secondItem="GA2-RJ-ciT" secondAttribute="trailingMargin" id="Esq-zo-Nx4"/>
-                            <constraint firstItem="b9U-Qc-UKN" firstAttribute="top" secondItem="B8x-R2-uMy" secondAttribute="top" id="Gog-BW-57I"/>
-                            <constraint firstItem="Ycp-7C-vXc" firstAttribute="bottom" secondItem="2r6-uL-X9O" secondAttribute="top" id="S3N-M6-kkx"/>
-                            <constraint firstItem="oaP-Nr-D6S" firstAttribute="leading" secondItem="GA2-RJ-ciT" secondAttribute="leadingMargin" constant="5" id="UjI-el-UHq"/>
-                            <constraint firstItem="oaP-Nr-D6S" firstAttribute="top" secondItem="WKW-BU-uaz" secondAttribute="bottom" constant="8" symbolic="YES" id="V7n-JC-IWF"/>
-                            <constraint firstItem="Ycp-7C-vXc" firstAttribute="top" secondItem="b9U-Qc-UKN" secondAttribute="bottom" constant="8" symbolic="YES" id="Xv0-5l-dsV"/>
-                            <constraint firstItem="Ycp-7C-vXc" firstAttribute="top" secondItem="B8x-R2-uMy" secondAttribute="bottom" constant="8" symbolic="YES" id="c1p-Py-KyM"/>
-                            <constraint firstItem="Ycp-7C-vXc" firstAttribute="top" secondItem="oaP-Nr-D6S" secondAttribute="bottom" constant="8" id="kOQ-CX-3Yk"/>
-                            <constraint firstItem="Ezi-Ba-qhC" firstAttribute="baseline" secondItem="oaP-Nr-D6S" secondAttribute="baseline" id="oBa-4X-S96"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="0hj-3a-QsH"/>
                     <connections>

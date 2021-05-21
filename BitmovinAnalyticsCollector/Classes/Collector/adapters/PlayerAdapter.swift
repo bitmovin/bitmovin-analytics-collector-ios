@@ -9,4 +9,5 @@ protocol PlayerAdapter {
     func resetSourceState()
     var drmDownloadTime: Int64? { get }
     var currentTime: CMTime? { get }
+    var currentSourceMetadata: SourceMetadata? { get }
 }

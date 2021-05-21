@@ -83,25 +83,49 @@ public class BitmovinAnalyticsInternal: NSObject {
     }
     
     @objc public func getCustomData() -> CustomData {
-        return self.stateMachine.getCustomDataFromConfig()
+        let sourceMetadata = adapter?.currentSourceMetadata
+        return sourceMetadata?.getCustomData() ?? self.stateMachine.getCustomDataFromConfig()
     }
     
     @objc public func setCustomData(customData: CustomData) {
-        self.stateMachine.changeCustomData(customData: customData, time: self.currentTime)
+        guard self.adapter != nil else {
+            return
+        }
+        let sourceMetadata = adapter?.currentSourceMetadata
+        
+        self.stateMachine.changeCustomData(customData: customData, time: self.currentTime) {
+            if(sourceMetadata != nil) {
+                sourceMetadata?.setCustomData(customData: customData)
+            }
+            else {
+                self.stateMachine.setCustomDataToConfig(customData: customData)
+            }
+        }
     }
     
     @objc public func setCustomDataOnce(customData: CustomData) {
-        //do we need guard here?
         guard self.adapter != nil else {
             return
         }
         
-        let currentCustomData = self.stateMachine.getCustomDataFromConfig()
-        self.stateMachine.setCustomDataToConfig(customData: customData)
-        let eventData = createEventData(duration: 0)
-        eventData?.state = PlayerState.customdatachange.rawValue
-        sendEventData(eventData: eventData)
-        self.stateMachine.setCustomDataToConfig(customData: currentCustomData)
+        let sourceMetadata = adapter?.currentSourceMetadata
+        let currentCustomData = sourceMetadata?.getCustomData() ?? self.stateMachine.getCustomDataFromConfig()
+        
+        if(sourceMetadata == nil) {
+            self.stateMachine.setCustomDataToConfig(customData: customData)
+            let eventData = createEventData(duration: 0)
+            eventData?.state = PlayerState.customdatachange.rawValue
+            sendEventData(eventData: eventData)
+            self.stateMachine.setCustomDataToConfig(customData: currentCustomData)
+        }
+        else {
+            sourceMetadata?.setCustomData(customData: customData)
+            let eventData = createEventData(duration: 0)
+            eventData?.state = PlayerState.customdatachange.rawValue
+            sendEventData(eventData: eventData)
+            sourceMetadata?.setCustomData(customData: currentCustomData)
+        }
+       
     }
 
     private func sendEventData(eventData: EventData?) {

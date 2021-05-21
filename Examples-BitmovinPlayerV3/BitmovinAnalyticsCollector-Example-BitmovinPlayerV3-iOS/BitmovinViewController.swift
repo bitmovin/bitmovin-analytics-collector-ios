@@ -17,6 +17,7 @@ class BitmovinViewController: UIViewController {
     @IBOutlet var reloadButton: UIButton!
     @IBOutlet var seekToSecondSourceButton: UIButton!
     @IBOutlet var sourceChange: UIButton!
+    @IBOutlet var setCustomData: UIButton!
     
     var adsActive = false
 
@@ -198,5 +199,12 @@ class BitmovinViewController: UIViewController {
         self.attachAnalytics(player: player)
         
         self.loadPlaylist(player: player)
+    }
+    
+    @IBAction func setCustomDataButtonWasPressed(_: UIButton) {
+        let currentCustomData = analyticsCollector.getCustomData()
+        currentCustomData.customData1 = "some test"
+        currentCustomData.customData2 = "other test"
+        analyticsCollector.setCustomDataOnce(customData: currentCustomData)
     }
 }

@@ -276,13 +276,13 @@ public class StateMachine {
         self.errorData = error
     }
     
-    internal func changeCustomData(customData: CustomData, time: CMTime?){
+    internal func changeCustomData(customData: CustomData, time: CMTime?, _ updateConfig:() -> ()){
         let originalState = state
         let shouldTransition = (originalState == PlayerState.paused || originalState == PlayerState.playing)
         if shouldTransition {
             transitionState(destinationState: PlayerState.customdatachange,time: time)
         }
-        self.setCustomDataToConfig(customData: customData)
+        updateConfig()
         if shouldTransition {
             transitionState(destinationState: originalState, time: time)
         }

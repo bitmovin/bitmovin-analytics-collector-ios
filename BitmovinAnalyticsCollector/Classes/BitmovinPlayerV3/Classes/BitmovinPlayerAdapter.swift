@@ -22,7 +22,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
     }
     
-    private var currentSourceMetadata: SourceMetadata? {
+    var currentSourceMetadata: SourceMetadata? {
         get {
             return sourceMetadataProvider.get(source: currentSource)
         }
