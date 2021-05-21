@@ -42,7 +42,7 @@ lane :release do
         Dir.chdir(COCOA_DEPLOY_REPO) do
             branch_name = "release/analytics-#{release_version}"
             sh("git pull;"\
-                "git checkout -B #{branch_name};")
+                "git checkout #{branch_name} || git checkout -b #{branch_name};")
             repo_spec_output_path = "Specs/#{pod_name}/#{release_version}"
             FileUtils.mkdir_p(repo_spec_output_path) unless Dir.exist?(repo_spec_output_path)
             FileUtils.cp("../#{spec_output_name}", repo_spec_output_path)

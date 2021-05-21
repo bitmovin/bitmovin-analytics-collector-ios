@@ -19,7 +19,7 @@
     "ios": "9.0",
     "tvos": "9.0"
   },
-  "swift_versions": "5.0",
+  "swift_version": "5.0",
   "pod_target_xcconfig": {
     "FRAMEWORK_SEARCH_PATHS": "\"${PODS_ROOT}\"/*",
     "OTHER_LDFLAGS": "$(inherited) -ObjC",
