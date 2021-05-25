@@ -6,21 +6,21 @@ pod 'BitmovinPlayer', '~>3.0.0-rc.6'
 target 'BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS' do
     use_frameworks!
     platform :ios, '12.0'
-    pod 'BitmovinAnalyticsCollector/Core', :path => '../'
-    pod 'BitmovinAnalyticsCollector/BitmovinPlayerV3', :path => '../'
+    pod 'BitmovinAnalyticsCollector/Core', :path => '../Specs/Development-V3'
+    pod 'BitmovinAnalyticsCollector/BitmovinPlayer', :path => '../Specs/Development-V3'
     pod 'GoogleAds-IMA-iOS-SDK', '3.12.1'
 end
 
 target 'BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS' do
     use_frameworks!
     platform :tvos, '12.0'
-    pod 'BitmovinAnalyticsCollector/Core', :path => '../'
-    pod 'BitmovinAnalyticsCollector/BitmovinPlayerV3', :path => '../'
+    pod 'BitmovinAnalyticsCollector/Core', :path => '../Specs/Development-V3'
+    pod 'BitmovinAnalyticsCollector/BitmovinPlayer', :path => '../Specs/Development-V3'
 end
 
 target 'BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS' do
     use_frameworks!
     platform :ios, '12.0'
-    pod 'BitmovinAnalyticsCollector/Core', :path => '../'
-    pod 'BitmovinAnalyticsCollector/BitmovinPlayerV3', :path => '../', :testspecs => ['BitmovinPlayerV3Tests']
+    pod 'BitmovinAnalyticsCollector/Core', :path => '../Specs/Development-V3'
+    pod 'BitmovinAnalyticsCollector/BitmovinPlayer', :path => '../Specs/Development-V3', :testspecs => ['BitmovinPlayerV3Tests']
 end
