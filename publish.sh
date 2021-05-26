@@ -53,16 +53,16 @@ echo "Make sure to bump the version in the .podspec (use the latest v1 version),
 echo "If you've changed the version of the player dependency, make sure to also update the .podspec.json files in the Specs folder."
 echo "Version (without leading \"v\")":
 read VERSION
-git checkout develop
-git pull
-git checkout main
-git pull
-git merge develop
-git tag -a $VERSION -m "v$VERSION"
-git push origin main $VERSION
+git checkout develop || exit
+git pull || exit
+git checkout main || exit
+git pull || exit
+git merge develop || exit
+git tag -a $VERSION -m "v$VERSION" || exit
+git push origin main $VERSION || exit
 
 echo "Pushed \"main\" and \"$VERSION\" to internal repo."
-git push git@github.com:bitmovin/bitmovin-analytics-collector-ios.git main $VERSION
+git push git@github.com:bitmovin/bitmovin-analytics-collector-ios.git main $VERSION || exit
 echo "Pushed \"main\" and \"$VERSION\" to public repo."
 
 curl \
