@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development v1
 
+## 2.0.0
+
+- Support for BitmovinPlayer v3
+
 ## 2.0.0-beta1
 
 - Support for BitmovinPlayer v3
