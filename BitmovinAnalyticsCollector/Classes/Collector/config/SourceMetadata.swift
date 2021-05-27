@@ -1,7 +1,6 @@
 @objc
 @objcMembers
-public class SourceMetadata: NSObject {
-    
+public class SourceMetadata: NSObject, CustomDataGetter, CustomDataSetter {
     @objc public init(videoId: String? = nil, title: String? = nil, path: String? = nil, isLive: Bool = false, cdnProvider: String? = nil, customData1: String? = nil, customData2: String? = nil, customData3: String? = nil, customData4: String? = nil, customData5: String? = nil, customData6: String? = nil, customData7: String? = nil, experimentName: String? = nil) {
         self.videoId = videoId
         self.title = title
@@ -83,7 +82,7 @@ public class SourceMetadata: NSObject {
      */
     @objc public private(set) var experimentName: String?
     
-    func getCustomData() -> CustomData {
+    internal func getCustomData() -> CustomData {
         let customData = CustomData()
         customData.customData1 = self.customData1
         customData.customData2 = self.customData2
@@ -96,7 +95,7 @@ public class SourceMetadata: NSObject {
         return customData
     }
     
-    func setCustomData(customData: CustomData) {
+    internal func setCustomData(customData: CustomData) {
         self.customData1 = customData.customData1
         self.customData2 = customData.customData2
         self.customData3 = customData.customData3
