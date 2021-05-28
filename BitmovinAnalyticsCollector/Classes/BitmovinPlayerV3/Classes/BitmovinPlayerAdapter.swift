@@ -60,6 +60,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
     
     func resetSourceState() {
+        previousTime = player.currentTime
         drmDownloadTime = nil
         drmCertificateDownloadTime = nil
         overwriteCurrentSource = nil
@@ -387,7 +388,6 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onPlaylistTransition(_ event: PlaylistTransitionEvent, player: Player) {
         print("------------- \nBitmovinAdapter: onPlaylistTransition \(player.currentTime) \n\t isPlaying: \(player.isPlaying) \n\t isPaused: \(player.isPaused) \n\t from: \(event.from.sourceConfig.url) \n\t to: \(event.to.sourceConfig.url)")
         overwriteCurrentSource = event.from
-        previousTime = player.currentTime
         let previousVideoDuration = Util.timeIntervalToCMTime(_: event.from.duration)
         let nextVideotimeStart = self.currentTime
         let shouldStartup = player.isPlaying
