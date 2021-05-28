@@ -269,6 +269,9 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onSeek(_ event: SeekEvent, player: Player) {
         print("BitmovinAdapter: onSeek \(player.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
         isSeeking = true
+        if(event.from.source !== event.to.source) {
+            overwriteCurrentSource = event.from.source
+        }
         stateMachine.transitionState(destinationState: .seeking, time: Util.timeIntervalToCMTime(_: player.currentTime))
     }
 
