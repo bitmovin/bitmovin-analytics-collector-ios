@@ -193,6 +193,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             if let currentItem = change?[NSKeyValueChangeKey.newKey] as? AVPlayerItem {
                 NSLog("Current Item Changed: %@", currentItem.debugDescription)
                 startMonitoringPlayerItem(playerItem: currentItem)
+                if player.rate > 0 {
+                    startup()
+                }
             }
         } else if keyPath == #keyPath(player.status) && player.status == .failed {
             errorOccured(error: self.player.currentItem?.error as NSError?)
