@@ -14,7 +14,6 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     
     private var overwriteCurrentSource: Source? = nil
     
-    private var isPlayerReady: Bool = false
     
     private var currentSource: Source? {
         get {
@@ -53,14 +52,12 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return
         }
         
-        isPlayerReady = true
         stateMachine.play(time: currentTime)
         
         print("BitmovinPlayerAdapter checkAutoplay \n\t isAutoplayEnabled: \(player.config.playbackConfig.isAutoplayEnabled) \n\t isPlaying: \(player.isPlaying) \n\t isPaused: \(player.isPaused) \n\t isBufferingAndWillAutoPlay: \(isSourceLoadedAndWillAutoPlay) \n\t source \n\t\t loadingState \(player.source?.loadingState.rawValue) \n\t\t isActive: \(player.source?.isActive) \n\t\t duration: \(player.source?.duration)")
     }
     
     func resetSourceState() {
-        isPlayerReady = false
         drmDownloadTime = nil
         drmCertificateDownloadTime = nil
         overwriteCurrentSource = nil
@@ -207,7 +204,6 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 extension BitmovinPlayerAdapter: PlayerListener {
     func onPlay(_ event: PlayEvent, player: Player) {
         print("BitmovinAdapter: onPlay isPlaying: \(player.isPlaying) isPaused: \(player.isPaused) isStalling: \(isStalling)")
-        isPlayerReady = true
         stateMachine.play(time: nil)
         
         if (isStalling && stateMachine.state != .seeking && stateMachine.state != .buffering) {
@@ -216,7 +212,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
     
     func onTimeChanged(_ event: TimeChangedEvent, player: Player) {
-        print("BitmovinAdapter: onTimeChanged \(event.currentTime) isPlayerReady: \(isPlayerReady) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused) isStalling: \(isStalling) isSeeking: \(isSeeking)")
+        print("BitmovinAdapter: onTimeChanged \(event.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused) isStalling: \(isStalling) isSeeking: \(isSeeking)")
         
         // When seeking between sources, there might be onTimeChanged events before the
         // player is ready to play the second source
@@ -247,11 +243,6 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onPaused(_ event: PausedEvent, player: Player) {
         isSeeking = false
         stateMachine.pause(time: currentTime)
-    }
-
-    func onReady(_ event: ReadyEvent, player: Player) {
-        print("BitmovinAdapter: onReady \(player.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
-        isPlayerReady = true
     }
 
     func onStallStarted(_ event: StallStartedEvent, player: Player) {
