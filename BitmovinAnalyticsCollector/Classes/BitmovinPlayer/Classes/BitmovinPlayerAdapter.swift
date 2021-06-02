@@ -45,13 +45,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.drmCertificateDownloadTime = nil
     }
 
-    func createEventData() -> EventData {
-        let eventData: EventData = EventData(config: config, sourceMetadata: nil, impressionId: stateMachine.impressionId)
-        decorateEventData(eventData: eventData)
-        return eventData
-    }
-
-    private func decorateEventData(eventData: EventData) {
+    func decorateEventData(eventData: EventData) {
         //PlayerType
         eventData.player = PlayerType.bitmovin.rawValue
 

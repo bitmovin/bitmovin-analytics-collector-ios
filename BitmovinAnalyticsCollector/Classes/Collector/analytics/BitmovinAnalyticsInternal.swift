@@ -16,13 +16,14 @@ public class BitmovinAnalyticsInternal: NSObject {
     private var eventDataDispatcher: EventDataDispatcher
     internal var adAnalytics: BitmovinAdAnalytics?
     internal var adAdapter: AdAdapter?
-    internal var didSendDrmLoadTime = false
+    internal var eventDataFactory: EventDataFactory
     private var isPlayerAttached = false
 
     internal init(config: BitmovinAnalyticsConfig) {
         self.config = config
         stateMachine = StateMachine(config: self.config)
         eventDataDispatcher = SimpleEventDataDispatcher(config: config)
+        eventDataFactory = EventDataFactory(stateMachine, config)
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(licenseFailed(notification:)), name: .licenseFailed, object: eventDataDispatcher)
         NotificationCenter.default.addObserver(self,
@@ -31,7 +32,7 @@ public class BitmovinAnalyticsInternal: NSObject {
             object: nil)
         
         if (config.ads) {
-            self.adAnalytics = BitmovinAdAnalytics(analytics: self);
+            self.adAnalytics = BitmovinAdAnalytics(analytics: self, eventDataFactory: eventDataFactory);
         }
     }
     
@@ -52,6 +53,7 @@ public class BitmovinAnalyticsInternal: NSObject {
         eventDataDispatcher.resetSourceState()
         eventDataDispatcher.disable()
         stateMachine.reset()
+        eventDataFactory.removeAdapter()
         adapter = nil
     }
 
@@ -62,6 +64,7 @@ public class BitmovinAnalyticsInternal: NSObject {
         isPlayerAttached = true
         stateMachine.delegate = self
         eventDataDispatcher.enable()
+        eventDataFactory.useAdapter(playerAdapter: adapter)
         self.adapter = adapter
         self.adapter!.initialize()
     }
@@ -131,30 +134,8 @@ public class BitmovinAnalyticsInternal: NSObject {
     }
 
     private func createEventData(duration: Int64) -> EventData? {
-        guard let eventData = adapter?.createEventData() else {
-            return nil
-        }
-        eventData.state = stateMachine.state.rawValue
+        let eventData = self.eventDataFactory.createEventData()
         eventData.duration = duration
-
-        if !self.didSendDrmLoadTime,  let drmLoadTime = self.adapter?.drmDownloadTime {
-            self.didSendDrmLoadTime = true
-            eventData.drmLoadTime = drmLoadTime
-        }
-
-        if let timeStart = stateMachine.videoTimeStart, CMTIME_IS_NUMERIC(_: timeStart) {
-            eventData.videoTimeStart = Int64(CMTimeGetSeconds(timeStart) * BitmovinAnalyticsInternal.msInSec)
-        }
-        if let timeEnd = stateMachine.videoTimeEnd, CMTIME_IS_NUMERIC(_: timeEnd) {
-            eventData.videoTimeEnd = Int64(CMTimeGetSeconds(timeEnd) * BitmovinAnalyticsInternal.msInSec)
-        }
-        
-        //play attempt failed
-        if (stateMachine.videoStartFailed) {
-            eventData.videoStartFailed = stateMachine.videoStartFailed
-            eventData.videoStartFailedReason = stateMachine.videoStartFailedReason ?? VideoStartFailedReason.unknown
-            stateMachine.resetVideoStartFailed()
-        }
         return eventData
     }
     

@@ -3,6 +3,7 @@ import Foundation
 public class BitmovinAdAnalytics {
     
     private weak var analytics: BitmovinAnalyticsInternal?
+    private var eventDataFactory: EventDataFactory
     
     private var adPodPosition = 0
     private var adStartupTimestamp: TimeInterval? = nil
@@ -30,8 +31,9 @@ public class BitmovinAdAnalytics {
         }
     }
     
-    internal init(analytics: BitmovinAnalyticsInternal) {
+    internal init(analytics: BitmovinAnalyticsInternal, eventDataFactory: EventDataFactory) {
         self.analytics = analytics;
+        self.eventDataFactory = eventDataFactory
         self.adManifestDownloadTimes = [String: TimeInterval]()
     }
     
@@ -192,14 +194,13 @@ public class BitmovinAdAnalytics {
     }
     
     private func sendAnalyticsRequest(adBreak: AnalyticsAdBreak, adSample: AdSample? = nil) {
-        guard let analytics = self.analytics,
-              let adapter = analytics.adapter else {
+        guard let analytics = self.analytics else {
             return
         }
         
         let adEventData = AdEventData()
         
-        adEventData.setEventData(eventData: adapter.createEventData())
+        adEventData.setEventData(eventData: eventDataFactory.createEventData())
         adEventData.setAdBreak(adBreak: adBreak);
         if let adSample = adSample {
             adEventData.setAdSample(adSample: adSample)

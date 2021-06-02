@@ -228,13 +228,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         stateMachine.playing(time: player.currentTime())
     }
 
-    public func createEventData() -> EventData {
-        let eventData: EventData = EventData(config: config, sourceMetadata: nil, impressionId: stateMachine.impressionId)
-        decorateEventData(eventData: eventData)
-        return eventData
-    }
-
-    private func decorateEventData(eventData: EventData) {
+    func decorateEventData(eventData: EventData) {
         // Player
         eventData.player = PlayerType.avplayer.rawValue
 
