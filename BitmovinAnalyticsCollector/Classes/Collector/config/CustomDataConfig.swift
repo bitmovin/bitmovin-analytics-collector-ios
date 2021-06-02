@@ -1,7 +1,4 @@
-protocol CustomDataGetter {
+internal protocol CustomDataConfig {
     func getCustomData() -> CustomData
-}
-
-protocol CustomDataSetter {
     func setCustomData(customData: CustomData)
 }

@@ -1,6 +1,6 @@
 @objc
 @objcMembers
-public class SourceMetadata: NSObject, CustomDataGetter, CustomDataSetter {
+public class SourceMetadata: NSObject, CustomDataConfig {
     @objc public init(videoId: String? = nil, title: String? = nil, path: String? = nil, isLive: Bool = false, cdnProvider: String? = nil, customData1: String? = nil, customData2: String? = nil, customData3: String? = nil, customData4: String? = nil, customData5: String? = nil, customData6: String? = nil, customData7: String? = nil, experimentName: String? = nil) {
         self.videoId = videoId
         self.title = title

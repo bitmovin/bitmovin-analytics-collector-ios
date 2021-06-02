@@ -2,7 +2,7 @@ import UIKit
 
 @objc
 @objcMembers
-public class BitmovinAnalyticsConfig: NSObject, CustomDataGetter, CustomDataSetter {
+public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig{
     internal func getCustomData() -> CustomData {
         let customData = CustomData()
         customData.customData1 = self.customData1
