@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development v2
 
+### Changed
+
+- eventData is now created by `EventDataFactory`
+
 ### Added
 
 - `setCustomData` and `setCustomDataOnce` methods 
@@ -14,6 +18,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development v1
 
+### Changed
+
+- eventData is now created by `EventDataFactory`
+- 
 ### Added
 
 - `setCustomData` and `setCustomDataOnce` methods 
