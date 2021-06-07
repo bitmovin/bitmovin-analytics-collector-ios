@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- eventData is now created by `EventDataFactory`
+- [Internal] `eventData` is now created by `EventDataFactory`
 - 
 ### Added
 
