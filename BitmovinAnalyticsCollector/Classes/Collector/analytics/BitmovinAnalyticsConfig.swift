@@ -120,7 +120,6 @@ public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig{
      * How often the video engine should heartbeat
      */
     @objc public var heartbeatInterval: Int = 59_000
-    
     @objc public init(key: String, playerKey: String) {
         self.key = key
         self.playerKey = playerKey
