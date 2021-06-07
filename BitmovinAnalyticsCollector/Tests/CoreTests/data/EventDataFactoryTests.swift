@@ -5,12 +5,18 @@ class EventDataFactoryTests: XCTestCase {
     
     func test_createEventData_should_returnEventDataWithBasicDataSet() {
         // arrange
-        let config = BitmovinAnalyticsConfig(key: "analytics-key")
-        let stateMachine = StateMachine(config: config)
-        let eventDataFactory = EventDataFactory(stateMachine, config)
+        let eventDataFactory = createDefaultEventDataFactoryForTest()
         
         // act
-        let eventData = eventDataFactory.createEventData()
+        let eventData = eventDataFactory.createEventData(
+            "test-state",
+            "test-impression",
+            nil,
+            nil,
+            nil,
+            nil,
+            false,
+            nil )
         
         // arrange
         XCTAssertNotNil(eventData.version)
@@ -22,12 +28,18 @@ class EventDataFactoryTests: XCTestCase {
     
     func test_createEventData_should_returnEventDataWithAnalyticsVersionSet() {
         // arrange
-        let config = BitmovinAnalyticsConfig(key: "analytics-key")
-        let stateMachine = StateMachine(config: config)
-        let eventDataFactory = EventDataFactory(stateMachine, config)
+        let eventDataFactory = createDefaultEventDataFactoryForTest()
         
         // act
-        let eventData = eventDataFactory.createEventData()
+        let eventData = eventDataFactory.createEventData(
+            "test-state",
+            "test-impression",
+            nil,
+            nil,
+            nil,
+            nil,
+            false,
+            nil )
         
         // arrange
         XCTAssertNotNil(eventData.analyticsVersion)
@@ -36,11 +48,18 @@ class EventDataFactoryTests: XCTestCase {
     func test_createEventData_should_returnEventDataWithConfigDataSet() {
         // arrange
         let config = getTestBitmovinConfig()
-        let stateMachine = StateMachine(config: config)
-        let eventDataFactory = EventDataFactory(stateMachine, config)
+        let eventDataFactory = EventDataFactory(config)
         
         // act
-        let eventData = eventDataFactory.createEventData()
+        let eventData = eventDataFactory.createEventData(
+            "test-state",
+            "test-impression",
+            nil,
+            nil,
+            nil,
+            nil,
+            false,
+            nil )
         
         // arrange
         XCTAssertEqual(eventData.key, config.key)
@@ -63,9 +82,7 @@ class EventDataFactoryTests: XCTestCase {
     
     func test_createEventData_should_returnEventDataWithSourceMetaDataSet() {
         // arrange
-        let config = getTestBitmovinConfig()
-        let stateMachine = StateMachine(config: config)
-        let eventDataFactory = EventDataFactory(stateMachine, config)
+        let eventDataFactory = createDefaultEventDataFactoryForTest()
         let currentSourceMetadata = SourceMetadata(
             videoId: "test-video-id-sourceMetadata",
             title: "test-title-sourceMetadata",
@@ -79,12 +96,17 @@ class EventDataFactoryTests: XCTestCase {
             customData6: "test-customData6-sourceMetadata",
             customData7: "test-customData7-sourceMetadata",
             experimentName: "test-experiment-sourceMetadata")
-        let playerAdapter = FakePlayerAdapter()
-        playerAdapter.currentSourceMetadata = currentSourceMetadata
-        eventDataFactory.useAdapter(playerAdapter: playerAdapter)
         
         // act
-        let eventData = eventDataFactory.createEventData()
+        let eventData = eventDataFactory.createEventData(
+            "test-state",
+            "test-impression",
+            Util.timeIntervalToCMTime(_: 0),
+            Util.timeIntervalToCMTime(_: 10),
+            60,
+            currentSourceMetadata,
+            true,
+            "TEST_ERROR" )
         
         // arrange
         XCTAssertEqual(eventData.cdnProvider, currentSourceMetadata.cdnProvider)
@@ -100,97 +122,34 @@ class EventDataFactoryTests: XCTestCase {
         XCTAssertEqual(eventData.experimentName, currentSourceMetadata.experimentName)
         XCTAssertEqual(eventData.path, currentSourceMetadata.path)
     }
-    
-    func test_createEventData_should_returnEventDataWithStateMachineDataSet() {
-        // arrange
-        let config = getTestBitmovinConfig()
-        let stateMachine = StateMachine(config: config)
-        let eventDataFactory = EventDataFactory(stateMachine, config)
-        
-        // act
-        let eventData = eventDataFactory.createEventData()
-        
-        // arrange
-        XCTAssertEqual(eventData.state, PlayerState.ready.rawValue)
-        XCTAssertNotNil(eventData.impressionId)
-    }
-    
-    func test_createEventData_should_returnEventDataWithDrmDataSet() {
-        // arrange
-        let config = getTestBitmovinConfig()
-        let stateMachine = StateMachine(config: config)
-        let eventDataFactory = EventDataFactory(stateMachine, config)
-        let playerAdapter = FakePlayerAdapter()
-        playerAdapter.drmDownloadTime =  400
-        eventDataFactory.useAdapter(playerAdapter: playerAdapter)
-        
-        // act
-        let eventData = eventDataFactory.createEventData()
-        
-        // arrange
-        XCTAssertEqual(eventData.drmLoadTime, 400)
-    }
-    
-    func test_createEventData_should_notSetDrmLoadTimeTwice() {
-        // arrange
-        let config = getTestBitmovinConfig()
-        let stateMachine = StateMachine(config: config)
-        let eventDataFactory = EventDataFactory(stateMachine, config)
-        let playerAdapter = FakePlayerAdapter()
-        playerAdapter.drmDownloadTime =  400
-        eventDataFactory.useAdapter(playerAdapter: playerAdapter)
-        
-        // act
-        let eventData1 = eventDataFactory.createEventData()
-        let eventData2 = eventDataFactory.createEventData()
-        
-        // arrange
-        XCTAssertEqual(eventData1.drmLoadTime, 400)
-        XCTAssertNil(eventData2.drmLoadTime)
-    }
-    
-    // This tests that the EventDataFactory is setting correct videoTimeStart and videoTimeEnd during the exitPlaying event
-    func test_createEventData_should_returnEventDataWithVideoTimeDataSet() {
-        // arrange
-        let config = getTestBitmovinConfig()
-        
-        let stateMachine = StateMachine(config: config)
-        let eventDataFactory = EventDataFactory(stateMachine, config)
-        var eventData: EventData? = nil
-        let mockDelegate = MockStateMachineDelegate()
-        mockDelegate.setActionForExitPlaying {
-            // act
-            eventData = eventDataFactory.createEventData()
-        }
-        
-        stateMachine.delegate = mockDelegate
-        
-        
-        stateMachine.transitionState(destinationState: .startup, time: Util.timeIntervalToCMTime(_: 0))
-        stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: 10))
-        stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: 60))
 
+    func test_createEventData_should_returnEventDataWithParameterSet() {
         // arrange
-        XCTAssertNotNil(eventData)
-        XCTAssertEqual(eventData!.state, PlayerState.playing.rawValue)
-        XCTAssertEqual(eventData!.videoTimeStart, 10000)
-        XCTAssertEqual(eventData!.videoTimeEnd, 60000)
-    }
-    
-    func test_createEventData_should_returnEventDataWithVideoStartupFailedSet() {
-        // arrange
-        let config = getTestBitmovinConfig()
-        
-        let stateMachine = StateMachine(config: config)
-        stateMachine.setVideoStartFailed(withReason: "TEST_ERROR")
-        let eventDataFactory = EventDataFactory(stateMachine, config)
-        
+        let eventDataFactory = createDefaultEventDataFactoryForTest()
         // act
-        let eventData = eventDataFactory.createEventData()
+        let eventData = eventDataFactory.createEventData(
+            "test-state",
+            "test-impression",
+            Util.timeIntervalToCMTime(_: 0),
+            Util.timeIntervalToCMTime(_: 10),
+            60,
+            nil,
+            true,
+            "TEST_ERROR" )
 
         // arrange
         XCTAssertTrue(eventData.videoStartFailed!)
         XCTAssertEqual(eventData.videoStartFailedReason, "TEST_ERROR")
+        XCTAssertEqual(eventData.state, "test-state")
+        XCTAssertEqual(eventData.impressionId, "test-impression")
+        XCTAssertEqual(eventData.videoTimeStart, 0)
+        XCTAssertEqual(eventData.videoTimeEnd, 10000)
+        XCTAssertEqual(eventData.drmLoadTime, 60)
+    }
+    
+    private func createDefaultEventDataFactoryForTest() -> EventDataFactory{
+        let config = getTestBitmovinConfig()
+        return EventDataFactory(config)
     }
     
     private func getTestBitmovinConfig() -> BitmovinAnalyticsConfig{

@@ -2,26 +2,25 @@ import AVFoundation
 import Foundation
 
 class EventDataFactory {
-    private final var stateMachine: StateMachine
     private final var config: BitmovinAnalyticsConfig
     
     internal var didSendDrmLoadTime = false
     
-    init(_ stateMachine: StateMachine, _ config: BitmovinAnalyticsConfig) {
-        self.stateMachine = stateMachine
+    init(_ config: BitmovinAnalyticsConfig) {
         self.config = config
     }
     
-    func createEventData(_ drmLoadTime: Int64?, _ sourceMetaData: SourceMetadata?) -> EventData {
+    func createEventData(_ state: String, _ impressionId: String, _ videoTimeStart: CMTime?, _ videoTimeEnd: CMTime?, _ drmLoadTime: Int64?, _ sourceMetaData: SourceMetadata?, _ videoStartFailed: Bool, _ videoStartFailedReason: String?) -> EventData {
         let eventData = EventData()
         
+        eventData.state = state
+        eventData.impressionId = impressionId
         setBasicData(eventData)
         setAnalyticsVersion(eventData)
         setConfigData(eventData, sourceMetaData)
-        setValuesFromStateMachine(eventData)
         setDrmLoadTime(eventData, drmLoadTime)
-        setVideoTime(eventData)
-        setVideoStartupFailed(eventData)
+        setVideoTime(eventData, videoTimeStart, videoTimeEnd)
+        setVideoStartupFailed(eventData, videoStartFailed, videoStartFailedReason)
         return eventData
     }
     
@@ -74,10 +73,6 @@ class EventDataFactory {
             eventData.path = config.path
         }
     }
-    private func setValuesFromStateMachine(_ eventData: EventData) {
-        eventData.state = stateMachine.state.rawValue
-        eventData.impressionId = stateMachine.impressionId
-    }
     
     private func setDrmLoadTime(_ eventData: EventData, _ drmLoadTime: Int64?) {
         if self.didSendDrmLoadTime {
@@ -92,22 +87,21 @@ class EventDataFactory {
         eventData.drmLoadTime = drmLoadTime
     }
     
-    private func setVideoTime(_ eventData: EventData) {
-        if let timeStart = stateMachine.videoTimeStart, CMTIME_IS_NUMERIC(_: timeStart) {
+    private func setVideoTime(_ eventData: EventData, _ videoTimeStart: CMTime?, _ videoTimeEnd: CMTime?) {
+        if let timeStart = videoTimeStart, CMTIME_IS_NUMERIC(_: timeStart) {
             eventData.videoTimeStart = Int64(CMTimeGetSeconds(timeStart) * BitmovinAnalyticsInternal.msInSec)
         }
-        if let timeEnd = stateMachine.videoTimeEnd, CMTIME_IS_NUMERIC(_: timeEnd) {
+        if let timeEnd = videoTimeEnd, CMTIME_IS_NUMERIC(_: timeEnd) {
             eventData.videoTimeEnd = Int64(CMTimeGetSeconds(timeEnd) * BitmovinAnalyticsInternal.msInSec)
         }
     }
     
-    private func setVideoStartupFailed(_ eventData: EventData) {
-        if (!stateMachine.videoStartFailed) {
+    private func setVideoStartupFailed(_ eventData: EventData, _ videoStartFailed: Bool, _ videoStartFailedReason: String?) {
+        guard videoStartFailed else {
             return
         }
         
-        eventData.videoStartFailed = stateMachine.videoStartFailed
-        eventData.videoStartFailedReason = stateMachine.videoStartFailedReason ?? VideoStartFailedReason.unknown
-        stateMachine.resetVideoStartFailed()
+        eventData.videoStartFailed = videoStartFailed
+        eventData.videoStartFailedReason = videoStartFailedReason ?? VideoStartFailedReason.unknown
     }
 }

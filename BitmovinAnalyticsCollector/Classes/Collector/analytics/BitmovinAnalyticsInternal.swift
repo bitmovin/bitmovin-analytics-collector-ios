@@ -23,7 +23,7 @@ public class BitmovinAnalyticsInternal: NSObject {
         self.config = config
         stateMachine = StateMachine(config: self.config)
         eventDataDispatcher = SimpleEventDataDispatcher(config: config)
-        eventDataFactory = EventDataFactory(stateMachine, config)
+        eventDataFactory = EventDataFactory(config)
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(licenseFailed(notification:)), name: .licenseFailed, object: eventDataDispatcher)
         NotificationCenter.default.addObserver(self,
@@ -32,7 +32,7 @@ public class BitmovinAnalyticsInternal: NSObject {
             object: nil)
         
         if (config.ads) {
-            self.adAnalytics = BitmovinAdAnalytics(analytics: self, eventDataFactory: eventDataFactory);
+            self.adAnalytics = BitmovinAdAnalytics(analytics: self);
         }
     }
     
@@ -132,7 +132,15 @@ public class BitmovinAnalyticsInternal: NSObject {
     }
 
     internal func createEventData(duration: Int64) -> EventData {
-        let eventData = self.eventDataFactory.createEventData(self.adapter?.drmDownloadTime, self.adapter?.currentSourceMetadata)
+        let eventData = self.eventDataFactory.createEventData(
+            self.stateMachine.state.rawValue,
+            self.stateMachine.impressionId,
+            self.stateMachine.videoTimeStart,
+            self.stateMachine.videoTimeEnd,
+            self.adapter?.drmDownloadTime,
+            self.adapter?.currentSourceMetadata,
+            self.stateMachine.videoStartFailed,
+            self.stateMachine.videoStartFailedReason)
         self.adapter?.decorateEventData(eventData: eventData)
         eventData.duration = duration
         return eventData
@@ -159,6 +167,8 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
             stateMachine.setErrorData(error: nil)
         }
         sendEventData(eventData: eventData)
+        
+        stateMachine.resetVideoStartFailed()
     }
     
     func stateMachine(_ stateMachine: StateMachine, didExitBufferingWithDuration duration: Int64) {

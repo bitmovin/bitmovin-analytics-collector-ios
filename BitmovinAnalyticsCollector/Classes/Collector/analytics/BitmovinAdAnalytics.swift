@@ -3,7 +3,6 @@ import Foundation
 public class BitmovinAdAnalytics {
     
     private weak var analytics: BitmovinAnalyticsInternal?
-    private var eventDataFactory: EventDataFactory
     
     private var adPodPosition = 0
     private var adStartupTimestamp: TimeInterval? = nil
@@ -31,9 +30,8 @@ public class BitmovinAdAnalytics {
         }
     }
     
-    internal init(analytics: BitmovinAnalyticsInternal, eventDataFactory: EventDataFactory) {
+    internal init(analytics: BitmovinAnalyticsInternal) {
         self.analytics = analytics;
-        self.eventDataFactory = eventDataFactory
         self.adManifestDownloadTimes = [String: TimeInterval]()
     }
     
