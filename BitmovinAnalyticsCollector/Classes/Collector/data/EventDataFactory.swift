@@ -3,9 +3,11 @@ import Foundation
 
 class EventDataFactory {
     private final var config: BitmovinAnalyticsConfig
+    private final var userIdProvider: UserIdProvider
     
-    init(_ config: BitmovinAnalyticsConfig) {
+    init(_ config: BitmovinAnalyticsConfig, _ userIdProvider: UserIdProvider) {
         self.config = config
+        self.userIdProvider = userIdProvider
     }
     
     func createEventData(_ state: String, _ impressionId: String, _ videoTimeStart: CMTime?, _ videoTimeEnd: CMTime?, _ drmLoadTime: Int64?, _ sourceMetaData: SourceMetadata?, _ videoStartFailed: Bool, _ videoStartFailedReason: String?) -> EventData {
@@ -25,7 +27,7 @@ class EventDataFactory {
     private func setBasicData(_ eventData: EventData) {
         eventData.version = UIDevice.current.systemVersion
         
-        eventData.userId = Util.getUserId()
+        eventData.userId = userIdProvider.getUserId()
         eventData.userAgent = Util.userAgent()
         eventData.domain = Util.mainBundleIdentifier()
         eventData.language = Util.language()
