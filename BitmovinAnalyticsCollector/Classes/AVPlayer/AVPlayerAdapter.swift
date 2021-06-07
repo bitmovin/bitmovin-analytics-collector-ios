@@ -193,6 +193,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             if let currentItem = change?[NSKeyValueChangeKey.newKey] as? AVPlayerItem {
                 NSLog("Current Item Changed: %@", currentItem.debugDescription)
                 startMonitoringPlayerItem(playerItem: currentItem)
+                if player.rate > 0 {
+                    startup()
+                }
             }
         } else if keyPath == #keyPath(player.status) && player.status == .failed {
             errorOccured(error: self.player.currentItem?.error as NSError?)
@@ -206,9 +209,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         if(newRate.floatValue == 0 && oldRate.floatValue != 0) {
             isPlaying = false
             stateMachine.pause(time: player.currentTime())
-        } else if (newRate.floatValue != 0 && oldRate.floatValue == 0) {
-            isPlaying = true
-            stateMachine.play(time: player.currentTime())
+        } else if (newRate.floatValue != 0 && oldRate.floatValue == 0 && self.player.currentItem != nil) {
+            startup()
         }
     }
     
@@ -225,6 +227,11 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return;
         }
         stateMachine.playing(time: player.currentTime())
+    }
+    
+    private func startup() {
+        isPlaying = true
+        stateMachine.play(time: player.currentTime())
     }
 
     public func createEventData() -> EventData {
