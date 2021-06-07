@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - `setCustomData` and `setCustomDataOnce` methods 
+- `randomizedUserId` configuration property
 
 
 ## Development v1
@@ -25,6 +26,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - `setCustomData` and `setCustomDataOnce` methods 
+- `randomizedUserId` configuration property
 
 
 ## 2.0.0
