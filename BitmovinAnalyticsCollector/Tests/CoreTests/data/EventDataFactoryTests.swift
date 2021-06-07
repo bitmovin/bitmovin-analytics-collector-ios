@@ -5,7 +5,13 @@ class EventDataFactoryTests: XCTestCase {
     
     func test_createEventData_should_returnEventDataWithBasicDataSet() {
         // arrange
-        let eventDataFactory = createDefaultEventDataFactoryForTest()
+        let userIdProvider = MockUserIdProvider()
+        var getUserIdCnt = 0
+        userIdProvider.setActionForGetUserIdAction {
+            getUserIdCnt += 1
+            return "test-user-id"
+        }
+        let eventDataFactory = createDefaultEventDataFactoryForTest(userIdProvider: userIdProvider)
         
         // act
         let eventData = eventDataFactory.createEventData(
@@ -50,7 +56,7 @@ class EventDataFactoryTests: XCTestCase {
     func test_createEventData_should_returnEventDataWithConfigDataSet() {
         // arrange
         let config = getTestBitmovinConfig()
-        let eventDataFactory = EventDataFactory(config)
+        let eventDataFactory = createDefaultEventDataFactoryForTest(config: config)
         
         // act
         let eventData = eventDataFactory.createEventData(
@@ -150,9 +156,23 @@ class EventDataFactoryTests: XCTestCase {
         XCTAssertEqual(eventData.drmLoadTime, 60)
     }
     
-    private func createDefaultEventDataFactoryForTest() -> EventDataFactory{
-        let config = getTestBitmovinConfig()
-        return EventDataFactory(config)
+    private func createDefaultEventDataFactoryForTest( stateMachine: StateMachine? = nil, config: BitmovinAnalyticsConfig? = nil, userIdProvider: UserIdProvider? = nil) -> EventDataFactory {
+        
+        var c = config
+        if c == nil {
+            c = getTestBitmovinConfig()
+        }
+        var sm = stateMachine
+        if sm == nil {
+            sm = StateMachine(config: c!)
+        }
+        
+        var uip = userIdProvider
+        if uip == nil {
+            uip = RandomizedUserIdProvider()
+        }
+        
+        return  EventDataFactory(sm!, c!, uip!)
     }
     
     private func getTestBitmovinConfig() -> BitmovinAnalyticsConfig{
