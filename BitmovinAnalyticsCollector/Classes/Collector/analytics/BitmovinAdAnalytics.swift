@@ -200,7 +200,7 @@ public class BitmovinAdAnalytics {
         
         let adEventData = AdEventData()
         
-        adEventData.setEventData(eventData: eventDataFactory.createEventData())
+        adEventData.setEventData(eventData: analytics.createEventData(duration: 0))
         adEventData.setAdBreak(adBreak: adBreak);
         if let adSample = adSample {
             adEventData.setAdSample(adSample: adSample)
