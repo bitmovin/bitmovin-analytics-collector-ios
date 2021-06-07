@@ -4,8 +4,6 @@ import Foundation
 class EventDataFactory {
     private final var config: BitmovinAnalyticsConfig
     
-    internal var didSendDrmLoadTime = false
-    
     init(_ config: BitmovinAnalyticsConfig) {
         self.config = config
     }
@@ -15,10 +13,10 @@ class EventDataFactory {
         
         eventData.state = state
         eventData.impressionId = impressionId
+        eventData.drmLoadTime = drmLoadTime
         setBasicData(eventData)
         setAnalyticsVersion(eventData)
         setConfigData(eventData, sourceMetaData)
-        setDrmLoadTime(eventData, drmLoadTime)
         setVideoTime(eventData, videoTimeStart, videoTimeEnd)
         setVideoStartupFailed(eventData, videoStartFailed, videoStartFailedReason)
         return eventData
@@ -72,19 +70,6 @@ class EventDataFactory {
             eventData.experimentName = config.experimentName
             eventData.path = config.path
         }
-    }
-    
-    private func setDrmLoadTime(_ eventData: EventData, _ drmLoadTime: Int64?) {
-        if self.didSendDrmLoadTime {
-            return
-        }
-        
-        if drmLoadTime == nil  {
-            return
-        }
-        
-        self.didSendDrmLoadTime = true
-        eventData.drmLoadTime = drmLoadTime
     }
     
     private func setVideoTime(_ eventData: EventData, _ videoTimeStart: CMTime?, _ videoTimeEnd: CMTime?) {

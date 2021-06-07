@@ -18,6 +18,7 @@ public class BitmovinAnalyticsInternal: NSObject {
     internal var adAdapter: AdAdapter?
     internal var eventDataFactory: EventDataFactory
     private var isPlayerAttached = false
+    internal var didSendDrmLoadTime = false
 
     internal init(config: BitmovinAnalyticsConfig) {
         self.config = config
@@ -132,12 +133,19 @@ public class BitmovinAnalyticsInternal: NSObject {
     }
 
     internal func createEventData(duration: Int64) -> EventData {
+        
+        var drmLoadTime: Int64? = nil
+        if adapter?.drmDownloadTime != nil && !didSendDrmLoadTime {
+            drmLoadTime = adapter?.drmDownloadTime
+            didSendDrmLoadTime = true
+        }
+        
         let eventData = self.eventDataFactory.createEventData(
             self.stateMachine.state.rawValue,
             self.stateMachine.impressionId,
             self.stateMachine.videoTimeStart,
             self.stateMachine.videoTimeEnd,
-            self.adapter?.drmDownloadTime,
+            drmLoadTime,
             self.adapter?.currentSourceMetadata,
             self.stateMachine.videoStartFailed,
             self.stateMachine.videoStartFailedReason)
@@ -148,6 +156,7 @@ public class BitmovinAnalyticsInternal: NSObject {
     
     internal func reset(){
         eventDataDispatcher.resetSourceState()
+        didSendDrmLoadTime = false
     }
     
 }
