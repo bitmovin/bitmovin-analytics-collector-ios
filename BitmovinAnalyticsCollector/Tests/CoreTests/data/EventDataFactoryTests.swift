@@ -20,10 +20,12 @@ class EventDataFactoryTests: XCTestCase {
         
         // arrange
         XCTAssertNotNil(eventData.version)
-        XCTAssertNotNil(eventData.userId)
+        XCTAssertEqual(eventData.userId, "test-user-id")
+        XCTAssertEqual(getUserIdCnt, 1)
         XCTAssertNotNil(eventData.userAgent)
         XCTAssertNotNil(eventData.domain)
         XCTAssertNotNil(eventData.language)
+        
     }
     
     func test_createEventData_should_returnEventDataWithAnalyticsVersionSet() {
@@ -126,6 +128,7 @@ class EventDataFactoryTests: XCTestCase {
     func test_createEventData_should_returnEventDataWithParameterSet() {
         // arrange
         let eventDataFactory = createDefaultEventDataFactoryForTest()
+
         // act
         let eventData = eventDataFactory.createEventData(
             "test-state",
