@@ -53,7 +53,6 @@ public class BitmovinAnalyticsInternal: NSObject {
         eventDataDispatcher.resetSourceState()
         eventDataDispatcher.disable()
         stateMachine.reset()
-        eventDataFactory.removeAdapter()
         adapter = nil
     }
 
@@ -64,7 +63,6 @@ public class BitmovinAnalyticsInternal: NSObject {
         isPlayerAttached = true
         stateMachine.delegate = self
         eventDataDispatcher.enable()
-        eventDataFactory.useAdapter(playerAdapter: adapter)
         self.adapter = adapter
         self.adapter!.initialize()
     }
@@ -113,7 +111,7 @@ public class BitmovinAnalyticsInternal: NSObject {
         
         customDataConfig.setCustomData(customData: customData)
         let eventData = createEventData(duration: 0)
-        eventData?.state = PlayerState.customdatachange.rawValue
+        eventData.state = PlayerState.customdatachange.rawValue
         sendEventData(eventData: eventData)
         customDataConfig.setCustomData(customData: currentCustomData)
         
@@ -133,8 +131,9 @@ public class BitmovinAnalyticsInternal: NSObject {
         eventDataDispatcher.addAd(adEventData: data)
     }
 
-    private func createEventData(duration: Int64) -> EventData? {
-        let eventData = self.eventDataFactory.createEventData()
+    internal func createEventData(duration: Int64) -> EventData {
+        let eventData = self.eventDataFactory.createEventData(self.adapter?.drmDownloadTime, self.adapter?.currentSourceMetadata)
+        self.adapter?.decorateEventData(eventData: eventData)
         eventData.duration = duration
         return eventData
     }
@@ -153,9 +152,9 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
     func stateMachineEnterPlayAttemptFailed(stateMachine: StateMachine) {
         let eventData = createEventData(duration: 0)
         if let errorData = stateMachine.getErrorData() {
-            eventData?.errorCode = errorData.code
-            eventData?.errorMessage = errorData.message
-            eventData?.errorData = errorData.data
+            eventData.errorCode = errorData.code
+            eventData.errorMessage = errorData.message
+            eventData.errorData = errorData.data
             // error data is only send in the payload once and then cleared from state machine
             stateMachine.setErrorData(error: nil)
         }
@@ -164,7 +163,7 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
     
     func stateMachine(_ stateMachine: StateMachine, didExitBufferingWithDuration duration: Int64) {
         let eventData = createEventData(duration: duration)
-        eventData?.buffered = duration
+        eventData.buffered = duration
         sendEventData(eventData: eventData)
     }
 
@@ -172,9 +171,9 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         let eventData = createEventData(duration: 0)
         
         if let errorData = stateMachine.getErrorData() {
-            eventData?.errorCode = errorData.code
-            eventData?.errorMessage = errorData.message
-            eventData?.errorData = errorData.data
+            eventData.errorCode = errorData.code
+            eventData.errorMessage = errorData.message
+            eventData.errorData = errorData.data
             // error data is only send in the payload once and then cleared from state machine
             stateMachine.setErrorData(error: nil)
         }
@@ -183,13 +182,13 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
 
     func stateMachine(_ stateMachine: StateMachine, didExitPlayingWithDuration duration: Int64) {
         let eventData = createEventData(duration: duration)
-        eventData?.played = duration
+        eventData.played = duration
         sendEventData(eventData: eventData)
     }
 
     func stateMachine(_ stateMachine: StateMachine, didExitPauseWithDuration duration: Int64) {
         let eventData = createEventData(duration: duration)
-        eventData?.paused = duration
+        eventData.paused = duration
         sendEventData(eventData: eventData)
     }
 
@@ -200,7 +199,7 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
 
     func stateMachine(_ stateMachine: StateMachine, didExitSeekingWithDuration duration: Int64, destinationPlayerState: PlayerState) {
         let eventData = createEventData(duration: duration)
-        eventData?.seeked = duration
+        eventData.seeked = duration
         sendEventData(eventData: eventData)
     }
 
@@ -208,13 +207,13 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         let eventData = createEventData(duration: duration)
         switch stateMachine.state {
         case .playing:
-            eventData?.played = duration
+            eventData.played = duration
 
         case .paused:
-            eventData?.paused = duration
+            eventData.paused = duration
 
         case .buffering:
-            eventData?.buffered = duration
+            eventData.buffered = duration
 
         default:
             break
@@ -224,12 +223,12 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
 
     func stateMachine(_ stateMachine: StateMachine, didStartupWithDuration duration: Int64) {
         let eventData = createEventData(duration: duration)
-        eventData?.videoStartupTime = duration
+        eventData.videoStartupTime = duration
         // Hard coding 1 as the player startup time to workaround a Dashboard issue
-        eventData?.playerStartupTime = 1
-        eventData?.startupTime = duration + 1
-        eventData?.supportedVideoCodecs = Util.getSupportedVideoCodecs()
-        eventData?.state = "startup"
+        eventData.playerStartupTime = 1
+        eventData.startupTime = duration + 1
+        eventData.supportedVideoCodecs = Util.getSupportedVideoCodecs()
+        eventData.state = "startup"
         sendEventData(eventData: eventData)
     }
 

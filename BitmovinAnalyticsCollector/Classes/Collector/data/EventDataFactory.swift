@@ -4,7 +4,6 @@ import Foundation
 class EventDataFactory {
     private final var stateMachine: StateMachine
     private final var config: BitmovinAnalyticsConfig
-    private var playerAdapter: PlayerAdapter?
     
     internal var didSendDrmLoadTime = false
     
@@ -13,26 +12,16 @@ class EventDataFactory {
         self.config = config
     }
     
-    func useAdapter(playerAdapter: PlayerAdapter) {
-        self.playerAdapter = playerAdapter
-    }
-    
-    func removeAdapter() {
-        self.playerAdapter = nil
-    }
-    
-    func createEventData() -> EventData {
+    func createEventData(_ drmLoadTime: Int64?, _ sourceMetaData: SourceMetadata?) -> EventData {
         let eventData = EventData()
         
         setBasicData(eventData)
         setAnalyticsVersion(eventData)
-        setConfigData(eventData, playerAdapter?.currentSourceMetadata)
+        setConfigData(eventData, sourceMetaData)
         setValuesFromStateMachine(eventData)
-        setDrmLoadTime(eventData, playerAdapter?.drmDownloadTime)
+        setDrmLoadTime(eventData, drmLoadTime)
         setVideoTime(eventData)
         setVideoStartupFailed(eventData)
-        
-        playerAdapter?.decorateEventData(eventData: eventData)
         return eventData
     }
     
