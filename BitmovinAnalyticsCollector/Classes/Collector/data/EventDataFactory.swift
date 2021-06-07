@@ -23,13 +23,8 @@ class EventDataFactory {
     
     func createEventData() -> EventData {
         let eventData = EventData()
-        eventData.version = UIDevice.current.systemVersion
         
-        eventData.userId = Util.getUserId()
-        eventData.userAgent = Util.userAgent()
-        eventData.domain = Util.mainBundleIdentifier()
-        eventData.language = Util.language()
-        
+        setBasicData(eventData)
         setAnalyticsVersion(eventData)
         setConfigData(eventData, playerAdapter?.currentSourceMetadata)
         setValuesFromStateMachine(eventData)
@@ -39,6 +34,15 @@ class EventDataFactory {
         
         playerAdapter?.decorateEventData(eventData: eventData)
         return eventData
+    }
+    
+    private func setBasicData(_ eventData: EventData) {
+        eventData.version = UIDevice.current.systemVersion
+        
+        eventData.userId = Util.getUserId()
+        eventData.userAgent = Util.userAgent()
+        eventData.domain = Util.mainBundleIdentifier()
+        eventData.language = Util.language()
     }
     
     private func setAnalyticsVersion(_ eventData: EventData) {
