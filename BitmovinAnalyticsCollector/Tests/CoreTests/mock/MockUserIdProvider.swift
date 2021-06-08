@@ -1,6 +1,8 @@
+@testable import BitmovinAnalyticsCollector
+
 class MockUserIdProvider: UserIdProvider {
     private var getUserIdAction: (() -> String)? = nil
-    func setActionForGetUserIdAction(action: @escaping () -> String) {
+    func setActionForGetUserId(action: @escaping () -> String) {
         getUserIdAction = action
     }
     

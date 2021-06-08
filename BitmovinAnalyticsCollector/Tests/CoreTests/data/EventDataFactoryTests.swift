@@ -7,7 +7,7 @@ class EventDataFactoryTests: XCTestCase {
         // arrange
         let userIdProvider = MockUserIdProvider()
         var getUserIdCnt = 0
-        userIdProvider.setActionForGetUserIdAction {
+        userIdProvider.setActionForGetUserId {
             getUserIdCnt += 1
             return "test-user-id"
         }
@@ -156,15 +156,11 @@ class EventDataFactoryTests: XCTestCase {
         XCTAssertEqual(eventData.drmLoadTime, 60)
     }
     
-    private func createDefaultEventDataFactoryForTest( stateMachine: StateMachine? = nil, config: BitmovinAnalyticsConfig? = nil, userIdProvider: UserIdProvider? = nil) -> EventDataFactory {
+    private func createDefaultEventDataFactoryForTest(config: BitmovinAnalyticsConfig? = nil, userIdProvider: UserIdProvider? = nil) -> EventDataFactory {
         
         var c = config
         if c == nil {
             c = getTestBitmovinConfig()
-        }
-        var sm = stateMachine
-        if sm == nil {
-            sm = StateMachine(config: c!)
         }
         
         var uip = userIdProvider
@@ -172,7 +168,7 @@ class EventDataFactoryTests: XCTestCase {
             uip = RandomizedUserIdProvider()
         }
         
-        return  EventDataFactory(sm!, c!, uip!)
+        return EventDataFactory(c!, uip!)
     }
     
     private func getTestBitmovinConfig() -> BitmovinAnalyticsConfig{
