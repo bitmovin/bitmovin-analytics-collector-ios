@@ -92,9 +92,9 @@ public class BitmovinAnalyticsInternal: NSObject {
             return
         }
         let sourceMetadata = adapter?.currentSourceMetadata
-        let customDataSetter: CustomDataSetter = sourceMetadata ?? self.config
+        let customDataConfig: CustomDataConfig = sourceMetadata ?? self.config
         
-        self.stateMachine.changeCustomData(customData: customData, time: self.currentTime, customDataSetter: customDataSetter)
+        self.stateMachine.changeCustomData(customData: customData, time: self.currentTime, customDataConfig: customDataConfig)
     }
     
     @objc public func setCustomDataOnce(customData: CustomData) {
@@ -104,16 +104,15 @@ public class BitmovinAnalyticsInternal: NSObject {
         
         let sourceMetadata = adapter?.currentSourceMetadata
         
-        let customDataGetter: CustomDataGetter = sourceMetadata ?? self.config
-        let customDataSetter: CustomDataSetter = sourceMetadata ?? self.config
+        let customDataConfig: CustomDataConfig = sourceMetadata ?? self.config
         
-        let currentCustomData = customDataGetter.getCustomData()
+        let currentCustomData = customDataConfig.getCustomData()
         
-        customDataSetter.setCustomData(customData: customData)
+        customDataConfig.setCustomData(customData: customData)
         let eventData = createEventData(duration: 0)
         eventData?.state = PlayerState.customdatachange.rawValue
         sendEventData(eventData: eventData)
-        customDataSetter.setCustomData(customData: currentCustomData)
+        customDataConfig.setCustomData(customData: currentCustomData)
         
     }
 
