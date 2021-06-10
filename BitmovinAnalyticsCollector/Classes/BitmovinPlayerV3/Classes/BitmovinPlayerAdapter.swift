@@ -12,13 +12,13 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var drmCertificateDownloadTime: Int64?
     internal var drmDownloadTime: Int64?
     
-    private var overwriteCurrentSource: Source? = nil
+    private var overrideCurrentSource: Source? = nil
     
     private var previousTime: TimeInterval
     
     private var currentSource: Source? {
         get {
-            return overwriteCurrentSource != nil ? overwriteCurrentSource : player.source
+            return overrideCurrentSource ?? player.source
         }
     }
     
@@ -63,7 +63,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         previousTime = player.currentTime
         drmDownloadTime = nil
         drmCertificateDownloadTime = nil
-        overwriteCurrentSource = nil
+        overrideCurrentSource = nil
     }
 
     func createEventData() -> EventData {
@@ -387,7 +387,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     
     func onPlaylistTransition(_ event: PlaylistTransitionEvent, player: Player) {
         print("------------- \nBitmovinAdapter: onPlaylistTransition \(player.currentTime) \n\t isPlaying: \(player.isPlaying) \n\t isPaused: \(player.isPaused) \n\t from: \(event.from.sourceConfig.url) \n\t to: \(event.to.sourceConfig.url)")
-        overwriteCurrentSource = event.from
+        overrideCurrentSource = event.from
         let previousVideoDuration = Util.timeIntervalToCMTime(_: event.from.duration)
         let nextVideotimeStart = self.currentTime
         let shouldStartup = player.isPlaying
