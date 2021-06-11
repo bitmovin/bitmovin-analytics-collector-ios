@@ -42,39 +42,38 @@ class ViewController: UIViewController {
         guard let streamUrl = URL(string: "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8") else {
             return
         }
-
+        
         // Create player configuration
-        let config = PlayerConfiguration()
-        let playbackConfig = PlaybackConfiguration()
+        let config = PlayerConfig()
+        let playbackConfig = PlaybackConfig()
         playbackConfig.isAutoplayEnabled = true
-        do {
-            try config.setSourceItem(url: streamUrl)
-            config.playbackConfiguration = playbackConfig
-            // Create player based on player configuration
-            let player = Player(configuration: config)
-            analyticsCollector.attachBitmovinPlayer(player: player)
+        
+        config.playbackConfig = playbackConfig
+        // Create player based on player configuration
+        let player = PlayerFactory.create(playerConfig: config)
+        player.add(listener: self)
+        analyticsCollector.attachBitmovinPlayer(player: player)
 
-            // Create player view and pass the player instance to it
-            let playerView = BMPBitmovinPlayerView(player: player, frame: .zero)
+        // Create player view and pass the player instance to it
+        let playerBoundaries = BitmovinPlayer.PlayerView(player: player, frame: .zero)
 
-            // Listen to player events
-            player.add(listener: self)
+        // Listen to player events
+        
+        playerBoundaries.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        playerBoundaries.frame = view.bounds
 
-            playerView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-            playerView.frame = view.bounds
-
-            view.addSubview(playerView)
-            view.bringSubviewToFront(playerView)
-
-            self.player = player
-        } catch {
-            print("Configuration error: \(error)")
-        }
+        view.addSubview(playerBoundaries)
+        view.bringSubviewToFront(playerBoundaries)
+        
+        let sourceConfig = SourceConfig(url: streamUrl)
+        let source = SourceFactory.create(from: sourceConfig!)
+        player.load(source: source)
+        self.player = player
     }
 }
 
 extension ViewController: PlayerListener {
-    func onError(_ event: ErrorEvent) {
-        print("onError \(event.message)")
+    func onEvent(_ event: Event, player: Player) {
+        print(event.name)
     }
 }
