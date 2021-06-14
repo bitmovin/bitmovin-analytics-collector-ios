@@ -2,7 +2,31 @@ import UIKit
 
 @objc
 @objcMembers
-public class BitmovinAnalyticsConfig: NSObject {
+public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig{
+    internal func getCustomData() -> CustomData {
+        let customData = CustomData()
+        customData.customData1 = self.customData1
+        customData.customData2 = self.customData2
+        customData.customData3 = self.customData3
+        customData.customData4 = self.customData4
+        customData.customData5 = self.customData5
+        customData.customData6 = self.customData6
+        customData.customData7 = self.customData7
+        customData.experimentName = self.experimentName
+        return customData
+    }
+    
+    internal func setCustomData(customData: CustomData) {
+        self.customData1 = customData.customData1
+        self.customData2 = customData.customData2
+        self.customData3 = customData.customData3
+        self.customData4 = customData.customData4
+        self.customData5 = customData.customData5
+        self.customData6 = customData.customData6
+        self.customData7 = customData.customData7
+        self.experimentName = customData.experimentName
+    }
+    
     static var analyticsUrl: String = "https://analytics-ingress-global.bitmovin.com/analytics"
     static var adAnalyticsUrl: String = "https://analytics-ingress-global.bitmovin.com/analytics/a"
     static var analyticsLicenseUrl: String = "https://analytics-ingress-global.bitmovin.com/licensing"

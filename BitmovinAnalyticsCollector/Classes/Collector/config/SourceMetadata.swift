@@ -1,7 +1,6 @@
 @objc
 @objcMembers
-public class SourceMetadata: NSObject {
-    
+public class SourceMetadata: NSObject, CustomDataConfig {
     @objc public init(videoId: String? = nil, title: String? = nil, path: String? = nil, isLive: Bool = false, cdnProvider: String? = nil, customData1: String? = nil, customData2: String? = nil, customData3: String? = nil, customData4: String? = nil, customData5: String? = nil, customData6: String? = nil, customData7: String? = nil, experimentName: String? = nil) {
         self.videoId = videoId
         self.title = title
@@ -83,4 +82,27 @@ public class SourceMetadata: NSObject {
      */
     @objc public private(set) var experimentName: String?
     
+    internal func getCustomData() -> CustomData {
+        let customData = CustomData()
+        customData.customData1 = self.customData1
+        customData.customData2 = self.customData2
+        customData.customData3 = self.customData3
+        customData.customData4 = self.customData4
+        customData.customData5 = self.customData5
+        customData.customData6 = self.customData6
+        customData.customData7 = self.customData7
+        customData.experimentName = self.experimentName
+        return customData
+    }
+    
+    internal func setCustomData(customData: CustomData) {
+        self.customData1 = customData.customData1
+        self.customData2 = customData.customData2
+        self.customData3 = customData.customData3
+        self.customData4 = customData.customData4
+        self.customData5 = customData.customData5
+        self.customData6 = customData.customData6
+        self.customData7 = customData.customData7
+        self.experimentName = customData.experimentName
+    }
 }

@@ -7,6 +7,7 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var isStalling: Bool
     private var isSeeking: Bool
     private var isMonitoring = false
+    internal var currentSourceMetadata: SourceMetadata?
     
     /// DRM certificate download time in milliseconds
     private var drmCertificateDownloadTime: Int64?
