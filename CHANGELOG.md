@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - `setCustomData` and `setCustomDataOnce` methods 
 
+### Fixed
+
+- AVPlayer: wrong tracking of startup_time when no source is attached to player
 
 ## 2.0.0
 
