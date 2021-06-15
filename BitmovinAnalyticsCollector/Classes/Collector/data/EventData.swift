@@ -51,7 +51,7 @@ public class EventData: Codable {
     var customData7: String?
     var experimentName: String?
     var userId: String?
-    var impressionId: String?
+    var impressionId: String
     var state: String?
     var m3u8Url: String?
     var mpdUrl: String?
@@ -85,6 +85,10 @@ public class EventData: Codable {
     var videoStartFailed: Bool?
     var videoStartFailedReason: String?
 
+    init(_ impressionId: String) {
+        self.impressionId = impressionId
+    }
+    
     public func jsonString() -> String {
         let encoder = JSONEncoder()
         if #available(iOS 11.0, tvOS 11.0, *) {
