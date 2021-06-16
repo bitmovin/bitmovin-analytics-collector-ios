@@ -20,9 +20,7 @@ class EventDataFactoryTests: XCTestCase {
             nil,
             nil,
             nil,
-            nil,
-            false,
-            nil )
+            nil)
         
         // arrange
         XCTAssertNotNil(eventData.version)
@@ -45,9 +43,7 @@ class EventDataFactoryTests: XCTestCase {
             nil,
             nil,
             nil,
-            nil,
-            false,
-            nil )
+            nil)
         
         // arrange
         XCTAssertNotNil(eventData.analyticsVersion)
@@ -65,9 +61,7 @@ class EventDataFactoryTests: XCTestCase {
             nil,
             nil,
             nil,
-            nil,
-            false,
-            nil )
+            nil)
         
         // arrange
         XCTAssertEqual(eventData.key, config.key)
@@ -112,9 +106,7 @@ class EventDataFactoryTests: XCTestCase {
             Util.timeIntervalToCMTime(_: 0),
             Util.timeIntervalToCMTime(_: 10),
             60,
-            currentSourceMetadata,
-            true,
-            "TEST_ERROR" )
+            currentSourceMetadata)
         
         // arrange
         XCTAssertEqual(eventData.cdnProvider, currentSourceMetadata.cdnProvider)
@@ -142,13 +134,9 @@ class EventDataFactoryTests: XCTestCase {
             Util.timeIntervalToCMTime(_: 0),
             Util.timeIntervalToCMTime(_: 10),
             60,
-            nil,
-            true,
-            "TEST_ERROR" )
+            nil )
 
         // arrange
-        XCTAssertTrue(eventData.videoStartFailed!)
-        XCTAssertEqual(eventData.videoStartFailedReason, "TEST_ERROR")
         XCTAssertEqual(eventData.state, "test-state")
         XCTAssertEqual(eventData.impressionId, "test-impression")
         XCTAssertEqual(eventData.videoTimeStart, 0)

@@ -147,10 +147,15 @@ public class BitmovinAnalyticsInternal: NSObject {
             self.stateMachine.videoTimeStart,
             self.stateMachine.videoTimeEnd,
             drmLoadTime,
-            self.adapter?.currentSourceMetadata,
-            self.stateMachine.videoStartFailed,
-            self.stateMachine.videoStartFailedReason)
+            self.adapter?.currentSourceMetadata)
         self.adapter?.decorateEventData(eventData: eventData)
+        
+        if self.stateMachine.videoStartFailed {
+            eventData.videoStartFailed = self.stateMachine.videoStartFailed
+            eventData.videoStartFailedReason = self.stateMachine.videoStartFailedReason ?? VideoStartFailedReason.unknown
+            stateMachine.resetVideoStartFailed()
+        }
+        
         eventData.duration = duration
         return eventData
     }
@@ -177,8 +182,6 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
             stateMachine.setErrorData(error: nil)
         }
         sendEventData(eventData: eventData)
-        
-        stateMachine.resetVideoStartFailed()
     }
     
     func stateMachine(_ stateMachine: StateMachine, didExitBufferingWithDuration duration: Int64) {

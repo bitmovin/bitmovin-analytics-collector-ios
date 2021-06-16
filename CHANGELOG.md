@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- eventData is now created by `EventDataFactory`
+- [Internal] `eventData` is now created by `EventDataFactory`
 
 ### Added
 
@@ -21,13 +21,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- eventData is now created by `EventDataFactory`
+- [Internal] `eventData` is now created by `EventDataFactory`
 - 
 ### Added
 
 - `setCustomData` and `setCustomDataOnce` methods 
 - `randomizedUserId` configuration property
 
+### Fixed
+
+- AVPlayer: wrong tracking of startup_time when no source is attached to player
 
 ## 2.0.0
 

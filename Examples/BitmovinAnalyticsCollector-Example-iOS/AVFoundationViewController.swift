@@ -63,18 +63,24 @@ class AVFoundationViewController: UIViewController {
     }
 
     override func viewWillAppear(_: Bool) {
-        playerView.playerLayer.player = player
-        addObserver(self, forKeyPath: #keyPath(AVFoundationViewController.player.rate), options: [.new, .initial], context: &AVFoundationViewController.playerViewControllerKVOContext)
-        createPlayer()
-        analyticsCollector.attachPlayer(player: player)
-    }
-
-    @IBAction func createPlayer() {
-        addObserver(self, forKeyPath: #keyPath(AVFoundationViewController.player.currentItem.duration), options: [.new, .initial], context: &AVFoundationViewController.playerViewControllerKVOContext)
         player.isMuted = true
+        playerView.playerLayer.player = player
+        setupPlayerObserver()
+        
+        print("------- attach analytics")
+        analyticsCollector.attachPlayer(player: player)
+        
+        print("------- set item")
         let asset = AVURLAsset(url: url!, options: nil)
         player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
+        
+        print("------- player play")
         player.play()
+    }
+
+    @IBAction func setupPlayerObserver() {
+        addObserver(self, forKeyPath: #keyPath(AVFoundationViewController.player.rate), options: [.new, .initial], context: &AVFoundationViewController.playerViewControllerKVOContext)
+        addObserver(self, forKeyPath: #keyPath(AVFoundationViewController.player.currentItem.duration), options: [.new, .initial], context: &AVFoundationViewController.playerViewControllerKVOContext)
         let interval = CMTimeMake(value: 1, timescale: 1)
         timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { [weak self] time in
             if let this = self {
@@ -87,7 +93,10 @@ class AVFoundationViewController: UIViewController {
 
     @IBAction func reloadPlayer() {
         analyticsCollector.detachPlayer()
-        createPlayer()
+        player.pause()
+        let asset = AVURLAsset(url: url!, options: nil)
+        player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
+        
         config.cdnProvider = CdnProvider.bitmovin
         config.customData1 = "customData1_2"
         config.customData2 = "customData2_2"

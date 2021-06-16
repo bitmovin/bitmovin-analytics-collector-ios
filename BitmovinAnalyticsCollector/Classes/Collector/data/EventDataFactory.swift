@@ -10,17 +10,15 @@ class EventDataFactory {
         self.userIdProvider = userIdProvider
     }
     
-    func createEventData(_ state: String, _ impressionId: String, _ videoTimeStart: CMTime?, _ videoTimeEnd: CMTime?, _ drmLoadTime: Int64?, _ sourceMetaData: SourceMetadata?, _ videoStartFailed: Bool, _ videoStartFailedReason: String?) -> EventData {
-        let eventData = EventData()
+    func createEventData(_ state: String, _ impressionId: String, _ videoTimeStart: CMTime?, _ videoTimeEnd: CMTime?, _ drmLoadTime: Int64?, _ sourceMetaData: SourceMetadata?) -> EventData {
+        let eventData = EventData(impressionId)
         
         eventData.state = state
-        eventData.impressionId = impressionId
         eventData.drmLoadTime = drmLoadTime
         setBasicData(eventData)
         setAnalyticsVersion(eventData)
         setConfigData(eventData, sourceMetaData)
         setVideoTime(eventData, videoTimeStart, videoTimeEnd)
-        setVideoStartupFailed(eventData, videoStartFailed, videoStartFailedReason)
         return eventData
     }
     
@@ -81,14 +79,5 @@ class EventDataFactory {
         if let timeEnd = videoTimeEnd, CMTIME_IS_NUMERIC(_: timeEnd) {
             eventData.videoTimeEnd = Int64(CMTimeGetSeconds(timeEnd) * BitmovinAnalyticsInternal.msInSec)
         }
-    }
-    
-    private func setVideoStartupFailed(_ eventData: EventData, _ videoStartFailed: Bool, _ videoStartFailedReason: String?) {
-        guard videoStartFailed else {
-            return
-        }
-        
-        eventData.videoStartFailed = videoStartFailed
-        eventData.videoStartFailedReason = videoStartFailedReason ?? VideoStartFailedReason.unknown
     }
 }
