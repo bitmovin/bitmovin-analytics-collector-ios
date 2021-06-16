@@ -1,5 +1,3 @@
-import UIKit
-
 @objc
 @objcMembers
 public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig{
@@ -120,6 +118,12 @@ public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig{
      * How often the video engine should heartbeat
      */
     @objc public var heartbeatInterval: Int = 59_000
+    
+    /**
+     * Flag to use randomised userId not depending on device specific values
+     */
+    @objc public var randomizeUserId: Bool = false
+    
     @objc public init(key: String, playerKey: String) {
         self.key = key
         self.playerKey = playerKey

@@ -24,7 +24,8 @@ public class BitmovinAnalyticsInternal: NSObject {
         self.config = config
         stateMachine = StateMachine(config: self.config)
         eventDataDispatcher = SimpleEventDataDispatcher(config: config)
-        eventDataFactory = EventDataFactory(config)
+        let userIdProvider: UserIdProvider = config.randomizeUserId ? RandomizedUserIdProvider() : UserDefaultUserIdProvider()
+        eventDataFactory = EventDataFactory(config, userIdProvider)
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(licenseFailed(notification:)), name: .licenseFailed, object: eventDataDispatcher)
         NotificationCenter.default.addObserver(self,
