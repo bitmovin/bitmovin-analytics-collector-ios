@@ -192,14 +192,13 @@ public class BitmovinAdAnalytics {
     }
     
     private func sendAnalyticsRequest(adBreak: AnalyticsAdBreak, adSample: AdSample? = nil) {
-        guard let analytics = self.analytics,
-              let adapter = analytics.adapter else {
+        guard let analytics = self.analytics else {
             return
         }
         
         let adEventData = AdEventData()
         
-        adEventData.setEventData(eventData: adapter.createEventData())
+        adEventData.setEventData(eventData: analytics.createEventData(duration: 0))
         adEventData.setAdBreak(adBreak: adBreak);
         if let adSample = adSample {
             adEventData.setAdSample(adSample: adSample)
