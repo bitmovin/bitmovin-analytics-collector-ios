@@ -169,12 +169,12 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return
         }
         if currentVideoBitrate == 0 {
-            currentVideoBitrate = event.indicatedBitrate
-        } else if currentVideoBitrate != event.indicatedBitrate {
+            currentVideoBitrate = event.observedBitrate
+        } else if currentVideoBitrate != event.observedBitrate {
             let previousState = stateMachine.state
             stateMachine.videoQualityChange(time: player.currentTime())
             stateMachine.transitionState(destinationState: previousState, time: player.currentTime())
-            currentVideoBitrate = event.indicatedBitrate
+            currentVideoBitrate = event.observedBitrate
         }
     }
 
