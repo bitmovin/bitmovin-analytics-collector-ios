@@ -9,7 +9,7 @@ Development v1
 
 ### Changed
 
-- AVPlayer: current bitrate is now reported by `observedBitrate`
+- AVPlayer: current video bitrate is now correctly calculated
 
 ## 2.1.0
 
