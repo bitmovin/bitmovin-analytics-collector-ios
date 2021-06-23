@@ -169,6 +169,10 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return
         }
         
+        if event.numberOfBytesTransferred < 0 || event.segmentsDownloadedDuration <= 0 {
+            return
+        }
+        
         let numberOfBitsTransferred = (event.numberOfBytesTransferred * 8)
         let newBitrate = Double(integerLiteral: numberOfBitsTransferred) / event.segmentsDownloadedDuration
         
