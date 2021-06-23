@@ -173,6 +173,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return
         }
         
+        // https://stackoverflow.com/questions/32406838/how-to-find-avplayer-current-bitrate
         let numberOfBitsTransferred = (event.numberOfBytesTransferred * 8)
         let newBitrate = Double(integerLiteral: numberOfBitsTransferred) / event.segmentsDownloadedDuration
         
