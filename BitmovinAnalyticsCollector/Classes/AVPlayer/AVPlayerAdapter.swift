@@ -100,6 +100,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(failedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(didPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         updateDrmPerformanceInfo(playerItem)
     }
 
@@ -108,6 +109,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemTimeJumped, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         statusObserver?.invalidate()
     }
 
@@ -150,6 +152,11 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     @objc private func failedToPlayToEndTime(notification: Notification) {
         let error = notification.userInfo?[AVPlayerItemFailedToPlayToEndTimeErrorKey] as? NSError
         errorOccured(error: error)
+    }
+
+    @objc private func didPlayToEndTime(notification: Notification) {
+        isPlaying = false
+        stateMachine.pause(time: player.currentTime())
     }
 
     @objc private func playbackStalled(notification _: Notification) {
