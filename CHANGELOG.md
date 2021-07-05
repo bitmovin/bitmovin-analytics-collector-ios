@@ -8,7 +8,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Development v1
 
 ### Added
-- listening for `AVPlayerItemDidPlayToEndTime` notifications for determining end of playback
+- AVPlayer: listening for `AVPlayerItemDidPlayToEndTime` notifications for determining end of playback
+
+### Fixed
+
+- AVPlayer: detection of `streamFormat` and `streamURL` when source URL contains queryParameters
+
+### Changed
+
+- AVPlayer: current video bitrate is now correctly calculated
 
 ## 2.1.0
 

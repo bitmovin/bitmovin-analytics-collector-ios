@@ -96,7 +96,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         statusObserver = playerItem.observe(\.status) {[weak self] (item, _) in
             self?.playerItemStatusObserver(playerItem: item)
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(accessItemAdded(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(observeNewAccessLogEntry(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(failedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
@@ -171,18 +171,33 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
     }
 
-    @objc private func accessItemAdded(notification: Notification) {
+    @objc private func observeNewAccessLogEntry(notification: Notification) {
         guard let item = notification.object as? AVPlayerItem, let event = item.accessLog()?.events.last else {
             return
         }
-        if currentVideoBitrate == 0 {
-            currentVideoBitrate = event.indicatedBitrate
-        } else if currentVideoBitrate != event.indicatedBitrate {
-            let previousState = stateMachine.state
-            stateMachine.videoQualityChange(time: player.currentTime())
-            stateMachine.transitionState(destinationState: previousState, time: player.currentTime())
-            currentVideoBitrate = event.indicatedBitrate
+        
+        if event.numberOfBytesTransferred < 0 || event.segmentsDownloadedDuration <= 0 {
+            return
         }
+        
+        // https://stackoverflow.com/questions/32406838/how-to-find-avplayer-current-bitrate
+        let numberOfBitsTransferred = (event.numberOfBytesTransferred * 8)
+        let newBitrate = Double(integerLiteral: numberOfBitsTransferred) / event.segmentsDownloadedDuration
+        
+        if currentVideoBitrate == 0 {
+            currentVideoBitrate = newBitrate
+            return
+        }
+        
+        // bitrate needs to change in order to trigger state change
+        if currentVideoBitrate == newBitrate {
+            return
+        }
+        
+        let previousState = stateMachine.state
+        stateMachine.videoQualityChange(time: player.currentTime())
+        stateMachine.transitionState(destinationState: previousState, time: player.currentTime())
+        currentVideoBitrate = newBitrate
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
