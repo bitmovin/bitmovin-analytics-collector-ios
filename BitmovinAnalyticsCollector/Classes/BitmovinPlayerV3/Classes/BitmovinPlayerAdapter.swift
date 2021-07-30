@@ -79,9 +79,14 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         //PlayerTech
         eventData.playerTech = "ios:bitmovin"
 
-        //isCasting
-        eventData.isCasting = player.isCasting
-
+        let isCasting = player.isCasting || player.isAirPlayActive
+        eventData.isCasting = isCasting
+       
+        //castTech
+        if isCasting {
+            eventData.castTech = player.isAirPlayActive ? CastTech.AirPlay.rawValue : CastTech.GoogleCast.rawValue
+        }
+        
         //version
         if let sdkVersion = BitmovinPlayerUtil.playerVersion() {
             eventData.version = PlayerType.bitmovin.rawValue + "-" + sdkVersion

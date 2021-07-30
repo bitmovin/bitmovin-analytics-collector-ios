@@ -58,8 +58,14 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
 
         //isCasting
-        eventData.isCasting = player.isCasting
-
+        let isCasting = player.isCasting || player.isAirPlayActive
+        eventData.isCasting = isCasting
+       
+        //castTech
+        if isCasting {
+            eventData.castTech = player.isAirPlayActive ? CastTech.AirPlay.rawValue : CastTech.GoogleCast.rawValue
+        }
+        
         //isLive
         eventData.isLive = self.isPlayerReady ? player.isLive : self.config.isLive
 

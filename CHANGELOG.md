@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+### Added
+-`castTech` payload field to differentiate between `Airplay` and `GoogleCast`
+
 ## Development V1
+
+### Added
+-`castTech` payload field to differentiate between `Airplay` and `GoogleCast`
 
 ## 1.21.0
 
