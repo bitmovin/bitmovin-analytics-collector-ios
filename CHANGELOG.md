@@ -7,17 +7,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
-### Added
--`castTech` payload field to differentiate between `Airplay` and `GoogleCast`
-
 ## Development V1
 
+## 2.2.0
+
 ### Added
--`castTech` payload field to differentiate between `Airplay` and `GoogleCast`
+
+- `castTech` payload field to differentiate between `Airplay` and `GoogleCast`
+
+## 1.22.0
+
+### Added
+
+- `castTech` payload field to differentiate between `Airplay` and `GoogleCast`
 
 ## 1.21.0
 
 ### Added
+
 - AVPlayer: listening for `AVPlayerItemDidPlayToEndTime` notifications for determining end of playback
 
 ### Fixed
@@ -45,7 +52,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - [Internal] `eventData` is now created by `EventDataFactory`
-- 
+
 ### Added
 
 - `setCustomData` and `setCustomDataOnce` methods 
