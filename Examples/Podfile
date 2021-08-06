@@ -10,6 +10,7 @@ target 'BitmovinAnalyticsCollector-Example-iOS' do
     pod 'BitmovinAnalyticsCollector/AVPlayer', :path => '../'
     pod 'BitmovinAnalyticsCollector/BitmovinPlayer', :path => '../'
     pod 'GoogleAds-IMA-iOS-SDK', '3.11.1'
+    pod 'google-cast-sdk', '4.6.1'
 end
 
 target 'BitmovinAnalyticsCollector-Example-tvOS' do

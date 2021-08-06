@@ -1,4 +1,6 @@
 import UIKit
+import BitmovinPlayer
+import GoogleCast
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -6,6 +8,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        // Initialize ChromeCast support for this application
+        BitmovinCastManager.initializeCasting()
+
+        GCKCastContext.sharedInstance().discoveryManager.startDiscovery()
+
         return true
     }
 

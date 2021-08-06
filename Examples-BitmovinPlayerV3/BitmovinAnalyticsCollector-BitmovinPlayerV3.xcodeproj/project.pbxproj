@@ -52,6 +52,7 @@
 		24DB7FDF261D7BD5009F7AE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		24DB7FE4261D7BD5009F7AE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24DB801A261D805B009F7AE7 /* BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A8847E726B05A15008D9F7B /* BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOSRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOSRelease.entitlements"; sourceTree = "<group>"; };
 		51CFB9B00A1246E5397544A8 /* Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS.release.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		5E5AAB45C4DD6532B12C64D9 /* Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS.release.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		67D7D3032E40EEFC258C6F8D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -127,6 +128,7 @@
 		24DB7FBD261D7BB9009F7AE7 /* BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				2A8847E726B05A15008D9F7B /* BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOSRelease.entitlements */,
 				24DB7FBE261D7BB9009F7AE7 /* AppDelegate.swift */,
 				24DB7FC4261D7BB9009F7AE7 /* Main.storyboard */,
 				24DB7FC7261D7BBB009F7AE7 /* Assets.xcassets */,
@@ -221,6 +223,7 @@
 				24DB7FB9261D7BB9009F7AE7 /* Frameworks */,
 				24DB7FBA261D7BB9009F7AE7 /* Resources */,
 				62DA4BE808E47919E66685F2 /* [CP] Embed Pods Frameworks */,
+				02611DBFD7C0BB0B4CB699E4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -340,6 +343,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		02611DBFD7C0BB0B4CB699E4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1898EDC5E8E40D940985B0F6 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -667,6 +687,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS/BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOSRelease.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7UXPEM3WRB;
 				INFOPLIST_FILE = "BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS/Info.plist";

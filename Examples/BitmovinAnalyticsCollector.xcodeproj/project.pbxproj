@@ -53,6 +53,7 @@
 		24DB7FDF261D7BD5009F7AE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		24DB7FE4261D7BD5009F7AE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24DB801A261D805B009F7AE7 /* BitmovinAnalyticsCollector-Tests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BitmovinAnalyticsCollector-Tests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A8847E626B04DC6008D9F7B /* BitmovinAnalyticsCollector-Example-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BitmovinAnalyticsCollector-Example-iOS.entitlements"; sourceTree = "<group>"; };
 		38D18A53F31D6A43C2BA9E31 /* Pods-BitmovinAnalyticsCollector-Tests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-Tests-iOS.release.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-Tests-iOS/Pods-BitmovinAnalyticsCollector-Tests-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		4445FF596F835EBD2CA56A59 /* Pods_BitmovinAnalyticsCollector_Example_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_Example_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E5AAB45C4DD6532B12C64D9 /* Pods-BitmovinAnalyticsCollector-Example-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-Example-iOS.release.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-Example-iOS/Pods-BitmovinAnalyticsCollector-Example-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +128,7 @@
 		24DB7FBD261D7BB9009F7AE7 /* BitmovinAnalyticsCollector-Example-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				2A8847E626B04DC6008D9F7B /* BitmovinAnalyticsCollector-Example-iOS.entitlements */,
 				24DB7FBE261D7BB9009F7AE7 /* AppDelegate.swift */,
 				24DB7FC4261D7BB9009F7AE7 /* Main.storyboard */,
 				24DB7FC7261D7BBB009F7AE7 /* Assets.xcassets */,
@@ -221,6 +223,7 @@
 				24DB7FB9261D7BB9009F7AE7 /* Frameworks */,
 				24DB7FBA261D7BB9009F7AE7 /* Resources */,
 				62DA4BE808E47919E66685F2 /* [CP] Embed Pods Frameworks */,
+				3ED3A0E1DA5E9D9185B2D013 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -377,6 +380,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3ED3A0E1DA5E9D9185B2D013 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector-Example-iOS/Pods-BitmovinAnalyticsCollector-Example-iOS-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector-Example-iOS/Pods-BitmovinAnalyticsCollector-Example-iOS-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector-Example-iOS/Pods-BitmovinAnalyticsCollector-Example-iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4C1CA700160FAB28AC6DCBDC /* [CP] Embed Pods Frameworks */ = {
@@ -647,6 +667,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "BitmovinAnalyticsCollector-Example-iOS/BitmovinAnalyticsCollector-Example-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7UXPEM3WRB;
 				INFOPLIST_FILE = "BitmovinAnalyticsCollector-Example-iOS/Info.plist";
@@ -667,6 +688,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "BitmovinAnalyticsCollector-Example-iOS/BitmovinAnalyticsCollector-Example-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7UXPEM3WRB;
 				INFOPLIST_FILE = "BitmovinAnalyticsCollector-Example-iOS/Info.plist";
