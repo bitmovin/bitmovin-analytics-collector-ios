@@ -10,7 +10,7 @@ class BitmovinViewController: UIViewController {
     private let debugger: DebugBitmovinPlayerEvents = DebugBitmovinPlayerEvents()
     let url = URL(string: VideoAssets.sintel)
     let corruptedUrl = URL(string: VideoAssets.corruptRedBull)
-    let liveSimUrl = URL(string: VideoAssets.liveSim)
+    let liveSimUrl = URL(string: VideoAssets.liveSim)!
     @IBOutlet var playerView: UIView!
     @IBOutlet var doneButton: UIButton!
     @IBOutlet var reloadButton: UIButton!
@@ -44,21 +44,17 @@ class BitmovinViewController: UIViewController {
         super.init(coder: aDecoder)
     }
 
+    func getAdSource(url: String) -> AdSource {
+        return AdSource(tag: urlWithCorrelator(adTag: url), ofType: BMPAdSourceType.IMA)
+    }
     
     func getAdvertisingConfiguration() -> AdvertisingConfiguration {
-        let adScource1 = AdSource(tag: urlWithCorrelator(adTag: VideoAssets.AD_SOURCE_1), ofType: BMPAdSourceType.IMA)
-        let adScource2 = AdSource(tag: urlWithCorrelator(adTag: VideoAssets.AD_SOURCE_2), ofType: BMPAdSourceType.IMA)
-        let adScource3 = AdSource(tag: urlWithCorrelator(adTag: VideoAssets.AD_SOURCE_3), ofType: BMPAdSourceType.IMA)
-        let adScource4 = AdSource(tag: urlWithCorrelator(adTag: VideoAssets.AD_SOURCE_4), ofType: BMPAdSourceType.IMA)
-        let adScource5 = AdSource(tag: urlWithCorrelator(adTag: VideoAssets.AD_SOURCE_5), ofType: BMPAdSourceType.IMA)
-        let adScourceVMAP = AdSource(tag: urlWithCorrelator(adTag: VideoAssets.AD_SOURCE_VMAP), ofType: BMPAdSourceType.IMA)
-        
-        let preRoll = AdItem(adSources: [adScource4], atPosition: "pre")
+        let preRoll = AdItem(adSources: [getAdSource(url: VideoAssets.AD_SOURCE_1)], atPosition: "pre")
 //        let midRoll = AdItem(adSources: [adScource], atPosition: "mid")
-        let customMidRoll = AdItem(adSources: [adScource4], atPosition: "10%")
+        let customMidRoll = AdItem(adSources: [getAdSource(url: VideoAssets.AD_SOURCE_4)], atPosition: "10%")
 //        let postRoll = AdItem(adSources: [adScource], atPosition: "post")
 
-        return AdvertisingConfiguration(schedule: [preRoll])
+        return AdvertisingConfiguration(schedule: [preRoll, customMidRoll])
     }
     
     func urlWithCorrelator(adTag: String) -> URL {
