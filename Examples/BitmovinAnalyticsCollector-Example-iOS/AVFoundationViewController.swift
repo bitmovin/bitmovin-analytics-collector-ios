@@ -20,8 +20,8 @@ class AVFoundationViewController: UIViewController {
     @IBOutlet var sourceChangeButton: UIButton!
     @IBOutlet var setCustomDataButton: UIButton!
     @IBOutlet var playerView: PlayerView!
-    let url = URL(string: "http://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
-    let corruptedUrl = URL(string: "http://bitdash-a.akamaihd.net/content/analytics-teststreams/redbull-parkour/corrupted_first_segment.mpd")
+    let url = URL(string: VideoAssets.sintel)
+    let corruptedUrl = URL(string: VideoAssets.corruptRedBull)
 
 
     var duration: Double {

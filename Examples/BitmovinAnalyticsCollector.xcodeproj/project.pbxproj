@@ -27,6 +27,9 @@
 		8F1713AD24AB3FAD009ACECA /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713A924AB3FAD009ACECA /* Stream.swift */; };
 		8F1713AF24AB3FAD009ACECA /* FairPlayConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713AA24AB3FAD009ACECA /* FairPlayConfiguration.swift */; };
 		8F54717224A37D8D008B31C2 /* BitmovinDrmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F54717124A37D8D008B31C2 /* BitmovinDrmViewController.swift */; };
+		8F82680726D3B04D003327ED /* VideoAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F82680626D3B04D003327ED /* VideoAssets.swift */; };
+		8F82680826D3B04D003327ED /* VideoAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F82680626D3B04D003327ED /* VideoAssets.swift */; };
+		8F82680926D3B04D003327ED /* VideoAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F82680626D3B04D003327ED /* VideoAssets.swift */; };
 		8FAA118924AA1D5A00F7922B /* AVFoundationDrmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAA118824AA1D5A00F7922B /* AVFoundationDrmViewController.swift */; };
 		B76C62AEA501F9CEF160E077 /* Pods_BitmovinAnalyticsCollector_Example_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4445FF596F835EBD2CA56A59 /* Pods_BitmovinAnalyticsCollector_Example_tvOS.framework */; };
 		EC93565C2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC93565B2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift */; };
@@ -65,6 +68,7 @@
 		8F1713A924AB3FAD009ACECA /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
 		8F1713AA24AB3FAD009ACECA /* FairPlayConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FairPlayConfiguration.swift; sourceTree = "<group>"; };
 		8F54717124A37D8D008B31C2 /* BitmovinDrmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitmovinDrmViewController.swift; sourceTree = "<group>"; };
+		8F82680626D3B04D003327ED /* VideoAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAssets.swift; sourceTree = "<group>"; };
 		8FAA118824AA1D5A00F7922B /* AVFoundationDrmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVFoundationDrmViewController.swift; sourceTree = "<group>"; };
 		94E92FFDF2C4FD3FDF42D78C /* Pods-BitmovinAnalyticsCollector-Example-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-Example-iOS.debug.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-Example-iOS/Pods-BitmovinAnalyticsCollector-Example-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A13FCB967E22402182A70074 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 				01C26BE52083F14D001A0D76 /* BitmovinViewController.swift */,
 				EC93565B2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift */,
 				8F54717124A37D8D008B31C2 /* BitmovinDrmViewController.swift */,
+				8F82680626D3B04D003327ED /* VideoAssets.swift */,
 			);
 			path = "BitmovinAnalyticsCollector-Example-iOS";
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 					};
 					24DB8019261D805B009F7AE7 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -488,6 +494,7 @@
 				8F1713AD24AB3FAD009ACECA /* Stream.swift in Sources */,
 				011096092028C74C00A70D38 /* PlayerView.swift in Sources */,
 				01C26BE42083ED7B001A0D76 /* WelcomeViewController.swift in Sources */,
+				8F82680726D3B04D003327ED /* VideoAssets.swift in Sources */,
 				8F1713AB24AB3FAD009ACECA /* Asset.swift in Sources */,
 				607FACD81AFB9204008FA782 /* AVFoundationViewController.swift in Sources */,
 				8F1713AF24AB3FAD009ACECA /* FairPlayConfiguration.swift in Sources */,
@@ -505,6 +512,7 @@
 			files = (
 				24DB7FDB261D7BD4009F7AE7 /* ViewController.swift in Sources */,
 				24DB7FD9261D7BD4009F7AE7 /* AppDelegate.swift in Sources */,
+				8F82680826D3B04D003327ED /* VideoAssets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +520,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F82680926D3B04D003327ED /* VideoAssets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -749,6 +758,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 131DEC3EA3701F8CAE9AF90F /* Pods-BitmovinAnalyticsCollector-Tests-iOS.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "BitmovinAnalyticsCollector-Tests-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -758,6 +768,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bitmovin.analytics.BitmovinAnalyticsCollector-Tests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -767,6 +778,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 38D18A53F31D6A43C2BA9E31 /* Pods-BitmovinAnalyticsCollector-Tests-iOS.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "BitmovinAnalyticsCollector-Tests-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

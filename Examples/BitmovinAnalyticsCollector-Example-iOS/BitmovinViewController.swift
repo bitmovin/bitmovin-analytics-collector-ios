@@ -8,9 +8,9 @@ class BitmovinViewController: UIViewController {
     private var analyticsCollector: BitmovinPlayerCollector
     private var config: BitmovinAnalyticsConfig
     private let debugger: DebugBitmovinPlayerEvents = DebugBitmovinPlayerEvents()
-    let url = URL(string: "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
-    let corruptedUrl = URL(string: "http://bitdash-a.akamaihd.net/content/analytics-teststreams/redbull-parkour/corrupted_first_segment.mpd")
-    let liveSimUrl = URL(string: "https://bitcdn-kronehit.bitmovin.com/v2/hls/playlist.m3u8")!
+    let url = URL(string: VideoAssets.sintel)
+    let corruptedUrl = URL(string: VideoAssets.corruptRedBull)
+    let liveSimUrl = URL(string: VideoAssets.liveSim)
     @IBOutlet var playerView: UIView!
     @IBOutlet var doneButton: UIButton!
     @IBOutlet var reloadButton: UIButton!
@@ -43,22 +43,15 @@ class BitmovinViewController: UIViewController {
 
         super.init(coder: aDecoder)
     }
-    
-    static let AD_SOURCE_1 = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dredirecterror&nofb=1&correlator=";
-    static let AD_SOURCE_2 = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator=";
-    static let AD_SOURCE_3 = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator=";
-    static let AD_SOURCE_4 = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dredirectlinear&correlator=";
-    static let AD_SOURCE_5  = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dredirecterror&nofb=1&correlator=";
-    static let AD_SOURCE_VMAP = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpostoptimizedpod&cmsid=496&vid=short_onecue&correlator=";
 
     
     func getAdvertisingConfiguration() -> AdvertisingConfiguration {
-        let adScource1 = AdSource(tag: urlWithCorrelator(adTag: BitmovinViewController.AD_SOURCE_1), ofType: BMPAdSourceType.IMA)
-        let adScource2 = AdSource(tag: urlWithCorrelator(adTag: BitmovinViewController.AD_SOURCE_2), ofType: BMPAdSourceType.IMA)
-        let adScource3 = AdSource(tag: urlWithCorrelator(adTag: BitmovinViewController.AD_SOURCE_3), ofType: BMPAdSourceType.IMA)
-        let adScource4 = AdSource(tag: urlWithCorrelator(adTag: BitmovinViewController.AD_SOURCE_4), ofType: BMPAdSourceType.IMA)
-        let adScource5 = AdSource(tag: urlWithCorrelator(adTag: BitmovinViewController.AD_SOURCE_5), ofType: BMPAdSourceType.IMA)
-        let adScourceVMAP = AdSource(tag: urlWithCorrelator(adTag: BitmovinViewController.AD_SOURCE_VMAP), ofType: BMPAdSourceType.IMA)
+        let adScource1 = AdSource(tag: urlWithCorrelator(adTag: VideoAssets.AD_SOURCE_1), ofType: BMPAdSourceType.IMA)
+        let adScource2 = AdSource(tag: urlWithCorrelator(adTag: VideoAssets.AD_SOURCE_2), ofType: BMPAdSourceType.IMA)
+        let adScource3 = AdSource(tag: urlWithCorrelator(adTag: VideoAssets.AD_SOURCE_3), ofType: BMPAdSourceType.IMA)
+        let adScource4 = AdSource(tag: urlWithCorrelator(adTag: VideoAssets.AD_SOURCE_4), ofType: BMPAdSourceType.IMA)
+        let adScource5 = AdSource(tag: urlWithCorrelator(adTag: VideoAssets.AD_SOURCE_5), ofType: BMPAdSourceType.IMA)
+        let adScourceVMAP = AdSource(tag: urlWithCorrelator(adTag: VideoAssets.AD_SOURCE_VMAP), ofType: BMPAdSourceType.IMA)
         
         let preRoll = AdItem(adSources: [adScource4], atPosition: "pre")
 //        let midRoll = AdItem(adSources: [adScource], atPosition: "mid")
