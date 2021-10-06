@@ -53,7 +53,7 @@ class AVFoundationViewController: UIViewController {
         config.customData6 = "customData6"
         config.customData7 = "customData7"
         config.customerUserId = "customUserId"
-        config.experimentName = "customDataTest-1"
+        config.experimentName = "experiment-1"
         config.videoId = "iOSHLSStatic"
         config.title = "Static HLS Video on iOS"
         config.path = "/vod/breadcrumb/"

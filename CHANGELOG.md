@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+### Changed
+
+- Collector will send one final sample on destroy if player is playing
+
 ## Development V1
+
+### Changed
+
+- Collector will send one final sample on destroy if player is playing
 
 ## 2.2.0
 
