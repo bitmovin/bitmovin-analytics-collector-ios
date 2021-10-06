@@ -258,6 +258,15 @@
                                     <action selector="setCustomDataButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xAq-Cd-in4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWf-bV-bem">
+                                <rect key="frame" x="322" y="0.0" width="37" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="doneButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qsy-FZ-Hwv"/>
+                                    <action selector="doneButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="uFt-mO-dKS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>

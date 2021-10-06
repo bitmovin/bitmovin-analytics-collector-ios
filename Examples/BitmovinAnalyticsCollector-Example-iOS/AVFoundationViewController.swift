@@ -19,6 +19,7 @@ class AVFoundationViewController: UIViewController {
     @IBOutlet var rewindButton: UIButton!
     @IBOutlet var sourceChangeButton: UIButton!
     @IBOutlet var setCustomDataButton: UIButton!
+    @IBOutlet var doneButton: UIButton!
     @IBOutlet var playerView: PlayerView!
     let url = URL(string: VideoAssets.sintel)
     let corruptedUrl = URL(string: VideoAssets.corruptRedBull)
@@ -52,7 +53,7 @@ class AVFoundationViewController: UIViewController {
         config.customData6 = "customData6"
         config.customData7 = "customData7"
         config.customerUserId = "customUserId"
-        config.experimentName = "experiment-1"
+        config.experimentName = "customDataTest-1"
         config.videoId = "iOSHLSStatic"
         config.title = "Static HLS Video on iOS"
         config.path = "/vod/breadcrumb/"
@@ -214,6 +215,10 @@ class AVFoundationViewController: UIViewController {
         analyticsCollector.setCustomDataOnce(customData: currentCustomData)
     }
 
+    @IBAction func doneButtonWasPressed(_: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
