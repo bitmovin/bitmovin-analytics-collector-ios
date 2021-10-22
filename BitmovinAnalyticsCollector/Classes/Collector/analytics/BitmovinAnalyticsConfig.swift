@@ -10,6 +10,24 @@ public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig{
         customData.customData5 = self.customData5
         customData.customData6 = self.customData6
         customData.customData7 = self.customData7
+        customData.customData8 = self.customData8
+        customData.customData9 = self.customData9
+        customData.customData10 = self.customData10
+        customData.customData11 = self.customData11
+        customData.customData12 = self.customData12
+        customData.customData13 = self.customData13
+        customData.customData14 = self.customData14
+        customData.customData15 = self.customData15
+        customData.customData16 = self.customData16
+        customData.customData17 = self.customData17
+        customData.customData18 = self.customData18
+        customData.customData19 = self.customData19
+        customData.customData20 = self.customData20
+        customData.customData21 = self.customData21
+        customData.customData22 = self.customData22
+        customData.customData23 = self.customData23
+        customData.customData24 = self.customData24
+        customData.customData25 = self.customData25
         customData.experimentName = self.experimentName
         return customData
     }
@@ -22,6 +40,24 @@ public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig{
         self.customData5 = customData.customData5
         self.customData6 = customData.customData6
         self.customData7 = customData.customData7
+        self.customData8 = customData.customData8
+        self.customData9 = customData.customData9
+        self.customData10 = customData.customData10
+        self.customData11 = customData.customData11
+        self.customData12 = customData.customData12
+        self.customData13 = customData.customData13
+        self.customData14 = customData.customData14
+        self.customData15 = customData.customData15
+        self.customData16 = customData.customData16
+        self.customData17 = customData.customData17
+        self.customData18 = customData.customData18
+        self.customData19 = customData.customData19
+        self.customData20 = customData.customData20
+        self.customData21 = customData.customData21
+        self.customData22 = customData.customData22
+        self.customData23 = customData.customData23
+        self.customData24 = customData.customData24
+        self.customData25 = customData.customData25
         self.experimentName = customData.experimentName
     }
     
@@ -68,6 +104,96 @@ public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig{
      * Optional free-form custom data
      */
     @objc public var customData7: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData8: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData9: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData10: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData11: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData12: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData13: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData14: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData15: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData16: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData17: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData18: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData19: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData20: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData21: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData22: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData23: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData24: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData25: String?
     
     /**
      * User ID of the customer

@@ -12,6 +12,24 @@ public class AdEventData: Codable {
     var customData6 : String?
     var customData7 : String?
     var customUserId : String?
+    var customData8: String?
+    var customData9: String?
+    var customData10: String?
+    var customData11: String?
+    var customData12: String?
+    var customData13: String?
+    var customData14: String?
+    var customData15: String?
+    var customData16: String?
+    var customData17: String?
+    var customData18: String?
+    var customData19: String?
+    var customData20: String?
+    var customData21: String?
+    var customData22: String?
+    var customData23: String?
+    var customData24: String?
+    var customData25: String?
     var domain : String?
     var experimentName: String?
     var key : String?
@@ -127,6 +145,24 @@ public class AdEventData: Codable {
         self.customData5 = eventData.customData5
         self.customData6 = eventData.customData6
         self.customData7 = eventData.customData7
+        self.customData8 = eventData.customData8
+        self.customData9 = eventData.customData9
+        self.customData10 = eventData.customData10
+        self.customData11 = eventData.customData11
+        self.customData12 = eventData.customData12
+        self.customData13 = eventData.customData13
+        self.customData14 = eventData.customData14
+        self.customData15 = eventData.customData15
+        self.customData16 = eventData.customData16
+        self.customData17 = eventData.customData17
+        self.customData18 = eventData.customData18
+        self.customData19 = eventData.customData19
+        self.customData20 = eventData.customData20
+        self.customData21 = eventData.customData21
+        self.customData22 = eventData.customData22
+        self.customData23 = eventData.customData23
+        self.customData24 = eventData.customData24
+        self.customData25 = eventData.customData25
         self.customUserId = eventData.customUserId
         self.domain = eventData.domain
         self.experimentName = eventData.experimentName
