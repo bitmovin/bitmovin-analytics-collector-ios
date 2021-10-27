@@ -19,6 +19,7 @@ class AVFoundationViewController: UIViewController {
     @IBOutlet var rewindButton: UIButton!
     @IBOutlet var sourceChangeButton: UIButton!
     @IBOutlet var setCustomDataButton: UIButton!
+    @IBOutlet var doneButton: UIButton!
     @IBOutlet var playerView: PlayerView!
     let url = URL(string: VideoAssets.sintel)
     let corruptedUrl = URL(string: VideoAssets.corruptRedBull)
@@ -232,6 +233,10 @@ class AVFoundationViewController: UIViewController {
         analyticsCollector.setCustomDataOnce(customData: currentCustomData)
     }
 
+    @IBAction func doneButtonWasPressed(_: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

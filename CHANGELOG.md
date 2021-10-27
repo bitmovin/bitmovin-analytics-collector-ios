@@ -11,11 +11,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Additional `customData` fields 8 to 25
 
+### Changed
+
+- Collector will send one final sample on destroy if player is playing
+
 ## Development V1
 
 ### Added
 
 - Additional `customData` fields 8 to 25
+
+### Changed
+
+- Collector will send one final sample on destroy if player is playing
+
 
 ## 2.2.0
 

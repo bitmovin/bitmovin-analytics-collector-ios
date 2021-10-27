@@ -16,7 +16,7 @@ public class StateMachine {
     var potentialSeekVideoTimeStart: CMTime?
     var startupTime: Int64 = 0
     private(set) var videoTimeStart: CMTime?
-    private(set) var videoTimeEnd: CMTime?
+    internal var videoTimeEnd: CMTime?
     
     // heartbeat
     weak private var heartbeatTimer: Timer?
