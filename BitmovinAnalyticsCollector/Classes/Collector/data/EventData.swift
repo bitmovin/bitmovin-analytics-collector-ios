@@ -50,6 +50,24 @@ public class EventData: Codable {
     var customData5: String?
     var customData6: String?
     var customData7: String?
+    var customData8: String?
+    var customData9: String?
+    var customData10: String?
+    var customData11: String?
+    var customData12: String?
+    var customData13: String?
+    var customData14: String?
+    var customData15: String?
+    var customData16: String?
+    var customData17: String?
+    var customData18: String?
+    var customData19: String?
+    var customData20: String?
+    var customData21: String?
+    var customData22: String?
+    var customData23: String?
+    var customData24: String?
+    var customData25: String?
     var experimentName: String?
     var userId: String?
     var impressionId: String

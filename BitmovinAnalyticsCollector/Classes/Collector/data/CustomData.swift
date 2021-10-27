@@ -16,6 +16,42 @@ public class CustomData: NSObject {
     
     @objc public var customData7: String?
     
+    @objc public var customData8: String?
+
+    @objc public var customData9: String?
+
+    @objc public var customData10: String?
+
+    @objc public var customData11: String?
+
+    @objc public var customData12: String?
+
+    @objc public var customData13: String?
+    
+    @objc public var customData14: String?
+    
+    @objc public var customData15: String?
+
+    @objc public var customData16: String?
+
+    @objc public var customData17: String?
+
+    @objc public var customData18: String?
+
+    @objc public var customData19: String?
+
+    @objc public var customData20: String?
+    
+    @objc public var customData21: String?
+    
+    @objc public var customData22: String?
+
+    @objc public var customData23: String?
+
+    @objc public var customData24: String?
+    
+    @objc public var customData25: String?
+    
     @objc public var experimentName: String?
     
 }
