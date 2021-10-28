@@ -37,7 +37,7 @@ class Util {
     }
 
     static func version() -> String? {
-        return Bundle(for: self).infoDictionary?["CFBundleShortVersionString"] as? String
+        return BuildConfig.VERSION
     }
 
     static func timeIntervalToCMTime(_ timeInterval: TimeInterval) -> CMTime? {
