@@ -55,6 +55,14 @@ echo "Version (without leading \"v\")":
 read VERSION
 git checkout develop || exit
 git pull || exit
+
+echo "Generating BuildConfig.swift file..."
+(./generateBuildConfig.sh "VERSION=$VERSION") > BitmovinAnalyticsCollector/Classes/Collector/util/BuildConfig.swift || exit
+git add BitmovinAnalyticsCollector/Classes/Collector/util/BuildConfig.swift || exit
+git commit -m "Generated BuildConfig.swift" || exit
+git push origin develop || exit
+echo "Generated BuildConfig.swift file."
+
 git checkout main || exit
 git pull || exit
 git merge develop || exit
