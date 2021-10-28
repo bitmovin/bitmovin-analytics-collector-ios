@@ -9,4 +9,4 @@ echo "  fileprivate init() {}"
 echo "$1" |\
 sed "s/^/    static let /" |\
 sed -E 's/=(.*)/ = "\1"/'
-echo "}"
+echo "}	"
