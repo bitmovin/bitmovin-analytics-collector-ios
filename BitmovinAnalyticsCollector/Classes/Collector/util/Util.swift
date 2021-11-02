@@ -36,7 +36,7 @@ class Util {
         return userAgent
     }
 
-    static func version() -> String? {
+    static func version() -> String {
         return BuildConfig.VERSION
     }
 
