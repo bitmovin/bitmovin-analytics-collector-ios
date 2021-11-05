@@ -290,4 +290,10 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
             return self.adapter?.currentTime
         }
     }
+    
+    public var version: String {
+        get {
+            return Util.version()
+        }
+    }
 }

@@ -36,8 +36,8 @@ class Util {
         return userAgent
     }
 
-    static func version() -> String? {
-        return Bundle(for: self).infoDictionary?["CFBundleShortVersionString"] as? String
+    static func version() -> String {
+        return BuildConfig.VERSION
     }
 
     static func timeIntervalToCMTime(_ timeInterval: TimeInterval) -> CMTime? {

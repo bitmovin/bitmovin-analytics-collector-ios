@@ -7,7 +7,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+### Added
+
+- `version` property on Collector classes
+
+### Changed
+
+- `version` is now hard-coded into source and not taken from `CFBundleShortVersionString`
+
 ## Development V1
+
+### Added
+
+- `version` property on Collector classes
+
+### Changed
+
+- `version` is now hard-coded into source and not taken from `CFBundleShortVersionString`
 
 ## 2.3.0
 
