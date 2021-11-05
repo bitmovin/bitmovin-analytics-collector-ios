@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+## Development V1
+
+## 2.4.0
+
 ### Added
 
 - `version` property on Collector classes
@@ -15,7 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - `version` is now hard-coded into source and not taken from `CFBundleShortVersionString`
 
-## Development V1
+## 1.24.0
 
 ### Added
 
