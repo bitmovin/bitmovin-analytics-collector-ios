@@ -10,20 +10,20 @@ To get started collecting data with Bitmovin Analytics you need a License-Key wh
 
 **BitmovinPlayer v2, AVPlayer**
 
-* iOS 9.0+
-* tvOS 9.0+
+- iOS 9.0+
+- tvOS 9.0+
 
 The DRM examples require iOS 11.2+.
 
 **BitmovinPlayer v3**
 
-* iOS 12.0+
-* tvOS 12.0+
+- iOS 12.0+
+- tvOS 12.0+
 
 ### Video Players
 
-* [Bitmovin Player](https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod)
-* AVPlayer
+- [Bitmovin Player](https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod)
+- AVPlayer
 
 ## Example
 
@@ -74,8 +74,8 @@ The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` versi
 
 ```ruby
   source 'https://github.com/bitmovin/cocoapod-specs.git'
-  pod 'BitmovinAnalyticsCollector/Core', '1.23.0'
-  pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '1.23.0'
+  pod 'BitmovinAnalyticsCollector/Core', '1.24.0'
+  pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '1.24.0'
   pod 'BitmovinPlayer', '2.51.0'
 
   use_frameworks!
@@ -87,8 +87,8 @@ The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` versi
 
 ```ruby
   source 'https://github.com/bitmovin/cocoapod-specs.git'
-  pod 'BitmovinAnalyticsCollector/Core', '2.3.0'
-  pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '2.3.0'
+  pod 'BitmovinAnalyticsCollector/Core', '2.4.0'
+  pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '2.4.0'
   pod 'BitmovinPlayer', '3.0.0'
 
   use_frameworks!
@@ -98,8 +98,8 @@ The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` versi
 
 ```ruby
   source 'https://github.com/bitmovin/cocoapod-specs.git'
-  pod 'BitmovinAnalyticsCollector/Core', '1.23.0'
-  pod 'BitmovinAnalyticsCollector/AVPlayer', '1.23.0'
+  pod 'BitmovinAnalyticsCollector/Core', '1.24.0'
+  pod 'BitmovinAnalyticsCollector/AVPlayer', '1.24.0'
 
   use_frameworks!
 ```
@@ -110,7 +110,7 @@ To include all available collectors, add the following lines (the dependency on 
 
 ```ruby
   source 'https://github.com/bitmovin/cocoapod-specs.git'
-  pod 'BitmovinAnalyticsCollector', '1.23.0'
+  pod 'BitmovinAnalyticsCollector', '1.24.0'
   pod 'BitmovinPlayer', '2.51.0'
 
   use_frameworks!
@@ -120,7 +120,7 @@ To include all available collectors, add the following lines (the dependency on 
 
 ```ruby
   source 'https://github.com/bitmovin/cocoapod-specs.git'
-  pod 'BitmovinAnalyticsCollector', '2.3.0'
+  pod 'BitmovinAnalyticsCollector', '2.4.0'
   pod 'BitmovinPlayer', '3.0.0'
 
   use_frameworks!
@@ -134,8 +134,8 @@ pod install
 
 ## Known Issues
 
-* The `audioCodec` property is not collected at the moment, as the information isn't available in the player.
-* `subtitleLanguage` will fallback to the `label`, if no language is defined.
+- The `audioCodec` property is not collected at the moment, as the information isn't available in the player.
+- `subtitleLanguage` will fallback to the `label`, if no language is defined.
 
 ## License
 
