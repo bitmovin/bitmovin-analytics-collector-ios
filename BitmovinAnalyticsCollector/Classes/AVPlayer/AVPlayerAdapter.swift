@@ -56,10 +56,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         timeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(0.2, preferredTimescale: Int32(NSEC_PER_SEC)), queue: .main) { [weak self] time in
             self?.onPlayerDidChangeTime(currentTime: time)
         }
-        
-        addObserver(self, forKeyPath: #keyPath(player.rate), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
-        addObserver(self, forKeyPath: #keyPath(player.currentItem), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
-        addObserver(self, forKeyPath: #keyPath(player.status), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
+        player.addObserver(self, forKeyPath: #keyPath(AVPlayer.rate), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
+        player.addObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
+        player.addObserver(self, forKeyPath: #keyPath(AVPlayer.status), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
     }
 
     override public func stopMonitoring() {
@@ -72,9 +71,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         if let playerItem = player.currentItem {
             stopMonitoringPlayerItem(playerItem: playerItem)
         }
-        removeObserver(self, forKeyPath: #keyPath(player.rate), context: &AVPlayerAdapter.playerKVOContext)
-        removeObserver(self, forKeyPath: #keyPath(player.currentItem), context: &AVPlayerAdapter.playerKVOContext)
-        removeObserver(self, forKeyPath: #keyPath(player.status), context: &AVPlayerAdapter.playerKVOContext)
+        player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.rate), context: &AVPlayerAdapter.playerKVOContext)
+        player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem), context: &AVPlayerAdapter.playerKVOContext)
+        player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.status), context: &AVPlayerAdapter.playerKVOContext)
         
         if(timeObserver != nil) {
             player.removeTimeObserver(timeObserver!)
