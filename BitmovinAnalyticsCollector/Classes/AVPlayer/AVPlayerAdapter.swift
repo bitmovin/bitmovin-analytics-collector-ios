@@ -75,9 +75,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem), context: &AVPlayerAdapter.playerKVOContext)
         player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.status), context: &AVPlayerAdapter.playerKVOContext)
         
-        if(timeObserver != nil) {
-            player.removeTimeObserver(timeObserver!)
-            timeObserver = nil
+        if let timeObserver = timeObserver {
+            player.removeTimeObserver(timeObserver)
+            self.timeObserver = nil
         }
         
         resetSourceState()
