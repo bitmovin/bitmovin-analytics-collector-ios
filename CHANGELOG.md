@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V1
 
+### Fixed
+
+- correctly adding/removing observers for AVPlayer elements
+
 ## 2.4.0
 
 ### Added
