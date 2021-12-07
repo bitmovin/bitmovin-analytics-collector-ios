@@ -73,12 +73,12 @@ it, simply add the following line to your Podfile:
 The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` version `>= 2.51.0`.
 
 ```ruby
-  source 'https://github.com/bitmovin/cocoapod-specs.git'
-  pod 'BitmovinAnalyticsCollector/Core', '1.24.0'
-  pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '1.24.0'
-  pod 'BitmovinPlayer', '2.51.0'
+source 'https://github.com/bitmovin/cocoapod-specs.git'
+pod 'BitmovinAnalyticsCollector/Core', '1.24.0'
+pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '1.24.0'
+pod 'BitmovinPlayer', '2.51.0'
 
-  use_frameworks!
+use_frameworks!
 ```
 
 ### Bitmovin Player v3
@@ -86,22 +86,22 @@ The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` versi
 The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` version `>= 3.0.0`.
 
 ```ruby
-  source 'https://github.com/bitmovin/cocoapod-specs.git'
-  pod 'BitmovinAnalyticsCollector/Core', '2.4.0'
-  pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '2.4.0'
-  pod 'BitmovinPlayer', '3.0.0'
+source 'https://github.com/bitmovin/cocoapod-specs.git'
+pod 'BitmovinAnalyticsCollector/Core', '2.4.0'
+pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '2.4.0'
+pod 'BitmovinPlayer', '3.0.0'
 
-  use_frameworks!
+use_frameworks!
 ```
 
 ### AVPlayer
 
 ```ruby
-  source 'https://github.com/bitmovin/cocoapod-specs.git'
-  pod 'BitmovinAnalyticsCollector/Core', '1.24.0'
-  pod 'BitmovinAnalyticsCollector/AVPlayer', '1.24.0'
+source 'https://github.com/bitmovin/cocoapod-specs.git'
+pod 'BitmovinAnalyticsCollector/Core', '1.24.0'
+pod 'BitmovinAnalyticsCollector/AVPlayer', '1.24.0'
 
-  use_frameworks!
+use_frameworks!
 ```
 
 To include all available collectors, add the following lines (the dependency on BitmovinPlayer applies here as well):
@@ -109,21 +109,21 @@ To include all available collectors, add the following lines (the dependency on 
 **BitmovinPlayer v2 and AVPlayer**
 
 ```ruby
-  source 'https://github.com/bitmovin/cocoapod-specs.git'
-  pod 'BitmovinAnalyticsCollector', '1.24.0'
-  pod 'BitmovinPlayer', '2.51.0'
+source 'https://github.com/bitmovin/cocoapod-specs.git'
+pod 'BitmovinAnalyticsCollector', '1.24.0'
+pod 'BitmovinPlayer', '2.51.0'
 
-  use_frameworks!
+use_frameworks!
 ```
 
 **BitmovinPlayer v3**
 
 ```ruby
-  source 'https://github.com/bitmovin/cocoapod-specs.git'
-  pod 'BitmovinAnalyticsCollector', '2.4.0'
-  pod 'BitmovinPlayer', '3.0.0'
+source 'https://github.com/bitmovin/cocoapod-specs.git'
+pod 'BitmovinAnalyticsCollector', '2.4.0'
+pod 'BitmovinPlayer', '3.0.0'
 
-  use_frameworks!
+use_frameworks!
 ```
 
 Then, in your command line run
