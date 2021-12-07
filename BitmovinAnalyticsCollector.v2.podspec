@@ -24,17 +24,17 @@ DESC
   }
   s.subspec 'Core' do |core|
     core.source_files = 'BitmovinAnalyticsCollector/Classes/Collector/**/*.{swift}'
-    
+
     core.test_spec 'CoreTests' do |core_test_spec|
       core_test_spec.source_files = 'BitmovinAnalyticsCollector/Tests/CoreTests/**/*'
     end
   end
 
   s.subspec 'BitmovinPlayer' do |bitmovinplayerv3|
-    bitmovinplayerv3.source_files = 'BitmovinAnalyticsCollector/Classes/BitmovinPlayerV3/**/*.{swift}'    
+    bitmovinplayerv3.source_files = 'BitmovinAnalyticsCollector/Classes/BitmovinPlayerV3/**/*.{swift}'
     bitmovinplayerv3.tvos.dependency 'BitmovinPlayer', '~>3.0'
     bitmovinplayerv3.ios.dependency 'BitmovinPlayer', '~>3.0'
-    
+
     bitmovinplayerv3.test_spec 'BitmovinPlayerV3Tests' do |bitmovinplayerv3_test_spec|
       bitmovinplayerv3_test_spec.source_files = 'BitmovinAnalyticsCollector/Tests/BitmovinPlayerV3Tests/**/*'
     end
