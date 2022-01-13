@@ -49,20 +49,22 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
     
     func initialize() {
-        checkAutoplay()
         startMonitoring()
+        shouldTransitionToStartup()
     }
     
-    private func checkAutoplay() {
+    private func shouldTransitionToStartup(){
         let isSourceLoadedAndWillAutoPlay = player.config.playbackConfig.isAutoplayEnabled && player.source != nil
+
+        let isPlayingWithoutBeingTracked = player.isPlaying && !stateMachine.didStartPlayingVideo && stateMachine.state == PlayerState.ready
         
-        guard isSourceLoadedAndWillAutoPlay else {
+        guard isSourceLoadedAndWillAutoPlay || isPlayingWithoutBeingTracked else {
             return
         }
         
         stateMachine.play(time: currentTime)
-        
-        print("BitmovinPlayerAdapter checkAutoplay \n\t isAutoplayEnabled: \(player.config.playbackConfig.isAutoplayEnabled) \n\t isPlaying: \(player.isPlaying) \n\t isPaused: \(player.isPaused) \n\t isBufferingAndWillAutoPlay: \(isSourceLoadedAndWillAutoPlay) \n\t source \n\t\t loadingState \(player.source?.loadingState.rawValue) \n\t\t isActive: \(player.source?.isActive) \n\t\t duration: \(player.source?.duration)")
+
+        print("BitmovinPlayerAdapter shouldTransitionToStartup \n\t isAutoplayEnabled: \(player.config.playbackConfig.isAutoplayEnabled) \n\t isPlaying: \(player.isPlaying) \n\t isPaused: \(player.isPaused) \n\t isSourceLoadedAndWillAutoPlay: \(isSourceLoadedAndWillAutoPlay) \n\t isPlayingWithoutBeingTracked: \(isPlayingWithoutBeingTracked) \n\t source \n\t\t loadingState \(player.source?.loadingState.rawValue) \n\t\t isActive: \(player.source?.isActive) \n\t\t duration: \(player.source?.duration)  ")
     }
     
     func resetSourceState() {
@@ -412,6 +414,9 @@ extension BitmovinPlayerAdapter: PlayerListener {
         if(!didEmitSourceLoadAfterPlayerActive) {
             didEmitSourceLoadAfterPlayerActive = true
             overrideCurrentSource = event.source
+        }
+        if(player.config.playbackConfig.isAutoplayEnabled && !stateMachine.didAttemptPlayingVideo) {
+            stateMachine.play(time: currentTime)
         }
         print("BitmovinAdapter: onSourceLoad \(event.source.sourceConfig.url)")
     }

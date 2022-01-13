@@ -25,18 +25,23 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
     
     func initialize() {
-        checkAutoplay()
         startMonitoring()
+        shouldTransitionToStartup()
     }
     
-    private func checkAutoplay() {
+    private func shouldTransitionToStartup() {
         let isSourceLoadedAndWillAutoPlay = player.config.playbackConfiguration.isAutoplayEnabled && player.config.sourceConfiguration.firstSourceItem != nil
         
-        guard isSourceLoadedAndWillAutoPlay else {
-            return
-        }
+        let isPlayingWithoutBeingTracked = player.isPlaying && !stateMachine.didStartPlayingVideo && stateMachine.state == PlayerState.ready
         
+        guard isSourceLoadedAndWillAutoPlay || isPlayingWithoutBeingTracked else {
+           return
+        }
+       
         stateMachine.play(time: currentTime)
+        
+        print("BitmovinPlayerAdapter shouldTransitionToStartup \n\t isAutoplayEnabled: \(player.config.playbackConfiguration.isAutoplayEnabled) \n\t isPlaying: \(player.isPlaying) \n\t stateMachine.didStartPlayingVideo: \(stateMachine.didStartPlayingVideo) \n\t isPlayingWithoutBeingTracked: \(isPlayingWithoutBeingTracked)")
+
     }
     
     func resetSourceState() {
@@ -299,6 +304,12 @@ extension BitmovinPlayerAdapter: PlayerListener {
             stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.currentTime))
         } else {
             stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        }
+    }
+    
+    func onSourceLoaded(_ event: SourceLoadedEvent) {
+        if(player.config.playbackConfiguration.isAutoplayEnabled && !stateMachine.didAttemptPlayingVideo) {
+            stateMachine.play(time: currentTime)
         }
     }
     

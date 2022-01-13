@@ -87,7 +87,7 @@ class BitmovinViewController: UIViewController {
         guard let config = getPlayerConfig() else {
             return
         }
-            
+
         // Create player based on player configuration
         let player = Player(configuration: config)
 
@@ -121,7 +121,7 @@ class BitmovinViewController: UIViewController {
             try config.setSourceItem(url: streamUrl)
             
             config.playbackConfiguration.isMuted = true
-            config.playbackConfiguration.isAutoplayEnabled = false
+            config.playbackConfiguration.isAutoplayEnabled = true
         } catch {
             
         }
@@ -164,12 +164,22 @@ class BitmovinViewController: UIViewController {
             return
         }
 
-        guard let config = getPlayerConfig() else {
+        guard let streamUrl = url else {
             return
         }
         
+        guard let sourceItem = SourceItem(url: streamUrl) else {
+            return
+        }
+        
+        //alternative way to load source
+        let sourceConfiguration = SourceConfiguration()
+        sourceConfiguration.addSourceItem(item: sourceItem)
+        
+        player.load(sourceConfiguration: sourceConfiguration)
+        
         // Create player based on player configuration
-        self.player?.load(sourceConfiguration: config.sourceConfiguration)
+        self.player?.load(sourceConfiguration: sourceConfiguration)
 
         analyticsCollector.attachPlayer(player: player)
     }
