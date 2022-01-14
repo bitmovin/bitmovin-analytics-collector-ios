@@ -7,11 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+## Development V1
+
+## 2.5.0
+
 ### Changed
 - startup time tracking when autoplay is enabled starts from `SourceLoad` event
 - transition to `playing` state if collector is attached after player started playing 
 
-## Development V1
+## 1.25.0
 
 ### Changed
 - startup time tracking when autoplay is enabled starts from `SourceLoaded` event
