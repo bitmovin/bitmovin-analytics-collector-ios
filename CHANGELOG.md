@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+### Added
+
+- additional `customData` 26 to 30 to sample payload
+
 ## Development V1
+
+### Added
+
+- additional `customData` 26 to 30 to sample payload
 
 ## 2.5.0
 

@@ -1,7 +1,7 @@
 @objc
 @objcMembers
 public class SourceMetadata: NSObject, CustomDataConfig {
-    @objc public init(videoId: String? = nil, title: String? = nil, path: String? = nil, isLive: Bool = false, cdnProvider: String? = nil, customData1: String? = nil, customData2: String? = nil, customData3: String? = nil, customData4: String? = nil, customData5: String? = nil, customData6: String? = nil, customData7: String? = nil, customData8: String? = nil, customData9: String? = nil, customData10: String? = nil, customData11: String? = nil, customData12: String? = nil, customData13: String? = nil, customData14: String? = nil, customData15: String? = nil, customData16: String? = nil, customData17: String? = nil, customData18: String? = nil, customData19: String? = nil, customData20: String? = nil, customData21: String? = nil, customData22: String? = nil, customData23: String? = nil, customData24: String? = nil, customData25: String? = nil, experimentName: String? = nil) {
+    @objc public init(videoId: String? = nil, title: String? = nil, path: String? = nil, isLive: Bool = false, cdnProvider: String? = nil, customData1: String? = nil, customData2: String? = nil, customData3: String? = nil, customData4: String? = nil, customData5: String? = nil, customData6: String? = nil, customData7: String? = nil, customData8: String? = nil, customData9: String? = nil, customData10: String? = nil, customData11: String? = nil, customData12: String? = nil, customData13: String? = nil, customData14: String? = nil, customData15: String? = nil, customData16: String? = nil, customData17: String? = nil, customData18: String? = nil, customData19: String? = nil, customData20: String? = nil, customData21: String? = nil, customData22: String? = nil, customData23: String? = nil, customData24: String? = nil, customData25: String? = nil, customData26: String? = nil, customData27: String? = nil, customData28: String? = nil, customData29: String? = nil, customData30: String? = nil, experimentName: String? = nil) {
         self.videoId = videoId
         self.title = title
         self.path = path
@@ -32,6 +32,11 @@ public class SourceMetadata: NSObject, CustomDataConfig {
         self.customData23 = customData23
         self.customData24 = customData24
         self.customData25 = customData25
+        self.customData26 = customData26
+        self.customData27 = customData27
+        self.customData28 = customData28
+        self.customData29 = customData29
+        self.customData30 = customData30
         self.experimentName = experimentName
     }
     
@@ -186,6 +191,31 @@ public class SourceMetadata: NSObject, CustomDataConfig {
     @objc public private(set) var customData25: String?
     
     /**
+     * Optional free-form custom data
+     */
+    @objc public private(set) var customData26: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public private(set) var customData27: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public private(set) var customData28: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public private(set) var customData29: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public private(set) var customData30: String?
+    
+    /**
      * Experiment name needed for A/B testing
      */
     @objc public private(set) var experimentName: String?
@@ -217,6 +247,11 @@ public class SourceMetadata: NSObject, CustomDataConfig {
         customData.customData23 = self.customData23
         customData.customData24 = self.customData24
         customData.customData25 = self.customData25
+        customData.customData26 = self.customData26
+        customData.customData27 = self.customData27
+        customData.customData28 = self.customData28
+        customData.customData29 = self.customData29
+        customData.customData30 = self.customData30
         customData.experimentName = self.experimentName
         return customData
     }
@@ -247,6 +282,11 @@ public class SourceMetadata: NSObject, CustomDataConfig {
         self.customData23 = customData.customData23
         self.customData24 = customData.customData24
         self.customData25 = customData.customData25
+        self.customData26 = customData.customData26
+        self.customData27 = customData.customData27
+        self.customData28 = customData.customData28
+        self.customData29 = customData.customData29
+        self.customData30 = customData.customData30
         self.experimentName = customData.experimentName
     }
 }

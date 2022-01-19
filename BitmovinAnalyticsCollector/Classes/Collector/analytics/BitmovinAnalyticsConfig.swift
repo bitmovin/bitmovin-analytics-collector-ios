@@ -28,6 +28,11 @@ public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig{
         customData.customData23 = self.customData23
         customData.customData24 = self.customData24
         customData.customData25 = self.customData25
+        customData.customData26 = self.customData26
+        customData.customData27 = self.customData27
+        customData.customData28 = self.customData28
+        customData.customData29 = self.customData29
+        customData.customData30 = self.customData30
         customData.experimentName = self.experimentName
         return customData
     }
@@ -58,6 +63,11 @@ public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig{
         self.customData23 = customData.customData23
         self.customData24 = customData.customData24
         self.customData25 = customData.customData25
+        self.customData26 = customData.customData26
+        self.customData27 = customData.customData27
+        self.customData28 = customData.customData28
+        self.customData29 = customData.customData29
+        self.customData30 = customData.customData30
         self.experimentName = customData.experimentName
     }
     
@@ -194,6 +204,31 @@ public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig{
      * Optional free-form custom data
      */
     @objc public var customData25: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData26: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData27: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData28: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData29: String?
+    
+    /**
+     * Optional free-form custom data
+     */
+    @objc public var customData30: String?
     
     /**
      * User ID of the customer

@@ -30,6 +30,11 @@ public class AdEventData: Codable {
     var customData23: String?
     var customData24: String?
     var customData25: String?
+    var customData26: String?
+    var customData27: String?
+    var customData28: String?
+    var customData29: String?
+    var customData30: String?
     var domain : String?
     var experimentName: String?
     var key : String?
@@ -163,6 +168,11 @@ public class AdEventData: Codable {
         self.customData23 = eventData.customData23
         self.customData24 = eventData.customData24
         self.customData25 = eventData.customData25
+        self.customData26 = eventData.customData26
+        self.customData27 = eventData.customData27
+        self.customData28 = eventData.customData28
+        self.customData29 = eventData.customData29
+        self.customData30 = eventData.customData30
         self.customUserId = eventData.customUserId
         self.domain = eventData.domain
         self.experimentName = eventData.experimentName

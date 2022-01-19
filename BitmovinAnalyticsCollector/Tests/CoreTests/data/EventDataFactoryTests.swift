@@ -94,6 +94,11 @@ class EventDataFactoryTests: XCTestCase {
         XCTAssertEqual(eventData.customData23, config.customData23)
         XCTAssertEqual(eventData.customData24, config.customData24)
         XCTAssertEqual(eventData.customData25, config.customData25)
+        XCTAssertEqual(eventData.customData26, config.customData26)
+        XCTAssertEqual(eventData.customData27, config.customData27)
+        XCTAssertEqual(eventData.customData28, config.customData28)
+        XCTAssertEqual(eventData.customData29, config.customData29)
+        XCTAssertEqual(eventData.customData30, config.customData30)
         XCTAssertEqual(eventData.videoId, config.videoId)
         XCTAssertEqual(eventData.videoTitle, config.title!)
         XCTAssertEqual(eventData.experimentName, config.experimentName)
@@ -133,6 +138,11 @@ class EventDataFactoryTests: XCTestCase {
             customData23: "test-customData23-sourceMetadata",
             customData24: "test-customData24-sourceMetadata",
             customData25: "test-customData25-sourceMetadata",
+            customData26: "test-customData26-sourceMetadata",
+            customData27: "test-customData27-sourceMetadata",
+            customData28: "test-customData28-sourceMetadata",
+            customData29: "test-customData29-sourceMetadata",
+            customData30: "test-customData30-sourceMetadata",
             experimentName: "test-experiment-sourceMetadata")
         
         // act
@@ -171,6 +181,11 @@ class EventDataFactoryTests: XCTestCase {
         XCTAssertEqual(eventData.customData23, currentSourceMetadata.customData23)
         XCTAssertEqual(eventData.customData24, currentSourceMetadata.customData24)
         XCTAssertEqual(eventData.customData25, currentSourceMetadata.customData25)
+        XCTAssertEqual(eventData.customData26, currentSourceMetadata.customData26)
+        XCTAssertEqual(eventData.customData27, currentSourceMetadata.customData27)
+        XCTAssertEqual(eventData.customData28, currentSourceMetadata.customData28)
+        XCTAssertEqual(eventData.customData29, currentSourceMetadata.customData29)
+        XCTAssertEqual(eventData.customData30, currentSourceMetadata.customData30)
         XCTAssertEqual(eventData.videoId, currentSourceMetadata.videoId)
         XCTAssertEqual(eventData.videoTitle, currentSourceMetadata.title!)
         XCTAssertEqual(eventData.experimentName, currentSourceMetadata.experimentName)
@@ -242,6 +257,11 @@ class EventDataFactoryTests: XCTestCase {
         config.customData23 = "test-customData23"
         config.customData24 = "test-customData24"
         config.customData25 = "test-customData25"
+        config.customData26 = "test-customData26"
+        config.customData27 = "test-customData27"
+        config.customData28 = "test-customData28"
+        config.customData29 = "test-customData29"
+        config.customData30 = "test-customData30"
         config.experimentName = "test-experiment"
         config.videoId = "test-video-id"
         config.title = "test-title"

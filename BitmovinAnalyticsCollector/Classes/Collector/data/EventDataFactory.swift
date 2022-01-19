@@ -69,6 +69,11 @@ class EventDataFactory {
             eventData.customData23 = metadata.customData23
             eventData.customData24 = metadata.customData24
             eventData.customData25 = metadata.customData25
+            eventData.customData26 = metadata.customData26
+            eventData.customData27 = metadata.customData27
+            eventData.customData28 = metadata.customData28
+            eventData.customData29 = metadata.customData29
+            eventData.customData30 = metadata.customData30
             eventData.videoId = metadata.videoId
             eventData.videoTitle = metadata.title
             eventData.experimentName = metadata.experimentName
@@ -101,6 +106,11 @@ class EventDataFactory {
             eventData.customData23 = config.customData23
             eventData.customData24 = config.customData24
             eventData.customData25 = config.customData25
+            eventData.customData26 = config.customData26
+            eventData.customData27 = config.customData27
+            eventData.customData28 = config.customData28
+            eventData.customData29 = config.customData29
+            eventData.customData30 = config.customData30
             eventData.videoId = config.videoId
             eventData.videoTitle = config.title
             eventData.experimentName = config.experimentName
