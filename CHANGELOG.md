@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V1
 
+## 1.26.0
+
 ### Added
 
 - additional `customData` 26 to 30 to sample payload
