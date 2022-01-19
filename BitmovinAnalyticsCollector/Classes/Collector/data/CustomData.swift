@@ -52,6 +52,16 @@ public class CustomData: NSObject {
     
     @objc public var customData25: String?
     
+    @objc public var customData26: String?
+    
+    @objc public var customData27: String?
+    
+    @objc public var customData28: String?
+    
+    @objc public var customData29: String?
+    
+    @objc public var customData30: String?
+    
     @objc public var experimentName: String?
     
 }
