@@ -1,3 +1,5 @@
+import Foundation
+
 internal class SourceMetadataProvider<TSource: AnyObject>: NSObject {
     private var sources: Array<(key: TSource, value: SourceMetadata)> = []
     

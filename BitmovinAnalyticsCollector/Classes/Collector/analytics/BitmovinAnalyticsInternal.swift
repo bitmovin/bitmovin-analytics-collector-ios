@@ -1,5 +1,7 @@
 import AVFoundation
 import Foundation
+import UIKit
+
 /**
  * An iOS analytics plugin that sends video playback analytics to Bitmovin Analytics servers. Currently
  * supports analytics on AVPlayer video players
