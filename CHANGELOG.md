@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - device information to sample payload
+- SwiftPM support
 
 ### Fixed
 
