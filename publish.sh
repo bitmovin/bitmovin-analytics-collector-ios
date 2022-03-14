@@ -63,6 +63,14 @@ git commit -m "Generated BuildConfig.swift" || exit
 git push origin develop || exit
 echo "Generated BuildConfig.swift file."
 
+echo "Replace Package.swift file with version $VERSION"
+rm -v Package.swift
+cp SwiftPM/Package.v$VERSION.swift ./Package.swift
+git add Package.swift || exit
+git commit -m "Replace Package.swift" || exit
+git push origin develop || exit
+echo "Replaced Package.swift file with version $VERSION"
+
 git checkout main || exit
 git pull || exit
 git merge develop || exit
