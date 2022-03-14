@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+### Added 
+
+- SwiftPM support
+
 ## Development V1
 
 ## 2.7.0
@@ -36,6 +40,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 - correctly handling changes of observered AVPlayer elements
+
 ## 2.6.0
 
 ### Added
