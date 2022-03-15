@@ -24,7 +24,7 @@ let package = Package(
             name: "BitmovinAnalyticsCollector",
             dependencies: [],
             path: "BitmovinAnalyticsCollector/Classes/",
-           exclude: ["BitmovinPlayer/", "BitmovinPlayerV3/"],
+            exclude: ["BitmovinPlayer/", "BitmovinPlayerV3/"],
             sources: ["AVPlayer/", "Collector/"]),
         .testTarget(
             name: "BitmovinAnalyticsCollectorTests",
