@@ -12,35 +12,25 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "BitmovinAnalyticsCollectorAVPlayer",
-            targets: ["BitmovinAnalyticsCollectorCore", "BitmovinAnalyticsCollectorAVPlayer"]),
+            name: "BitmovinAnalyticsCollector",
+            targets: ["BitmovinAnalyticsCollector"]),
     ],
-    dependencies: [],
+    dependencies: [
+    ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "BitmovinAnalyticsCollectorCore",
+            name: "BitmovinAnalyticsCollector",
             dependencies: [],
             path: "BitmovinAnalyticsCollector/Classes/",
-            exclude: ["BitmovinPlayer/", "AVPlayer/", "Collector/BitmovinAnalyticsCollector.h", "Collector/Info.plist", "BitmovinPlayerV3/"],
-            sources:["Collector/"]),
-        .target(
-            name: "BitmovinAnalyticsCollectorAVPlayer",
-            path: "BitmovinAnalyticsCollector/Classes/",
-            exclude: ["BitmovinPlayer/", "BitmovinPlayerV3/", "Collector/"],
-            sources:["AVPlayer/"]),
+           exclude: ["BitmovinPlayer/", "BitmovinPlayerV3/"],
+            sources: ["AVPlayer/", "Collector/"]),
         .testTarget(
-            name: "BitmovinAnalyticsCollectorCoreTests",
-            dependencies: ["BitmovinAnalyticsCollectorCore"],
+            name: "BitmovinAnalyticsCollectorTests",
+            dependencies: ["BitmovinAnalyticsCollector"],
             path: "BitmovinAnalyticsCollector/Tests/",
-            exclude: ["BitmovinPlayerTests/", "AVPlayerTests/", "BitmovinPlayerV3Tests/"],
-            sources:["CoreTests/"]),
-        .testTarget(
-            name: "BitmovinAnalyticsCollectorAVPlayerTests",
-            dependencies: ["BitmovinAnalyticsCollectorAVPlayer"],
-            path: "BitmovinAnalyticsCollector/Tests/",
-            exclude: ["BitmovinPlayerTests/", "BitmovinPlayerV3Tests/", "CoreTests/"],
-            sources:["AVPlayerTests/"]),
+            exclude: ["BitmovinPlayerTests/", "BitmovinPlayerV3Tests/"],
+            sources:["AVPlayerTests/", "CoreTests/"]),
     ]
 )
