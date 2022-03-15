@@ -63,6 +63,7 @@ git commit -m "Generated BuildConfig.swift" || exit
 git push origin develop || exit
 echo "Generated BuildConfig.swift file."
 
+# Copy correct Package.swift file into root folder and commit
 echo "Replace Package.swift file for version $MAJOR_VERSION"
 if [[ $VERSION = 2* ]]; then
     MAJOR_VERSION="2"
