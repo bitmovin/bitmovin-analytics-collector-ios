@@ -65,10 +65,8 @@ echo "Generated BuildConfig.swift file."
 
 echo "Replace Package.swift file for version $MAJOR_VERSION"
 if [[ $VERSION = 2* ]]; then
-    echo "2 -> $VERSION"
     MAJOR_VERSION="2"
 else
-    echo "1 -> $VERSION"
     MAJOR_VERSION="1"
 fi
 cp -f SwiftPM/Package.v$MAJOR_VERSION.swift ./Package.swift
