@@ -1,6 +1,6 @@
 import BitmovinPlayer
 
-class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter, DeviceInformationProvider {
+class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
     private var player: Player
     private var sourceMetadataProvider: SourceMetadataProvider<Source>

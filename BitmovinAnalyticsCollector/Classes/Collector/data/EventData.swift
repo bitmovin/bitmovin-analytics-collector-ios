@@ -110,12 +110,11 @@ public class EventData: Codable {
     var videoStartFailed: Bool?
     var videoStartFailedReason: String?
 
-    init(_ impressionId: String, _ deviceInformation: DeviceInformation) {
-        self.userAgent = deviceInformation.userAgent
-        self.deviceInformation = DeviceInformationDto.fromDeviceInformation(deviceInformation)
+    init(_ impressionId: String) {
         self.impressionId = impressionId
     }
     
+    // TODO: Write test
     public func jsonString() -> String {
         let encoder = JSONEncoder()
         if #available(iOS 11.0, tvOS 11.0, *) {

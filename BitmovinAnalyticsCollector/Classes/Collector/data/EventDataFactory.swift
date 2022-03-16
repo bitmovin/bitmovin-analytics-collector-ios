@@ -13,7 +13,7 @@ class EventDataFactory {
     }
     
     func createEventData(_ state: String, _ impressionId: String, _ videoTimeStart: CMTime?, _ videoTimeEnd: CMTime?, _ drmLoadTime: Int64?, _ sourceMetaData: SourceMetadata?) -> EventData {
-        let eventData = EventData(impressionId, self.deviceInformationProvider.getDeviceInformation())
+        let eventData = EventData(impressionId)
         
         eventData.state = state
         eventData.drmLoadTime = drmLoadTime
@@ -27,10 +27,13 @@ class EventDataFactory {
     private func setBasicData(_ eventData: EventData) {
         eventData.version = UIDevice.current.systemVersion
         
+        let deviceInfo = self.deviceInformationProvider
+        
         eventData.userId = userIdProvider.getUserId()
         eventData.userAgent = Util.userAgent()
         eventData.domain = Util.mainBundleIdentifier()
         eventData.language = Util.language()
+        eventData.deviceInformation = deviceInfo.getDeviceInformation()
     }
     
     private func setAnalyticsVersion(_ eventData: EventData) {
