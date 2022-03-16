@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V1
 
+## 1.25.1
+
+### Fixed
+
+-correctly handling changes of observed AVPlayer elements
 ## 2.5.0
 
 ### Changed
