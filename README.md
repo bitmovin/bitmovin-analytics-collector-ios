@@ -74,8 +74,8 @@ The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` versi
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '1.24.1'
-pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '1.24.1'
+pod 'BitmovinAnalyticsCollector/Core', '1.24.2'
+pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '1.24.2'
 pod 'BitmovinPlayer', '2.51.0'
 
 use_frameworks!
@@ -98,8 +98,8 @@ use_frameworks!
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '1.24.1'
-pod 'BitmovinAnalyticsCollector/AVPlayer', '1.24.1'
+pod 'BitmovinAnalyticsCollector/Core', '1.24.2'
+pod 'BitmovinAnalyticsCollector/AVPlayer', '1.24.2'
 
 use_frameworks!
 ```
@@ -110,7 +110,7 @@ To include all available collectors, add the following lines (the dependency on 
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector', '1.24.1'
+pod 'BitmovinAnalyticsCollector', '1.24.2'
 pod 'BitmovinPlayer', '2.51.0'
 
 use_frameworks!
