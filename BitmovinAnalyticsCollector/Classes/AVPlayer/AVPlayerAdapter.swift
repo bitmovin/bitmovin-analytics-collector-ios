@@ -205,9 +205,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return
         }
 
-        if keyPath == #keyPath(player.rate) {
+        if keyPath == #keyPath(AVPlayer.rate) {
             onRateChanged(change)
-        } else if keyPath == #keyPath(player.currentItem) {
+        } else if keyPath == #keyPath(AVPlayer.currentItem) {
             if let oldItem = change?[NSKeyValueChangeKey.oldKey] as? AVPlayerItem {
                 NSLog("Current Item Changed: %@", oldItem.debugDescription)
                 stopMonitoringPlayerItem(playerItem: oldItem)
@@ -219,7 +219,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
                     startup()
                 }
             }
-        } else if keyPath == #keyPath(player.status) && player.status == .failed {
+        } else if keyPath == #keyPath(AVPlayer.status) && player.status == .failed {
             errorOccured(error: self.player.currentItem?.error as NSError?)
         }
     }
