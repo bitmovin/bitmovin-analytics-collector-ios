@@ -1,7 +1,7 @@
 import CoreMedia
 import Foundation
 
-protocol PlayerAdapter {
+protocol PlayerAdapter: DeviceInformationProvider {
     func decorateEventData(eventData: EventData)
     func initialize()
     func stopMonitoring()

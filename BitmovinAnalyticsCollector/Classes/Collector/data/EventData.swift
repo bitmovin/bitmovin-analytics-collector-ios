@@ -5,6 +5,7 @@ public class EventData: Codable {
     var path: String?
     var language: String?
     var userAgent: String?
+    var deviceInformation: DeviceInformationDto?
     var errorCode: Int?
     var errorMessage: String?
     var errorData: String?
@@ -109,7 +110,9 @@ public class EventData: Codable {
     var videoStartFailed: Bool?
     var videoStartFailedReason: String?
 
-    init(_ impressionId: String) {
+    init(_ impressionId: String, _ deviceInformation: DeviceInformation) {
+        self.userAgent = deviceInformation.userAgent
+        self.deviceInformation = DeviceInformationDto.fromDeviceInformation(deviceInformation)
         self.impressionId = impressionId
     }
     

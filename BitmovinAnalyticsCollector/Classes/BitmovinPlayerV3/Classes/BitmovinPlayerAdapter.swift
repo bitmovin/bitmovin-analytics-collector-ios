@@ -1,6 +1,6 @@
 import BitmovinPlayer
 
-class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
+class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter, DeviceInformationProvider {
     private let config: BitmovinAnalyticsConfig
     private var player: Player
     private var sourceMetadataProvider: SourceMetadataProvider<Source>
@@ -455,6 +455,10 @@ extension BitmovinPlayerAdapter: PlayerListener {
         }
         stateMachine.transitionState(destinationState: .subtitlechange, time: Util.timeIntervalToCMTime(_: player.currentTime))
         transitionToPausedOrBufferingOrPlaying()
+    }
+    
+    func getDeviceInformation() -> DeviceInformation {
+        return DeviceInformation(playerName: "bitmovin", playerVersion: BitmovinPlayerUtil.playerVersion() ?? "unknown")
     }
 
 }

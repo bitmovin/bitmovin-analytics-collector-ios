@@ -4,14 +4,16 @@ import Foundation
 class EventDataFactory {
     private final var config: BitmovinAnalyticsConfig
     private final var userIdProvider: UserIdProvider
+    private final var deviceInformationProvider: DeviceInformationProvider
     
-    init(_ config: BitmovinAnalyticsConfig, _ userIdProvider: UserIdProvider) {
+    init(_ config: BitmovinAnalyticsConfig, _ userIdProvider: UserIdProvider, _ deviceInformationProvider: DeviceInformationProvider) {
         self.config = config
         self.userIdProvider = userIdProvider
+        self.deviceInformationProvider = deviceInformationProvider
     }
     
     func createEventData(_ state: String, _ impressionId: String, _ videoTimeStart: CMTime?, _ videoTimeEnd: CMTime?, _ drmLoadTime: Int64?, _ sourceMetaData: SourceMetadata?) -> EventData {
-        let eventData = EventData(impressionId)
+        let eventData = EventData(impressionId, self.deviceInformationProvider.getDeviceInformation())
         
         eventData.state = state
         eventData.drmLoadTime = drmLoadTime
