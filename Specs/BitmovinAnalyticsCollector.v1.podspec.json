@@ -1,6 +1,6 @@
 {
   "name": "BitmovinAnalyticsCollector",
-  "version": "1.24.1",
+  "version": "1.24.2",
   "summary": "iOS library that allows you to monitor your iOS video playback with Bitmovin Analytics",
   "description": "iOS library that allows you to monitor your iOS video playback with Bitmovin Analytics. This SDK can monitor an AVPlayer or a Bitmovin Player",
   "homepage": "https://github.com/bitmovin/bitmovin-analytics-collector-ios",
