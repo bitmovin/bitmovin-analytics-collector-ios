@@ -14,19 +14,19 @@ public class DeviceInformation {
     public let operatingSystemMinor = String(ProcessInfo().operatingSystemVersion.minorVersion)
     public var deviceClass: DeviceClass
     
-    init(userAgent: String) {
-        self.userAgent = userAgent
+    init(playerName: String, playerVersion: String) {
         self.locale = Locale.current.languageCode!
         self.domain = Bundle.main.bundleIdentifier!
         self.deviceClass = getDeviceClass()
+        self.userAgent = DeviceInformation.getUserAgent(playerName: playerName, playerVersion: playerVersion, operatingSystem: self.operatingSystem)
     }
     
-    public func getUserAgent(playerName: String, playerVersion: String) -> String {
+    public static func getUserAgent(playerName: String, playerVersion: String, operatingSystem: String) -> String {
         let infoDict = Bundle.main.infoDictionary!
         let appName = infoDict["CFBundleName"] as! String
         let appVersion = infoDict["CFBundleShortVersionString"] as! String
 
         let playerVersion = "0"
-        return "\(appName)/\(appVersion) (Apple;\(self.operatingSystem)) \(playerName)/\(playerVersion)"
+        return "\(appName)/\(appVersion) (Apple;\(operatingSystem)) \(playerName)/\(playerVersion)"
     }
 }

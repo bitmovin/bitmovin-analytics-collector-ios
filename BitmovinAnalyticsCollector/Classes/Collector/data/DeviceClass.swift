@@ -1,6 +1,6 @@
 import Foundation
 
-public enum DeviceClass: String {
+public enum DeviceClass: String, Codable {
     case TV = "TV"
     case Phone = "Phone"
     case Tablet = "Tablet"
