@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+### Fixed
+
+- fixed type in compiler config `ENABLE_BITCODE`
 ## Development V1
+
+### Fixed
+
+- fixed type in compiler config `ENABLE_BITCODE`
 
 ## 1.26.1
 
