@@ -63,19 +63,6 @@ git commit -m "Generated BuildConfig.swift" || exit
 git push origin develop || exit
 echo "Generated BuildConfig.swift file."
 
-# Copy correct Package.swift file into root folder and commit
-echo "Replace Package.swift file for version $MAJOR_VERSION"
-if [[ $VERSION = 2* ]]; then
-    MAJOR_VERSION="2"
-else
-    MAJOR_VERSION="1"
-fi
-cp -f SwiftPM/Package.v$MAJOR_VERSION.swift ./Package.swift
-git add Package.swift || exit
-git commit -m "Replace Package.swift" || exit
-git push origin develop || exit
-echo "Replaced Package.swift file for version $MAJOR_VERSION"
-
 git checkout main || exit
 git pull || exit
 git merge develop || exit
