@@ -4,12 +4,10 @@ import Foundation
 class EventDataFactory {
     private final var config: BitmovinAnalyticsConfig
     private final var userIdProvider: UserIdProvider
-    private final var deviceInformationProvider: DeviceInformationProvider
-    
-    init(_ config: BitmovinAnalyticsConfig, _ userIdProvider: UserIdProvider, _ deviceInformationProvider: DeviceInformationProvider) {
+
+    init(_ config: BitmovinAnalyticsConfig, _ userIdProvider: UserIdProvider) {
         self.config = config
         self.userIdProvider = userIdProvider
-        self.deviceInformationProvider = deviceInformationProvider
     }
     
     func createEventData(_ state: String, _ impressionId: String, _ videoTimeStart: CMTime?, _ videoTimeEnd: CMTime?, _ drmLoadTime: Int64?, _ sourceMetaData: SourceMetadata?) -> EventData {
@@ -26,14 +24,12 @@ class EventDataFactory {
     
     private func setBasicData(_ eventData: EventData) {
         eventData.version = UIDevice.current.systemVersion
-        
-        let deviceInfo = self.deviceInformationProvider
-        
+
         eventData.userId = userIdProvider.getUserId()
-        eventData.userAgent = Util.userAgent()
         eventData.domain = Util.mainBundleIdentifier()
-        eventData.language = Util.language()
-        eventData.deviceInformation = deviceInfo.getDeviceInformation()
+        eventData.language = DeviceInformationUtils.language()
+        eventData.userAgent = DeviceInformationUtils.userAgent()
+        eventData.deviceInformation = DeviceInformationUtils.getDeviceInformation()
     }
     
     private func setAnalyticsVersion(_ eventData: EventData) {
