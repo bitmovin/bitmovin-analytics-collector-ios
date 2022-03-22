@@ -10,7 +10,7 @@ class BitmovinViewController: UIViewController {
     private let debugger: DebugBitmovinPlayerEvents = DebugBitmovinPlayerEvents()
     let url = URL(string: VideoAssets.sintel)
     let corruptedUrl = URL(string: VideoAssets.corruptRedBull)
-    let liveSimUrl = URL(string: VideoAssets.liveSim)!
+    let liveSimUrl = URL(string: VideoAssets.liveSim)
     @IBOutlet var playerView: UIView!
     @IBOutlet var doneButton: UIButton!
     @IBOutlet var reloadButton: UIButton!
@@ -151,7 +151,7 @@ class BitmovinViewController: UIViewController {
         config.title = "New video Title"
         let sourceConfig = SourceConfiguration()
         do {
-            try sourceConfig.addSourceItem(url: liveSimUrl)
+            try sourceConfig.addSourceItem(url: liveSimUrl!)
         }
         catch {}
         analyticsCollector.attachPlayer(player: self.player!)
