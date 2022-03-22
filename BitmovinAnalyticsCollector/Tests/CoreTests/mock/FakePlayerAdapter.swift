@@ -1,5 +1,7 @@
 import CoreMedia
+#if !SWIFT_PACKAGE
 @testable import BitmovinAnalyticsCollector
+#endif
 
 class FakePlayerAdapter: PlayerAdapter {
     func decorateEventData(eventData: EventData) {

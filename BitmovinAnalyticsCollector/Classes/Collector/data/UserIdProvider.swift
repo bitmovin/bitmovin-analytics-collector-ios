@@ -1,3 +1,3 @@
-protocol UserIdProvider {
+public protocol UserIdProvider {
     func getUserId() -> String
 }

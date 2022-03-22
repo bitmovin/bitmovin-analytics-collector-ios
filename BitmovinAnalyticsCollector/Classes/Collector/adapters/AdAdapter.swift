@@ -1,6 +1,6 @@
 import Foundation
 
-protocol AdAdapter {
+public protocol AdAdapter {
     func releaseAdapter()
     func getModuleInformation() -> AdModuleInformation
     func isAutoPlayEnabled() -> Bool

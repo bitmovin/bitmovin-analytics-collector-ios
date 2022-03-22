@@ -1,5 +1,8 @@
 import AVKit
 import Foundation
+#if SWIFT_PACKAGE
+import BitmovinCollectorCore
+#endif
 
 public class AVPlayerCollector: BitmovinAnalyticsInternal {
 

@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class CorePlayerAdapter: NSObject {
+open class CorePlayerAdapter: NSObject {
     internal var stateMachine: StateMachine
     private var isDestroyed = false
     

@@ -1,6 +1,9 @@
 import BitmovinPlayer
+#if SWIFT_PACKAGE
+import BitmovinCollectorCore
+#endif
 
-class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
+internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let config: BitmovinAnalyticsConfig
     private var player: Player
     private var sourceMetadataProvider: SourceMetadataProvider<Source>

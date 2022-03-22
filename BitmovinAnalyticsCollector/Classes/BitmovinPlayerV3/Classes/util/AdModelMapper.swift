@@ -1,4 +1,7 @@
 import BitmovinPlayer
+#if SWIFT_PACKAGE
+import BitmovinCollectorCore
+#endif
 
 public class AdModelMapper {
     
@@ -92,7 +95,7 @@ public class AdModelMapper {
         return collectorAd
     }
     
-    static func fromVastAdData(collectorAd:AnalyticsAd, vastData: VastAdData) {
+    static func fromVastAdData(collectorAd: AnalyticsAd, vastData: VastAdData) {
         collectorAd.title = vastData.adTitle
         collectorAd.adSystemName = vastData.adSystem?.name
         collectorAd.adSystemVersion = vastData.adSystem?.version

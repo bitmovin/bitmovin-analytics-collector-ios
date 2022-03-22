@@ -5,15 +5,15 @@ import UIKit
 /**
  * An iOS analytics plugin that sends video playback analytics to Bitmovin Analytics servers. Currently
  * supports analytics on AVPlayer video players
- */
-public class BitmovinAnalyticsInternal: NSObject {
+*/
+open class BitmovinAnalyticsInternal: NSObject {
     public static let ErrorMessageKey = "errorMessage"
     public static let ErrorCodeKey = "errorCode"
     public static let ErrorDataKey = "errorData"
 
     static let msInSec = 1_000.0
-    internal var config: BitmovinAnalyticsConfig
-    internal var stateMachine: StateMachine
+    private var config: BitmovinAnalyticsConfig
+    private var stateMachine: StateMachine
     internal var adapter: PlayerAdapter?
     private var eventDataDispatcher: EventDataDispatcher
     internal var adAnalytics: BitmovinAdAnalytics?
@@ -22,7 +22,7 @@ public class BitmovinAnalyticsInternal: NSObject {
     private var isPlayerAttached = false
     internal var didSendDrmLoadTime = false
 
-    internal init(config: BitmovinAnalyticsConfig) {
+    public init(config: BitmovinAnalyticsConfig) {
         self.config = config
         stateMachine = StateMachine(config: self.config)
         eventDataDispatcher = SimpleEventDataDispatcher(config: config)
@@ -71,7 +71,7 @@ public class BitmovinAnalyticsInternal: NSObject {
         adapter = nil
     }
 
-    internal func attach(adapter: PlayerAdapter) {
+    private func attach(adapter: PlayerAdapter) {
         if isPlayerAttached {
             detachPlayer()
         }

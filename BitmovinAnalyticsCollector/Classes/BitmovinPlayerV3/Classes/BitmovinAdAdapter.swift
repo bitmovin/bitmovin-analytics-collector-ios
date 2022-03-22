@@ -1,4 +1,8 @@
 import BitmovinPlayer
+#if SWIFT_PACKAGE
+import BitmovinCollectorCore
+#endif
+
 
 public class BitmovinAdAdapter : NSObject, AdAdapter {
     private var bitmovinPlayer: Player
@@ -11,16 +15,16 @@ public class BitmovinAdAdapter : NSObject, AdAdapter {
         self.bitmovinPlayer.add(listener: self)
     }
 
-    func releaseAdapter() {
+    public func releaseAdapter() {
         self.bitmovinPlayer.remove(listener: self)
     }
     
-    func getModuleInformation() -> AdModuleInformation {
+    public func getModuleInformation() -> AdModuleInformation {
         let playerVersion = BitmovinPlayerUtil.playerVersion()
         return AdModuleInformation(name: "BMPDefaultAdvertisingService", version: playerVersion)
     }
     
-    func isAutoPlayEnabled() -> Bool {
+    public func isAutoPlayEnabled() -> Bool {
         self.bitmovinPlayer.config.playbackConfig.isAutoplayEnabled
     }
 }
