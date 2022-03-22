@@ -10,7 +10,7 @@ public class BitmovinPlayerCollector : Collector {
     private var analytics: BitmovinAnalyticsInternal
     
     @objc public init(config: BitmovinAnalyticsConfig) {
-        self.analytics = BitmovinPlayerCollector.createAnalytics(config: config)
+        self.analytics = BitmovinAnalyticsInternal.createAnalytics(config: config)
     }
     /**
      * Attach a player instance to this analytics plugin. After this is completed, BitmovinAnalytics
@@ -22,6 +22,22 @@ public class BitmovinPlayerCollector : Collector {
         if (analytics.adAnalytics != nil) {
             analytics.attachAd(adAdapter: BitmovinAdAdapter(bitmovinPlayer: player, adAnalytics: analytics.adAnalytics!))
         }
+    }
+    
+    @objc public func detachPlayer() {
+        analytics.detachPlayer()
+    }
+
+    @objc public func getCustomData() -> CustomData {
+        return analytics.getCustomData()
+    }
+
+    @objc public func setCustomData(customData: CustomData) {
+        return analytics.setCustomData(customData: customData)
+    }
+
+    @objc public func setCustomDataOnce(customData: CustomData) {
+        return analytics.setCustomDataOnce(customData: customData)
     }
     
     @objc public func addSourceMetadata(playerSource: Source, sourceMetadata: SourceMetadata) {

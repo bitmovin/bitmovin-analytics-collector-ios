@@ -301,3 +301,9 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         }
     }
 }
+
+extension BitmovinAnalyticsInternal {
+    static public func createAnalytics(config: BitmovinAnalyticsConfig) -> BitmovinAnalyticsInternal {
+        return BitmovinAnalyticsInternal(config: config)
+    }
+}

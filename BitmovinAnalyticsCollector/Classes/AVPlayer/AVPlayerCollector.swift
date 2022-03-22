@@ -4,17 +4,37 @@ import Foundation
 import BitmovinCollectorCore
 #endif
 
-public class AVPlayerCollector: BitmovinAnalyticsInternal {
+public class AVPlayerCollector: Collector {
+    public typealias TPlayer = AVPlayer
 
-    public override init(config: BitmovinAnalyticsConfig) {
-        super.init(config: config)
+    private var analytics: BitmovinAnalyticsInternal
+
+    @objc public init(config: BitmovinAnalyticsConfig) {
+        self.analytics = BitmovinAnalyticsInternal.createAnalytics(config: config)
     }
 
     /**
      * Attach a player instance to this analytics plugin. After this is completed, BitmovinAnalytics
      * will start monitoring and sending analytics data based on the attached player instance.
      */
-    public func attachPlayer(player: AVPlayer) {
-        attach(adapter: AVPlayerAdapter(player: player, config: config, stateMachine: stateMachine))
+    @objc public func attachPlayer(player: AVPlayer) {
+        let adapter = AVPlayerAdapter(player: player, config: analytics.config, stateMachine: analytics.stateMachine)
+        analytics.attach(adapter: adapter)
+    }
+
+    @objc public func detachPlayer() {
+        analytics.detachPlayer()
+    }
+
+    @objc public func getCustomData() -> CustomData {
+        return analytics.getCustomData()
+    }
+
+    @objc public func setCustomData(customData: CustomData) {
+        return analytics.setCustomData(customData: customData)
+    }
+
+    @objc public func setCustomDataOnce(customData: CustomData) {
+        return analytics.setCustomDataOnce(customData: customData)
     }
 }
