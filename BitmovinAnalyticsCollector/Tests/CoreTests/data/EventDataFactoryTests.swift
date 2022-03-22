@@ -3,6 +3,10 @@ import XCTest
 @testable import BitmovinAnalyticsCollector
 #endif
 
+#if SWIFT_PACKAGE
+@testable import BitmovinCollectorCore
+#endif
+
 class EventDataFactoryTests: XCTestCase {
     
     func test_createEventData_should_returnEventDataWithBasicDataSet() {
