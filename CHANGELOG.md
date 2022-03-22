@@ -7,10 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+### Added
+
+- device information to sample payload
+
 ### Fixed
 
 - fixed type in compiler config `ENABLE_BITCODE`
+
 ## Development V1
+
+### Added
+
+- device information to sample payload
 
 ### Fixed
 
