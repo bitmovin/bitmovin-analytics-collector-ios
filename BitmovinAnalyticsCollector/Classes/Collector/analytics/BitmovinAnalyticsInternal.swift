@@ -12,11 +12,11 @@ open class BitmovinAnalyticsInternal: NSObject {
     public static let ErrorDataKey = "errorData"
 
     static let msInSec = 1_000.0
-    private var config: BitmovinAnalyticsConfig
-    private var stateMachine: StateMachine
+    public private(set) var config: BitmovinAnalyticsConfig
+    public private(set) var stateMachine: StateMachine
+    public private(set) var adAnalytics: BitmovinAdAnalytics?
     internal var adapter: PlayerAdapter?
     private var eventDataDispatcher: EventDataDispatcher
-    internal var adAnalytics: BitmovinAdAnalytics?
     internal var adAdapter: AdAdapter?
     internal var eventDataFactory: EventDataFactory
     private var isPlayerAttached = false
@@ -55,6 +55,8 @@ open class BitmovinAnalyticsInternal: NSObject {
         self.detachPlayer()
     }
     
+    
+    
     /**
      * Detach the current player that is being used with Bitmovin Analytics.
      */
@@ -71,7 +73,7 @@ open class BitmovinAnalyticsInternal: NSObject {
         adapter = nil
     }
 
-    private func attach(adapter: PlayerAdapter) {
+    public func attach(adapter: PlayerAdapter) {
         if isPlayerAttached {
             detachPlayer()
         }
@@ -86,7 +88,7 @@ open class BitmovinAnalyticsInternal: NSObject {
         adAdapter?.releaseAdapter()
     }
     
-    internal func attachAd(adAdapter: AdAdapter) {
+    public func attachAd(adAdapter: AdAdapter) {
         self.adAdapter = adAdapter;
     }
     

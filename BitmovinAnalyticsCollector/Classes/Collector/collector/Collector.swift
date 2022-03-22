@@ -1,6 +1,12 @@
 import Foundation
 
 public protocol Collector {
+    associatedtype TPlayer
     func attachPlayer(player: TPlayer)
-    func
+}
+
+extension Collector {
+    static public func createAnalytics(config: BitmovinAnalyticsConfig) -> BitmovinAnalyticsInternal {
+        return BitmovinAnalyticsInternal(config: config)
+    }
 }
