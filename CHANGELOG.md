@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - device information to sample payload
 - SwiftPM support
+- strict protocol for Collectors for strict visibility of methods
 
 ### Fixed
 
