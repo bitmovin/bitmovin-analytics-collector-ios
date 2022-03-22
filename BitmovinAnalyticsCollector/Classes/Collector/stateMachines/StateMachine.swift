@@ -5,7 +5,7 @@ public class StateMachine {
     private static var kVideoStartFailedTimeoutSeconds: TimeInterval = 60
     private static var kvideoStartFailedTimerId: String = "com.bitmovin.analytics.core.statemachine.startupFailedTimer"
     
-    private(set) var state: PlayerState
+    public private(set) var state: PlayerState
     private var config: BitmovinAnalyticsConfig
     private(set) var impressionId: String
     weak var delegate: StateMachineDelegate?
@@ -26,8 +26,8 @@ public class StateMachine {
     private let rebufferHeartbeatInterval: [Int64] = [3000, 5000, 10000, 59700]
     
     //play attempt
-    var didAttemptPlayingVideo: Bool = false
-    private(set) var didStartPlayingVideo: Bool = false
+    public private(set) var didAttemptPlayingVideo: Bool = false
+    public private(set) var didStartPlayingVideo: Bool = false
     private var videoStartFailedWorkItem: DispatchWorkItem?
     private(set) var videoStartFailed: Bool = false
     private(set) var videoStartFailedReason: String?
@@ -95,6 +95,8 @@ public class StateMachine {
         if(didStartPlayingVideo) {
             return
         }
+        
+        didAttemptPlayingVideo = true
         transitionState(destinationState: .startup, time: time)
     }
     

@@ -1,6 +1,6 @@
 import Foundation
 
-enum StreamType: String {
+public enum StreamType: String {
     case progressive
     case hls
     case dash

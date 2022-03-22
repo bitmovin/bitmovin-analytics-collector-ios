@@ -5,7 +5,7 @@ import CoreTelephony
 import AVKit
 import Foundation
 
-class Util {
+public class Util {
     static func mainBundleIdentifier() -> String {
         guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
             return "Unknown"
@@ -17,7 +17,7 @@ class Util {
         return BuildConfig.VERSION
     }
 
-    static func timeIntervalToCMTime(_ timeInterval: TimeInterval) -> CMTime? {
+    static public func timeIntervalToCMTime(_ timeInterval: TimeInterval) -> CMTime? {
         if !timeInterval.isNaN, !timeInterval.isInfinite {
             return CMTimeMakeWithSeconds(timeInterval, preferredTimescale: 1000)
         }
@@ -95,13 +95,13 @@ class Util {
 }
 
 extension Date {
-    var timeIntervalSince1970Millis: Int64 {
+    public var timeIntervalSince1970Millis: Int64 {
         return Int64(round(Date().timeIntervalSince1970 * 1_000))
     }
 }
 
 extension TimeInterval {
-    var milliseconds: Int64? {
+    public var milliseconds: Int64? {
         if self > Double(Int64.min) && self < Double(Int64.max) {
             return Int64(self * 1_000)
         }
