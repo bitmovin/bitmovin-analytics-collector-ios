@@ -456,7 +456,6 @@ extension BitmovinPlayerAdapter: PlayerListener {
         stateMachine.transitionState(destinationState: .subtitlechange, time: Util.timeIntervalToCMTime(_: player.currentTime))
         transitionToPausedOrBufferingOrPlaying()
     }
-
 }
 
 extension BitmovinPlayerAdapter: SourceListener {

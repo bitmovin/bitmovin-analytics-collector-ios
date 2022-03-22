@@ -4,7 +4,7 @@ import Foundation
 class EventDataFactory {
     private final var config: BitmovinAnalyticsConfig
     private final var userIdProvider: UserIdProvider
-    
+
     init(_ config: BitmovinAnalyticsConfig, _ userIdProvider: UserIdProvider) {
         self.config = config
         self.userIdProvider = userIdProvider
@@ -24,11 +24,12 @@ class EventDataFactory {
     
     private func setBasicData(_ eventData: EventData) {
         eventData.version = UIDevice.current.systemVersion
-        
+
         eventData.userId = userIdProvider.getUserId()
-        eventData.userAgent = Util.userAgent()
         eventData.domain = Util.mainBundleIdentifier()
-        eventData.language = Util.language()
+        eventData.language = DeviceInformationUtils.language()
+        eventData.userAgent = DeviceInformationUtils.userAgent()
+        eventData.deviceInformation = DeviceInformationUtils.getDeviceInformation()
     }
     
     private func setAnalyticsVersion(_ eventData: EventData) {
