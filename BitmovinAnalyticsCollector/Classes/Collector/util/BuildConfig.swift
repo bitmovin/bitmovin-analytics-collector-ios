@@ -6,5 +6,5 @@ import Foundation
 
 struct BuildConfig { 
   fileprivate init() {}
-    static let VERSION = "1.26.1"
+    static let VERSION = "1.27.0"
 }	

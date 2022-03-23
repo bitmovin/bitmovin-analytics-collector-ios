@@ -9,6 +9,28 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V1
 
+## 2.7.0
+
+### Added
+
+- device information to sample payload
+
+### Fixed
+
+- tracking of `analytics_version` don't use `CFBundleShortVersionString` 
+- fixed type in compiler config `ENABLE_BITCODE`
+
+## 1.27.0
+
+### Added
+
+- device information to sample payload
+
+### Fixed
+
+- tracking of `analytics_version` don't use `CFBundleShortVersionString` 
+- fixed type in compiler config `ENABLE_BITCODE`
+
 ## 1.26.1
 
 ### Fixed

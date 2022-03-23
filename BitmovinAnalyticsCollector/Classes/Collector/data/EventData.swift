@@ -5,6 +5,7 @@ public class EventData: Codable {
     var path: String?
     var language: String?
     var userAgent: String?
+    var deviceInformation: DeviceInformationDto?
     var errorCode: Int?
     var errorMessage: String?
     var errorData: String?
@@ -113,6 +114,7 @@ public class EventData: Codable {
         self.impressionId = impressionId
     }
     
+    // TODO: Write test
     public func jsonString() -> String {
         let encoder = JSONEncoder()
         if #available(iOS 11.0, tvOS 11.0, *) {

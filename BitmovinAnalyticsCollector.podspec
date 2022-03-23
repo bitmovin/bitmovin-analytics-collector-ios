@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BitmovinAnalyticsCollector'
-  s.version          = '1.26.1'
+  s.version          = '1.27.0'
   s.summary          = 'iOS library that allows you to monitor your iOS video playback with Bitmovin Analytics'
 
   s.description      = <<-DESC
@@ -20,7 +20,7 @@ DESC
   s.pod_target_xcconfig = {
       'FRAMEWORK_SEARCH_PATHS' => '"${PODS_ROOT}"/*',
       'OTHER_LDFLAGS' => '$(inherited) -ObjC',
-      'ENABLE_BITCOD' => 'YES'
+      'ENABLE_BITCODE' => 'YES'
   }
   s.subspec 'Core' do |core|
     core.source_files = 'BitmovinAnalyticsCollector/Classes/Collector/**/*.{swift}'
