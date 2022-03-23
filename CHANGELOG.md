@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-- tracking of `analytics_version` don't use `Bundle.main.bundleIdentifier` 
+- tracking of `analytics_version` don't use `CFBundleShortVersionString` 
 - fixed type in compiler config `ENABLE_BITCODE`
 
 ## Development V1
@@ -24,7 +24,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-- tracking of `analytics_version` don't use `Bundle.main.bundleIdentifier` 
+- tracking of `analytics_version` don't use `CFBundleShortVersionString` 
 - fixed type in compiler config `ENABLE_BITCODE`
 
 ## 1.26.1
