@@ -8,10 +8,10 @@ class BitmovinViewController: UIViewController {
     private var config: BitmovinAnalyticsConfig
     private let debugger: DebugBitmovinPlayerEvents = DebugBitmovinPlayerEvents()
     
-//    private let redbullSource = SourceFactory.create(from: SourceConfig(url: URL(string: VideoAssets.redbull)!)!)
-//    private let sintelSource = SourceFactory.create(from: SourceConfig(url: URL(string: VideoAssets.sintel)!)!)
-    private let redbullCastSource = SourceFactory.create(from: SourceConfig(url: URL(string: VideoAssets.redbullCasting)!)!)
-    private let sintelCastSource = SourceFactory.create(from: SourceConfig(url: URL(string: VideoAssets.sintelCasting)!)!)
+    private let redbullSource = SourceFactory.create(from: SourceConfig(url: URL(string: VideoAssets.redbull)!, type: .hls))
+    private let sintelSource = SourceFactory.create(from: SourceConfig(url: URL(string: VideoAssets.sintel)!, type: .hls))
+//    private let redbullCastSource = SourceFactory.create(from: SourceConfig(url: URL(string: VideoAssets.redbullCasting)!)!)
+//    private let sintelCastSource = SourceFactory.create(from: SourceConfig(url: URL(string: VideoAssets.sintelCasting)!)!)
     private let liveSimSource = SourceFactory.create(from: SourceConfig(url: URL(string: VideoAssets.liveSim)!)!)
     
     @IBOutlet var playerView: UIView!
@@ -96,13 +96,13 @@ class BitmovinViewController: UIViewController {
         let redbullMetadata = SourceMetadata(
             title: "redbull",
             experimentName: "experiment-bitmovin-v3-upgrade")
-        self.analyticsCollector.addSourceMetadata(playerSource: redbullCastSource, sourceMetadata: redbullMetadata)
+        self.analyticsCollector.addSourceMetadata(playerSource: redbullSource, sourceMetadata: redbullMetadata)
         
         // setup analytics SourceMetadata for Sintel Source
         let sintelMetadata = SourceMetadata(videoId: "sintelID",
                                             title: "sintel",
                                             experimentName: "experiment-bitmovin-v3-upgrade")
-        self.analyticsCollector.addSourceMetadata(playerSource: sintelCastSource, sourceMetadata: sintelMetadata)
+        self.analyticsCollector.addSourceMetadata(playerSource: sintelSource, sourceMetadata: sintelMetadata)
     }
     
     func loadPlaylist(player: Player) {
@@ -164,7 +164,7 @@ class BitmovinViewController: UIViewController {
         let playlistOptions = PlaylistOptions(preloadAllSources: false)
                
         return PlaylistConfig(
-            sources: [redbullCastSource, sintelCastSource],
+            sources: [redbullSource, sintelSource],
             options: playlistOptions
         )
     }
