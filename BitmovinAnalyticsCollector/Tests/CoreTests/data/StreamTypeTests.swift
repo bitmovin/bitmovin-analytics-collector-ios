@@ -30,7 +30,7 @@ class StreamTypeTests: XCTestCase {
     func test_streamType(){
         for test in streamTypeTests {
             let streamType = Util.streamType(from: test.streamUrl)
-            XCTAssertEqual(streamType, test.expectedStreamType, "Test: \(test.name) failed! Expected \(test.expectedStreamType), got \(streamType)")
+            XCTAssertEqual(streamType, test.expectedStreamType, "Test: \(String(describing: test.name)) failed! Expected \(String(describing: test.expectedStreamType)), got \(String(describing: streamType))")
         }
     }
 }
