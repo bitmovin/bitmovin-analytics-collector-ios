@@ -67,7 +67,7 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         
         stateMachine.play(time: currentTime)
 
-        print("BitmovinPlayerAdapter shouldTransitionToStartup \n\t isAutoplayEnabled: \(player.config.playbackConfig.isAutoplayEnabled) \n\t isPlaying: \(player.isPlaying) \n\t isPaused: \(player.isPaused) \n\t isSourceLoadedAndWillAutoPlay: \(isSourceLoadedAndWillAutoPlay) \n\t isPlayingWithoutBeingTracked: \(isPlayingWithoutBeingTracked) \n\t source \n\t\t loadingState \(player.source?.loadingState.rawValue) \n\t\t isActive: \(player.source?.isActive) \n\t\t duration: \(player.source?.duration)  ")
+        print("BitmovinPlayerAdapter shouldTransitionToStartup \n\t isAutoplayEnabled: \(player.config.playbackConfig.isAutoplayEnabled) \n\t isPlaying: \(player.isPlaying) \n\t isPaused: \(player.isPaused) \n\t isSourceLoadedAndWillAutoPlay: \(isSourceLoadedAndWillAutoPlay) \n\t isPlayingWithoutBeingTracked: \(isPlayingWithoutBeingTracked) \n\t source \n\t\t loadingState \(String(describing: player.source?.loadingState.rawValue)) \n\t\t isActive: \(String(describing: player.source?.isActive)) \n\t\t duration: \(String(describing: player.source?.duration))  ")
     }
     
     func resetSourceState() {
