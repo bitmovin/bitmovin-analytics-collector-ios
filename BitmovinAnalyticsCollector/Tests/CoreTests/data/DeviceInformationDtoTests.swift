@@ -5,7 +5,6 @@ import XCTest
 #endif
 
 #if SWIFT_PACKAGE
-@testable import BitmovinCollector
 @testable import BitmovinCollectorCore
 #endif
 
