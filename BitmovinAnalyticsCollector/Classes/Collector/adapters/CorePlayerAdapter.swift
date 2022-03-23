@@ -1,11 +1,11 @@
 import Foundation
 import UIKit
 
-class CorePlayerAdapter: NSObject {
-    internal var stateMachine: StateMachine
+open class CorePlayerAdapter: NSObject {
+    public private(set) var stateMachine: StateMachine
     private var isDestroyed = false
     
-    init(stateMachine: StateMachine){
+    public init(stateMachine: StateMachine){
         self.stateMachine = stateMachine
         
         super.init()
@@ -14,9 +14,9 @@ class CorePlayerAdapter: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForegroundNotification(notification:)), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
-    func stopMonitoring() {}
+    open func stopMonitoring() {}
     
-    func destroy() {
+    public func destroy() {
         guard !isDestroyed else {
             return
         }

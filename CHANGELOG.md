@@ -7,17 +7,27 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+### Changed
+
+- strict protocol `Collector` as public API for player collectors
+
 ### Added 
 
 - SwiftPM support
 
 ## Development V1
 
+### Changed
+
+- strict protocol `Collector` as public API for player collectors
+
 ## 2.7.0
 
 ### Added
 
 - device information to sample payload
+- SwiftPM support
+- strict protocol for Collectors for strict visibility of methods
 
 ### Fixed
 

@@ -3,6 +3,7 @@ import CoreTelephony
 #endif
 
 import Foundation
+import UIKit
 
 public class DeviceInformationUtils {
     

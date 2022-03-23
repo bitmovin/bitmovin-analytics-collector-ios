@@ -5,24 +5,24 @@ import UIKit
 /**
  * An iOS analytics plugin that sends video playback analytics to Bitmovin Analytics servers. Currently
  * supports analytics on AVPlayer video players
- */
-public class BitmovinAnalyticsInternal: NSObject {
+*/
+open class BitmovinAnalyticsInternal: NSObject {
     public static let ErrorMessageKey = "errorMessage"
     public static let ErrorCodeKey = "errorCode"
     public static let ErrorDataKey = "errorData"
 
     static let msInSec = 1_000.0
-    internal var config: BitmovinAnalyticsConfig
-    internal var stateMachine: StateMachine
+    public private(set) var config: BitmovinAnalyticsConfig
+    public private(set) var stateMachine: StateMachine
+    public private(set) var adAnalytics: BitmovinAdAnalytics?
     internal var adapter: PlayerAdapter?
     private var eventDataDispatcher: EventDataDispatcher
-    internal var adAnalytics: BitmovinAdAnalytics?
     internal var adAdapter: AdAdapter?
     internal var eventDataFactory: EventDataFactory
     private var isPlayerAttached = false
     internal var didSendDrmLoadTime = false
 
-    internal init(config: BitmovinAnalyticsConfig) {
+    public init(config: BitmovinAnalyticsConfig) {
         self.config = config
         stateMachine = StateMachine(config: self.config)
         eventDataDispatcher = SimpleEventDataDispatcher(config: config)
@@ -55,6 +55,8 @@ public class BitmovinAnalyticsInternal: NSObject {
         self.detachPlayer()
     }
     
+    
+    
     /**
      * Detach the current player that is being used with Bitmovin Analytics.
      */
@@ -71,7 +73,7 @@ public class BitmovinAnalyticsInternal: NSObject {
         adapter = nil
     }
 
-    internal func attach(adapter: PlayerAdapter) {
+    public func attach(adapter: PlayerAdapter) {
         if isPlayerAttached {
             detachPlayer()
         }
@@ -86,7 +88,7 @@ public class BitmovinAnalyticsInternal: NSObject {
         adAdapter?.releaseAdapter()
     }
     
-    internal func attachAd(adAdapter: AdAdapter) {
+    public func attachAd(adAdapter: AdAdapter) {
         self.adAdapter = adAdapter;
     }
     
@@ -297,5 +299,11 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         get {
             return Util.version()
         }
+    }
+}
+
+extension BitmovinAnalyticsInternal {
+    static public func createAnalytics(config: BitmovinAnalyticsConfig) -> BitmovinAnalyticsInternal {
+        return BitmovinAnalyticsInternal(config: config)
     }
 }

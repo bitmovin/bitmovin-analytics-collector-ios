@@ -1,9 +1,9 @@
 import Foundation
 
-internal class SourceMetadataProvider<TSource: AnyObject>: NSObject {
+public class SourceMetadataProvider<TSource: AnyObject>: NSObject {
     private var sources: Array<(key: TSource, value: SourceMetadata)> = []
     
-    func add(source: TSource, sourceMetadata: SourceMetadata) {
+    public func add(source: TSource, sourceMetadata: SourceMetadata) {
         
         let sourceIndex = sources.firstIndex { (s) -> Bool in
             s.key === source
@@ -17,7 +17,7 @@ internal class SourceMetadataProvider<TSource: AnyObject>: NSObject {
         self.sources.append(pair)
     }
     
-    func get(source: TSource?) -> SourceMetadata? {
+    public func get(source: TSource?) -> SourceMetadata? {
         
         guard let p = source else {
             return nil
@@ -28,7 +28,7 @@ internal class SourceMetadataProvider<TSource: AnyObject>: NSObject {
         }?.value
     }
     
-    func clear() {
+    public func clear() {
         sources.removeAll()
     }
 }

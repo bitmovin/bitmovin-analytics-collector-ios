@@ -1,6 +1,6 @@
 import Foundation
 
-enum PlayerType: String {
+public enum PlayerType: String {
     case avplayer
     case bitmovin
 }

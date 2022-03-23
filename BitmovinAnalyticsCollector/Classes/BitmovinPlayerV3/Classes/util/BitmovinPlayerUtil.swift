@@ -1,4 +1,7 @@
 import BitmovinPlayer
+#if SWIFT_PACKAGE
+import BitmovinCollectorCore
+#endif
 
 public class BitmovinPlayerUtil {
 

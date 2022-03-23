@@ -1,37 +1,39 @@
 import Foundation
 
 public class AnalyticsAd {
-    var isLinear: Bool = false
-    var width: Int = 0
-    var height: Int = 0
-    var id: String?
-    var mediaFileUrl: String?
-    var clickThroughUrl: String?
-    var bitrate: Int?
-    var minBitrate: Int?
-    var maxBitrate: Int?
-    var mimeType: String?
-    var adSystemName: String?
-    var adSystemVersion: String?
-    var advertiserName: String?
-    var advertiserId: String?
-    var apiFramework: String?
-    var creativeAdId: String?
-    var creativeId: String?
-    var universalAdIdRegistry: String?
-    var universalAdIdValue: String?
-    var description: String?
-    var minSuggestedDuration: TimeInterval?
-    var surveyUrl: String?
-    var surveyType: String?
-    var title: String?
-    var wrapperAdsCount: Int?
-    var codec: String?
-    var pricingValue: Int64?
-    var pricingModel: String?
-    var pricingCurrency: String?
-    var skippableAfter: TimeInterval?
-    var skippable: Bool?
-    var duration: TimeInterval?
-    var dealId: String?
+    public var isLinear: Bool = false
+    public var width: Int = 0
+    public var height: Int = 0
+    public var id: String?
+    public var mediaFileUrl: String?
+    public var clickThroughUrl: String?
+    public var bitrate: Int?
+    public var minBitrate: Int?
+    public var maxBitrate: Int?
+    public var mimeType: String?
+    public var adSystemName: String?
+    public var adSystemVersion: String?
+    public var advertiserName: String?
+    public var advertiserId: String?
+    public var apiFramework: String?
+    public var creativeAdId: String?
+    public var creativeId: String?
+    public var universalAdIdRegistry: String?
+    public var universalAdIdValue: String?
+    public var description: String?
+    public var minSuggestedDuration: TimeInterval?
+    public var surveyUrl: String?
+    public var surveyType: String?
+    public var title: String?
+    public var wrapperAdsCount: Int?
+    public var codec: String?
+    public var pricingValue: Int64?
+    public var pricingModel: String?
+    public var pricingCurrency: String?
+    public var skippableAfter: TimeInterval?
+    public var skippable: Bool?
+    public var duration: TimeInterval?
+    public var dealId: String?
+    
+    public init(){}
 }

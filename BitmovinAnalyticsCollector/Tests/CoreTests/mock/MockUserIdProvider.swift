@@ -1,4 +1,9 @@
+#if !SWIFT_PACKAGE
 @testable import BitmovinAnalyticsCollector
+#endif
+#if SWIFT_PACKAGE
+import BitmovinCollectorCore
+#endif
 
 class MockUserIdProvider: UserIdProvider {
     private var getUserIdAction: (() -> String)? = nil
