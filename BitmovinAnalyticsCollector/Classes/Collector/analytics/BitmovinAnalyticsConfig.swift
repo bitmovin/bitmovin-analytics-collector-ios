@@ -1,3 +1,5 @@
+import Foundation
+
 @objc
 @objcMembers
 public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig{

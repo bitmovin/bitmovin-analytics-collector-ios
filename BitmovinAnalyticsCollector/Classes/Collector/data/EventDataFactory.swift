@@ -1,5 +1,6 @@
 import AVFoundation
 import Foundation
+import UIKit
 
 class EventDataFactory {
     private final var config: BitmovinAnalyticsConfig

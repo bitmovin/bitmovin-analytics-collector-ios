@@ -1,3 +1,5 @@
+import Foundation
+
 class UserDefaultUserIdProvider: UserIdProvider {
     private let defaults = UserDefaults(suiteName: "com.bitmovin.analytics.collector_defaults")
     private let userIdFromStore: String
