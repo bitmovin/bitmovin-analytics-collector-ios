@@ -29,12 +29,14 @@ class EventDataFactoryTests: XCTestCase {
             nil)
         
         // arrange
-        XCTAssertNotNil(eventData.version)
+        XCTAssertEqual(eventData.version, UIDevice.current.systemVersion)
         XCTAssertEqual(eventData.userId, "test-user-id")
         XCTAssertEqual(getUserIdCnt, 1)
-        XCTAssertNotNil(eventData.userAgent)
-        XCTAssertNotNil(eventData.domain)
-        XCTAssertNotNil(eventData.language)
+        XCTAssertEqual(eventData.domain, Util.mainBundleIdentifier())
+        XCTAssertEqual(eventData.analyticsVersion, Util.version())
+        XCTAssertEqual(eventData.language, DeviceInformationUtils.language())
+        XCTAssertEqual(eventData.userAgent, DeviceInformationUtils.userAgent())
+        XCTAssertNotNil(eventData.deviceInformation)
         
     }
     
@@ -209,7 +211,7 @@ class EventDataFactoryTests: XCTestCase {
             Util.timeIntervalToCMTime(_: 0),
             Util.timeIntervalToCMTime(_: 10),
             60,
-            nil )
+            nil)
 
         // arrange
         XCTAssertEqual(eventData.state, "test-state")
@@ -217,6 +219,10 @@ class EventDataFactoryTests: XCTestCase {
         XCTAssertEqual(eventData.videoTimeStart, 0)
         XCTAssertEqual(eventData.videoTimeEnd, 10000)
         XCTAssertEqual(eventData.drmLoadTime, 60)
+    }
+    
+    func test_serializeEventData() throws {
+        
     }
     
     private func createDefaultEventDataFactoryForTest(config: BitmovinAnalyticsConfig? = nil, userIdProvider: UserIdProvider? = nil) -> EventDataFactory {

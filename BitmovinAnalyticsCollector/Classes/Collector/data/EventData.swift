@@ -116,7 +116,6 @@ public class EventData: Codable {
         #endif
     }
     
-    // TODO: Write test
     public func jsonString() -> String {
         let encoder = JSONEncoder()
         if #available(iOS 11.0, tvOS 11.0, *) {
