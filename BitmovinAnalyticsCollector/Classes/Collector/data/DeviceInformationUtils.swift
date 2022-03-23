@@ -11,6 +11,9 @@ public class DeviceInformationUtils {
         return Locale.current.identifier
     }
 
+    /**
+     * Returns device specific user agent.
+     */
     static func userAgent() -> String {
         let model = UIDevice.current.model
         let product = Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "Unknown Product"
@@ -25,24 +28,28 @@ public class DeviceInformationUtils {
         let carrier = "Unknown Carrier OSX"
         #endif
 
-        let userAgent = String(format: "%@ / Apple; %@ %.f / iOS %@ / %@", product, model, height, version, carrier)
-
-        return userAgent
+        return buildUserAgent(product: product, model: model, height: height, version: version, carrier: carrier)
     }
     
     static func getDeviceInformation() -> DeviceInformationDto {
         return DeviceInformationDto(manufacturer: "Apple",
                                     model: UIDevice.current.model,
-                                    isTV: UIDevice.current.userInterfaceIdiom == .tv,
+                                    isTV: isTV(UIDevice.current.userInterfaceIdiom),
                                     operatingSystem: UIDevice.current.systemName,
                                     operatingSystemMajorVersion: String(ProcessInfo().operatingSystemVersion.majorVersion),
                                     operatingSystemMinorVersion: String(ProcessInfo().operatingSystemVersion.minorVersion),
-                                    deviceClass: getDeviceClass()
+                                    deviceClass: getDeviceClass(UIDevice.current.userInterfaceIdiom)
         )
     }
     
-    static func getDeviceClass() -> DeviceClass {
-        switch UIDevice.current.userInterfaceIdiom {
+    // #region Internal Helper Function
+
+    static func buildUserAgent(product: String, model: String, height: CGFloat, version: String, carrier: String) -> String {
+        return String(format: "%@ / Apple; %@ %.f / iOS %@ / %@", product, model, height, version, carrier)
+    }
+
+    static func getDeviceClass(_ userInterfaceIdiom: UIUserInterfaceIdiom) -> DeviceClass {
+        switch userInterfaceIdiom {
         case .tv:
             return DeviceClass.TV
         case .phone:
@@ -55,4 +62,10 @@ public class DeviceInformationUtils {
             return DeviceClass.Other
         }
     }
+
+    static func isTV(_ userInterfaceIdiom: UIUserInterfaceIdiom) -> Bool {
+        return userInterfaceIdiom == .tv
+    }
+
+    // #endregion
 }
