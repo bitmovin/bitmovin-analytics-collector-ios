@@ -4,9 +4,7 @@ Instruments adaptive streaming video players and collects information to be sent
 
 To get started collecting data with Bitmovin Analytics you need a License-Key which you can get for free by signing up for a [free Bitmovin account](https://bitmovin.com/dashboard/signup).
 
-## Support
-
-### Platforms
+## Supported Platforms
 
 **BitmovinPlayer v2, AVPlayer**
 
@@ -20,7 +18,7 @@ The DRM examples require iOS 11.2+.
 - iOS 12.0+
 - tvOS 12.0+
 
-### Video Players
+## Supported Video Players
 
 - [Bitmovin Player](https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod)
 - AVPlayer
@@ -145,3 +143,6 @@ BitmovinAnalyticsCollector is available under the MIT license. See the LICENSE f
 
 We are happy to accept contributions.
 Upon opening a Pull Request you will be asked to sign a Contributor License Agreement.
+
+## Support
+If you have any questions or issues with this Analytics Collector or its examples, or you require other technical support for our services, please login to your Bitmovin Dashboard at https://bitmovin.com/dashboard and create a new support case. Our team will get back to you as soon as possible 👍
