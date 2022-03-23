@@ -11,9 +11,7 @@ public class DeviceInformationUtils {
         return Locale.current.identifier
     }
 
-    /**
-     * Returns device specific user agent.
-     */
+    /// Returns device specific user agent.
     static func userAgent() -> String {
         let model = UIDevice.current.model
         let product = Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "Unknown Product"
