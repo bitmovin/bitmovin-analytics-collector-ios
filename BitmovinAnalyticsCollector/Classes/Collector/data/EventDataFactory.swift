@@ -16,7 +16,6 @@ class EventDataFactory {
         eventData.state = state
         eventData.drmLoadTime = drmLoadTime
         setBasicData(eventData)
-        setAnalyticsVersion(eventData)
         setConfigData(eventData, sourceMetaData)
         setVideoTime(eventData, videoTimeStart, videoTimeEnd)
         return eventData
@@ -27,15 +26,10 @@ class EventDataFactory {
 
         eventData.userId = userIdProvider.getUserId()
         eventData.domain = Util.mainBundleIdentifier()
+        eventData.analyticsVersion = Util.version()
         eventData.language = DeviceInformationUtils.language()
         eventData.userAgent = DeviceInformationUtils.userAgent()
         eventData.deviceInformation = DeviceInformationUtils.getDeviceInformation()
-    }
-    
-    private func setAnalyticsVersion(_ eventData: EventData) {
-        if let text = Bundle(for: type(of: self)).infoDictionary?["CFBundleShortVersionString"] as? String {
-            eventData.analyticsVersion = text
-        }
     }
     
     private func setConfigData(_ eventData: EventData, _ sourceMetadata: SourceMetadata?){
