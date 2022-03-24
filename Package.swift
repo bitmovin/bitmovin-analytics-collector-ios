@@ -14,9 +14,9 @@ let package = Package(
         .library(
             name: "BitmovinCollector",
             targets: ["BitmovinCollector"]),
-        // .library(
-        //     name: "BitmovinCollectorAVPlayer",
-        //     targets: ["BitmovinCollectorAVPlayer"]),
+         .library(
+             name: "BitmovinCollectorAVPlayer",
+             targets: ["BitmovinCollectorAVPlayer"]),
     ],
     dependencies: [
         .package(name: "BitmovinPlayer", url: "git@github.com:bitmovin/player-ios.git", from: "3.0.0"),
@@ -27,37 +27,37 @@ let package = Package(
         .target(
             name: "BitmovinCollectorCore",
             path: "BitmovinAnalyticsCollector/Classes/",
-            exclude: ["BitmovinPlayer/", "BitmovinPlayerV3/", "AVPlayer/"],
+            exclude: ["BitmovinPlayer/", "BitmovinPlayerV3/", "AVPlayer/", "AVPlayerV2/"],
             sources: ["Collector/"]),
-        // .target(
-        //     name: "BitmovinCollectorAVPlayer",
-        //     dependencies: ["BitmovinCollectorCore"],
-        //     path: "BitmovinAnalyticsCollector/Classes/",
-        //     exclude: ["BitmovinPlayer/", "BitmovinPlayerV3/", "Collector/"],
-        //     sources: ["AVPlayer/"]),
+         .target(
+             name: "BitmovinCollectorAVPlayer",
+             dependencies: ["BitmovinCollectorCore"],
+             path: "BitmovinAnalyticsCollector/Classes/",
+             exclude: ["BitmovinPlayer/", "BitmovinPlayerV3/", "Collector/", "AVPlayer/"],
+             sources: ["AVPlayerV2/"]),
         .target(
             name: "BitmovinCollector",
             dependencies: ["BitmovinPlayer", "BitmovinCollectorCore"],
             path: "BitmovinAnalyticsCollector/Classes/",
-            exclude: ["BitmovinPlayer/", "AVPlayer/", "Collector/"],
+            exclude: ["BitmovinPlayer/", "AVPlayer/", "Collector/", "AVPlayerV2/"],
             sources: ["BitmovinPlayerV3/"]),
        .testTarget(
            name: "BitmovinCollectorCoreTests",
            dependencies: ["BitmovinCollectorCore"],
            path: "BitmovinAnalyticsCollector/Tests/",
-           exclude: ["BitmovinPlayerTests/", "AVPlayerTests/", "BitmovinPlayerV3Tests/"],
+           exclude: ["BitmovinPlayerTests/", "AVPlayerTests/", "BitmovinPlayerV3Tests/", "AVPlayerV2Tests/"],
            sources:["CoreTests/"]),
        .testTarget(
            name: "BitmovinCollectorTests",
            dependencies: ["BitmovinCollector", "BitmovinPlayer"],
            path: "BitmovinAnalyticsCollector/Tests/",
-           exclude: ["BitmovinPlayerTests/", "AVPlayerTests/", "CoreTests/"],
+           exclude: ["BitmovinPlayerTests/", "AVPlayerTests/", "CoreTests/", "AVPlayerV2Tests/"],
            sources:["BitmovinPlayerV3Tests/"]),
-      //  .testTarget(
-      //      name: "BitmovinCollectorAVPlayerTests",
-      //      dependencies: ["BitmovinCollectorAVPlayer"],
-      //      path: "BitmovinAnalyticsCollector/Tests/",
-      //      exclude: ["BitmovinPlayerTests/", "BitmovinPlayerV3Tests/", "CoreTests/"],
-      //      sources:["AVPlayerTests/"]),
+        .testTarget(
+            name: "BitmovinCollectorAVPlayerTests",
+            dependencies: ["BitmovinCollectorAVPlayer"],
+            path: "BitmovinAnalyticsCollector/Tests/",
+            exclude: ["BitmovinPlayerTests/", "BitmovinPlayerV3Tests/", "CoreTests/", "AVPlayerTests/"],
+            sources:["AVPlayerV2Tests/"]),
     ]
 )
