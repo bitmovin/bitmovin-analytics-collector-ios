@@ -12,8 +12,8 @@ public class StateMachine {
     
     //tracked player times
     private(set) var enterTimestamp: Int64?
-    var potentialSeekStart: Int64 = 0
-    var potentialSeekVideoTimeStart: CMTime?
+    public var potentialSeekStart: Int64 = 0
+    public var potentialSeekVideoTimeStart: CMTime?
     var startupTime: Int64 = 0
     private(set) var videoTimeStart: CMTime?
     internal var videoTimeEnd: CMTime?
