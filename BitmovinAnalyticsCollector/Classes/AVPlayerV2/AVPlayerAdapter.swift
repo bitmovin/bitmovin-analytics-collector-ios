@@ -1,5 +1,9 @@
 import AVFoundation
 import Foundation
+import UIKit
+#if SWIFT_PACKAGE
+import BitmovinCollectorCore
+#endif
 
 class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     static let timeJumpedDuplicateTolerance = 1_000
