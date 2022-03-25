@@ -40,4 +40,12 @@ DESC
     end
   end
 
+  s.subspec 'AVPlayer' do |avplayer|
+    avplayer.source_files = 'BitmovinAnalyticsCollector/Classes/AVPlayerV2/**/*.{swift}'
+
+    avplayer.test_spec 'AVPlayerV2Tests' do |avplayer_test_spec|
+      avplayer_test_spec.source_files = 'BitmovinAnalyticsCollector/Tests/AVPlayerV2Tests/**/*'
+    end
+  end
+
 end

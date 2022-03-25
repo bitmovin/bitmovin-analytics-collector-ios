@@ -26,6 +26,8 @@
 		8F54717224A37D8D008B31C2 /* BitmovinDrmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F54717124A37D8D008B31C2 /* BitmovinDrmViewController.swift */; };
 		B61FE4B4AFB146F142E53C8D /* Pods_BitmovinAnalyticsCollector_Tests_BitmovinPlayerV3_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1D0CD2018C430DD9F190A1 /* Pods_BitmovinAnalyticsCollector_Tests_BitmovinPlayerV3_iOS.framework */; };
 		BB3F17D3EDC1096ADBA78F19 /* Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7494402F272A9FA5EA9F130E /* Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_tvOS.framework */; };
+		EC3D4EB327EDAD87003C2E63 /* AVFoundationDrmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3D4EB127EDAD87003C2E63 /* AVFoundationDrmViewController.swift */; };
+		EC3D4EB427EDAD87003C2E63 /* AVFoundationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3D4EB227EDAD87003C2E63 /* AVFoundationViewController.swift */; };
 		EC6FFDD22626C01E00E279B5 /* AdAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6FFDD12626C01E00E279B5 /* AdAssets.swift */; };
 		EC6FFDD72626C08A00E279B5 /* VideoAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6FFDD62626C08A00E279B5 /* VideoAssets.swift */; };
 		EC93565C2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC93565B2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift */; };
@@ -68,6 +70,8 @@
 		94E92FFDF2C4FD3FDF42D78C /* Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS.debug.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A13FCB967E22402182A70074 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		BB1D0CD2018C430DD9F190A1 /* Pods_BitmovinAnalyticsCollector_Tests_BitmovinPlayerV3_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_Tests_BitmovinPlayerV3_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC3D4EB127EDAD87003C2E63 /* AVFoundationDrmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVFoundationDrmViewController.swift; sourceTree = "<group>"; };
+		EC3D4EB227EDAD87003C2E63 /* AVFoundationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVFoundationViewController.swift; sourceTree = "<group>"; };
 		EC6FFDD12626C01E00E279B5 /* AdAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdAssets.swift; sourceTree = "<group>"; };
 		EC6FFDD62626C08A00E279B5 /* VideoAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAssets.swift; sourceTree = "<group>"; };
 		EC93565B2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugBitmovinPlayerListener.swift; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 		24DB7FBD261D7BB9009F7AE7 /* BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				EC3D4EB127EDAD87003C2E63 /* AVFoundationDrmViewController.swift */,
+				EC3D4EB227EDAD87003C2E63 /* AVFoundationViewController.swift */,
 				2A8847E726B05A15008D9F7B /* BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOSRelease.entitlements */,
 				24DB7FBE261D7BB9009F7AE7 /* AppDelegate.swift */,
 				24DB7FC4261D7BB9009F7AE7 /* Main.storyboard */,
@@ -486,8 +492,10 @@
 			files = (
 				24DB7FBF261D7BB9009F7AE7 /* AppDelegate.swift in Sources */,
 				8F1713AD24AB3FAD009ACECA /* Stream.swift in Sources */,
+				EC3D4EB427EDAD87003C2E63 /* AVFoundationViewController.swift in Sources */,
 				EC6FFDD72626C08A00E279B5 /* VideoAssets.swift in Sources */,
 				EC6FFDD22626C01E00E279B5 /* AdAssets.swift in Sources */,
+				EC3D4EB327EDAD87003C2E63 /* AVFoundationDrmViewController.swift in Sources */,
 				011096092028C74C00A70D38 /* PlayerView.swift in Sources */,
 				01C26BE42083ED7B001A0D76 /* WelcomeViewController.swift in Sources */,
 				8F1713AB24AB3FAD009ACECA /* Asset.swift in Sources */,

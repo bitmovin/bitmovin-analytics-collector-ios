@@ -51,7 +51,7 @@ public class Util {
         return codecs
     }
 
-    static func streamType(from url: String) -> StreamType? {
+    static public func streamType(from url: String) -> StreamType? {
         var path = url.lowercased()
         if let components = URLComponents(string: url){
             path = components.path.lowercased()

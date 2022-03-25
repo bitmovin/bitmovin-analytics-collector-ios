@@ -60,6 +60,20 @@
           "source_files": "BitmovinAnalyticsCollector/Tests/BitmovinPlayerV3Tests/**/*"
         }
       ]
+    },
+    {
+      "name": "AVPlayer",
+      "source_files": "BitmovinAnalyticsCollector/Classes/AVPlayerV2/**/*.{swift}",
+      "dependencies": {
+        "BitmovinAnalyticsCollector/Core": []
+      },
+      "testspecs": [
+        {
+          "name": "AVPlayerTests",
+          "test_type": "unit",
+          "source_files": "BitmovinAnalyticsCollector/Tests/AVPlayerV2Tests/**/*"
+        }
+      ]
     }
   ]
 }

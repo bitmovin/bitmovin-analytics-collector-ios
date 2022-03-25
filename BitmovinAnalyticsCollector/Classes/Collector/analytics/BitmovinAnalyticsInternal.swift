@@ -10,8 +10,8 @@ open class BitmovinAnalyticsInternal: NSObject {
     public static let ErrorMessageKey = "errorMessage"
     public static let ErrorCodeKey = "errorCode"
     public static let ErrorDataKey = "errorData"
-
-    static let msInSec = 1_000.0
+    public static let msInSec = 1_000.0
+    
     public private(set) var config: BitmovinAnalyticsConfig
     public private(set) var stateMachine: StateMachine
     public private(set) var adAnalytics: BitmovinAdAnalytics?
