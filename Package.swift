@@ -27,7 +27,7 @@ let package = Package(
         .target(
             name: "BitmovinCollectorCore",
             path: "BitmovinAnalyticsCollector/Classes/",
-            exclude: ["BitmovinPlayer/", "BitmovinPlayerV3/", "AVPlayer/", "AVPlayerV2/"],
+            exclude: ["BitmovinPlayer/", "BitmovinPlayerV3/", "AVPlayer/", "AVPlayerV2/", "Collector/Info.plist"],
             sources: ["Collector/"]),
          .target(
              name: "BitmovinCollectorAVPlayer",
