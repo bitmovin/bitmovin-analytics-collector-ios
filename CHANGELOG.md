@@ -13,12 +13,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added 
 
+- new AVPlayer adapter with deployment_target `iOS:12` and `tvOS:12`
 - SwiftPM support
 
 ## Development V1
 
 ### Changed
 
+- deprecated AVPlayerCollector
 - strict protocol `Collector` as public API for player collectors
 
 ## 2.7.0
