@@ -4,6 +4,7 @@ import Foundation
 import BitmovinCollectorCore
 #endif
 
+@available(*, deprecated, message: "Please use new AVPlayerCollector and upgrade to v2.8.0")
 public class AVPlayerCollector: Collector {
     public typealias TPlayer = AVPlayer
 
