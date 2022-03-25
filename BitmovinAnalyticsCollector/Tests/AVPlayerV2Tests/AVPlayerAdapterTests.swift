@@ -6,6 +6,7 @@ import AVKit
 #endif
 
 #if SWIFT_PACKAGE
+@testable import BitmovinCollectorAVPlayer
 @testable import BitmovinCollectorCore
 #endif
 
