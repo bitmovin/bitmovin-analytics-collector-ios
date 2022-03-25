@@ -6,4 +6,6 @@ class VideoAssets {
     //Casting receiver-v3 compatible sources
     public static let sintelCasting: String = "https://bitmovin-a.akamaihd.net/content/sintel/Sintel.mp4"
     public static let redbullCasting: String =  "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/MI201109210084_mpeg-4_hd_high_1080p25_10mbits.mp4"
+    
+    public static let corruptRedBull: String = "http://bitdash-a.akamaihd.net/content/analytics-teststreams/redbull-parkour/corrupted_first_segment.mpd"
 }
