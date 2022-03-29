@@ -41,8 +41,9 @@ open class BitmovinAnalyticsInternal: NSObject {
     }
     
     deinit {
+        // TODO move this logic into statemachine
         if(self.stateMachine.state == .playing){
-            let enterTimestamp = stateMachine.enterTimestamp ?? 0
+            let enterTimestamp = stateMachine.stateEnterTimestamp
             let duration = Date().timeIntervalSince1970Millis - enterTimestamp
             if (duration < 90000) {
                 self.stateMachine.videoTimeEnd = self.adapter?.currentTime
