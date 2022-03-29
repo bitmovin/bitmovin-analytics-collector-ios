@@ -41,7 +41,6 @@ open class BitmovinAnalyticsInternal: NSObject {
     }
     
     deinit {
-        // TODO move this logic into statemachine
         if(self.stateMachine.state == .playing){
             let enterTimestamp = stateMachine.stateEnterTimestamp
             let duration = Date().timeIntervalSince1970Millis - enterTimestamp
