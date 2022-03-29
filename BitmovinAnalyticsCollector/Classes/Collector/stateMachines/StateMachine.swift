@@ -214,6 +214,8 @@ public class StateMachine {
             return false
         } else if state == .playAttemptFailed {
             return false
+        } else if state == .paused && (destinationState == .qualitychange || destinationState == .seeking || destinationState == .buffering) {
+            return false
         }
         
         return true
