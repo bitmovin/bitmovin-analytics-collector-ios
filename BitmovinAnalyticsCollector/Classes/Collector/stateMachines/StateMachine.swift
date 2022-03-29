@@ -11,7 +11,7 @@ public class StateMachine {
     weak var delegate: StateMachineDelegate?
     
     //tracked player times
-    private(set) var enterTimestamp: Int64?
+    private(set) var stateEnterTimestamp: Int64 = 0
     public var potentialSeekStart: Int64 = 0
     public var potentialSeekVideoTimeStart: CMTime?
     var startupTime: Int64 = 0
@@ -80,14 +80,17 @@ public class StateMachine {
 
         if performTransition {
             print("[StateMachine] Transitioning from state \(state) to \(destinationState)")
-            let timestamp = Date().timeIntervalSince1970Millis
-            let previousState = state
+            let currentTimestamp = Date().timeIntervalSince1970Millis
             videoTimeEnd = time
-            state.onExit(stateMachine: self, timestamp: timestamp, destinationState: destinationState)
+            
+            // Get the time spend in the current state
+            let duration = currentTimestamp - stateEnterTimestamp
+            state.onExit(stateMachine: self, duration: duration, destinationState: destinationState)
+            
             state = destinationState
-            enterTimestamp = timestamp
+            stateEnterTimestamp = currentTimestamp
             videoTimeStart = videoTimeEnd
-            state.onEntry(stateMachine: self, timestamp: timestamp, previousState: previousState)
+            state.onEntry(stateMachine: self)
         }
     }
     
@@ -211,13 +214,15 @@ public class StateMachine {
             return false
         } else if state == .playAttemptFailed {
             return false
+        } else if state == .paused && (destinationState == .qualitychange || destinationState == .seeking || destinationState == .buffering) {
+            return false
         }
         
         return true
     }
 
     public func confirmSeek() {
-        enterTimestamp = potentialSeekStart
+        stateEnterTimestamp = potentialSeekStart
         videoTimeStart = potentialSeekVideoTimeStart
         potentialSeekStart = 0
         potentialSeekVideoTimeStart = CMTime.zero
@@ -260,14 +265,11 @@ public class StateMachine {
     }
 
     @objc func onHeartbeat() {
-        guard let enterTime = enterTimestamp else {
-            return
-        }
         videoTimeEnd = delegate?.currentTime
         let timestamp = Date().timeIntervalSince1970Millis
-        delegate?.stateMachine(self, didHeartbeatWithDuration: timestamp - enterTime)
+        delegate?.stateMachine(self, didHeartbeatWithDuration: timestamp - stateEnterTimestamp)
         videoTimeStart = videoTimeEnd
-        enterTimestamp = timestamp
+        stateEnterTimestamp = timestamp
     }
     
     public func getErrorData() -> ErrorData? {

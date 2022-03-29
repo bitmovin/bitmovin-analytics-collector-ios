@@ -17,7 +17,7 @@ public enum PlayerState: String {
     case sourceChanged
     case customdatachange
 
-    func onEntry(stateMachine: StateMachine, timestamp _: Int64, previousState : PlayerState) {
+    func onEntry(stateMachine: StateMachine) {
         switch self {
             case .ad:
                 return
@@ -58,10 +58,7 @@ public enum PlayerState: String {
             }
     }
 
-    func onExit(stateMachine: StateMachine, timestamp: Int64, destinationState: PlayerState) {
-        // Get the duration we were in the state we are exiting
-        let enterTimestamp = stateMachine.enterTimestamp ?? 0
-        let duration = timestamp - enterTimestamp
+    func onExit(stateMachine: StateMachine, duration: Int64, destinationState: PlayerState) {
         if (destinationState == .playAttemptFailed) {
             stateMachine.disableRebufferHeartbeat()
             stateMachine.delegate?.stateMachineEnterPlayAttemptFailed(stateMachine: stateMachine)
