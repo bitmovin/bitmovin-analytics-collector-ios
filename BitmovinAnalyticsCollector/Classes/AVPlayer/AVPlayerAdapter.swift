@@ -12,7 +12,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     var statusObserver: NSKeyValueObservation?
     
     private var isMonitoring = false
-    private var isPlaying = false
     private var currentVideoBitrate: Double = 0
     private var previousTime: CMTime?
     private var isPlayerReady = false
@@ -66,7 +65,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return
         }
         isMonitoring = false
-        isPlaying = false
         
         if let playerItem = player.currentItem {
             stopMonitoringPlayerItem(playerItem: playerItem)
@@ -154,7 +152,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
 
     @objc private func didPlayToEndTime(notification: Notification) {
-        isPlaying = false
         stateMachine.pause(time: player.currentTime())
     }
 
@@ -229,7 +226,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         let newRate = change?[NSKeyValueChangeKey.newKey] as? NSNumber ?? 0;
 
         if(newRate.floatValue == 0 && oldRate.floatValue != 0) {
-            isPlaying = false
             stateMachine.pause(time: player.currentTime())
         } else if (newRate.floatValue != 0 && oldRate.floatValue == 0 && self.player.currentItem != nil) {
             startup()
@@ -237,7 +233,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
     
     private func onPlayerDidChangeTime(currentTime: CMTime) {
-        if currentTime == previousTime || !isPlaying {
+        if currentTime == previousTime {
             return
         }
         previousTime = currentTime
@@ -245,14 +241,13 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
 
     private func emitPlayingEvent() {
-        if !isPlaying || player.currentItem?.isPlaybackLikelyToKeepUp == false {
+        if player.currentItem?.isPlaybackLikelyToKeepUp == false {
             return;
         }
         stateMachine.playing(time: player.currentTime())
     }
     
     private func startup() {
-        isPlaying = true
         stateMachine.play(time: player.currentTime())
     }
 
