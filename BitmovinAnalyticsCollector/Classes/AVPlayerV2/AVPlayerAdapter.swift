@@ -102,10 +102,10 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             self?.playerItemStatusObserver(playerItem: item)
         }
         NotificationCenter.default.addObserver(self, selector: #selector(observeNewAccessLogEntry(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: AVPlayerItem.timeJumpedNotification, object: playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(failedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(didPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(observeTimeJumped(notification:)), name: AVPlayerItem.timeJumpedNotification, object: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(observePlaybackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(observeFailedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(observeDidPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         updateDrmPerformanceInfo(playerItem)
     }
 
@@ -146,16 +146,16 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
     }
 
-    @objc private func failedToPlayToEndTime(notification: Notification) {
+    @objc private func observeFailedToPlayToEndTime(notification: Notification) {
         let error = notification.userInfo?[AVPlayerItemFailedToPlayToEndTimeErrorKey] as? NSError
         errorOccured(error: error)
     }
 
-    @objc private func didPlayToEndTime(notification: Notification) {
+    @objc private func observeDidPlayToEndTime(notification: Notification) {
         stateMachine.pause(time: player.currentTime())
     }
 
-    @objc private func playbackStalled(notification _: Notification) {
+    @objc private func observePlaybackStalled(notification _: Notification) {
         stateMachine.transitionState(destinationState: .buffering, time: player.currentTime())
     }
 
@@ -226,7 +226,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
     
     // if seek into unbuffered area (no data) we get this event and know that it's a seek
-    @objc private func timeJumped(notification _: Notification) {
+    @objc private func observeTimeJumped(notification _: Notification) {
         stateMachine.transitionState(destinationState: .seeking, time: previousTime)
     }
     
