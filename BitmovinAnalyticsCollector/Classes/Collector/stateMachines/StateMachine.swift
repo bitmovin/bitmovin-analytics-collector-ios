@@ -12,8 +12,6 @@ public class StateMachine {
     
     //tracked player times
     private(set) var stateEnterTimestamp: Int64 = 0
-    public var potentialSeekStart: Int64 = 0
-    public var potentialSeekVideoTimeStart: CMTime?
     var startupTime: Int64 = 0
     private(set) var videoTimeStart: CMTime?
     internal var videoTimeEnd: CMTime?
@@ -227,13 +225,6 @@ public class StateMachine {
         }
         
         return true
-    }
-
-    public func confirmSeek() {
-        stateEnterTimestamp = potentialSeekStart
-        videoTimeStart = potentialSeekVideoTimeStart
-        potentialSeekStart = 0
-        potentialSeekVideoTimeStart = CMTime.zero
     }
 
     func enableHeartbeat() {
