@@ -221,7 +221,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     
     // if seek into unbuffered area (no data) we get this event and know that it's a seek
     @objc private func timeJumped(notification _: Notification) {
-        print("timejumped: \(CMTimeGetSeconds(player.currentTime()))")
         stateMachine.transitionState(destinationState: .seeking, time: previousTime)
     }
     
@@ -246,7 +245,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return
         }
         
-        print("possible seek")
         // here we know that a seek was triggered one time changed event before
         // that's why we use the prevPlayerTime and we also override the enterTimestamp
         stateMachine.seek(time: prevPlayerTime, overrideEnterTimestamp: previousTimestamp)

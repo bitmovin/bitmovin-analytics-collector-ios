@@ -271,8 +271,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return
         }
         
-        print("Playing player.currentTime: \(CMTimeGetSeconds(player.currentTime() - currentTime)) currentTime from onTimeChanged: \(CMTimeGetSeconds(currentTime))")
-        
         stateMachine.playing(time: currentTime)
     }
     
