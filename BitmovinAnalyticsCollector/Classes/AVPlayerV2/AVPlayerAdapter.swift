@@ -65,10 +65,13 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             self?.onTimeChanged(playerTime: time)
         }
         
-        playerKVOList.append(player.observe(\.status) {[weak self] (item, _) in
-            self?.playerStatusChangedHandler(item)
+        playerKVOList.append(player.observe(\.status) {[weak self] (player, _) in
+            self?.playerStatusChangedHandler(player)
         })
-        player.addObserver(self, forKeyPath: #keyPath(AVPlayer.rate), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
+        
+        playerKVOList.append(player.observe(\.rate, options: [.new, .old]) {[weak self] (player, change) in
+            self?.playerRateChangedHandler(old: change.oldValue, new: change.newValue)
+        })
         player.addObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
     }
 
@@ -81,7 +84,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         if let playerItem = player.currentItem {
             stopMonitoringPlayerItem(playerItem: playerItem)
         }
-        player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.rate), context: &AVPlayerAdapter.playerKVOContext)
         player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem), context: &AVPlayerAdapter.playerKVOContext)
         
         if let timeObserver = periodicTimeObserver {
@@ -146,6 +148,18 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             
             default:
                 break
+        }
+    }
+    
+    private func playerRateChangedHandler(old: Float?, new: Float?) {
+        guard let oldRate = old, let newRate = new else {
+            return
+        }
+        
+        if(newRate == 0 && oldRate != 0) {
+            stateMachine.pause(time: player.currentTime())
+        } else if (newRate != 0 && oldRate == 0 && self.player.currentItem != nil) {
+            stateMachine.play(time: player.currentTime())
         }
     }
 
@@ -213,9 +227,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return
         }
 
-        if keyPath == #keyPath(AVPlayer.rate) {
-            onRateChanged(change)
-        } else if keyPath == #keyPath(AVPlayer.currentItem) {
+        if keyPath == #keyPath(AVPlayer.currentItem) {
             if let oldItem = change?[NSKeyValueChangeKey.oldKey] as? AVPlayerItem {
                 NSLog("Current Item Changed: %@", oldItem.debugDescription)
                 stopMonitoringPlayerItem(playerItem: oldItem)
@@ -227,17 +239,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
                     stateMachine.play(time: player.currentTime())
                 }
             }
-        }
-    }
-    
-    private func onRateChanged(_ change: [NSKeyValueChangeKey: Any]?) {
-        let oldRate = change?[NSKeyValueChangeKey.oldKey] as? NSNumber ?? 0;
-        let newRate = change?[NSKeyValueChangeKey.newKey] as? NSNumber ?? 0;
-
-        if(newRate.floatValue == 0 && oldRate.floatValue != 0) {
-            stateMachine.pause(time: player.currentTime())
-        } else if (newRate.floatValue != 0 && oldRate.floatValue == 0 && self.player.currentItem != nil) {
-            stateMachine.play(time: player.currentTime())
         }
     }
     
