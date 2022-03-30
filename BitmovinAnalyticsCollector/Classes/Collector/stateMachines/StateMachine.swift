@@ -76,19 +76,23 @@ public class StateMachine {
     }
 
     public func transitionState(destinationState: PlayerState, time: CMTime?) {
+        transitionState(destinationState: destinationState, playerTime: time, enterTimestamp: Date().timeIntervalSince1970Millis)
+    }
+    
+    private func transitionState(destinationState: PlayerState, playerTime: CMTime?, enterTimestamp overrideEnterTimestamp: Int64?) {
         let performTransition = checkUnallowedTransitions(destinationState: destinationState)
 
         if performTransition {
             print("[StateMachine] Transitioning from state \(state) to \(destinationState)")
-            let currentTimestamp = Date().timeIntervalSince1970Millis
-            videoTimeEnd = time
+            let usedEnterTimestamp = overrideEnterTimestamp ?? Date().timeIntervalSince1970Millis
+            videoTimeEnd = playerTime
             
             // Get the time spend in the current state
-            let duration = currentTimestamp - stateEnterTimestamp
+            let duration = usedEnterTimestamp - stateEnterTimestamp
             state.onExit(stateMachine: self, duration: duration, destinationState: destinationState)
             
             state = destinationState
-            stateEnterTimestamp = currentTimestamp
+            stateEnterTimestamp = usedEnterTimestamp
             videoTimeStart = videoTimeEnd
             state.onEntry(stateMachine: self)
         }
@@ -110,6 +114,10 @@ public class StateMachine {
     
     public func playing(time: CMTime?) {
         transitionState(destinationState: .playing, time: time)
+    }
+    
+    public func seek(time: CMTime?, overrideEnterTimestamp: Int64? = nil) {
+        transitionState(destinationState: .seeking, playerTime: time, enterTimestamp: overrideEnterTimestamp)
     }
     
     public func videoQualityChange(time: CMTime?) {
