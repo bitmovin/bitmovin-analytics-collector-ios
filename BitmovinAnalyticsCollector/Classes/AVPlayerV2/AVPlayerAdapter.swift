@@ -14,6 +14,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     @objc private var player: AVPlayer
     var statusObserver: NSKeyValueObservation?
     
+    var playerKVOList: Array<NSKeyValueObservation> = Array()
+    
     private var isMonitoring = false
     private var isPlayerReady = false
     internal var currentSourceMetadata: SourceMetadata?
@@ -63,9 +65,11 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             self?.onTimeChanged(playerTime: time)
         }
         
+        playerKVOList.append(player.observe(\.status) {[weak self] (item, _) in
+            self?.playerStatusChangedHandler(item)
+        })
         player.addObserver(self, forKeyPath: #keyPath(AVPlayer.rate), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
         player.addObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
-        player.addObserver(self, forKeyPath: #keyPath(AVPlayer.status), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
     }
 
     override public func stopMonitoring() {
@@ -84,6 +88,11 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             player.removeTimeObserver(timeObserver)
             self.periodicTimeObserver = nil
         }
+        
+        for kvo in playerKVOList {
+            kvo.invalidate()
+        }
+        playerKVOList.removeAll()
         
         resetSourceState()
     }
@@ -125,6 +134,16 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             case .failed:
                 errorOccured(error: playerItem.error as NSError?)
 
+            default:
+                break
+        }
+    }
+    
+    private func playerStatusChangedHandler(_ player: AVPlayer) {
+        switch player.status {
+            case .failed:
+                errorOccured(error: player.currentItem?.error as NSError?)
+            
             default:
                 break
         }
@@ -208,8 +227,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
                     stateMachine.play(time: player.currentTime())
                 }
             }
-        } else if keyPath == #keyPath(AVPlayer.status) && player.status == .failed {
-            errorOccured(error: self.player.currentItem?.error as NSError?)
         }
     }
     
