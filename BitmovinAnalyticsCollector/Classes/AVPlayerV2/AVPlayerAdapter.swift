@@ -206,7 +206,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
                 NSLog("Current Item Changed: %@", currentItem.debugDescription)
                 startMonitoringPlayerItem(playerItem: currentItem)
                 if player.rate > 0 {
-                    startup()
+                    stateMachine.play(time: player.currentTime())
                 }
             }
         } else if keyPath == #keyPath(AVPlayer.status) && player.status == .failed {
@@ -221,7 +221,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         if(newRate.floatValue == 0 && oldRate.floatValue != 0) {
             stateMachine.pause(time: player.currentTime())
         } else if (newRate.floatValue != 0 && oldRate.floatValue == 0 && self.player.currentItem != nil) {
-            startup()
+            stateMachine.play(time: player.currentTime())
         }
     }
     
@@ -272,10 +272,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
         
         stateMachine.playing(time: currentTime)
-    }
-    
-    private func startup() {
-        stateMachine.play(time: player.currentTime())
     }
 
     func decorateEventData(eventData: EventData) {
