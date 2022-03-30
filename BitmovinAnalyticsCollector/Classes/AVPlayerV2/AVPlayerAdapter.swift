@@ -98,7 +98,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
     private func startMonitoringPlayerItem(playerItem: AVPlayerItem) {
         statusObserver = playerItem.observe(\.status) {[weak self] (item, _) in
-            self?.playerItemStatusObserver(playerItem: item)
+            self?.playerItemStatusChangedHandler(item)
         }
         NotificationCenter.default.addObserver(self, selector: #selector(observeNewAccessLogEntry(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(observeTimeJumped(notification:)), name: AVPlayerItem.timeJumpedNotification, object: playerItem)
@@ -117,7 +117,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         statusObserver?.invalidate()
     }
 
-    private func playerItemStatusObserver(playerItem: AVPlayerItem) {
+    private func playerItemStatusChangedHandler(_ playerItem: AVPlayerItem) {
         switch playerItem.status {
             case .readyToPlay:
                 isPlayerReady = true
