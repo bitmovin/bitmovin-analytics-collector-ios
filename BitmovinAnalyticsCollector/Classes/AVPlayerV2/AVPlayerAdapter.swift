@@ -17,9 +17,12 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     
     private var isMonitoring = false
     private var currentVideoBitrate: Double = 0
-    private var previousTime: CMTime?
     private var isPlayerReady = false
     internal var currentSourceMetadata: SourceMetadata?
+    
+    // used for seek tracking
+    private var previousTime: CMTime?
+    private var previousTimestamp: Int64 = 0
     
     internal var drmDownloadTime: Int64?
     private var drmType: String?
@@ -231,6 +234,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         checkSeek(playerTime)
         checkPlaying(playerTime)
         previousTime = playerTime
+        previousTimestamp = Date().timeIntervalSince1970Millis
     }
     
     // if seek into buffered area no timeJumped event occur and we register seek event here
@@ -248,8 +252,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
         
         // here we know that a seek was triggered one time changed event before
-        // that's why we use the prevPlayerTime
-        stateMachine.transitionState(destinationState: .seeking, time: prevPlayerTime)
+        // that's why we use the prevPlayerTime and we also override the enterTimestamp
+        stateMachine.seek(time: prevPlayerTime, overrideEnterTimestamp: previousTimestamp)
     }
     
     private func checkPlaying(_ currentTime: CMTime) {
