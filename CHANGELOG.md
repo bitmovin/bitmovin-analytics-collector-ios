@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - strict protocol `Collector` as public API for player collectors
 - during `paused` state we do not track `qualityChange`, `seeking` and `buffering`
+- reworked tracking of seeking
 
 ### Added 
 
