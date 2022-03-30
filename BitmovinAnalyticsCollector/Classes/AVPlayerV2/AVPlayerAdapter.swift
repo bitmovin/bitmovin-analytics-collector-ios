@@ -12,22 +12,22 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private static var playerKVOContext = 0
     private let config: BitmovinAnalyticsConfig
     @objc private var player: AVPlayer
-    let lockQueue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
     var statusObserver: NSKeyValueObservation?
     
     private var isMonitoring = false
-    private var currentVideoBitrate: Double = 0
     private var isPlayerReady = false
     internal var currentSourceMetadata: SourceMetadata?
     
-    // used for seek tracking
+    // used for time tracking
+    private var periodicTimeObserver: Any?
     private var previousTime: CMTime?
     private var previousTimestamp: Int64 = 0
     
+    // event data tracking
     internal var drmDownloadTime: Int64?
     private var drmType: String?
+    private var currentVideoBitrate: Double = 0
     
-    private var timeObserver: Any?
     private let errorHandler: ErrorHandler
     
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
@@ -59,7 +59,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
         isMonitoring = true
         
-        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(AVPlayerAdapter.periodicTimeObserverIntervalSeconds, preferredTimescale: Int32(NSEC_PER_SEC)), queue: .main) { [weak self] time in
+        periodicTimeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(AVPlayerAdapter.periodicTimeObserverIntervalSeconds, preferredTimescale: Int32(NSEC_PER_SEC)), queue: .main) { [weak self] time in
             self?.onTimeChanged(playerTime: time)
         }
         
@@ -79,11 +79,10 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
         player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.rate), context: &AVPlayerAdapter.playerKVOContext)
         player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem), context: &AVPlayerAdapter.playerKVOContext)
-        player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.status), context: &AVPlayerAdapter.playerKVOContext)
         
-        if let timeObserver = timeObserver {
+        if let timeObserver = periodicTimeObserver {
             player.removeTimeObserver(timeObserver)
-            self.timeObserver = nil
+            self.periodicTimeObserver = nil
         }
         
         resetSourceState()
