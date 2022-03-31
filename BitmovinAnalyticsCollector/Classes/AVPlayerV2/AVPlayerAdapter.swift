@@ -55,7 +55,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         drmDownloadTime = nil
     }
     
-    // Player Monitoring
+    // Monitoring
     public func startMonitoring() {
         if isMonitoring  {
             stopMonitoring()
@@ -123,7 +123,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         playerItemStatusObserver?.invalidate()
     }
 
-    // playerItem KVOs
+    // AVPlayerItem KVOs
     private func onPlayerItemStatusChanged(_ playerItem: AVPlayerItem) {
         switch playerItem.status {
             case .failed:
