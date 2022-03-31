@@ -6,8 +6,8 @@ import BitmovinCollectorCore
 #endif
 
 class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
-    static let timeJumpedDuplicateTolerance = 1_000
-    static let maxSeekOperation = 10_000
+    static let periodicTimeObserverIntervalSeconds = 0.2
+    static let minSeekDeltaSeconds = periodicTimeObserverIntervalSeconds + 0.3
     
     private static var playerKVOContext = 0
     private let config: BitmovinAnalyticsConfig
@@ -16,11 +16,13 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     var statusObserver: NSKeyValueObservation?
     
     private var isMonitoring = false
-    private var isPlaying = false
     private var currentVideoBitrate: Double = 0
-    private var previousTime: CMTime?
     private var isPlayerReady = false
     internal var currentSourceMetadata: SourceMetadata?
+    
+    // used for seek tracking
+    private var previousTime: CMTime?
+    private var previousTimestamp: Int64 = 0
     
     internal var drmDownloadTime: Int64?
     private var drmType: String?
@@ -57,9 +59,10 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
         isMonitoring = true
         
-        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(0.2, preferredTimescale: Int32(NSEC_PER_SEC)), queue: .main) { [weak self] time in
-            self?.onPlayerDidChangeTime(currentTime: time)
+        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(AVPlayerAdapter.periodicTimeObserverIntervalSeconds, preferredTimescale: Int32(NSEC_PER_SEC)), queue: .main) { [weak self] time in
+            self?.onTimeChanged(playerTime: time)
         }
+        
         player.addObserver(self, forKeyPath: #keyPath(AVPlayer.rate), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
         player.addObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
         player.addObserver(self, forKeyPath: #keyPath(AVPlayer.status), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
@@ -70,7 +73,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return
         }
         isMonitoring = false
-        isPlaying = false
         
         if let playerItem = player.currentItem {
             stopMonitoringPlayerItem(playerItem: playerItem)
@@ -100,7 +102,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             self?.playerItemStatusObserver(playerItem: item)
         }
         NotificationCenter.default.addObserver(self, selector: #selector(observeNewAccessLogEntry(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: NSNotification.Name.AVPlayerItemTimeJumped, object: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: AVPlayerItem.timeJumpedNotification, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(failedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(didPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
@@ -109,7 +111,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
 
     private func stopMonitoringPlayerItem(playerItem: AVPlayerItem) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemTimeJumped, object: playerItem)
+        NotificationCenter.default.removeObserver(self, name: AVPlayerItem.timeJumpedNotification, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
@@ -117,17 +119,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
 
     private func playerItemStatusObserver(playerItem: AVPlayerItem) {
-        let timestamp = Date().timeIntervalSince1970Millis
-        
         switch playerItem.status {
             case .readyToPlay:
                 isPlayerReady = true
-                lockQueue.sync {
-                    if stateMachine.didStartPlayingVideo && stateMachine.potentialSeekStart > 0 && (timestamp - stateMachine.potentialSeekStart) <= AVPlayerAdapter.maxSeekOperation {
-                        stateMachine.confirmSeek()
-                        stateMachine.transitionState(destinationState: .seeking, time: player.currentTime())
-                    }
-                }
             
             case .failed:
                 errorOccured(error: playerItem.error as NSError?)
@@ -158,7 +152,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
 
     @objc private func didPlayToEndTime(notification: Notification) {
-        isPlaying = false
         stateMachine.pause(time: player.currentTime())
     }
 
@@ -166,13 +159,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         stateMachine.transitionState(destinationState: .buffering, time: player.currentTime())
     }
 
-    @objc private func timeJumped(notification _: Notification) {
-        let timestamp = Date().timeIntervalSince1970Millis
-        if (timestamp - stateMachine.potentialSeekStart) > AVPlayerAdapter.timeJumpedDuplicateTolerance {
-            stateMachine.potentialSeekStart = timestamp
-            stateMachine.potentialSeekVideoTimeStart = player.currentTime()
-        }
-    }
 
     @objc private func observeNewAccessLogEntry(notification: Notification) {
         guard let item = notification.object as? AVPlayerItem, let event = item.accessLog()?.events.last else {
@@ -220,7 +206,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
                 NSLog("Current Item Changed: %@", currentItem.debugDescription)
                 startMonitoringPlayerItem(playerItem: currentItem)
                 if player.rate > 0 {
-                    startup()
+                    stateMachine.play(time: player.currentTime())
                 }
             }
         } else if keyPath == #keyPath(AVPlayer.status) && player.status == .failed {
@@ -233,31 +219,59 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         let newRate = change?[NSKeyValueChangeKey.newKey] as? NSNumber ?? 0;
 
         if(newRate.floatValue == 0 && oldRate.floatValue != 0) {
-            isPlaying = false
             stateMachine.pause(time: player.currentTime())
         } else if (newRate.floatValue != 0 && oldRate.floatValue == 0 && self.player.currentItem != nil) {
-            startup()
+            stateMachine.play(time: player.currentTime())
         }
     }
     
-    private func onPlayerDidChangeTime(currentTime: CMTime) {
-        if currentTime == previousTime || !isPlaying {
+    // if seek into unbuffered area (no data) we get this event and know that it's a seek
+    @objc private func timeJumped(notification _: Notification) {
+        stateMachine.transitionState(destinationState: .seeking, time: previousTime)
+    }
+    
+    private func onTimeChanged(playerTime: CMTime){
+        checkSeek(playerTime)
+        checkPlaying(playerTime)
+        previousTime = playerTime
+        previousTimestamp = Date().timeIntervalSince1970Millis
+    }
+    
+    // if seek into buffered area no timeJumped event occur and we register seek event here
+    private func checkSeek(_ playerTime: CMTime) {
+        // if no previous time is tracked - ignore
+        guard let prevPlayerTime = previousTime else {
             return
         }
-        previousTime = currentTime
-        emitPlayingEvent()
-    }
-
-    private func emitPlayingEvent() {
-        if !isPlaying || player.currentItem?.isPlaybackLikelyToKeepUp == false {
-            return;
+        
+        // if time dif between previous tracked playerTime and
+        // the current playerTime is bigger than the minimal seek time, it's a seek
+        let timeDelta = abs(CMTimeGetSeconds(playerTime - prevPlayerTime))
+        if timeDelta < AVPlayerAdapter.minSeekDeltaSeconds {
+            return
         }
-        stateMachine.playing(time: player.currentTime())
+        
+        // here we know that a seek was triggered one time changed event before
+        // that's why we use the prevPlayerTime and we also override the enterTimestamp
+        stateMachine.seek(time: prevPlayerTime, overrideEnterTimestamp: previousTimestamp)
     }
     
-    private func startup() {
-        isPlaying = true
-        stateMachine.play(time: player.currentTime())
+    private func checkPlaying(_ currentTime: CMTime) {
+        // time must have changed
+        if currentTime == previousTime {
+            return
+        }
+        
+        // buffer is full enough to actually continue the playback
+        if player.currentItem?.isPlaybackLikelyToKeepUp == false {
+            return;
+        }
+        
+        if player.rate == 0 {
+            return
+        }
+        
+        stateMachine.playing(time: currentTime)
     }
 
     func decorateEventData(eventData: EventData) {
