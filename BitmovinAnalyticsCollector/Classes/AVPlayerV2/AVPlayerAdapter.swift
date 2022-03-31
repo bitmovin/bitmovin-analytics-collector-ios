@@ -17,7 +17,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     var playerKVOList: Array<NSKeyValueObservation> = Array()
     
     private var isMonitoring = false
-    private var isPlayerReady = false
     internal var currentSourceMetadata: SourceMetadata?
     
     // used for time tracking
@@ -131,12 +130,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
 
     // playerItem KVOs
-    
     private func playerItemStatusChangedHandler(_ playerItem: AVPlayerItem) {
         switch playerItem.status {
-            case .readyToPlay:
-                isPlayerReady = true
-            
             case .failed:
                 errorOccured(error: playerItem.error as NSError?)
 
@@ -309,10 +304,10 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         // DRM Type
         eventData.drmType = self.drmType
         
-
         // isLive
         let duration = player.currentItem?.duration
-        if duration != nil && self.isPlayerReady {
+        let isPlayerReady = player.currentItem?.status == .readyToPlay
+        if duration != nil && isPlayerReady {
             eventData.isLive = CMTIME_IS_INDEFINITE(duration!)
         } else {
             eventData.isLive = config.isLive
