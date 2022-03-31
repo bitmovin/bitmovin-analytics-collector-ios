@@ -45,6 +45,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     func resetSourceState() {
         currentVideoBitrate = 0
         previousTime = nil
+        previousTimestamp = 0
         drmType = nil
         drmDownloadTime = nil
     }
