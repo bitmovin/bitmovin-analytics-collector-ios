@@ -9,25 +9,27 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     static let periodicTimeObserverIntervalSeconds = 0.2
     static let minSeekDeltaSeconds = periodicTimeObserverIntervalSeconds + 0.3
     
-    private static var playerKVOContext = 0
     private let config: BitmovinAnalyticsConfig
-    @objc private var player: AVPlayer
-    let lockQueue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
-    var statusObserver: NSKeyValueObservation?
+    @objc private let player: AVPlayer
     
     private var isMonitoring = false
-    private var currentVideoBitrate: Double = 0
-    private var isPlayerReady = false
     internal var currentSourceMetadata: SourceMetadata?
     
-    // used for seek tracking
+    // KVO references
+    var playerItemStatusObserver: NSKeyValueObservation?
+    var playerKVOList: Array<NSKeyValueObservation> = Array()
+    
+    // used for time tracking
+    private var periodicTimeObserver: Any?
     private var previousTime: CMTime?
     private var previousTimestamp: Int64 = 0
     
+    // event data tracking
     internal var drmDownloadTime: Int64?
     private var drmType: String?
+    private var currentVideoBitrate: Double = 0
     
-    private var timeObserver: Any?
+    // Helper classes
     private let errorHandler: ErrorHandler
     
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
@@ -49,23 +51,33 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     func resetSourceState() {
         currentVideoBitrate = 0
         previousTime = nil
+        previousTimestamp = 0
         drmType = nil
         drmDownloadTime = nil
     }
     
+    // Monitoring
     public func startMonitoring() {
         if isMonitoring  {
             stopMonitoring()
         }
         isMonitoring = true
         
-        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(AVPlayerAdapter.periodicTimeObserverIntervalSeconds, preferredTimescale: Int32(NSEC_PER_SEC)), queue: .main) { [weak self] time in
-            self?.onTimeChanged(playerTime: time)
+        periodicTimeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(AVPlayerAdapter.periodicTimeObserverIntervalSeconds, preferredTimescale: Int32(NSEC_PER_SEC)), queue: .main) { [weak self] playerTime in
+            self?.onPlayerTimeChanged(playerTime)
         }
         
-        player.addObserver(self, forKeyPath: #keyPath(AVPlayer.rate), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
-        player.addObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
-        player.addObserver(self, forKeyPath: #keyPath(AVPlayer.status), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
+        playerKVOList.append(player.observe(\.status) {[weak self] (player, _) in
+            self?.onPlayerStatusChanged(player)
+        })
+        
+        playerKVOList.append(player.observe(\.rate, options: [.new, .old]) {[weak self] (player, change) in
+            self?.onPlayerRateChanged(old: change.oldValue, new: change.newValue)
+        })
+        
+        playerKVOList.append(player.observe(\.currentItem, options: [.new, .old]) {[weak self] (player, change) in
+            self?.onPlayerCurrentItemChange(old: change.oldValue ?? nil, new: change.newValue ?? nil)
+        })
     }
 
     override public func stopMonitoring() {
@@ -77,35 +89,29 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         if let playerItem = player.currentItem {
             stopMonitoringPlayerItem(playerItem: playerItem)
         }
-        player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.rate), context: &AVPlayerAdapter.playerKVOContext)
-        player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem), context: &AVPlayerAdapter.playerKVOContext)
-        player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.status), context: &AVPlayerAdapter.playerKVOContext)
         
-        if let timeObserver = timeObserver {
+        if let timeObserver = periodicTimeObserver {
             player.removeTimeObserver(timeObserver)
-            self.timeObserver = nil
+            self.periodicTimeObserver = nil
         }
+        
+        for kvo in playerKVOList {
+            kvo.invalidate()
+        }
+        playerKVOList.removeAll()
         
         resetSourceState()
     }
 
-    private func updateDrmPerformanceInfo(_ playerItem: AVPlayerItem) {
-        if playerItem.asset.hasProtectedContent {
-            drmType = DrmType.fairplay.rawValue
-        } else {
-            drmType = nil
-        }
-    }
-
     private func startMonitoringPlayerItem(playerItem: AVPlayerItem) {
-        statusObserver = playerItem.observe(\.status) {[weak self] (item, _) in
-            self?.playerItemStatusObserver(playerItem: item)
+        playerItemStatusObserver = playerItem.observe(\.status) {[weak self] (item, _) in
+            self?.onPlayerItemStatusChanged(item)
         }
         NotificationCenter.default.addObserver(self, selector: #selector(observeNewAccessLogEntry(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: AVPlayerItem.timeJumpedNotification, object: playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(failedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(didPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(observeTimeJumped(notification:)), name: AVPlayerItem.timeJumpedNotification, object: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(observePlaybackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(observeFailedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(observeDidPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         updateDrmPerformanceInfo(playerItem)
     }
 
@@ -115,14 +121,12 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
-        statusObserver?.invalidate()
+        playerItemStatusObserver?.invalidate()
     }
 
-    private func playerItemStatusObserver(playerItem: AVPlayerItem) {
+    // AVPlayerItem KVOs
+    private func onPlayerItemStatusChanged(_ playerItem: AVPlayerItem) {
         switch playerItem.status {
-            case .readyToPlay:
-                isPlayerReady = true
-            
             case .failed:
                 errorOccured(error: playerItem.error as NSError?)
 
@@ -130,36 +134,67 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
                 break
         }
     }
-
-    private func errorOccured(error: NSError?) {
-        let errorCode = error?.code ?? 1
-        guard errorHandler.shouldSendError(errorCode: errorCode) else {
+    
+    // AVPlayer KVOs
+    private func onPlayerStatusChanged(_ player: AVPlayer) {
+        switch player.status {
+            case .failed:
+                errorOccured(error: player.currentItem?.error as NSError?)
+            
+            default:
+                break
+        }
+    }
+    
+    private func onPlayerRateChanged(old: Float?, new: Float?) {
+        guard let oldRate = old, let newRate = new else {
             return
         }
         
-        let errorData = ErrorData(code: errorCode, message: error?.localizedDescription ?? "Unkown", data: error?.localizedFailureReason)
-        
-        if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
-            stateMachine.onPlayAttemptFailed(withError: errorData)
-        } else {
-            stateMachine.error(withError: errorData, time: player.currentTime())
+        if(newRate == 0 && oldRate != 0) {
+            stateMachine.pause(time: player.currentTime())
+        } else if (newRate != 0 && oldRate == 0 && self.player.currentItem != nil) {
+            stateMachine.play(time: player.currentTime())
         }
     }
-
-    @objc private func failedToPlayToEndTime(notification: Notification) {
+    
+    private func onPlayerCurrentItemChange(old: AVPlayerItem?, new: AVPlayerItem?) {
+        if let oldItem = old {
+            NSLog("Current Item Changed: %@", oldItem.debugDescription)
+            stopMonitoringPlayerItem(playerItem: oldItem)
+        }
+        
+        if let newItem = new {
+            NSLog("Current Item Changed: %@", newItem.debugDescription)
+            startMonitoringPlayerItem(playerItem: newItem)
+            if player.rate > 0 {
+                stateMachine.play(time: player.currentTime())
+            }
+        }
+    }
+    
+    private func onPlayerTimeChanged(_ playerTime: CMTime){
+        checkSeek(playerTime)
+        checkPlaying(playerTime)
+        previousTime = playerTime
+        previousTimestamp = Date().timeIntervalSince1970Millis
+    }
+    
+    // AVPlayer Notifications
+    @objc private func observeFailedToPlayToEndTime(notification: Notification) {
         let error = notification.userInfo?[AVPlayerItemFailedToPlayToEndTimeErrorKey] as? NSError
         errorOccured(error: error)
     }
 
-    @objc private func didPlayToEndTime(notification: Notification) {
+    @objc private func observeDidPlayToEndTime(notification: Notification) {
         stateMachine.pause(time: player.currentTime())
     }
 
-    @objc private func playbackStalled(notification _: Notification) {
+    @objc private func observePlaybackStalled(notification _: Notification) {
         stateMachine.transitionState(destinationState: .buffering, time: player.currentTime())
     }
 
-
+    // Quality change event
     @objc private func observeNewAccessLogEntry(notification: Notification) {
         guard let item = notification.object as? AVPlayerItem, let event = item.accessLog()?.events.last else {
             return
@@ -188,54 +223,13 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         stateMachine.transitionState(destinationState: previousState, time: player.currentTime())
         currentVideoBitrate = newBitrate
     }
-
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        guard context == &AVPlayerAdapter.playerKVOContext else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-            return
-        }
-
-        if keyPath == #keyPath(AVPlayer.rate) {
-            onRateChanged(change)
-        } else if keyPath == #keyPath(AVPlayer.currentItem) {
-            if let oldItem = change?[NSKeyValueChangeKey.oldKey] as? AVPlayerItem {
-                NSLog("Current Item Changed: %@", oldItem.debugDescription)
-                stopMonitoringPlayerItem(playerItem: oldItem)
-            }
-            if let currentItem = change?[NSKeyValueChangeKey.newKey] as? AVPlayerItem {
-                NSLog("Current Item Changed: %@", currentItem.debugDescription)
-                startMonitoringPlayerItem(playerItem: currentItem)
-                if player.rate > 0 {
-                    stateMachine.play(time: player.currentTime())
-                }
-            }
-        } else if keyPath == #keyPath(AVPlayer.status) && player.status == .failed {
-            errorOccured(error: self.player.currentItem?.error as NSError?)
-        }
-    }
-    
-    private func onRateChanged(_ change: [NSKeyValueChangeKey: Any]?) {
-        let oldRate = change?[NSKeyValueChangeKey.oldKey] as? NSNumber ?? 0;
-        let newRate = change?[NSKeyValueChangeKey.newKey] as? NSNumber ?? 0;
-
-        if(newRate.floatValue == 0 && oldRate.floatValue != 0) {
-            stateMachine.pause(time: player.currentTime())
-        } else if (newRate.floatValue != 0 && oldRate.floatValue == 0 && self.player.currentItem != nil) {
-            stateMachine.play(time: player.currentTime())
-        }
-    }
     
     // if seek into unbuffered area (no data) we get this event and know that it's a seek
-    @objc private func timeJumped(notification _: Notification) {
+    @objc private func observeTimeJumped(notification _: Notification) {
         stateMachine.transitionState(destinationState: .seeking, time: previousTime)
     }
     
-    private func onTimeChanged(playerTime: CMTime){
-        checkSeek(playerTime)
-        checkPlaying(playerTime)
-        previousTime = playerTime
-        previousTimestamp = Date().timeIntervalSince1970Millis
-    }
+    // Helper methods
     
     // if seek into buffered area no timeJumped event occur and we register seek event here
     private func checkSeek(_ playerTime: CMTime) {
@@ -273,6 +267,29 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         
         stateMachine.playing(time: currentTime)
     }
+    
+    private func errorOccured(error: NSError?) {
+        let errorCode = error?.code ?? 1
+        guard errorHandler.shouldSendError(errorCode: errorCode) else {
+            return
+        }
+        
+        let errorData = ErrorData(code: errorCode, message: error?.localizedDescription ?? "Unkown", data: error?.localizedFailureReason)
+        
+        if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
+            stateMachine.onPlayAttemptFailed(withError: errorData)
+        } else {
+            stateMachine.error(withError: errorData, time: player.currentTime())
+        }
+    }
+    
+    private func updateDrmPerformanceInfo(_ playerItem: AVPlayerItem) {
+        if playerItem.asset.hasProtectedContent {
+            drmType = DrmType.fairplay.rawValue
+        } else {
+            drmType = nil
+        }
+    }
 
     func decorateEventData(eventData: EventData) {
         // Player
@@ -292,10 +309,10 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         // DRM Type
         eventData.drmType = self.drmType
         
-
         // isLive
         let duration = player.currentItem?.duration
-        if duration != nil && self.isPlayerReady {
+        let isPlayerReady = player.currentItem?.status == .readyToPlay || stateMachine.didStartPlayingVideo
+        if duration != nil && isPlayerReady {
             eventData.isLive = CMTIME_IS_INDEFINITE(duration!)
         } else {
             eventData.isLive = config.isLive
