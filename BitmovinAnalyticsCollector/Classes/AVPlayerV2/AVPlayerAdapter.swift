@@ -311,7 +311,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         
         // isLive
         let duration = player.currentItem?.duration
-        let isPlayerReady = player.currentItem?.status == .readyToPlay
+        let isPlayerReady = player.currentItem?.status == .readyToPlay || stateMachine.didStartPlayingVideo
         if duration != nil && isPlayerReady {
             eventData.isLive = CMTIME_IS_INDEFINITE(duration!)
         } else {
