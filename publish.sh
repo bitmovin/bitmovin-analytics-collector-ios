@@ -48,6 +48,28 @@ if [ -z "$ANALYTICS_API_RELEASE_TOKEN" ]; then
     setEnvVariable "ANALYTICS_API_RELEASE_TOKEN" $ANALYTICS_API_RELEASE_TOKEN
 fi
 
+echo "You are about to Release a new version for the iOS Collector"
+echo "Do you want to run build the projects? (recommended)"
+echo "y/n"
+read RUN_BUILD_CHECKS
+
+if [ $RUN_BUILD_CHECKS = y ]
+then
+  
+  ./deployment/buildProjects.sh
+  if ! [ $? -eq 0 ]
+  then
+    echo "--------------------------------------------"
+    echo "Build of Collector project ---- FAILED -----"
+    echo "--------------------------------------------"
+    exit
+  else
+    echo "-----------------------------------------------"
+    echo "Build of Collector project ---- SUCCEEDED -----"
+    echo "-----------------------------------------------"
+  fi
+fi
+
 echo "Make sure you have fastlane installed on your computer before releasing: (sudo gem install fastlane -NV)"
 echo "Make sure to bump the version in the .podspec (use the latest v1 version), .v2.podspec (use the latest v2 version), README and CHANGELOG first and merge that PR into develop."
 echo "If you've changed the version of the player dependency, make sure to also update the .podspec.json files in the Specs folder."
@@ -57,7 +79,7 @@ git checkout develop || exit
 git pull || exit
 
 echo "Generating BuildConfig.swift file..."
-(./generateBuildConfig.sh "VERSION=$VERSION") > BitmovinAnalyticsCollector/Classes/Collector/util/BuildConfig.swift || exit
+(./deployment/generateBuildConfig.sh "VERSION=$VERSION") > BitmovinAnalyticsCollector/Classes/Collector/util/BuildConfig.swift || exit
 git add BitmovinAnalyticsCollector/Classes/Collector/util/BuildConfig.swift || exit
 git commit -m "Generated BuildConfig.swift" || exit
 git push origin develop || exit
