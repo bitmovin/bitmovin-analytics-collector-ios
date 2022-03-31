@@ -72,7 +72,10 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         playerKVOList.append(player.observe(\.rate, options: [.new, .old]) {[weak self] (player, change) in
             self?.playerRateChangedHandler(old: change.oldValue, new: change.newValue)
         })
-        player.addObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
+        
+        playerKVOList.append(player.observe(\.currentItem, options: [.new, .old]) {[weak self] (player, change) in
+            self?.playerCurrentItemChangeHandler(old: change.oldValue ?? nil, new: change.newValue ?? nil)
+        })
     }
 
     override public func stopMonitoring() {
@@ -84,7 +87,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         if let playerItem = player.currentItem {
             stopMonitoringPlayerItem(playerItem: playerItem)
         }
-        player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem), context: &AVPlayerAdapter.playerKVOContext)
         
         if let timeObserver = periodicTimeObserver {
             player.removeTimeObserver(timeObserver)
@@ -128,6 +130,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         statusObserver?.invalidate()
     }
 
+    // playerItem KVOs
+    
     private func playerItemStatusChangedHandler(_ playerItem: AVPlayerItem) {
         switch playerItem.status {
             case .readyToPlay:
@@ -140,6 +144,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
                 break
         }
     }
+    
+    // AVPlayer KVOs
     
     private func playerStatusChangedHandler(_ player: AVPlayer) {
         switch player.status {
@@ -160,6 +166,21 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             stateMachine.pause(time: player.currentTime())
         } else if (newRate != 0 && oldRate == 0 && self.player.currentItem != nil) {
             stateMachine.play(time: player.currentTime())
+        }
+    }
+    
+    private func playerCurrentItemChangeHandler(old: AVPlayerItem?, new: AVPlayerItem?) {
+        if let oldItem = old {
+            NSLog("Current Item Changed: %@", oldItem.debugDescription)
+            stopMonitoringPlayerItem(playerItem: oldItem)
+        }
+        
+        if let newItem = new {
+            NSLog("Current Item Changed: %@", newItem.debugDescription)
+            startMonitoringPlayerItem(playerItem: newItem)
+            if player.rate > 0 {
+                stateMachine.play(time: player.currentTime())
+            }
         }
     }
 
@@ -219,27 +240,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         stateMachine.videoQualityChange(time: player.currentTime())
         stateMachine.transitionState(destinationState: previousState, time: player.currentTime())
         currentVideoBitrate = newBitrate
-    }
-
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        guard context == &AVPlayerAdapter.playerKVOContext else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-            return
-        }
-
-        if keyPath == #keyPath(AVPlayer.currentItem) {
-            if let oldItem = change?[NSKeyValueChangeKey.oldKey] as? AVPlayerItem {
-                NSLog("Current Item Changed: %@", oldItem.debugDescription)
-                stopMonitoringPlayerItem(playerItem: oldItem)
-            }
-            if let currentItem = change?[NSKeyValueChangeKey.newKey] as? AVPlayerItem {
-                NSLog("Current Item Changed: %@", currentItem.debugDescription)
-                startMonitoringPlayerItem(playerItem: currentItem)
-                if player.rate > 0 {
-                    stateMachine.play(time: player.currentTime())
-                }
-            }
-        }
     }
     
     // if seek into unbuffered area (no data) we get this event and know that it's a seek
