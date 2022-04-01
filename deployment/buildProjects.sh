@@ -1,12 +1,12 @@
 
 buildAll() {
   echo "Start building xcode projects based on cocoapods for iOS"
-  xcodebuild -quiet -workspace Examples/BitmovinAnalyticsCollector.xcworkspace -scheme BitmovinAnalyticsCollector-Example-iOS -sdk iphoneos -destination 'name=iPhone 13' clean build || BUILD_CHECKS_PASSED=0
-  xcodebuild -quiet -workspace Examples-BitmovinPlayerV3/BitmovinAnalyticsCollector-BitmovinPlayerV3.xcworkspace -scheme BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS -sdk iphoneos -destination 'name=iPhone 13' clean build || BUILD_CHECKS_PASSED=0
+  xcodebuild -quiet -workspace Examples/BitmovinAnalyticsCollector.xcworkspace -scheme BitmovinAnalyticsCollector-Example-iOS -sdk iphoneos -destination 'name=iPhone 13' clean build || CHECKS_PASSED=0
+  xcodebuild -quiet -workspace Examples-BitmovinPlayerV3/BitmovinAnalyticsCollector-BitmovinPlayerV3.xcworkspace -scheme BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS -sdk iphoneos -destination 'name=iPhone 13' clean build || CHECKS_PASSED=0
 
   # echo "Start building xcode projects based on cocoapods for tvOS"
-  # xcodebuild -quiet -workspace Examples/BitmovinAnalyticsCollector.xcworkspace -scheme BitmovinAnalyticsCollector-Example-tvOS -sdk appletvos analyze || BUILD_CHECKS_PASSED=0
-  # xcodebuild -quiet -workspace Examples-BitmovinPlayerV3/BitmovinAnalyticsCollector-BitmovinPlayerV3.xcworkspace -scheme BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS -sdk appletvos analyze || BUILD_CHECKS_PASSED=0
+  # xcodebuild -quiet -workspace Examples/BitmovinAnalyticsCollector.xcworkspace -scheme BitmovinAnalyticsCollector-Example-tvOS -sdk appletvos analyze || CHECKS_PASSED=0
+  # xcodebuild -quiet -workspace Examples-BitmovinPlayerV3/BitmovinAnalyticsCollector-BitmovinPlayerV3.xcworkspace -scheme BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS -sdk appletvos analyze || CHECKS_PASSED=0
 
   echo "Start building xcode projects based on swiftpm"
   xcodebuild -quiet -workspace .swiftpm/xcode/package.xcworkspace -scheme BitmovinCollector -sdk iphoneos -destination 'name=iPhone 13' clean build || BUILD_CHECKS_PASSED=0
@@ -24,10 +24,10 @@ checkForSwiftPMProject() {
 
 checkForSwiftPMProject
 
-BUILD_CHECKS_PASSED=1 
+CHECKS_PASSED=1 
 time buildAll
 
-if [ $BUILD_CHECKS_PASSED -eq 0 ]
+if [ $CHECKS_PASSED -eq 0 ]
 then 
   exit 1
 fi
