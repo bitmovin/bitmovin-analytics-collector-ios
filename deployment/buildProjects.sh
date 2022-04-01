@@ -1,4 +1,15 @@
 
+preparePods() {
+  echo "-----------------"
+  echo "Preparing Pods---"
+  echo "-----------------"
+  cd Examples
+  pod install --repo-update --silent
+  cd ../Examples-BitmovinPlayerV3
+  pod install --repo-update --silent
+  cd ..
+}
+
 buildAll() {
   echo "Start building xcode projects based on cocoapods for iOS"
   xcodebuild -quiet -workspace Examples/BitmovinAnalyticsCollector.xcworkspace -scheme BitmovinAnalyticsCollector-Example-iOS -sdk iphoneos -destination 'name=iPhone 13' clean build || CHECKS_PASSED=0
@@ -18,10 +29,11 @@ checkForSwiftPMProject() {
   if ! [ -d $swiftpmDIR ]
   then
     echo "SwiftPm project has never been opened. Will open project to create project files"
-    open Package.swift || echo "Problem openign swiftpm project"
+    open Package.swift || echo "-------------------------------Problem openign swiftpm project ---------------------------------"
   fi
 }
 
+time preparePods
 checkForSwiftPMProject
 
 CHECKS_PASSED=1 
