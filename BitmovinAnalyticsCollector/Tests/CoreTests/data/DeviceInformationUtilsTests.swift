@@ -29,8 +29,6 @@ class DeviceInformationUtilsTests: XCTestCase {
         XCTAssertEqual(deviceInfo.model, "iPhone")
         XCTAssertEqual(deviceInfo.isTV, false)
         XCTAssertEqual(deviceInfo.operatingSystem, "iOS")
-        XCTAssertEqual(deviceInfo.operatingSystemMajor, "15")
-        XCTAssertEqual(deviceInfo.operatingSystemMinor, "0")
         XCTAssertEqual(deviceInfo.deviceClass, DeviceClass.Phone)
     }
     

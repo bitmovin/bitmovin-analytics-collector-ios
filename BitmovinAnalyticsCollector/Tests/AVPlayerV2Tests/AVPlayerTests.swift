@@ -10,7 +10,7 @@ import AVKit
 @testable import BitmovinCollectorCore
 #endif
 
-class CoreTests_iOS: XCTestCase {
+class AVPlayerTest: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
