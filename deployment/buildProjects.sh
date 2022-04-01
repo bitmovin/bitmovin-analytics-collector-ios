@@ -20,8 +20,22 @@ buildAll() {
   # xcodebuild -quiet -workspace Examples-BitmovinPlayerV3/BitmovinAnalyticsCollector-BitmovinPlayerV3.xcworkspace -scheme BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS -sdk appletvos analyze || CHECKS_PASSED=0
 
   echo "Start building xcode projects based on swiftpm"
-  xcodebuild -quiet -workspace .swiftpm/xcode/package.xcworkspace -scheme BitmovinCollector -sdk iphoneos -destination 'name=iPhone 13' clean build || BUILD_CHECKS_PASSED=0
-  xcodebuild -quiet -workspace .swiftpm/xcode/package.xcworkspace -scheme BitmovinCollectorAVPlayer -sdk iphoneos -destination 'name=iPhone 13' clean build || BUILD_CHECKS_PASSED=0
+  xcodebuild -quiet -workspace .swiftpm/xcode/package.xcworkspace -scheme BitmovinCollector -sdk iphoneos -destination 'name=iPhone 13' clean build || CHECKS_PASSED=0
+  xcodebuild -quiet -workspace .swiftpm/xcode/package.xcworkspace -scheme BitmovinCollectorAVPlayer -sdk iphoneos -destination 'name=iPhone 13' clean build || CHECKS_PASSED=0
+
+  if [ $CHECKS_PASSED -eq 1 ]
+  then
+    echo "Successfully build all projects - Starting with tests"
+    TESTS_PASSED=1
+    xcodebuild -quiet -workspace Examples/BitmovinAnalyticsCollector.xcworkspace -scheme BitmovinAnalyticsCollector-Example-iOS -sdk iphoneos -destination 'name=iPhone 13' clean test || TESTS_PASSED=0
+    xcodebuild -quiet -workspace Examples-BitmovinPlayerV3/BitmovinAnalyticsCollector-BitmovinPlayerV3.xcworkspace -scheme BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS -sdk iphoneos -destination 'name=iPhone 13' clean test || TESTS_PASSED=0
+    if [ $TESTS_PASSED -eq 0 ]
+    then
+      CHECKS_PASSED=0
+      echo "--------------------------"
+      echo "-------Tests FAILED-------"
+    fi
+  fi
 }
 
 checkForSwiftPMProject() {
