@@ -22,19 +22,18 @@ buildAll() {
   echo "Start building xcode projects based on swiftpm"
   xcodebuild -quiet -workspace .swiftpm/xcode/package.xcworkspace -scheme BitmovinCollector -sdk iphoneos -destination 'name=iPhone 13' clean build || CHECKS_PASSED=0
   xcodebuild -quiet -workspace .swiftpm/xcode/package.xcworkspace -scheme BitmovinCollectorAVPlayer -sdk iphoneos -destination 'name=iPhone 13' clean build || CHECKS_PASSED=0
+}
 
-  if [ $CHECKS_PASSED -eq 1 ]
+testAll() {
+  echo "Successfully build all projects - Starting with tests"
+  TESTS_PASSED=1
+  xcodebuild -quiet -workspace Examples/BitmovinAnalyticsCollector.xcworkspace -scheme BitmovinAnalyticsCollector-Example-iOS -sdk iphoneos -destination 'name=iPhone 13' clean test || TESTS_PASSED=0
+  xcodebuild -quiet -workspace Examples-BitmovinPlayerV3/BitmovinAnalyticsCollector-BitmovinPlayerV3.xcworkspace -scheme BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS -sdk iphoneos -destination 'name=iPhone 13' clean test || TESTS_PASSED=0
+  if [ $TESTS_PASSED -eq 0 ]
   then
-    echo "Successfully build all projects - Starting with tests"
-    TESTS_PASSED=1
-    xcodebuild -quiet -workspace Examples/BitmovinAnalyticsCollector.xcworkspace -scheme BitmovinAnalyticsCollector-Example-iOS -sdk iphoneos -destination 'name=iPhone 13' clean test || TESTS_PASSED=0
-    xcodebuild -quiet -workspace Examples-BitmovinPlayerV3/BitmovinAnalyticsCollector-BitmovinPlayerV3.xcworkspace -scheme BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS -sdk iphoneos -destination 'name=iPhone 13' clean test || TESTS_PASSED=0
-    if [ $TESTS_PASSED -eq 0 ]
-    then
-      CHECKS_PASSED=0
-      echo "--------------------------"
-      echo "-------Tests FAILED-------"
-    fi
+    CHECKS_PASSED=0
+    echo "--------------------------"
+    echo "-------Tests FAILED-------"
   fi
 }
 
@@ -47,11 +46,19 @@ checkForSwiftPMProject() {
   fi
 }
 
-time preparePods
+# Prepare for builds
+preparePods
 checkForSwiftPMProject
 
+# Build
 CHECKS_PASSED=1 
-time buildAll
+buildAll
+
+# If successfully built -> Test
+if [ $CHECKS_PASSED -eq 1 ]
+then 
+  testAll
+fi
 
 if [ $CHECKS_PASSED -eq 0 ]
 then 

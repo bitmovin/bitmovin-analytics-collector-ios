@@ -56,7 +56,7 @@ read RUN_BUILD_CHECKS
 if [ $RUN_BUILD_CHECKS = y ]
 then
   
-  ./deployment/buildProjects.sh
+  time ./deployment/buildProjects.sh
   if ! [ $? -eq 0 ]
   then
     echo "--------------------------------------------"
