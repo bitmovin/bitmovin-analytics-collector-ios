@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E1C417BA93A421F4601CD59DC4E3E92A"
+               BuildableName = "BitmovinAnalyticsCollector-iOS-Unit-AVPlayer-AVPlayerV2Tests.xctest"
+               BlueprintName = "BitmovinAnalyticsCollector-iOS-Unit-AVPlayer-AVPlayerV2Tests"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D2B7AD89AAC6B3006192E1164A89F303"
+               BuildableName = "BitmovinAnalyticsCollector-iOS-Unit-BitmovinPlayer-BitmovinPlayerV3Tests.xctest"
+               BlueprintName = "BitmovinAnalyticsCollector-iOS-Unit-BitmovinPlayer-BitmovinPlayerV3Tests"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

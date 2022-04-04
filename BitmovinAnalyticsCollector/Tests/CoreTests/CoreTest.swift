@@ -1,7 +1,4 @@
 import XCTest
-#if !SWIFT_PACKAGE
-@testable import BitmovinAnalyticsCollector
-#endif
 
 class CoreTests_iOS: XCTestCase {
 
