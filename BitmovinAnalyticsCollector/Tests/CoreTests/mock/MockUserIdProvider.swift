@@ -2,7 +2,7 @@
 @testable import BitmovinAnalyticsCollector
 #endif
 #if SWIFT_PACKAGE
-import BitmovinCollectorCore
+import CoreCollector
 #endif
 
 class MockUserIdProvider: UserIdProvider {

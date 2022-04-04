@@ -4,7 +4,7 @@ import CoreMedia
 #endif
 
 #if SWIFT_PACKAGE
-@testable import BitmovinCollectorCore
+@testable import CoreCollector
 #endif
 
 class MockStateMachineDelegate: StateMachineDelegate {

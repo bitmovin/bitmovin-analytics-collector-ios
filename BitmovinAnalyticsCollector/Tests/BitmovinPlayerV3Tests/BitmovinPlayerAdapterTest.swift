@@ -5,8 +5,8 @@ import BitmovinPlayer
 #endif
 
 #if SWIFT_PACKAGE
-@testable import BitmovinCollector
-@testable import BitmovinCollectorCore
+@testable import BitmovinPlayerCollector
+@testable import CoreCollector
 #endif
 
 class BitmovinPlayerAdapterTests: XCTestCase {
