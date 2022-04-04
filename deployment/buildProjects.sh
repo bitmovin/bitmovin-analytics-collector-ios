@@ -20,8 +20,8 @@ buildAll() {
   # xcodebuild -quiet -workspace Examples-BitmovinPlayerV3/BitmovinAnalyticsCollector-BitmovinPlayerV3.xcworkspace -scheme BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS -sdk appletvos analyze || CHECKS_PASSED=0
 
   echo "Start building xcode projects based on swiftpm"
-  xcodebuild -quiet -workspace .swiftpm/xcode/package.xcworkspace -scheme BitmovinCollector -sdk iphoneos -destination 'name=iPhone 13' clean build || CHECKS_PASSED=0
-  xcodebuild -quiet -workspace .swiftpm/xcode/package.xcworkspace -scheme BitmovinCollectorAVPlayer -sdk iphoneos -destination 'name=iPhone 13' clean build || CHECKS_PASSED=0
+  xcodebuild -quiet -workspace .swiftpm/xcode/package.xcworkspace -scheme BitmovinPlayerCollector -sdk iphoneos -destination 'name=iPhone 13' clean build || CHECKS_PASSED=0
+  xcodebuild -quiet -workspace .swiftpm/xcode/package.xcworkspace -scheme AVPlayerCollector -sdk iphoneos -destination 'name=iPhone 13' clean build || CHECKS_PASSED=0
 }
 
 testAll() {
@@ -61,8 +61,14 @@ then
 fi
 
 if [ $CHECKS_PASSED -eq 0 ]
-then 
+then
+  echo "--------------------------------------------"
+  echo "Build of Collector project ---- FAILED -----"
+  echo "--------------------------------------------"
   exit 1
 fi
 
+echo "-----------------------------------------------"
+echo "Build of Collector project ---- SUCCEEDED -----"
+echo "-----------------------------------------------"
 exit 0

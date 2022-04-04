@@ -55,19 +55,7 @@ read RUN_BUILD_CHECKS
 
 if [ $RUN_BUILD_CHECKS = y ]
 then
-  
-  time ./deployment/buildProjects.sh
-  if ! [ $? -eq 0 ]
-  then
-    echo "--------------------------------------------"
-    echo "Build of Collector project ---- FAILED -----"
-    echo "--------------------------------------------"
-    exit
-  else
-    echo "-----------------------------------------------"
-    echo "Build of Collector project ---- SUCCEEDED -----"
-    echo "-----------------------------------------------"
-  fi
+  time ./deployment/buildProjects.sh || exit 
 fi
 
 echo "Make sure you have fastlane installed on your computer before releasing: (sudo gem install fastlane -NV)"
