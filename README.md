@@ -164,8 +164,8 @@ We do support deployment target `iOS 9.0+`, but this version is deprecated and d
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '1.27.0'
-pod 'BitmovinAnalyticsCollector/AVPlayer', '1.27.0'
+pod 'BitmovinAnalyticsCollector/Core', '2.7.0'
+pod 'BitmovinAnalyticsCollector/AVPlayer', '2.7.0'
 
 use_frameworks!
 ```
