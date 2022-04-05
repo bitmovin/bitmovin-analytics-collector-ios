@@ -117,7 +117,7 @@ We have split the `BitmovinAnalytics` into 3 targets
 - BitmovinPlayerCollector - including `BitmovinPlayer` Collector
 - AVPlayerCollector - including `AVPlayer` Collector
 
-if you are working with our Collectors you need to add at least `import CoreCollector` as many Classes are located in that package
+if you are working with our Collectors you need to add at least `import CoreCollector` as many Classes are relocated to that package
 
 Going further you need to import the corresponding Collector package for player
 
@@ -162,7 +162,7 @@ use_frameworks!
 
 We provide builds of our AVPlayerCollector to support platforms `iOS 9.0+` and `iOS 12.0+`.
 Use the BitmovinAnalyticsCollector version `2.7.0` for deployment targets `iOS 12.0+`.
-We do support deployment target `iOS 9.0+`, but this version is deprecated and don't get major updates anymore.
+We do support deployment target `iOS 9.0+`, but this version is deprecated and won't get major updates anymore.
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
