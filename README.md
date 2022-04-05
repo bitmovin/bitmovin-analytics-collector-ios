@@ -138,8 +138,8 @@ The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` versi
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '1.27.0'
-pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '1.27.0'
+pod 'BitmovinAnalyticsCollector/Core', '1.28.0'
+pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '1.28.0'
 pod 'BitmovinPlayer', '2.51.0'
 
 use_frameworks!
@@ -151,8 +151,8 @@ The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` versi
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '2.7.0'
-pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '2.7.0'
+pod 'BitmovinAnalyticsCollector/Core', '2.8.0'
+pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '2.8.0'
 pod 'BitmovinPlayer', '3.0.0'
 
 use_frameworks!
@@ -161,13 +161,13 @@ use_frameworks!
 ### AVPlayer
 
 We provide builds of our AVPlayerCollector to support platforms `iOS 9.0+` and `iOS 12.0+`.
-Use the BitmovinAnalyticsCollector version `2.7.0` for deployment targets `iOS 12.0+`.
+Use the BitmovinAnalyticsCollector version `2.8.0` for deployment targets `iOS 12.0+`.
 We do support deployment target `iOS 9.0+`, but this version is deprecated and won't get major updates anymore.
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '2.7.0'
-pod 'BitmovinAnalyticsCollector/AVPlayer', '2.7.0'
+pod 'BitmovinAnalyticsCollector/Core', '2.8.0'
+pod 'BitmovinAnalyticsCollector/AVPlayer', '2.8.0'
 
 use_frameworks!
 ```
@@ -178,7 +178,7 @@ To include all available collectors, add the following lines (the dependency on 
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector', '1.27.0'
+pod 'BitmovinAnalyticsCollector', '1.28.0'
 pod 'BitmovinPlayer', '2.51.0'
 
 use_frameworks!
@@ -188,7 +188,7 @@ use_frameworks!
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector', '2.7.0'
+pod 'BitmovinAnalyticsCollector', '2.8.0'
 pod 'BitmovinPlayer', '3.0.0'
 
 use_frameworks!
