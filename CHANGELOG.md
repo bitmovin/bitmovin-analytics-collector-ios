@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+## Development V1
+
+## 2.8.0-beta1
+
 ### Changed
 
 - strict protocol `Collector` as public API for player collectors
@@ -18,7 +22,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - new AVPlayer adapter with deployment_target `iOS:12` and `tvOS:12`
 - SwiftPM support
 
-## Development V1
+## 1.28.0-beta1
 
 ### Changed
 
