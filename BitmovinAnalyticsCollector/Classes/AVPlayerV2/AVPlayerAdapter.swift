@@ -2,7 +2,7 @@ import AVFoundation
 import Foundation
 import UIKit
 #if SWIFT_PACKAGE
-import BitmovinCollectorCore
+import CoreCollector
 #endif
 
 class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {

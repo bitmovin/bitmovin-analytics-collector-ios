@@ -1,6 +1,6 @@
 import BitmovinPlayer
 #if SWIFT_PACKAGE
-import BitmovinCollectorCore
+import CoreCollector
 #endif
 
 public class BitmovinPlayerCollector : Collector {

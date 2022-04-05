@@ -6,8 +6,8 @@ import AVKit
 #endif
 
 #if SWIFT_PACKAGE
-@testable import BitmovinCollectorAVPlayer
-@testable import BitmovinCollectorCore
+@testable import AVPlayerCollector
+@testable import CoreCollector
 #endif
 
 class AVPlayerAdapterTests: XCTestCase {

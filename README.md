@@ -71,9 +71,9 @@ Swift Package Manager is a tool for managing the distribution of Swift framework
 
 Swift Package Manager support since `2.8.0`
 
-We provide two packages:
-- `BitmovinCollector` including BitmovinPlayer v3 Collector
-- `BitmovinCollectorAVPlayer` including AVPlayer Collector
+We provide two products:
+- `BitmovinPlayerCollector` including BitmovinPlayer v3 Collector
+- `AVPlayerCollector` including AVPlayer Collector
 
 ### Using Xcode
 
@@ -86,43 +86,45 @@ https://github.com/bitmovin/bitmovin-analytics-collector-ios
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift` and replace `Version Number` with the desired version of the SDK.
 ```
-.package(name: "BitmovinAnalyticsCollector", url: "https://github.com/bitmovin/bitmovin-analytics-collector-ios", .exact("Version Number"))
+.package(name: "BitmovinAnalytics", url: "https://github.com/bitmovin/bitmovin-analytics-collector-ios", .exact("Version Number"))
 ```
-And then specify the `BitmovinAnalyticsCollector` as a dependency of the desired target. Here is an example of a `Package.swift` file:
+And then specify the `BitmovinAnalytics` as a dependency of the desired target. Here is an example of a `Package.swift` file:
 ```
 let package = Package(
   ...
   dependencies: [
     ...
-    .package(name: "BitmovinAnalyticsCollector", url: "https://github.com/bitmovin/bitmovin-analytics-collector-ios", .exact("Version Number"))
+    .package(name: "BitmovinAnalytics", url: "https://github.com/bitmovin/bitmovin-analytics-collector-ios", .exact("Version Number"))
   ],
   targets: [
     .target(
       name: "<NAME_OF_YOUR_PACKAGE>",
-      dependencies: [.product(name: "BitmovinCollector", package: "BitmovinAnalyticsCollector")]),
-      dependencies: [.product(name: "BitmovinCollectorAVPlayer", package: "BitmovinAnalyticsCollector")]),
+      dependencies: [
+        .product(name: "BitmovinPlayerCollector", package: "BitmovinAnalytics"),
+        .product(name: "AVPlayerCollector", package: "BitmovinAnalytics")
+      ]),
   ]
   ...
 )
 ```
 ### Limitation
-Executing `swift build` from the command line is currently not supported. Open the Package in Xcode if you are developing another Package depending on `BitmovinAnalyticsCollector`.
+Executing `swift build` from the command line is currently not supported. Open the Package in Xcode if you are developing another Package depending on `BitmovinAnalytics`.
 
 ### Import BitmovinAnalyticsCollector into your Code
 
-We have split the `BitmovinAnalyticsCollector` into 3 packages
-- BitmovinCollectorCore - including shared code for all collectors
-- BitmovinCollector - including `BitmovinPlayer` Collector
-- BitmovinCollectorAVPlayer - including `AVPlayer` Collector
+We have split the `BitmovinAnalytics` into 3 targets
+- CoreCollector - including shared code for all collectors
+- BitmovinPlayerCollector - including `BitmovinPlayer` Collector
+- AVPlayerCollector - including `AVPlayer` Collector
 
-if you are working with our Collectors you need to add at least `import BitmovinCollectorCore` as many Classes are located in that package
+if you are working with our Collectors you need to add at least `import CoreCollector` as many Classes are relocated to that package
 
 Going further you need to import the corresponding Collector package for player
 
 Example when using BitmovinPlayer
 ```
-import BitmovinCollectorCore
-import BitmovinCollector
+import CoreCollector
+import BitmovinPlayerCollector
 ```
 
 ## Using [CocoaPods](https://cocoapods.org/)
@@ -160,12 +162,12 @@ use_frameworks!
 
 We provide builds of our AVPlayerCollector to support platforms `iOS 9.0+` and `iOS 12.0+`.
 Use the BitmovinAnalyticsCollector version `2.7.0` for deployment targets `iOS 12.0+`.
-We do support deployment target `iOS 9.0+`, but this version is deprecated and don't get major updates anymore.
+We do support deployment target `iOS 9.0+`, but this version is deprecated and won't get major updates anymore.
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '1.27.0'
-pod 'BitmovinAnalyticsCollector/AVPlayer', '1.27.0'
+pod 'BitmovinAnalyticsCollector/Core', '2.7.0'
+pod 'BitmovinAnalyticsCollector/AVPlayer', '2.7.0'
 
 use_frameworks!
 ```
