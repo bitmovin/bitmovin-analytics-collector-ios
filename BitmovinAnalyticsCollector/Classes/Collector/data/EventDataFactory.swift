@@ -30,7 +30,11 @@ class EventDataFactory {
         eventData.analyticsVersion = Util.version()
         eventData.language = DeviceInformationUtils.language()
         eventData.userAgent = DeviceInformationUtils.userAgent()
-        eventData.deviceInformation = DeviceInformationUtils.getDeviceInformation()
+        
+        let deviceInformation = DeviceInformationUtils.getDeviceInformation()
+        eventData.deviceInformation = deviceInformation
+        eventData.screenWidth = deviceInformation.screenWidth
+        eventData.screenHeight = deviceInformation.screenHeight
     }
     
     private func setConfigData(_ eventData: EventData, _ sourceMetadata: SourceMetadata?){

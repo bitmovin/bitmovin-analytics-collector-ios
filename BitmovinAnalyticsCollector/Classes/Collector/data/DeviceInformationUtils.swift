@@ -30,13 +30,17 @@ public class DeviceInformationUtils {
     }
     
     static func getDeviceInformation() -> DeviceInformationDto {
+        let scale = UIScreen.main.scale
+        
         return DeviceInformationDto(manufacturer: "Apple",
                                     model: UIDevice.current.model,
                                     isTV: isTV(UIDevice.current.userInterfaceIdiom),
                                     operatingSystem: UIDevice.current.systemName,
                                     operatingSystemMajorVersion: String(ProcessInfo().operatingSystemVersion.majorVersion),
                                     operatingSystemMinorVersion: String(ProcessInfo().operatingSystemVersion.minorVersion),
-                                    deviceClass: getDeviceClass(UIDevice.current.userInterfaceIdiom)
+                                    deviceClass: getDeviceClass(UIDevice.current.userInterfaceIdiom),
+                                    screenHeight: Int(UIScreen.main.bounds.size.height * scale),
+                                    screenWidth: Int(UIScreen.main.bounds.size.width * scale)
         )
     }
     
