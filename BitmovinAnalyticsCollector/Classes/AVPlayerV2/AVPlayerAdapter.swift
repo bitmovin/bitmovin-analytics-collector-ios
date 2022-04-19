@@ -363,13 +363,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             eventData.videoPlaybackHeight = Int(height)
         }
 
-        let scale = UIScreen.main.scale
-        // screenHeight
-        eventData.screenHeight = Int(UIScreen.main.bounds.size.height * scale)
-
-        // screenWidth
-        eventData.screenWidth = Int(UIScreen.main.bounds.size.width * scale)
-
         // isMuted
         if player.volume == 0 {
             eventData.isMuted = true
