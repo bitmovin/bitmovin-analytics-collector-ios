@@ -165,13 +165,6 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             eventData.videoCodec = String(videoCodec)
         }
 
-        let scale = UIScreen.main.scale
-        // screenHeight
-        eventData.screenHeight = Int(UIScreen.main.bounds.size.height * scale)
-
-        // screenWidth
-        eventData.screenWidth = Int(UIScreen.main.bounds.size.width * scale)
-
         // isMuted
         eventData.isMuted = player.isMuted
         
