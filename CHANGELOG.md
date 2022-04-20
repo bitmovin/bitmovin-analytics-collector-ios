@@ -9,13 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-- synchronous access on async property caused customer apps to freeze
+- AVPlayer: synchronous access on async property caused customer apps to freeze
+- AVPlayer: not startup was tracked if collector was attached after play
 
 ## Development V1
 
 ### Fixed
 
-- synchronous access on async property caused customer apps to freeze
+- AVPlayer: synchronous access on async property caused customer apps to freeze
 
 ## 2.8.0-beta1
 
