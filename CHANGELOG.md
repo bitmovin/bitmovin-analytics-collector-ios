@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V1
 
+### Fixed
+
+- synchronous access on async property caused customer apps to freeze
+
 ## 2.8.0-beta1
 
 ### Changed
