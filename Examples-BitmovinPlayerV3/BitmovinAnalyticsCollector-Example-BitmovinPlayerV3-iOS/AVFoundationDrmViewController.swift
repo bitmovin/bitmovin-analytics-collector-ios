@@ -131,10 +131,13 @@ class AVFoundationDrmViewController: UIViewController {
         addObserver(self, forKeyPath: #keyPath(AVFoundationDrmViewController.player.currentItem.duration), options: [.new, .initial], context: &AVFoundationDrmViewController.playerViewControllerKVOContext)
 
         let interval = CMTimeMake(value: 1, timescale: 1)
-        timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { [unowned self] time in
+        timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { [weak self] time in
+            guard let view = self else {
+                return
+            }
             let position = Float(CMTimeGetSeconds(time))
-            self.slider.value = Float(position)
-            self.position.text = self.createTimeString(time: position)
+            view.slider.value = Float(position)
+            view.position.text = view.createTimeString(time: position)
         }
     }
 
