@@ -86,10 +86,20 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
 
     private func updateDrmPerformanceInfo(_ playerItem: AVPlayerItem) {
-        if playerItem.asset.hasProtectedContent {
-            drmType = DrmType.fairplay.rawValue
-        } else {
-            drmType = nil
+        let asset = playerItem.asset
+        asset.loadValuesAsynchronously(forKeys: ["hasProtectedContent"]) { [weak self] in
+            guard let adapter = self else {
+                return
+            }
+            var error: NSError?
+            if asset.statusOfValue(forKey: "hasProtectedContent", error: &error) == .loaded {
+                // Access the property value synchronously.
+                if asset.hasProtectedContent {
+                    adapter.drmType = DrmType.fairplay.rawValue
+                } else {
+                    adapter.drmType = nil
+                }
+            }
         }
     }
 
