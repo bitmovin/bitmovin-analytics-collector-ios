@@ -299,7 +299,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
                 }
             }
         }
-        
     }
 
     func decorateEventData(eventData: EventData) {
