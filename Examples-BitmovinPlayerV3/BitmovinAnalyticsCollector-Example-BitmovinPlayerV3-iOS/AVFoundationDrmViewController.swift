@@ -94,11 +94,11 @@ class AVFoundationDrmViewController: UIViewController {
     override func viewWillAppear(_: Bool) {
         playerView.player = player
         addObserver(self, forKeyPath: #keyPath(AVFoundationDrmViewController.player.rate), options: [.new, .initial], context: &AVFoundationDrmViewController.playerViewControllerKVOContext)
-        createPlayer()
         analyticsCollector.attachPlayer(player: player)
+        loadDrmSource()
     }
 
-    func createPlayer() {
+    func loadDrmSource() {
         let fpsConfig = FairPlayConfiguration(licenseUrl: drmLicenseUrl!, certificateUrl: drmCertificateUrl!)
         fpsConfig.prepareContentId = { (contentId: String) -> String in
             return contentId.components(separatedBy: "/").last ?? contentId
@@ -143,7 +143,7 @@ class AVFoundationDrmViewController: UIViewController {
 
     @IBAction func reloadPlayer() {
         analyticsCollector.detachPlayer()
-        createPlayer()
+        loadDrmSource()
         config.cdnProvider = CdnProvider.bitmovin
         config.customData1 = "customData1_2"
         config.customData2 = "customData2_2"

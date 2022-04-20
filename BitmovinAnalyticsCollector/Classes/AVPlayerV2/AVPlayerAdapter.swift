@@ -67,15 +67,15 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             self?.onPlayerTimeChanged(playerTime)
         }
         
-        playerKVOList.append(player.observe(\.status) {[weak self] (player, _) in
+        playerKVOList.append(player.observe(\.status, options: [.new, .old, .initial]) {[weak self] (player, _) in
             self?.onPlayerStatusChanged(player)
         })
         
-        playerKVOList.append(player.observe(\.rate, options: [.new, .old]) {[weak self] (player, change) in
+        playerKVOList.append(player.observe(\.rate, options: [.new, .old, .initial]) {[weak self] (player, change) in
             self?.onPlayerRateChanged(old: change.oldValue, new: change.newValue)
         })
         
-        playerKVOList.append(player.observe(\.currentItem, options: [.new, .old]) {[weak self] (player, change) in
+        playerKVOList.append(player.observe(\.currentItem, options: [.new, .old, .initial]) {[weak self] (player, change) in
             self?.onPlayerCurrentItemChange(old: change.oldValue ?? nil, new: change.newValue ?? nil)
         })
     }
