@@ -7,12 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+## Development V1
+
+## 2.8.0
+
 ### Fixed
 
 - AVPlayer: synchronous access on async property caused customer apps to freeze
 - AVPlayer: not startup was tracked if collector was attached after play
 
-## Development V1
+## 1.28.0
 
 ### Fixed
 
