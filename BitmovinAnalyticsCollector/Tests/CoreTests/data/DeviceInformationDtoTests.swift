@@ -12,9 +12,9 @@ class DeviceInformationDtoTests: XCTestCase {
 
     func testSerializesCorrectly() throws {
         // Arrange
-        let deviceInfo = DeviceInformationDto(manufacturer: "Apple", model: "iPhone 12 Pro", isTV: false, operatingSystem: "iOS", operatingSystemMajorVersion: "15", operatingSystemMinorVersion: "2", deviceClass: DeviceClass.Phone)
+        let deviceInfo = DeviceInformationDto(manufacturer: "Apple", model: "iPhone 12 Pro", isTV: false, operatingSystem: "iOS", operatingSystemMajorVersion: "15", operatingSystemMinorVersion: "2", deviceClass: DeviceClass.Phone, screenHeight: 123, screenWidth: 321)
         let expectedJSON = """
-            {"operatingSystemMajor":"15","manufacturer":"Apple","deviceClass":"Phone","model":"iPhone 12 Pro","operatingSystem":"iOS","operatingSystemMinor":"2","isTV":false}
+            {"operatingSystemMajor":"15","manufacturer":"Apple","deviceClass":"Phone","model":"iPhone 12 Pro","operatingSystem":"iOS","operatingSystemMinor":"2","isTV":false,"screenHeight":123,"screenWidth":321}
             """
 
         // Act
