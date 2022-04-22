@@ -38,4 +38,8 @@ public class AVPlayerCollector: Collector {
     @objc public func setCustomDataOnce(customData: CustomData) {
         return analytics.setCustomDataOnce(customData: customData)
     }
+    
+    @objc public func getUserId() -> String {
+        return analytics.getUserId()
+    }
 }
