@@ -4,16 +4,15 @@ import UIKit
 
 class EventDataFactory {
     private final var config: BitmovinAnalyticsConfig
-    private final var userIdProvider: UserIdProvider
 
-    init(_ config: BitmovinAnalyticsConfig, _ userIdProvider: UserIdProvider) {
+    init(_ config: BitmovinAnalyticsConfig) {
         self.config = config
-        self.userIdProvider = userIdProvider
     }
     
-    func createEventData(_ state: String, _ impressionId: String, _ videoTimeStart: CMTime?, _ videoTimeEnd: CMTime?, _ drmLoadTime: Int64?, _ sourceMetaData: SourceMetadata?) -> EventData {
+    func createEventData(_ state: String, _ impressionId: String, _ videoTimeStart: CMTime?, _ videoTimeEnd: CMTime?, _ drmLoadTime: Int64?, _ sourceMetaData: SourceMetadata?, _ userId: String) -> EventData {
         let eventData = EventData(impressionId)
         
+        eventData.userId = userId
         eventData.state = state
         eventData.drmLoadTime = drmLoadTime
         setBasicData(eventData)
@@ -25,7 +24,6 @@ class EventDataFactory {
     private func setBasicData(_ eventData: EventData) {
         eventData.version = UIDevice.current.systemVersion
 
-        eventData.userId = userIdProvider.getUserId()
         eventData.domain = Util.mainBundleIdentifier()
         eventData.analyticsVersion = Util.version()
         eventData.language = DeviceInformationUtils.language()
