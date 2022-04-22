@@ -17,6 +17,7 @@ open class BitmovinAnalyticsInternal: NSObject {
     public private(set) var adAnalytics: BitmovinAdAnalytics?
     internal var adapter: PlayerAdapter?
     private var eventDataDispatcher: EventDataDispatcher
+    private var userIdProvider: UserIdProvider
     internal var adAdapter: AdAdapter?
     internal var eventDataFactory: EventDataFactory
     private var isPlayerAttached = false
@@ -26,8 +27,8 @@ open class BitmovinAnalyticsInternal: NSObject {
         self.config = config
         stateMachine = StateMachine(config: self.config)
         eventDataDispatcher = SimpleEventDataDispatcher(config: config)
-        let userIdProvider: UserIdProvider = config.randomizeUserId ? RandomizedUserIdProvider() : UserDefaultUserIdProvider()
-        eventDataFactory = EventDataFactory(config, userIdProvider)
+        userIdProvider = config.randomizeUserId ? RandomizedUserIdProvider() : UserDefaultUserIdProvider()
+        eventDataFactory = EventDataFactory(config)
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(licenseFailed(notification:)), name: .licenseFailed, object: eventDataDispatcher)
         NotificationCenter.default.addObserver(self,
@@ -133,6 +134,10 @@ open class BitmovinAnalyticsInternal: NSObject {
         customDataConfig.setCustomData(customData: currentCustomData)
         
     }
+    
+    @objc public func getUserId() -> String {
+        return userIdProvider.getUserId()
+    }
 
     private func sendEventData(eventData: EventData?) {
         guard let data = eventData else {
@@ -162,7 +167,8 @@ open class BitmovinAnalyticsInternal: NSObject {
             self.stateMachine.videoTimeStart,
             self.stateMachine.videoTimeEnd,
             drmLoadTime,
-            self.adapter?.currentSourceMetadata)
+            self.adapter?.currentSourceMetadata,
+            self.userIdProvider.getUserId())
         self.adapter?.decorateEventData(eventData: eventData)
         
         if self.stateMachine.videoStartFailed {

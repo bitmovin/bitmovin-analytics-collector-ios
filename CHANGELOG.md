@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+### Added
+- new method `getUserId` on all collectors to get used `userId`
+
 ## Development V1
+
+### Added
+- new method `getUserId` on all collectors to get used `userId`
 
 ## 2.8.0
 

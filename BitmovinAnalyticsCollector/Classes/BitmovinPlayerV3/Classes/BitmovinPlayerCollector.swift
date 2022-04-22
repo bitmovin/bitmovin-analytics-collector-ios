@@ -43,4 +43,8 @@ public class BitmovinPlayerCollector : Collector {
     @objc public func addSourceMetadata(playerSource: Source, sourceMetadata: SourceMetadata) {
         sourceMetadataProvider.add(source: playerSource, sourceMetadata: sourceMetadata)
     }
+    
+    @objc public func getUserId() -> String {
+        return analytics.getUserId()
+    }
 }

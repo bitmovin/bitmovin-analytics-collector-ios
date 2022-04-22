@@ -11,13 +11,7 @@ class EventDataFactoryTests: XCTestCase {
     
     func test_createEventData_should_returnEventDataWithBasicDataSet() {
         // arrange
-        let userIdProvider = MockUserIdProvider()
-        var getUserIdCnt = 0
-        userIdProvider.setActionForGetUserId {
-            getUserIdCnt += 1
-            return "test-user-id"
-        }
-        let eventDataFactory = createDefaultEventDataFactoryForTest(userIdProvider: userIdProvider)
+        let eventDataFactory = createDefaultEventDataFactoryForTest()
         
         // act
         let eventData = eventDataFactory.createEventData(
@@ -26,18 +20,17 @@ class EventDataFactoryTests: XCTestCase {
             nil,
             nil,
             nil,
-            nil)
+            nil,
+            ""
+        )
         
         // arrange
         XCTAssertEqual(eventData.version, UIDevice.current.systemVersion)
-        XCTAssertEqual(eventData.userId, "test-user-id")
-        XCTAssertEqual(getUserIdCnt, 1)
         XCTAssertEqual(eventData.domain, Util.mainBundleIdentifier())
         XCTAssertEqual(eventData.analyticsVersion, Util.version())
         XCTAssertEqual(eventData.language, DeviceInformationUtils.language())
         XCTAssertEqual(eventData.userAgent, DeviceInformationUtils.userAgent())
         XCTAssertNotNil(eventData.deviceInformation)
-        
     }
     
     func test_createEventData_should_returnEventDataWithAnalyticsVersionSet() {
@@ -51,7 +44,9 @@ class EventDataFactoryTests: XCTestCase {
             nil,
             nil,
             nil,
-            nil)
+            nil,
+            ""
+        )
         
         // arrange
         XCTAssertNotNil(eventData.analyticsVersion)
@@ -69,7 +64,9 @@ class EventDataFactoryTests: XCTestCase {
             nil,
             nil,
             nil,
-            nil)
+            nil,
+            ""
+        )
         
         // arrange
         XCTAssertEqual(eventData.key, config.key)
@@ -160,7 +157,9 @@ class EventDataFactoryTests: XCTestCase {
             Util.timeIntervalToCMTime(_: 0),
             Util.timeIntervalToCMTime(_: 10),
             60,
-            currentSourceMetadata)
+            currentSourceMetadata,
+            ""
+        )
         
         // arrange
         XCTAssertEqual(eventData.cdnProvider, currentSourceMetadata.cdnProvider)
@@ -211,7 +210,9 @@ class EventDataFactoryTests: XCTestCase {
             Util.timeIntervalToCMTime(_: 0),
             Util.timeIntervalToCMTime(_: 10),
             60,
-            nil)
+            nil,
+            "test-userId"
+        )
 
         // arrange
         XCTAssertEqual(eventData.state, "test-state")
@@ -219,25 +220,21 @@ class EventDataFactoryTests: XCTestCase {
         XCTAssertEqual(eventData.videoTimeStart, 0)
         XCTAssertEqual(eventData.videoTimeEnd, 10000)
         XCTAssertEqual(eventData.drmLoadTime, 60)
+        XCTAssertEqual(eventData.userId, "test-userId")
     }
     
     func test_serializeEventData() throws {
         
     }
     
-    private func createDefaultEventDataFactoryForTest(config: BitmovinAnalyticsConfig? = nil, userIdProvider: UserIdProvider? = nil) -> EventDataFactory {
+    private func createDefaultEventDataFactoryForTest(config: BitmovinAnalyticsConfig? = nil) -> EventDataFactory {
         
         var c = config
         if c == nil {
             c = getTestBitmovinConfig()
         }
         
-        var uip = userIdProvider
-        if uip == nil {
-            uip = RandomizedUserIdProvider()
-        }
-        
-        return EventDataFactory(c!, uip!)
+        return EventDataFactory(c!)
     }
     
     private func getTestBitmovinConfig() -> BitmovinAnalyticsConfig{
