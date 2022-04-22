@@ -9,4 +9,6 @@ public protocol Collector {
     func getCustomData() -> CustomData
     func setCustomData(customData: CustomData)
     func setCustomDataOnce(customData: CustomData)
+    
+    func getUserId() -> String
 }
