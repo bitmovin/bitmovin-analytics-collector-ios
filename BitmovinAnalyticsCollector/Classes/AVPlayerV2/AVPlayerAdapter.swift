@@ -341,22 +341,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
                 eventData.m3u8Url = urlAsset.url.absoluteString
             case .progressive:
                 eventData.progUrl = urlAsset.url.absoluteString
+                eventData.audioBitrate = getAudioBitrateFromProgressivePlayerItem(forItem: player.currentItem) ?? 0.0
             case .unknown:
                 break
-            }
-        }
-
-        // audio bitrate
-        if let asset = player.currentItem?.asset {
-            if !asset.tracks.isEmpty {
-                let tracks = asset.tracks(withMediaType: .audio)
-                if !tracks.isEmpty {
-                    let desc = tracks[0].formatDescriptions[0] as! CMAudioFormatDescription
-                    let basic = CMAudioFormatDescriptionGetStreamBasicDescription(desc)
-                    if let sampleRate = basic?.pointee.mSampleRate {
-                        eventData.audioBitrate = sampleRate
-                    }
-                }
             }
         }
 
@@ -379,6 +366,30 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
     }
 
+    func getAudioBitrateFromProgressivePlayerItem(forItem playerItem: AVPlayerItem?) -> Float64? {
+        // audio bitrate for progressive sources
+        guard let asset = playerItem?.asset else {
+            return nil
+        }
+        if asset.tracks.isEmpty {
+            return nil
+        }
+        
+        let tracks = asset.tracks(withMediaType: .audio)
+        if tracks.isEmpty {
+            return nil
+        }
+        
+        let desc = tracks[0].formatDescriptions[0] as! CMAudioFormatDescription
+        let basic = CMAudioFormatDescriptionGetStreamBasicDescription(desc)
+        
+        guard let sampleRate = basic?.pointee.mSampleRate else {
+            return nil
+        }
+        
+        return sampleRate
+    }
+    
     var currentTime: CMTime? {
         get {
             return player.currentTime()
