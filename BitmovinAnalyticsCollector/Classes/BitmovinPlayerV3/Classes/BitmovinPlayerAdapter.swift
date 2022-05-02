@@ -31,6 +31,8 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
     }
     
+    private var currentVideoQuality: VideoQuality? = nil
+    
     var currentSourceMetadata: SourceMetadata? {
         get {
             return sourceMetadataProvider.get(source: currentSource)
@@ -145,24 +147,12 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             eventData.isLive = fallbackIsLive
         }
 
-        // videoBitrate
-        if let bitrate = player.videoQuality?.bitrate {
-            eventData.videoBitrate = Double(bitrate)
-        }
-
-        // videoPlaybackWidth
-        if let videoPlaybackWidth = player.videoQuality?.width {
-            eventData.videoPlaybackWidth = Int(videoPlaybackWidth)
-        }
-
-        // videoPlaybackHeight
-        if let videoPlaybackHeight = player.videoQuality?.height {
-            eventData.videoPlaybackHeight = Int(videoPlaybackHeight)
-        }
-        
-        // videoCodec
-        if let videoCodec = player.videoQuality?.codec {
-            eventData.videoCodec = String(videoCodec)
+        // videoQuality
+        if let videoQuality = currentVideoQuality ?? player.videoQuality {
+            eventData.videoBitrate = Double(videoQuality.bitrate)
+            eventData.videoPlaybackWidth = Int(videoQuality.width)
+            eventData.videoPlaybackHeight = Int(videoQuality.height)
+            eventData.videoCodec = videoQuality.codec
         }
 
         // isMuted
@@ -338,8 +328,15 @@ extension BitmovinPlayerAdapter: PlayerListener {
             return
         }
         
+        // if nil we assume that previous quality is videoQualityOld
+        if currentVideoQuality == nil {
+            currentVideoQuality = event.videoQualityOld
+        }
+        
         stateMachine.videoQualityChange(time: currentTime)
         transitionToPausedOrBufferingOrPlaying()
+        
+        currentVideoQuality = event.videoQualityNew
     }
     
     // No check if audioBitrate changes because no data available
