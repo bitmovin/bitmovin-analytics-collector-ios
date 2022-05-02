@@ -200,13 +200,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return
         }
         
-        if event.numberOfBytesTransferred < 0 || event.segmentsDownloadedDuration <= 0 {
-            return
-        }
-        
-        // https://stackoverflow.com/questions/32406838/how-to-find-avplayer-current-bitrate
-        let numberOfBitsTransferred = (event.numberOfBytesTransferred * 8)
-        let newBitrate = Double(integerLiteral: numberOfBitsTransferred) / event.segmentsDownloadedDuration
+        let newBitrate = event.indicatedBitrate
         
         if currentVideoBitrate == 0 {
             currentVideoBitrate = newBitrate
@@ -337,10 +331,13 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             switch streamFormat {
             case .dash:
                 eventData.mpdUrl = urlAsset.url.absoluteString
+                //not possible to get audio bitrate from AVPlayer for adaptive streaming
             case .hls:
                 eventData.m3u8Url = urlAsset.url.absoluteString
+                //not possible to get audio bitrate from AVPlayer for adaptive streaming
             case .progressive:
                 eventData.progUrl = urlAsset.url.absoluteString
+                //audio bitrate for progressive streaming
                 eventData.audioBitrate = getAudioBitrateFromProgressivePlayerItem(forItem: player.currentItem) ?? 0.0
             case .unknown:
                 break
