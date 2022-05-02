@@ -312,15 +312,6 @@ extension BitmovinPlayerAdapter: PlayerListener {
         guard isEventRelevantForCurrentSource else {
             return
         }
-        // no quality change before video started
-        guard stateMachine.didStartPlayingVideo else {
-            return
-        }
-        
-        // no quality change during buffering and seeking
-        guard !isStalling && !isSeeking else {
-            return
-        }
         
         // no quality change if quality didn't change
         let videoBitrateDidChange = didVideoBitrateChange(old: event.videoQualityOld, new: event.videoQualityNew)
@@ -333,10 +324,9 @@ extension BitmovinPlayerAdapter: PlayerListener {
             currentVideoQuality = event.videoQualityOld
         }
         
-        stateMachine.videoQualityChange(time: currentTime)
-        transitionToPausedOrBufferingOrPlaying()
-        
-        currentVideoQuality = event.videoQualityNew
+        stateMachine.videoQualityChange(time: currentTime){ [weak self] in
+            self?.currentVideoQuality = event.videoQualityNew
+        }
     }
     
     // No check if audioBitrate changes because no data available
@@ -344,18 +334,8 @@ extension BitmovinPlayerAdapter: PlayerListener {
         guard isEventRelevantForCurrentSource else {
             return
         }
-        // no audio change before video started
-        guard stateMachine.didStartPlayingVideo else {
-            return
-        }
-        
-        // no audio change during buffering and seeking
-        guard !isStalling && !isSeeking else {
-            return
-        }
         
         stateMachine.audioQualityChange(time: currentTime)
-        transitionToPausedOrBufferingOrPlaying()
     }
 
     func onSeeked(_ event: SeekedEvent, player: Player) {

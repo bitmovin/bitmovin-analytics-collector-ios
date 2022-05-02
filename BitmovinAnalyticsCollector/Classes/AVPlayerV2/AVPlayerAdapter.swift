@@ -212,10 +212,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return
         }
         
-        let previousState = stateMachine.state
-        stateMachine.videoQualityChange(time: player.currentTime())
-        stateMachine.transitionState(destinationState: previousState, time: player.currentTime())
-        currentVideoBitrate = newBitrate
+        stateMachine.videoQualityChange(time: player.currentTime()) { [weak self] in
+            self?.currentVideoBitrate = newBitrate
+        }
     }
     
     // if seek into unbuffered area (no data) we get this event and know that it's a seek
