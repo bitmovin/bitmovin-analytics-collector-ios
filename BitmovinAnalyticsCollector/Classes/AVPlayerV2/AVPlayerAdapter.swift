@@ -16,8 +16,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     internal var currentSourceMetadata: SourceMetadata?
     
     // KVO references
-    var playerItemStatusObserver: NSKeyValueObservation?
-    var playerKVOList: Array<NSKeyValueObservation> = Array()
+    private var playerItemStatusObserver: NSKeyValueObservation?
+    private var playerKVOList: Array<NSKeyValueObservation> = Array()
+    private var bitrateDetectionServiceKVO: NSKeyValueObservation?
     
     // used for time tracking
     private var periodicTimeObserver: Any?
@@ -31,11 +32,13 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     
     // Helper classes
     private let errorHandler: ErrorHandler
+    private let bitrateDetectionService: BitrateDetectionService
     
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.config = config
         self.errorHandler = ErrorHandler()
+        self.bitrateDetectionService = BitrateDetectionService(player: player)
         super.init(stateMachine: stateMachine)
     }
     
@@ -78,6 +81,11 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         playerKVOList.append(player.observe(\.currentItem, options: [.new, .old, .initial]) {[weak self] (player, change) in
             self?.onPlayerCurrentItemChange(old: change.oldValue ?? nil, new: change.newValue ?? nil)
         })
+        
+        bitrateDetectionService.startMonitoring()
+        bitrateDetectionServiceKVO = bitrateDetectionService.observe(\.videoBitrate, options: [.new, .old, .initial]) { [weak self] _, change in
+            // TODO quality has changed
+        }
     }
 
     override public func stopMonitoring() {
@@ -99,6 +107,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             kvo.invalidate()
         }
         playerKVOList.removeAll()
+        
+        bitrateDetectionServiceKVO?.invalidate()
+        bitrateDetectionServiceKVO = nil
         
         resetSourceState()
     }
