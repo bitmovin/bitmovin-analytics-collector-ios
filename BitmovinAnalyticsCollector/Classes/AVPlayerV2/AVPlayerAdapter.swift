@@ -83,8 +83,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         })
         
         bitrateDetectionService.startMonitoring()
-        bitrateDetectionServiceKVO = bitrateDetectionService.observe(\.videoBitrate, options: [.new, .old, .initial]) { [weak self] _, change in
-            // TODO quality has changed
+        bitrateDetectionServiceKVO = bitrateDetectionService.observe(\.videoBitrate, options: [.new, .old]) { [weak self] _, change in
+            self?.onVideoQualityChange(newVideoBitrate: change.newValue ?? nil)
         }
     }
 
@@ -118,7 +118,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         playerItemStatusObserver = playerItem.observe(\.status) {[weak self] (item, _) in
             self?.onPlayerItemStatusChanged(item)
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(observeNewAccessLogEntry(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(observeTimeJumped(notification:)), name: AVPlayerItem.timeJumpedNotification, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(observePlaybackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(observeFailedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
@@ -127,7 +126,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
 
     private func stopMonitoringPlayerItem(playerItem: AVPlayerItem) {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: AVPlayerItem.timeJumpedNotification, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
@@ -204,29 +202,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     @objc private func observePlaybackStalled(notification _: Notification) {
         stateMachine.transitionState(destinationState: .buffering, time: player.currentTime())
     }
-
-    // Quality change event
-    @objc private func observeNewAccessLogEntry(notification: Notification) {
-        guard let item = notification.object as? AVPlayerItem, let event = item.accessLog()?.events.last else {
-            return
-        }
-        
-        let newBitrate = event.indicatedBitrate
-        
-        if currentVideoBitrate == 0 {
-            currentVideoBitrate = newBitrate
-            return
-        }
-        
-        // bitrate needs to change in order to trigger state change
-        if currentVideoBitrate == newBitrate {
-            return
-        }
-        
-        stateMachine.videoQualityChange(time: player.currentTime()) { [weak self] in
-            self?.currentVideoBitrate = newBitrate
-        }
-    }
     
     // if seek into unbuffered area (no data) we get this event and know that it's a seek
     @objc private func observeTimeJumped(notification _: Notification) {
@@ -234,6 +209,21 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
     
     // Helper methods
+    
+    private func onVideoQualityChange(newVideoBitrate: Double?) {
+        guard let videoBitrate = newVideoBitrate else {
+            return
+        }
+        
+        if currentVideoBitrate == 0 {
+            currentVideoBitrate = videoBitrate
+            return
+        }
+        
+        stateMachine.videoQualityChange(time: player.currentTime()) { [weak self] in
+            self?.currentVideoBitrate = videoBitrate
+        }
+    }
     
     // if seek into buffered area no timeJumped event occur and we register seek event here
     private func checkSeek(_ playerTime: CMTime) {
