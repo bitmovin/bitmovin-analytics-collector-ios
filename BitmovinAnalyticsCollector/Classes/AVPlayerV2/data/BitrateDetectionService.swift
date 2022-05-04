@@ -2,10 +2,12 @@ import Foundation
 import AVFoundation
 
 internal class BitrateDetectionService: NSObject {
+    private static let heartbeatInterval: Double = 1.0
     
     @objc dynamic var videoBitrate: Double
     
     private let player: AVPlayer
+    weak private var heartbeatTimer: Timer?
     
     init(player: AVPlayer) {
         self.player = player
@@ -13,14 +15,16 @@ internal class BitrateDetectionService: NSObject {
     }
     
     func startMonitoring() {
-        // TODO create Timer
+        heartbeatTimer?.invalidate()
+        heartbeatTimer = Timer.scheduledTimer(timeInterval: BitrateDetectionService.heartbeatInterval, target: self, selector: #selector(BitrateDetectionService.detectBitrateChange), userInfo: nil, repeats: true)
     }
     
     func stopMonitoring() {
-        // TODO kill timer
+        heartbeatTimer?.invalidate()
+        heartbeatTimer = nil
     }
     
-    private func detectBitrateChange() {
+    @objc private func detectBitrateChange() {
         guard let currentLogEntry = getCurrentLogEntry() else {
             return
         }
