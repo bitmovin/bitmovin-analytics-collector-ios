@@ -15,6 +15,8 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var drmType: String?
     
     private var isPlayerReady: Bool = false
+    
+    private var currentVideoQuality: VideoQuality? = nil
 
     init(player: Player, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
@@ -96,25 +98,12 @@ class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         // drmType
         eventData.drmType = self.drmType
         
-
-        // videoBitrate
-        if let bitrate = player.videoQuality?.bitrate {
-            eventData.videoBitrate = Double(bitrate)
-        }
-
-        // videoPlaybackWidth
-        if let videoPlaybackWidth = player.videoQuality?.width {
-            eventData.videoPlaybackWidth = Int(videoPlaybackWidth)
-        }
-
-        // videoPlaybackHeight
-        if let videoPlaybackHeight = player.videoQuality?.height {
-            eventData.videoPlaybackHeight = Int(videoPlaybackHeight)
-        }
-        
-        // videoCodec
-        if let videoCodec = player.videoQuality?.codec {
-            eventData.videoCodec = String(videoCodec)
+        // videoQuality
+        if let videoQuality = currentVideoQuality ?? player.videoQuality {
+            eventData.videoBitrate = Double(videoQuality.bitrate)
+            eventData.videoPlaybackWidth = Int(videoQuality.width)
+            eventData.videoPlaybackHeight = Int(videoQuality.height)
+            eventData.videoCodec = videoQuality.codec
         }
 
         let scale = UIScreen.main.scale
@@ -235,40 +224,25 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onVideoDownloadQualityChanged(_ event: VideoDownloadQualityChangedEvent) {
-        // no quality change before video started
-        guard stateMachine.didStartPlayingVideo else {
-            return
-        }
-        
-        // no quality change during buffering and seeking
-        guard !isStalling && !isSeeking else {
-            return
-        }
-        
         // no quality change if quality didn't change
         let videoBitrateDidChange = didVideoBitrateChange(old: event.videoQualityOld, new: event.videoQualityNew)
         guard videoBitrateDidChange else {
             return
         }
         
-        stateMachine.videoQualityChange(time: currentTime)
-        transitionToPausedOrBufferingOrPlaying()
+        // if nil we assume that previous quality is videoQualityOld
+        if currentVideoQuality == nil {
+            currentVideoQuality = event.videoQualityOld
+        }
+        
+        stateMachine.videoQualityChange(time: currentTime){ [weak self] in
+            self?.currentVideoQuality = event.videoQualityNew
+        }
     }
     
     // No check if audioBitrate changes because no data available
     func onAudioChanged(_ event: AudioChangedEvent) {
-        // no audio change before video started
-        guard stateMachine.didStartPlayingVideo else {
-            return
-        }
-        
-        // no audio change during buffering and seeking
-        guard !isStalling && !isSeeking else {
-            return
-        }
-        
         stateMachine.audioQualityChange(time: currentTime)
-        transitionToPausedOrBufferingOrPlaying()
     }
 
     func onSeeked(_ event: SeekedEvent) {

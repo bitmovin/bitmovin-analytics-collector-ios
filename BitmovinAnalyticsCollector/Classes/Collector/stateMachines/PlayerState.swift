@@ -12,6 +12,7 @@ public enum PlayerState: String {
     case qualitychange
     case seeking
     case subtitlechange
+    // TODO can be removed - both video and audio changes handled by `qualityChange` state
     case audiochange
     case playAttemptFailed
     case sourceChanged
@@ -110,6 +111,7 @@ public enum PlayerState: String {
             case .subtitlechange:
                 stateMachine.delegate?.stateMachineDidSubtitleChange(stateMachine)
                 return
+            // TODO can be removed
             case .audiochange:
                 stateMachine.delegate?.stateMachineDidAudioChange(stateMachine)
                 return

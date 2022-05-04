@@ -200,13 +200,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return
         }
         
-        if event.numberOfBytesTransferred < 0 || event.segmentsDownloadedDuration <= 0 {
-            return
-        }
-        
-        // https://stackoverflow.com/questions/32406838/how-to-find-avplayer-current-bitrate
-        let numberOfBitsTransferred = (event.numberOfBytesTransferred * 8)
-        let newBitrate = Double(integerLiteral: numberOfBitsTransferred) / event.segmentsDownloadedDuration
+        let newBitrate = event.indicatedBitrate
         
         if currentVideoBitrate == 0 {
             currentVideoBitrate = newBitrate
@@ -218,10 +212,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return
         }
         
-        let previousState = stateMachine.state
-        stateMachine.videoQualityChange(time: player.currentTime())
-        stateMachine.transitionState(destinationState: previousState, time: player.currentTime())
-        currentVideoBitrate = newBitrate
+        stateMachine.videoQualityChange(time: player.currentTime()) { [weak self] in
+            self?.currentVideoBitrate = newBitrate
+        }
     }
     
     // if seek into unbuffered area (no data) we get this event and know that it's a seek
@@ -337,26 +330,16 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             switch streamFormat {
             case .dash:
                 eventData.mpdUrl = urlAsset.url.absoluteString
+                //not possible to get audio bitrate from AVPlayer for adaptive streaming
             case .hls:
                 eventData.m3u8Url = urlAsset.url.absoluteString
+                //not possible to get audio bitrate from AVPlayer for adaptive streaming
             case .progressive:
                 eventData.progUrl = urlAsset.url.absoluteString
+                //audio bitrate for progressive streaming
+                eventData.audioBitrate = getAudioBitrateFromProgressivePlayerItem(forItem: player.currentItem) ?? 0.0
             case .unknown:
                 break
-            }
-        }
-
-        // audio bitrate
-        if let asset = player.currentItem?.asset {
-            if !asset.tracks.isEmpty {
-                let tracks = asset.tracks(withMediaType: .audio)
-                if !tracks.isEmpty {
-                    let desc = tracks[0].formatDescriptions[0] as! CMAudioFormatDescription
-                    let basic = CMAudioFormatDescriptionGetStreamBasicDescription(desc)
-                    if let sampleRate = basic?.pointee.mSampleRate {
-                        eventData.audioBitrate = sampleRate
-                    }
-                }
             }
         }
 
@@ -379,6 +362,30 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
     }
 
+    func getAudioBitrateFromProgressivePlayerItem(forItem playerItem: AVPlayerItem?) -> Float64? {
+        // audio bitrate for progressive sources
+        guard let asset = playerItem?.asset else {
+            return nil
+        }
+        if asset.tracks.isEmpty {
+            return nil
+        }
+        
+        let tracks = asset.tracks(withMediaType: .audio)
+        if tracks.isEmpty {
+            return nil
+        }
+        
+        let desc = tracks[0].formatDescriptions[0] as! CMAudioFormatDescription
+        let basic = CMAudioFormatDescriptionGetStreamBasicDescription(desc)
+        
+        guard let sampleRate = basic?.pointee.mSampleRate else {
+            return nil
+        }
+        
+        return sampleRate
+    }
+    
     var currentTime: CMTime? {
         get {
             return player.currentTime()

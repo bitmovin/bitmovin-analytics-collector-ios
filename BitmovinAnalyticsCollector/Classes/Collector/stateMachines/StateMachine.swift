@@ -118,18 +118,24 @@ public class StateMachine {
         transitionState(destinationState: .seeking, playerTime: time, enterTimestamp: overrideEnterTimestamp)
     }
     
-    public func videoQualityChange(time: CMTime?) {
-        if !qualityChangeCounter.isQualityChangeEnabled() {
-            return
-        }
-        transitionState(destinationState: .qualitychange, time: time)
+    public func videoQualityChange(time: CMTime?, setQualityFunction: @escaping () -> Void) {
+        qualityChange(.qualitychange, time: time, setQualityFunction: setQualityFunction)
     }
     
     public func audioQualityChange(time: CMTime?) {
+        qualityChange(.audiochange, time: time, setQualityFunction: nil)
+    }
+    
+    private func qualityChange(_ qualityState: PlayerState, time: CMTime?, setQualityFunction: (() -> Void)?) {
         if !qualityChangeCounter.isQualityChangeEnabled() {
+            setQualityFunction?()
             return
         }
-        transitionState(destinationState: .audiochange, time: time)
+        
+        let previousState = state
+        transitionState(destinationState: qualityState, time: time)
+        setQualityFunction?()
+        transitionState(destinationState: previousState, time: time)
     }
     
     public func error(withError error: ErrorData, time: CMTime?) {
@@ -206,11 +212,9 @@ public class StateMachine {
     private func checkUnallowedTransitions(destinationState: PlayerState) -> Bool{
         if state == destinationState {
             return false
-        } else if state == .buffering && destinationState == .qualitychange {
+        } else if state == .buffering && (destinationState == .qualitychange || destinationState == .audiochange) {
             return false
-        } else if state == .seeking && destinationState == .qualitychange {
-            return false
-        } else if state == .seeking && destinationState == .buffering {
+        } else if state == .seeking && (destinationState == .qualitychange || destinationState == .buffering || destinationState == .audiochange) {
             return false
         } else if state == .ready && (destinationState != .error && destinationState != .playAttemptFailed && destinationState != .startup && destinationState != .ad) {
             return false
@@ -220,7 +224,7 @@ public class StateMachine {
             return false
         } else if state == .playAttemptFailed {
             return false
-        } else if state == .paused && (destinationState == .qualitychange || destinationState == .seeking || destinationState == .buffering) {
+        } else if state == .paused && (destinationState == .qualitychange || destinationState == .seeking || destinationState == .buffering || destinationState == .audiochange) {
             return false
         }
         

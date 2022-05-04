@@ -10,10 +10,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - new method `getUserId` on all collectors to get used `userId`
 
+### Changed
+- AVPlayer: reworked tracking of video bitrate
+
 ## Development V1
 
 ### Added
 - new method `getUserId` on all collectors to get used `userId`
+
+### Changed
+- AVPlayer: reworked tracking of video bitrate
 
 ## 2.8.0
 

@@ -31,6 +31,8 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
     }
     
+    private var currentVideoQuality: VideoQuality? = nil
+    
     var currentSourceMetadata: SourceMetadata? {
         get {
             return sourceMetadataProvider.get(source: currentSource)
@@ -145,24 +147,12 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             eventData.isLive = fallbackIsLive
         }
 
-        // videoBitrate
-        if let bitrate = player.videoQuality?.bitrate {
-            eventData.videoBitrate = Double(bitrate)
-        }
-
-        // videoPlaybackWidth
-        if let videoPlaybackWidth = player.videoQuality?.width {
-            eventData.videoPlaybackWidth = Int(videoPlaybackWidth)
-        }
-
-        // videoPlaybackHeight
-        if let videoPlaybackHeight = player.videoQuality?.height {
-            eventData.videoPlaybackHeight = Int(videoPlaybackHeight)
-        }
-        
-        // videoCodec
-        if let videoCodec = player.videoQuality?.codec {
-            eventData.videoCodec = String(videoCodec)
+        // videoQuality
+        if let videoQuality = currentVideoQuality ?? player.videoQuality {
+            eventData.videoBitrate = Double(videoQuality.bitrate)
+            eventData.videoPlaybackWidth = Int(videoQuality.width)
+            eventData.videoPlaybackHeight = Int(videoQuality.height)
+            eventData.videoCodec = videoQuality.codec
         }
 
         // isMuted
@@ -322,15 +312,6 @@ extension BitmovinPlayerAdapter: PlayerListener {
         guard isEventRelevantForCurrentSource else {
             return
         }
-        // no quality change before video started
-        guard stateMachine.didStartPlayingVideo else {
-            return
-        }
-        
-        // no quality change during buffering and seeking
-        guard !isStalling && !isSeeking else {
-            return
-        }
         
         // no quality change if quality didn't change
         let videoBitrateDidChange = didVideoBitrateChange(old: event.videoQualityOld, new: event.videoQualityNew)
@@ -338,8 +319,14 @@ extension BitmovinPlayerAdapter: PlayerListener {
             return
         }
         
-        stateMachine.videoQualityChange(time: currentTime)
-        transitionToPausedOrBufferingOrPlaying()
+        // if nil we assume that previous quality is videoQualityOld
+        if currentVideoQuality == nil {
+            currentVideoQuality = event.videoQualityOld
+        }
+        
+        stateMachine.videoQualityChange(time: currentTime){ [weak self] in
+            self?.currentVideoQuality = event.videoQualityNew
+        }
     }
     
     // No check if audioBitrate changes because no data available
@@ -347,18 +334,8 @@ extension BitmovinPlayerAdapter: PlayerListener {
         guard isEventRelevantForCurrentSource else {
             return
         }
-        // no audio change before video started
-        guard stateMachine.didStartPlayingVideo else {
-            return
-        }
-        
-        // no audio change during buffering and seeking
-        guard !isStalling && !isSeeking else {
-            return
-        }
         
         stateMachine.audioQualityChange(time: currentTime)
-        transitionToPausedOrBufferingOrPlaying()
     }
 
     func onSeeked(_ event: SeekedEvent, player: Player) {
