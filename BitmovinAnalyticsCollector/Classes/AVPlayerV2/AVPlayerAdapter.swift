@@ -38,7 +38,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.player = player
         self.config = config
         self.errorHandler = ErrorHandler()
-        self.bitrateDetectionService = BitrateDetectionService(player: player)
+        self.bitrateDetectionService = BitrateDetectionService(bitrateLogProvider: AVPlayerBitrateLogProvider(player: player))
         super.init(stateMachine: stateMachine)
     }
     

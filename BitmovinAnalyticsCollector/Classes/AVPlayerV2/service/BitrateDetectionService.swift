@@ -6,13 +6,11 @@ internal class BitrateDetectionService: NSObject {
     
     @objc dynamic var videoBitrate: Double
     
-    private let player: AVPlayer
+    private let bitrateLogProvider: BitrateLogProvider
     weak private var heartbeatTimer: Timer?
     
-    
-    // TODO refactor for testability
-    init(player: AVPlayer) {
-        self.player = player
+    init(bitrateLogProvider: BitrateLogProvider) {
+        self.bitrateLogProvider = bitrateLogProvider
         self.videoBitrate = 0
     }
     
@@ -45,8 +43,8 @@ internal class BitrateDetectionService: NSObject {
      returns the last AccessLogEntry with durationWatched > 0
      for us this is the current relevant entry
      */
-    private func getCurrentLogEntry() -> AVPlayerItemAccessLogEvent? {
-        guard let events = player.currentItem?.accessLog()?.events else {
+    private func getCurrentLogEntry() -> BitrateLogDto? {
+        guard let events = bitrateLogProvider.getEvents() else {
             return nil
         }
         
