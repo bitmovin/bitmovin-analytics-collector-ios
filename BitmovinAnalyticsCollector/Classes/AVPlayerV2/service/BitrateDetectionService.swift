@@ -9,6 +9,8 @@ internal class BitrateDetectionService: NSObject {
     private let player: AVPlayer
     weak private var heartbeatTimer: Timer?
     
+    
+    // TODO refactor for testability
     init(player: AVPlayer) {
         self.player = player
         self.videoBitrate = 0
@@ -28,6 +30,8 @@ internal class BitrateDetectionService: NSObject {
         guard let currentLogEntry = getCurrentLogEntry() else {
             return
         }
+        
+        print("BitrateDetectionService: indicatedBitrate: \(currentLogEntry.indicatedBitrate)")
         
         if currentLogEntry.indicatedBitrate == videoBitrate {
             return
