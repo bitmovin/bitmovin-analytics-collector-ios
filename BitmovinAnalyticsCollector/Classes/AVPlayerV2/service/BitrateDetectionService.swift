@@ -24,7 +24,7 @@ internal class BitrateDetectionService: NSObject {
         heartbeatTimer = nil
     }
     
-    @objc private func detectBitrateChange() {
+    @objc func detectBitrateChange() {
         guard let currentLogEntry = getCurrentLogEntry() else {
             return
         }
