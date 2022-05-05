@@ -76,6 +76,7 @@ class EventDataFactory {
             eventData.videoTitle = metadata.title
             eventData.experimentName = metadata.experimentName
             eventData.path = metadata.path
+            eventData.isLive = metadata.isLive
         }
         else {
             eventData.cdnProvider = config.cdnProvider
@@ -113,6 +114,7 @@ class EventDataFactory {
             eventData.videoTitle = config.title
             eventData.experimentName = config.experimentName
             eventData.path = config.path
+            eventData.isLive = config.isLive
         }
     }
     

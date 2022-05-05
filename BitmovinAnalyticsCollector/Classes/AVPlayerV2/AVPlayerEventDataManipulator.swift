@@ -3,7 +3,6 @@ import AVFoundation
 
 class AVPlayerEventDataManipulator {
     
-    private let config: BitmovinAnalyticsConfig
     private let player: AVPlayer
     
     // event data tracking
@@ -14,9 +13,8 @@ class AVPlayerEventDataManipulator {
     // Helper classes
     private let playbackTypeDetectionService: PlaybackTypeDetectionService
     
-    init(player: AVPlayer, config: BitmovinAnalyticsConfig, playbackTypeDetectionService: PlaybackTypeDetectionService) {
+    init(player: AVPlayer, playbackTypeDetectionService: PlaybackTypeDetectionService) {
         self.player = player
-        self.config = config
         self.playbackTypeDetectionService = playbackTypeDetectionService
     }
     
@@ -47,8 +45,6 @@ class AVPlayerEventDataManipulator {
         // isLive
         if playbackTypeDetectionService.playbackType != nil {
             eventData.isLive = playbackTypeDetectionService.isLive()
-        } else {
-            eventData.isLive = config.isLive
         }
 
         // version
