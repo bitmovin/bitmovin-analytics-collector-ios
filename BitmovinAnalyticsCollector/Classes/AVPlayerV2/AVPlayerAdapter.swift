@@ -28,7 +28,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     // event data tracking
     internal var drmDownloadTime: Int64?
     private var drmType: String?
-    private var currentVideoBitrate: Double = 0
+    private var currentVideoQuality: VideoQualityDto?
     
     // Helper classes
     private let errorHandler: ErrorHandler
@@ -52,7 +52,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
     
     func resetSourceState() {
-        currentVideoBitrate = 0
+        currentVideoQuality = nil
         previousTime = nil
         previousTimestamp = 0
         drmType = nil
@@ -215,13 +215,15 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             return
         }
         
-        if currentVideoBitrate == 0 {
-            currentVideoBitrate = videoBitrate
+        let videoQuality = getVideoQualityDto(videoBitrate: videoBitrate)
+        
+        if currentVideoQuality == nil {
+            currentVideoQuality = videoQuality
             return
         }
         
         stateMachine.videoQualityChange(time: player.currentTime()) { [weak self] in
-            self?.currentVideoBitrate = videoBitrate
+            self?.currentVideoQuality = videoQuality
         }
     }
     
@@ -344,17 +346,11 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             }
         }
 
-        // video bitrate
-        eventData.videoBitrate = currentVideoBitrate
-
-        // videoPlaybackWidth
-        if let width = player.currentItem?.presentationSize.width {
-            eventData.videoPlaybackWidth = Int(width)
-        }
-
-        // videoPlaybackHeight
-        if let height = player.currentItem?.presentationSize.height {
-            eventData.videoPlaybackHeight = Int(height)
+        // video quality
+        if let videoQuality = currentVideoQuality {
+            eventData.videoBitrate = videoQuality.videoBitrate
+            eventData.videoPlaybackWidth = videoQuality.videoWidth
+            eventData.videoPlaybackHeight = videoQuality.videoHeight
         }
 
         // isMuted
@@ -385,6 +381,24 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
         
         return sampleRate
+    }
+    
+    func getVideoQualityDto(videoBitrate: Double) -> VideoQualityDto {
+        
+        let videoQuality = VideoQualityDto()
+        videoQuality.videoBitrate = videoBitrate
+        
+        // videoPlaybackWidth
+        if let width = player.currentItem?.presentationSize.width {
+            videoQuality.videoWidth = Int(width)
+        }
+
+        // videoPlaybackHeight
+        if let height = player.currentItem?.presentationSize.height {
+            videoQuality.videoHeight = Int(height)
+        }
+        
+        return videoQuality
     }
     
     var currentTime: CMTime? {
