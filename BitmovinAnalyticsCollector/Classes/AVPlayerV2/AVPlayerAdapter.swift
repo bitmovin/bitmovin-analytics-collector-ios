@@ -108,6 +108,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
         playerKVOList.removeAll()
         
+        bitrateDetectionService.stopMonitoring()
         bitrateDetectionServiceKVO?.invalidate()
         bitrateDetectionServiceKVO = nil
         
