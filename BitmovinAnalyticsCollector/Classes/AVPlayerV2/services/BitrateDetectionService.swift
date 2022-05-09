@@ -6,11 +6,11 @@ internal class BitrateDetectionService: NSObject {
     
     @objc dynamic private(set) var videoBitrate: Double
     
-    private let bitrateLogProvider: BitrateLogProvider
+    private let accessLogProvider: AccessLogProvider
     weak private var heartbeatTimer: Timer?
     
-    init(bitrateLogProvider: BitrateLogProvider) {
-        self.bitrateLogProvider = bitrateLogProvider
+    init(accessLogProvider: AccessLogProvider) {
+        self.accessLogProvider = accessLogProvider
         self.videoBitrate = 0
     }
     
@@ -47,8 +47,8 @@ internal class BitrateDetectionService: NSObject {
      returns the last AccessLogEntry with durationWatched > 0
      for us this is the current relevant entry
      */
-    private func getCurrentLogEntry() -> BitrateLogDto? {
-        guard let events = bitrateLogProvider.getEvents() else {
+    private func getCurrentLogEntry() -> AccessLogDto? {
+        guard let events = accessLogProvider.getEvents() else {
             return nil
         }
         
