@@ -53,6 +53,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     func resetSourceState() {
         manipulator.resetSourceState()
         playbackTypeDetectionService.resetSourceState()
+        bitrateDetectionService.resetSourceState()
         previousTime = nil
         previousTimestamp = 0
     }
