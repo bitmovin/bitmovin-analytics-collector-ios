@@ -31,9 +31,14 @@ internal class DownloadSpeedDetectionService: NSObject {
         return calculateDownloadInfo(prevLogs, currentLogs, prevTimestamp)
     }
     
-    private func calculateDownloadInfo(_ prevLogs: [AccessLogDto], _ currentLogs: [AccessLogDto], _ prevTimestamp: Int64) -> DownloadSpeedInfoDto {
+    private func calculateDownloadInfo(_ prevLogs: [AccessLogDto], _ currentLogs: [AccessLogDto], _ prevTimestamp: Int64) -> DownloadSpeedInfoDto? {
         let downloadSpeedInfo = DownloadSpeedInfoDto()
         downloadSpeedInfo.segmentsDownloadTime = Date().timeIntervalSince1970Millis - prevTimestamp
+        
+        if (prevLogs.count <= 0 || currentLogs.count <= 0) {
+            return nil
+        }
+        
         for i in 0...prevLogs.count-1 {
             let prevLog = prevLogs[i]
             let currentLog = currentLogs[i]

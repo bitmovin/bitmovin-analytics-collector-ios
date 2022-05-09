@@ -39,7 +39,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.bitrateDetectionService = BitrateDetectionService(accessLogProvider: AVPlayerAccessLogProvider(player: player))
         self.playbackTypeDetectionService = PlaybackTypeDetectionService(player: player)
         self.downloadSpeedDetectionService = DownloadSpeedDetectionService(accessLogProvider: AVPlayerAccessLogProvider(player: player))
-        self.manipulator = AVPlayerEventDataManipulator(player: player, playbackTypeDetectionService: playbackTypeDetectionService)
+        self.manipulator = AVPlayerEventDataManipulator(player: player, playbackTypeDetectionService: playbackTypeDetectionService, downloadSpeedDetectionService: downloadSpeedDetectionService)
         super.init(stateMachine: stateMachine)
     }
     
