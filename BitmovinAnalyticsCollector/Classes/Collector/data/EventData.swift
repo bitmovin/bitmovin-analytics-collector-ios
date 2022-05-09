@@ -97,6 +97,7 @@ public class EventData: Codable {
     public var audioLanguage: String?
     public var videoStartFailed: Bool?
     public var videoStartFailedReason: String?
+    public var downloadSpeedInfo: DownloadSpeedInfoDto?
 
     init(_ impressionId: String) {
         self.impressionId = impressionId
