@@ -99,8 +99,6 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             eventData.version = PlayerType.bitmovin.rawValue + "-" + sdkVersion
         }
         
-        let fallbackIsLive = currentSourceMetadata?.isLive ?? config.isLive
-        
         if let source = currentSource{
             let sourceConfig = source.sourceConfig
             // streamFormat & urls
@@ -119,9 +117,7 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             
             // isLive & duration
             let duration = source.duration
-            if (duration == 0) {
-                eventData.isLive = fallbackIsLive
-            } else {
+            if (duration != 0) {
                 if (duration.isInfinite) {
                     eventData.isLive = true;
                 } else {
@@ -142,9 +138,6 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
                     eventData.drmType = DrmType.clearkey.rawValue
                 }
             }
-        } else {
-            // player active Source is not available
-            eventData.isLive = fallbackIsLive
         }
 
         // videoQuality
