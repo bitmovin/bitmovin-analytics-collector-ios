@@ -16,8 +16,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     internal var currentSourceMetadata: SourceMetadata?
     
     // KVO references
-    var playerItemStatusObserver: NSKeyValueObservation?
-    var playerKVOList: Array<NSKeyValueObservation> = Array()
+    private var playerItemStatusObserver: NSKeyValueObservation?
+    private var playerKVOList: Array<NSKeyValueObservation> = Array()
+    private var bitrateDetectionServiceKVO: NSKeyValueObservation?
     
     // used for time tracking
     private var periodicTimeObserver: Any?
@@ -27,15 +28,17 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     // event data tracking
     internal var drmDownloadTime: Int64?
     private var drmType: String?
-    private var currentVideoBitrate: Double = 0
+    private var currentVideoQuality: VideoQualityDto?
     
     // Helper classes
     private let errorHandler: ErrorHandler
+    private let bitrateDetectionService: BitrateDetectionService
     
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
         self.player = player
         self.config = config
         self.errorHandler = ErrorHandler()
+        self.bitrateDetectionService = BitrateDetectionService(bitrateLogProvider: AVPlayerBitrateLogProvider(player: player))
         super.init(stateMachine: stateMachine)
     }
     
@@ -49,11 +52,12 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
     
     func resetSourceState() {
-        currentVideoBitrate = 0
+        currentVideoQuality = nil
         previousTime = nil
         previousTimestamp = 0
         drmType = nil
         drmDownloadTime = nil
+        bitrateDetectionService.resetSourceState()
     }
     
     // Monitoring
@@ -78,6 +82,11 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         playerKVOList.append(player.observe(\.currentItem, options: [.new, .old, .initial]) {[weak self] (player, change) in
             self?.onPlayerCurrentItemChange(old: change.oldValue ?? nil, new: change.newValue ?? nil)
         })
+        
+        bitrateDetectionService.startMonitoring()
+        bitrateDetectionServiceKVO = bitrateDetectionService.observe(\.videoBitrate, options: [.new, .old]) { [weak self] _, change in
+            self?.onVideoQualityChange(newVideoBitrate: change.newValue ?? nil)
+        }
     }
 
     override public func stopMonitoring() {
@@ -100,6 +109,10 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
         playerKVOList.removeAll()
         
+        bitrateDetectionService.stopMonitoring()
+        bitrateDetectionServiceKVO?.invalidate()
+        bitrateDetectionServiceKVO = nil
+        
         resetSourceState()
     }
 
@@ -107,7 +120,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         playerItemStatusObserver = playerItem.observe(\.status) {[weak self] (item, _) in
             self?.onPlayerItemStatusChanged(item)
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(observeNewAccessLogEntry(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(observeTimeJumped(notification:)), name: AVPlayerItem.timeJumpedNotification, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(observePlaybackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(observeFailedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
@@ -116,7 +128,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
 
     private func stopMonitoringPlayerItem(playerItem: AVPlayerItem) {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: AVPlayerItem.timeJumpedNotification, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
@@ -193,29 +204,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     @objc private func observePlaybackStalled(notification _: Notification) {
         stateMachine.transitionState(destinationState: .buffering, time: player.currentTime())
     }
-
-    // Quality change event
-    @objc private func observeNewAccessLogEntry(notification: Notification) {
-        guard let item = notification.object as? AVPlayerItem, let event = item.accessLog()?.events.last else {
-            return
-        }
-        
-        let newBitrate = event.indicatedBitrate
-        
-        if currentVideoBitrate == 0 {
-            currentVideoBitrate = newBitrate
-            return
-        }
-        
-        // bitrate needs to change in order to trigger state change
-        if currentVideoBitrate == newBitrate {
-            return
-        }
-        
-        stateMachine.videoQualityChange(time: player.currentTime()) { [weak self] in
-            self?.currentVideoBitrate = newBitrate
-        }
-    }
     
     // if seek into unbuffered area (no data) we get this event and know that it's a seek
     @objc private func observeTimeJumped(notification _: Notification) {
@@ -223,6 +211,23 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
     
     // Helper methods
+    
+    private func onVideoQualityChange(newVideoBitrate: Double?) {
+        guard let videoBitrate = newVideoBitrate else {
+            return
+        }
+        
+        let videoQuality = getVideoQualityDto(videoBitrate: videoBitrate)
+        
+        if currentVideoQuality == nil {
+            currentVideoQuality = videoQuality
+            return
+        }
+        
+        stateMachine.videoQualityChange(time: player.currentTime()) { [weak self] in
+            self?.currentVideoQuality = videoQuality
+        }
+    }
     
     // if seek into buffered area no timeJumped event occur and we register seek event here
     private func checkSeek(_ playerTime: CMTime) {
@@ -343,17 +348,11 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             }
         }
 
-        // video bitrate
-        eventData.videoBitrate = currentVideoBitrate
-
-        // videoPlaybackWidth
-        if let width = player.currentItem?.presentationSize.width {
-            eventData.videoPlaybackWidth = Int(width)
-        }
-
-        // videoPlaybackHeight
-        if let height = player.currentItem?.presentationSize.height {
-            eventData.videoPlaybackHeight = Int(height)
+        // video quality
+        if let videoQuality = currentVideoQuality {
+            eventData.videoBitrate = videoQuality.videoBitrate
+            eventData.videoPlaybackWidth = videoQuality.videoWidth
+            eventData.videoPlaybackHeight = videoQuality.videoHeight
         }
 
         // isMuted
@@ -384,6 +383,24 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
         
         return sampleRate
+    }
+    
+    func getVideoQualityDto(videoBitrate: Double) -> VideoQualityDto {
+        
+        let videoQuality = VideoQualityDto()
+        videoQuality.videoBitrate = videoBitrate
+        
+        // videoPlaybackWidth
+        if let width = player.currentItem?.presentationSize.width {
+            videoQuality.videoWidth = Int(width)
+        }
+
+        // videoPlaybackHeight
+        if let height = player.currentItem?.presentationSize.height {
+            videoQuality.videoHeight = Int(height)
+        }
+        
+        return videoQuality
     }
     
     var currentTime: CMTime? {
