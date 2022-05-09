@@ -57,6 +57,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         previousTimestamp = 0
         drmType = nil
         drmDownloadTime = nil
+        bitrateDetectionService.resetSourceState()
     }
     
     // Monitoring
