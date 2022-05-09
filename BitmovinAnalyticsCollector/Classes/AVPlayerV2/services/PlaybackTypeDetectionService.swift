@@ -19,6 +19,10 @@ class PlaybackTypeDetectionService {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
     }
     
+    func resetSourceState() {
+        playbackType = nil
+    }
+    
     func isLive() -> Bool {
         switch(playbackType?.uppercased()) {
         case "VOD":
