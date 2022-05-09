@@ -17,6 +17,7 @@ class PlaybackTypeDetectionService {
     
     func stopMonitoring(playerItem: AVPlayerItem) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
+        resetSourceState()
     }
     
     func resetSourceState() {
