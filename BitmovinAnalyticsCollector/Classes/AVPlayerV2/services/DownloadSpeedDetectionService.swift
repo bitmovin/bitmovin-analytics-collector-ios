@@ -32,6 +32,14 @@ internal class DownloadSpeedDetectionService: NSObject {
             return nil
         }
         
+        guard let downloadSpeedInfo = calculateDownloadInfo(prevLogs, currentLogs, prevTimestamp) else {
+            return nil
+        }
+        
+        if (downloadSpeedInfo.segmentsDownloadCount <= 0 || downloadSpeedInfo.segmentsDownloadSize <= 0) {
+            return nil
+        }
+        
         return calculateDownloadInfo(prevLogs, currentLogs, prevTimestamp)
     }
     
