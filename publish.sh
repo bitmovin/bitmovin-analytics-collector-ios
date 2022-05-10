@@ -10,23 +10,6 @@ setEnvVariable () {
     fi
 }
 
-notifyApi () {
-  PLATFORM=$1
-  VERSION=$2
-  curl "https://api.bitmovin.com/v1/admin/analytics/releases/$PLATFORM/v$VERSION" -H "X-Api-Key:$ANALYTICS_API_RELEASE_TOKEN" -H "Content-Type:application/json" \
-    --data-binary "{
-        \"podName\": \"BitmovinAnalyticsCollector\",
-        \"gitUrl\":\"https://github.com/bitmovin/bitmovin-analytics-collector-ios.git\",
-        \"gitTag\": \"$VERSION\"
-      }" > /dev/null 2>&1
-
-  if [ $? -eq 0 ]; then
-    echo "Published Release $PLATFORM:$VERSION to Bitmovin API"
-  else
-    echo "Failed to publish release to Bitmovin API"
-  fi
-}
-
 if test -e ~/.bashrc; then
   source ~/.bashrc
 fi
@@ -96,8 +79,8 @@ bundle exec fastlane release
 
 echo "Don't forget to create and merge the pull request in the cocoapod-specs repo."
 
-notifyApi "ios" $VERSION
-notifyApi "tvos" $VERSION
+./deployment/notifyCollectorReleaseChannel "ios" $VERSION
+./deployment/notifyCollectorReleaseChannel "tvos" $VERSION
 
 echo "Don't forget to update the changelog in Contentful."
 open "https://app.contentful.com/spaces/blfijbdi3ei3/entries"
