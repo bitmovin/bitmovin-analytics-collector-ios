@@ -36,9 +36,10 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.player = player
         self.config = config
         self.errorHandler = ErrorHandler()
-        self.bitrateDetectionService = BitrateDetectionService(accessLogProvider: AVPlayerAccessLogProvider(player: player))
+        let accessLogProvider = AVPlayerAccessLogProvider(player: player)
+        self.bitrateDetectionService = BitrateDetectionService(accessLogProvider: accessLogProvider)
+        self.downloadSpeedDetectionService = DownloadSpeedDetectionService(accessLogProvider: accessLogProvider)
         self.playbackTypeDetectionService = PlaybackTypeDetectionService(player: player)
-        self.downloadSpeedDetectionService = DownloadSpeedDetectionService(accessLogProvider: AVPlayerAccessLogProvider(player: player))
         self.manipulator = AVPlayerEventDataManipulator(player: player, playbackTypeDetectionService: playbackTypeDetectionService, downloadSpeedDetectionService: downloadSpeedDetectionService)
         super.init(stateMachine: stateMachine)
     }
