@@ -1,5 +1,10 @@
 import Foundation
 import AVFoundation
+import UIKit
+
+#if SWIFT_PACKAGE
+import CoreCollector
+#endif
 
 class AVPlayerEventDataManipulator {
     

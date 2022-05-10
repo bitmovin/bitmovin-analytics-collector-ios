@@ -13,10 +13,10 @@ class AVPlayerAccessLogProvider: AccessLogProvider {
             return nil
         }
         
-        var log: [AccessLogDto]? = []
+        let log: [AccessLogDto]? = []
         
         for event in accessEvents {
-            var logDto = toBitrateLogDto(event)
+            let logDto = toBitrateLogDto(event)
             logDto.index = accessEvents.lastIndex(of: event) ?? 0
         }
         return log

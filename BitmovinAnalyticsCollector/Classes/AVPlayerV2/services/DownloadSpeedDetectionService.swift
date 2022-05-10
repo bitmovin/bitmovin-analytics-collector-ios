@@ -1,6 +1,10 @@
 import Foundation
 import AVFoundation
 
+#if SWIFT_PACKAGE
+import CoreCollector
+#endif
+
 internal class DownloadSpeedDetectionService: NSObject {
     private let accessLogProvider: AccessLogProvider
     private var accessLog: [AccessLogDto]? = nil
@@ -55,6 +59,9 @@ internal class DownloadSpeedDetectionService: NSObject {
         return downloadSpeedInfo
     }
     
+    /*
+     saves the current state of the accessLog
+     */
     func saveSnapshot() {
         accessLog = accessLogProvider.getEvents()
         timestamp = Date().timeIntervalSince1970Millis
