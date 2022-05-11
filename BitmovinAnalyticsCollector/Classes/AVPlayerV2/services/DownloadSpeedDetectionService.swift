@@ -36,11 +36,19 @@ internal class DownloadSpeedDetectionService: NSObject {
             return nil
         }
         
-        if (downloadSpeedInfo.segmentsDownloadCount <= 0 || downloadSpeedInfo.segmentsDownloadSize <= 0) {
+        // -1 values for segmentsCount and time are ignored in PAS
+        if downloadSpeedInfo.segmentsDownloadSize < 0 {
             return nil
         }
         
-        return calculateDownloadInfo(prevLogs, currentLogs, prevTimestamp)
+        // if too little time for the accessLog to update has passed between two samples discard 0 values for count and size
+        if (downloadSpeedInfo.segmentsDownloadSize == 0 && downloadSpeedInfo.segmentsDownloadCount == 0) {
+            if (downloadSpeedInfo.segmentsDownloadTime <= 200) {
+                return nil
+            }
+        }
+        
+        return downloadSpeedInfo
     }
     
     private func calculateDownloadInfo(_ prevLogs: [AccessLogDto], _ currentLogs: [AccessLogDto], _ prevTimestamp: Int64) -> DownloadSpeedInfoDto? {
@@ -57,6 +65,7 @@ internal class DownloadSpeedDetectionService: NSObject {
             downloadSpeedInfo.segmentsDownloadSize += currentLog.numberofBytesTransfered - prevLog.numberofBytesTransfered
             downloadSpeedInfo.segmentsDownloadCount += currentLog.numberOfMediaRequests - prevLog.numberOfMediaRequests
         }
+        
         if (prevLogs.count < currentLogs.count) {
             for i in prevLogs.count-1...currentLogs.count-1 {
                 let currentLog = currentLogs[i]
