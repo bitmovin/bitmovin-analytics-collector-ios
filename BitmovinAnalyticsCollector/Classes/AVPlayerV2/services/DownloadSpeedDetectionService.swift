@@ -67,7 +67,7 @@ internal class DownloadSpeedDetectionService: NSObject {
         }
         
         if (prevLogs.count < currentLogs.count) {
-            for i in prevLogs.count-1...currentLogs.count-1 {
+            for i in prevLogs.count...currentLogs.count-1 {
                 let currentLog = currentLogs[i]
                 downloadSpeedInfo.segmentsDownloadSize += currentLog.numberofBytesTransfered
                 downloadSpeedInfo.segmentsDownloadCount += currentLog.numberOfMediaRequests
