@@ -17,12 +17,12 @@ class AVPlayerEventDataManipulator {
     
     // Helper classes
     private let playbackTypeDetectionService: PlaybackTypeDetectionService
-    private let downloadSpeedDetectionService: DownloadSpeedDetectionService
+    private let downloadSpeedMeter: DownloadSpeedMeter
     
-    init(player: AVPlayer, playbackTypeDetectionService: PlaybackTypeDetectionService, downloadSpeedDetectionService: DownloadSpeedDetectionService) {
+    init(player: AVPlayer, playbackTypeDetectionService: PlaybackTypeDetectionService, downloadSpeedMeter: DownloadSpeedMeter) {
         self.player = player
         self.playbackTypeDetectionService = playbackTypeDetectionService
-        self.downloadSpeedDetectionService = downloadSpeedDetectionService
+        self.downloadSpeedMeter = downloadSpeedMeter
     }
     
     func resetSourceState() {
@@ -88,10 +88,7 @@ class AVPlayerEventDataManipulator {
             eventData.isMuted = true
         }
         
-        if let downloadSpeedInfo = downloadSpeedDetectionService.getDownloadSpeedInfo(atTime: eventData.time ?? Date().timeIntervalSince1970Millis) {
-            eventData.downloadSpeedInfo = downloadSpeedInfo
-        }
-        downloadSpeedDetectionService.saveSnapshot(forState: eventData.state, atTime: eventData.time ?? Date().timeIntervalSince1970Millis)
+        eventData.downloadSpeedInfo = downloadSpeedMeter.getInfo()
     }
     
     func updateDrmPerformanceInfo(_ playerItem: AVPlayerItem) {

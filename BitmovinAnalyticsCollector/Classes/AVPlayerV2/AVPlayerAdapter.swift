@@ -30,6 +30,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let bitrateDetectionService: BitrateDetectionService
     private let playbackTypeDetectionService: PlaybackTypeDetectionService
     private let downloadSpeedDetectionService: DownloadSpeedDetectionService
+    private let downloadSpeedMeter: DownloadSpeedMeter
     private let manipulator: AVPlayerEventDataManipulator
     
     init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
@@ -41,7 +42,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.downloadSpeedMeter = DownloadSpeedMeter()
         self.downloadSpeedDetectionService = DownloadSpeedDetectionService(accessLogProvider: accessLogProvider, downloadSpeedMeter: self.downloadSpeedMeter)
         self.playbackTypeDetectionService = PlaybackTypeDetectionService(player: player)
-        self.manipulator = AVPlayerEventDataManipulator(player: player, playbackTypeDetectionService: playbackTypeDetectionService, downloadSpeedDetectionService: downloadSpeedDetectionService)
+        self.manipulator = AVPlayerEventDataManipulator(player: player, playbackTypeDetectionService: playbackTypeDetectionService, downloadSpeedMeter: self.downloadSpeedMeter)
         super.init(stateMachine: stateMachine)
     }
     
