@@ -33,7 +33,9 @@ internal class BitrateDetectionService: NSObject {
             return
         }
         
-        print("BitrateDetectionService: indicatedBitrate: \(currentLogEntry.indicatedBitrate)")
+        if currentLogEntry.indicatedBitrate <= 0 {
+            return
+        }
         
         if currentLogEntry.indicatedBitrate == videoBitrate {
             return
