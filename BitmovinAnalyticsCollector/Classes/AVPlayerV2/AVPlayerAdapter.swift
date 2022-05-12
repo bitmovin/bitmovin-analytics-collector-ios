@@ -210,7 +210,19 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
     
     // if seek into unbuffered area (no data) we get this event and know that it's a seek
-    @objc private func observeTimeJumped(notification _: Notification) {
+    @objc private func observeTimeJumped(notification: Notification) {
+        // ignores this event when there was no playing yet
+        guard let prevPlayerTime = previousTime else {
+            return
+        }
+        
+        // if time dif between previous tracked playerTime and
+        // the current playerTime is bigger than the minimal seek time, it's a seek
+        let timeDelta = abs(CMTimeGetSeconds(player.currentTime() - prevPlayerTime))
+        if timeDelta < AVPlayerAdapter.minSeekDeltaSeconds {
+            return
+        }
+        
         stateMachine.transitionState(destinationState: .seeking, time: previousTime)
     }
     

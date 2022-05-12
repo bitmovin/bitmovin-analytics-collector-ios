@@ -13,13 +13,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - AVPlayer: reworked tracking of video bitrate
 
+### Fixed
+- AVPlayer: wrongly track multiple seek events instead of one event for progressice sources 
+
 ## Development V1
 
 ### Added
 - new method `getUserId` on all collectors to get used `userId`
-
-### Changed
-- AVPlayer: reworked tracking of video bitrate
 
 ## 2.8.0
 
