@@ -38,7 +38,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.errorHandler = ErrorHandler()
         let accessLogProvider = AVPlayerAccessLogProvider(player: player)
         self.bitrateDetectionService = BitrateDetectionService(accessLogProvider: accessLogProvider)
-        self.downloadSpeedDetectionService = DownloadSpeedDetectionService(accessLogProvider: accessLogProvider)
+        self.downloadSpeedMeter = DownloadSpeedMeter()
+        self.downloadSpeedDetectionService = DownloadSpeedDetectionService(accessLogProvider: accessLogProvider, downloadSpeedMeter: self.downloadSpeedMeter)
         self.playbackTypeDetectionService = PlaybackTypeDetectionService(player: player)
         self.manipulator = AVPlayerEventDataManipulator(player: player, playbackTypeDetectionService: playbackTypeDetectionService, downloadSpeedDetectionService: downloadSpeedDetectionService)
         super.init(stateMachine: stateMachine)
@@ -57,7 +58,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         manipulator.resetSourceState()
         playbackTypeDetectionService.resetSourceState()
         bitrateDetectionService.resetSourceState()
-        downloadSpeedDetectionService.resetSourceState()
         previousTime = nil
         previousTimestamp = 0
     }
@@ -93,6 +93,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         bitrateDetectionServiceKVO = bitrateDetectionService.observe(\.videoBitrate, options: [.new, .old]) { [weak self] _, change in
             self?.onVideoQualityChange(newVideoBitrate: change.newValue ?? nil)
         }
+        downloadSpeedDetectionService.startMonitoring()
     }
 
     override public func stopMonitoring() {
@@ -119,6 +120,8 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         bitrateDetectionServiceKVO?.invalidate()
         bitrateDetectionServiceKVO = nil
         
+        downloadSpeedDetectionService.stopMonitoring()
+        
         resetSourceState()
     }
 
@@ -132,7 +135,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         NotificationCenter.default.addObserver(self, selector: #selector(observeDidPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         manipulator.updateDrmPerformanceInfo(playerItem)
         playbackTypeDetectionService.startMonitoring(playerItem: playerItem)
-        downloadSpeedDetectionService.saveSnapshot(forState: nil, atTime: Date().timeIntervalSince1970Millis)
     }
 
     private func stopMonitoringPlayerItem(playerItem: AVPlayerItem) {

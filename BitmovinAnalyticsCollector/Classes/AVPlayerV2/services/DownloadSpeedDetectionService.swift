@@ -7,131 +7,84 @@ import CoreCollector
 
 internal class DownloadSpeedDetectionService: NSObject {
     private static let segmentsDownloadTimeMinThreshold: Int = 200
+    private static let heartbeatInterval: Double = 1.0
+    private static let SECONDS: Int64 = 1000
     
     private let accessLogProvider: AccessLogProvider
-    private var accessLog: [AccessLogDto]? = nil
+    private let downloadSpeedMeter: DownloadSpeedMeter
+    
+    weak private var heartbeatTimer: Timer?
+    
+    private var prevAccessLog: [AccessLogDto]? = nil
     private var timestamp: Int64? = nil
     
-    init(accessLogProvider: AccessLogProvider) {
+    init(accessLogProvider: AccessLogProvider, downloadSpeedMeter: DownloadSpeedMeter) {
         self.accessLogProvider = accessLogProvider
+        self.downloadSpeedMeter = downloadSpeedMeter
     }
     
-    func resetSourceState() {
-        accessLog = nil
-        timestamp = nil
+    func startMonitoring() {
+        heartbeatTimer?.invalidate()
+        heartbeatTimer = Timer.scheduledTimer(timeInterval: DownloadSpeedDetectionService.heartbeatInterval, target: self, selector: #selector(DownloadSpeedDetectionService.detectDownloadSpeed), userInfo: nil, repeats: true)
     }
     
-    /*
-     saves the current state of the accessLog
-     */
-    func saveSnapshot(forState state: String?, atTime currentTime: Int64) {
-        if shouldSkipSnapshot(forState: state)
-            || shouldSkip(forCurrentTime: currentTime) {
-            print("skipped snapshot for state: \(state) at time: \(currentTime)")
+    func stopMonitoring() {
+        heartbeatTimer?.invalidate()
+        heartbeatTimer = nil
+    }
+    
+    @objc public func detectDownloadSpeed() {
+        guard let currentLogs = accessLogProvider.getEvents() else {
             return
         }
         
-        accessLog = accessLogProvider.getEvents()
-        timestamp = currentTime
+        let speedMeasurement = createSpeedMeasurement(prevAccessLog ?? [], currentLogs)
+        
+        
+        if !isValid(speedMeasurement: speedMeasurement) {
+            return
+        }
+        
+        prevAccessLog = currentLogs
+        downloadSpeedMeter.add(measurement: speedMeasurement)
     }
     
-    func getDownloadSpeedInfo(atTime currentTime: Int64) -> DownloadSpeedInfoDto? {
-        if shouldSkip(forCurrentTime: currentTime) {
-            print("skipped snapshot at time: \(currentTime)")
-            return nil
-        }
+    private func createSpeedMeasurement(_ prevLogs: [AccessLogDto], _ currentLogs: [AccessLogDto]) -> SpeedMeasurement {
+        let speedMeasurement = SpeedMeasurement()
+        speedMeasurement.duration = Int64(DownloadSpeedDetectionService.heartbeatInterval) * DownloadSpeedDetectionService.SECONDS
         
-        guard let prevLogs = accessLog else {
-            return nil
-        }
-        
-        guard let currentLogs = accessLogProvider.getEvents() else {
-            return nil
-        }
-        
-        guard let prevTimestamp = timestamp else {
-            return nil
-        }
-        
-        guard let downloadSpeedInfo = calculateDownloadInfo(prevLogs, currentLogs, prevTimestamp) else {
-            return nil
-        }
-        
-        if !isValid(downloadSpeedInfo: downloadSpeedInfo) {
-            return nil
-        }
-        
-        return downloadSpeedInfo
-    }
-    
-    private func calculateDownloadInfo(_ prevLogs: [AccessLogDto], _ currentLogs: [AccessLogDto], _ prevTimestamp: Int64) -> DownloadSpeedInfoDto? {
-        let downloadSpeedInfo = DownloadSpeedInfoDto()
-        downloadSpeedInfo.segmentsDownloadTime = Date().timeIntervalSince1970Millis - prevTimestamp
-        
-        if (prevLogs.count <= 0 || currentLogs.count <= 0) {
-            return nil
-        }
-        
-        for i in 0...prevLogs.count-1 {
-            let prevLog = prevLogs[i]
-            let currentLog = currentLogs[i]
-            downloadSpeedInfo.segmentsDownloadSize += currentLog.numberofBytesTransfered - prevLog.numberofBytesTransfered
-            downloadSpeedInfo.segmentsDownloadCount += currentLog.numberOfMediaRequests - prevLog.numberOfMediaRequests
-        }
-        
-        if (prevLogs.count < currentLogs.count) {
-            for i in prevLogs.count...currentLogs.count-1 {
+        if prevLogs.count > 0 {
+            for i in 0...prevLogs.count-1 {
+                let prevLog = prevLogs[i]
                 let currentLog = currentLogs[i]
-                downloadSpeedInfo.segmentsDownloadSize += currentLog.numberofBytesTransfered
-                downloadSpeedInfo.segmentsDownloadCount += currentLog.numberOfMediaRequests
+                speedMeasurement.size += currentLog.numberofBytesTransfered - prevLog.numberofBytesTransfered
+                speedMeasurement.segmentCount += currentLog.numberOfMediaRequests - prevLog.numberOfMediaRequests
             }
         }
-        return downloadSpeedInfo
+        
+        if prevLogs.count < currentLogs.count {
+            for i in prevLogs.count...currentLogs.count-1 {
+                let currentLog = currentLogs[i]
+                speedMeasurement.size += currentLog.numberofBytesTransfered
+                speedMeasurement.segmentCount += currentLog.numberOfMediaRequests
+            }
+        }
+        return speedMeasurement
     }
     
-    private func isValid(downloadSpeedInfo: DownloadSpeedInfoDto) -> Bool {
+    private func isValid(speedMeasurement: SpeedMeasurement) -> Bool {
         // consider negative values as invalid
-        if downloadSpeedInfo.segmentsDownloadSize < 0
-            || downloadSpeedInfo.segmentsDownloadCount < 0
-            || downloadSpeedInfo.segmentsDownloadTime < 0 {
+        if speedMeasurement.size < 0
+            || speedMeasurement.segmentCount < 0
+            || speedMeasurement.duration < 0 {
             return false
         }
         
         // no data no tracking
-        if downloadSpeedInfo.segmentsDownloadSize == 0 {
+        if speedMeasurement.size == 0 {
             return false
         }
         
         return true
-    }
-    
-    private func shouldSkipSnapshot(forState state: String?) -> Bool {
-        // we skip taking a snapshot for this events to count the time spend in this state to the download segment time for the next sample
-        switch state {
-        case PlayerState.startup.rawValue:
-            return true
-        case PlayerState.customdatachange.rawValue:
-            return true
-        case PlayerState.qualitychange.rawValue:
-            return true
-        case PlayerState.subtitlechange.rawValue:
-            return true
-        case PlayerState.audiochange.rawValue:
-            return true
-        case PlayerState.qualitychange.rawValue:
-            return true
-        default:
-            return false
-        }
-    }
-    
-    private func shouldSkip(forCurrentTime currentTime: Int64) -> Bool {
-        // if there is not timestamp for sure save it
-        guard let timestamp = timestamp else {
-            return false
-        }
-
-        let timeDelta = currentTime - timestamp
-        return timeDelta < DownloadSpeedDetectionService.segmentsDownloadTimeMinThreshold
     }
 }
