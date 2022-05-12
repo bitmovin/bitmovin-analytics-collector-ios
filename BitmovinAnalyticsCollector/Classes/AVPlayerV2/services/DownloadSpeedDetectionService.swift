@@ -6,6 +6,8 @@ import CoreCollector
 #endif
 
 internal class DownloadSpeedDetectionService: NSObject {
+    private static let segmentsDownloadTimeMinThreshold: Int = 200
+    
     private let accessLogProvider: AccessLogProvider
     private var accessLog: [AccessLogDto]? = nil
     private var timestamp: Int64? = nil
@@ -17,6 +19,14 @@ internal class DownloadSpeedDetectionService: NSObject {
     func resetSourceState() {
         accessLog = nil
         timestamp = nil
+    }
+    
+    /*
+     saves the current state of the accessLog
+     */
+    func saveSnapshot() {
+        accessLog = accessLogProvider.getEvents()
+        timestamp = Date().timeIntervalSince1970Millis
     }
     
     func getDownloadSpeedInfo() -> DownloadSpeedInfoDto? {
@@ -36,16 +46,8 @@ internal class DownloadSpeedDetectionService: NSObject {
             return nil
         }
         
-        // -1 values for segmentsCount and time are ignored in PAS
-        if downloadSpeedInfo.segmentsDownloadSize < 0 {
+        if !isDownloadSpeedValid(downloadSpeedInfo) {
             return nil
-        }
-        
-        // if too little time for the accessLog to update has passed between two samples discard 0 values for count and size
-        if (downloadSpeedInfo.segmentsDownloadSize == 0 && downloadSpeedInfo.segmentsDownloadCount == 0) {
-            if (downloadSpeedInfo.segmentsDownloadTime <= 200) {
-                return nil
-            }
         }
         
         return downloadSpeedInfo
@@ -76,11 +78,21 @@ internal class DownloadSpeedDetectionService: NSObject {
         return downloadSpeedInfo
     }
     
-    /*
-     saves the current state of the accessLog
-     */
-    func saveSnapshot() {
-        accessLog = accessLogProvider.getEvents()
-        timestamp = Date().timeIntervalSince1970Millis
+    private func isDownloadSpeedValid(_ downloadSpeedInfo: DownloadSpeedInfoDto) -> Bool {
+        // consider negative values as invalid
+        if downloadSpeedInfo.segmentsDownloadSize < 0
+            || downloadSpeedInfo.segmentsDownloadCount < 0
+            || downloadSpeedInfo.segmentsDownloadTime < 0 {
+            return false
+        }
+        
+        // if too little time for the accessLog to update has passed between two samples discard 0 values for count and size
+        if (downloadSpeedInfo.segmentsDownloadSize == 0
+            && downloadSpeedInfo.segmentsDownloadCount == 0
+            && downloadSpeedInfo.segmentsDownloadTime <= DownloadSpeedDetectionService.segmentsDownloadTimeMinThreshold) {
+            return false
+        }
+        
+        return true
     }
 }
