@@ -24,7 +24,11 @@ internal class DownloadSpeedDetectionService: NSObject {
     /*
      saves the current state of the accessLog
      */
-    func saveSnapshot() {
+    func saveSnapshot(forState state: String?) {
+        if shouldSkipSnapshot(forState: state) {
+            return
+        }
+        
         accessLog = accessLogProvider.getEvents()
         timestamp = Date().timeIntervalSince1970Millis
     }
@@ -92,5 +96,25 @@ internal class DownloadSpeedDetectionService: NSObject {
         }
         
         return true
+    }
+    
+    private func shouldSkipSnapshot(forState state: String?) -> Bool {
+        // we skip taking a snapshot for this events to count the time spend in this state to the download segment time for the next sample
+        switch state {
+        case PlayerState.startup.rawValue:
+            return true
+        case PlayerState.customdatachange.rawValue:
+            return true
+        case PlayerState.qualitychange.rawValue:
+            return true
+        case PlayerState.subtitlechange.rawValue:
+            return true
+        case PlayerState.audiochange.rawValue:
+            return true
+        case PlayerState.qualitychange.rawValue:
+            return true
+        default:
+            return false
+        }
     }
 }

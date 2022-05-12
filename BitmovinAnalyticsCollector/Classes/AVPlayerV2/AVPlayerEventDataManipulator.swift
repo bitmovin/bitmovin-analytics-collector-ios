@@ -88,7 +88,10 @@ class AVPlayerEventDataManipulator {
             eventData.isMuted = true
         }
         
-        setDownloadSpeedInfo(eventData: eventData)
+        if let downloadSpeedInfo = downloadSpeedDetectionService.getDownloadSpeedInfo() {
+            eventData.downloadSpeedInfo = downloadSpeedInfo
+        }
+        downloadSpeedDetectionService.saveSnapshot(forState: eventData.state)
     }
     
     func updateDrmPerformanceInfo(_ playerItem: AVPlayerItem) {
@@ -153,19 +156,5 @@ class AVPlayerEventDataManipulator {
         }
         
         return sampleRate
-    }
-    
-    private func setDownloadSpeedInfo(eventData: EventData) {
-        
-        if let downloadSpeedInfo = downloadSpeedDetectionService.getDownloadSpeedInfo() {
-            eventData.downloadSpeedInfo = downloadSpeedInfo
-        }
-        
-        // we skip taking a snapshot for startup to count the time spend in this state to the download segment time
-        if eventData.state == "startup" {
-            return
-        }
-        
-        downloadSpeedDetectionService.saveSnapshot()
     }
 }

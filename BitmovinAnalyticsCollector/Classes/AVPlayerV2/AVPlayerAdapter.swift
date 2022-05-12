@@ -132,7 +132,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         NotificationCenter.default.addObserver(self, selector: #selector(observeDidPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         manipulator.updateDrmPerformanceInfo(playerItem)
         playbackTypeDetectionService.startMonitoring(playerItem: playerItem)
-        downloadSpeedDetectionService.saveSnapshot()
+        downloadSpeedDetectionService.saveSnapshot(forState: nil)
     }
 
     private func stopMonitoringPlayerItem(playerItem: AVPlayerItem) {
