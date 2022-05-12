@@ -24,16 +24,23 @@ internal class DownloadSpeedDetectionService: NSObject {
     /*
      saves the current state of the accessLog
      */
-    func saveSnapshot(forState state: String?) {
-        if shouldSkipSnapshot(forState: state) {
+    func saveSnapshot(forState state: String?, atTime currentTime: Int64) {
+        if shouldSkipSnapshot(forState: state)
+            || shouldSkip(forCurrentTime: currentTime) {
+            print("skipped snapshot for state: \(state) at time: \(currentTime)")
             return
         }
         
         accessLog = accessLogProvider.getEvents()
-        timestamp = Date().timeIntervalSince1970Millis
+        timestamp = currentTime
     }
     
-    func getDownloadSpeedInfo() -> DownloadSpeedInfoDto? {
+    func getDownloadSpeedInfo(atTime currentTime: Int64) -> DownloadSpeedInfoDto? {
+        if shouldSkip(forCurrentTime: currentTime) {
+            print("skipped snapshot at time: \(currentTime)")
+            return nil
+        }
+        
         guard let prevLogs = accessLog else {
             return nil
         }
@@ -116,5 +123,15 @@ internal class DownloadSpeedDetectionService: NSObject {
         default:
             return false
         }
+    }
+    
+    private func shouldSkip(forCurrentTime currentTime: Int64) -> Bool {
+        // if there is not timestamp for sure save it
+        guard let timestamp = timestamp else {
+            return false
+        }
+
+        let timeDelta = currentTime - timestamp
+        return timeDelta < DownloadSpeedDetectionService.segmentsDownloadTimeMinThreshold
     }
 }

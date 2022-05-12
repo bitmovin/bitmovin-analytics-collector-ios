@@ -16,7 +16,7 @@ public class EventData: Codable {
     public var castTech: String?
     public var isMuted: Bool? = false
     public var videoDuration: Int64 = 0
-    public var time: Double?
+    public var time: Int64?
     public var videoWindowWidth: Int = 0
     public var videoWindowHeight: Int = 0
     public var droppedFrames: Int = 0

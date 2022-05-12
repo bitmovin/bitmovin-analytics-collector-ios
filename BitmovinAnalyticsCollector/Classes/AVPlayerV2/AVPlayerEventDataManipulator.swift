@@ -88,10 +88,10 @@ class AVPlayerEventDataManipulator {
             eventData.isMuted = true
         }
         
-        if let downloadSpeedInfo = downloadSpeedDetectionService.getDownloadSpeedInfo() {
+        if let downloadSpeedInfo = downloadSpeedDetectionService.getDownloadSpeedInfo(atTime: eventData.time ?? Date().timeIntervalSince1970Millis) {
             eventData.downloadSpeedInfo = downloadSpeedInfo
         }
-        downloadSpeedDetectionService.saveSnapshot(forState: eventData.state)
+        downloadSpeedDetectionService.saveSnapshot(forState: eventData.state, atTime: eventData.time ?? Date().timeIntervalSince1970Millis)
     }
     
     func updateDrmPerformanceInfo(_ playerItem: AVPlayerItem) {

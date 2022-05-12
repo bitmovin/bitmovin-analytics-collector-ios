@@ -15,6 +15,7 @@ class EventDataFactory {
         eventData.userId = userId
         eventData.state = state
         eventData.drmLoadTime = drmLoadTime
+        eventData.time = Date().timeIntervalSince1970Millis
         setBasicData(eventData)
         setConfigData(eventData, sourceMetaData)
         setVideoTime(eventData, videoTimeStart, videoTimeEnd)
