@@ -33,7 +33,7 @@ internal class BitrateDetectionService: NSObject {
             return
         }
         
-        if (currentLogEntry.indicatedBitrate <= 0) {
+        if currentLogEntry.indicatedBitrate <= 0 {
             return
         }
         
