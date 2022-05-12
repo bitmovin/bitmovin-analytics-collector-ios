@@ -144,6 +144,7 @@ open class BitmovinAnalyticsInternal: NSObject {
             return
         }
         eventDataDispatcher.add(eventData: data)
+        adapter?.resetEventDataState()
     }
     
     internal func sendAdEventData(adEventData: AdEventData?) {
@@ -185,7 +186,6 @@ open class BitmovinAnalyticsInternal: NSObject {
         eventDataDispatcher.resetSourceState()
         didSendDrmLoadTime = false
     }
-    
 }
 
 extension BitmovinAnalyticsInternal: StateMachineDelegate {

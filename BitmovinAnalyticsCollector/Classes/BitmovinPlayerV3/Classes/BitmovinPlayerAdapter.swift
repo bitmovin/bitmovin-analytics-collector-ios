@@ -78,6 +78,8 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         drmDownloadTime = nil
         drmCertificateDownloadTime = nil
     }
+    
+    func resetEventDataState() {}
 
     func decorateEventData(eventData: EventData) {
         //PlayerType
