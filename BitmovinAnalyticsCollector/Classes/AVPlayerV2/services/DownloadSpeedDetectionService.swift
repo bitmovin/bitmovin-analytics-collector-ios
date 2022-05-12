@@ -46,7 +46,7 @@ internal class DownloadSpeedDetectionService: NSObject {
             return nil
         }
         
-        if !isDownloadSpeedValid(downloadSpeedInfo) {
+        if !isValid(downloadSpeedInfo: downloadSpeedInfo) {
             return nil
         }
         
@@ -78,7 +78,7 @@ internal class DownloadSpeedDetectionService: NSObject {
         return downloadSpeedInfo
     }
     
-    private func isDownloadSpeedValid(_ downloadSpeedInfo: DownloadSpeedInfoDto) -> Bool {
+    private func isValid(downloadSpeedInfo: DownloadSpeedInfoDto) -> Bool {
         // consider negative values as invalid
         if downloadSpeedInfo.segmentsDownloadSize < 0
             || downloadSpeedInfo.segmentsDownloadCount < 0
@@ -86,10 +86,8 @@ internal class DownloadSpeedDetectionService: NSObject {
             return false
         }
         
-        // if too little time for the accessLog to update has passed between two samples discard 0 values for count and size
-        if (downloadSpeedInfo.segmentsDownloadSize == 0
-            && downloadSpeedInfo.segmentsDownloadCount == 0
-            && downloadSpeedInfo.segmentsDownloadTime <= DownloadSpeedDetectionService.segmentsDownloadTimeMinThreshold) {
+        // no data no tracking
+        if downloadSpeedInfo.segmentsDownloadSize == 0 {
             return false
         }
         
