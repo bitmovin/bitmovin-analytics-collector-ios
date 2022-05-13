@@ -18,7 +18,22 @@ public class AVPlayerCollector: Collector {
      * will start monitoring and sending analytics data based on the attached player instance.
      */
     @objc public func attachPlayer(player: AVPlayer) {
-        let adapter = AVPlayerAdapter(player: player, config: analytics.config, stateMachine: analytics.stateMachine)
+        let errorHandler = ErrorHandler()
+        let bitrateDetectionService = BitrateDetectionService()
+        let downloadSpeedMeter = DownloadSpeedMeter()
+        let downloadSpeedDetectionService = DownloadSpeedDetectionService(downloadSpeedMeter: downloadSpeedMeter)
+        let playbackTypeDetectionService = PlaybackTypeDetectionService(player: player)
+        let manipulator = AVPlayerEventDataManipulator(player: player, playbackTypeDetectionService: playbackTypeDetectionService, downloadSpeedMeter: downloadSpeedMeter)
+        
+        let adapter = AVPlayerAdapter(player: player,
+                                      stateMachine: analytics.stateMachine,
+                                      errorHandler: errorHandler,
+                                      bitrateDetectionService: bitrateDetectionService,
+                                      playbackTypeDetectionService: playbackTypeDetectionService,
+                                      downloadSpeedDetectionService: downloadSpeedDetectionService,
+                                      downloadSpeedMeter: downloadSpeedMeter,
+                                      manipulator: manipulator
+        )
         analytics.attach(adapter: adapter)
     }
 

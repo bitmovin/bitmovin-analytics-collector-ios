@@ -9,7 +9,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     static let periodicTimeObserverIntervalSeconds = 0.2
     static let minSeekDeltaSeconds = periodicTimeObserverIntervalSeconds + 0.3
     
-    private let config: BitmovinAnalyticsConfig
     @objc private let player: AVPlayer
     
     private var isMonitoring = false
@@ -33,15 +32,22 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let downloadSpeedMeter: DownloadSpeedMeter
     private let manipulator: AVPlayerEventDataManipulator
     
-    init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
+    init(player: AVPlayer,
+         stateMachine: StateMachine,
+         errorHandler: ErrorHandler,
+         bitrateDetectionService: BitrateDetectionService,
+         playbackTypeDetectionService: PlaybackTypeDetectionService,
+         downloadSpeedDetectionService: DownloadSpeedDetectionService,
+         downloadSpeedMeter: DownloadSpeedMeter,
+         manipulator: AVPlayerEventDataManipulator
+    ) {
         self.player = player
-        self.config = config
-        self.errorHandler = ErrorHandler()
-        self.bitrateDetectionService = BitrateDetectionService()
-        self.downloadSpeedMeter = DownloadSpeedMeter()
-        self.downloadSpeedDetectionService = DownloadSpeedDetectionService(downloadSpeedMeter: self.downloadSpeedMeter)
-        self.playbackTypeDetectionService = PlaybackTypeDetectionService(player: player)
-        self.manipulator = AVPlayerEventDataManipulator(player: player, playbackTypeDetectionService: playbackTypeDetectionService, downloadSpeedMeter: self.downloadSpeedMeter)
+        self.errorHandler = errorHandler
+        self.bitrateDetectionService = bitrateDetectionService
+        self.downloadSpeedMeter = downloadSpeedMeter
+        self.downloadSpeedDetectionService = downloadSpeedDetectionService
+        self.playbackTypeDetectionService = playbackTypeDetectionService
+        self.manipulator = manipulator
         super.init(stateMachine: stateMachine)
     }
     
