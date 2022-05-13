@@ -144,7 +144,6 @@ open class BitmovinAnalyticsInternal: NSObject {
             return
         }
         eventDataDispatcher.add(eventData: data)
-        adapter?.resetEventDataState()
     }
     
     internal func sendAdEventData(adEventData: AdEventData?) {

@@ -50,8 +50,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         drmDownloadTime = nil
     }
     
-    func resetEventDataState() {}
-    
     public func startMonitoring() {
         if isMonitoring  {
             stopMonitoring()

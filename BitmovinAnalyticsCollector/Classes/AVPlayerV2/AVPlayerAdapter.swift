@@ -62,10 +62,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         previousTimestamp = 0
     }
     
-    func resetEventDataState() {
-        downloadSpeedMeter.reset()
-    }
-    
     func decorateEventData(eventData: EventData) {
         manipulator.manipulate(eventData: eventData)
     }
