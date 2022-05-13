@@ -1,8 +1,7 @@
 import Foundation
 
 class DownloadSpeedMeter {
-    private static let thresholdBytes: Float32 = 37500.0
-    private var measures: [SpeedMeasurement] = []
+    private(set) var measures: [SpeedMeasurement] = []
     
     public init() {}
     
@@ -11,7 +10,6 @@ class DownloadSpeedMeter {
     }
     
     public func add(measurement:SpeedMeasurement) {
-        
         measures.append(measurement)
     }
     
