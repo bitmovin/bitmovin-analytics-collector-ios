@@ -1,6 +1,6 @@
 import Foundation
 
-class SpeedMeasurement {
+public struct SpeedMeasurement {
     
     public init() {}
     

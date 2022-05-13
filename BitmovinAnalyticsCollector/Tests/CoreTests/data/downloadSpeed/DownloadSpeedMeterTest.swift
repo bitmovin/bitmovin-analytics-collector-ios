@@ -54,13 +54,13 @@ class DownloadSpeedMeterTest: XCTestCase {
     func testGetInfo_should_returnCorrectValues() throws  {
         // arrange
         let dsm = DownloadSpeedMeter()
-        let measurement = SpeedMeasurement()
+        var measurement = SpeedMeasurement()
         measurement.size = 50
         measurement.duration = 1000
         measurement.segmentCount = 1
         dsm.add(measurement: measurement)
         
-        let measurement2 = SpeedMeasurement()
+        var measurement2 = SpeedMeasurement()
         measurement2.size = 100
         measurement2.duration = 1000
         measurement2.segmentCount = 2

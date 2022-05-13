@@ -1,6 +1,6 @@
 import Foundation
 
-class DownloadSpeedMeter {
+public class DownloadSpeedMeter {
     private(set) var measures: [SpeedMeasurement] = []
     
     public init() {}

@@ -50,7 +50,7 @@ internal class DownloadSpeedDetectionService: NSObject {
     }
     
     private func createSpeedMeasurement(_ prevLogs: [AccessLogDto], _ currentLogs: [AccessLogDto]) -> SpeedMeasurement {
-        let speedMeasurement = SpeedMeasurement()
+        var speedMeasurement = SpeedMeasurement()
         speedMeasurement.duration = Int64(DownloadSpeedDetectionService.heartbeatInterval) * DownloadSpeedDetectionService.SECONDS
         
         if prevLogs.count > 0 {
