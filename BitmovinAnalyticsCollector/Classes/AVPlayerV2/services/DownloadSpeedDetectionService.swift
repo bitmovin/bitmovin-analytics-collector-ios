@@ -7,8 +7,7 @@ import CoreCollector
 
 internal class DownloadSpeedDetectionService: NSObject {
     private static let segmentsDownloadTimeMinThreshold: Int = 200
-    private static let heartbeatIntervalSec: Double = 1.0
-    private static let SecondsToMillisec: Int64 = 1000
+    private static let heartbeatIntervalMs: Int64 = 1000
     
     private var accessLogProvider: AccessLogProvider?
     private let downloadSpeedMeter: DownloadSpeedMeter
@@ -25,7 +24,8 @@ internal class DownloadSpeedDetectionService: NSObject {
     func startMonitoring(accessLogProvider: AccessLogProvider) {
         self.accessLogProvider = accessLogProvider
         heartbeatTimer?.invalidate()
-        heartbeatTimer = Timer.scheduledTimer(timeInterval: DownloadSpeedDetectionService.heartbeatIntervalSec, target: self, selector: #selector(DownloadSpeedDetectionService.detectDownloadSpeed), userInfo: nil, repeats: true)
+        let heartbeatSec = Double(DownloadSpeedDetectionService.heartbeatIntervalMs) / 1000
+        heartbeatTimer = Timer.scheduledTimer(timeInterval: heartbeatSec, target: self, selector: #selector(DownloadSpeedDetectionService.detectDownloadSpeed), userInfo: nil, repeats: true)
     }
     
     func stopMonitoring() {
@@ -48,7 +48,7 @@ internal class DownloadSpeedDetectionService: NSObject {
         
         // no data no tracking
         if speedMeasurement.numberOfBytesTransfered == 0 {
-            return false
+            return
         }
         
         print("DownloadSpeedDetectionService: accessLog size:\(currentLogs.count)")
@@ -58,7 +58,7 @@ internal class DownloadSpeedDetectionService: NSObject {
     
     private func createSpeedMeasurement(_ prevLogs: [AccessLogDto], _ currentLogs: [AccessLogDto]) -> SpeedMeasurement {
         var speedMeasurement = SpeedMeasurement()
-        speedMeasurement.downloadTime = Int64(DownloadSpeedDetectionService.heartbeatIntervalSec) * DownloadSpeedDetectionService.SecondsToMillisec
+        speedMeasurement.downloadTime = DownloadSpeedDetectionService.heartbeatIntervalMs
         
         if prevLogs.count > 0 {
             for i in 0...prevLogs.count-1 {
