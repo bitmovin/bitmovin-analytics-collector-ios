@@ -5,7 +5,7 @@ public struct SpeedMeasurement {
     
     public var downloadTime: Int64 = 0
 
-    public var numberOfBytesTransfered: Int64 = 0
+    public var numberOfBytesTransferred: Int64 = 0
     
     public var numberOfSegmentsDownloaded: Int = 0
 }

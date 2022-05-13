@@ -28,7 +28,7 @@ class AVPlayerAccessLogProvider: AccessLogProvider {
         log.indicatedBitrate = accessLogEvent.indicatedBitrate
         log.durationWatched = accessLogEvent.durationWatched
         log.numberOfMediaRequests = accessLogEvent.numberOfMediaRequests
-        log.numberofBytesTransfered = accessLogEvent.numberOfBytesTransferred
+        log.numberofBytesTransferred = accessLogEvent.numberOfBytesTransferred
         return log
     }
 }

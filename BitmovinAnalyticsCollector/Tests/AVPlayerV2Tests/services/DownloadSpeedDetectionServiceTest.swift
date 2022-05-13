@@ -42,11 +42,11 @@ class DownloadSpeedDetectionServiceTest: XCTestCase {
         //arrange
         let mockAccessLogProvider = AccessLogProviderMock()
         var log = AccessLogDto()
-        log.numberofBytesTransfered = -1
+        log.numberofBytesTransferred = -1
         log.numberOfMediaRequests = -1
         
         var log2 = AccessLogDto()
-        log2.numberofBytesTransfered = 0
+        log2.numberofBytesTransferred = 0
         log2.numberOfMediaRequests = 1
         mockAccessLogProvider.events = [log, log2]
         
@@ -65,7 +65,7 @@ class DownloadSpeedDetectionServiceTest: XCTestCase {
         //arrange
         let mockAccessLogProvider = AccessLogProviderMock()
         var log = AccessLogDto()
-        log.numberofBytesTransfered = 100
+        log.numberofBytesTransferred = 100
         log.numberOfMediaRequests = 2
         mockAccessLogProvider.events = [log]
         let downloadSpeedMeter = DownloadSpeedMeter()
@@ -80,14 +80,14 @@ class DownloadSpeedDetectionServiceTest: XCTestCase {
         let speedMeasurement = downloadSpeedMeter.measures[0]
         XCTAssertEqual(speedMeasurement.numberOfSegmentsDownloaded, 2)
         XCTAssertEqual(speedMeasurement.downloadTime, 1000)
-        XCTAssertEqual(speedMeasurement.numberOfBytesTransfered, 100)
+        XCTAssertEqual(speedMeasurement.numberOfBytesTransferred, 100)
     }
     
     func test_detectDownloadSpeed_should_addMeasurementToDownloadSpeedMeter_when_prevLogsContainsLessItemsThanNewOne() {
         //arrange
         let mockAccessLogProvider = AccessLogProviderMock()
         var log = AccessLogDto()
-        log.numberofBytesTransfered = 100
+        log.numberofBytesTransferred = 100
         log.numberOfMediaRequests = 2
         mockAccessLogProvider.events = [log]
         let downloadSpeedMeter = DownloadSpeedMeter()
@@ -97,15 +97,15 @@ class DownloadSpeedDetectionServiceTest: XCTestCase {
         downloadSpeedMeter.getInfoAndReset()
         
         // access log has changed in the meanwhile
-        log.numberofBytesTransfered += 50
+        log.numberofBytesTransferred += 50
         log.numberOfMediaRequests += 1
         
         var log2 = AccessLogDto()
-        log2.numberofBytesTransfered = 1000
+        log2.numberofBytesTransferred = 1000
         log2.numberOfMediaRequests = 5
         
         var log3 = AccessLogDto()
-        log3.numberofBytesTransfered = 10000
+        log3.numberofBytesTransferred = 10000
         log3.numberOfMediaRequests = 10
         mockAccessLogProvider.events = [log, log2, log3]
         
@@ -118,14 +118,14 @@ class DownloadSpeedDetectionServiceTest: XCTestCase {
         let speedMeasurement = downloadSpeedMeter.measures[0]
         XCTAssertEqual(speedMeasurement.numberOfSegmentsDownloaded, 16)
         XCTAssertEqual(speedMeasurement.downloadTime, 1000)
-        XCTAssertEqual(speedMeasurement.numberOfBytesTransfered, 11050)
+        XCTAssertEqual(speedMeasurement.numberOfBytesTransferred, 11050)
     }
     
     func test_startMonitoring_should_callDetectDownloadSpeed() {
         // arrange
         let mockAccessLogProvider = AccessLogProviderMock()
         var log = AccessLogDto()
-        log.numberofBytesTransfered = 100
+        log.numberofBytesTransferred = 100
         log.numberOfMediaRequests = 2
         mockAccessLogProvider.events = [log]
         let downloadSpeedMeterExpectation = expectation(description: "should add Measurement")
