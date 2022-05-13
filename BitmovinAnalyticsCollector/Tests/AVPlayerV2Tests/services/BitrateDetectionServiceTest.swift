@@ -12,12 +12,24 @@ import XCTest
 
 class BitrateDetectionServiceTest: XCTestCase {
     
-    func test_detectBitrateChange_should_doNothing_when_bitrateLogIsNil() {
+    func test_detectBitrateChange_should_doNothing_when_accessLogIsNil() {
+        // arrange
+        let bitrateDetector = BitrateDetectionService()
+        
+        // act
+        bitrateDetector.detectBitrateChange()
+        
+        // assert
+        XCTAssertEqual(bitrateDetector.videoBitrate, 0)
+    }
+    
+    func test_detectBitrateChange_should_doNothing_when_accessLogReturnNil() {
         // arrange
         let mockAccessLogProvider = AccessLogProviderMock()
         mockAccessLogProvider.events = nil
         
-        let bitrateDetector = BitrateDetectionService(accessLogProvider: mockAccessLogProvider)
+        let bitrateDetector = BitrateDetectionService()
+        bitrateDetector.startMonitoring(accessLogProvider: mockAccessLogProvider)
         
         // act
         bitrateDetector.detectBitrateChange()
@@ -31,7 +43,8 @@ class BitrateDetectionServiceTest: XCTestCase {
         let mockAccessLogProvider = AccessLogProviderMock()
         mockAccessLogProvider.events = []
         
-        let bitrateDetector = BitrateDetectionService(accessLogProvider: mockAccessLogProvider)
+        let bitrateDetector = BitrateDetectionService()
+        bitrateDetector.startMonitoring(accessLogProvider: mockAccessLogProvider)
         
         // act
         bitrateDetector.detectBitrateChange()
@@ -48,7 +61,8 @@ class BitrateDetectionServiceTest: XCTestCase {
         let mockAccessLogProvider = AccessLogProviderMock()
         mockAccessLogProvider.events = [log]
         
-        let bitrateDetector = BitrateDetectionService(accessLogProvider: mockAccessLogProvider)
+        let bitrateDetector = BitrateDetectionService()
+        bitrateDetector.startMonitoring(accessLogProvider: mockAccessLogProvider)
         
         // act
         bitrateDetector.detectBitrateChange()
@@ -66,7 +80,8 @@ class BitrateDetectionServiceTest: XCTestCase {
         let mockAccessLogProvider = AccessLogProviderMock()
         mockAccessLogProvider.events = [log]
         
-        let bitrateDetector = BitrateDetectionService(accessLogProvider: mockAccessLogProvider)
+        let bitrateDetector = BitrateDetectionService()
+        bitrateDetector.startMonitoring(accessLogProvider: mockAccessLogProvider)
         bitrateDetector.detectBitrateChange()
         XCTAssertEqual(bitrateDetector.videoBitrate, 10)
         
@@ -94,7 +109,8 @@ class BitrateDetectionServiceTest: XCTestCase {
         let mockAccessLogProvider = AccessLogProviderMock()
         mockAccessLogProvider.events = [log, log2, log3]
         
-        let bitrateDetector = BitrateDetectionService(accessLogProvider: mockAccessLogProvider)
+        let bitrateDetector = BitrateDetectionService()
+        bitrateDetector.startMonitoring(accessLogProvider: mockAccessLogProvider)
         
         let videoBitrateChangeExpectation = expectation(description: "should change videoBitrate")
         let kvo = bitrateDetector.observe(\.videoBitrate, options: [.new, .old]) {_,_ in
@@ -127,7 +143,7 @@ class BitrateDetectionServiceTest: XCTestCase {
         let mockAccessLogProvider = AccessLogProviderMock()
         mockAccessLogProvider.events = [log]
         
-        let bitrateDetector = BitrateDetectionService(accessLogProvider: mockAccessLogProvider)
+        let bitrateDetector = BitrateDetectionService()
         
         var videoBitrateChangeExpectation = expectation(description: "should change videoBitrate first time")
         let kvo = bitrateDetector.observe(\.videoBitrate, options: [.new, .old]) {_,_ in
@@ -136,7 +152,7 @@ class BitrateDetectionServiceTest: XCTestCase {
         }
         
         // act
-        bitrateDetector.startMonitoring()
+        bitrateDetector.startMonitoring(accessLogProvider: mockAccessLogProvider)
         
         // assert
         wait(for: [videoBitrateChangeExpectation], timeout: 1.1)

@@ -12,11 +12,24 @@ import XCTest
 
 class DownloadSpeedDetectionServiceTest: XCTestCase {
 
+    func test_detectDownloadSpeed_should_notAddMeasurement_when_accessLogProviderIsNil() {
+        //arrange
+        let downloadSpeedMeter = DownloadSpeedMeter()
+        let downloadSpeedDetectionService = DownloadSpeedDetectionService(downloadSpeedMeter: downloadSpeedMeter)
+        
+        // act
+        downloadSpeedDetectionService.detectDownloadSpeed()
+        
+        // assert
+        XCTAssertEqual(downloadSpeedMeter.measures.count, 0)
+    }
+    
     func test_detectDownloadSpeed_should_notAddMeasurement_when_accessLogProviderReturnsNil() {
         //arrange
         let mockAccessLogProvider = AccessLogProviderMock()
         let downloadSpeedMeter = DownloadSpeedMeter()
-        let downloadSpeedDetectionService = DownloadSpeedDetectionService(accessLogProvider: mockAccessLogProvider, downloadSpeedMeter: downloadSpeedMeter)
+        let downloadSpeedDetectionService = DownloadSpeedDetectionService(downloadSpeedMeter: downloadSpeedMeter)
+        downloadSpeedDetectionService.startMonitoring(accessLogProvider: mockAccessLogProvider)
         
         // act
         downloadSpeedDetectionService.detectDownloadSpeed()
@@ -38,7 +51,8 @@ class DownloadSpeedDetectionServiceTest: XCTestCase {
         mockAccessLogProvider.events = [log, log2]
         
         let downloadSpeedMeter = DownloadSpeedMeter()
-        let downloadSpeedDetectionService = DownloadSpeedDetectionService(accessLogProvider: mockAccessLogProvider, downloadSpeedMeter: downloadSpeedMeter)
+        let downloadSpeedDetectionService = DownloadSpeedDetectionService(downloadSpeedMeter: downloadSpeedMeter)
+        downloadSpeedDetectionService.startMonitoring(accessLogProvider: mockAccessLogProvider)
         
         // act
         downloadSpeedDetectionService.detectDownloadSpeed()
@@ -55,7 +69,8 @@ class DownloadSpeedDetectionServiceTest: XCTestCase {
         log.numberOfMediaRequests = 2
         mockAccessLogProvider.events = [log]
         let downloadSpeedMeter = DownloadSpeedMeter()
-        let downloadSpeedDetectionService = DownloadSpeedDetectionService(accessLogProvider: mockAccessLogProvider, downloadSpeedMeter: downloadSpeedMeter)
+        let downloadSpeedDetectionService = DownloadSpeedDetectionService(downloadSpeedMeter: downloadSpeedMeter)
+        downloadSpeedDetectionService.startMonitoring(accessLogProvider: mockAccessLogProvider)
         
         // act
         downloadSpeedDetectionService.detectDownloadSpeed()
@@ -76,9 +91,10 @@ class DownloadSpeedDetectionServiceTest: XCTestCase {
         log.numberOfMediaRequests = 2
         mockAccessLogProvider.events = [log]
         let downloadSpeedMeter = DownloadSpeedMeter()
-        let downloadSpeedDetectionService = DownloadSpeedDetectionService(accessLogProvider: mockAccessLogProvider, downloadSpeedMeter: downloadSpeedMeter)
+        let downloadSpeedDetectionService = DownloadSpeedDetectionService(downloadSpeedMeter: downloadSpeedMeter)
+        downloadSpeedDetectionService.startMonitoring(accessLogProvider: mockAccessLogProvider)
         downloadSpeedDetectionService.detectDownloadSpeed()
-        downloadSpeedMeter.reset()
+        downloadSpeedMeter.getInfoAndReset()
         
         // access log has changed in the meanwhile
         log.numberofBytesTransfered += 50
@@ -114,10 +130,10 @@ class DownloadSpeedDetectionServiceTest: XCTestCase {
         mockAccessLogProvider.events = [log]
         let downloadSpeedMeterExpectation = expectation(description: "should add Measurement")
         let mockDownloadSpeedMeter = MockDownloadSpeedMeter(downloadSpeedMeterExpectation)
-        let downloadSpeedDetectionService = DownloadSpeedDetectionService(accessLogProvider: mockAccessLogProvider, downloadSpeedMeter: mockDownloadSpeedMeter)
+        let downloadSpeedDetectionService = DownloadSpeedDetectionService(downloadSpeedMeter: mockDownloadSpeedMeter)
         
         // act
-        downloadSpeedDetectionService.startMonitoring()
+        downloadSpeedDetectionService.startMonitoring(accessLogProvider: mockAccessLogProvider)
         
         // assert
         XCTAssertEqual(mockDownloadSpeedMeter.measures.count, 0)
