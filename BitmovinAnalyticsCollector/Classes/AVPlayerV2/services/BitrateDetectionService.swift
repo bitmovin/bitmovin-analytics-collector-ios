@@ -2,7 +2,7 @@ import Foundation
 import AVFoundation
 
 internal class BitrateDetectionService: NSObject {
-    private static let heartbeatInterval: Double = 1.0
+    private static let heartbeatIntervalSec: Double = 1.0
     
     @objc dynamic private(set) var videoBitrate: Double = 0
     
@@ -12,7 +12,7 @@ internal class BitrateDetectionService: NSObject {
     func startMonitoring(accessLogProvider: AccessLogProvider) {
         self.accessLogProvider = accessLogProvider
         heartbeatTimer?.invalidate()
-        heartbeatTimer = Timer.scheduledTimer(timeInterval: BitrateDetectionService.heartbeatInterval, target: self, selector: #selector(BitrateDetectionService.detectBitrateChange), userInfo: nil, repeats: true)
+        heartbeatTimer = Timer.scheduledTimer(timeInterval: BitrateDetectionService.heartbeatIntervalSec, target: self, selector: #selector(BitrateDetectionService.detectBitrateChange), userInfo: nil, repeats: true)
     }
     
     func stopMonitoring() {

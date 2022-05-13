@@ -7,8 +7,8 @@ import CoreCollector
 
 internal class DownloadSpeedDetectionService: NSObject {
     private static let segmentsDownloadTimeMinThreshold: Int = 200
-    private static let heartbeatInterval: Double = 1.0
-    private static let SECONDS: Int64 = 1000
+    private static let heartbeatIntervalSec: Double = 1.0
+    private static let SecondsToMillisec: Int64 = 1000
     
     private var accessLogProvider: AccessLogProvider?
     private let downloadSpeedMeter: DownloadSpeedMeter
@@ -25,7 +25,7 @@ internal class DownloadSpeedDetectionService: NSObject {
     func startMonitoring(accessLogProvider: AccessLogProvider) {
         self.accessLogProvider = accessLogProvider
         heartbeatTimer?.invalidate()
-        heartbeatTimer = Timer.scheduledTimer(timeInterval: DownloadSpeedDetectionService.heartbeatInterval, target: self, selector: #selector(DownloadSpeedDetectionService.detectDownloadSpeed), userInfo: nil, repeats: true)
+        heartbeatTimer = Timer.scheduledTimer(timeInterval: DownloadSpeedDetectionService.heartbeatIntervalSec, target: self, selector: #selector(DownloadSpeedDetectionService.detectDownloadSpeed), userInfo: nil, repeats: true)
     }
     
     func stopMonitoring() {
@@ -46,13 +46,14 @@ internal class DownloadSpeedDetectionService: NSObject {
             return
         }
         
+        print("DownloadSpeedDetectionService: accessLog size:\(currentLogs.count)")
         prevAccessLog = currentLogs
         downloadSpeedMeter.add(measurement: speedMeasurement)
     }
     
     private func createSpeedMeasurement(_ prevLogs: [AccessLogDto], _ currentLogs: [AccessLogDto]) -> SpeedMeasurement {
         var speedMeasurement = SpeedMeasurement()
-        speedMeasurement.duration = Int64(DownloadSpeedDetectionService.heartbeatInterval) * DownloadSpeedDetectionService.SECONDS
+        speedMeasurement.duration = Int64(DownloadSpeedDetectionService.heartbeatIntervalSec) * DownloadSpeedDetectionService.SecondsToMillisec
         
         if prevLogs.count > 0 {
             for i in 0...prevLogs.count-1 {
