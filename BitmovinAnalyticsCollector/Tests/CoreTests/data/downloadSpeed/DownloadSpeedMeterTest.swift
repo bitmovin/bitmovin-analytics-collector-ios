@@ -24,26 +24,12 @@ class DownloadSpeedMeterTest: XCTestCase {
         XCTAssertEqual(dsm.measures.count, 1)
     }
     
-    func testReset_should_removeAllItems() throws  {
-        // arrange
-        let dsm = DownloadSpeedMeter()
-        let measurement = SpeedMeasurement()
-        dsm.add(measurement: measurement)
-        XCTAssertEqual(dsm.measures.count, 1)
-        
-        // act
-        dsm.reset()
-        
-        // assert
-        XCTAssertEqual(dsm.measures.count, 0)
-    }
-    
     func testGetInfo_should_returnZeroValues_when_noMeasurements() throws {
         // arrange
         let dsm = DownloadSpeedMeter()
         
         // act
-        let info = dsm.getInfo()
+        let info = dsm.getInfoAndReset()
         
         // assert
         XCTAssertEqual(info.segmentsDownloadSize, 0)
@@ -67,11 +53,12 @@ class DownloadSpeedMeterTest: XCTestCase {
         dsm.add(measurement: measurement2)
         
         // act
-        let info = dsm.getInfo()
+        let info = dsm.getInfoAndReset()
         
         // assert
         XCTAssertEqual(info.segmentsDownloadSize, 150)
         XCTAssertEqual(info.segmentsDownloadTime, 2000)
         XCTAssertEqual(info.segmentsDownloadCount, 3)
+        XCTAssertEqual(dsm.measures.count, 0)
     }
 }

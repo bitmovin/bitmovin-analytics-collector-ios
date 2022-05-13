@@ -12,10 +12,4 @@ public struct SpeedMeasurement {
     
     // amount of segments downloaded
     public var segmentCount: Int = 0
-    
-    public var speed: Float32 {
-        get {
-            return Float32(size) / Float32(duration)
-        }
-    }
 }

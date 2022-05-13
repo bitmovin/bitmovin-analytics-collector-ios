@@ -88,7 +88,7 @@ class AVPlayerEventDataManipulator {
             eventData.isMuted = true
         }
         
-        eventData.downloadSpeedInfo = downloadSpeedMeter.getInfo()
+        eventData.downloadSpeedInfo = downloadSpeedMeter.getInfoAndReset()
     }
     
     func updateDrmPerformanceInfo(_ playerItem: AVPlayerItem) {
