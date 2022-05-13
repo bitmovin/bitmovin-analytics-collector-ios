@@ -46,6 +46,11 @@ internal class DownloadSpeedDetectionService: NSObject {
             return
         }
         
+        // no data no tracking
+        if speedMeasurement.size == 0 {
+            return false
+        }
+        
         print("DownloadSpeedDetectionService: accessLog size:\(currentLogs.count)")
         prevAccessLog = currentLogs
         downloadSpeedMeter.add(measurement: speedMeasurement)
@@ -76,17 +81,8 @@ internal class DownloadSpeedDetectionService: NSObject {
     
     private func isValid(speedMeasurement: SpeedMeasurement) -> Bool {
         // consider negative values as invalid
-        if speedMeasurement.size < 0
-            || speedMeasurement.segmentCount < 0
-            || speedMeasurement.duration < 0 {
-            return false
-        }
-        
-        // no data no tracking
-        if speedMeasurement.size == 0 {
-            return false
-        }
-        
-        return true
+        return speedMeasurement.size >= 0
+            && speedMeasurement.segmentCount >= 0
+            && speedMeasurement.duration >= 0
     }
 }
