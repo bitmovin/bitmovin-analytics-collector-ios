@@ -10,7 +10,7 @@ internal class DownloadSpeedDetectionService: NSObject {
     private static let heartbeatInterval: Double = 1.0
     private static let SECONDS: Int64 = 1000
     
-    private let accessLogProvider: AccessLogProvider
+    private var accessLogProvider: AccessLogProvider?
     private let downloadSpeedMeter: DownloadSpeedMeter
     
     weak private var heartbeatTimer: Timer?
@@ -18,12 +18,12 @@ internal class DownloadSpeedDetectionService: NSObject {
     private var prevAccessLog: [AccessLogDto]? = nil
     private var timestamp: Int64? = nil
     
-    init(accessLogProvider: AccessLogProvider, downloadSpeedMeter: DownloadSpeedMeter) {
-        self.accessLogProvider = accessLogProvider
+    init(downloadSpeedMeter: DownloadSpeedMeter) {
         self.downloadSpeedMeter = downloadSpeedMeter
     }
     
-    func startMonitoring() {
+    func startMonitoring(accessLogProvider: AccessLogProvider) {
+        self.accessLogProvider = accessLogProvider
         heartbeatTimer?.invalidate()
         heartbeatTimer = Timer.scheduledTimer(timeInterval: DownloadSpeedDetectionService.heartbeatInterval, target: self, selector: #selector(DownloadSpeedDetectionService.detectDownloadSpeed), userInfo: nil, repeats: true)
     }
@@ -31,10 +31,11 @@ internal class DownloadSpeedDetectionService: NSObject {
     func stopMonitoring() {
         heartbeatTimer?.invalidate()
         heartbeatTimer = nil
+        accessLogProvider = nil
     }
     
     @objc public func detectDownloadSpeed() {
-        guard let currentLogs = accessLogProvider.getEvents() else {
+        guard let currentLogs = accessLogProvider?.getEvents() else {
             return
         }
         

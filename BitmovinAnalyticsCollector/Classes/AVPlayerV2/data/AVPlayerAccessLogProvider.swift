@@ -2,14 +2,14 @@ import Foundation
 import AVFoundation
 
 class AVPlayerAccessLogProvider: AccessLogProvider {
-    private let player: AVPlayer
+    private var playerItem: AVPlayerItem
     
-    init(player: AVPlayer) {
-        self.player = player
+    init(playerItem: AVPlayerItem) {
+        self.playerItem = playerItem
     }
     
     func getEvents() -> [AccessLogDto]? {
-        guard let accessEvents = player.currentItem?.accessLog()?.events else {
+        guard let accessEvents = playerItem.accessLog()?.events else {
             return nil
         }
         

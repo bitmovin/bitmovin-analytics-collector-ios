@@ -37,10 +37,9 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.player = player
         self.config = config
         self.errorHandler = ErrorHandler()
-        let accessLogProvider = AVPlayerAccessLogProvider(player: player)
-        self.bitrateDetectionService = BitrateDetectionService(accessLogProvider: accessLogProvider)
+        self.bitrateDetectionService = BitrateDetectionService()
         self.downloadSpeedMeter = DownloadSpeedMeter()
-        self.downloadSpeedDetectionService = DownloadSpeedDetectionService(accessLogProvider: accessLogProvider, downloadSpeedMeter: self.downloadSpeedMeter)
+        self.downloadSpeedDetectionService = DownloadSpeedDetectionService(downloadSpeedMeter: self.downloadSpeedMeter)
         self.playbackTypeDetectionService = PlaybackTypeDetectionService(player: player)
         self.manipulator = AVPlayerEventDataManipulator(player: player, playbackTypeDetectionService: playbackTypeDetectionService, downloadSpeedMeter: self.downloadSpeedMeter)
         super.init(stateMachine: stateMachine)
@@ -93,12 +92,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         playerKVOList.append(player.observe(\.currentItem, options: [.new, .old, .initial]) {[weak self] (player, change) in
             self?.onPlayerCurrentItemChange(old: change.oldValue ?? nil, new: change.newValue ?? nil)
         })
-        
-        bitrateDetectionService.startMonitoring()
-        bitrateDetectionServiceKVO = bitrateDetectionService.observe(\.videoBitrate, options: [.new, .old]) { [weak self] _, change in
-            self?.onVideoQualityChange(newVideoBitrate: change.newValue ?? nil)
-        }
-        downloadSpeedDetectionService.startMonitoring()
     }
 
     override public func stopMonitoring() {
@@ -121,12 +114,6 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
         playerKVOList.removeAll()
         
-        bitrateDetectionService.stopMonitoring()
-        bitrateDetectionServiceKVO?.invalidate()
-        bitrateDetectionServiceKVO = nil
-        
-        downloadSpeedDetectionService.stopMonitoring()
-        
         resetSourceState()
     }
 
@@ -139,7 +126,16 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         NotificationCenter.default.addObserver(self, selector: #selector(observeFailedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(observeDidPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         manipulator.updateDrmPerformanceInfo(playerItem)
+        
         playbackTypeDetectionService.startMonitoring(playerItem: playerItem)
+        
+        let accessLogProvider = AVPlayerAccessLogProvider(playerItem: playerItem)
+        bitrateDetectionService.startMonitoring(accessLogProvider: accessLogProvider)
+        bitrateDetectionServiceKVO = bitrateDetectionService.observe(\.videoBitrate, options: [.new, .old]) { [weak self] _, change in
+            self?.onVideoQualityChange(newVideoBitrate: change.newValue ?? nil)
+        }
+        
+        downloadSpeedDetectionService.startMonitoring(accessLogProvider: accessLogProvider)
     }
 
     private func stopMonitoringPlayerItem(playerItem: AVPlayerItem) {
@@ -148,7 +144,14 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         playerItemStatusObserver?.invalidate()
+        
         playbackTypeDetectionService.stopMonitoring(playerItem: playerItem)
+        
+        bitrateDetectionService.stopMonitoring()
+        bitrateDetectionServiceKVO?.invalidate()
+        bitrateDetectionServiceKVO = nil
+        
+        downloadSpeedDetectionService.stopMonitoring()
     }
 
     // AVPlayerItem KVOs
