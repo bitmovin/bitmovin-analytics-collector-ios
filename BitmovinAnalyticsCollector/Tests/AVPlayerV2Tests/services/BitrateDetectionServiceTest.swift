@@ -42,7 +42,7 @@ class BitrateDetectionServiceTest: XCTestCase {
     
     func test_detectBitrateChange_should_doNothing_when_bitrateLogDoesNotContainLogWithDurationWatched() {
         // arrange
-        let log = AccessLogDto()
+        var log = AccessLogDto()
         log.durationWatched = 0
         
         let mockAccessLogProvider = AccessLogProviderMock()
@@ -59,11 +59,11 @@ class BitrateDetectionServiceTest: XCTestCase {
     
     func test_detectBitrateChange_should_doNothing_when_bitrateLogDidNotChange() {
         // arrange
-        let log = AccessLogDto()
+        var log = AccessLogDto()
         log.durationWatched = 1
         log.indicatedBitrate = 10
         
-        let mockAccessLogProvider = AccessLogProviderMock()
+        var mockAccessLogProvider = AccessLogProviderMock()
         mockAccessLogProvider.events = [log]
         
         let bitrateDetector = BitrateDetectionService(accessLogProvider: mockAccessLogProvider)
@@ -79,15 +79,15 @@ class BitrateDetectionServiceTest: XCTestCase {
     
     func test_detectBitrateChange_should_changeBitrateValue() {
         // arrange
-        let log = AccessLogDto()
+        var log = AccessLogDto()
         log.durationWatched = 1
         log.indicatedBitrate = 20
         
-        let log2 = AccessLogDto()
+        var log2 = AccessLogDto()
         log2.durationWatched = 2
         log2.indicatedBitrate = 30
         
-        let log3 = AccessLogDto()
+        var log3 = AccessLogDto()
         log3.durationWatched = 0
         log3.indicatedBitrate = 40
         
@@ -112,15 +112,15 @@ class BitrateDetectionServiceTest: XCTestCase {
     
     func test_startMonitoring_should_callDetectBitrateChangeAndChangeValue() {
         // arrange
-        let log = AccessLogDto()
+        var log = AccessLogDto()
         log.durationWatched = 1
         log.indicatedBitrate = 20
         
-        let log2 = AccessLogDto()
+        var log2 = AccessLogDto()
         log2.durationWatched = 2
         log2.indicatedBitrate = 30
         
-        let log3 = AccessLogDto()
+        var log3 = AccessLogDto()
         log3.durationWatched = 0
         log3.indicatedBitrate = 40
         

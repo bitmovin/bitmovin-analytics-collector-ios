@@ -16,7 +16,7 @@ class AVPlayerAccessLogProvider: AccessLogProvider {
         var log: [AccessLogDto] = []
         
         for event in accessEvents {
-            let logDto = toBitrateLogDto(event)
+            var logDto = toBitrateLogDto(event)
             logDto.index = accessEvents.lastIndex(of: event) ?? 0
             log.append(logDto)
         }
@@ -24,7 +24,7 @@ class AVPlayerAccessLogProvider: AccessLogProvider {
     }
     
     func toBitrateLogDto(_ accessLogEvent: AVPlayerItemAccessLogEvent) -> AccessLogDto {
-        let log = AccessLogDto()
+        var log = AccessLogDto()
         log.indicatedBitrate = accessLogEvent.indicatedBitrate
         log.durationWatched = accessLogEvent.durationWatched
         log.numberOfMediaRequests = accessLogEvent.numberOfMediaRequests
