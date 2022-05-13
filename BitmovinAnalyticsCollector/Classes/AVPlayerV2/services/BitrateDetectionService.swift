@@ -26,7 +26,6 @@ internal class BitrateDetectionService: NSObject {
     }
     
     @objc func detectBitrateChange() {
-        print("BitrateDetection")
         guard let currentLogEntry = getCurrentLogEntry() else {
             return
         }
