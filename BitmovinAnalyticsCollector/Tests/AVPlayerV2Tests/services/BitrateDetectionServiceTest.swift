@@ -63,7 +63,7 @@ class BitrateDetectionServiceTest: XCTestCase {
         log.durationWatched = 1
         log.indicatedBitrate = 10
         
-        var mockAccessLogProvider = AccessLogProviderMock()
+        let mockAccessLogProvider = AccessLogProviderMock()
         mockAccessLogProvider.events = [log]
         
         let bitrateDetector = BitrateDetectionService(accessLogProvider: mockAccessLogProvider)
