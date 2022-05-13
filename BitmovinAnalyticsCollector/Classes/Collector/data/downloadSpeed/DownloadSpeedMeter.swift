@@ -17,9 +17,9 @@ public class DownloadSpeedMeter {
     public func getInfoAndReset() -> DownloadSpeedInfoDto {
         let info = DownloadSpeedInfoDto()
         downloadSpeedMeterDispatchQueue.sync {
-            info.segmentsDownloadCount = measures.reduce(into: 0) { result, m in result += m.segmentCount}
-            info.segmentsDownloadSize = measures.reduce(into: 0) { result, m in result += m.size}
-            info.segmentsDownloadTime = measures.reduce(into: 0) { result, m in result += m.duration}
+            info.segmentsDownloadCount = measures.reduce(into: 0) { result, m in result += m.numberOfSegmentsDownloaded}
+            info.segmentsDownloadSize = measures.reduce(into: 0) { result, m in result += m.numberOfBytesTransfered}
+            info.segmentsDownloadTime = measures.reduce(into: 0) { result, m in result += m.downloadTime}
             measures.removeAll()
         }
         return info

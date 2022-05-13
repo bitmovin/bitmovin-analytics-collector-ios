@@ -1,15 +1,11 @@
 import Foundation
 
 public struct SpeedMeasurement {
-    
     public init() {}
     
-    // Download time in milliseconds
-    public var duration: Int64 = 0
+    public var downloadTime: Int64 = 0
 
-    // Bytes downloaded
-    public var size: Int64 = 0
+    public var numberOfBytesTransfered: Int64 = 0
     
-    // amount of segments downloaded
-    public var segmentCount: Int = 0
+    public var numberOfSegmentsDownloaded: Int = 0
 }

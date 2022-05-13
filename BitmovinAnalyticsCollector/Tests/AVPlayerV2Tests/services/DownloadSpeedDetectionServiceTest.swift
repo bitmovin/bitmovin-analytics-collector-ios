@@ -78,9 +78,9 @@ class DownloadSpeedDetectionServiceTest: XCTestCase {
         // assert
         XCTAssertEqual(downloadSpeedMeter.measures.count, 1)
         let speedMeasurement = downloadSpeedMeter.measures[0]
-        XCTAssertEqual(speedMeasurement.segmentCount, 2)
-        XCTAssertEqual(speedMeasurement.duration, 1000)
-        XCTAssertEqual(speedMeasurement.size, 100)
+        XCTAssertEqual(speedMeasurement.numberOfSegmentsDownloaded, 2)
+        XCTAssertEqual(speedMeasurement.downloadTime, 1000)
+        XCTAssertEqual(speedMeasurement.numberOfBytesTransfered, 100)
     }
     
     func test_detectDownloadSpeed_should_addMeasurementToDownloadSpeedMeter_when_prevLogsContainsLessItemsThanNewOne() {
@@ -116,9 +116,9 @@ class DownloadSpeedDetectionServiceTest: XCTestCase {
         // assert
         XCTAssertEqual(downloadSpeedMeter.measures.count, 1)
         let speedMeasurement = downloadSpeedMeter.measures[0]
-        XCTAssertEqual(speedMeasurement.segmentCount, 16)
-        XCTAssertEqual(speedMeasurement.duration, 1000)
-        XCTAssertEqual(speedMeasurement.size, 11050)
+        XCTAssertEqual(speedMeasurement.numberOfSegmentsDownloaded, 16)
+        XCTAssertEqual(speedMeasurement.downloadTime, 1000)
+        XCTAssertEqual(speedMeasurement.numberOfBytesTransfered, 11050)
     }
     
     func test_startMonitoring_should_callDetectDownloadSpeed() {

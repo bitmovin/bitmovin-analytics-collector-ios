@@ -47,7 +47,7 @@ internal class DownloadSpeedDetectionService: NSObject {
         }
         
         // no data no tracking
-        if speedMeasurement.size == 0 {
+        if speedMeasurement.numberOfBytesTransfered == 0 {
             return false
         }
         
@@ -58,22 +58,22 @@ internal class DownloadSpeedDetectionService: NSObject {
     
     private func createSpeedMeasurement(_ prevLogs: [AccessLogDto], _ currentLogs: [AccessLogDto]) -> SpeedMeasurement {
         var speedMeasurement = SpeedMeasurement()
-        speedMeasurement.duration = Int64(DownloadSpeedDetectionService.heartbeatIntervalSec) * DownloadSpeedDetectionService.SecondsToMillisec
+        speedMeasurement.downloadTime = Int64(DownloadSpeedDetectionService.heartbeatIntervalSec) * DownloadSpeedDetectionService.SecondsToMillisec
         
         if prevLogs.count > 0 {
             for i in 0...prevLogs.count-1 {
                 let prevLog = prevLogs[i]
                 let currentLog = currentLogs[i]
-                speedMeasurement.size += currentLog.numberofBytesTransfered - prevLog.numberofBytesTransfered
-                speedMeasurement.segmentCount += currentLog.numberOfMediaRequests - prevLog.numberOfMediaRequests
+                speedMeasurement.numberOfBytesTransfered += currentLog.numberofBytesTransfered - prevLog.numberofBytesTransfered
+                speedMeasurement.numberOfSegmentsDownloaded += currentLog.numberOfMediaRequests - prevLog.numberOfMediaRequests
             }
         }
         
         if prevLogs.count < currentLogs.count {
             for i in prevLogs.count...currentLogs.count-1 {
                 let currentLog = currentLogs[i]
-                speedMeasurement.size += currentLog.numberofBytesTransfered
-                speedMeasurement.segmentCount += currentLog.numberOfMediaRequests
+                speedMeasurement.numberOfBytesTransfered += currentLog.numberofBytesTransfered
+                speedMeasurement.numberOfSegmentsDownloaded += currentLog.numberOfMediaRequests
             }
         }
         return speedMeasurement
@@ -81,8 +81,8 @@ internal class DownloadSpeedDetectionService: NSObject {
     
     private func isValid(speedMeasurement: SpeedMeasurement) -> Bool {
         // consider negative values as invalid
-        return speedMeasurement.size >= 0
-            && speedMeasurement.segmentCount >= 0
-            && speedMeasurement.duration >= 0
+        return speedMeasurement.numberOfBytesTransfered >= 0
+            && speedMeasurement.numberOfSegmentsDownloaded >= 0
+            && speedMeasurement.downloadTime >= 0
     }
 }
