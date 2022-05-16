@@ -43,13 +43,13 @@ class DownloadSpeedMeterTest: XCTestCase {
         var measurement = SpeedMeasurement()
         measurement.numberOfBytesTransferred = 50
         measurement.downloadTime = 1000
-        measurement.numberOfSegmentsDownloadedsegmentCount = 1
+        measurement.numberOfSegmentsDownloaded = 1
         dsm.add(measurement: measurement)
         
         var measurement2 = SpeedMeasurement()
         measurement2.numberOfBytesTransferred = 100
         measurement2.downloadTime = 1000
-        measurement2.numberOfSegmentsDownloadedsegmentCount = 2
+        measurement2.numberOfSegmentsDownloaded = 2
         dsm.add(measurement: measurement2)
         
         // act
