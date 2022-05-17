@@ -41,7 +41,6 @@ internal class DownloadSpeedDetectionService: NSObject {
         
         let speedMeasurement = createSpeedMeasurement(prevAccessLog ?? [], currentLogs)
         
-        
         if !isValid(speedMeasurement: speedMeasurement) {
             return
         }
