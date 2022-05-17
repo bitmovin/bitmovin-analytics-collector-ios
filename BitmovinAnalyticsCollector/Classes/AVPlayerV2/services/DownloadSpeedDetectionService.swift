@@ -39,6 +39,11 @@ internal class DownloadSpeedDetectionService: NSObject {
             return
         }
         
+        // in the rare case that the currentLog is smaller than the previous one we skip downloadSpeed Calculation
+        guard currentLogs.count >= prevAccessLog?.count ?? 0 else {
+            return
+        }
+        
         let speedMeasurement = createSpeedMeasurement(prevAccessLog ?? [], currentLogs)
         
         if !isValid(speedMeasurement: speedMeasurement) {
@@ -50,7 +55,6 @@ internal class DownloadSpeedDetectionService: NSObject {
             return
         }
         
-        print("DownloadSpeedDetectionService: accessLog size:\(currentLogs.count)")
         prevAccessLog = currentLogs
         downloadSpeedMeter.add(measurement: speedMeasurement)
     }
