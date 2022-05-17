@@ -32,6 +32,7 @@ internal class DownloadSpeedDetectionService: NSObject {
         heartbeatTimer?.invalidate()
         heartbeatTimer = nil
         accessLogProvider = nil
+        prevAccessLog = nil
     }
     
     @objc public func detectDownloadSpeed() {
@@ -40,7 +41,10 @@ internal class DownloadSpeedDetectionService: NSObject {
         }
         
         // in the rare case that the currentLog is smaller than the previous one we skip downloadSpeed Calculation
+        // this behaviour is not documented by apple and we don't know how to interpret it
         guard currentLogs.count >= prevAccessLog?.count ?? 0 else {
+            // recover the previousLogs
+            prevAccessLog = currentLogs
             return
         }
         
