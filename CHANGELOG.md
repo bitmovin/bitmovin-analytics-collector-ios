@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - new method `getUserId` on all collectors to get used `userId`
+- AVPlayer: Download Speed is now tracked
+- AVPlayer: Number of downloaded segments is now tracked
 
 ### Changed
 - AVPlayer: reworked tracking of video bitrate

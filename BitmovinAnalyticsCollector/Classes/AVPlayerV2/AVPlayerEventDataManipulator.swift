@@ -1,5 +1,10 @@
 import Foundation
 import AVFoundation
+import UIKit
+
+#if SWIFT_PACKAGE
+import CoreCollector
+#endif
 
 class AVPlayerEventDataManipulator {
     
@@ -12,10 +17,12 @@ class AVPlayerEventDataManipulator {
     
     // Helper classes
     private let playbackTypeDetectionService: PlaybackTypeDetectionService
+    private let downloadSpeedMeter: DownloadSpeedMeter
     
-    init(player: AVPlayer, playbackTypeDetectionService: PlaybackTypeDetectionService) {
+    init(player: AVPlayer, playbackTypeDetectionService: PlaybackTypeDetectionService, downloadSpeedMeter: DownloadSpeedMeter) {
         self.player = player
         self.playbackTypeDetectionService = playbackTypeDetectionService
+        self.downloadSpeedMeter = downloadSpeedMeter
     }
     
     func resetSourceState() {
@@ -80,6 +87,8 @@ class AVPlayerEventDataManipulator {
         if player.volume == 0 {
             eventData.isMuted = true
         }
+        
+        eventData.downloadSpeedInfo = downloadSpeedMeter.getInfoAndReset()
     }
     
     func updateDrmPerformanceInfo(_ playerItem: AVPlayerItem) {
@@ -145,5 +154,4 @@ class AVPlayerEventDataManipulator {
         
         return sampleRate
     }
-    
 }

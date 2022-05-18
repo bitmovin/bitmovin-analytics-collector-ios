@@ -8,25 +8,17 @@ import CoreMedia
 #endif
 
 class FakePlayerAdapter: PlayerAdapter {
-    func decorateEventData(eventData: EventData) {
-        
-    }
+    func decorateEventData(eventData: EventData) {}
     
-    func initialize() {
-        
-    }
+    func initialize() {}
     
-    func stopMonitoring() {
-        
-    }
+    func stopMonitoring() {}
     
-    func destroy() {
-        
-    }
+    func destroy() {}
     
-    func resetSourceState() {
-        
-    }
+    func resetSourceState() {}
+    
+    func resetEventDataState() {}
     
     var drmDownloadTime: Int64?
     

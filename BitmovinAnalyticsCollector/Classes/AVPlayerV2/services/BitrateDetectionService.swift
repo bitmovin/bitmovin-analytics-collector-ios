@@ -2,26 +2,23 @@ import Foundation
 import AVFoundation
 
 internal class BitrateDetectionService: NSObject {
-    private static let heartbeatInterval: Double = 1.0
+    private static let heartbeatIntervalSec: Double = 1.0
     
-    @objc dynamic private(set) var videoBitrate: Double
+    @objc dynamic private(set) var videoBitrate: Double = 0
     
-    private let bitrateLogProvider: BitrateLogProvider
+    private var accessLogProvider: AccessLogProvider?
     weak private var heartbeatTimer: Timer?
     
-    init(bitrateLogProvider: BitrateLogProvider) {
-        self.bitrateLogProvider = bitrateLogProvider
-        self.videoBitrate = 0
-    }
-    
-    func startMonitoring() {
+    func startMonitoring(accessLogProvider: AccessLogProvider) {
+        self.accessLogProvider = accessLogProvider
         heartbeatTimer?.invalidate()
-        heartbeatTimer = Timer.scheduledTimer(timeInterval: BitrateDetectionService.heartbeatInterval, target: self, selector: #selector(BitrateDetectionService.detectBitrateChange), userInfo: nil, repeats: true)
+        heartbeatTimer = Timer.scheduledTimer(timeInterval: BitrateDetectionService.heartbeatIntervalSec, target: self, selector: #selector(BitrateDetectionService.detectBitrateChange), userInfo: nil, repeats: true)
     }
     
     func stopMonitoring() {
         heartbeatTimer?.invalidate()
         heartbeatTimer = nil
+        accessLogProvider = nil
     }
     
     func resetSourceState() {
@@ -49,8 +46,8 @@ internal class BitrateDetectionService: NSObject {
      returns the last AccessLogEntry with durationWatched > 0
      for us this is the current relevant entry
      */
-    private func getCurrentLogEntry() -> BitrateLogDto? {
-        guard let events = bitrateLogProvider.getEvents() else {
+    private func getCurrentLogEntry() -> AccessLogDto? {
+        guard let events = accessLogProvider?.getEvents() else {
             return nil
         }
         

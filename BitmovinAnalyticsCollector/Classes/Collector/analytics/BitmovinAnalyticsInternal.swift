@@ -185,7 +185,6 @@ open class BitmovinAnalyticsInternal: NSObject {
         eventDataDispatcher.resetSourceState()
         didSendDrmLoadTime = false
     }
-    
 }
 
 extension BitmovinAnalyticsInternal: StateMachineDelegate {

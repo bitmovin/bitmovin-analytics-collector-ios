@@ -9,10 +9,10 @@ import Foundation
 @testable import CoreCollector
 #endif
 
-class BitrateLogProviderMock: BitrateLogProvider {
-    var events: [BitrateLogDto]? = nil
+class AccessLogProviderMock: AccessLogProvider {
+    var events: [AccessLogDto]? = nil
     
-    func getEvents() -> [BitrateLogDto]? {
+    func getEvents() -> [AccessLogDto]? {
         return events
     }
 }

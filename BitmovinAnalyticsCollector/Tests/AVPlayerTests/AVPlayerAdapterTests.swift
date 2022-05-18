@@ -7,6 +7,7 @@ class AVPlayerAdapterTests: XCTestCase {
     func test() {
         
         let player = AVPlayer()
+        player.isMuted = true
         let config = BitmovinAnalyticsConfig(key: "")
         class StateMachineMock : StateMachine {
             override func transitionState(destinationState: PlayerState, time: CMTime?) {
