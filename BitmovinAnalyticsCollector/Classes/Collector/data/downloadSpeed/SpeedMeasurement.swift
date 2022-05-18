@@ -12,7 +12,7 @@ public struct SpeedMeasurement {
 }
 
 extension SpeedMeasurement {
-    static func + (left: SpeedMeasurement, right: SpeedMeasurement) -> SpeedMeasurement {
+    public static func + (left: SpeedMeasurement, right: SpeedMeasurement) -> SpeedMeasurement {
         var new = SpeedMeasurement()
         new.downloadTime = left.downloadTime + right.downloadTime
         new.numberOfBytesTransferred = left.numberOfBytesTransferred + right.numberOfBytesTransferred
@@ -20,7 +20,7 @@ extension SpeedMeasurement {
         return new
     }
     
-    static func += (left: inout SpeedMeasurement, right: SpeedMeasurement) {
+    public static func += (left: inout SpeedMeasurement, right: SpeedMeasurement) {
         left = left + right
     }
 }
