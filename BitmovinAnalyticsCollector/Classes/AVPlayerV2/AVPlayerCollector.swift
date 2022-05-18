@@ -8,6 +8,7 @@ public class AVPlayerCollector: Collector {
     public typealias TPlayer = AVPlayer
 
     private var analytics: BitmovinAnalyticsInternal
+    private let factory: AVPlayerAdapterFactory = AVPlayerAdapterFactory()
 
     @objc public init(config: BitmovinAnalyticsConfig) {
         self.analytics = BitmovinAnalyticsInternal.createAnalytics(config: config)
@@ -23,22 +24,7 @@ public class AVPlayerCollector: Collector {
     }
     
     private func buildAdapter(player: AVPlayer) -> AVPlayerAdapter {
-        let errorHandler = ErrorHandler()
-        let bitrateDetectionService = BitrateDetectionService()
-        let downloadSpeedMeter = DownloadSpeedMeter()
-        let downloadSpeedDetectionService = DownloadSpeedDetectionService(downloadSpeedMeter: downloadSpeedMeter)
-        let playbackTypeDetectionService = PlaybackTypeDetectionService(player: player)
-        let manipulator = AVPlayerEventDataManipulator(player: player, playbackTypeDetectionService: playbackTypeDetectionService, downloadSpeedMeter: downloadSpeedMeter)
-        
-        return AVPlayerAdapter(player: player,
-                                      stateMachine: analytics.stateMachine,
-                                      errorHandler: errorHandler,
-                                      bitrateDetectionService: bitrateDetectionService,
-                                      playbackTypeDetectionService: playbackTypeDetectionService,
-                                      downloadSpeedDetectionService: downloadSpeedDetectionService,
-                                      downloadSpeedMeter: downloadSpeedMeter,
-                                      manipulator: manipulator
-        )
+        return factory.createAdapter(stateMachine: analytics.stateMachine, player: player)
     }
 
     @objc public func detachPlayer() {
