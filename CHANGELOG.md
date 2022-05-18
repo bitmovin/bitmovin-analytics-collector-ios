@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
+## Development V1
+
+## 2.9.0
 
 ### Added
 - new method `getUserId` on all collectors to get used `userId`
@@ -18,7 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - AVPlayer: wrongly track multiple seek events instead of one event for progressice sources 
 
-## Development V1
+## 1.29.0
 
 ### Added
 - new method `getUserId` on all collectors to get used `userId`
