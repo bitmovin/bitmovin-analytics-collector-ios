@@ -61,6 +61,34 @@ class DownloadSpeedDetectionServiceTest: XCTestCase {
         XCTAssertEqual(downloadSpeedMeter.measures.count, 0)
     }
     
+    func test_detectDownloadSpeed_should_notAddMeasurement_when_invalidPartialSpeedMeasurementWasTracked() {
+        //arrange
+        let mockAccessLogProvider = AccessLogProviderMock()
+        var log = AccessLogDto()
+        log.numberofBytesTransferred = 10
+        log.numberOfMediaRequests = 10
+        
+        mockAccessLogProvider.events = [log]
+        
+        let downloadSpeedMeter = DownloadSpeedMeter()
+        let downloadSpeedDetectionService = DownloadSpeedDetectionService(downloadSpeedMeter: downloadSpeedMeter)
+        downloadSpeedDetectionService.startMonitoring(accessLogProvider: mockAccessLogProvider)
+        downloadSpeedDetectionService.detectDownloadSpeed()
+        downloadSpeedMeter.getInfoAndReset()
+        
+        var log2 = AccessLogDto()
+        log2.numberofBytesTransferred = 2
+        log2.numberOfMediaRequests = 1
+        // this will set the previous log entry with the new log entry in conflict and produce negative values
+        mockAccessLogProvider.events = [log2]
+        
+        // act
+        downloadSpeedDetectionService.detectDownloadSpeed()
+        
+        // assert
+        XCTAssertEqual(downloadSpeedMeter.measures.count, 0)
+    }
+    
     func test_detectDownloadSpeed_should_addMeasurementToDownloadSpeedMeter() {
         //arrange
         let mockAccessLogProvider = AccessLogProviderMock()
