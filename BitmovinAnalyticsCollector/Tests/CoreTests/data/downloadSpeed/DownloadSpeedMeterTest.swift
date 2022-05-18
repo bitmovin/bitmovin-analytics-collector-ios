@@ -41,15 +41,15 @@ class DownloadSpeedMeterTest: XCTestCase {
         // arrange
         let dsm = DownloadSpeedMeter()
         var measurement = SpeedMeasurement()
-        measurement.size = 50
-        measurement.duration = 1000
-        measurement.segmentCount = 1
+        measurement.numberOfBytesTransferred = 50
+        measurement.downloadTime = 1000
+        measurement.numberOfSegmentsDownloaded = 1
         dsm.add(measurement: measurement)
         
         var measurement2 = SpeedMeasurement()
-        measurement2.size = 100
-        measurement2.duration = 1000
-        measurement2.segmentCount = 2
+        measurement2.numberOfBytesTransferred = 100
+        measurement2.downloadTime = 1000
+        measurement2.numberOfSegmentsDownloaded = 2
         dsm.add(measurement: measurement2)
         
         // act
