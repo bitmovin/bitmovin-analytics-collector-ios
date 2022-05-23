@@ -4,6 +4,7 @@ import CoreCollector
 #endif
 
 
+@objc
 public class BitmovinPlayerCollector : Collector {
     public typealias TPlayer = Player
 
