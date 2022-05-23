@@ -6,7 +6,7 @@ import BitmovinCollectorCore
 
 @objc
 @available(*, deprecated, message: "Please use new AVPlayerCollector and upgrade to v2.8.0")
-public class AVPlayerCollector: Collector {
+public class AVPlayerCollector: NSObject, Collector {
     public typealias TPlayer = AVPlayer
 
     private var analytics: BitmovinAnalyticsInternal

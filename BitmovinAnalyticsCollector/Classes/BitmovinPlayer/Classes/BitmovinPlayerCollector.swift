@@ -5,7 +5,7 @@ import CoreCollector
 
 
 @objc
-public class BitmovinPlayerCollector : Collector {
+public class BitmovinPlayerCollector: NSObject, Collector {
     public typealias TPlayer = Player
 
     private var analytics: BitmovinAnalyticsInternal
