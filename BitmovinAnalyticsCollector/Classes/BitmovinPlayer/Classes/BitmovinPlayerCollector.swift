@@ -4,7 +4,8 @@ import CoreCollector
 #endif
 
 
-public class BitmovinPlayerCollector : Collector {
+@objc
+public class BitmovinPlayerCollector: NSObject, Collector {
     public typealias TPlayer = Player
 
     private var analytics: BitmovinAnalyticsInternal

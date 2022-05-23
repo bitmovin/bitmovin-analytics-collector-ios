@@ -4,7 +4,8 @@ import Foundation
 import CoreCollector
 #endif
 
-public class AVPlayerCollector: Collector {
+@objc
+public class AVPlayerCollector: NSObject, Collector {
     public typealias TPlayer = AVPlayer
 
     private var analytics: BitmovinAnalyticsInternal
