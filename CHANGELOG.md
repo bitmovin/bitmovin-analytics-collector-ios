@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
+
+### Removed
+- Heartbeat interval duration configuration on `BitmovinAnalyticsConfig`
+
 ## Development V1
 ## 2.9.1
 
@@ -16,6 +20,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - `@objc` annotations to allow embedding the Collector in Objective-C Applications
+
+### Removed
+- Heartbeat interval duration configuration on `BitmovinAnalyticsConfig`
 
 ## 2.9.0
 

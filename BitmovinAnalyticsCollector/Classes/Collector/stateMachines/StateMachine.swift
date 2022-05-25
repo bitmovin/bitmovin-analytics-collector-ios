@@ -22,6 +22,7 @@ public class StateMachine {
     private var rebufferHeartbeatTimer: DispatchWorkItem?
     private var currentRebufferIntervalIndex: Int = 0
     private let rebufferHeartbeatInterval: [Int64] = [3000, 5000, 10000, 59700]
+    private let heartbeatInterval: Int = 59700
     
     //play attempt
     public private(set) var didAttemptPlayingVideo: Bool = false
@@ -232,7 +233,7 @@ public class StateMachine {
     }
 
     func enableHeartbeat() {
-        let interval = Double(config.heartbeatInterval) / 1_000.0
+        let interval = Double(heartbeatInterval) / 1_000.0
         heartbeatTimer?.invalidate()
         heartbeatTimer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(StateMachine.onHeartbeat), userInfo: nil, repeats: true)
     }

@@ -280,7 +280,8 @@ public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig{
     /**
      * How often the video engine should heartbeat
      */
-    @objc public var heartbeatInterval: Int = 59_000
+    @available(*, deprecated, message: "No longer possible to change default value of 59700ms")
+    @objc public var heartbeatInterval: Int = 59700
     
     /**
      * Flag to use randomised userId not depending on device specific values
