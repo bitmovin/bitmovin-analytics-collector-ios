@@ -225,7 +225,7 @@ public class StateMachine {
             return false
         } else if state == .playAttemptFailed {
             return false
-        } else if state == .paused && (destinationState == .qualitychange || destinationState == .seeking || destinationState == .buffering || destinationState == .audiochange) {
+        } else if state == .paused && (destinationState == .qualitychange || destinationState == .buffering || destinationState == .audiochange) {
             return false
         }
         

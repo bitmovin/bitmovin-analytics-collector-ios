@@ -10,7 +10,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 - Heartbeat interval duration configuration on `BitmovinAnalyticsConfig`
 
+### Fixed
+- BitmovinPlayer: tracking of seeking events
+
 ## Development V1
+
+### Removed
+- Heartbeat interval duration configuration on `BitmovinAnalyticsConfig`
+
+### Fixed
+- BitmovinPlayer: tracking of seeking events
+
 ## 2.9.1
 
 ### Added
