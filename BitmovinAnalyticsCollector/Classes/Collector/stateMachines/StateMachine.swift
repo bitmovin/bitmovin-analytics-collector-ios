@@ -225,6 +225,8 @@ public class StateMachine {
             return false
         } else if state == .playAttemptFailed {
             return false
+        // transition from paused to seeking is allowed because if seeking is triggered with UI
+        // first pause is triggered and then seeking
         } else if state == .paused && (destinationState == .qualitychange || destinationState == .buffering || destinationState == .audiochange) {
             return false
         }

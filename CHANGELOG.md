@@ -7,13 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+## Development V1
+
+## 2.9.2
+
 ### Removed
 - Heartbeat interval duration configuration on `BitmovinAnalyticsConfig`
 
 ### Fixed
 - BitmovinPlayer: tracking of seeking events
 
-## Development V1
+## 1.29.2
 
 ### Removed
 - Heartbeat interval duration configuration on `BitmovinAnalyticsConfig`
@@ -30,9 +34,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - `@objc` annotations to allow embedding the Collector in Objective-C Applications
-
-### Removed
-- Heartbeat interval duration configuration on `BitmovinAnalyticsConfig`
 
 ## 2.9.0
 
