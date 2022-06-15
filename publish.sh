@@ -50,6 +50,7 @@ git checkout develop || exit
 git pull || exit
 
 echo "Generating BuildConfig.swift file..."
+chmod +x ./deployment/generateBuildConfig.sh 
 (./deployment/generateBuildConfig.sh "VERSION=$VERSION") > BitmovinAnalyticsCollector/Classes/Collector/util/BuildConfig.swift || exit
 git add BitmovinAnalyticsCollector/Classes/Collector/util/BuildConfig.swift || exit
 git commit -m "Generated BuildConfig.swift" || exit
@@ -79,6 +80,7 @@ bundle exec fastlane release
 
 echo "Don't forget to create and merge the pull request in the cocoapod-specs repo."
 
+chmod +x ./deployment/notifyCollectorReleaseChannel.sh 
 ./deployment/notifyCollectorReleaseChannel "ios" $VERSION
 ./deployment/notifyCollectorReleaseChannel "tvos" $VERSION
 
