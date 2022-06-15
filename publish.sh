@@ -81,8 +81,8 @@ bundle exec fastlane release
 echo "Don't forget to create and merge the pull request in the cocoapod-specs repo."
 
 chmod +x ./deployment/notifyCollectorReleaseChannel.sh 
-./deployment/notifyCollectorReleaseChannel "ios" $VERSION
-./deployment/notifyCollectorReleaseChannel "tvos" $VERSION
+./deployment/notifyCollectorReleaseChannel.sh "ios" $VERSION
+./deployment/notifyCollectorReleaseChannel.sh "tvos" $VERSION
 
 echo "Don't forget to update the changelog in Contentful."
 open "https://app.contentful.com/spaces/blfijbdi3ei3/entries"
