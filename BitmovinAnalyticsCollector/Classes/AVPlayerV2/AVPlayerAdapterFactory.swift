@@ -2,7 +2,7 @@ import Foundation
 import AVFoundation
 
 #if SWIFT_PACKAGE
-@testable import CoreCollector
+import CoreCollector
 #endif
 
 class AVPlayerAdapterFactory {
