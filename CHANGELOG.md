@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+### Fixed
+- Fixed typo of unknown Player Error
+
 ## Development V1
+
+### Fixed
+- Fixed typo of unknown Player Error
 
 ## 2.9.2
 
