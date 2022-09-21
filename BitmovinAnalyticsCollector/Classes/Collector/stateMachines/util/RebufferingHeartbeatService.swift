@@ -16,8 +16,16 @@ public class RebufferingHeartbeatService {
     
     private weak var stateMachine: StateMachine?
     
+    private let timeoutHandler: RebufferingTimeoutHandler = RebufferingTimeoutHandler()
+
     func initialise(stateMachine: StateMachine) {
         self.stateMachine = stateMachine
+        self.timeoutHandler.initialise(stateMachine: stateMachine)
+    }
+    
+    func startRebufferHeartbeat() {
+        scheduleRebufferHeartbeat()
+        timeoutHandler.startInterval()
     }
     
     func scheduleRebufferHeartbeat() {
@@ -39,6 +47,7 @@ public class RebufferingHeartbeatService {
             self.rebufferHeartbeatTimer = nil
             self.currentRebufferIntervalIndex = 0
         }
+        timeoutHandler.resetInterval()
     }
     
     private func getRebufferDeadline() -> DispatchTime {
