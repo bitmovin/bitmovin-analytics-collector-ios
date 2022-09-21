@@ -31,7 +31,7 @@ public enum PlayerState: String {
                 return
             case .buffering:
                 stateMachine.rebufferingTimeoutHandler.startInterval()
-                stateMachine.scheduleRebufferHeartbeat()
+                stateMachine.rebufferingHeartbeatService.scheduleRebufferHeartbeat()
                 return
             case .playAttemptFailed:
                 return
@@ -61,7 +61,7 @@ public enum PlayerState: String {
 
     func onExit(stateMachine: StateMachine, duration: Int64, destinationState: PlayerState) {
         if (destinationState == .playAttemptFailed) {
-            stateMachine.disableRebufferHeartbeat()
+            stateMachine.rebufferingHeartbeatService.disableRebufferHeartbeat()
             stateMachine.delegate?.stateMachineEnterPlayAttemptFailed(stateMachine: stateMachine)
             return
         }
@@ -82,7 +82,7 @@ public enum PlayerState: String {
                 }
             case .buffering:
                 stateMachine.rebufferingTimeoutHandler.resetInterval()
-                stateMachine.disableRebufferHeartbeat()
+                stateMachine.rebufferingHeartbeatService.disableRebufferHeartbeat()
                 stateMachine.delegate?.stateMachine(stateMachine, didExitBufferingWithDuration: duration)
                 return
             case .playAttemptFailed:
