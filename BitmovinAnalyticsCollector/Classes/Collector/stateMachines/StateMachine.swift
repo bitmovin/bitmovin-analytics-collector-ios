@@ -2,9 +2,6 @@ import AVFoundation
 import Foundation
 
 public class StateMachine {
-    private static var kVideoStartFailedTimeoutSeconds: TimeInterval = 60
-    private static var kvideoStartFailedTimerId: String = "com.bitmovin.analytics.core.statemachine.startupFailedTimer"
-    
     public private(set) var state: PlayerState
     private var config: BitmovinAnalyticsConfig
     private(set) var impressionId: String
