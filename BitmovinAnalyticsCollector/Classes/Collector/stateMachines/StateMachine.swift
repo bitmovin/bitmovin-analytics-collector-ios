@@ -23,13 +23,11 @@ public class StateMachine {
     //play attempt
     public private(set) var didAttemptPlayingVideo: Bool = false
     public private(set) var didStartPlayingVideo: Bool = false
-    private var videoStartFailedWorkItem: DispatchWorkItem?
-    private(set) var videoStartFailed: Bool = false
-    private(set) var videoStartFailedReason: String?
     
     // features objects
     public var qualityChangeCounter: QualityChangeCounter
     public var rebufferingHeartbeatService: RebufferingHeartbeatService
+    public var videoStartFailureService: VideoStartFailureService
     
     // error tracking
     private var errorData: ErrorData? = nil
@@ -39,11 +37,13 @@ public class StateMachine {
         state = .ready
         impressionId = NSUUID().uuidString
         qualityChangeCounter = QualityChangeCounter()
-        self.rebufferingHeartbeatService = RebufferingHeartbeatService()
+        rebufferingHeartbeatService = RebufferingHeartbeatService()
+        videoStartFailureService = VideoStartFailureService()
         print("Generated Bitmovin Analytics impression ID: " + impressionId.lowercased())
         
         // needs to happen after init of properties
-        self.rebufferingHeartbeatService.initialise(stateMachine: self)
+        rebufferingHeartbeatService.initialise(stateMachine: self)
+        videoStartFailureService.initialise(stateMachine: self)
     }
 
     deinit {
@@ -58,7 +58,7 @@ public class StateMachine {
         startupTime = 0
         disableHeartbeat()
         rebufferingHeartbeatService.disableRebufferHeartbeat()
-        resetVideoStartFailed()
+        videoStartFailureService.resetVideoStartFailed()
         qualityChangeCounter.resetInterval()
         delegate?.stateMachineResetSourceState()
         print("Generated Bitmovin Analytics impression ID: " +  impressionId.lowercased())
@@ -152,48 +152,8 @@ public class StateMachine {
         didStartPlayingVideo = true
     }
     
-    public func startVideoStartFailedTimer() {
-        // The second test makes sure to not start the timer during an ad or if the player is paused on resuming from background
-        if(didStartPlayingVideo || state != .startup) {
-            return
-        }
-        clearVideoStartFailedTimer()
-        
-        videoStartFailedWorkItem = DispatchWorkItem { [weak self] in
-            guard let self = self else { return }
-            self.errorData = ErrorData.ANALYTICS_VIDEOSTART_TIMEOUT_REACHED
-            self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout)
-        }
-        DispatchQueue.init(label: StateMachine.kvideoStartFailedTimerId).asyncAfter(deadline: .now() + StateMachine.kVideoStartFailedTimeoutSeconds, execute: videoStartFailedWorkItem!)
-    }
-    
-    public func clearVideoStartFailedTimer() {
-        if (videoStartFailedWorkItem == nil) {
-            return
-        }
-        videoStartFailedWorkItem!.cancel()
-        videoStartFailedWorkItem = nil
-    }
-    
-    public func setVideoStartFailed(withReason reason: String) {
-        clearVideoStartFailedTimer()
-        videoStartFailed = true
-        videoStartFailedReason = reason
-    }
-    
-    public func resetVideoStartFailed() {
-        videoStartFailed = false
-        videoStartFailedReason = nil
-    }
-    
-    public func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown) {
-        setVideoStartFailed(withReason: reason)
-        transitionState(destinationState: .playAttemptFailed, time: nil)
-        self.delegate?.stateMachineStopsCollecting()
-    }
-    
-    public func onPlayAttemptFailed(withError error: ErrorData) {
-        setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
+    public func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown, withError error: ErrorData? = nil) {
+        videoStartFailureService.setVideoStartFailed(withReason: reason)
         self.errorData = error
         transitionState(destinationState: .playAttemptFailed, time: nil)
         self.delegate?.stateMachineStopsCollecting()

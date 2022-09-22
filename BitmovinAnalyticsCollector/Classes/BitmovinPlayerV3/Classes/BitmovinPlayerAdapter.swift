@@ -183,7 +183,7 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     
     func onErrorEvent(_ errorData: ErrorData) {
         if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
-            stateMachine.onPlayAttemptFailed(withError: errorData)
+            stateMachine.onPlayAttemptFailed(withReason: VideoStartFailedReason.playerError, withError: errorData)
         } else {
             stateMachine.error(withError: errorData, time: Util.timeIntervalToCMTime(_: player.currentTime))
         }
