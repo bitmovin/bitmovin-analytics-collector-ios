@@ -1,10 +1,3 @@
-//
-//  VideoStartFailureService.swift
-//  Pods
-//
-//  Created by Thomas Sablattnig on 22.09.22.
-//
-
 import Foundation
 
 public class VideoStartFailureService {

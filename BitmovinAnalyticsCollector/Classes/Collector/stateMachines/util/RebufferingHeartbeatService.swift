@@ -1,10 +1,4 @@
 //
-//  RebufferingTimeService.swift
-//  Pods
-//
-//  Created by Thomas Sablattnig on 21.09.22.
-//
-
 import Foundation
 
 public class RebufferingHeartbeatService {
