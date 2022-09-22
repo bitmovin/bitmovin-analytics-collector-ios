@@ -174,7 +174,7 @@ open class BitmovinAnalyticsInternal: NSObject {
         if self.stateMachine.videoStartFailureService.videoStartFailed {
             eventData.videoStartFailed = self.stateMachine.videoStartFailureService.videoStartFailed
             eventData.videoStartFailedReason = self.stateMachine.videoStartFailureService.videoStartFailedReason ?? VideoStartFailedReason.unknown
-            stateMachine.videoStartFailureService.resetVideoStartFailed()
+            stateMachine.videoStartFailureService.reset()
         }
         
         eventData.duration = duration

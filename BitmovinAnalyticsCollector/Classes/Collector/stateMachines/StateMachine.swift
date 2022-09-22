@@ -55,7 +55,7 @@ public class StateMachine {
         startupTime = 0
         disableHeartbeat()
         rebufferingHeartbeatService.disableHeartbeat()
-        videoStartFailureService.resetVideoStartFailed()
+        videoStartFailureService.reset()
         qualityChangeCounter.resetInterval()
         delegate?.stateMachineResetSourceState()
         print("Generated Bitmovin Analytics impression ID: " +  impressionId.lowercased())

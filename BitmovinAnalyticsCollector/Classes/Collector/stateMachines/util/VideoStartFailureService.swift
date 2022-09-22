@@ -15,7 +15,7 @@ public class VideoStartFailureService {
         self.stateMachine = stateMachine
     }
     
-    public func startVideoStartFailedTimer() {
+    public func startTimer() {
         guard let stateMachine = self.stateMachine else {
             return
         }
@@ -24,7 +24,7 @@ public class VideoStartFailureService {
         if(stateMachine.didStartPlayingVideo || stateMachine.state != .startup) {
             return
         }
-        clearVideoStartFailedTimer()
+        clearTimer()
         
         videoStartFailedWorkItem = DispatchWorkItem { [weak self] in
             guard let self = self else { return }
@@ -33,7 +33,7 @@ public class VideoStartFailureService {
         queue.asyncAfter(deadline: .now() + VideoStartFailureService.videoStartFailedTimeoutSeconds, execute: videoStartFailedWorkItem!)
     }
     
-    public func clearVideoStartFailedTimer() {
+    public func clearTimer() {
         if (videoStartFailedWorkItem == nil) {
             return
         }
@@ -42,12 +42,12 @@ public class VideoStartFailureService {
     }
     
     public func setVideoStartFailed(withReason reason: String) {
-        clearVideoStartFailedTimer()
+        clearTimer()
         videoStartFailed = true
         videoStartFailedReason = reason
     }
     
-    public func resetVideoStartFailed() {
+    public func reset() {
         videoStartFailed = false
         videoStartFailedReason = nil
     }

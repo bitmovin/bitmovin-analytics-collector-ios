@@ -32,12 +32,12 @@ open class CorePlayerAdapter: NSObject {
     }
     
     @objc func willResignActive(notification _: Notification){
-        stateMachine.videoStartFailureService.clearVideoStartFailedTimer()
+        stateMachine.videoStartFailureService.clearTimer()
     }
     
     @objc func willEnterForegroundNotification(notification _: Notification){
         if(!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
-            stateMachine.videoStartFailureService.startVideoStartFailedTimer()
+            stateMachine.videoStartFailureService.startTimer()
         }
     }
     

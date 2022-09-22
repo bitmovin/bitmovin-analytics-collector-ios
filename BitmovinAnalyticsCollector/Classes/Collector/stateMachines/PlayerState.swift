@@ -27,7 +27,7 @@ public enum PlayerState: String {
             case .ready:
                 return
             case .startup:
-                stateMachine.videoStartFailureService.startVideoStartFailedTimer()
+                stateMachine.videoStartFailureService.startTimer()
                 return
             case .buffering:
                 stateMachine.rebufferingHeartbeatService.startHeartbeat()
@@ -73,7 +73,7 @@ public enum PlayerState: String {
             case .ready:
                 return
             case .startup:
-                stateMachine.videoStartFailureService.clearVideoStartFailedTimer()
+                stateMachine.videoStartFailureService.clearTimer()
                 stateMachine.startupTime += duration
                 if(destinationState == .playing) {
                     stateMachine.setDidStartPlayingVideo()
