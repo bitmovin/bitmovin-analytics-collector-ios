@@ -1,9 +1,9 @@
 import Foundation
 
 public class RebufferingTimeoutHandler {
-    private static var kAnalyticsRebufferingTimeoutIntervalId = "com.bitmovin.analytics.core.utils.RebufferingTimeoutHandler"
-    private static var kAnalyticsRebufferingTimeoutSeconds: TimeInterval = 2 * 60
+    private static var rebufferingTimeoutSeconds: TimeInterval = 2 * 60
     
+    private let queue = DispatchQueue.init(label: "com.bitmovin.analytics.core.utils.RebufferingTimeoutHandler")
     private var rebufferingTimeoutWorkItem: DispatchWorkItem?
     private weak var stateMachine: StateMachine?
     
@@ -19,7 +19,7 @@ public class RebufferingTimeoutHandler {
             self.resetInterval()
         }
 
-        DispatchQueue.init(label: RebufferingTimeoutHandler.kAnalyticsRebufferingTimeoutIntervalId).asyncAfter(deadline: .now() + RebufferingTimeoutHandler.kAnalyticsRebufferingTimeoutSeconds, execute: rebufferingTimeoutWorkItem!)
+        queue.asyncAfter(deadline: .now() + RebufferingTimeoutHandler.rebufferingTimeoutSeconds, execute: rebufferingTimeoutWorkItem!)
     }
     
     private func rebufferTimeoutReached() {
