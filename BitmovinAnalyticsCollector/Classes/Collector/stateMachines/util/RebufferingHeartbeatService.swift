@@ -28,7 +28,7 @@ public class RebufferingHeartbeatService {
         timeoutHandler.startInterval()
     }
     
-    func scheduleRebufferHeartbeat() {
+    private func scheduleRebufferHeartbeat() {
         self.rebufferHeartbeatTimer = DispatchWorkItem { [weak self] in
             guard let self = self,
                 self.rebufferHeartbeatTimer != nil else {

@@ -29,7 +29,6 @@ public class StateMachine {
     
     // features objects
     public var qualityChangeCounter: QualityChangeCounter
-    public var rebufferingTimeoutHandler: RebufferingTimeoutHandler
     public var rebufferingHeartbeatService: RebufferingHeartbeatService
     
     // error tracking
@@ -40,12 +39,10 @@ public class StateMachine {
         state = .ready
         impressionId = NSUUID().uuidString
         qualityChangeCounter = QualityChangeCounter()
-        self.rebufferingTimeoutHandler = RebufferingTimeoutHandler()
         self.rebufferingHeartbeatService = RebufferingHeartbeatService()
         print("Generated Bitmovin Analytics impression ID: " + impressionId.lowercased())
         
         // needs to happen after init of properties
-        self.rebufferingTimeoutHandler.initialise(stateMachine: self)
         self.rebufferingHeartbeatService.initialise(stateMachine: self)
     }
 
@@ -60,10 +57,9 @@ public class StateMachine {
         didStartPlayingVideo = false
         startupTime = 0
         disableHeartbeat()
-        self.rebufferingHeartbeatService.disableRebufferHeartbeat()
+        rebufferingHeartbeatService.disableRebufferHeartbeat()
         resetVideoStartFailed()
         qualityChangeCounter.resetInterval()
-        rebufferingTimeoutHandler.resetInterval()
         delegate?.stateMachineResetSourceState()
         print("Generated Bitmovin Analytics impression ID: " +  impressionId.lowercased())
     }
