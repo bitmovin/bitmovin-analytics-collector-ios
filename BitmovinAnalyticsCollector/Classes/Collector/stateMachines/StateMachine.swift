@@ -148,12 +148,6 @@ public class StateMachine {
         }
     }
     
-    public func rebufferTimeoutReached(time: CMTime?) {
-        self.errorData = ErrorData.ANALYTICS_BUFFERING_TIMEOUT_REACHED
-        transitionState(destinationState: .error, time: time)
-        self.delegate?.stateMachineStopsCollecting()
-    }
-    
     public func setDidStartPlayingVideo() {
         didStartPlayingVideo = true
     }

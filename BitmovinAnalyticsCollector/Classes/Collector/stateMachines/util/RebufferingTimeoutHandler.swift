@@ -15,11 +15,16 @@ public class RebufferingTimeoutHandler {
         resetInterval()
         rebufferingTimeoutWorkItem = DispatchWorkItem { [weak self] in
             guard let self = self else { return }
-            self.stateMachine?.rebufferTimeoutReached(time: self.stateMachine?.delegate?.currentTime)
+            self.rebufferTimeoutReached()
             self.resetInterval()
         }
 
         DispatchQueue.init(label: RebufferingTimeoutHandler.kAnalyticsRebufferingTimeoutIntervalId).asyncAfter(deadline: .now() + RebufferingTimeoutHandler.kAnalyticsRebufferingTimeoutSeconds, execute: rebufferingTimeoutWorkItem!)
+    }
+    
+    private func rebufferTimeoutReached() {
+        stateMachine?.error(withError: ErrorData.ANALYTICS_BUFFERING_TIMEOUT_REACHED, time: stateMachine?.delegate?.currentTime)
+        stateMachine?.delegate?.stateMachineStopsCollecting()
     }
 
     func resetInterval() {
