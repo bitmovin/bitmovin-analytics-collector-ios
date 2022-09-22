@@ -260,7 +260,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     func onError(_ event: ErrorEvent) {
         let errorData = ErrorData(code: Int(event.code), message: event.message, data: nil)
         if (!stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo) {
-            stateMachine.onPlayAttemptFailed(withError: errorData)
+            stateMachine.onPlayAttemptFailed(withReason:VideoStartFailedReason.playerError, withError: errorData)
         } else {
             stateMachine.error(withError: errorData, time: Util.timeIntervalToCMTime(_: player.currentTime))
         }
