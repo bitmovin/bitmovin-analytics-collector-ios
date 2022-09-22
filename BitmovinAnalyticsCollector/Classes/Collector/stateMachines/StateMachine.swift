@@ -45,7 +45,7 @@ public class StateMachine {
 
     deinit {
         disableHeartbeat()
-        self.rebufferingHeartbeatService.disableRebufferHeartbeat()
+        self.rebufferingHeartbeatService.disableHeartbeat()
     }
 
     private func resetSourceState() {
@@ -54,7 +54,7 @@ public class StateMachine {
         didStartPlayingVideo = false
         startupTime = 0
         disableHeartbeat()
-        rebufferingHeartbeatService.disableRebufferHeartbeat()
+        rebufferingHeartbeatService.disableHeartbeat()
         videoStartFailureService.resetVideoStartFailed()
         qualityChangeCounter.resetInterval()
         delegate?.stateMachineResetSourceState()
