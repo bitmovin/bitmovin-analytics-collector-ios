@@ -27,11 +27,10 @@ public enum PlayerState: String {
             case .ready:
                 return
             case .startup:
-                stateMachine.startVideoStartFailedTimer()
+                stateMachine.videoStartFailureService.startTimer()
                 return
             case .buffering:
-                stateMachine.rebufferingTimeoutHandler.startInterval()
-                stateMachine.scheduleRebufferHeartbeat()
+                stateMachine.rebufferingHeartbeatService.startHeartbeat()
                 return
             case .playAttemptFailed:
                 return
@@ -61,7 +60,7 @@ public enum PlayerState: String {
 
     func onExit(stateMachine: StateMachine, duration: Int64, destinationState: PlayerState) {
         if (destinationState == .playAttemptFailed) {
-            stateMachine.disableRebufferHeartbeat()
+            stateMachine.rebufferingHeartbeatService.disableHeartbeat()
             stateMachine.delegate?.stateMachineEnterPlayAttemptFailed(stateMachine: stateMachine)
             return
         }
@@ -74,15 +73,14 @@ public enum PlayerState: String {
             case .ready:
                 return
             case .startup:
-                stateMachine.clearVideoStartFailedTimer()
+                stateMachine.videoStartFailureService.clearTimer()
                 stateMachine.startupTime += duration
                 if(destinationState == .playing) {
                     stateMachine.setDidStartPlayingVideo()
                     stateMachine.delegate?.stateMachine(stateMachine, didStartupWithDuration: stateMachine.startupTime)
                 }
             case .buffering:
-                stateMachine.rebufferingTimeoutHandler.resetInterval()
-                stateMachine.disableRebufferHeartbeat()
+                stateMachine.rebufferingHeartbeatService.disableHeartbeat()
                 stateMachine.delegate?.stateMachine(stateMachine, didExitBufferingWithDuration: duration)
                 return
             case .playAttemptFailed:

@@ -2,9 +2,6 @@ import AVFoundation
 import Foundation
 
 public class StateMachine {
-    private static var kVideoStartFailedTimeoutSeconds: TimeInterval = 60
-    private static var kvideoStartFailedTimerId: String = "com.bitmovin.analytics.core.statemachine.startupFailedTimer"
-    
     public private(set) var state: PlayerState
     private var config: BitmovinAnalyticsConfig
     private(set) var impressionId: String
@@ -18,22 +15,16 @@ public class StateMachine {
     
     // heartbeat
     weak private var heartbeatTimer: Timer?
-    let rebufferHeartbeatQueue = DispatchQueue.init(label: "com.bitmovin.analytics.core.statemachine.heartBeatQueue")
-    private var rebufferHeartbeatTimer: DispatchWorkItem?
-    private var currentRebufferIntervalIndex: Int = 0
-    private let rebufferHeartbeatInterval: [Int64] = [3000, 5000, 10000, 59700]
     private let heartbeatInterval: Int = 59700
     
     //play attempt
     public private(set) var didAttemptPlayingVideo: Bool = false
     public private(set) var didStartPlayingVideo: Bool = false
-    private var videoStartFailedWorkItem: DispatchWorkItem?
-    private(set) var videoStartFailed: Bool = false
-    private(set) var videoStartFailedReason: String?
     
     // features objects
     public var qualityChangeCounter: QualityChangeCounter
-    public var rebufferingTimeoutHandler: RebufferingTimeoutHandler
+    public var rebufferingHeartbeatService: RebufferingHeartbeatService
+    public var videoStartFailureService: VideoStartFailureService
     
     // error tracking
     private var errorData: ErrorData? = nil
@@ -43,16 +34,18 @@ public class StateMachine {
         state = .ready
         impressionId = NSUUID().uuidString
         qualityChangeCounter = QualityChangeCounter()
-        self.rebufferingTimeoutHandler = RebufferingTimeoutHandler()
+        rebufferingHeartbeatService = RebufferingHeartbeatService()
+        videoStartFailureService = VideoStartFailureService()
         print("Generated Bitmovin Analytics impression ID: " + impressionId.lowercased())
         
         // needs to happen after init of properties
-        self.rebufferingTimeoutHandler.initialise(stateMachine: self)
+        rebufferingHeartbeatService.initialise(stateMachine: self)
+        videoStartFailureService.initialise(stateMachine: self)
     }
 
     deinit {
         disableHeartbeat()
-        disableRebufferHeartbeat()
+        self.rebufferingHeartbeatService.disableHeartbeat()
     }
 
     private func resetSourceState() {
@@ -61,10 +54,9 @@ public class StateMachine {
         didStartPlayingVideo = false
         startupTime = 0
         disableHeartbeat()
-        disableRebufferHeartbeat()
-        resetVideoStartFailed()
+        rebufferingHeartbeatService.disableHeartbeat()
+        videoStartFailureService.reset()
         qualityChangeCounter.resetInterval()
-        rebufferingTimeoutHandler.resetInterval()
         delegate?.stateMachineResetSourceState()
         print("Generated Bitmovin Analytics impression ID: " +  impressionId.lowercased())
     }
@@ -153,58 +145,12 @@ public class StateMachine {
         }
     }
     
-    public func rebufferTimeoutReached(time: CMTime?) {
-        self.errorData = ErrorData.ANALYTICS_BUFFERING_TIMEOUT_REACHED
-        transitionState(destinationState: .error, time: time)
-        self.delegate?.stateMachineStopsCollecting()
-    }
-    
     public func setDidStartPlayingVideo() {
         didStartPlayingVideo = true
     }
     
-    public func startVideoStartFailedTimer() {
-        // The second test makes sure to not start the timer during an ad or if the player is paused on resuming from background
-        if(didStartPlayingVideo || state != .startup) {
-            return
-        }
-        clearVideoStartFailedTimer()
-        
-        videoStartFailedWorkItem = DispatchWorkItem { [weak self] in
-            guard let self = self else { return }
-            self.errorData = ErrorData.ANALYTICS_VIDEOSTART_TIMEOUT_REACHED
-            self.onPlayAttemptFailed(withReason: VideoStartFailedReason.timeout)
-        }
-        DispatchQueue.init(label: StateMachine.kvideoStartFailedTimerId).asyncAfter(deadline: .now() + StateMachine.kVideoStartFailedTimeoutSeconds, execute: videoStartFailedWorkItem!)
-    }
-    
-    public func clearVideoStartFailedTimer() {
-        if (videoStartFailedWorkItem == nil) {
-            return
-        }
-        videoStartFailedWorkItem!.cancel()
-        videoStartFailedWorkItem = nil
-    }
-    
-    public func setVideoStartFailed(withReason reason: String) {
-        clearVideoStartFailedTimer()
-        videoStartFailed = true
-        videoStartFailedReason = reason
-    }
-    
-    public func resetVideoStartFailed() {
-        videoStartFailed = false
-        videoStartFailedReason = nil
-    }
-    
-    public func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown) {
-        setVideoStartFailed(withReason: reason)
-        transitionState(destinationState: .playAttemptFailed, time: nil)
-        self.delegate?.stateMachineStopsCollecting()
-    }
-    
-    public func onPlayAttemptFailed(withError error: ErrorData) {
-        setVideoStartFailed(withReason: VideoStartFailedReason.playerError)
+    public func onPlayAttemptFailed(withReason reason: String = VideoStartFailedReason.unknown, withError error: ErrorData? = nil) {
+        videoStartFailureService.setVideoStartFailed(withReason: reason)
         self.errorData = error
         transitionState(destinationState: .playAttemptFailed, time: nil)
         self.delegate?.stateMachineStopsCollecting()
@@ -244,32 +190,6 @@ public class StateMachine {
         heartbeatTimer?.invalidate()
     }
     
-    func scheduleRebufferHeartbeat() {
-        self.rebufferHeartbeatTimer = DispatchWorkItem { [weak self] in
-            guard let self = self,
-                self.rebufferHeartbeatTimer != nil else {
-                return
-            }
-            self.onHeartbeat()
-            self.currentRebufferIntervalIndex = min(self.currentRebufferIntervalIndex + 1, self.rebufferHeartbeatInterval.count - 1)
-            self.scheduleRebufferHeartbeat()
-        }
-        self.rebufferHeartbeatQueue.asyncAfter(deadline: getRebufferDeadline(), execute: self.rebufferHeartbeatTimer!)
-    }
-
-    func disableRebufferHeartbeat() {
-        self.rebufferHeartbeatQueue.sync {
-            self.rebufferHeartbeatTimer?.cancel()
-            self.rebufferHeartbeatTimer = nil
-            self.currentRebufferIntervalIndex = 0
-        }
-    }
-    
-    private func getRebufferDeadline() -> DispatchTime {
-        let interval = Double(rebufferHeartbeatInterval[currentRebufferIntervalIndex]) / 1_000.0
-        return DispatchTime.now() + interval
-    }
-
     @objc func onHeartbeat() {
         videoTimeEnd = delegate?.currentTime
         let timestamp = Date().timeIntervalSince1970Millis
