@@ -7,13 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+## Development V1
+
+## 2.9.3
+
 ### Changed
 - Improvements of DispatchQueue creation
 
 ### Fixed
 - Fixed typo of unknown Player Error
 
-## Development V1
+## 1.29.3
 
 ### Changed
 - Improvements of DispatchQueue creation
