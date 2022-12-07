@@ -8,8 +8,11 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private static var playerKVOContext = 0
     private let config: BitmovinAnalyticsConfig
     @objc private var player: AVPlayer
-    let lockQueue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
     var statusObserver: NSKeyValueObservation?
+    
+    // We need to have our own instances to be able to operate in time
+    private let notificationCenter: NotificationCenter
+    private let queue = DispatchQueue.init(label: "com.bitmovin.analytics.avplayeradapter")
     
     private var isMonitoring = false
     private var currentVideoBitrate: Double = 0
@@ -26,10 +29,15 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private var timeObserver: Any?
     private let errorHandler: ErrorHandler
     
-    init(player: AVPlayer, config: BitmovinAnalyticsConfig, stateMachine: StateMachine) {
+    init(player: AVPlayer,
+         config: BitmovinAnalyticsConfig,
+         stateMachine: StateMachine,
+         notificationCenter: NotificationCenter = NotificationCenter()
+    ) {
         self.player = player
         self.config = config
         self.errorHandler = ErrorHandler()
+        self.notificationCenter = notificationCenter
         super.init(stateMachine: stateMachine)
     }
     
@@ -56,7 +64,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
         isMonitoring = true
         
-        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(AVPlayerAdapter.periodicTimeObserverIntervalSeconds, preferredTimescale: Int32(NSEC_PER_SEC)), queue: .main) { [weak self] time in
+        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(AVPlayerAdapter.periodicTimeObserverIntervalSeconds, preferredTimescale: Int32(NSEC_PER_SEC)), queue: self.queue) { [weak self] time in
             self?.onTimeChanged(playerTime: time)
         }
         player.addObserver(self, forKeyPath: #keyPath(AVPlayer.rate), options: [.new, .initial, .old], context: &AVPlayerAdapter.playerKVOContext)
@@ -107,20 +115,20 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         statusObserver = playerItem.observe(\.status) {[weak self] (item, _) in
             self?.playerItemStatusObserver(playerItem: item)
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(observeNewAccessLogEntry(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(timeJumped(notification:)), name: AVPlayerItem.timeJumpedNotification, object: playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(failedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(didPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
+        self.notificationCenter.addObserver(self, selector: #selector(observeNewAccessLogEntry(notification:)), name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
+        self.notificationCenter.addObserver(self, selector: #selector(timeJumped(notification:)), name: AVPlayerItem.timeJumpedNotification, object: playerItem)
+        self.notificationCenter.addObserver(self, selector: #selector(playbackStalled(notification:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
+        self.notificationCenter.addObserver(self, selector: #selector(failedToPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
+        self.notificationCenter.addObserver(self, selector: #selector(didPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         updateDrmPerformanceInfo(playerItem)
     }
 
     private func stopMonitoringPlayerItem(playerItem: AVPlayerItem) {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
-        NotificationCenter.default.removeObserver(self, name: AVPlayerItem.timeJumpedNotification, object: playerItem)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
+        self.notificationCenter.removeObserver(self, name: NSNotification.Name.AVPlayerItemNewAccessLogEntry, object: playerItem)
+        self.notificationCenter.removeObserver(self, name: AVPlayerItem.timeJumpedNotification, object: playerItem)
+        self.notificationCenter.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
+        self.notificationCenter.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: playerItem)
+        self.notificationCenter.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         statusObserver?.invalidate()
     }
 

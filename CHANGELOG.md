@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+### Fixed
+- AVPlayer: fake seeks with less than 300ms caused by timeJumpedNotifications
+- 
 ## Development V1
+
+### Fixed
+- AVPlayer: fake seeks with less than 300ms caused by timeJumpedNotifications
 
 ## 2.9.3
 
