@@ -1,59 +1,38 @@
 import Foundation
 
 class SimpleEventDataDispatcher: EventDataDispatcher {
-    private var httpClient: HttpClient
+    private let httpClient: HttpClient
+    private let config: BitmovinAnalyticsConfig
+    private let notificationCenter: NotificationCenter
+    
     private var enabled: Bool = false
     private var events = [EventData]()
     private var adEvents = [AdEventData]()
-    private var config: BitmovinAnalyticsConfig
     private var sequenceNumber: Int32 = 0
     
     private var analyticsBackendUrl: String
     private var adAnalyticsBackendUrl: String
 
-    init(config: BitmovinAnalyticsConfig) {
-        httpClient = HttpClient()
+    init(config: BitmovinAnalyticsConfig, httpClient: HttpClient, authenticationService: AuthenticationService, notificationCenter: NotificationCenter) {
+        self.httpClient = httpClient
         self.config = config
         self.analyticsBackendUrl = BitmovinAnalyticsConfig.analyticsUrl
         self.adAnalyticsBackendUrl = BitmovinAnalyticsConfig.adAnalyticsUrl
+        self.notificationCenter = notificationCenter
+        
+        self.setupObserver(authenticationService)
+    }
+    
+    deinit {
+        self.removeObserver()
     }
 
-    func makeLicenseCall() {
-        let licenseCall = LicenseCall(config: config)
-        licenseCall.authenticate { [weak self] success in
-            if success {
-                print("LicenseCall succeeded")
-                self?.enabled = true
-                if let events = self?.events.enumerated().reversed() {
-                    for (index, eventData) in events {
-                        self?.httpClient.post(urlString: self!.analyticsBackendUrl, json: eventData.jsonString(), completionHandler: nil)
-                        self?.events.remove(at: index)
-                    }
-                }
-                if let adEvents = self?.adEvents.enumerated().reversed() {
-                    for (index, adEventData) in adEvents {
-                        self?.httpClient.post(urlString: self!.adAnalyticsBackendUrl, json: Util.toJson(object: adEventData), completionHandler: nil)
-                        self?.adEvents.remove(at: index)
-                    }
-                }
-            } else {
-                print("LicenseCall didn't succeed")
-                self?.enabled = false
-                NotificationCenter.default.post(name: .licenseFailed, object: self)
-            }
-        }
-    }
-
-    func enable() {
-        makeLicenseCall()
-    }
-
-    func disable() {
+    public func disable() {
         enabled = false
         self.sequenceNumber = 0
     }
 
-    func add(eventData: EventData) {
+    public func add(eventData: EventData) {
         eventData.sequenceNumber = self.sequenceNumber
         self.sequenceNumber += 1
         
@@ -67,7 +46,7 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
         }
     }
     
-    func addAd(adEventData: AdEventData) {
+    public func addAd(adEventData: AdEventData) {
         if enabled {
             let json = Util.toJson(object: adEventData)
             print("send Ad payload: " + json)
@@ -77,7 +56,39 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
         }
     }
     
-    func resetSourceState() {
+    public func resetSourceState() {
         self.sequenceNumber = 0
+    }
+    
+    private func setupObserver(_ authenticationService: AuthenticationService) {
+        self.notificationCenter.addObserver(self, selector: #selector(self.handleAuthenticationSuccess), name: .authenticationSuccess, object: authenticationService)
+        self.notificationCenter.addObserver(self, selector: #selector(self.handleAuthenticationFailed), name: .authenticationFailed, object: authenticationService)
+    }
+    
+    private func removeObserver() {
+        self.notificationCenter.removeObserver(self)
+    }
+    
+    @objc private func handleAuthenticationSuccess(_ notification: Notification) {
+        self.enabled = true
+        self.flushEventQueues()
+    }
+    
+    private func flushEventQueues() {
+        let events = self.events.enumerated().reversed()
+        for (index, eventData) in events {
+            self.httpClient.post(urlString: self.analyticsBackendUrl, json: eventData.jsonString(), completionHandler: nil)
+            self.events.remove(at: index)
+        }
+    
+        let adEvents = self.adEvents.enumerated().reversed()
+        for (index, adEventData) in adEvents {
+            self.httpClient.post(urlString: self.adAnalyticsBackendUrl, json: Util.toJson(object: adEventData), completionHandler: nil)
+            self.adEvents.remove(at: index)
+        }
+    }
+        
+    @objc private func handleAuthenticationFailed(_ notification: Notification) {
+        self.disable()
     }
 }
