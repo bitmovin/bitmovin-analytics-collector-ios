@@ -5,6 +5,5 @@ protocol EventDataDispatcher {
     func addAd(adEventData: AdEventData)
     func enable()
     func disable()
-    func clear()
     func resetSourceState()
 }
