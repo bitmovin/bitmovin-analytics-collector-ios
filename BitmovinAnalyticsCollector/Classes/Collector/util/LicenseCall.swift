@@ -1,6 +1,6 @@
 import Foundation
 
-typealias LicenseCallCompletionHandler = ((_ success: Bool) -> Void)
+typealias LicenseCallCompletionHandler = ((_ success: Bool) throws -> Void) 
 
 func DPrint(_ string: String) {
     #if DEBUG
@@ -24,53 +24,56 @@ class LicenseCall {
         licenseCallData.key = config.key
         licenseCallData.domain = Util.mainBundleIdentifier()
         licenseCallData.analyticsVersion = Util.version()
-        httpClient.post(urlString: self.analyticsLicenseUrl, json: Util.toJson(object: licenseCallData)) { data, response, error in
-            guard error == nil else { // check for fundamental networking error
-                completionHandler(false)
+        httpClient.post(urlString: self.analyticsLicenseUrl, json: Util.toJson(object: licenseCallData)) { [weak self] data, response, error in
+            guard let licenseCall = self else {
                 return
             }
-
-            guard let httpResponse = response as? HTTPURLResponse else {
-                completionHandler(false)
-                return
-            }
-
-            guard let data = data else {
-                completionHandler(false)
-                return
-            }
-
+            var granted = licenseCall.validateResponse(data, response, error)
             do {
-                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else {
-                    DPrint("Licensing failed. Could not decode JSON response: \(data)")
-                    completionHandler(false)
-                    return
-                }
-
-                guard httpResponse.statusCode < 400 else {
-                    let message = json["message"] as? String
-                    DPrint("Licensing failed. Reason: \(message ?? "Unknown error")")
-                    completionHandler(false)
-                    return
-                }
-
-                guard let status = json["status"] as? String else {
-                    DPrint("Licensing failed. Reason: status not set")
-                    completionHandler(false)
-                    return
-                }
-
-                guard status == "granted" else {
-                    DPrint("Licensing failed. Reason given by server: \(status)")
-                    completionHandler(false)
-                    return
-                }
-
-                completionHandler(true)
-
+                try completionHandler(granted)
             } catch {
-                completionHandler(false)
             }
+        }
+    }
+    
+    private func validateResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Bool {
+        guard error == nil else { // check for fundamental networking error
+            return false
+        }
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            return false
+        }
+
+        guard let data = data else {
+            return false
+        }
+
+        do {
+            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else {
+                DPrint("Licensing failed. Could not decode JSON response: \(data)")
+                return false
+            }
+            
+            guard httpResponse.statusCode < 400 else {
+                let message = json["message"] as? String
+                DPrint("Licensing failed. Reason: \(message ?? "Unknown error")")
+                return false
+            }
+            
+            guard let status = json["status"] as? String else {
+                DPrint("Licensing failed. Reason: status not set")
+                return false
+            }
+            
+            guard status == "granted" else {
+                DPrint("Licensing failed. Reason given by server: \(status)")
+                return false
+            }
+            
+            return true
+        } catch {
+            return false
         }
     }
 }
