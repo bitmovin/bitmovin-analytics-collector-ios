@@ -140,14 +140,6 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
             }
         }
 
-        // videoQuality
-        if let videoQuality = currentVideoQuality ?? player.videoQuality {
-            eventData.videoBitrate = Double(videoQuality.bitrate)
-            eventData.videoPlaybackWidth = Int(videoQuality.width)
-            eventData.videoPlaybackHeight = Int(videoQuality.height)
-            eventData.videoCodec = videoQuality.codec
-        }
-
         // isMuted
         eventData.isMuted = player.isMuted
         
@@ -157,6 +149,14 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
 
         eventData.audioLanguage = player.audio?.language
+        
+        // videoQuality
+        if let videoQuality = currentVideoQuality ?? player.videoQuality {
+            eventData.videoBitrate = Double(videoQuality.bitrate)
+            eventData.videoPlaybackWidth = Int(videoQuality.width)
+            eventData.videoPlaybackHeight = Int(videoQuality.height)
+            eventData.videoCodec = videoQuality.codec
+        }
     }
 
     func startMonitoring() {

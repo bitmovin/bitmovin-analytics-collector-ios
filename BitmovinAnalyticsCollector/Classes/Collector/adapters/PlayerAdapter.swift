@@ -2,7 +2,7 @@ import CoreMedia
 import Foundation
 
 public protocol PlayerAdapter {
-    func decorateEventData(eventData: EventData)
+    func decorateEventData(eventData: EventData) throws
     func initialize()
     func stopMonitoring()
     func destroy()

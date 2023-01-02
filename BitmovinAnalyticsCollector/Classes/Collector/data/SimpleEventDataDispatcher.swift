@@ -76,9 +76,6 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
             adEvents.append(adEventData)
         }
     }
-
-    func clear() {
-    }
     
     func resetSourceState() {
         self.sequenceNumber = 0

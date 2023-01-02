@@ -169,7 +169,13 @@ open class BitmovinAnalyticsInternal: NSObject {
             drmLoadTime,
             self.adapter?.currentSourceMetadata,
             self.userIdProvider.getUserId())
-        self.adapter?.decorateEventData(eventData: eventData)
+        
+        do {
+            try self.adapter?.decorateEventData(eventData: eventData)
+        } catch {
+            DPrint("There was an error during decorating EventData - data might be incomplete")
+        }
+        
         
         if self.stateMachine.videoStartFailureService.videoStartFailed {
             eventData.videoStartFailed = self.stateMachine.videoStartFailureService.videoStartFailed
