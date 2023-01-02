@@ -28,10 +28,12 @@ class LicenseCall {
             guard let licenseCall = self else {
                 return
             }
-            var granted = licenseCall.validateResponse(data, response, error)
+            
+            let granted = licenseCall.validateResponse(data, response, error)
             do {
                 try completionHandler(granted)
             } catch {
+                DPrint("error handling license call")
             }
         }
     }
