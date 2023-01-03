@@ -1,24 +1,24 @@
 import Foundation
 
-class SimpleEventDataDispatcher: EventDataDispatcher {
-    private let httpClient: HttpClient
-    private let config: BitmovinAnalyticsConfig
+internal class AuthenticatedDispatcher: EventDataDispatcher {
+    
     private let notificationCenter: NotificationCenter
+    private let httpClient: HttpClient
+    private let innerDispatcher: EventDataDispatcher
     
     private var enabled: Bool = false
     private var events = [EventData]()
     private var adEvents = [AdEventData]()
-    private var sequenceNumber: Int32 = 0
     
     private var analyticsBackendUrl: String
     private var adAnalyticsBackendUrl: String
-
-    init(config: BitmovinAnalyticsConfig, httpClient: HttpClient, authenticationService: AuthenticationService, notificationCenter: NotificationCenter) {
+    
+    init(authenticationService: AuthenticationService, httpClient: HttpClient, notificationCenter: NotificationCenter, innerDispatcher: EventDataDispatcher) {
         self.httpClient = httpClient
-        self.config = config
+        self.innerDispatcher = innerDispatcher
+        self.notificationCenter = notificationCenter
         self.analyticsBackendUrl = BitmovinAnalyticsConfig.analyticsUrl
         self.adAnalyticsBackendUrl = BitmovinAnalyticsConfig.adAnalyticsUrl
-        self.notificationCenter = notificationCenter
         
         self.setupObserver(authenticationService)
     }
@@ -26,38 +26,30 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
     deinit {
         self.removeObserver()
     }
-
-    public func disable() {
-        enabled = false
-        self.sequenceNumber = 0
-    }
-
-    public func add(eventData: EventData) {
-        eventData.sequenceNumber = self.sequenceNumber
-        self.sequenceNumber += 1
-        
-        let json = Util.toJson(object: eventData)
-        print("send payload: " + json.replacingOccurrences(of: ",", with: "\n\t"))
-        
+    
+    func add(_ eventData: EventData) {
         if enabled {
-            httpClient.post(urlString: self.analyticsBackendUrl, json: eventData.jsonString(), completionHandler: nil)
+            innerDispatcher.add(eventData)
         } else {
             events.append(eventData)
         }
     }
     
-    public func addAd(adEventData: AdEventData) {
+    func addAd(_ adEventData: AdEventData) {
         if enabled {
-            let json = Util.toJson(object: adEventData)
-            print("send Ad payload: " + json)
-            httpClient.post(urlString: self.adAnalyticsBackendUrl, json: json, completionHandler: nil)
+            innerDispatcher.addAd(adEventData)
         } else {
             adEvents.append(adEventData)
         }
     }
     
-    public func resetSourceState() {
-        self.sequenceNumber = 0
+    func disable() {
+        self.enabled = false
+        innerDispatcher.disable()
+    }
+    
+    func resetSourceState() {
+        innerDispatcher.resetSourceState()
     }
     
     private func setupObserver(_ authenticationService: AuthenticationService) {
@@ -91,4 +83,5 @@ class SimpleEventDataDispatcher: EventDataDispatcher {
     @objc private func handleAuthenticationFailed(_ notification: Notification) {
         self.disable()
     }
+    
 }
