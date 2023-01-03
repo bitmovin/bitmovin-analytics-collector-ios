@@ -20,23 +20,41 @@ open class BitmovinAnalyticsInternal: NSObject {
     internal var adAdapter: AdAdapter?
     
     private let eventDataDispatcher: EventDataDispatcher
-    private let authenticationService: LicenseAuthenticationService
+    private let authenticationService: AuthenticationService
     private let userIdProvider: UserIdProvider
     private let eventDataFactory: EventDataFactory
     private let notificationCenter: NotificationCenter
     
     private var isPlayerAttached = false
     internal var didSendDrmLoadTime = false
-
-    public init(config: BitmovinAnalyticsConfig, notificationCenter: NotificationCenter = NotificationCenter()) {
-        self.config = config
-        self.stateMachine = StateMachine(config: self.config)
-        self.userIdProvider = config.randomizeUserId ? RandomizedUserIdProvider() : UserDefaultUserIdProvider()
-        self.eventDataFactory = EventDataFactory(config)
-        self.notificationCenter = notificationCenter
+    
+    public convenience init(config: BitmovinAnalyticsConfig) {
+        let notificationCenter = NotificationCenter()
         let httpClient = HttpClient()
-        self.authenticationService = LicenseAuthenticationService(httpClient: httpClient, config: config, notificationCenter: notificationCenter)
-        self.eventDataDispatcher = SimpleEventDataDispatcher(config: config, httpClient: httpClient, authenticationService: self.authenticationService, notificationCenter: self.notificationCenter)
+        let authenticationService = LicenseAuthenticationService(httpClient: httpClient, config: config, notificationCenter: notificationCenter)
+        let dispatcherFactory = EventDataDispatcherFactory(httpClient: httpClient, authenticationService: authenticationService, notificationCenter: notificationCenter)
+        let stateMachine = StateMachine(config: config)
+        let userIdProvider: UserIdProvider = config.randomizeUserId ? RandomizedUserIdProvider() : UserDefaultUserIdProvider()
+        let eventDataFactory = EventDataFactory(config)
+        self.init(config: config, notificationCenter: notificationCenter, eventDataDispatcher: dispatcherFactory.createDispatcher(), authenticationService: authenticationService, stateMachine: stateMachine, eventDataFactory: eventDataFactory,userIdProvider: userIdProvider)
+    }
+    
+    internal init(
+        config: BitmovinAnalyticsConfig,
+        notificationCenter: NotificationCenter,
+        eventDataDispatcher: EventDataDispatcher,
+        authenticationService: AuthenticationService,
+        stateMachine: StateMachine,
+        eventDataFactory: EventDataFactory,
+        userIdProvider: UserIdProvider
+    ) {
+        self.config = config
+        self.stateMachine = stateMachine
+        self.userIdProvider = userIdProvider
+        self.eventDataFactory = eventDataFactory
+        self.notificationCenter = notificationCenter
+        self.authenticationService = authenticationService
+        self.eventDataDispatcher = eventDataDispatcher
         
         super.init()
         
@@ -142,14 +160,14 @@ open class BitmovinAnalyticsInternal: NSObject {
         guard let data = eventData else {
             return
         }
-        eventDataDispatcher.add(eventData: data)
+        eventDataDispatcher.add(data)
     }
     
     internal func sendAdEventData(adEventData: AdEventData?) {
         guard let data = adEventData else {
             return
         }
-        eventDataDispatcher.addAd(adEventData: data)
+        eventDataDispatcher.addAd(data)
     }
 
     internal func createEventData(duration: Int64) -> EventData {
@@ -335,6 +353,6 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
 
 extension BitmovinAnalyticsInternal {
     static public func createAnalytics(config: BitmovinAnalyticsConfig) -> BitmovinAnalyticsInternal {
-        return BitmovinAnalyticsInternal(config: config, notificationCenter: NotificationCenter())
+        return BitmovinAnalyticsInternal(config: config)
     }
 }
