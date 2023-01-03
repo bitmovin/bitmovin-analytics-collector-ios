@@ -20,8 +20,7 @@ class EventDataFactoryTests: XCTestCase {
             nil,
             nil,
             nil,
-            nil,
-            ""
+            nil
         )
         
         // arrange
@@ -44,8 +43,7 @@ class EventDataFactoryTests: XCTestCase {
             nil,
             nil,
             nil,
-            nil,
-            ""
+            nil
         )
         
         // arrange
@@ -64,8 +62,7 @@ class EventDataFactoryTests: XCTestCase {
             nil,
             nil,
             nil,
-            nil,
-            ""
+            nil
         )
         
         // arrange
@@ -157,8 +154,7 @@ class EventDataFactoryTests: XCTestCase {
             Util.timeIntervalToCMTime(_: 0),
             Util.timeIntervalToCMTime(_: 10),
             60,
-            currentSourceMetadata,
-            ""
+            currentSourceMetadata
         )
         
         // arrange
@@ -210,8 +206,7 @@ class EventDataFactoryTests: XCTestCase {
             Util.timeIntervalToCMTime(_: 0),
             Util.timeIntervalToCMTime(_: 10),
             60,
-            nil,
-            "test-userId"
+            nil
         )
 
         // arrange
@@ -220,21 +215,112 @@ class EventDataFactoryTests: XCTestCase {
         XCTAssertEqual(eventData.videoTimeStart, 0)
         XCTAssertEqual(eventData.videoTimeEnd, 10000)
         XCTAssertEqual(eventData.drmLoadTime, 60)
-        XCTAssertEqual(eventData.userId, "test-userId")
+    }
+    
+    func test_createEventData_should_returnEventDataWithUserId() {
+        // arrange
+        let mockUserIdProvider = MockUserIdProvider()
+        mockUserIdProvider.setActionForGetUserId(action: {
+            return "user-Id"
+        })
+        let eventDataFactory = createDefaultEventDataFactoryForTest(userIdProvider: mockUserIdProvider)
+
+        // act
+        let eventData = eventDataFactory.createEventData(
+            "test-state",
+            "test-impression",
+            nil,
+            nil,
+            nil,
+            nil
+        )
+
+        // arrange
+        XCTAssertEqual(eventData.userId, "user-Id")
+    }
+    
+    func test_createEventData_should_returnEventDataWithIncreasingSequenceNumber() {
+        // arrange
+        let eventDataFactory = createDefaultEventDataFactoryForTest()
+
+        // act
+        let eventData = eventDataFactory.createEventData(
+            "test-state",
+            "test-impression",
+            nil,
+            nil,
+            nil,
+            nil
+        )
+        let eventData2 = eventDataFactory.createEventData(
+            "test-state",
+            "test-impression",
+            nil,
+            nil,
+            nil,
+            nil
+        )
+
+        // arrange
+        XCTAssertEqual(eventData.sequenceNumber, 0)
+        XCTAssertEqual(eventData2.sequenceNumber, 1)
+    }
+    
+    func test_reset_should_resetTheSequenceNumber() {
+        // arrange
+        let eventDataFactory = createDefaultEventDataFactoryForTest()
+
+        // act
+        let eventData = eventDataFactory.createEventData(
+            "test-state",
+            "test-impression",
+            nil,
+            nil,
+            nil,
+            nil
+        )
+        let eventData2 = eventDataFactory.createEventData(
+            "test-state",
+            "test-impression",
+            nil,
+            nil,
+            nil,
+            nil
+        )
+        eventDataFactory.reset()
+        
+        let eventData3 = eventDataFactory.createEventData(
+            "test-state",
+            "test-impression",
+            nil,
+            nil,
+            nil,
+            nil
+        )
+
+        // arrange
+        XCTAssertEqual(eventData.sequenceNumber, 0)
+        XCTAssertEqual(eventData2.sequenceNumber, 1)
+        XCTAssertEqual(eventData3.sequenceNumber, 0)
     }
     
     func test_serializeEventData() throws {
         
     }
     
-    private func createDefaultEventDataFactoryForTest(config: BitmovinAnalyticsConfig? = nil) -> EventDataFactory {
+    private func createDefaultEventDataFactoryForTest(config: BitmovinAnalyticsConfig? = nil, userIdProvider: UserIdProvider? = nil) -> EventDataFactory {
         
         var c = config
         if c == nil {
             c = getTestBitmovinConfig()
         }
         
-        return EventDataFactory(c!)
+        var u = userIdProvider
+        if u == nil {
+            u = RandomizedUserIdProvider()
+        }
+        
+        return EventDataFactory(c!, u!)
     }
     
     private func getTestBitmovinConfig() -> BitmovinAnalyticsConfig{
