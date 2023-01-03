@@ -5,13 +5,23 @@ import UIKit
 class EventDataFactory {
     private final var config: BitmovinAnalyticsConfig
     private final let userIdProvider: UserIdProvider
+    
+    private var sequenceNumber: Int32 = 0
+
     init(_ config: BitmovinAnalyticsConfig, _ userIdProvider: UserIdProvider) {
         self.config = config
         self.userIdProvider = userIdProvider
     }
     
+    func reset() {
+        self.sequenceNumber = 0
+    }
+    
     func createEventData(_ state: String, _ impressionId: String, _ videoTimeStart: CMTime?, _ videoTimeEnd: CMTime?, _ drmLoadTime: Int64?, _ sourceMetaData: SourceMetadata?) -> EventData {
         let eventData = EventData(impressionId)
+        
+        eventData.sequenceNumber = self.sequenceNumber
+        self.sequenceNumber += 1
         
         eventData.userId = self.userIdProvider.getUserId()
         eventData.state = state

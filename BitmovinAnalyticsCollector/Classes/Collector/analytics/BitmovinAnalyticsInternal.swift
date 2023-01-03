@@ -95,6 +95,7 @@ open class BitmovinAnalyticsInternal: NSObject {
         adapter?.destroy()
         eventDataDispatcher.resetSourceState()
         eventDataDispatcher.disable()
+        eventDataFactory.reset()
         stateMachine.reset()
         adapter = nil
     }
@@ -205,6 +206,7 @@ open class BitmovinAnalyticsInternal: NSObject {
     
     internal func reset(){
         eventDataDispatcher.resetSourceState()
+        eventDataFactory.reset()
         didSendDrmLoadTime = false
     }
     

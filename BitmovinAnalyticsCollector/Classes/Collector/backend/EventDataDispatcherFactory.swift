@@ -17,8 +17,6 @@ internal class EventDataDispatcherFactory {
         
         let authDispatcher = AuthenticatedDispatcher(authenticationService: self.authenticationService, httpClient: httpClient, notificationCenter: self.notificationCenter, innerDispatcher: httpDispatcher)
         
-        let sequenceDispatcher = SequenceNumberDispatcher(innerDispatcher: authDispatcher)
-        
-        return sequenceDispatcher
+        return authDispatcher
     }
 }
