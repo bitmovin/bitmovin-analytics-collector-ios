@@ -35,7 +35,7 @@ open class BitmovinAnalyticsInternal: NSObject {
         let dispatcherFactory = EventDataDispatcherFactory(httpClient: httpClient, authenticationService: authenticationService, notificationCenter: notificationCenter)
         let stateMachine = StateMachine(config: config)
         let userIdProvider: UserIdProvider = config.randomizeUserId ? RandomizedUserIdProvider() : UserDefaultUserIdProvider()
-        let eventDataFactory = EventDataFactory(config)
+        let eventDataFactory = EventDataFactory(config, userIdProvider)
         self.init(config: config, notificationCenter: notificationCenter, eventDataDispatcher: dispatcherFactory.createDispatcher(), authenticationService: authenticationService, stateMachine: stateMachine, eventDataFactory: eventDataFactory,userIdProvider: userIdProvider)
     }
     
@@ -184,8 +184,7 @@ open class BitmovinAnalyticsInternal: NSObject {
             self.stateMachine.videoTimeStart,
             self.stateMachine.videoTimeEnd,
             drmLoadTime,
-            self.adapter?.currentSourceMetadata,
-            self.userIdProvider.getUserId())
+            self.adapter?.currentSourceMetadata)
         
         do {
             try self.adapter?.decorateEventData(eventData: eventData)
