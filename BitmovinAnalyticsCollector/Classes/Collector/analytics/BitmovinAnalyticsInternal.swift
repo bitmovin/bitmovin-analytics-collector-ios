@@ -15,26 +15,50 @@ open class BitmovinAnalyticsInternal: NSObject {
     public private(set) var config: BitmovinAnalyticsConfig
     public private(set) var stateMachine: StateMachine
     public private(set) var adAnalytics: BitmovinAdAnalytics?
+    
     internal var adapter: PlayerAdapter?
-    private var eventDataDispatcher: EventDataDispatcher
-    private var userIdProvider: UserIdProvider
     internal var adAdapter: AdAdapter?
-    internal var eventDataFactory: EventDataFactory
+    
+    private let eventDataDispatcher: EventDataDispatcher
+    private let authenticationService: AuthenticationService
+    private let userIdProvider: UserIdProvider
+    private let eventDataFactory: EventDataFactory
+    private let notificationCenter: NotificationCenter
+    
     private var isPlayerAttached = false
     internal var didSendDrmLoadTime = false
-
-    public init(config: BitmovinAnalyticsConfig) {
+    
+    public convenience init(config: BitmovinAnalyticsConfig) {
+        let notificationCenter = NotificationCenter()
+        let httpClient = HttpClient()
+        let authenticationService = LicenseAuthenticationService(httpClient: httpClient, config: config, notificationCenter: notificationCenter)
+        let dispatcherFactory = EventDataDispatcherFactory(httpClient: httpClient, authenticationService: authenticationService, notificationCenter: notificationCenter)
+        let stateMachine = StateMachine(config: config)
+        let userIdProvider: UserIdProvider = config.randomizeUserId ? RandomizedUserIdProvider() : UserDefaultUserIdProvider()
+        let eventDataFactory = EventDataFactory(config, userIdProvider)
+        self.init(config: config, notificationCenter: notificationCenter, eventDataDispatcher: dispatcherFactory.createDispatcher(), authenticationService: authenticationService, stateMachine: stateMachine, eventDataFactory: eventDataFactory,userIdProvider: userIdProvider)
+    }
+    
+    internal init(
+        config: BitmovinAnalyticsConfig,
+        notificationCenter: NotificationCenter,
+        eventDataDispatcher: EventDataDispatcher,
+        authenticationService: AuthenticationService,
+        stateMachine: StateMachine,
+        eventDataFactory: EventDataFactory,
+        userIdProvider: UserIdProvider
+    ) {
         self.config = config
-        stateMachine = StateMachine(config: self.config)
-        eventDataDispatcher = SimpleEventDataDispatcher(config: config)
-        userIdProvider = config.randomizeUserId ? RandomizedUserIdProvider() : UserDefaultUserIdProvider()
-        eventDataFactory = EventDataFactory(config)
+        self.stateMachine = stateMachine
+        self.userIdProvider = userIdProvider
+        self.eventDataFactory = eventDataFactory
+        self.notificationCenter = notificationCenter
+        self.authenticationService = authenticationService
+        self.eventDataDispatcher = eventDataDispatcher
+        
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(licenseFailed(notification:)), name: .licenseFailed, object: eventDataDispatcher)
-        NotificationCenter.default.addObserver(self,
-            selector: #selector(applicationWillTerminate(notification:)),
-            name: UIApplication.willTerminateNotification,
-            object: nil)
+        
+        self.setupObservers()
         
         if (config.ads) {
             self.adAnalytics = BitmovinAdAnalytics(analytics: self);
@@ -52,7 +76,8 @@ open class BitmovinAnalyticsInternal: NSObject {
                 }
             }
         }
-
+        
+        self.removeObserver()
         self.detachPlayer()
     }
     
@@ -70,6 +95,7 @@ open class BitmovinAnalyticsInternal: NSObject {
         adapter?.destroy()
         eventDataDispatcher.resetSourceState()
         eventDataDispatcher.disable()
+        eventDataFactory.reset()
         stateMachine.reset()
         adapter = nil
     }
@@ -80,7 +106,7 @@ open class BitmovinAnalyticsInternal: NSObject {
         }
         isPlayerAttached = true
         stateMachine.delegate = self
-        eventDataDispatcher.enable()
+        self.authenticationService.authenticate()
         self.adapter = adapter
         self.adapter!.initialize()
     }
@@ -91,14 +117,6 @@ open class BitmovinAnalyticsInternal: NSObject {
     
     public func attachAd(adAdapter: AdAdapter) {
         self.adAdapter = adAdapter;
-    }
-    
-    @objc private func licenseFailed(notification _: Notification) {
-        detachPlayer()
-    }
-    
-    @objc private func applicationWillTerminate(notification _: Notification) {
-        detachPlayer()
     }
     
     @objc public func getCustomData() -> CustomData {
@@ -143,14 +161,14 @@ open class BitmovinAnalyticsInternal: NSObject {
         guard let data = eventData else {
             return
         }
-        eventDataDispatcher.add(eventData: data)
+        eventDataDispatcher.add(data)
     }
     
     internal func sendAdEventData(adEventData: AdEventData?) {
         guard let data = adEventData else {
             return
         }
-        eventDataDispatcher.addAd(adEventData: data)
+        eventDataDispatcher.addAd(data)
     }
 
     internal func createEventData(duration: Int64) -> EventData {
@@ -167,8 +185,7 @@ open class BitmovinAnalyticsInternal: NSObject {
             self.stateMachine.videoTimeStart,
             self.stateMachine.videoTimeEnd,
             drmLoadTime,
-            self.adapter?.currentSourceMetadata,
-            self.userIdProvider.getUserId())
+            self.adapter?.currentSourceMetadata)
         
         do {
             try self.adapter?.decorateEventData(eventData: eventData)
@@ -189,7 +206,29 @@ open class BitmovinAnalyticsInternal: NSObject {
     
     internal func reset(){
         eventDataDispatcher.resetSourceState()
+        eventDataFactory.reset()
         didSendDrmLoadTime = false
+    }
+    
+    private func removeObserver() {
+        self.notificationCenter.removeObserver(self, name: .authenticationFailed, object: self.authenticationService)
+        self.notificationCenter.removeObserver(self, name: UIApplication.willTerminateNotification, object: nil)
+    }
+    
+    private func setupObservers() {
+        self.notificationCenter.addObserver(self, selector: #selector(handleAuthenticationFailed(notification:)), name: .authenticationFailed, object: self.authenticationService)
+        self.notificationCenter.addObserver(self,
+            selector: #selector(handleApplicationWillTerminate(notification:)),
+            name: UIApplication.willTerminateNotification,
+            object: nil)
+    }
+    
+    @objc private func handleAuthenticationFailed(notification _: Notification) {
+        detachPlayer()
+    }
+    
+    @objc private func handleApplicationWillTerminate(notification _: Notification) {
+        detachPlayer()
     }
 }
 

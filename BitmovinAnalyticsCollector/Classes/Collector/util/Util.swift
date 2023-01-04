@@ -108,3 +108,9 @@ extension TimeInterval {
         return nil
     }
 }
+
+func DPrint(_ string: String) {
+    #if DEBUG
+    print(string)
+    #endif
+}
