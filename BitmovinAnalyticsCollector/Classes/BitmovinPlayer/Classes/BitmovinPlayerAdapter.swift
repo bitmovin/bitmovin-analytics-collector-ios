@@ -171,16 +171,21 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onAdBreakStarted(_ event: AdBreakStartedEvent) {
-        stateMachine.transitionState(destinationState: .ad, time: currentTime)
+        stateMachine.ad(time: currentTime)
     }
     
     func onAdBreakFinished(_ event: AdBreakFinishedEvent) {
-        stateMachine.transitionState(destinationState: .adFinished, time: currentTime)
+        stateMachine.adFinished()
     }
     
     func onPaused(_ event: PausedEvent) {
         isSeeking = false
-        stateMachine.pause(time: currentTime)
+        
+        if player.isAd {
+            stateMachine.ad(time: currentTime)
+        } else {
+            stateMachine.pause(time: currentTime)
+        }
     }
 
     func onReady(_ event: ReadyEvent) {
