@@ -6,12 +6,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
+
+### Added
+- `ad` sample to track when in the session an ad was played
+
+### Changed
 - improved error handling for license call handler and event data decoration
-- removed unused method on eventDispatcher
+- [Internal] removed unused method on eventDispatcher
   
 ## Development V1
+
+### Added
+- `ad` sample to track when in the session an ad was played
+
+### Changed
 - improved error handling for license call handler and event data decoration
-- removed unused method on eventDispatcher
+- [Internal] removed unused method on eventDispatcher
 
 ## 2.9.4
 
