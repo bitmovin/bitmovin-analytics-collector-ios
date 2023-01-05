@@ -242,19 +242,33 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onAdBreakStarted(_ event: AdBreakStartedEvent, player: Player) {
-        stateMachine.transitionState(destinationState: .ad, time: currentTime)
+        print("BitmovinAdapter: onAdBreakStarted \n\ttime: \(CMTimeGetSeconds(currentTime!)) \n\tprevTime: \(previousTime)")
+        transitionToAd()
+    }
+    
+    private func transitionToAd() {
+        // In this case we are not using `currentTime` or `player.currentTime` because player has already change the time to the ad ones
+        // previousTime is set in onTimeChanged and relates to the last tracked time of the video
+        let adStartTime = CMTimeMakeWithSeconds(previousTime, preferredTimescale: Int32(NSEC_PER_SEC))
+        stateMachine.ad(time: adStartTime)
     }
     
     func onAdBreakFinished(_ event: AdBreakFinishedEvent, player: Player) {
-        stateMachine.transitionState(destinationState: .adFinished, time: currentTime)
+        print("BitmovinAdapter: onAdBreakFinished \n\ttime: \(CMTimeGetSeconds(currentTime!)) \n\tprevTime: \(previousTime)")
+        stateMachine.adFinished()
     }
     
     func onPaused(_ event: PausedEvent, player: Player) {
+        print("BitmovinAdapter: onPaused \n\ttime: \(CMTimeGetSeconds(currentTime!)) \n\tprevTime: \(previousTime)")
         guard isEventRelevantForCurrentSource else {
             return
         }
         isSeeking = false
-        stateMachine.pause(time: currentTime)
+        if player.isAd {
+            transitionToAd()
+        } else {
+            stateMachine.pause(time: currentTime)
+        }
     }
 
     func onStallStarted(_ event: StallStartedEvent, player: Player) {
@@ -264,7 +278,6 @@ extension BitmovinPlayerAdapter: PlayerListener {
         print("BitmovinAdapter: onStallStarted \(player.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
         isStalling = true
         stateMachine.transitionState(destinationState: .buffering, time: currentTime)
-        
     }
 
     func onStallEnded(_ event: StallEndedEvent, player: Player) {
