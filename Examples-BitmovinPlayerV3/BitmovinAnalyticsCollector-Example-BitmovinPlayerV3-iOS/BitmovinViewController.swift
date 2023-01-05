@@ -75,12 +75,13 @@ class BitmovinViewController: UIViewController {
     
     func getAdvertisingConfiguration() -> AdvertisingConfig {
         let adScource = AdSource(tag: urlWithCorrelator(adTag: AdAssets.SINGLE_SKIPPABLE_INLINE), ofType: AdSourceType.ima)
+        let adScource2 = AdSource(tag: urlWithCorrelator(adTag: AdAssets.SINGLE_REDIRECT_LINEAR), ofType: AdSourceType.ima)
         
         let preRoll = AdItem(adSources: [adScource], atPosition: "pre")
 //        let midRoll = AdItem(adSources: [adScource], atPosition: "mid")
-//        let customMidRoll = AdItem(adSources: [adScource], atPosition: "10%")
+        let customMidRoll = AdItem(adSources: [adScource2], atPosition: "5%")
 //        let postRoll = AdItem(adSources: [adScource], atPosition: "post")
-        return AdvertisingConfig(schedule: [preRoll])
+        return AdvertisingConfig(schedule: [preRoll, customMidRoll])
     }
     
     func urlWithCorrelator(adTag: String) -> URL {

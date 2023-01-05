@@ -17,6 +17,8 @@ class BitmovinViewController: UIViewController {
     @IBOutlet var sourceChangeButton: UIButton!
     @IBOutlet var setCustomDataButton: UIButton!
 
+    let enableAds = false
+    
     deinit {
         player?.destroy()
     }
@@ -57,10 +59,10 @@ class BitmovinViewController: UIViewController {
         config.customerUserId = "customUserId"
         config.experimentName = "experiment-1"
         config.videoId = "iOSHLSStaticBitmovin"
-        config.title = "iOS HLS Static Asset with Bitmovin Player"
+        config.title = "Sintel"
         config.path = "/vod/breadcrumb/"
         config.isLive = false
-        config.ads = true
+        config.ads = enableAds
         analyticsCollector = BitmovinPlayerCollector(config: config)
         print("Setup of collector finished")
 
@@ -72,9 +74,9 @@ class BitmovinViewController: UIViewController {
     }
     
     func getAdvertisingConfiguration() -> AdvertisingConfiguration {
-        let preRoll = AdItem(adSources: [getAdSource(url: VideoAssets.AD_SOURCE_1)], atPosition: "pre")
+        let preRoll = AdItem(adSources: [getAdSource(url: VideoAssets.AD_SOURCE_2)], atPosition: "pre")
 //        let midRoll = AdItem(adSources: [adScource], atPosition: "mid")
-        let customMidRoll = AdItem(adSources: [getAdSource(url: VideoAssets.AD_SOURCE_4)], atPosition: "10%")
+        let customMidRoll = AdItem(adSources: [getAdSource(url: VideoAssets.AD_SOURCE_3)], atPosition: "2%")
 //        let postRoll = AdItem(adSources: [adScource], atPosition: "post")
 
         return AdvertisingConfiguration(schedule: [preRoll, customMidRoll])
@@ -110,7 +112,7 @@ class BitmovinViewController: UIViewController {
         self.player = player
     }
     
-    func getPlayerConfig(enableAds: Bool = false) -> PlayerConfiguration? {
+    func getPlayerConfig() -> PlayerConfiguration? {
         guard let streamUrl = url else {
             return nil
         }

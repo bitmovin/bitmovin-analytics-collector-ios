@@ -242,11 +242,18 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onAdBreakStarted(_ event: AdBreakStartedEvent, player: Player) {
-        stateMachine.transitionState(destinationState: .ad, time: currentTime)
+        transitionToAd()
+    }
+    
+    private func transitionToAd() {
+        // In this case we are not using `currentTime` or `player.currentTime` because player has already change the time to the ad ones
+        // previousTime is set in onTimeChanged and relates to the last tracked time of the video
+        let adStartTime = CMTimeMakeWithSeconds(previousTime, preferredTimescale: Int32(NSEC_PER_SEC))
+        stateMachine.ad(time: adStartTime)
     }
     
     func onAdBreakFinished(_ event: AdBreakFinishedEvent, player: Player) {
-        stateMachine.transitionState(destinationState: .adFinished, time: currentTime)
+        stateMachine.adFinished()
     }
     
     func onPaused(_ event: PausedEvent, player: Player) {
@@ -254,7 +261,11 @@ extension BitmovinPlayerAdapter: PlayerListener {
             return
         }
         isSeeking = false
-        stateMachine.pause(time: currentTime)
+        if player.isAd {
+            transitionToAd()
+        } else {
+            stateMachine.pause(time: currentTime)
+        }
     }
 
     func onStallStarted(_ event: StallStartedEvent, player: Player) {
@@ -263,8 +274,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
         }
         print("BitmovinAdapter: onStallStarted \(player.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
         isStalling = true
-        stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
-        
+        stateMachine.transitionState(destinationState: .buffering, time: currentTime)
     }
 
     func onStallEnded(_ event: StallEndedEvent, player: Player) {
@@ -279,7 +289,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
         }
         print("BitmovinAdapter: onSeek \(player.currentTime) isPlaying: \(player.isPlaying) isPaused: \(player.isPaused)")
         isSeeking = true
-        stateMachine.transitionState(destinationState: .seeking, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        stateMachine.seek(time: currentTime)
     }
 
     func onDownloadFinished(_ event: DownloadFinishedEvent, player: Player) {
@@ -343,7 +353,8 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onPlaybackFinished(_ event: PlaybackFinishedEvent, player: Player) {
-        stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.duration))
+        let duration = Util.timeIntervalToCMTime(_: player.duration)
+        stateMachine.pause(time: duration)
         stateMachine.reset()
     }
 
@@ -361,9 +372,9 @@ extension BitmovinPlayerAdapter: PlayerListener {
             // Player reports isPlaying=true although onStallEnded has not been called yet -- still stalling
             stateMachine.transitionState(destinationState: .buffering, time: Util.timeIntervalToCMTime(_: player.currentTime))
         } else if player.isPaused {
-            stateMachine.transitionState(destinationState: .paused, time: Util.timeIntervalToCMTime(_: player.currentTime))
+            stateMachine.pause(time: currentTime)
         } else {
-            stateMachine.transitionState(destinationState: .playing, time: Util.timeIntervalToCMTime(_: player.currentTime))
+            stateMachine.playing(time: currentTime)
         }
     }
     
@@ -419,7 +430,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
         guard stateMachine.state == .paused || stateMachine.state == .playing else {
             return
         }
-        stateMachine.transitionState(destinationState: .subtitlechange, time: Util.timeIntervalToCMTime(_: player.currentTime))
+        stateMachine.transitionState(destinationState: .subtitlechange, time: currentTime)
         transitionToPausedOrBufferingOrPlaying()
     }
 }
