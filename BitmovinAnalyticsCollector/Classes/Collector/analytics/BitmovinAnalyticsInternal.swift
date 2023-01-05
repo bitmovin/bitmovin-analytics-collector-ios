@@ -233,6 +233,12 @@ open class BitmovinAnalyticsInternal: NSObject {
 }
 
 extension BitmovinAnalyticsInternal: StateMachineDelegate {
+    
+    func stateMachine(_ stateMachine: StateMachine, didAdWithDuration duration: Int64) {
+        let eventData = createEventData(duration: duration)
+        eventData.ad = 1
+        sendEventData(eventData: eventData)
+    }
 
     func stateMachineDidExitSetup(_ stateMachine: StateMachine) {
     }

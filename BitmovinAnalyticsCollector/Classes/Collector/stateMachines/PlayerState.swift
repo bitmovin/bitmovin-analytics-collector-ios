@@ -67,6 +67,7 @@ public enum PlayerState: String {
         
         switch self {
             case .ad:
+                stateMachine.delegate?.stateMachine(stateMachine, didAdWithDuration: duration)
                 return
             case .adFinished:
                 return

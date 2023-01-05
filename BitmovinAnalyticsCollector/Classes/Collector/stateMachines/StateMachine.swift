@@ -145,6 +145,13 @@ public class StateMachine {
         }
     }
     
+    public func ad(time: CMTime?) {
+        transitionState(destinationState: .ad, time: time)
+    }
+    public func adFinished() {
+        transitionState(destinationState: .adFinished, time: videoTimeEnd)
+    }
+    
     public func setDidStartPlayingVideo() {
         didStartPlayingVideo = true
     }
