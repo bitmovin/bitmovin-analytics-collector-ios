@@ -242,7 +242,6 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onAdBreakStarted(_ event: AdBreakStartedEvent, player: Player) {
-        print("BitmovinAdapter: onAdBreakStarted \n\ttime: \(CMTimeGetSeconds(currentTime!)) \n\tprevTime: \(previousTime)")
         transitionToAd()
     }
     
@@ -254,12 +253,10 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
     
     func onAdBreakFinished(_ event: AdBreakFinishedEvent, player: Player) {
-        print("BitmovinAdapter: onAdBreakFinished \n\ttime: \(CMTimeGetSeconds(currentTime!)) \n\tprevTime: \(previousTime)")
         stateMachine.adFinished()
     }
     
     func onPaused(_ event: PausedEvent, player: Player) {
-        print("BitmovinAdapter: onPaused \n\ttime: \(CMTimeGetSeconds(currentTime!)) \n\tprevTime: \(previousTime)")
         guard isEventRelevantForCurrentSource else {
             return
         }
