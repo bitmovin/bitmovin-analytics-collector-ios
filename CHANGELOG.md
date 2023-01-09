@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - improved error handling for license call handler and event data decoration
 - [Internal] removed unused method on eventDispatcher
   
-## 2.30.0
+## 1.30.0
 
 ### Added
 - `ad` sample to track when in the session an ad was played
