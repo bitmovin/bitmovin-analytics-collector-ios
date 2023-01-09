@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
+## Development V1
+
+## 2.10.0
 
 ### Fixed
 - casting information was set in sample before casting 
@@ -17,7 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - improved error handling for license call handler and event data decoration
 - [Internal] removed unused method on eventDispatcher
   
-## Development V1
+## 2.30.0
 
 ### Added
 - `ad` sample to track when in the session an ad was played
