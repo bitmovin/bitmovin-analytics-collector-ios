@@ -51,6 +51,10 @@ class MockStateMachineDelegate: StateMachineDelegate {
     func stateMachineDidAudioChange(_ stateMachine: StateMachine) {
     }
     
+    func stateMachine(_ stateMachine: StateMachine, didAdWithDuration duration: Int64) {
+        
+    }
+    
     func stateMachineResetSourceState() {
     }
     
