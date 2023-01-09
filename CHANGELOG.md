@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+### Fixed
+- casting information was set in sample before casting 
+
 ### Added
 - `ad` sample to track when in the session an ad was played
 

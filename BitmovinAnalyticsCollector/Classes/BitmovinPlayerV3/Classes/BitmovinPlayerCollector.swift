@@ -18,7 +18,8 @@ public class BitmovinPlayerCollector : NSObject, Collector {
      * will start monitoring and sending analytics data based on the attached player instance.
      */
     @objc public func attachPlayer(player: Player) {
-        let adapter = BitmovinPlayerAdapter(player: player, config: analytics.config, stateMachine: analytics.stateMachine, sourceMetadataProvider: sourceMetadataProvider)
+        let castDecorator = CastEventDataDecorator(player: player)
+        let adapter = BitmovinPlayerAdapter(player: player, config: analytics.config, stateMachine: analytics.stateMachine, sourceMetadataProvider: sourceMetadataProvider, castEventDataDecorator: castDecorator)
         analytics.attach(adapter: adapter)
         if (analytics.adAnalytics != nil) {
             analytics.attachAd(adAdapter: BitmovinAdAdapter(bitmovinPlayer: player, adAnalytics: analytics.adAnalytics!))

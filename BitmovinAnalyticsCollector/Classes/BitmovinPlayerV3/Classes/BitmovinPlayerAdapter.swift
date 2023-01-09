@@ -4,9 +4,11 @@ import CoreCollector
 #endif
 
 internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
-    private let config: BitmovinAnalyticsConfig
-    private var player: Player
-    private var sourceMetadataProvider: SourceMetadataProvider<Source>
+    private final var config: BitmovinAnalyticsConfig
+    private final var player: Player
+    private final var sourceMetadataProvider: SourceMetadataProvider<Source>
+    private final var castEventDataDecorator: CastEventDataDecorator
+    
     private var isStalling: Bool
     private var isSeeking: Bool
     private var isMonitoring = false
@@ -39,12 +41,14 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         }
     }
     
-    init(player: Player, config: BitmovinAnalyticsConfig, stateMachine: StateMachine, sourceMetadataProvider:  SourceMetadataProvider<Source>) {
+    init(player: Player, config: BitmovinAnalyticsConfig, stateMachine: StateMachine, sourceMetadataProvider:  SourceMetadataProvider<Source>, castEventDataDecorator: CastEventDataDecorator) {
         self.player = player
         self.config = config
+        self.castEventDataDecorator = castEventDataDecorator
+        self.sourceMetadataProvider = sourceMetadataProvider
+        
         self.isStalling = false
         self.isSeeking = false
-        self.sourceMetadataProvider = sourceMetadataProvider
         super.init(stateMachine: stateMachine)
         resetSourceState()
     }
@@ -86,13 +90,7 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         //PlayerTech
         eventData.playerTech = "ios:bitmovin"
 
-        let isCasting = player.isCasting || player.isAirPlayActive
-        eventData.isCasting = isCasting
-       
-        //castTech
-        if isCasting {
-            eventData.castTech = player.isAirPlayActive ? CastTech.AirPlay.rawValue : CastTech.GoogleCast.rawValue
-        }
+        self.castEventDataDecorator.decorate(eventData)
         
         //version
         if let sdkVersion = BitmovinPlayerUtil.playerVersion() {
