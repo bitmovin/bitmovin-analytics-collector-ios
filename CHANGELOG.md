@@ -6,7 +6,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
-## Development V1
 
 ## 2.10.0
 
@@ -20,6 +19,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - improved error handling for license call handler and event data decoration
 - [Internal] removed unused method on eventDispatcher
   
+## Development V1
+- the v1 project has been deprectated and removed from that repository 
 ## 1.30.0
 
 ### Added

@@ -6,15 +6,6 @@ To get started collecting data with Bitmovin Analytics you need a License-Key wh
 
 ## Supported Platforms
 
-**BitmovinPlayer v2, AVPlayer**
-
-- iOS 9.0+
-- tvOS 9.0+
-
-The DRM examples require iOS 11.2+.
-
-**BitmovinPlayer v3, AVPlayer**
-
 - iOS 12.0+
 - tvOS 12.0+
 
@@ -132,19 +123,6 @@ import BitmovinPlayerCollector
 We depend on `cocoapods` version `>= 1.4`. 
 To install it, check which Player/version you are using and add the following lines to your Podfile:
 
-#### Bitmovin Player v2
-
-The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` version `>= 2.51.0`.
-
-```ruby
-source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '1.29.4'
-pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '1.29.4'
-pod 'BitmovinPlayer', '2.51.0'
-
-use_frameworks!
-```
-
 ### Bitmovin Player v3
 
 The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` version `>= 3.0.0`.
@@ -160,9 +138,8 @@ use_frameworks!
 
 ### AVPlayer
 
-We provide builds of our AVPlayerCollector to support platforms `iOS 9.0+` and `iOS 12.0+`.
+We provide builds of our AVPlayerCollector to support platforms `iOS 12.0+`.
 Use the BitmovinAnalyticsCollector version `2.8.0` for deployment targets `iOS 12.0+`.
-We do support deployment target `iOS 9.0+`, but this version is deprecated and won't get major updates anymore.
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
@@ -173,16 +150,6 @@ use_frameworks!
 ```
 
 To include all available collectors, add the following lines (the dependency on BitmovinPlayer applies here as well):
-
-**BitmovinPlayer v2 and AVPlayer**
-
-```ruby
-source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector', '1.29.4'
-pod 'BitmovinPlayer', '2.51.0'
-
-use_frameworks!
-```
 
 **BitmovinPlayer v3 and AVPlayer**
 

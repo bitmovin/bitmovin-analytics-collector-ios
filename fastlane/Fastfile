@@ -4,10 +4,8 @@ lane :release do
     release_track = ""
     pod_name = "BitmovinAnalyticsCollector"
     COCOA_DEPLOY_REPO = "cocoapod-specs"
-
-    if release_version.start_with?("1")
-        release_track = "v1"
-    elsif release_version.start_with?("2")
+    
+    if release_version.start_with?("2")
         release_track = "v2"
     else 
         raise "Invalid release track: " + release_version

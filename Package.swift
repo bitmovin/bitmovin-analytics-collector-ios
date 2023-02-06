@@ -27,38 +27,38 @@ let package = Package(
         .target(
             name: "CoreCollector",
             path: "BitmovinAnalyticsCollector/Classes/",
-            exclude: ["BitmovinPlayer/", "BitmovinPlayerV3/", "AVPlayer/", "AVPlayerV2/", "Collector/Info.plist"],
+            exclude: ["BitmovinPlayerV3/", "AVPlayerV2/", "Collector/Info.plist"],
             sources: ["Collector/"]),
          .target(
              name: "AVPlayerCollector",
              dependencies: ["CoreCollector"],
              path: "BitmovinAnalyticsCollector/Classes/",
-             exclude: ["BitmovinPlayer/", "BitmovinPlayerV3/", "Collector/", "AVPlayer/"],
+             exclude: ["BitmovinPlayerV3/", "Collector/"],
              sources: ["AVPlayerV2/"]),
         .target(
             name: "BitmovinPlayerCollector",
             dependencies: ["BitmovinPlayer", "CoreCollector"],
             path: "BitmovinAnalyticsCollector/Classes/",
-            exclude: ["BitmovinPlayer/", "AVPlayer/", "Collector/", "AVPlayerV2/"],
+            exclude: ["Collector/", "AVPlayerV2/"],
             sources: ["BitmovinPlayerV3/"]),
         
        .testTarget(
            name: "CoreCollectorTests",
            dependencies: ["CoreCollector"],
            path: "BitmovinAnalyticsCollector/Tests/",
-           exclude: ["BitmovinPlayerTests/", "AVPlayerTests/", "BitmovinPlayerV3Tests/", "AVPlayerV2Tests/"],
+           exclude: ["BitmovinPlayerV3Tests/", "AVPlayerV2Tests/"],
            sources:["CoreTests/"]),
        .testTarget(
            name: "BitmovinPlayerCollectorTests",
            dependencies: ["BitmovinPlayerCollector", "BitmovinPlayer"],
            path: "BitmovinAnalyticsCollector/Tests/",
-           exclude: ["BitmovinPlayerTests/", "AVPlayerTests/", "CoreTests/", "AVPlayerV2Tests/"],
+           exclude: ["CoreTests/", "AVPlayerV2Tests/"],
            sources:["BitmovinPlayerV3Tests/"]),
         .testTarget(
             name: "AVPlayerCollectorTests",
             dependencies: ["AVPlayerCollector"],
             path: "BitmovinAnalyticsCollector/Tests/",
-            exclude: ["BitmovinPlayerTests/", "BitmovinPlayerV3Tests/", "CoreTests/", "AVPlayerTests/"],
+            exclude: ["BitmovinPlayerV3Tests/", "CoreTests/"],
             sources:["AVPlayerV2Tests/"]),
     ]
 )
