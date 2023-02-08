@@ -25,6 +25,6 @@ target 'BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS' do
     use_frameworks!
     platform :ios, '12.0'
     pod 'BitmovinAnalyticsCollector/Core', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['CoreTests']
-    pod 'BitmovinAnalyticsCollector/AVPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['AVPlayerV2Tests']
-    pod 'BitmovinAnalyticsCollector/BitmovinPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['BitmovinPlayerV3Tests']
+    pod 'BitmovinAnalyticsCollector/AVPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['AVPlayerTests']
+    pod 'BitmovinAnalyticsCollector/BitmovinPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['BitmovinPlayerTests']
 end

@@ -29,15 +29,15 @@ public class BitmovinPlayerCollector : NSObject, Collector {
     @objc public func detachPlayer() {
         analytics.detachPlayer()
     }
-
+    
     @objc public func getCustomData() -> CustomData {
         return analytics.getCustomData()
     }
-
+    
     @objc public func setCustomData(customData: CustomData) {
         return analytics.setCustomData(customData: customData)
     }
-
+    
     @objc public func setCustomDataOnce(customData: CustomData) {
         return analytics.setCustomDataOnce(customData: customData)
     }

@@ -24,13 +24,13 @@
 		8F1713AD24AB3FAD009ACECA /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713A924AB3FAD009ACECA /* Stream.swift */; };
 		8F1713AF24AB3FAD009ACECA /* FairPlayConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1713AA24AB3FAD009ACECA /* FairPlayConfiguration.swift */; };
 		8F54717224A37D8D008B31C2 /* BitmovinDrmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F54717124A37D8D008B31C2 /* BitmovinDrmViewController.swift */; };
-		B61FE4B4AFB146F142E53C8D /* Pods_BitmovinAnalyticsCollector_Tests_BitmovinPlayerV3_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1D0CD2018C430DD9F190A1 /* Pods_BitmovinAnalyticsCollector_Tests_BitmovinPlayerV3_iOS.framework */; };
 		BB3F17D3EDC1096ADBA78F19 /* Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7494402F272A9FA5EA9F130E /* Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_tvOS.framework */; };
 		EC3D4EB327EDAD87003C2E63 /* AVFoundationDrmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3D4EB127EDAD87003C2E63 /* AVFoundationDrmViewController.swift */; };
 		EC3D4EB427EDAD87003C2E63 /* AVFoundationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3D4EB227EDAD87003C2E63 /* AVFoundationViewController.swift */; };
 		EC6FFDD22626C01E00E279B5 /* AdAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6FFDD12626C01E00E279B5 /* AdAssets.swift */; };
 		EC6FFDD72626C08A00E279B5 /* VideoAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6FFDD62626C08A00E279B5 /* VideoAssets.swift */; };
 		EC93565C2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC93565B2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift */; };
+		F6FF4116C79F0A8055A9007A /* Pods_BitmovinAnalyticsCollector_Tests_BitmovinPlayerV3_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F137747E3DEE0AA5B9396080 /* Pods_BitmovinAnalyticsCollector_Tests_BitmovinPlayerV3_iOS.framework */; };
 		F7A1963969BB789BF719FEE8 /* Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 860F3AF97FD280A819D3DDBB /* Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_iOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +40,6 @@
 		01C26BE32083ED7B001A0D76 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		01C26BE52083F14D001A0D76 /* BitmovinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitmovinViewController.swift; sourceTree = "<group>"; };
 		247009F226249C4F00232413 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
-		247009F326249C4F00232413 /* BitmovinAnalyticsCollector.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = BitmovinAnalyticsCollector.podspec; path = ../BitmovinAnalyticsCollector.podspec; sourceTree = "<group>"; };
 		24DB7FBC261D7BB9009F7AE7 /* BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24DB7FBE261D7BB9009F7AE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24DB7FC5261D7BB9009F7AE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -58,23 +57,22 @@
 		51CFB9B00A1246E5397544A8 /* Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS.release.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		5E5AAB45C4DD6532B12C64D9 /* Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS.release.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		67D7D3032E40EEFC258C6F8D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		741623A9CA1B599D4340F093 /* Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.debug.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		7494402F272A9FA5EA9F130E /* Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		860F3AF97FD280A819D3DDBB /* Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E87C386DC7DA9736D35CF74 /* Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.release.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		87335871234797C6FB09EDF7 /* Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.debug.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		8F1713A524AB3D64009ACECA /* AssetResourceLoaderDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetResourceLoaderDelegate.swift; sourceTree = "<group>"; };
 		8F1713A824AB3FAD009ACECA /* Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		8F1713A924AB3FAD009ACECA /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
 		8F1713AA24AB3FAD009ACECA /* FairPlayConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FairPlayConfiguration.swift; sourceTree = "<group>"; };
 		8F54717124A37D8D008B31C2 /* BitmovinDrmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitmovinDrmViewController.swift; sourceTree = "<group>"; };
 		94E92FFDF2C4FD3FDF42D78C /* Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS.debug.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		A13FCB967E22402182A70074 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		BB1D0CD2018C430DD9F190A1 /* Pods_BitmovinAnalyticsCollector_Tests_BitmovinPlayerV3_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_Tests_BitmovinPlayerV3_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC3D4EB127EDAD87003C2E63 /* AVFoundationDrmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVFoundationDrmViewController.swift; sourceTree = "<group>"; };
 		EC3D4EB227EDAD87003C2E63 /* AVFoundationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVFoundationViewController.swift; sourceTree = "<group>"; };
 		EC6FFDD12626C01E00E279B5 /* AdAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdAssets.swift; sourceTree = "<group>"; };
 		EC6FFDD62626C08A00E279B5 /* VideoAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAssets.swift; sourceTree = "<group>"; };
 		EC93565B2457F26A007B6F45 /* DebugBitmovinPlayerListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugBitmovinPlayerListener.swift; sourceTree = "<group>"; };
+		F137747E3DEE0AA5B9396080 /* Pods_BitmovinAnalyticsCollector_Tests_BitmovinPlayerV3_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitmovinAnalyticsCollector_Tests_BitmovinPlayerV3_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA0A90518F894967E1B88B61 /* Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.release.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		FEE65235C60BFAFED614C416 /* Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,7 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B61FE4B4AFB146F142E53C8D /* Pods_BitmovinAnalyticsCollector_Tests_BitmovinPlayerV3_iOS.framework in Frameworks */,
+				F6FF4116C79F0A8055A9007A /* Pods_BitmovinAnalyticsCollector_Tests_BitmovinPlayerV3_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,8 +177,8 @@
 				5E5AAB45C4DD6532B12C64D9 /* Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS.release.xcconfig */,
 				FEE65235C60BFAFED614C416 /* Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS.debug.xcconfig */,
 				51CFB9B00A1246E5397544A8 /* Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS.release.xcconfig */,
-				741623A9CA1B599D4340F093 /* Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.debug.xcconfig */,
-				8E87C386DC7DA9736D35CF74 /* Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.release.xcconfig */,
+				87335871234797C6FB09EDF7 /* Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.debug.xcconfig */,
+				FA0A90518F894967E1B88B61 /* Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -190,7 +188,7 @@
 			children = (
 				860F3AF97FD280A819D3DDBB /* Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_iOS.framework */,
 				7494402F272A9FA5EA9F130E /* Pods_BitmovinAnalyticsCollector_Example_BitmovinPlayerV3_tvOS.framework */,
-				BB1D0CD2018C430DD9F190A1 /* Pods_BitmovinAnalyticsCollector_Tests_BitmovinPlayerV3_iOS.framework */,
+				F137747E3DEE0AA5B9396080 /* Pods_BitmovinAnalyticsCollector_Tests_BitmovinPlayerV3_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -198,10 +196,8 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				247009F326249C4F00232413 /* BitmovinAnalyticsCollector.podspec */,
 				247009F226249C4F00232413 /* CHANGELOG.md */,
 				67D7D3032E40EEFC258C6F8D /* README.md */,
-				A13FCB967E22402182A70074 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
@@ -263,11 +259,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 24DB8021261D805B009F7AE7 /* Build configuration list for PBXNativeTarget "BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS" */;
 			buildPhases = (
-				B05751B7F94385679D8CF296 /* [CP] Check Pods Manifest.lock */,
+				464C9B2E70E01D8A53C75AED /* [CP] Check Pods Manifest.lock */,
 				24DB8016261D805B009F7AE7 /* Sources */,
 				24DB8017261D805B009F7AE7 /* Frameworks */,
 				24DB8018261D805B009F7AE7 /* Resources */,
-				1898EDC5E8E40D940985B0F6 /* [CP] Embed Pods Frameworks */,
+				5824030B194D2CD189AB13D8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -366,21 +362,26 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1898EDC5E8E40D940985B0F6 /* [CP] Embed Pods Frameworks */ = {
+		464C9B2E70E01D8A53C75AED /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4B1FA260647FCB92DF8EB7FB /* [CP] Check Pods Manifest.lock */ = {
@@ -403,6 +404,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5824030B194D2CD189AB13D8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		62DA4BE808E47919E66685F2 /* [CP] Embed Pods Frameworks */ = {
@@ -437,28 +455,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS/Pods-BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B05751B7F94385679D8CF296 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E5A68DD626F72FB864DBA067 /* [CP] Check Pods Manifest.lock */ = {
@@ -756,7 +752,7 @@
 		};
 		24DB801F261D805B009F7AE7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 741623A9CA1B599D4340F093 /* Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.debug.xcconfig */;
+			baseConfigurationReference = 87335871234797C6FB09EDF7 /* Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS/Info.plist";
@@ -774,7 +770,7 @@
 		};
 		24DB8020261D805B009F7AE7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8E87C386DC7DA9736D35CF74 /* Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.release.xcconfig */;
+			baseConfigurationReference = FA0A90518F894967E1B88B61 /* Pods-BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "BitmovinAnalyticsCollector-Tests-BitmovinPlayerV3-iOS/Info.plist";

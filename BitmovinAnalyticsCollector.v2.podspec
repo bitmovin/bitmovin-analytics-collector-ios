@@ -9,7 +9,6 @@ iOS library that allows you to monitor your iOS video playback with Bitmovin Ana
 DESC
 
   s.homepage         = 'https://github.com/bitmovin/bitmovin-analytics-collector-ios'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Bitmovin Inc' => 'admin@bitmovin.com' }
   s.source           = { :git => 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', :tag => s.version.to_s }
 
@@ -23,28 +22,28 @@ DESC
       'ENABLE_BITCODE' => 'YES'
   }
   s.subspec 'Core' do |core|
-    core.source_files = 'BitmovinAnalyticsCollector/Classes/Collector/**/*.{swift}'
+    core.source_files = 'Sources/CoreCollector/**/*.{swift}'
 
     core.test_spec 'CoreTests' do |core_test_spec|
-      core_test_spec.source_files = 'BitmovinAnalyticsCollector/Tests/CoreTests/**/*'
+      core_test_spec.source_files = 'Tests/CoreCollectorTests/**/*'
     end
   end
 
   s.subspec 'BitmovinPlayer' do |bitmovinplayerv3|
-    bitmovinplayerv3.source_files = 'BitmovinAnalyticsCollector/Classes/BitmovinPlayerV3/**/*.{swift}'
+    bitmovinplayerv3.source_files = 'Sources/BitmovinPlayerCollector/**/*.{swift}'
     bitmovinplayerv3.tvos.dependency 'BitmovinPlayer', '~>3.0'
     bitmovinplayerv3.ios.dependency 'BitmovinPlayer', '~>3.0'
 
-    bitmovinplayerv3.test_spec 'BitmovinPlayerV3Tests' do |bitmovinplayerv3_test_spec|
-      bitmovinplayerv3_test_spec.source_files = 'BitmovinAnalyticsCollector/Tests/BitmovinPlayerV3Tests/**/*'
+    bitmovinplayerv3.test_spec 'BitmovinPlayerTests' do |bitmovinplayerv3_test_spec|
+      bitmovinplayerv3_test_spec.source_files = 'Tests/BitmovinPlayerCollectorTests/**/*'
     end
   end
 
   s.subspec 'AVPlayer' do |avplayer|
-    avplayer.source_files = 'BitmovinAnalyticsCollector/Classes/AVPlayerV2/**/*.{swift}'
+    avplayer.source_files = 'Sources/AVPlayerCollector/**/*.{swift}'
 
-    avplayer.test_spec 'AVPlayerV2Tests' do |avplayer_test_spec|
-      avplayer_test_spec.source_files = 'BitmovinAnalyticsCollector/Tests/AVPlayerV2Tests/**/*'
+    avplayer.test_spec 'AVPlayerTests' do |avplayer_test_spec|
+      avplayer_test_spec.source_files = 'Tests/AVPlayerCollectorTests/**/*'
     end
   end
 
