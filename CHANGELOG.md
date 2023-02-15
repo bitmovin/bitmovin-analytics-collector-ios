@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+### Changed
+- updated example app 
+
 ### Removed
 - MIT License
 

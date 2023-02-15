@@ -3,17 +3,17 @@ preparePods() {
   echo "-----------------"
   echo "Preparing Pods---"
   echo "-----------------"
-  cd ../Examples-BitmovinPlayerV3
+  cd ../CollectorDemoApp
   pod install --repo-update --silent
   cd ..
 }
 
 buildAll() {
   echo "Start building xcode projects based on cocoapods for iOS"
-  xcodebuild -quiet -workspace Examples-BitmovinPlayerV3/BitmovinAnalyticsCollector-BitmovinPlayerV3.xcworkspace -scheme BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS -sdk iphoneos -destination 'name=iPhone 14' clean build || CHECKS_PASSED=0
+  xcodebuild -quiet -workspace CollectorDemoApp/CollectorDemoApp.xcworkspace -scheme CollectorDemoApp -sdk iphoneos -destination 'name=iPhone 14' clean build || CHECKS_PASSED=0
 
   # echo "Start building xcode projects based on cocoapods for tvOS"
-  # xcodebuild -quiet -workspace Examples-BitmovinPlayerV3/BitmovinAnalyticsCollector-BitmovinPlayerV3.xcworkspace -scheme BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-tvOS -sdk appletvos analyze || CHECKS_PASSED=0
+  # xcodebuild -quiet -workspace CollectorDemoApp/CollectorDemoApp.xcworkspace -scheme CollectorDemoAppTV -sdk appletvos -destination 'name=Apple TV' clean build || CHECKS_PASSED=0
 
   echo "Start building xcode projects based on swiftpm"
   xcodebuild -quiet -workspace .swiftpm/xcode/package.xcworkspace -scheme BitmovinPlayerCollector -sdk iphoneos -destination 'name=iPhone 14' clean build || CHECKS_PASSED=0
@@ -23,7 +23,7 @@ buildAll() {
 testAll() {
   echo "Successfully build all projects - Starting with tests"
   TESTS_PASSED=1
-  xcodebuild -quiet -workspace Examples-BitmovinPlayerV3/BitmovinAnalyticsCollector-BitmovinPlayerV3.xcworkspace -scheme BitmovinAnalyticsCollector-Example-BitmovinPlayerV3-iOS -sdk iphoneos -destination 'name=iPhone 14' clean test || TESTS_PASSED=0
+  xcodebuild -quiet -workspace .swiftpm/xcode/package.xcworkspace -scheme BitmovinAnalytics-Package -sdk iphoneos -destination 'name=iPhone 14' clean test || TESTS_PASSED=0
   if [ $TESTS_PASSED -eq 0 ]
   then
     CHECKS_PASSED=0
