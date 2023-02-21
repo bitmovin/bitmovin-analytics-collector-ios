@@ -43,7 +43,7 @@ internal class AVPlayerEventDataManipulator {
 
         // Duration
         if let duration = player.currentItem?.duration, CMTIME_IS_NUMERIC(_: duration) {
-            eventData.videoDuration = Int64(CMTimeGetSeconds(duration) * BitmovinAnalyticsInternal.msInSec)
+            eventData.videoDuration = duration.toMillis()
         }
 
         // isCasting

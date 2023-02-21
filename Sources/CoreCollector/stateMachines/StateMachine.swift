@@ -29,7 +29,7 @@ public class StateMachine {
     // error tracking
     private var errorData: ErrorData?
 
-    init(config: BitmovinAnalyticsConfig) {
+    public init(config: BitmovinAnalyticsConfig) {
         self.config = config
         state = .ready
         impressionId = NSUUID().uuidString

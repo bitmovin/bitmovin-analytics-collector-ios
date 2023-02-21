@@ -308,8 +308,8 @@ class EventDataFactoryTests: XCTestCase {
         config: BitmovinAnalyticsConfig? = nil,
         userIdProvider: UserIdProvider? = nil
     ) -> EventDataFactory {
-        var conf = config ?? getTestBitmovinConfig()
-        var userProv = userIdProvider ?? RandomizedUserIdProvider()
+        let conf = config ?? getTestBitmovinConfig()
+        let userProv = userIdProvider ?? RandomizedUserIdProvider()
         return EventDataFactory(conf, userProv)
     }
 

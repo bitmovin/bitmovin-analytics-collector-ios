@@ -5,8 +5,8 @@ import Foundation
 import CoreCollector
 #endif
 
-internal class AVPlayerAdapterFactory {
-    func createAdapter(stateMachine: StateMachine, player: AVPlayer) -> AVPlayerAdapter {
+internal enum AVPlayerAdapterFactory {
+    static func createAdapter(stateMachine: StateMachine, player: AVPlayer) -> AVPlayerAdapter {
         let errorHandler = ErrorHandler()
         let bitrateDetectionService = BitrateDetectionService()
         let downloadSpeedMeter = DownloadSpeedMeter()

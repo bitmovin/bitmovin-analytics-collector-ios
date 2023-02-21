@@ -2,9 +2,11 @@ import AVFoundation
 import Foundation
 import UIKit
 
-class EventDataFactory {
+class EventDataFactory: EventDataManipulatorPipeline {
     private final var config: BitmovinAnalyticsConfig
     private final let userIdProvider: UserIdProvider
+
+    private var manipulators: [EventDataManipulator] = []
 
     private var sequenceNumber: Int32 = 0
 
@@ -13,8 +15,16 @@ class EventDataFactory {
         self.userIdProvider = userIdProvider
     }
 
+    func clearEventDataManipulators() {
+        manipulators.removeAll()
+    }
+
+    func registerEventDataManipulator(manipulator: EventDataManipulator) {
+        manipulators.append(manipulator)
+    }
+
     func reset() {
-        self.sequenceNumber = 0
+        sequenceNumber = 0
     }
 
     func createEventData(
@@ -27,17 +37,29 @@ class EventDataFactory {
     ) -> EventData {
         let eventData = EventData(impressionId)
 
-        eventData.sequenceNumber = self.sequenceNumber
-        self.sequenceNumber += 1
-
         eventData.userId = self.userIdProvider.getUserId()
         eventData.state = state
         eventData.drmLoadTime = drmLoadTime
         eventData.time = Date().timeIntervalSince1970Millis
+        setSequenceNumber(eventData)
         setBasicData(eventData)
         setConfigData(eventData, sourceMetaData)
         setVideoTime(eventData, videoTimeStart, videoTimeEnd)
+
+        setDataFromManipulator(eventData)
+
         return eventData
+    }
+
+    private func setDataFromManipulator(_ eventData: EventData) {
+        manipulators.forEach { manipulator in
+            manipulator.manipulate(eventData: eventData)
+        }
+    }
+
+    private func setSequenceNumber(_ eventData: EventData) {
+        eventData.sequenceNumber = sequenceNumber
+        sequenceNumber += 1
     }
 
     private func setBasicData(_ eventData: EventData) {
@@ -138,10 +160,10 @@ class EventDataFactory {
 
     private func setVideoTime(_ eventData: EventData, _ videoTimeStart: CMTime?, _ videoTimeEnd: CMTime?) {
         if let timeStart = videoTimeStart, CMTIME_IS_NUMERIC(_: timeStart) {
-            eventData.videoTimeStart = Int64(CMTimeGetSeconds(timeStart) * BitmovinAnalyticsInternal.msInSec)
+            eventData.videoTimeStart = timeStart.toMillis()
         }
         if let timeEnd = videoTimeEnd, CMTIME_IS_NUMERIC(_: timeEnd) {
-            eventData.videoTimeEnd = Int64(CMTimeGetSeconds(timeEnd) * BitmovinAnalyticsInternal.msInSec)
+            eventData.videoTimeEnd = timeEnd.toMillis()
         }
     }
 }

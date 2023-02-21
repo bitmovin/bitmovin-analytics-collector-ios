@@ -10,10 +10,19 @@ public class BitmovinPlayerCollector: NSObject, Collector {
     private var sourceMetadataProvider = SourceMetadataProvider<Source>()
     private var analytics: BitmovinAnalyticsInternal
     private var config: BitmovinAnalyticsConfig
+    private let stateMachine: StateMachine
+    private let userIdProvider: UserIdProvider
 
     @objc
     public init(config: BitmovinAnalyticsConfig) {
-        self.analytics = BitmovinAnalyticsInternal.createAnalytics(config: config)
+        self.stateMachine = StateMachine(config: config)
+        self.userIdProvider = UserIdProviderFactory.create(randomizeUserId: config.randomizeUserId)
+        self.analytics = BitmovinAnalyticsInternal.createAnalytics(
+            config: config,
+            stateMachine: self.stateMachine,
+            userIdProvider: self.userIdProvider,
+            manipulators: []
+        )
         self.config = config
     }
     /**
@@ -26,7 +35,7 @@ public class BitmovinPlayerCollector: NSObject, Collector {
         let adapter = BitmovinPlayerAdapter(
             player: player,
             config: self.config,
-            stateMachine: analytics.stateMachine,
+            stateMachine: self.stateMachine,
             sourceMetadataProvider: sourceMetadataProvider,
             castEventDataDecorator: castDecorator
         )
@@ -64,6 +73,6 @@ public class BitmovinPlayerCollector: NSObject, Collector {
 
     @objc
     public func getUserId() -> String {
-        analytics.getUserId()
+        self.userIdProvider.getUserId()
     }
 }

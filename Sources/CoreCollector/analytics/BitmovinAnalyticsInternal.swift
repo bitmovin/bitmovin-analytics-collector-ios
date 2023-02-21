@@ -7,45 +7,37 @@ import UIKit
  * supports analytics on AVPlayer video players
 */
 public class BitmovinAnalyticsInternal: NSObject {
-    public static let ErrorMessageKey = "errorMessage"
-    public static let ErrorCodeKey = "errorCode"
-    public static let ErrorDataKey = "errorData"
-    public static let msInSec = 1_000.0
-
-    public private(set) var stateMachine: StateMachine
     public private(set) var adAnalytics: BitmovinAdAnalytics?
 
     internal var adapter: PlayerAdapter?
     internal var adAdapter: AdAdapter?
 
     private var config: BitmovinAnalyticsConfig
+    private let stateMachine: StateMachine
     private let eventDataDispatcher: EventDataDispatcher
     private let authenticationService: AuthenticationService
-    private let userIdProvider: UserIdProvider
     private let eventDataFactory: EventDataFactory
     private let notificationCenter: NotificationCenter
 
     private var isPlayerAttached = false
-    internal var didSendDrmLoadTime = false
+    private var didSendDrmLoadTime = false
 
-    convenience init(config: BitmovinAnalyticsConfig) {
+    convenience init(
+        config: BitmovinAnalyticsConfig,
+        stateMachine: StateMachine,
+        eventDataFactory: EventDataFactory
+    ) {
         let notificationCenter = NotificationCenter()
         let httpClient = HttpClient()
         let authenticationService = LicenseAuthenticationService(httpClient, config, notificationCenter)
         let dispatcherFactory = EventDataDispatcherFactory(httpClient, authenticationService, notificationCenter)
-        let stateMachine = StateMachine(config: config)
-        let userIdProvider: UserIdProvider = config.randomizeUserId
-            ? RandomizedUserIdProvider()
-            : UserDefaultUserIdProvider()
-        let eventDataFactory = EventDataFactory(config, userIdProvider)
         self.init(
             config,
             notificationCenter,
             dispatcherFactory.createDispatcher(),
             authenticationService,
             stateMachine,
-            eventDataFactory,
-            userIdProvider
+            eventDataFactory
         )
     }
 
@@ -55,12 +47,10 @@ public class BitmovinAnalyticsInternal: NSObject {
         _ eventDataDispatcher: EventDataDispatcher,
         _ authenticationService: AuthenticationService,
         _ stateMachine: StateMachine,
-        _ eventDataFactory: EventDataFactory,
-        _ userIdProvider: UserIdProvider
+        _ eventDataFactory: EventDataFactory
     ) {
         self.config = config
         self.stateMachine = stateMachine
-        self.userIdProvider = userIdProvider
         self.eventDataFactory = eventDataFactory
         self.notificationCenter = notificationCenter
         self.authenticationService = authenticationService
@@ -162,10 +152,6 @@ public class BitmovinAnalyticsInternal: NSObject {
         eventData.state = PlayerState.customdatachange.rawValue
         sendEventData(eventData: eventData)
         customDataConfig.setCustomData(customData: currentCustomData)
-    }
-
-    public func getUserId() -> String {
-        userIdProvider.getUserId()
     }
 
     private func sendEventData(eventData: EventData?) {
@@ -374,7 +360,20 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
 }
 
 public extension BitmovinAnalyticsInternal {
-    static func createAnalytics(config: BitmovinAnalyticsConfig) -> BitmovinAnalyticsInternal {
-        BitmovinAnalyticsInternal(config: config)
+    static func createAnalytics(
+        config: BitmovinAnalyticsConfig,
+        stateMachine: StateMachine,
+        userIdProvider: UserIdProvider,
+        manipulators: [EventDataManipulator]
+    ) -> BitmovinAnalyticsInternal {
+        let eventDataFactory = EventDataFactory(config, userIdProvider)
+        manipulators.forEach { manipulator in
+            eventDataFactory.registerEventDataManipulator(manipulator: manipulator)
+        }
+        return BitmovinAnalyticsInternal(
+            config: config,
+            stateMachine: stateMachine,
+            eventDataFactory: eventDataFactory
+        )
     }
 }

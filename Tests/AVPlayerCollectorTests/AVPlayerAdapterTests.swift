@@ -22,7 +22,7 @@ class AVPlayerAdapterTests: XCTestCase {
         }
         let stateMachine = StateMachineMock(config: config)
 
-        _ = AVPlayerAdapterFactory().createAdapter(stateMachine: stateMachine, player: player)
+        _ = AVPlayerAdapterFactory.createAdapter(stateMachine: stateMachine, player: player)
 
         let expectation = XCTestExpectation()
         let url = URL(string: "http://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
@@ -56,7 +56,7 @@ class AVPlayerAdapterTests: XCTestCase {
         let player = AVPlayer()
         let config = BitmovinAnalyticsConfig(key: "")
         let stateMachine = StateMachine(config: config)
-        let adapter = AVPlayerAdapterFactory().createAdapter(stateMachine: stateMachine, player: player)
+        let adapter = AVPlayerAdapterFactory.createAdapter(stateMachine: stateMachine, player: player)
 
         adapter.stopMonitoring()
         adapter.stopMonitoring()

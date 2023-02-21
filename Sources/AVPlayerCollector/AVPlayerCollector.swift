@@ -10,10 +10,18 @@ public class AVPlayerCollector: NSObject, Collector {
     public typealias TPlayer = AVPlayer
 
     private var analytics: BitmovinAnalyticsInternal
-    private let factory = AVPlayerAdapterFactory()
+    private let stateMachine: StateMachine
+    private let userIdProvider: UserIdProvider
 
     public init(config: BitmovinAnalyticsConfig) {
-        self.analytics = BitmovinAnalyticsInternal.createAnalytics(config: config)
+        self.stateMachine = StateMachine(config: config)
+        self.userIdProvider = UserIdProviderFactory.create(randomizeUserId: config.randomizeUserId)
+        self.analytics = BitmovinAnalyticsInternal.createAnalytics(
+            config: config,
+            stateMachine: stateMachine,
+            userIdProvider: userIdProvider,
+            manipulators: []
+        )
     }
 
     /**
@@ -26,7 +34,10 @@ public class AVPlayerCollector: NSObject, Collector {
     }
 
     private func buildAdapter(player: AVPlayer) -> AVPlayerAdapter {
-        factory.createAdapter(stateMachine: analytics.stateMachine, player: player)
+        AVPlayerAdapterFactory.createAdapter(
+            stateMachine: self.stateMachine,
+            player: player
+        )
     }
 
     public func detachPlayer() {
@@ -46,6 +57,6 @@ public class AVPlayerCollector: NSObject, Collector {
     }
 
     public func getUserId() -> String {
-        analytics.getUserId()
+        self.userIdProvider.getUserId()
     }
 }

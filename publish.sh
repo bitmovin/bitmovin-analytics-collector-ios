@@ -38,7 +38,8 @@ read RUN_BUILD_CHECKS
 
 if [ $RUN_BUILD_CHECKS = y ]
 then
-  time ./deployment/buildProjects.sh || exit 
+  chmod +x ./scripts/buildProjects.sh 
+  time ./scripts/buildProjects.sh || exit 
 fi
 
 echo "Make sure you have fastlane installed on your computer before releasing: (sudo gem install fastlane -NV)"
@@ -50,8 +51,8 @@ git checkout develop || exit
 git pull || exit
 
 echo "Generating BuildConfig.swift file..."
-chmod +x ./deployment/generateBuildConfig.sh 
-(./deployment/generateBuildConfig.sh "VERSION=$VERSION") > BitmovinAnalyticsCollector/Classes/Collector/util/BuildConfig.swift || exit
+chmod +x ./scripts/generateBuildConfig.sh 
+(./scripts/generateBuildConfig.sh "VERSION=$VERSION") > BitmovinAnalyticsCollector/Classes/Collector/util/BuildConfig.swift || exit
 git add BitmovinAnalyticsCollector/Classes/Collector/util/BuildConfig.swift || exit
 git commit -m "Generated BuildConfig.swift" || exit
 git push origin develop || exit
@@ -80,9 +81,9 @@ bundle exec fastlane release
 
 echo "Don't forget to create and merge the pull request in the cocoapod-specs repo."
 
-chmod +x ./deployment/notifyCollectorReleaseChannel.sh 
-./deployment/notifyCollectorReleaseChannel.sh "ios" $VERSION
-./deployment/notifyCollectorReleaseChannel.sh "tvos" $VERSION
+chmod +x ./scripts/notifyCollectorReleaseChannel.sh 
+./scripts/notifyCollectorReleaseChannel.sh "ios" $VERSION
+./scripts/notifyCollectorReleaseChannel.sh "tvos" $VERSION
 
 echo "Don't forget to update the changelog in Contentful."
 open "https://app.contentful.com/spaces/blfijbdi3ei3/entries"

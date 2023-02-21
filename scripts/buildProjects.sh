@@ -1,9 +1,16 @@
+SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+PROJECT_ROOT=$(dirname "$SCRIPTPATH")
+
+function switchToProjectRoot() {
+    cd $PROJECT_ROOT
+}
+
 
 preparePods() {
   echo "-----------------"
   echo "Preparing Pods---"
   echo "-----------------"
-  cd ../CollectorDemoApp
+  cd CollectorDemoApp
   pod install --repo-update --silent
   cd ..
 }
@@ -40,6 +47,8 @@ checkForSwiftPMProject() {
     open Package.swift || echo "-------------------------------Problem openign swiftpm project ---------------------------------"
   fi
 }
+
+switchToProjectRoot
 
 # Prepare for builds
 preparePods
