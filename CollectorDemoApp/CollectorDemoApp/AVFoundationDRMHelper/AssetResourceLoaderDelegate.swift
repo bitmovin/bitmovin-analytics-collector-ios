@@ -10,7 +10,6 @@
 import AVFoundation
 
 class AssetResourceLoaderDelegate: NSObject {
-
     weak var asset: Asset?
 
     init(asset: Asset) {
@@ -18,26 +17,25 @@ class AssetResourceLoaderDelegate: NSObject {
     }
 
     // MARK: Types
-    
+
     enum ProgramError: Error {
         case missingApplicationCertificate
         case noCKCReturnedByKSM
     }
-    
+
     // MARK: Properties
 
     /// A dictionary mapping content key identifiers to their associated stream name.
     var contentKeyToStreamNameMap = [String: String]()
-    
+
     /// The DispatchQueue to use for AVAssetResourceLoaderDelegate callbacks.
     fileprivate let resourceLoadingRequestQueue = DispatchQueue(label: "com.example.apple-samplecode.resourcerequests")
-    
-    // MARK: API
-    
-    func requestApplicationCertificate(completion: @escaping (Data?, Error?) -> ()) {
 
+    // MARK: API
+
+    func requestApplicationCertificate(completion: @escaping (Data?, Error?) -> Void) {
         guard let fairPlayConfig = self.asset?.fairPlayConfig else {
-            return;
+            return
         }
 
         let urlRequest = NSMutableURLRequest(url: fairPlayConfig.certificateUrl)
@@ -45,14 +43,13 @@ class AssetResourceLoaderDelegate: NSObject {
         // set request headers
         setCertificateRequestHeaders(fairPlayConfig: fairPlayConfig, certificateRequest: urlRequest)
 
-        let task = URLSession.shared.dataTask(with: urlRequest as URLRequest) {(data, response, error) in
-
+        let task = URLSession.shared.dataTask(with: urlRequest as URLRequest) {data, _, _ in
             if data == nil {
-                completion(nil, NSError(domain: "com.apple.sample", code: 1000, userInfo: nil))
+                completion(nil, NSError(domain: "com.apple.sample", code: 1_000, userInfo: nil))
                 return
             }
 
-            if (fairPlayConfig.prepareCertificate != nil) {
+            if fairPlayConfig.prepareCertificate != nil {
                 let data = fairPlayConfig.prepareCertificate!(data!)
                 completion(data, nil)
                 return
@@ -63,11 +60,10 @@ class AssetResourceLoaderDelegate: NSObject {
 
         task.resume()
     }
-    
-    func requestContentKeyFromKeySecurityModule(spcData: Data, assetIdString: String, completion: @escaping (Data?, Error?) -> ()) {
-        
+
+    func requestContentKeyFromKeySecurityModule(spcData: Data, assetIdString: String, completion: @escaping (Data?, Error?) -> Void) {
         guard let fairPlayConfig = self.asset?.fairPlayConfig else {
-            completion(nil, NSError(domain: "com.apple.sample", code: 1000, userInfo: nil))
+            completion(nil, NSError(domain: "com.apple.sample", code: 1_000, userInfo: nil))
             return
         }
 
@@ -86,9 +82,9 @@ class AssetResourceLoaderDelegate: NSObject {
         // set http headers
         setLicenseRequestHeaders(fairPlayConfig: fairPlayConfig, urlRequest: urlRequest)
 
-        let task = URLSession.shared.dataTask(with: urlRequest as URLRequest) {(data, response, error) in
+        let task = URLSession.shared.dataTask(with: urlRequest as URLRequest) {data, _, _ in
             if data == nil {
-                completion(nil, NSError(domain: "com.apple.sample", code: 1000, userInfo: nil))
+                completion(nil, NSError(domain: "com.apple.sample", code: 1_000, userInfo: nil))
                 return
             }
 
@@ -111,43 +107,41 @@ class AssetResourceLoaderDelegate: NSObject {
 
         task.resume()
     }
-    
+
     func shouldLoadOrRenewRequestedResource(resourceLoadingRequest: AVAssetResourceLoadingRequest) -> Bool {
-        
         guard let url = resourceLoadingRequest.request.url else {
             return false
         }
-        
+
         // AssetLoaderDelegate only should handle FPS Content Key requests.
         if url.scheme != "skd" {
             return false
         }
-        
+
         resourceLoadingRequestQueue.async { [weak self] in
             self?.prepareAndSendContentKeyRequest(resourceLoadingRequest: resourceLoadingRequest)
         }
-        
+
         return true
     }
 
     func prepareAndSendContentKeyRequest(resourceLoadingRequest: AVAssetResourceLoadingRequest) {
-        
         guard let contentKeyIdentifierURL = resourceLoadingRequest.request.url,
             let assetIDString = self.asset?.fairPlayConfig?.prepareContentId?(contentKeyIdentifierURL.absoluteString),
             let assetIDData = assetIDString.data(using: .utf8) else {
                 print("Failed to get url or assetIDString for the request object of the resource.")
                 return
         }
-        
+
         let provideOnlineKey: () -> Void = { () in
-            self.requestApplicationCertificate() { (data, error) in
+            self.requestApplicationCertificate { data, error in
                 do {
                     let spcData = try resourceLoadingRequest.streamingContentKeyRequestData(forApp: data!,
                                                                                              contentIdentifier: assetIDData,
                                                                                              options: nil)
 
                     // Send SPC to Key Server and obtain CKC.
-                    self.requestContentKeyFromKeySecurityModule(spcData: spcData, assetIdString: assetIDString) { (ckcData, error) in
+                    self.requestContentKeyFromKeySecurityModule(spcData: spcData, assetIdString: assetIDString) { ckcData, error in
                         guard error == nil, let ckcDat = ckcData else {
                             resourceLoadingRequest.finishLoading(with: error)
                             return
@@ -181,7 +175,6 @@ class AssetResourceLoaderDelegate: NSObject {
         */
         if  let contentTypes = resourceLoadingRequest.contentInformationRequest?.allowedContentTypes,
             !contentTypes.contains(AVStreamingKeyDeliveryPersistentContentKeyType) {
-            
             // Fallback to provide online FairPlay Streaming key from key server.
             provideOnlineKey()
 
@@ -196,27 +189,24 @@ class AssetResourceLoaderDelegate: NSObject {
 
 // MARK: - AVAssetResourceLoaderDelegate protocol methods extension
 extension AssetResourceLoaderDelegate: AVAssetResourceLoaderDelegate {
-    
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader,
                         shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
         print("\(#function) was called in AssetLoaderDelegate with loadingRequest: \(loadingRequest)")
-        
+
         return shouldLoadOrRenewRequestedResource(resourceLoadingRequest: loadingRequest)
     }
-    
+
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader,
                         shouldWaitForRenewalOfRequestedResource renewalRequest: AVAssetResourceRenewalRequest) -> Bool {
         print("\(#function) was called in AssetLoaderDelegate with renewalRequest: \(renewalRequest)")
-        
+
         return shouldLoadOrRenewRequestedResource(resourceLoadingRequest: renewalRequest)
     }
 }
 
 // MARK: - Private
 
-
 func setLicenseRequestHeaders(fairPlayConfig: FairPlayConfiguration, urlRequest: NSMutableURLRequest) {
-
     guard let headers = fairPlayConfig.licenseRequestHeaders else {
         return
     }
@@ -231,7 +221,6 @@ func setLicenseRequestHeaders(fairPlayConfig: FairPlayConfiguration, urlRequest:
 }
 
 func setCertificateRequestHeaders(fairPlayConfig: FairPlayConfiguration, certificateRequest: NSMutableURLRequest) {
-
     guard let headers = fairPlayConfig.certificateRequestHeaders else {
         return
     }

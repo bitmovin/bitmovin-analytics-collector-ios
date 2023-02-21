@@ -10,8 +10,18 @@ public class DeviceInformationDto: Codable {
     var deviceClass: DeviceClass
     var screenHeight: Int
     var screenWidth: Int
-    
-    init(manufacturer: String, model: String, isTV: Bool, operatingSystem: String, operatingSystemMajorVersion: String, operatingSystemMinorVersion: String, deviceClass: DeviceClass, screenHeight: Int, screenWidth: Int) {
+
+    init(
+        manufacturer: String,
+        model: String,
+        isTV: Bool,
+        operatingSystem: String,
+        operatingSystemMajorVersion: String,
+        operatingSystemMinorVersion: String,
+        deviceClass: DeviceClass,
+        screenHeight: Int,
+        screenWidth: Int
+    ) {
         self.manufacturer = manufacturer
         self.model = model
         self.isTV = isTV

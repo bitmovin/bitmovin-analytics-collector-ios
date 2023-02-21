@@ -5,7 +5,7 @@ import UIKit
 class PlayerView: UIView {
     var player: AVPlayer? {
         get {
-            return playerLayer.player
+            playerLayer.player
         }
 
         set {
@@ -14,10 +14,10 @@ class PlayerView: UIView {
     }
 
     var playerLayer: AVPlayerLayer {
-        return layer as! AVPlayerLayer
+        layer as! AVPlayerLayer
     }
 
     override class var layerClass: AnyClass {
-        return AVPlayerLayer.self
+        AVPlayerLayer.self
     }
 }

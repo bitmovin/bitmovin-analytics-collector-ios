@@ -1,0 +1,25 @@
+excluded:
+  - GeneratedMocks.swift # we have to keep it to avoid SwiftLint errors after using older branches
+  - GeneratedMocks-iOS.swift
+  - GeneratedMocks-tvOS.swift
+disabled_rules:
+  - force_cast
+  - force_try
+  - force_unwrapping
+  - function_body_length
+  - function_default_parameter_at_end
+  - implicitly_unwrapped_optional
+  - large_tuple
+  - extension_access_modifier
+  - cyclomatic_complexity
+  - function_parameter_count
+  - type_body_length
+  - file_length
+  - line_length
+
+opt_in_rules:
+  - empty_xctest_method
+
+# we can not override rule parameters in nested configs, that is not supported
+# > There should also be a way to override just part of a rule's configuration (rather than the whole configuration), but that requires deeper changes for a very specific use case, so it's not done in this PR.
+# https://github.com/realm/SwiftLint/pull/1674#issue-130393254

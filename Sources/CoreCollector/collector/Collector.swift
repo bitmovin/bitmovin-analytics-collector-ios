@@ -5,10 +5,10 @@ public protocol Collector {
 
     func attachPlayer(player: TPlayer)
     func detachPlayer()
-    
+
     func getCustomData() -> CustomData
     func setCustomData(customData: CustomData)
     func setCustomDataOnce(customData: CustomData)
-    
+
     func getUserId() -> String
 }

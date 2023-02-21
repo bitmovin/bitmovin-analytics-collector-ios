@@ -1,0 +1,45 @@
+#!/bin/bash
+set -e
+
+cd ${0%/*}/..
+
+# Hook name
+HOOK_IDENTIFIER="pre-commit"
+
+# Whether we should create pre-commit hook or append to the end of it
+SHOULD_APPEND=$1
+
+# Create git hooks directory in case it doesn't exist yet.
+mkdir -p .git/hooks
+
+if [ "$SHOULD_APPEND" == "append" ]; then
+echo '
+#SwiftLint Pre-Commit Hook
+
+set -euo pipefail
+# Uncomment for the detailed logging of each operation
+# set -x
+
+cd ${0%/*}/../..
+
+./scripts/run_swiftlint
+exit $?' >> .git/hooks/$HOOK_IDENTIFIER
+else
+# Copy contents of the template to the destination folder where git hooks have to be.
+echo '#!/bin/bash
+#SwiftLint Pre-Commit Hook
+
+set -euo pipefail
+# Uncomment for the detailed logging of each operation
+# set -x
+
+cd ${0%/*}/../..
+
+./scripts/run_swiftlint
+exit $?' > .git/hooks/$HOOK_IDENTIFIER
+
+# Make pre-commit hook executable
+chmod +x .git/hooks/$HOOK_IDENTIFIER
+fi
+
+echo 'Pre-commit hook has been successfully installed'

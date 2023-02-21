@@ -1,5 +1,12 @@
-source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/bitmovin/cocoapod-specs.git'
+
+def for_ios 
+  platform :ios, '12.0'
+end
+
+def for_tvos 
+  platform :tvos, '12.0'
+end
 
 def bitmovin_player
   pod 'BitmovinPlayer', '~>3.1.0'
@@ -9,6 +16,12 @@ def bitmovin_collector
   pod 'BitmovinAnalyticsCollector/Core', :path => '../BitmovinAnalyticsCollector.v2.podspec'
   pod 'BitmovinAnalyticsCollector/AVPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec'
   pod 'BitmovinAnalyticsCollector/BitmovinPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec'
+end
+
+def bitmovin_collector_tests 
+  pod 'BitmovinAnalyticsCollector/Core', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['CoreTests']
+  pod 'BitmovinAnalyticsCollector/AVPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['AVPlayerTests'] 
+  pod 'BitmovinAnalyticsCollector/BitmovinPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['BitmovinPlayerTests']
 end
 
 def google_Adsima_sdk
@@ -22,16 +35,18 @@ end
 
 target 'CollectorDemoApp' do
   use_frameworks!
-  platform :ios, '12.0'
+  for_ios
   bitmovin_player
   bitmovin_collector
+  bitmovin_collector_tests
   google_Adsima_sdk
   google_cast_sdk
 end
 
 target 'CollectorDemoAppTV' do
   use_frameworks!
-  platform :tvos, '12.0'
+  for_tvos
   bitmovin_player
   bitmovin_collector
+  bitmovin_collector_tests
 end

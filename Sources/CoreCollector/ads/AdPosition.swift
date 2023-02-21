@@ -1,7 +1,7 @@
 import Foundation
 
 public enum AdPosition: String {
-    case pre = "pre"
-    case mid = "mid"
-    case post = "post"
+    case pre
+    case mid
+    case post
 }

@@ -10,10 +10,9 @@ import Foundation
 #endif
 
 class AccessLogProviderMock: AccessLogProvider {
-    var events: [AccessLogDto]? = nil
-    
+    var events: [AccessLogDto]?
+
     func getEvents() -> [AccessLogDto]? {
-        return events
+        events
     }
 }
-

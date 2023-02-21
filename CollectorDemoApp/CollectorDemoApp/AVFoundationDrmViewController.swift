@@ -3,7 +3,6 @@ import BitmovinAnalyticsCollector
 import UIKit
 
 class AVFoundationDrmViewController: UIViewController {
-
     // TODO: Add URLs
     let drmStreamUrl = URL(string: "")
     let drmLicenseUrl = URL(string: "")
@@ -13,7 +12,7 @@ class AVFoundationDrmViewController: UIViewController {
     private var config: BitmovinAnalyticsConfig
 
     private var asset: Asset?
-    private var isSeeking: Bool = false
+    private var isSeeking = false
     private var timeObserverToken: Any?
     private static var playerViewControllerKVOContext = 0
 
@@ -27,22 +26,24 @@ class AVFoundationDrmViewController: UIViewController {
     @IBOutlet var position: UILabel!
 
     // MARK: - AssetPlaybackManager Variables
-    
+
     /// The instance of AVPlayer that will be used for playback of AssetPlaybackManager.playerItem.
-    @objc private let player: AVPlayer = AVPlayer()
-    
-    /// A Bool tracking if the AVPlayerItem.status has changed to .readyToPlay for the current AssetPlaybackManager.playerItem.
+    @objc private let player = AVPlayer()
+
+    /**
+     A Bool tracking if the AVPlayerItem.status has changed to
+     .readyToPlay for the current AssetPlaybackManager.playerItem.
+    */
     private var readyForPlayback = false
-    
+
     /// The `NSKeyValueObservation` for the KVO on \AVPlayerItem.status.
     private var playerItemObserver: NSKeyValueObservation?
-    
+
     /// The `NSKeyValueObservation` for the KVO on \AVURLAsset.isPlayable.
     private var urlAssetObserver: NSKeyValueObservation?
-    
+
     /// The `NSKeyValueObservation` for the KVO on \AVPlayer.currentItem.
     private var playerObserver: NSKeyValueObservation?
-    
 
     // MARK: Initialization
 
@@ -88,12 +89,16 @@ class AVFoundationDrmViewController: UIViewController {
 
         analyticsCollector = AVPlayerCollector(config: config)
         super.init(coder: aDecoder)
-        
     }
 
     override func viewWillAppear(_: Bool) {
         playerView.player = player
-        addObserver(self, forKeyPath: #keyPath(AVFoundationDrmViewController.player.rate), options: [.new, .initial], context: &AVFoundationDrmViewController.playerViewControllerKVOContext)
+        addObserver(
+            self,
+            forKeyPath: #keyPath(AVFoundationDrmViewController.player.rate),
+            options: [.new, .initial],
+            context: &AVFoundationDrmViewController.playerViewControllerKVOContext
+        )
         analyticsCollector.attachPlayer(player: player)
         loadDrmSource()
     }
@@ -101,7 +106,7 @@ class AVFoundationDrmViewController: UIViewController {
     func loadDrmSource() {
         let fpsConfig = FairPlayConfiguration(licenseUrl: drmLicenseUrl!, certificateUrl: drmCertificateUrl!)
         fpsConfig.prepareContentId = { (contentId: String) -> String in
-            return contentId.components(separatedBy: "/").last ?? contentId
+            contentId.components(separatedBy: "/").last ?? contentId
         }
         fpsConfig.prepareCertificate = { (certificateData: Data) -> Data in
             guard let stringData = String(data: certificateData, encoding: .utf8),
@@ -110,8 +115,8 @@ class AVFoundationDrmViewController: UIViewController {
             }
             return result
         }
-        fpsConfig.prepareMessage = { (data: Data, contentId: String) -> Data in
-            return data.base64EncodedData()
+        fpsConfig.prepareMessage = { (data: Data, _: String) -> Data in
+            data.base64EncodedData()
         }
         fpsConfig.prepareLicense = { (licenseData: Data) -> Data in
             guard let stringData = String(data: licenseData, encoding: .utf8),
@@ -122,16 +127,23 @@ class AVFoundationDrmViewController: UIViewController {
         }
 
         self.asset = Asset(urlAsset: AVURLAsset(url: drmStreamUrl!), fpsConfig: fpsConfig)
-        
+
         let playerItem = AVPlayerItem(asset: asset!.urlAsset)
         player.replaceCurrentItem(with: playerItem)
         player.play()
 
-
-        addObserver(self, forKeyPath: #keyPath(AVFoundationDrmViewController.player.currentItem.duration), options: [.new, .initial], context: &AVFoundationDrmViewController.playerViewControllerKVOContext)
+        addObserver(
+            self,
+            forKeyPath: #keyPath(AVFoundationDrmViewController.player.currentItem.duration),
+            options: [.new, .initial],
+            context: &AVFoundationDrmViewController.playerViewControllerKVOContext
+        )
 
         let interval = CMTimeMake(value: 1, timescale: 1)
-        timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { [weak self] time in
+        timeObserverToken = player.addPeriodicTimeObserver(
+            forInterval: interval,
+            queue: DispatchQueue.main
+        ) { [weak self] time in
             guard let view = self else {
                 return
             }
@@ -159,7 +171,12 @@ class AVFoundationDrmViewController: UIViewController {
         analyticsCollector.attachPlayer(player: player)
     }
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(
+        forKeyPath keyPath: String?,
+        of object: Any?,
+        change: [NSKeyValueChangeKey: Any]?,
+        context: UnsafeMutableRawPointer?
+    ) {
         guard context == &AVFoundationDrmViewController.playerViewControllerKVOContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
@@ -217,19 +234,19 @@ class AVFoundationDrmViewController: UIViewController {
     @IBAction func jumpForwardButtomPressed(_: UIButton) {
         let currentTime = player.currentTime()
         let deltaTime = CMTimeMakeWithSeconds(30, preferredTimescale: 30)
-        player.seek(to: CMTimeAdd(currentTime, deltaTime), completionHandler: { completed in
+        player.seek(to: CMTimeAdd(currentTime, deltaTime)) { completed in
             if completed {
             }
-        })
+        }
     }
 
     @IBAction func backButtonPressed(_: UIButton) {
         let currentTime = player.currentTime()
         let deltaTime = CMTimeMakeWithSeconds(30, preferredTimescale: 30)
-        player.seek(to: CMTimeSubtract(currentTime, deltaTime), completionHandler: { completed in
+        player.seek(to: CMTimeSubtract(currentTime, deltaTime)) { completed in
             if completed {
             }
-        })
+        }
     }
 
     @IBAction func rewindButtonWasPressed(_: UIButton) {
@@ -283,5 +300,4 @@ class AVFoundationDrmViewController: UIViewController {
         /// Remove any KVO observer.
         playerObserver?.invalidate()
     }
-    
 }

@@ -5,10 +5,10 @@ import UIKit
 class AVFoundationViewController: UIViewController {
     private static var playerViewControllerKVOContext = 0
     private var analyticsCollector: AVPlayerCollector
-    private var isSeeking: Bool = false
+    private var isSeeking = false
     private var timeObserverToken: Any?
     private var config: BitmovinAnalyticsConfig
-    @objc private let player: AVPlayer = AVPlayer()
+    @objc private let player = AVPlayer()
 
     @IBOutlet var playButton: UIButton!
     @IBOutlet var slider: UISlider!
@@ -23,7 +23,6 @@ class AVFoundationViewController: UIViewController {
     @IBOutlet var playerView: PlayerView!
     let url = URL(string: VideoAssets.sintel)
     let corruptedUrl = URL(string: VideoAssets.corruptRedBull)
-
 
     var duration: Double {
         guard let currentItem = player.currentItem else { return 0.0 }
@@ -90,14 +89,14 @@ class AVFoundationViewController: UIViewController {
         player.isMuted = true
         playerView.playerLayer.player = player
         setupPlayerObserver()
-        
+
         print("------- attach analytics")
         analyticsCollector.attachPlayer(player: player)
-        
+
         print("------- set item")
         let asset = AVURLAsset(url: url!, options: nil)
         player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
-        
+
         print("------- player play")
         player.play()
     }
@@ -120,7 +119,7 @@ class AVFoundationViewController: UIViewController {
         player.pause()
         let asset = AVURLAsset(url: url!, options: nil)
         player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
-        
+
         config.cdnProvider = CdnProvider.bitmovin
         config.customData1 = "customData1_2"
         config.customData2 = "customData2_2"
@@ -181,11 +180,11 @@ class AVFoundationViewController: UIViewController {
     }
 
     // MARK: - IBActions
-    
+
     @IBAction func sourceChangeButtonWasPressed(_: UIButton) {
         reloadPlayer()
     }
-    
+
     @IBAction func playPauseButtonWasPressed(_: UIButton) {
         if player.rate != 1.0 {
             player.play()
@@ -230,7 +229,7 @@ class AVFoundationViewController: UIViewController {
             self?.isSeeking = false
         }
     }
-    
+
     @IBAction func setCustomDataButtonWasPressed(_: UIButton) {
         let currentCustomData = analyticsCollector.getCustomData()
         currentCustomData.customData1 = "some test"
@@ -241,7 +240,7 @@ class AVFoundationViewController: UIViewController {
     @IBAction func doneButtonWasPressed(_: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

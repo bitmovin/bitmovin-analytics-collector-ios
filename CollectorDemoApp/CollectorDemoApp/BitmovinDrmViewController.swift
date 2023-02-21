@@ -1,12 +1,12 @@
-import BitmovinPlayer
 import BitmovinAnalyticsCollector
+import BitmovinPlayer
 import UIKit
 
 class BitmovinDrmViewController: UIViewController {
     var player: Player?
     private var analyticsCollector: BitmovinPlayerCollector
     private var config: BitmovinAnalyticsConfig
-    private let debugger: DebugBitmovinPlayerEvents = DebugBitmovinPlayerEvents()
+    private let debugger = DebugBitmovinPlayerEvents()
 
     // TODO: Add URLs
     let drmStreamUrl = URL(string: "")
@@ -75,21 +75,21 @@ class BitmovinDrmViewController: UIViewController {
         guard let config = getPlayerConfig() else {
             return
         }
-        
+
         // Create playlistConfig
         guard let playlistConfig = getPlaylistConfig() else {
             return
         }
-            
+
         // Create player based on player configuration
         let player = PlayerFactory.create(playerConfig: config)
 
         // Listen to player events
         player.add(listener: debugger)
-        
+
         // attach player to collector
         analyticsCollector.attachPlayer(player: player)
-        
+
         // Create player view and pass the player instance
         let playerBoundary = BitmovinPlayer.PlayerView(player: player, frame: .zero)
 
@@ -101,35 +101,34 @@ class BitmovinDrmViewController: UIViewController {
 
         // Load the playlist configuration into the player instance
         player.load(playlistConfig: playlistConfig)
-        
+
         self.player = player
     }
-    
+
     func getPlayerConfig() -> PlayerConfig? {
-        
         // Create player configuration
         let config = PlayerConfig()
-        
+
         config.playbackConfig.isMuted = true
         config.playbackConfig.isAutoplayEnabled = false
-        
+
         return config
     }
-    
+
     func getPlaylistConfig() -> PlaylistConfig? {
         guard let streamUrl = drmStreamUrl else {
             return nil
         }
-        
+
         let sourceConfig = SourceConfig(url: streamUrl)!
-        
+
         // Setup DRM system
         let fpsConfig = FairplayConfig(
             license: drmLicenseUrl!,
             certificateURL: drmCertificateUrl!)
-        
+
         fpsConfig.prepareContentId = { (contentId: String) -> String in
-            return contentId.components(separatedBy: "/").last ?? contentId
+            contentId.components(separatedBy: "/").last ?? contentId
         }
         fpsConfig.prepareCertificate = { (certificateData: Data) -> Data in
             guard let stringData = String(data: certificateData, encoding: .utf8),
@@ -138,8 +137,8 @@ class BitmovinDrmViewController: UIViewController {
             }
             return result
         }
-        fpsConfig.prepareMessage = { (data: Data, contentId: String) -> Data in
-            return data.base64EncodedData()
+        fpsConfig.prepareMessage = { (data: Data, _: String) -> Data in
+            data.base64EncodedData()
         }
         fpsConfig.prepareLicense = { (licenseData: Data) -> Data in
             guard let stringData = String(data: licenseData, encoding: .utf8),
@@ -148,14 +147,14 @@ class BitmovinDrmViewController: UIViewController {
             }
             return result
         }
-        
+
         // assign the FairplayConfig to the sourceConfig
         sourceConfig.drmConfig = fpsConfig
-        
+
         let source = SourceFactory.create(from: sourceConfig)
-        
+
         let playlistOptions = PlaylistOptions(preloadAllSources: false)
-               
+
         return PlaylistConfig(
             sources: [source],
            options: playlistOptions
@@ -172,11 +171,11 @@ class BitmovinDrmViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
 
-    @IBAction func doneButtonWasPressed(_ : UIButton) {
+    @IBAction func doneButtonWasPressed(_: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-    @IBAction func reloadButtonWasPressed(_ : UIButton) {
+
+    @IBAction func reloadButtonWasPressed(_: UIButton) {
         guard let player = player else {
             return
         }
@@ -184,16 +183,16 @@ class BitmovinDrmViewController: UIViewController {
         guard let playlistConfig = getPlaylistConfig() else {
             return
         }
-        
+
         // detach player from collector to have new state
         analyticsCollector.detachPlayer()
-        
+
         // unload current sources
         player.unload()
-        
+
         // attach player to collector before loading new playlist/sources
         analyticsCollector.attachPlayer(player: player)
-        
+
         // Load new playlist
         player.load(playlistConfig: playlistConfig)
     }

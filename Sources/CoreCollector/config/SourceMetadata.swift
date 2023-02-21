@@ -3,7 +3,44 @@ import Foundation
 @objc
 @objcMembers
 public class SourceMetadata: NSObject, CustomDataConfig {
-    @objc public init(videoId: String? = nil, title: String? = nil, path: String? = nil, isLive: Bool = false, cdnProvider: String? = nil, customData1: String? = nil, customData2: String? = nil, customData3: String? = nil, customData4: String? = nil, customData5: String? = nil, customData6: String? = nil, customData7: String? = nil, customData8: String? = nil, customData9: String? = nil, customData10: String? = nil, customData11: String? = nil, customData12: String? = nil, customData13: String? = nil, customData14: String? = nil, customData15: String? = nil, customData16: String? = nil, customData17: String? = nil, customData18: String? = nil, customData19: String? = nil, customData20: String? = nil, customData21: String? = nil, customData22: String? = nil, customData23: String? = nil, customData24: String? = nil, customData25: String? = nil, customData26: String? = nil, customData27: String? = nil, customData28: String? = nil, customData29: String? = nil, customData30: String? = nil, experimentName: String? = nil) {
+    public init(
+        videoId: String? = nil,
+        title: String? = nil,
+        path: String? = nil,
+        isLive: Bool = false,
+        cdnProvider: String? = nil,
+        customData1: String? = nil,
+        customData2: String? = nil,
+        customData3: String? = nil,
+        customData4: String? = nil,
+        customData5: String? = nil,
+        customData6: String? = nil,
+        customData7: String? = nil,
+        customData8: String? = nil,
+        customData9: String? = nil,
+        customData10: String? = nil,
+        customData11: String? = nil,
+        customData12: String? = nil,
+        customData13: String? = nil,
+        customData14: String? = nil,
+        customData15: String? = nil,
+        customData16: String? = nil,
+        customData17: String? = nil,
+        customData18: String? = nil,
+        customData19: String? = nil,
+        customData20: String? = nil,
+        customData21: String? = nil,
+        customData22: String? = nil,
+        customData23: String? = nil,
+        customData24: String? = nil,
+        customData25: String? = nil,
+        customData26: String? = nil,
+        customData27: String? = nil,
+        customData28: String? = nil,
+        customData29: String? = nil,
+        customData30: String? = nil,
+        experimentName: String? = nil
+    ) {
         self.videoId = videoId
         self.title = title
         self.path = path
@@ -41,187 +78,187 @@ public class SourceMetadata: NSObject, CustomDataConfig {
         self.customData30 = customData30
         self.experimentName = experimentName
     }
-    
+
     /**
      * ID of the video in the CMS system
      */
-    @objc public private(set) var videoId: String?
+    public private(set) var videoId: String?
 
     /**
      * Human readable title of the video asset currently playing
      */
-    @objc public private(set) var title: String?
-    
+    public private(set) var title: String?
+
     /**
      * Breadcrumb path to show where in the app the user is
      */
-    @objc public private(set) var path: String?
+    public private(set) var path: String?
 
     /**
      * Flag to see if stream is live before stream metadata is available
      */
-    @objc public private(set) var isLive: Bool
-    
+    public private(set) var isLive: Bool
+
     /**
      * CDN Provide that the video playback session is using
      */
-    @objc public private(set) var cdnProvider: String?
+    public private(set) var cdnProvider: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData1: String?
+    public private(set) var customData1: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData2: String?
+    public private(set) var customData2: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData3: String?
+    public private(set) var customData3: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData4: String?
+    public private(set) var customData4: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData5: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public private(set) var customData6: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public private(set) var customData7: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public private(set) var customData8: String?
+    public private(set) var customData5: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData9: String?
+    public private(set) var customData6: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData10: String?
+    public private(set) var customData7: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData11: String?
+    public private(set) var customData8: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData12: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public private(set) var customData13: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public private(set) var customData14: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public private(set) var customData15: String?
+    public private(set) var customData9: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData16: String?
+    public private(set) var customData10: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData17: String?
+    public private(set) var customData11: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData18: String?
+    public private(set) var customData12: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData19: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public private(set) var customData20: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public private(set) var customData21: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public private(set) var customData22: String?
+    public private(set) var customData13: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData23: String?
-    
+    public private(set) var customData14: String?
+
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData24: String?
-    
+    public private(set) var customData15: String?
+
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData25: String?
-    
+    public private(set) var customData16: String?
+
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData26: String?
-    
+    public private(set) var customData17: String?
+
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData27: String?
-    
+    public private(set) var customData18: String?
+
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData28: String?
-    
+    public private(set) var customData19: String?
+
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData29: String?
-    
+    public private(set) var customData20: String?
+
     /**
      * Optional free-form custom data
      */
-    @objc public private(set) var customData30: String?
-    
+    public private(set) var customData21: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public private(set) var customData22: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public private(set) var customData23: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public private(set) var customData24: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public private(set) var customData25: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public private(set) var customData26: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public private(set) var customData27: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public private(set) var customData28: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public private(set) var customData29: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public private(set) var customData30: String?
+
     /**
      * Experiment name needed for A/B testing
      */
-    @objc public private(set) var experimentName: String?
-    
+    public private(set) var experimentName: String?
+
     internal func getCustomData() -> CustomData {
         let customData = CustomData()
         customData.customData1 = self.customData1
@@ -257,7 +294,7 @@ public class SourceMetadata: NSObject, CustomDataConfig {
         customData.experimentName = self.experimentName
         return customData
     }
-    
+
     internal func setCustomData(customData: CustomData) {
         self.customData1 = customData.customData1
         self.customData2 = customData.customData2

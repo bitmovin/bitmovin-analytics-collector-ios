@@ -1,6 +1,6 @@
-import UIKit
-import BitmovinPlayer
 import BitmovinAnalyticsCollector
+import BitmovinPlayer
+import UIKit
 
 class ViewController: UIViewController {
     private var player: Player?
@@ -50,7 +50,6 @@ class ViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         self.view.backgroundColor = .black
@@ -59,12 +58,12 @@ class ViewController: UIViewController {
         guard let streamUrl = URL(string: "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8") else {
             return
         }
-        
+
         // Create player configuration
         let config = PlayerConfig()
         let playbackConfig = PlaybackConfig()
         playbackConfig.isAutoplayEnabled = true
-        
+
         config.playbackConfig = playbackConfig
         // Create player based on player configuration
         let player = PlayerFactory.create(playerConfig: config)
@@ -75,13 +74,13 @@ class ViewController: UIViewController {
         let playerBoundaries = BitmovinPlayer.PlayerView(player: player, frame: .zero)
 
         // Listen to player events
-        
+
         playerBoundaries.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         playerBoundaries.frame = view.bounds
 
         view.addSubview(playerBoundaries)
         view.bringSubviewToFront(playerBoundaries)
-        
+
         let sourceConfig = SourceConfig(url: streamUrl)
         let source = SourceFactory.create(from: sourceConfig!)
         player.load(source: source)

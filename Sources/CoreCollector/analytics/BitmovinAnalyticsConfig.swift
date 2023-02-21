@@ -2,7 +2,7 @@ import Foundation
 
 @objc
 @objcMembers
-public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig{
+public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig {
     internal func getCustomData() -> CustomData {
         let customData = CustomData()
         customData.customData1 = self.customData1
@@ -38,7 +38,7 @@ public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig{
         customData.experimentName = self.experimentName
         return customData
     }
-    
+
     internal func setCustomData(customData: CustomData) {
         self.customData1 = customData.customData1
         self.customData2 = customData.customData2
@@ -72,7 +72,7 @@ public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig{
         self.customData30 = customData.customData30
         self.experimentName = customData.experimentName
     }
-    
+
     static var analyticsUrl: String = "https://analytics-ingress-global.bitmovin.com/analytics"
     static var adAnalyticsUrl: String = "https://analytics-ingress-global.bitmovin.com/analytics/a"
     static var analyticsLicenseUrl: String = "https://analytics-ingress-global.bitmovin.com/licensing"
@@ -80,220 +80,220 @@ public class BitmovinAnalyticsConfig: NSObject, CustomDataConfig{
     /**
      * CDN Provide that the video playback session is using
      */
-    @objc public var cdnProvider: String?
+    public var cdnProvider: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public var customData1: String?
+    public var customData1: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public var customData2: String?
+    public var customData2: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public var customData3: String?
+    public var customData3: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public var customData4: String?
+    public var customData4: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public var customData5: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public var customData6: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public var customData7: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public var customData8: String?
+    public var customData5: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public var customData9: String?
+    public var customData6: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public var customData10: String?
+    public var customData7: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public var customData11: String?
+    public var customData8: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public var customData12: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public var customData13: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public var customData14: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public var customData15: String?
+    public var customData9: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public var customData16: String?
+    public var customData10: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public var customData17: String?
+    public var customData11: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public var customData18: String?
+    public var customData12: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public var customData19: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public var customData20: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public var customData21: String?
-    
-    /**
-     * Optional free-form custom data
-     */
-    @objc public var customData22: String?
+    public var customData13: String?
 
     /**
      * Optional free-form custom data
      */
-    @objc public var customData23: String?
-    
+    public var customData14: String?
+
     /**
      * Optional free-form custom data
      */
-    @objc public var customData24: String?
-    
+    public var customData15: String?
+
     /**
      * Optional free-form custom data
      */
-    @objc public var customData25: String?
-    
+    public var customData16: String?
+
     /**
      * Optional free-form custom data
      */
-    @objc public var customData26: String?
-    
+    public var customData17: String?
+
     /**
      * Optional free-form custom data
      */
-    @objc public var customData27: String?
-    
+    public var customData18: String?
+
     /**
      * Optional free-form custom data
      */
-    @objc public var customData28: String?
-    
+    public var customData19: String?
+
     /**
      * Optional free-form custom data
      */
-    @objc public var customData29: String?
-    
+    public var customData20: String?
+
     /**
      * Optional free-form custom data
      */
-    @objc public var customData30: String?
-    
+    public var customData21: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public var customData22: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public var customData23: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public var customData24: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public var customData25: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public var customData26: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public var customData27: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public var customData28: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public var customData29: String?
+
+    /**
+     * Optional free-form custom data
+     */
+    public var customData30: String?
+
     /**
      * User ID of the customer
      */
-    @objc public var customerUserId: String?
+    public var customerUserId: String?
 
     /**
      * Experiment name needed for A/B testing
      */
-    @objc public var experimentName: String?
+    public var experimentName: String?
 
     /**
      * ID of the video in the CMS system
      */
-    @objc public var videoId: String?
+    public var videoId: String?
 
     /**
      * Human readable title of the video asset currently playing
      */
-    @objc public var title: String?
+    public var title: String?
 
     /**
      * Analytics key. Find this value on dashboard.bitmovin.com/analytics
      */
-    @objc public var key: String
+    public var key: String
 
     /**
      * Player key. Find this value on dashboard.bitmovin.com/analytics
      */
-    @objc public var playerKey: String = ""
+    public var playerKey: String = ""
 
     /**
      * Breadcrumb path to show where in the app the user is
      */
-    @objc public var path: String?
+    public var path: String?
 
     /**
      * Flag to see if stream is live before stream metadata is available (default: false)
      */
-    @objc public var isLive: Bool = false
-    
+    public var isLive = false
+
     /**
      * Flag to enable Ad tracking
      */
-    @objc public var ads: Bool = false
-    
+    public var ads = false
+
     /**
      * How often the video engine should heartbeat
      */
     @available(*, deprecated, message: "No longer possible to change default value of 59700ms")
-    @objc public var heartbeatInterval: Int = 59700
-    
+    public var heartbeatInterval: Int = 59_700
+
     /**
      * Flag to use randomised userId not depending on device specific values
      */
-    @objc public var randomizeUserId: Bool = false
-    
-    @objc public init(key: String, playerKey: String) {
+    public var randomizeUserId = false
+
+    public init(key: String, playerKey: String) {
         self.key = key
         self.playerKey = playerKey
     }
 
-    @objc public init(key: String) {
+    public init(key: String) {
         self.key = key
     }
 }

@@ -1,5 +1,5 @@
-import XCTest
 import AVKit
+import XCTest
 
 #if !SWIFT_PACKAGE
 @testable import BitmovinAnalyticsCollector
@@ -11,13 +11,12 @@ import CoreMedia
 #endif
 
 class UtilTests: XCTestCase {
-    
     func test_timeIntervalToCMTime() throws {
         // Arrange
         let tests: [(name: String, timeInterval: TimeInterval, expectedTime: CMTime?)] = [
             ("TimeIntervalIsNaN", TimeInterval.nan, nil),
             ("TimeIntervalIsInfinite", TimeInterval.infinity, nil),
-            ("WithValidTimeInterval", TimeInterval(100), CMTimeMakeWithSeconds(100, preferredTimescale: 1000))
+            ("WithValidTimeInterval", TimeInterval(100), CMTimeMakeWithSeconds(100, preferredTimescale: 1_000))
         ]
 
         for test in tests {
@@ -32,7 +31,7 @@ class UtilTests: XCTestCase {
     func test_getSupportedVideoCodecs() throws {
         // Act
         let supportedVideoCodecs = Util.getSupportedVideoCodecs()
-        
+
         // Assert
         if #available(iOS 11, tvOS 11, *) {
             XCTAssertEqual(supportedVideoCodecs.count, 2)
@@ -53,7 +52,7 @@ class UtilTests: XCTestCase {
             ("https://my-domain.com/assets/manifest.m4a", StreamType.progressive),
             ("https://my-domain.com/assets/manifest.webm", StreamType.progressive),
             ("https://my-domain.com/assets/manifest.mpd", StreamType.dash),
-            ("https://my-domain.com/assets/manifest.unknown", nil),
+            ("https://my-domain.com/assets/manifest.unknown", nil)
         ]
 
         for test in tests {
@@ -70,7 +69,7 @@ class UtilTests: XCTestCase {
         let tests: [(name: String, uriString: String, expectedHost: String?, expectedPath: String?)] = [
             ("SuccessfullyExtractHostAndPathWithoutQueryParams", "https://my-domain.com/assets/manifest.m3u8", "my-domain.com", "/assets/manifest.m3u8"),
             ("SuccessfullyExtractHostAndPathWithQueryParams", "https://my-domain.com/manifest.m3u8?query=asdf", "my-domain.com", "/manifest.m3u8"),
-            ("invalidURI", "notAnURI", nil, "notAnURI"),
+            ("invalidURI", "notAnURI", nil, "notAnURI")
         ]
 
         for test in tests {
@@ -90,18 +89,22 @@ class UtilTests: XCTestCase {
             ("WithDenominatorEqualNil", Int64(10), nil, false, nil),
             ("WithDenominatorEqualZero", Int64(10), 0, false, nil),
             ("WithoutClampingTo100", Int64(10), Int64(2), false, Int(500)),
-            ("WithClampingTo100", Int64(10), Int64(2), true, Int(100)),
+            ("WithClampingTo100", Int64(10), Int64(2), true, Int(100))
         ]
-        
+
         for test in tests {
             // Act
-            let actualPct = Util.calculatePercentage(numerator: test.numerator, denominator: test.demoninator, clamp: test.clamp)
-            
+            let actualPct = Util.calculatePercentage(
+                numerator: test.numerator,
+                denominator: test.demoninator,
+                clamp: test.clamp
+            )
+
             // Assert
             XCTAssertEqual(test.expectedPct, actualPct, "\(String(describing: test.name)): expected output to be \(String(describing: test.expectedPct)), but got \(String(describing: actualPct))")
         }
     }
-    
+
     func test_calculatePercentageForTimeInterval() throws {
         // Arrange
         let tests: [(name: String, numerator: TimeInterval?, demoninator: TimeInterval?, clamp: Bool, expectedPct: Int?)] = [
@@ -109,13 +112,17 @@ class UtilTests: XCTestCase {
             ("WithDenominatorEqualNil", Double(10), nil, false, nil),
             ("WithDenominatorEqualZero", Double(10), 0, false, nil),
             ("WithoutClampingTo100", Double(10), Double(2), false, Int(500)),
-            ("WithClampingTo100", Double(10), Double(2), true, Int(100)),
+            ("WithClampingTo100", Double(10), Double(2), true, Int(100))
         ]
-        
+
         for test in tests {
             // Act
-            let actualPct = Util.calculatePercentageForTimeInterval(numerator: test.numerator, denominator: test.demoninator, clamp: test.clamp)
-            
+            let actualPct = Util.calculatePercentageForTimeInterval(
+                numerator: test.numerator,
+                denominator: test.demoninator,
+                clamp: test.clamp
+            )
+
             // Assert
             XCTAssertEqual(test.expectedPct, actualPct, "\(String(describing: test.name)): expected output to be \(String(describing: test.expectedPct)), but got \(String(describing: actualPct))")
         }

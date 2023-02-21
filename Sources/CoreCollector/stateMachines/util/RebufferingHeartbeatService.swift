@@ -2,26 +2,26 @@
 import Foundation
 
 public class RebufferingHeartbeatService {
-    private static let heartbeatIntervals: [Int64] = [3000, 5000, 10000, 59700]
-    
-    private let queue = DispatchQueue(label:"com.bitmovin.analytics.core.utils.RebufferingHeartbeatService")
+    private static let heartbeatIntervals: [Int64] = [3_000, 5_000, 10_000, 59_700]
+
+    private let queue = DispatchQueue(label: "com.bitmovin.analytics.core.utils.RebufferingHeartbeatService")
     private var heartbeatWorkerItem: DispatchWorkItem?
     private var currentIntervalIndex: Int = 0
-    
+
     private weak var stateMachine: StateMachine?
-    
-    private let timeoutHandler: RebufferingTimeoutHandler = RebufferingTimeoutHandler()
+
+    private let timeoutHandler = RebufferingTimeoutHandler()
 
     func initialise(stateMachine: StateMachine) {
         self.stateMachine = stateMachine
         self.timeoutHandler.initialise(stateMachine: stateMachine)
     }
-    
+
     func startHeartbeat() {
         scheduleHeartbeat()
         timeoutHandler.startInterval()
     }
-    
+
     private func scheduleHeartbeat() {
         self.heartbeatWorkerItem = DispatchWorkItem { [weak self] in
             guard let self = self,
@@ -43,7 +43,7 @@ public class RebufferingHeartbeatService {
         }
         timeoutHandler.resetInterval()
     }
-    
+
     private func getNextDeadline() -> DispatchTime {
         let interval = Double(RebufferingHeartbeatService.heartbeatIntervals[currentIntervalIndex]) / 1_000.0
         return DispatchTime.now() + interval

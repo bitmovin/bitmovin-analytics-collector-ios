@@ -1,5 +1,5 @@
-import XCTest
 import AVKit
+import XCTest
 
 #if !SWIFT_PACKAGE
 @testable import BitmovinAnalyticsCollector
@@ -11,21 +11,19 @@ import AVKit
 #endif
 
 class AVPlayerAdapterTests: XCTestCase {
-    
     func test() {
-        
         let player = AVPlayer()
         player.isMuted = true
         let config = BitmovinAnalyticsConfig(key: "")
-        class StateMachineMock : StateMachine {
+        class StateMachineMock: StateMachine {
             override func transitionState(destinationState: PlayerState, time: CMTime?) {
                 super.transitionState(destinationState: destinationState, time: time)
             }
         }
         let stateMachine = StateMachineMock(config: config)
-        
-        let adapter = AVPlayerAdapterFactory().createAdapter(stateMachine: stateMachine, player: player)
-        
+
+        _ = AVPlayerAdapterFactory().createAdapter(stateMachine: stateMachine, player: player)
+
         let expectation = XCTestExpectation()
         let url = URL(string: "http://bitmovin-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
         let asset = AVURLAsset(url: url!, options: nil)
@@ -35,8 +33,8 @@ class AVPlayerAdapterTests: XCTestCase {
                 player.play()
                 sleep(5) // to get the chance of some playback
             print(player.currentTime())
-            
-            player.seek(to: CMTimeMakeWithSeconds(0, preferredTimescale: 1)) { (Bool) in
+
+            player.seek(to: CMTimeMakeWithSeconds(0, preferredTimescale: 1)) { _ in
                 print("seek finished")
                 print(player.currentTime())
                 sleep(5) // to get the chance of some playback
@@ -45,7 +43,7 @@ class AVPlayerAdapterTests: XCTestCase {
             }
         }
         wait(for: [expectation], timeout: 20)
-        
+
 //        player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
 //
 //        player.play()
@@ -53,13 +51,13 @@ class AVPlayerAdapterTests: XCTestCase {
 //        player.seek(to: CMTimeMakeWithSeconds(0, preferredTimescale: 1))
 //        adapter.destroy()
     }
-    
+
     func testStopMonitoringWontFailOnMultipleCalls() throws {
         let player = AVPlayer()
         let config = BitmovinAnalyticsConfig(key: "")
         let stateMachine = StateMachine(config: config)
         let adapter = AVPlayerAdapterFactory().createAdapter(stateMachine: stateMachine, player: player)
-        
+
         adapter.stopMonitoring()
         adapter.stopMonitoring()
     }

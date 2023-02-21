@@ -4,11 +4,11 @@ public class QualityChangeCounter {
     private static var kAnalyticsQualityChangeThreshold = 50
     private static var kAnalyticsQualityChangeResetIntervalSeconds: TimeInterval = 60 * 60
     private static var kAnalyticsQualityChangeIntervalId = "com.bitmovin.analytics.core.utils.QualityChangeCounter"
-    private var queue = DispatchQueue.init(label: QualityChangeCounter.kAnalyticsQualityChangeIntervalId)
-    
+    private var queue = DispatchQueue(label: QualityChangeCounter.kAnalyticsQualityChangeIntervalId)
+
     private var qualityResetWorkItem: DispatchWorkItem?
     private var qualityChangeCounter = 0
-    
+
     func startInterval() {
         resetInterval()
         qualityResetWorkItem = DispatchWorkItem { [weak self] in
@@ -17,24 +17,24 @@ public class QualityChangeCounter {
         }
         queue.asyncAfter(deadline: .now() + QualityChangeCounter.kAnalyticsQualityChangeResetIntervalSeconds, execute: qualityResetWorkItem!)
     }
-    
+
     func resetInterval() {
-        if (qualityResetWorkItem == nil) {
+        if qualityResetWorkItem == nil {
             return
         }
-        
+
         qualityResetWorkItem?.cancel()
         qualityResetWorkItem = nil
     }
-    
+
     func increaseCounter() {
-        if (qualityChangeCounter == 0) {
+        if qualityChangeCounter == 0 {
             startInterval()
         }
         qualityChangeCounter += 1
     }
-    
-    func isQualityChangeEnabled() -> Bool {
-        return qualityChangeCounter <= QualityChangeCounter.kAnalyticsQualityChangeThreshold
+
+    var isQualityChangeEnabled: Bool {
+        qualityChangeCounter <= QualityChangeCounter.kAnalyticsQualityChangeThreshold
     }
 }

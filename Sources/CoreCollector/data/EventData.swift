@@ -11,8 +11,8 @@ public class EventData: Codable {
     public var errorData: String?
     public var screenWidth: Int?
     public var screenHeight: Int?
-    public var isLive: Bool = false
-    public var isCasting: Bool = false
+    public var isLive = false
+    public var isCasting = false
     public var castTech: String?
     public var isMuted: Bool? = false
     public var videoDuration: Int64 = 0
@@ -116,8 +116,8 @@ public class EventData: Codable {
         self.platform = "unknown"
         #endif
     }
-    
+
     public func jsonString() -> String {
-        return Util.toJson(object: self)
+        Util.toJson(object: self)
     }
 }

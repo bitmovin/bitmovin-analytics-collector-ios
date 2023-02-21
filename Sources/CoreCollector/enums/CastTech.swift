@@ -1,4 +1,4 @@
 public enum CastTech: String {
- case AirPlay
- case GoogleCast
+    case airPlay = "AirPlay"
+    case googleCast = "GoogleCast"
 }

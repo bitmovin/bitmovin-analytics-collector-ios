@@ -8,11 +8,10 @@ import XCTest
 #endif
 
 class EventDataFactoryTests: XCTestCase {
-    
     func test_createEventData_should_returnEventDataWithBasicDataSet() {
         // arrange
         let eventDataFactory = createDefaultEventDataFactoryForTest()
-        
+
         // act
         let eventData = eventDataFactory.createEventData(
             "test-state",
@@ -22,7 +21,7 @@ class EventDataFactoryTests: XCTestCase {
             nil,
             nil
         )
-        
+
         // arrange
         XCTAssertEqual(eventData.version, UIDevice.current.systemVersion)
         XCTAssertEqual(eventData.domain, Util.mainBundleIdentifier())
@@ -31,11 +30,11 @@ class EventDataFactoryTests: XCTestCase {
         XCTAssertEqual(eventData.userAgent, DeviceInformationUtils.userAgent())
         XCTAssertNotNil(eventData.deviceInformation)
     }
-    
+
     func test_createEventData_should_returnEventDataWithAnalyticsVersionSet() {
         // arrange
         let eventDataFactory = createDefaultEventDataFactoryForTest()
-        
+
         // act
         let eventData = eventDataFactory.createEventData(
             "test-state",
@@ -45,16 +44,16 @@ class EventDataFactoryTests: XCTestCase {
             nil,
             nil
         )
-        
+
         // arrange
         XCTAssertNotNil(eventData.analyticsVersion)
     }
-    
+
     func test_createEventData_should_returnEventDataWithConfigDataSet() {
         // arrange
         let config = getTestBitmovinConfig()
         let eventDataFactory = createDefaultEventDataFactoryForTest(config: config)
-        
+
         // act
         let eventData = eventDataFactory.createEventData(
             "test-state",
@@ -64,12 +63,12 @@ class EventDataFactoryTests: XCTestCase {
             nil,
             nil
         )
-        
+
         // arrange
         XCTAssertEqual(eventData.key, config.key)
         XCTAssertEqual(eventData.playerKey, config.playerKey)
-        XCTAssertNotNil(eventData.customUserId, config.customerUserId!)
-        
+        XCTAssertNotNil(eventData.customUserId)
+
         XCTAssertEqual(eventData.cdnProvider, config.cdnProvider)
         XCTAssertEqual(eventData.customData1, config.customData1)
         XCTAssertEqual(eventData.customData2, config.customData2)
@@ -102,11 +101,11 @@ class EventDataFactoryTests: XCTestCase {
         XCTAssertEqual(eventData.customData29, config.customData29)
         XCTAssertEqual(eventData.customData30, config.customData30)
         XCTAssertEqual(eventData.videoId, config.videoId)
-        XCTAssertEqual(eventData.videoTitle, config.title!)
+        XCTAssertEqual(eventData.videoTitle, config.title)
         XCTAssertEqual(eventData.experimentName, config.experimentName)
         XCTAssertEqual(eventData.path, config.path)
     }
-    
+
     func test_createEventData_should_returnEventDataWithSourceMetaDataSet() {
         // arrange
         let eventDataFactory = createDefaultEventDataFactoryForTest()
@@ -145,8 +144,9 @@ class EventDataFactoryTests: XCTestCase {
             customData28: "test-customData28-sourceMetadata",
             customData29: "test-customData29-sourceMetadata",
             customData30: "test-customData30-sourceMetadata",
-            experimentName: "test-experiment-sourceMetadata")
-        
+            experimentName: "test-experiment-sourceMetadata"
+        )
+
         // act
         let eventData = eventDataFactory.createEventData(
             "test-state",
@@ -156,7 +156,7 @@ class EventDataFactoryTests: XCTestCase {
             60,
             currentSourceMetadata
         )
-        
+
         // arrange
         XCTAssertEqual(eventData.cdnProvider, currentSourceMetadata.cdnProvider)
         XCTAssertEqual(eventData.customData1, currentSourceMetadata.customData1)
@@ -190,7 +190,7 @@ class EventDataFactoryTests: XCTestCase {
         XCTAssertEqual(eventData.customData29, currentSourceMetadata.customData29)
         XCTAssertEqual(eventData.customData30, currentSourceMetadata.customData30)
         XCTAssertEqual(eventData.videoId, currentSourceMetadata.videoId)
-        XCTAssertEqual(eventData.videoTitle, currentSourceMetadata.title!)
+        XCTAssertEqual(eventData.videoTitle, currentSourceMetadata.title)
         XCTAssertEqual(eventData.experimentName, currentSourceMetadata.experimentName)
         XCTAssertEqual(eventData.path, currentSourceMetadata.path)
     }
@@ -213,16 +213,16 @@ class EventDataFactoryTests: XCTestCase {
         XCTAssertEqual(eventData.state, "test-state")
         XCTAssertEqual(eventData.impressionId, "test-impression")
         XCTAssertEqual(eventData.videoTimeStart, 0)
-        XCTAssertEqual(eventData.videoTimeEnd, 10000)
+        XCTAssertEqual(eventData.videoTimeEnd, 10_000)
         XCTAssertEqual(eventData.drmLoadTime, 60)
     }
-    
+
     func test_createEventData_should_returnEventDataWithUserId() {
         // arrange
         let mockUserIdProvider = MockUserIdProvider()
-        mockUserIdProvider.setActionForGetUserId(action: {
-            return "user-Id"
-        })
+        mockUserIdProvider.setActionForGetUserId {
+            "user-Id"
+        }
         let eventDataFactory = createDefaultEventDataFactoryForTest(userIdProvider: mockUserIdProvider)
 
         // act
@@ -238,7 +238,7 @@ class EventDataFactoryTests: XCTestCase {
         // arrange
         XCTAssertEqual(eventData.userId, "user-Id")
     }
-    
+
     func test_createEventData_should_returnEventDataWithIncreasingSequenceNumber() {
         // arrange
         let eventDataFactory = createDefaultEventDataFactoryForTest()
@@ -265,7 +265,7 @@ class EventDataFactoryTests: XCTestCase {
         XCTAssertEqual(eventData.sequenceNumber, 0)
         XCTAssertEqual(eventData2.sequenceNumber, 1)
     }
-    
+
     func test_reset_should_resetTheSequenceNumber() {
         // arrange
         let eventDataFactory = createDefaultEventDataFactoryForTest()
@@ -288,7 +288,7 @@ class EventDataFactoryTests: XCTestCase {
             nil
         )
         eventDataFactory.reset()
-        
+
         let eventData3 = eventDataFactory.createEventData(
             "test-state",
             "test-impression",
@@ -303,27 +303,17 @@ class EventDataFactoryTests: XCTestCase {
         XCTAssertEqual(eventData2.sequenceNumber, 1)
         XCTAssertEqual(eventData3.sequenceNumber, 0)
     }
-    
-    func test_serializeEventData() throws {
-        
+
+    private func createDefaultEventDataFactoryForTest(
+        config: BitmovinAnalyticsConfig? = nil,
+        userIdProvider: UserIdProvider? = nil
+    ) -> EventDataFactory {
+        var conf = config ?? getTestBitmovinConfig()
+        var userProv = userIdProvider ?? RandomizedUserIdProvider()
+        return EventDataFactory(conf, userProv)
     }
-    
-    private func createDefaultEventDataFactoryForTest(config: BitmovinAnalyticsConfig? = nil, userIdProvider: UserIdProvider? = nil) -> EventDataFactory {
-        
-        var c = config
-        if c == nil {
-            c = getTestBitmovinConfig()
-        }
-        
-        var u = userIdProvider
-        if u == nil {
-            u = RandomizedUserIdProvider()
-        }
-        
-        return EventDataFactory(c!, u!)
-    }
-    
-    private func getTestBitmovinConfig() -> BitmovinAnalyticsConfig{
+
+    private func getTestBitmovinConfig() -> BitmovinAnalyticsConfig {
         let config = BitmovinAnalyticsConfig(key: "analytics-key", playerKey: "player-key")
         config.customerUserId = "test-customer-user-id"
         config.cdnProvider = "test-custom_cdn_provider"

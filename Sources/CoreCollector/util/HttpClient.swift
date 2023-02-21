@@ -3,7 +3,6 @@ import Foundation
 typealias HttpCompletionHandlerType = ((_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void)
 
 class HttpClient {
-
     func post(urlString: String, json: String, completionHandler: HttpCompletionHandlerType?) {
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)

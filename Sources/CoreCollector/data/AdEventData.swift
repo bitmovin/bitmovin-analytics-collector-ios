@@ -2,16 +2,16 @@ import Foundation
 
 public class AdEventData: Codable {
     //  EventData data
-    var audioCodec : String?
-    var cdnProvider : String?
+    var audioCodec: String?
+    var cdnProvider: String?
     var customData1: String?
-    var customData2 : String?
-    var customData3 : String?
-    var customData4 : String?
-    var customData5 : String?
-    var customData6 : String?
-    var customData7 : String?
-    var customUserId : String?
+    var customData2: String?
+    var customData3: String?
+    var customData4: String?
+    var customData5: String?
+    var customData6: String?
+    var customData7: String?
+    var customUserId: String?
     var customData8: String?
     var customData9: String?
     var customData10: String?
@@ -35,27 +35,27 @@ public class AdEventData: Codable {
     var customData28: String?
     var customData29: String?
     var customData30: String?
-    var domain : String?
+    var domain: String?
     var experimentName: String?
-    var key : String?
+    var key: String?
     var language: String?
-    var path : String?
-    var platform : String?
+    var path: String?
+    var platform: String?
     var player: String?
     var playerKey: String?
     var playerTech: String?
     var screenHeight: Int?
-    var screenWidth:Int?
+    var screenWidth: Int?
     var userAgent: String?
-    var userId : String?
-    var version : String?
+    var userId: String?
+    var version: String?
     var videoCodec: String?
-    var videoId : String?
+    var videoId: String?
     var videoImpressionId: String?
-    var videoTitle : String?
-    var videoWindowHeight:Int?
-    var videoWindowWidth:Int?
-    
+    var videoTitle: String?
+    var videoWindowHeight: Int?
+    var videoWindowWidth: Int?
+
     //  AdBreak data
     var adFallbackIndex: Int = 0
     var adIdPlayer: String?
@@ -69,7 +69,7 @@ public class AdEventData: Codable {
     var adTagUrl: String?
     var adTagServer: String?
     var adTagPath: String?
-    
+
     //  AdSample data
     //    var timeHovered: Double?
     //    var timeInViewport: Double?
@@ -100,7 +100,7 @@ public class AdEventData: Codable {
     var timeFromContent: Int64?
     var timePlayed: Int64?
     var timeToContent: Int64?
-    
+
     // Ad data
     var adClickThroughUrl: String?
     var adDescription: String?
@@ -117,7 +117,7 @@ public class AdEventData: Codable {
     var creativeAdId: String?
     var creativeId: String?
     var dealId: String?
-    var isLinear: Bool = false
+    var isLinear = false
     var mimeType: String?
     var mediaPath: String?
     var mediaServer: String?
@@ -129,7 +129,7 @@ public class AdEventData: Codable {
     var universalAdIdValue: String?
     var videoBitrate: Int?
     var wrapperAdsCount: Int?
-    
+
     var manifestDownloadTime: Int64?
     var analyticsVersion: String?
     var adModule: String?
@@ -138,8 +138,8 @@ public class AdEventData: Codable {
     var autoplay: Bool?
     var time: Int64?
     var adImpressionId: String?
-    
-    public func setEventData(eventData: EventData){
+
+    public func setEventData(eventData: EventData) {
         self.analyticsVersion = eventData.analyticsVersion
         self.audioCodec = eventData.audioCodec
         self.cdnProvider = eventData.cdnProvider
@@ -195,8 +195,8 @@ public class AdEventData: Codable {
         self.videoWindowWidth = eventData.videoWindowWidth
         self.videoImpressionId = eventData.impressionId
     }
-    
-    public func setAdBreak(adBreak: AnalyticsAdBreak){
+
+    public func setAdBreak(adBreak: AnalyticsAdBreak) {
         self.adFallbackIndex = adBreak.fallbackIndex
         self.adIsPersistent = adBreak.persistent
         self.adIdPlayer = adBreak.id
@@ -209,8 +209,8 @@ public class AdEventData: Codable {
         self.adTagType = adBreak.tagType?.rawValue
         self.adTagUrl = adBreak.tagUrl
     }
-    
-    public func setAdSample(adSample: AdSample){
+
+    public func setAdSample(adSample: AdSample) {
         self.adPodPosition = adSample.adPodPosition
         self.adStartupTime = adSample.adStartupTime?.milliseconds
         self.clicked = adSample.clicked
@@ -221,7 +221,7 @@ public class AdEventData: Codable {
         self.closePosition = adSample.closePosition?.milliseconds
         self.completed = adSample.completed
         self.errorCode = adSample.errorCode
-        self.errorData  = adSample.errorData
+        self.errorData = adSample.errorData
         self.errorMessage = adSample.errorMessage
         self.errorPercentage = adSample.errorPercentage
         self.errorPosition = adSample.errorPosition?.milliseconds
@@ -237,19 +237,19 @@ public class AdEventData: Codable {
         self.timeFromContent = adSample.timeFromContent?.milliseconds
         self.timePlayed = adSample.timePlayed?.milliseconds
         self.timeToContent = adSample.timeToContent?.milliseconds
-        
+
         setAd(ad: adSample.ad)
     }
-    
-    private func setAd(ad: AnalyticsAd){
+
+    private func setAd(ad: AnalyticsAd) {
         self.adClickThroughUrl = ad.clickThroughUrl
         self.adDescription = ad.description
-        self.adDuration =  ad.duration?.milliseconds
+        self.adDuration = ad.duration?.milliseconds
         self.adId = ad.id
         self.adPlaybackHeight = ad.height
         self.adPlaybackWidth = ad.width
         self.adSkippable = ad.skippable
-        self.adSkippableAfter =  ad.skippableAfter?.milliseconds
+        self.adSkippableAfter = ad.skippableAfter?.milliseconds
         self.adSystem = ad.adSystemName
         self.adTitle = ad.title
         self.advertiserName = ad.advertiserName

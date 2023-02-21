@@ -5,24 +5,31 @@ import UIKit
 class EventDataFactory {
     private final var config: BitmovinAnalyticsConfig
     private final let userIdProvider: UserIdProvider
-    
+
     private var sequenceNumber: Int32 = 0
 
     init(_ config: BitmovinAnalyticsConfig, _ userIdProvider: UserIdProvider) {
         self.config = config
         self.userIdProvider = userIdProvider
     }
-    
+
     func reset() {
         self.sequenceNumber = 0
     }
-    
-    func createEventData(_ state: String, _ impressionId: String, _ videoTimeStart: CMTime?, _ videoTimeEnd: CMTime?, _ drmLoadTime: Int64?, _ sourceMetaData: SourceMetadata?) -> EventData {
+
+    func createEventData(
+        _ state: String,
+        _ impressionId: String,
+        _ videoTimeStart: CMTime?,
+        _ videoTimeEnd: CMTime?,
+        _ drmLoadTime: Int64?,
+        _ sourceMetaData: SourceMetadata?
+    ) -> EventData {
         let eventData = EventData(impressionId)
-        
+
         eventData.sequenceNumber = self.sequenceNumber
         self.sequenceNumber += 1
-        
+
         eventData.userId = self.userIdProvider.getUserId()
         eventData.state = state
         eventData.drmLoadTime = drmLoadTime
@@ -32,7 +39,7 @@ class EventDataFactory {
         setVideoTime(eventData, videoTimeStart, videoTimeEnd)
         return eventData
     }
-    
+
     private func setBasicData(_ eventData: EventData) {
         eventData.version = UIDevice.current.systemVersion
 
@@ -40,18 +47,18 @@ class EventDataFactory {
         eventData.analyticsVersion = Util.version()
         eventData.language = DeviceInformationUtils.language()
         eventData.userAgent = DeviceInformationUtils.userAgent()
-        
+
         let deviceInformation = DeviceInformationUtils.getDeviceInformation()
         eventData.deviceInformation = deviceInformation
         eventData.screenWidth = deviceInformation.screenWidth
         eventData.screenHeight = deviceInformation.screenHeight
     }
-    
-    private func setConfigData(_ eventData: EventData, _ sourceMetadata: SourceMetadata?){
+
+    private func setConfigData(_ eventData: EventData, _ sourceMetadata: SourceMetadata?) {
         eventData.key = config.key
         eventData.playerKey = config.playerKey
         eventData.customUserId = config.customerUserId
-        
+
         if let metadata = sourceMetadata {
             eventData.cdnProvider = metadata.cdnProvider
             eventData.customData1 = metadata.customData1
@@ -89,8 +96,7 @@ class EventDataFactory {
             eventData.experimentName = metadata.experimentName
             eventData.path = metadata.path
             eventData.isLive = metadata.isLive
-        }
-        else {
+        } else {
             eventData.cdnProvider = config.cdnProvider
             eventData.customData1 = config.customData1
             eventData.customData2 = config.customData2
@@ -129,7 +135,7 @@ class EventDataFactory {
             eventData.isLive = config.isLive
         }
     }
-    
+
     private func setVideoTime(_ eventData: EventData, _ videoTimeStart: CMTime?, _ videoTimeEnd: CMTime?) {
         if let timeStart = videoTimeStart, CMTIME_IS_NUMERIC(_: timeStart) {
             eventData.videoTimeStart = Int64(CMTimeGetSeconds(timeStart) * BitmovinAnalyticsInternal.msInSec)

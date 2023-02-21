@@ -1,7 +1,7 @@
 import Foundation
 
 public class AnalyticsAd {
-    public var isLinear: Bool = false
+    public var isLinear = false
     public var width: Int = 0
     public var height: Int = 0
     public var id: String?
@@ -34,6 +34,6 @@ public class AnalyticsAd {
     public var skippable: Bool?
     public var duration: TimeInterval?
     public var dealId: String?
-    
-    public init(){}
+
+    public init() {}
 }

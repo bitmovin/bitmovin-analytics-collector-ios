@@ -1,7 +1,6 @@
 import Foundation
 
 public class DownloadSpeedInfoDto: Codable {
-    
     public init() {}
 
     // Number of completed segment downloads
