@@ -72,7 +72,7 @@ public class BitmovinAnalyticsInternal: NSObject {
             if duration < 90_000 {
                 self.stateMachine.videoTimeEnd = self.adapter?.currentTime
                 if self.stateMachine.state == .playing {
-                    stateMachine(self.stateMachine, didExitPlayingWithDuration: duration)
+                    onPlayingExit(withDuration: duration)
                 }
             }
         }
@@ -103,7 +103,7 @@ public class BitmovinAnalyticsInternal: NSObject {
             detachPlayer()
         }
         isPlayerAttached = true
-        stateMachine.delegate = self
+        stateMachine.listener = self
         self.authenticationService.authenticate()
         self.adapter = adapter
         self.adapter?.initialize()
@@ -238,77 +238,33 @@ public class BitmovinAnalyticsInternal: NSObject {
     }
 }
 
-extension BitmovinAnalyticsInternal: StateMachineDelegate {
-    func stateMachine(_ stateMachine: StateMachine, didAdWithDuration duration: Int64) {
+extension BitmovinAnalyticsInternal: StateMachineListener {
+    func onStartup(withDuration duration: Int64) {
         let eventData = createEventData(duration: duration)
-        eventData.ad = 1
+        eventData.videoStartupTime = duration
+        // Hard coding 1 as the player startup time to workaround a Dashboard issue
+        eventData.playerStartupTime = 1
+        eventData.startupTime = duration + 1
+        eventData.supportedVideoCodecs = Util.getSupportedVideoCodecs()
+        eventData.state = "startup"
         sendEventData(eventData: eventData)
     }
 
-    func stateMachineDidExitSetup(_ stateMachine: StateMachine) {
-    }
-
-    func stateMachineEnterPlayAttemptFailed(stateMachine: StateMachine) {
-        let eventData = createEventData(duration: 0)
-        if let errorData = stateMachine.getErrorData() {
-            eventData.errorCode = errorData.code
-            eventData.errorMessage = errorData.message
-            eventData.errorData = errorData.data
-            // error data is only send in the payload once and then cleared from state machine
-            stateMachine.setErrorData(error: nil)
-        }
-        sendEventData(eventData: eventData)
-    }
-
-    func stateMachine(_ stateMachine: StateMachine, didExitBufferingWithDuration duration: Int64) {
-        let eventData = createEventData(duration: duration)
-        eventData.buffered = duration
-        sendEventData(eventData: eventData)
-    }
-
-    func stateMachineDidEnterError(_ stateMachine: StateMachine) {
-        let eventData = createEventData(duration: 0)
-
-        if let errorData = stateMachine.getErrorData() {
-            eventData.errorCode = errorData.code
-            eventData.errorMessage = errorData.message
-            eventData.errorData = errorData.data
-            // error data is only send in the payload once and then cleared from state machine
-            stateMachine.setErrorData(error: nil)
-        }
-        sendEventData(eventData: eventData)
-    }
-
-    func stateMachine(_ stateMachine: StateMachine, didExitPlayingWithDuration duration: Int64) {
-        let eventData = createEventData(duration: duration)
-        eventData.played = duration
-        sendEventData(eventData: eventData)
-    }
-
-    func stateMachine(_ stateMachine: StateMachine, didExitPauseWithDuration duration: Int64) {
+    func onPauseExit(withDuration duration: Int64) {
         let eventData = createEventData(duration: duration)
         eventData.paused = duration
         sendEventData(eventData: eventData)
     }
 
-    func stateMachineDidQualityChange(_ stateMachine: StateMachine) {
-        let eventData = createEventData(duration: 0)
+    func onPlayingExit(withDuration duration: Int64) {
+        let eventData = createEventData(duration: duration)
+        eventData.played = duration
         sendEventData(eventData: eventData)
     }
 
-    func stateMachine(
-        _ stateMachine: StateMachine,
-        didExitSeekingWithDuration duration: Int64,
-        destinationPlayerState: PlayerState
-    ) {
+    func onHeartbeat(withDuration duration: Int64, state: PlayerState) {
         let eventData = createEventData(duration: duration)
-        eventData.seeked = duration
-        sendEventData(eventData: eventData)
-    }
-
-    func stateMachine(_ stateMachine: StateMachine, didHeartbeatWithDuration duration: Int64) {
-        let eventData = createEventData(duration: duration)
-        switch stateMachine.state {
+        switch state {
         case .playing:
             eventData.played = duration
 
@@ -324,23 +280,60 @@ extension BitmovinAnalyticsInternal: StateMachineDelegate {
         sendEventData(eventData: eventData)
     }
 
-    func stateMachine(_ stateMachine: StateMachine, didStartupWithDuration duration: Int64) {
+    func onRebuffering(withDuration duration: Int64) {
         let eventData = createEventData(duration: duration)
-        eventData.videoStartupTime = duration
-        // Hard coding 1 as the player startup time to workaround a Dashboard issue
-        eventData.playerStartupTime = 1
-        eventData.startupTime = duration + 1
-        eventData.supportedVideoCodecs = Util.getSupportedVideoCodecs()
-        eventData.state = "startup"
+        eventData.buffered = duration
         sendEventData(eventData: eventData)
     }
 
-    func stateMachineDidSubtitleChange(_ stateMachine: StateMachine) {
+    func onError(_ stateMachine: StateMachine) {
+        let eventData = createEventData(duration: 0)
+
+        if let errorData = stateMachine.getErrorData() {
+            eventData.errorCode = errorData.code
+            eventData.errorMessage = errorData.message
+            eventData.errorData = errorData.data
+            // error data is only send in the payload once and then cleared from state machine
+            stateMachine.setErrorData(error: nil)
+        }
+        sendEventData(eventData: eventData)
+    }
+
+    func onSeekComplete(withDuration duration: Int64) {
+        let eventData = createEventData(duration: duration)
+        eventData.seeked = duration
+        sendEventData(eventData: eventData)
+    }
+
+    func onAdFinished(withDuration duration: Int64) {
+        let eventData = createEventData(duration: duration)
+        eventData.ad = 1
+        sendEventData(eventData: eventData)
+    }
+
+    func onVideoQualityChanged() {
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
     }
 
-    func stateMachineDidAudioChange(_ stateMachine: StateMachine) {
+    func onVideoStartFailed(_ stateMachine: StateMachine) {
+        let eventData = createEventData(duration: 0)
+        if let errorData = stateMachine.getErrorData() {
+            eventData.errorCode = errorData.code
+            eventData.errorMessage = errorData.message
+            eventData.errorData = errorData.data
+            // error data is only send in the payload once and then cleared from state machine
+            stateMachine.setErrorData(error: nil)
+        }
+        sendEventData(eventData: eventData)
+    }
+
+    func onSubtitleChanged() {
+        let eventData = createEventData(duration: 0)
+        sendEventData(eventData: eventData)
+    }
+
+    func onAudioQualityChanged() {
         let eventData = createEventData(duration: 0)
         sendEventData(eventData: eventData)
     }

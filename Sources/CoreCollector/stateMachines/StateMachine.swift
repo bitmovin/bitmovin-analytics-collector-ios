@@ -5,7 +5,7 @@ public class StateMachine {
     public private(set) var state: PlayerState
     private var config: BitmovinAnalyticsConfig
     private(set) var impressionId: String
-    weak var delegate: StateMachineDelegate?
+    weak var listener: StateMachineListener?
 
     // tracked player times
     private(set) var stateEnterTimestamp: Int64 = 0
@@ -57,7 +57,7 @@ public class StateMachine {
         rebufferingHeartbeatService.disableHeartbeat()
         videoStartFailureService.reset()
         qualityChangeCounter.resetInterval()
-        delegate?.stateMachineResetSourceState()
+        listener?.stateMachineResetSourceState()
         print("Generated Bitmovin Analytics impression ID: " + impressionId.lowercased())
     }
 
@@ -171,7 +171,7 @@ public class StateMachine {
         videoStartFailureService.setVideoStartFailed(withReason: reason)
         self.errorData = error
         transitionState(destinationState: .playAttemptFailed, time: nil)
-        self.delegate?.stateMachineStopsCollecting()
+        self.listener?.stateMachineStopsCollecting()
     }
 
     private func checkUnallowedTransitions(destinationState: PlayerState) -> Bool {
@@ -220,9 +220,10 @@ public class StateMachine {
 
     @objc
     func onHeartbeat() {
-        videoTimeEnd = delegate?.currentTime
+        videoTimeEnd = listener?.currentTime
         let timestamp = Date().timeIntervalSince1970Millis
-        delegate?.stateMachine(self, didHeartbeatWithDuration: timestamp - stateEnterTimestamp)
+        let duration = timestamp - stateEnterTimestamp
+        listener?.onHeartbeat(withDuration: duration, state: state)
         videoTimeStart = videoTimeEnd
         stateEnterTimestamp = timestamp
     }

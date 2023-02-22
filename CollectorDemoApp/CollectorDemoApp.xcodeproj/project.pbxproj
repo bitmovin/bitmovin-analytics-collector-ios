@@ -404,7 +404,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../scripts/run_swiftlint\" -xcode -path \"${SOURCE_ROOT}/${PRODUCT_NAME}\"\nexit 0\n";
+			shellScript = "\"${SRCROOT}/../scripts/run_swiftlint\" -xcode -path \"${SOURCE_ROOT}/..\"\nexit 0\n";
 		};
 		9D2CDED8299F9863004B6176 /* [CUSTOM] Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -422,7 +422,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# cd into repo root to pick up swiftlint.yml \ncd ${PROJECT_DIR}/..\n\n# try to fix issues\n./CollectorDemoApp/Pods/SwiftLint/swiftlint --fix\n./CollectorDemoApp/Pods/SwiftLint/swiftlint --fix ./Sources\n./CollectorDemoApp/Pods/SwiftLint/swiftlint --fix --config Tests/.swiftlint.yml ./Tests\n\n# report the rest\n./CollectorDemoApp/Pods/SwiftLint/swiftlint\n./CollectorDemoApp/Pods/SwiftLint/swiftlint ./Sources\n./CollectorDemoApp/Pods/SwiftLint/swiftlint --config Tests/.swiftlint.yml ./Tests\n";
+			shellScript = "\"${SRCROOT}/../scripts/run_swiftlint\" -xcode -path \"${SOURCE_ROOT}/..\"\nexit 0\n";
 		};
 		A71523FAF942ECFC0BD93623 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

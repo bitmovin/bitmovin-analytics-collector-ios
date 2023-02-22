@@ -23,8 +23,8 @@ public class RebufferingTimeoutHandler {
     }
 
     private func rebufferTimeoutReached() {
-        stateMachine?.error(withError: ErrorData.BUFFERING_TIMEOUT_REACHED, time: stateMachine?.delegate?.currentTime)
-        stateMachine?.delegate?.stateMachineStopsCollecting()
+        stateMachine?.error(withError: ErrorData.BUFFERING_TIMEOUT_REACHED, time: stateMachine?.listener?.currentTime)
+        stateMachine?.listener?.stateMachineStopsCollecting()
     }
 
     func resetInterval() {

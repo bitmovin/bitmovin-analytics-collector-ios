@@ -35,7 +35,7 @@ public enum PlayerState: String {
         case .playAttemptFailed:
             return
         case .error:
-            stateMachine.delegate?.stateMachineDidEnterError(stateMachine)
+            stateMachine.listener?.onError(stateMachine)
             return
         case .paused:
             return
@@ -61,13 +61,13 @@ public enum PlayerState: String {
     func onExit(stateMachine: StateMachine, duration: Int64, destinationState: PlayerState) {
         if destinationState == .playAttemptFailed {
             stateMachine.rebufferingHeartbeatService.disableHeartbeat()
-            stateMachine.delegate?.stateMachineEnterPlayAttemptFailed(stateMachine: stateMachine)
+            stateMachine.listener?.onVideoStartFailed(stateMachine)
             return
         }
 
         switch self {
         case .ad:
-            stateMachine.delegate?.stateMachine(stateMachine, didAdWithDuration: duration)
+            stateMachine.listener?.onAdFinished(withDuration: duration)
             return
         case .adFinished:
             return
@@ -78,44 +78,40 @@ public enum PlayerState: String {
             stateMachine.startupTime += duration
             if destinationState == .playing {
                 stateMachine.setDidStartPlayingVideo()
-                stateMachine.delegate?.stateMachine(stateMachine, didStartupWithDuration: stateMachine.startupTime)
+                stateMachine.listener?.onStartup(withDuration: stateMachine.startupTime)
             }
         case .buffering:
             stateMachine.rebufferingHeartbeatService.disableHeartbeat()
-            stateMachine.delegate?.stateMachine(stateMachine, didExitBufferingWithDuration: duration)
+            stateMachine.listener?.onRebuffering(withDuration: duration)
             return
         case .playAttemptFailed:
             return
         case .error:
             return
         case .playing:
-            stateMachine.delegate?.stateMachine(stateMachine, didExitPlayingWithDuration: duration)
+            stateMachine.listener?.onPlayingExit(withDuration: duration)
             stateMachine.disableHeartbeat()
             return
         case .paused:
-            stateMachine.delegate?.stateMachine(stateMachine, didExitPauseWithDuration: duration)
+            stateMachine.listener?.onPauseExit(withDuration: duration)
             return
         case .qualitychange:
             if stateMachine.qualityChangeCounter.isQualityChangeEnabled {
-                   stateMachine.delegate?.stateMachineDidQualityChange(stateMachine)
+                   stateMachine.listener?.onVideoQualityChanged()
             } else {
                 stateMachine.setErrorData(error: ErrorData.QUALITY_CHANGE_THRESHOLD_EXCEEDED)
-                stateMachine.delegate?.stateMachineDidEnterError(stateMachine)
+                stateMachine.listener?.onError(stateMachine)
             }
             return
         case .seeking:
-            stateMachine.delegate?.stateMachine(
-                stateMachine,
-                didExitSeekingWithDuration: duration,
-                destinationPlayerState: destinationState
-            )
+            stateMachine.listener?.onSeekComplete(withDuration: duration)
             return
         case .subtitlechange:
-            stateMachine.delegate?.stateMachineDidSubtitleChange(stateMachine)
+            stateMachine.listener?.onSubtitleChanged()
             return
         // TODO can be removed
         case .audiochange:
-            stateMachine.delegate?.stateMachineDidAudioChange(stateMachine)
+            stateMachine.listener?.onAudioQualityChanged()
             return
         case .sourceChanged:
             return

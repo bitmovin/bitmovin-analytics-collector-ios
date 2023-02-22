@@ -7,17 +7,14 @@ import CoreMedia
 @testable import CoreCollector
 #endif
 
-class MockStateMachineDelegate: StateMachineDelegate {
-    func stateMachineDidExitSetup(_ stateMachine: StateMachine) {
+class MockStateMachineDelegate: StateMachineListener {
+    func onVideoStartFailed(_ stateMachine: StateMachine) {
     }
 
-    func stateMachineEnterPlayAttemptFailed(stateMachine: StateMachine) {
+    func onRebuffering(withDuration duration: Int64) {
     }
 
-    func stateMachine(_ stateMachine: StateMachine, didExitBufferingWithDuration duration: Int64) {
-    }
-
-    func stateMachineDidEnterError(_ stateMachine: StateMachine) {
+    func onError(_ stateMachine: StateMachine) {
     }
 
     private var exitPlayingAction: (() -> Void)?
@@ -25,32 +22,32 @@ class MockStateMachineDelegate: StateMachineDelegate {
             exitPlayingAction = action
     }
 
-    func stateMachine(_ stateMachine: StateMachine, didExitPlayingWithDuration duration: Int64) {
+    func onPlayingExit(withDuration duration: Int64) {
         exitPlayingAction?()
     }
 
-    func stateMachine(_ stateMachine: StateMachine, didExitPauseWithDuration duration: Int64) {
+    func onPauseExit(withDuration duration: Int64) {
     }
 
-    func stateMachineDidQualityChange(_ stateMachine: StateMachine) {
+    func onVideoQualityChanged() {
     }
 
-    func stateMachine(_ stateMachine: StateMachine, didExitSeekingWithDuration duration: Int64, destinationPlayerState: PlayerState) {
+    func onSeekComplete(withDuration duration: Int64) {
     }
 
-    func stateMachine(_ stateMachine: StateMachine, didHeartbeatWithDuration duration: Int64) {
+    func onHeartbeat(withDuration duration: Int64, state: PlayerState) {
     }
 
-    func stateMachine(_ stateMachine: StateMachine, didStartupWithDuration duration: Int64) {
+    func onStartup(withDuration duration: Int64) {
     }
 
-    func stateMachineDidSubtitleChange(_ stateMachine: StateMachine) {
+    func onSubtitleChanged() {
     }
 
-    func stateMachineDidAudioChange(_ stateMachine: StateMachine) {
+    func onAudioQualityChanged() {
     }
 
-    func stateMachine(_ stateMachine: StateMachine, didAdWithDuration duration: Int64) {
+    func onAdFinished(withDuration duration: Int64) {
     }
 
     func stateMachineResetSourceState() {
