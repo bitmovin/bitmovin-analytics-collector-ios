@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C9F52909250A2416284A39F /* Pods_CollectorDemoAppTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACF2489EF66A6971D7BC4DF /* Pods_CollectorDemoAppTV.framework */; };
 		9D8F6018299A61E200090B46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F6011299A61E200090B46 /* Assets.xcassets */; };
 		9D8F6019299A61E200090B46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F6012299A61E200090B46 /* AppDelegate.swift */; };
 		9D8F601A299A61E200090B46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F6013299A61E200090B46 /* ViewController.swift */; };
@@ -26,20 +27,20 @@
 		9D8F6040299A65FC00090B46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F602F299A65FC00090B46 /* Main.storyboard */; };
 		9DA89915299CB13E004BE1CD /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA89914299CB13E004BE1CD /* AppConfig.swift */; };
 		9DA89916299CB13E004BE1CD /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA89914299CB13E004BE1CD /* AppConfig.swift */; };
+		9DCA88EB29A647F400D1EC9C /* AmazonIvsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCA88EA29A647F400D1EC9C /* AmazonIvsViewController.swift */; };
 		9DD665BF299B522C00608720 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F6016299A61E200090B46 /* Main.storyboard */; };
 		9DD665C8299B751D00608720 /* DebugBitmovinPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD665C4299B751D00608720 /* DebugBitmovinPlayerListener.swift */; };
 		9DD665C9299B751D00608720 /* AdAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD665C5299B751D00608720 /* AdAssets.swift */; };
 		9DD665CA299B751D00608720 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD665C6299B751D00608720 /* PlayerView.swift */; };
 		9DD665CB299B751D00608720 /* VideoAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD665C7299B751D00608720 /* VideoAssets.swift */; };
+		9DE5887029A7542B00C68DCA /* IVSPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5886F29A7542B00C68DCA /* IVSPlayerController.swift */; };
 		C2B45EC798D382C918568864 /* Pods_CollectorDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C83C68FFAD5DC3BC948FFC7E /* Pods_CollectorDemoApp.framework */; };
-		CD72C52930E415A4657A73B7 /* Pods_CollectorDemoAppTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC048F0D0B0DEC0E6A704D86 /* Pods_CollectorDemoAppTV.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		350AFDFC8995065CB7A19C95 /* Pods-CollectorDemoAppTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTV.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV.debug.xcconfig"; sourceTree = "<group>"; };
 		3C777BE8E1D5FB8B3F89C767 /* Pods-CollectorDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoApp.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		64C07D9C2569E490F98602D8 /* Pods-CollectorDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoApp.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp.release.xcconfig"; sourceTree = "<group>"; };
-		9BABEF01C7F00DF907B978D1 /* Pods-CollectorDemoAppTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTV.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV.release.xcconfig"; sourceTree = "<group>"; };
+		73976C7C38B766C8A915F9D8 /* Pods-CollectorDemoAppTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTV.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV.release.xcconfig"; sourceTree = "<group>"; };
 		9D8F5F96299A1DE700090B46 /* CollectorDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D8F5FCE299A1F8300090B46 /* CollectorDemoAppTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoAppTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D8F6010299A61E200090B46 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -64,12 +65,15 @@
 		9D8F602E299A65FC00090B46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9D8F6030299A65FC00090B46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		9DA89914299CB13E004BE1CD /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		9DCA88EA29A647F400D1EC9C /* AmazonIvsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmazonIvsViewController.swift; sourceTree = "<group>"; };
 		9DD665C4299B751D00608720 /* DebugBitmovinPlayerListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugBitmovinPlayerListener.swift; sourceTree = "<group>"; };
 		9DD665C5299B751D00608720 /* AdAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdAssets.swift; sourceTree = "<group>"; };
 		9DD665C6299B751D00608720 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		9DD665C7299B751D00608720 /* VideoAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoAssets.swift; sourceTree = "<group>"; };
+		9DE5886F29A7542B00C68DCA /* IVSPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IVSPlayerController.swift; sourceTree = "<group>"; };
 		C83C68FFAD5DC3BC948FFC7E /* Pods_CollectorDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC048F0D0B0DEC0E6A704D86 /* Pods_CollectorDemoAppTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoAppTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2F76AFBBE83BCF6740A68BB /* Pods-CollectorDemoAppTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTV.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV.debug.xcconfig"; sourceTree = "<group>"; };
+		FACF2489EF66A6971D7BC4DF /* Pods_CollectorDemoAppTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoAppTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD72C52930E415A4657A73B7 /* Pods_CollectorDemoAppTV.framework in Frameworks */,
+				2C9F52909250A2416284A39F /* Pods_CollectorDemoAppTV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				C83C68FFAD5DC3BC948FFC7E /* Pods_CollectorDemoApp.framework */,
-				FC048F0D0B0DEC0E6A704D86 /* Pods_CollectorDemoAppTV.framework */,
+				FACF2489EF66A6971D7BC4DF /* Pods_CollectorDemoAppTV.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -125,6 +129,7 @@
 		9D8F5F98299A1DE700090B46 /* CollectorDemoApp */ = {
 			isa = PBXGroup;
 			children = (
+				9DE5886E29A753FB00C68DCA /* IVSHelper */,
 				9D8F6021299A65FB00090B46 /* AVFoundationDRMHelper */,
 				9DD665C3299B751D00608720 /* Helper */,
 				9D8F602C299A65FC00090B46 /* Base.lproj */,
@@ -134,6 +139,7 @@
 				9D8F6020299A65FB00090B46 /* AVFoundationViewController.swift */,
 				9D8F6027299A65FC00090B46 /* BitmovinDrmViewController.swift */,
 				9D8F602B299A65FC00090B46 /* BitmovinViewController.swift */,
+				9DCA88EA29A647F400D1EC9C /* AmazonIvsViewController.swift */,
 				9D8F601C299A65FB00090B46 /* Assets.xcassets */,
 				9D8F6028299A65FC00090B46 /* Images.xcassets */,
 				9D8F602A299A65FC00090B46 /* Info.plist */,
@@ -193,13 +199,21 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		9DE5886E29A753FB00C68DCA /* IVSHelper */ = {
+			isa = PBXGroup;
+			children = (
+				9DE5886F29A7542B00C68DCA /* IVSPlayerController.swift */,
+			);
+			path = IVSHelper;
+			sourceTree = "<group>";
+		};
 		DFEAE2400C8B4C976388A5EF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				3C777BE8E1D5FB8B3F89C767 /* Pods-CollectorDemoApp.debug.xcconfig */,
 				64C07D9C2569E490F98602D8 /* Pods-CollectorDemoApp.release.xcconfig */,
-				350AFDFC8995065CB7A19C95 /* Pods-CollectorDemoAppTV.debug.xcconfig */,
-				9BABEF01C7F00DF907B978D1 /* Pods-CollectorDemoAppTV.release.xcconfig */,
+				F2F76AFBBE83BCF6740A68BB /* Pods-CollectorDemoAppTV.debug.xcconfig */,
+				73976C7C38B766C8A915F9D8 /* Pods-CollectorDemoAppTV.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -216,8 +230,8 @@
 				9D8F5F93299A1DE700090B46 /* Frameworks */,
 				9D8F5F94299A1DE700090B46 /* Resources */,
 				9D2CDEB3299F84FA004B6176 /* [CUSTOM] Run SwiftLint */,
-				A71523FAF942ECFC0BD93623 /* [CP] Embed Pods Frameworks */,
-				6C134AC0D108942199CE9991 /* [CP] Copy Pods Resources */,
+				FF700B0D214847F9FE5D7DDC /* [CP] Embed Pods Frameworks */,
+				C3F453CB4C3AE6F603670379 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -232,12 +246,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9D8F5FCB299A1F8300090B46 /* Build configuration list for PBXNativeTarget "CollectorDemoAppTV" */;
 			buildPhases = (
-				15DC26274D555ECA6E05AB34 /* [CP] Check Pods Manifest.lock */,
+				F9634EFB02652F95399DBF52 /* [CP] Check Pods Manifest.lock */,
 				9D8F5FC4299A1F8300090B46 /* Sources */,
 				9D8F5FC7299A1F8300090B46 /* Frameworks */,
 				9D8F5FC8299A1F8300090B46 /* Resources */,
 				9D2CDED8299F9863004B6176 /* [CUSTOM] Run SwiftLint */,
-				564CB0A5FFC3D31A21A6F65C /* [CP] Embed Pods Frameworks */,
+				B7D6D8F7E822684618BA1B63 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -332,62 +346,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		15DC26274D555ECA6E05AB34 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CollectorDemoAppTV-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		564CB0A5FFC3D31A21A6F65C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6C134AC0D108942199CE9991 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		9D2CDEB3299F84FA004B6176 /* [CUSTOM] Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -424,7 +382,63 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/../scripts/run_swiftlint\" -xcode -path \"${SOURCE_ROOT}/..\"\nexit 0\n";
 		};
-		A71523FAF942ECFC0BD93623 /* [CP] Embed Pods Frameworks */ = {
+		B7D6D8F7E822684618BA1B63 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C3F453CB4C3AE6F603670379 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F9634EFB02652F95399DBF52 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CollectorDemoAppTV-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF700B0D214847F9FE5D7DDC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -452,6 +466,7 @@
 				9DA89915299CB13E004BE1CD /* AppConfig.swift in Sources */,
 				9DD665C9299B751D00608720 /* AdAssets.swift in Sources */,
 				9D8F6038299A65FC00090B46 /* Asset.swift in Sources */,
+				9DE5887029A7542B00C68DCA /* IVSPlayerController.swift in Sources */,
 				9D8F6033299A65FC00090B46 /* WelcomeViewController.swift in Sources */,
 				9D8F603C299A65FC00090B46 /* AppDelegate.swift in Sources */,
 				9D8F603E299A65FC00090B46 /* BitmovinViewController.swift in Sources */,
@@ -463,6 +478,7 @@
 				9D8F6034299A65FC00090B46 /* AVFoundationViewController.swift in Sources */,
 				9DD665C8299B751D00608720 /* DebugBitmovinPlayerListener.swift in Sources */,
 				9D8F6036299A65FC00090B46 /* Stream.swift in Sources */,
+				9DCA88EB29A647F400D1EC9C /* AmazonIvsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -693,7 +709,7 @@
 		};
 		9D8F5FCC299A1F8300090B46 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 350AFDFC8995065CB7A19C95 /* Pods-CollectorDemoAppTV.debug.xcconfig */;
+			baseConfigurationReference = F2F76AFBBE83BCF6740A68BB /* Pods-CollectorDemoAppTV.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -731,7 +747,7 @@
 		};
 		9D8F5FCD299A1F8300090B46 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9BABEF01C7F00DF907B978D1 /* Pods-CollectorDemoAppTV.release.xcconfig */;
+			baseConfigurationReference = 73976C7C38B766C8A915F9D8 /* Pods-CollectorDemoAppTV.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

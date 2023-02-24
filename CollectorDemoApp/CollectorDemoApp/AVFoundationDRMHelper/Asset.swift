@@ -13,7 +13,7 @@ class Asset {
     /// The AVURLAsset corresponding to this Asset.
     var urlAsset: AVURLAsset
 
-    var delegate: AssetResourceLoaderDelegate?
+    weak var delegate: AssetResourceLoaderDelegate?
     var fairPlayConfig: FairPlayConfiguration?
 
     init(urlAsset: AVURLAsset, fpsConfig: FairPlayConfiguration) {

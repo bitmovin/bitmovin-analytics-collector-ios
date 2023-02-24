@@ -145,6 +145,100 @@
             </objects>
             <point key="canvasLocation" x="-103" y="1278"/>
         </scene>
+        <!--Amazon Ivs View Controller-->
+        <scene sceneID="9DM-9k-FDf">
+            <objects>
+                <viewController storyboardIdentifier="AmazonIvsViewController" autoresizesArchivedViewToFullSize="NO" id="j74-lv-zUX" customClass="AmazonIvsViewController" customModule="CollectorDemoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0lG-a8-xPt"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ayd-3z-KL5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="C84-K7-gG6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="755"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ej4-NW-t8d" customClass="IVSPlayerView">
+                                <rect key="frame" x="16" y="-7" width="343" height="796"/>
+                                <subviews>
+                                    <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="jWd-4P-Fkv">
+                                        <rect key="frame" x="-2" y="639" width="347" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="29" id="Uie-ib-lHC"/>
+                                        </constraints>
+                                    </slider>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ubx-uI-MsB">
+                                        <rect key="frame" x="149" y="695" width="45" height="36"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="PlayButton">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ubx-uI-MsB" firstAttribute="top" secondItem="jWd-4P-Fkv" secondAttribute="bottom" constant="27" id="11L-8c-lCt"/>
+                                    <constraint firstItem="jWd-4P-Fkv" firstAttribute="centerX" secondItem="ubx-uI-MsB" secondAttribute="centerX" id="1Nj-V4-kQA"/>
+                                    <constraint firstItem="jWd-4P-Fkv" firstAttribute="leading" secondItem="Ej4-NW-t8d" secondAttribute="leading" id="IO6-X3-gqF"/>
+                                    <constraint firstAttribute="bottom" secondItem="jWd-4P-Fkv" secondAttribute="bottom" constant="141" id="U7E-ve-W2e"/>
+                                    <constraint firstItem="jWd-4P-Fkv" firstAttribute="centerX" secondItem="Ej4-NW-t8d" secondAttribute="centerX" id="sCq-FN-byf"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i1M-VI-ieP">
+                                <rect key="frame" x="64" y="8" width="84" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Release"/>
+                                <connections>
+                                    <action selector="releaseButtonWasPressed:" destination="j74-lv-zUX" eventType="touchUpInside" id="PpZ-Ib-s6y"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bA-23-SlH">
+                                <rect key="frame" x="156" y="8" width="75" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Create"/>
+                                <connections>
+                                    <action selector="createButtonWasPressed:" destination="j74-lv-zUX" eventType="touchUpInside" id="5kt-wL-nPr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ZR-c3-u3H">
+                                <rect key="frame" x="5" y="8" width="65" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Done"/>
+                                <connections>
+                                    <action selector="doneButtonWasPressed:" destination="j74-lv-zUX" eventType="touchUpInside" id="cK5-df-p0c"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="FGn-PL-1jk">
+                                <rect key="frame" x="169" y="365" width="37" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="1" green="0.6841462787" blue="0.2212122285" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="1" green="0.68414627866299216" blue="0.22121222846574828" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstAttribute="bottomMargin" secondItem="Ej4-NW-t8d" secondAttribute="bottom" constant="-34" id="2AK-I1-mXB"/>
+                            <constraint firstItem="4bA-23-SlH" firstAttribute="baseline" secondItem="i1M-VI-ieP" secondAttribute="baseline" id="7Wm-su-amT"/>
+                            <constraint firstItem="4bA-23-SlH" firstAttribute="leading" secondItem="C84-K7-gG6" secondAttribute="leading" constant="156" id="BEW-AR-mcX"/>
+                            <constraint firstItem="4ZR-c3-u3H" firstAttribute="top" secondItem="0lG-a8-xPt" secondAttribute="bottom" constant="8" id="aDh-AH-W0M"/>
+                            <constraint firstItem="Ej4-NW-t8d" firstAttribute="trailing" secondItem="C84-K7-gG6" secondAttribute="trailingMargin" id="bX7-Hl-g1o"/>
+                            <constraint firstItem="4bA-23-SlH" firstAttribute="leading" secondItem="i1M-VI-ieP" secondAttribute="trailing" constant="8" id="iQG-J7-kyK"/>
+                            <constraint firstItem="4ZR-c3-u3H" firstAttribute="leading" secondItem="C84-K7-gG6" secondAttribute="leadingMargin" constant="-11" id="k6S-Op-7Rg"/>
+                            <constraint firstItem="Ej4-NW-t8d" firstAttribute="top" secondItem="C84-K7-gG6" secondAttribute="topMargin" constant="-54" id="lUS-ff-ef9"/>
+                            <constraint firstItem="4ZR-c3-u3H" firstAttribute="baseline" secondItem="i1M-VI-ieP" secondAttribute="baseline" id="pXd-QW-Hbj"/>
+                            <constraint firstItem="Ej4-NW-t8d" firstAttribute="leading" secondItem="C84-K7-gG6" secondAttribute="leadingMargin" id="vk6-Ms-lZD"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="rln-W0-sNj"/>
+                    <connections>
+                        <outlet property="bufferIndicator" destination="FGn-PL-1jk" id="0st-AL-sjR"/>
+                        <outlet property="playButton" destination="ubx-uI-MsB" id="Ngq-tA-aGb"/>
+                        <outlet property="playerView" destination="Ej4-NW-t8d" id="WRz-bM-5Qe"/>
+                        <outlet property="seekSlider" destination="jWd-4P-Fkv" id="zOx-pf-2yf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="okZ-TF-7k6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1008.8" y="30.295566502463057"/>
+        </scene>
         <!--Welcome View Controller-->
         <scene sceneID="dFc-85-HjE">
             <objects>
@@ -158,7 +252,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="IWW-sI-AB0">
-                                <rect key="frame" x="32" y="224.33333333333337" width="311" height="220"/>
+                                <rect key="frame" x="32" y="224.33333333333337" width="311" height="285"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pwj-ea-28F">
                                         <rect key="frame" x="0.0" y="0.0" width="311" height="25"/>
@@ -198,6 +292,16 @@
                                         <state key="normal" title="AVPlayer DRM Example"/>
                                         <connections>
                                             <segue destination="JLp-0k-WVS" kind="show" id="ofT-Nz-ojY"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asl-gs-XlO" userLabel="Amazon IVS Button">
+                                        <rect key="frame" x="0.0" y="260" width="311" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="blr-9w-zFN"/>
+                                        </constraints>
+                                        <state key="normal" title="Amazon IVS Example"/>
+                                        <connections>
+                                            <segue destination="j74-lv-zUX" kind="show" id="wBf-TR-UP4"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -313,7 +417,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-:--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOC-Kz-nZX" userLabel="Duration">
-                                <rect key="frame" x="338.33333333333331" y="653" width="20.666666666666686" height="13.333333333333371"/>
+                                <rect key="frame" x="338.33333333333331" y="652" width="20.666666666666686" height="14.333333333333371"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -489,7 +593,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-:--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mb3-Gz-UTv" userLabel="Duration">
-                                <rect key="frame" x="338.33333333333331" y="653" width="20.666666666666686" height="13.333333333333371"/>
+                                <rect key="frame" x="338.33333333333331" y="652" width="20.666666666666686" height="14.333333333333371"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="highlightedColor"/>
                             </label>

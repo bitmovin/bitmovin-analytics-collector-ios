@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - linter and formater
+- example view with Amazon IVS player
 
 ### Changed
 - updated example app 
