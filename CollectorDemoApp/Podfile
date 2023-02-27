@@ -17,17 +17,27 @@ def amazon_ivs_player
   pod 'AmazonIVSPlayer', '~> 1.16.0'
 end
 
-def bitmovin_collector
+def core_collector
   pod 'BitmovinAnalyticsCollector/Core', :path => '../BitmovinAnalyticsCollector.v2.podspec'
-  pod 'BitmovinAnalyticsCollector/AVPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec'
-  pod 'BitmovinAnalyticsCollector/BitmovinPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec'
+  pod 'BitmovinAnalyticsCollector/Core', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['CoreTests']
 end
 
-def bitmovin_collector_tests 
-  pod 'BitmovinAnalyticsCollector/Core', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['CoreTests']
+def av_collector
+  pod 'BitmovinAnalyticsCollector/AVPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec'
   pod 'BitmovinAnalyticsCollector/AVPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['AVPlayerTests'] 
+end
+
+def bitmovin_collector
+  pod 'BitmovinAnalyticsCollector/BitmovinPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec'
   pod 'BitmovinAnalyticsCollector/BitmovinPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['BitmovinPlayerTests']
 end
+
+def ivs_collector
+  pod 'BitmovinAnalyticsCollector/AmazonIVSPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec'
+  # no test files yet -> uncomment once test files are present
+  # pod 'BitmovinAnalyticsCollector/AmazonIVSPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['AmazonIVSPlayerTests']
+end
+
 
 def google_Adsima_sdk
   pod 'GoogleAds-IMA-iOS-SDK', '3.12.1'
@@ -45,8 +55,10 @@ target 'CollectorDemoApp' do
   bitmovin_player
   amazon_ivs_player
 
+  core_collector
+  av_collector
   bitmovin_collector
-  bitmovin_collector_tests
+  ivs_collector
   
   google_Adsima_sdk
   google_cast_sdk
@@ -56,6 +68,8 @@ target 'CollectorDemoAppTV' do
   use_frameworks!
   for_tvos
   bitmovin_player
+  
+  core_collector
+  av_collector
   bitmovin_collector
-  bitmovin_collector_tests
 end

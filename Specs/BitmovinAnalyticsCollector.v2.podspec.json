@@ -4,10 +4,6 @@
   "summary": "iOS library that allows you to monitor your iOS video playback with Bitmovin Analytics",
   "description": "iOS library that allows you to monitor your iOS video playback with Bitmovin Analytics. This SDK can monitor an AVPlayer or a Bitmovin Player",
   "homepage": "https://github.com/bitmovin/bitmovin-analytics-collector-ios",
-  "license": {
-    "type": "MIT",
-    "file": "LICENSE"
-  },
   "authors": {
     "Bitmovin Inc": "admin@bitmovin.com"
   },
@@ -19,7 +15,7 @@
     "ios": "12.0",
     "tvos": "12.0"
   },
-  "swift_version": "5.0",
+  "swift_versions": "5.0",
   "pod_target_xcconfig": {
     "FRAMEWORK_SEARCH_PATHS": "\"${PODS_ROOT}\"/*",
     "OTHER_LDFLAGS": "$(inherited) -ObjC",
@@ -28,52 +24,76 @@
   "subspecs": [
     {
       "name": "Core",
-      "source_files": "BitmovinAnalyticsCollector/Classes/Collector/**/*.{swift}",
+      "source_files": "Sources/CoreCollector/**/*.{swift}",
       "testspecs": [
         {
           "name": "CoreTests",
           "test_type": "unit",
-          "source_files": "BitmovinAnalyticsCollector/Tests/CoreTests/**/*"
+          "source_files": "Tests/CoreCollectorTests/**/*"
         }
       ]
     },
     {
       "name": "BitmovinPlayer",
-      "source_files": "BitmovinAnalyticsCollector/Classes/BitmovinPlayerV3/**/*.{swift}",
-      "dependencies": {
-        "BitmovinAnalyticsCollector/Core": []
-      },
+      "source_files": "Sources/BitmovinPlayerCollector/**/*.{swift}",
       "tvos": {
         "dependencies": {
-          "BitmovinPlayer": ["~>3.0"]
+          "BitmovinPlayer": [
+            "~>3.0"
+          ]
         }
       },
       "ios": {
         "dependencies": {
-          "BitmovinPlayer": ["~>3.0"]
+          "BitmovinPlayer": [
+            "~>3.0"
+          ]
         }
       },
       "testspecs": [
         {
           "name": "BitmovinPlayerTests",
           "test_type": "unit",
-          "source_files": "BitmovinAnalyticsCollector/Tests/BitmovinPlayerV3Tests/**/*"
+          "source_files": "Tests/BitmovinPlayerCollectorTests/**/*"
+        }
+      ]
+    },
+    {
+      "name": "AmazonIVSPlayer",
+      "source_files": "Sources/AmazonIVSPlayerCollector/**/*.{swift}",
+      "tvos": {
+        "dependencies": {
+          "AmazonIVSPlayer": [
+            "~> 1.16.0"
+          ]
+        }
+      },
+      "ios": {
+        "dependencies": {
+          "AmazonIVSPlayer": [
+            "~> 1.16.0"
+          ]
+        }
+      },
+      "testspecs": [
+        {
+          "name": "AmazonIVSPlayerTests",
+          "test_type": "unit",
+          "source_files": "Tests/AmazonIVSPlayerCollectorTests/**/*"
         }
       ]
     },
     {
       "name": "AVPlayer",
-      "source_files": "BitmovinAnalyticsCollector/Classes/AVPlayerV2/**/*.{swift}",
-      "dependencies": {
-        "BitmovinAnalyticsCollector/Core": []
-      },
+      "source_files": "Sources/AVPlayerCollector/**/*.{swift}",
       "testspecs": [
         {
           "name": "AVPlayerTests",
           "test_type": "unit",
-          "source_files": "BitmovinAnalyticsCollector/Tests/AVPlayerV2Tests/**/*"
+          "source_files": "Tests/AVPlayerCollectorTests/**/*"
         }
       ]
     }
-  ]
+  ],
+  "swift_version": "5.0"
 }
