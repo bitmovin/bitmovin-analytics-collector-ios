@@ -1,4 +1,5 @@
-import XCTest
+import Quick
+import Nimble
 
 #if !SWIFT_PACKAGE
 @testable import BitmovinAnalyticsCollector
@@ -8,8 +9,8 @@ import XCTest
 @testable import CoreCollector
 #endif
 
-class EventDataTests: XCTestCase {
-    func testSerializesCorrectly() throws {
+class EventDataTests: QuickSpec {
+    override func spec() {
         // Arrange
         let impressionId = "097170EB-51BA-435F-9F6F-727896EBEB45"
 
@@ -125,6 +126,6 @@ class EventDataTests: XCTestCase {
         let jsonString = eventData.jsonString()
 
         // Assert
-        XCTAssertEqual(jsonString, expectedJsonString)
+        expect(jsonString).to(equal(expectedJsonString))
     }
 }

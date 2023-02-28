@@ -19,7 +19,7 @@ end
 
 def core_collector
   pod 'BitmovinAnalyticsCollector/Core', :path => '../BitmovinAnalyticsCollector.v2.podspec'
-  pod 'BitmovinAnalyticsCollector/Core', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['CoreTests']
+  # pod 'BitmovinAnalyticsCollector/Core', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['CoreTests']
 end
 
 # not imported via Podfile
