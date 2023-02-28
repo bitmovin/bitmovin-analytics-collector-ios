@@ -1,0 +1,41 @@
+PODS:
+  - AmazonIVSPlayer (1.16.0)
+  - BitmovinAnalyticsCollector/AmazonIVSPlayer (2.10.0):
+    - AmazonIVSPlayer (~> 1.16.0)
+  - BitmovinAnalyticsCollector/Core (2.10.0)
+  - google-cast-sdk (4.6.1):
+    - google-cast-sdk/Core (= 4.6.1)
+    - Protobuf (~> 3.13)
+  - google-cast-sdk/Core (4.6.1):
+    - Protobuf (~> 3.13)
+  - GoogleAds-IMA-iOS-SDK (3.18.4)
+  - Protobuf (3.22.0)
+
+DEPENDENCIES:
+  - AmazonIVSPlayer (~> 1.16.0)
+  - BitmovinAnalyticsCollector/AmazonIVSPlayer (from `../BitmovinAnalyticsCollector.v2.podspec`)
+  - BitmovinAnalyticsCollector/Core (from `../BitmovinAnalyticsCollector.v2.podspec`)
+  - google-cast-sdk (= 4.6.1)
+  - GoogleAds-IMA-iOS-SDK (= 3.18.4)
+
+SPEC REPOS:
+  trunk:
+    - AmazonIVSPlayer
+    - google-cast-sdk
+    - GoogleAds-IMA-iOS-SDK
+    - Protobuf
+
+EXTERNAL SOURCES:
+  BitmovinAnalyticsCollector:
+    :path: "../BitmovinAnalyticsCollector.v2.podspec"
+
+SPEC CHECKSUMS:
+  AmazonIVSPlayer: e9092086094e70ba1e39b3f6f57f623da05b4b27
+  BitmovinAnalyticsCollector: abec912e1c02ab5cd011a0bcdaed9eb042b43106
+  google-cast-sdk: 9fc76175641bc24ef2515e0263344bd2c5c4e75c
+  GoogleAds-IMA-iOS-SDK: b01284e3bf3d64ba948de6692ffda531452c3713
+  Protobuf: 5e6cbc143d02fe08585d86b0098f8b755d2caaab
+
+PODFILE CHECKSUM: 6ed206dc0c2f6c879a94034e4613964a8a51952d
+
+COCOAPODS: 1.11.3
