@@ -53,14 +53,8 @@ end
 target 'CollectorDemoApp' do
   use_frameworks!
   for_ios
-  
-#  bitmovin_player
- amazon_ivs_player
 
- core_collector
-#  av_collector
-#  bitmovin_collector
- ivs_collector
+  amazon_ivs_player
   
   google_Adsima_sdk
   google_cast_sdk

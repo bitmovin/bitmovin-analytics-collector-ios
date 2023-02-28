@@ -19,6 +19,10 @@ let package = Package(
             name: "AVPlayerCollector",
             targets: ["AVPlayerCollector"]
         ),
+        .library(
+            name: "AmazonIVSPlayerCollector",
+            targets: ["AmazonIVSPlayerCollector"]
+        )
     ],
     dependencies: [
         .package(name: "BitmovinPlayer", url: "https://github.com/bitmovin/player-ios.git", from: "3.0.0"),
@@ -39,6 +43,15 @@ let package = Package(
         .target(
             name: "BitmovinPlayerCollector",
             dependencies: ["BitmovinPlayer", "CoreCollector"]
+        ),
+        .binaryTarget(
+            name: "AmazonIVSPlayer",
+            url: "https://player.live-video.net/1.16.0/AmazonIVSPlayer.xcframework.zip",
+            checksum: "23c35fbab391039caf13b057e5421a88c5b1dc54e662fa36e6c97dc21b0eb8fd"
+        ),
+        .target(
+            name: "AmazonIVSPlayerCollector",
+            dependencies: ["CoreCollector", "AmazonIVSPlayer"]
         ),
         .testTarget(
             name: "CoreCollectorTests",
