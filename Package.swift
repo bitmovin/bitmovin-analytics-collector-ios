@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.7
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -22,6 +22,8 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "BitmovinPlayer", url: "https://github.com/bitmovin/player-ios.git", from: "3.0.0"),
+        .package(url: "https://github.com/Quick/Quick.git", exact: "5.0.1"),
+        .package(url: "https://github.com/Quick/Nimble.git", exact: "10.0.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -40,15 +42,15 @@ let package = Package(
         ),
         .testTarget(
             name: "CoreCollectorTests",
-            dependencies: ["CoreCollector"]
+            dependencies: ["CoreCollector", "Quick", "Nimble"]
         ),
         .testTarget(
             name: "BitmovinPlayerCollectorTests",
-            dependencies: ["BitmovinPlayerCollector", "BitmovinPlayer"]
+            dependencies: ["BitmovinPlayerCollector", "BitmovinPlayer", "Quick", "Nimble"]
         ),
         .testTarget(
             name: "AVPlayerCollectorTests",
-            dependencies: ["AVPlayerCollector"]
+            dependencies: ["AVPlayerCollector", "Quick", "Nimble"]
         ),
     ]
 )

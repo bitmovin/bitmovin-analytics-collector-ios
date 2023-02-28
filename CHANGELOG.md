@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - linter and formater
 - example view with Amazon IVS player
+- quick & nimble test framework
 
 ### Changed
 - updated example app 

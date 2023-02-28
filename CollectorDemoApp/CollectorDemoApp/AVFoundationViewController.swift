@@ -1,5 +1,6 @@
 import AVKit
-import BitmovinAnalyticsCollector
+import CoreCollector
+import AVPlayerCollector
 import UIKit
 
 class AVFoundationViewController: UIViewController {

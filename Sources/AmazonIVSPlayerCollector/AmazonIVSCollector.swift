@@ -17,6 +17,7 @@ public class AmazonIVSCollector: NSObject, Collector {
 
     public func getCustomData() -> CustomData {
 
+        return CustomData()
     }
 
     public func setCustomData(customData: CustomData) {
@@ -28,6 +29,6 @@ public class AmazonIVSCollector: NSObject, Collector {
     }
 
     public func getUserId() -> String {
-
+        return ""
     }
 }

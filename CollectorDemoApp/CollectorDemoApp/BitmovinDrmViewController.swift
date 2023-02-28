@@ -1,4 +1,5 @@
-import BitmovinAnalyticsCollector
+import CoreCollector
+import BitmovinPlayerCollector
 import BitmovinPlayer
 import UIKit
 

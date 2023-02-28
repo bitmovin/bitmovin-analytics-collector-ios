@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2C9F52909250A2416284A39F /* Pods_CollectorDemoAppTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACF2489EF66A6971D7BC4DF /* Pods_CollectorDemoAppTV.framework */; };
+		9D6FA9EE29AE2C6900B2BF1A /* AVPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9D6FA9ED29AE2C6900B2BF1A /* AVPlayerCollector */; };
+		9D6FA9F029AE2C6900B2BF1A /* BitmovinPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9D6FA9EF29AE2C6900B2BF1A /* BitmovinPlayerCollector */; };
+		9D6FA9F629AE2C8900B2BF1A /* bitmovin-analytics-collector-ios-internal in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D6FA9EC29AE2BFA00B2BF1A /* bitmovin-analytics-collector-ios-internal */; };
 		9D8F6018299A61E200090B46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F6011299A61E200090B46 /* Assets.xcassets */; };
 		9D8F6019299A61E200090B46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F6012299A61E200090B46 /* AppDelegate.swift */; };
 		9D8F601A299A61E200090B46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F6013299A61E200090B46 /* ViewController.swift */; };
@@ -37,10 +40,24 @@
 		C2B45EC798D382C918568864 /* Pods_CollectorDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C83C68FFAD5DC3BC948FFC7E /* Pods_CollectorDemoApp.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9D6FA9F529AE2C7E00B2BF1A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9D6FA9F629AE2C8900B2BF1A /* bitmovin-analytics-collector-ios-internal in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		3C777BE8E1D5FB8B3F89C767 /* Pods-CollectorDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoApp.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		64C07D9C2569E490F98602D8 /* Pods-CollectorDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoApp.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp.release.xcconfig"; sourceTree = "<group>"; };
 		73976C7C38B766C8A915F9D8 /* Pods-CollectorDemoAppTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTV.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV.release.xcconfig"; sourceTree = "<group>"; };
+		9D6FA9EC29AE2BFA00B2BF1A /* bitmovin-analytics-collector-ios-internal */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "bitmovin-analytics-collector-ios-internal"; path = ..; sourceTree = "<group>"; };
 		9D8F5F96299A1DE700090B46 /* CollectorDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D8F5FCE299A1F8300090B46 /* CollectorDemoAppTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoAppTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D8F6010299A61E200090B46 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -81,7 +98,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D6FA9EE29AE2C6900B2BF1A /* AVPlayerCollector in Frameworks */,
 				C2B45EC798D382C918568864 /* Pods_CollectorDemoApp.framework in Frameworks */,
+				9D6FA9F029AE2C6900B2BF1A /* BitmovinPlayerCollector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,9 +124,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9D6FA9EB29AE2BFA00B2BF1A /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				9D6FA9EC29AE2BFA00B2BF1A /* bitmovin-analytics-collector-ios-internal */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		9D8F5F8D299A1DE600090B46 = {
 			isa = PBXGroup;
 			children = (
+				9D6FA9EB29AE2BFA00B2BF1A /* Packages */,
 				9DA89913299CB13E004BE1CD /* Shared */,
 				9D8F5FF6299A249500090B46 /* CollectorDemoAppTV */,
 				9D8F5F98299A1DE700090B46 /* CollectorDemoApp */,
@@ -232,12 +260,19 @@
 				9D2CDEB3299F84FA004B6176 /* [CUSTOM] Run SwiftLint */,
 				FF700B0D214847F9FE5D7DDC /* [CP] Embed Pods Frameworks */,
 				C3F453CB4C3AE6F603670379 /* [CP] Copy Pods Resources */,
+				9D6FA9F529AE2C7E00B2BF1A /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9D6FA9F229AE2C7700B2BF1A /* PBXTargetDependency */,
+				9D6FA9F429AE2C7700B2BF1A /* PBXTargetDependency */,
 			);
 			name = CollectorDemoApp;
+			packageProductDependencies = (
+				9D6FA9ED29AE2C6900B2BF1A /* AVPlayerCollector */,
+				9D6FA9EF29AE2C6900B2BF1A /* BitmovinPlayerCollector */,
+			);
 			productName = CollectorDemoApp;
 			productReference = 9D8F5F96299A1DE700090B46 /* CollectorDemoApp.app */;
 			productType = "com.apple.product-type.application";
@@ -251,7 +286,6 @@
 				9D8F5FC7299A1F8300090B46 /* Frameworks */,
 				9D8F5FC8299A1F8300090B46 /* Resources */,
 				9D2CDED8299F9863004B6176 /* [CUSTOM] Run SwiftLint */,
-				B7D6D8F7E822684618BA1B63 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -382,23 +416,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/../scripts/run_swiftlint\" -xcode -path \"${SOURCE_ROOT}/..\"\nexit 0\n";
 		};
-		B7D6D8F7E822684618BA1B63 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		C3F453CB4C3AE6F603670379 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -493,6 +510,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9D6FA9F229AE2C7700B2BF1A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 9D6FA9F129AE2C7700B2BF1A /* AVPlayerCollector */;
+		};
+		9D6FA9F429AE2C7700B2BF1A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 9D6FA9F329AE2C7700B2BF1A /* BitmovinPlayerCollector */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9D8F602D299A65FC00090B46 /* LaunchScreen.storyboard */ = {
@@ -813,6 +841,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9D6FA9ED29AE2C6900B2BF1A /* AVPlayerCollector */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AVPlayerCollector;
+		};
+		9D6FA9EF29AE2C6900B2BF1A /* BitmovinPlayerCollector */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BitmovinPlayerCollector;
+		};
+		9D6FA9F129AE2C7700B2BF1A /* AVPlayerCollector */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AVPlayerCollector;
+		};
+		9D6FA9F329AE2C7700B2BF1A /* BitmovinPlayerCollector */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BitmovinPlayerCollector;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9D8F5F8E299A1DE600090B46 /* Project object */;
 }

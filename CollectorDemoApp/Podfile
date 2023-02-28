@@ -22,11 +22,13 @@ def core_collector
   pod 'BitmovinAnalyticsCollector/Core', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['CoreTests']
 end
 
+# not imported via Podfile
 def av_collector
   pod 'BitmovinAnalyticsCollector/AVPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec'
   pod 'BitmovinAnalyticsCollector/AVPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['AVPlayerTests'] 
 end
 
+# not imported via Podfile
 def bitmovin_collector
   pod 'BitmovinAnalyticsCollector/BitmovinPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec'
   pod 'BitmovinAnalyticsCollector/BitmovinPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['BitmovinPlayerTests']
@@ -40,7 +42,7 @@ end
 
 
 def google_Adsima_sdk
-  pod 'GoogleAds-IMA-iOS-SDK', '3.12.1'
+  pod 'GoogleAds-IMA-iOS-SDK', '3.18.4'
 end
 
 def google_cast_sdk
@@ -52,13 +54,13 @@ target 'CollectorDemoApp' do
   use_frameworks!
   for_ios
   
-  bitmovin_player
-  amazon_ivs_player
+#  bitmovin_player
+ amazon_ivs_player
 
-  core_collector
-  av_collector
-  bitmovin_collector
-  ivs_collector
+ core_collector
+#  av_collector
+#  bitmovin_collector
+ ivs_collector
   
   google_Adsima_sdk
   google_cast_sdk
@@ -67,9 +69,4 @@ end
 target 'CollectorDemoAppTV' do
   use_frameworks!
   for_tvos
-  bitmovin_player
-  
-  core_collector
-  av_collector
-  bitmovin_collector
 end
