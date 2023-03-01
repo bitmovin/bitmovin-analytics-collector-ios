@@ -6,7 +6,7 @@ import UIKit
 import CoreCollector
 #endif
 
-internal class AVPlayerEventDataManipulator {
+internal class AVPlayerEventDataManipulator: EventDataManipulator {
     private let player: AVPlayer
 
     // event data tracking

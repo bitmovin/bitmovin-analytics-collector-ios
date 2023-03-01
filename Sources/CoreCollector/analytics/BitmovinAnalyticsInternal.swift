@@ -184,12 +184,6 @@ public class BitmovinAnalyticsInternal: NSObject {
             self.adapter?.currentSourceMetadata
         )
 
-        do {
-            try self.adapter?.decorateEventData(eventData: eventData)
-        } catch {
-            DPrint("There was an error during decorating EventData - data might be incomplete")
-        }
-
         if self.stateMachine.videoStartFailureService.videoStartFailed {
             eventData.videoStartFailed = self.stateMachine.videoStartFailureService.videoStartFailed
             eventData.videoStartFailedReason = self.stateMachine.videoStartFailureService.videoStartFailedReason
@@ -356,13 +350,8 @@ public extension BitmovinAnalyticsInternal {
     static func createAnalytics(
         config: BitmovinAnalyticsConfig,
         stateMachine: StateMachine,
-        userIdProvider: UserIdProvider,
-        manipulators: [EventDataManipulator]
+        eventDataFactory: EventDataFactory
     ) -> BitmovinAnalyticsInternal {
-        let eventDataFactory = EventDataFactory(config, userIdProvider)
-        manipulators.forEach { manipulator in
-            eventDataFactory.registerEventDataManipulator(manipulator: manipulator)
-        }
         return BitmovinAnalyticsInternal(
             config: config,
             stateMachine: stateMachine,

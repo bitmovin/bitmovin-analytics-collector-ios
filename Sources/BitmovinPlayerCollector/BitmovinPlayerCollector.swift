@@ -12,16 +12,17 @@ public class BitmovinPlayerCollector: NSObject, Collector {
     private var config: BitmovinAnalyticsConfig
     private let stateMachine: StateMachine
     private let userIdProvider: UserIdProvider
+    private let eventDataFactory: EventDataFactory
 
     @objc
     public init(config: BitmovinAnalyticsConfig) {
         self.stateMachine = StateMachine(config: config)
         self.userIdProvider = UserIdProviderFactory.create(randomizeUserId: config.randomizeUserId)
+        self.eventDataFactory = EventDataFactory(config, userIdProvider)
         self.analytics = BitmovinAnalyticsInternal.createAnalytics(
             config: config,
             stateMachine: self.stateMachine,
-            userIdProvider: self.userIdProvider,
-            manipulators: []
+            eventDataFactory: eventDataFactory
         )
         self.config = config
     }
@@ -31,14 +32,16 @@ public class BitmovinPlayerCollector: NSObject, Collector {
      */
     @objc
     public func attachPlayer(player: Player) {
-        let castDecorator = CastEventDataDecorator(player: player)
+        let castManipulator = CastEventDataManipulator(player: player)
+        eventDataFactory.registerEventDataManipulator(manipulator: castManipulator)
+
         let adapter = BitmovinPlayerAdapter(
             player: player,
             config: self.config,
             stateMachine: self.stateMachine,
-            sourceMetadataProvider: sourceMetadataProvider,
-            castEventDataDecorator: castDecorator
+            sourceMetadataProvider: sourceMetadataProvider
         )
+        eventDataFactory.registerEventDataManipulator(manipulator: adapter)
         analytics.attach(adapter: adapter)
         if let adAnalytics = analytics.adAnalytics {
             let adAdapter = BitmovinAdAdapter(bitmovinPlayer: player, adAnalytics: adAnalytics)

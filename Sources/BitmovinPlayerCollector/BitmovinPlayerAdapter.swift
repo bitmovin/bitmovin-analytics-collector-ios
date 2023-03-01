@@ -3,11 +3,10 @@ import BitmovinPlayer
 import CoreCollector
 #endif
 
-internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
+internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter, EventDataManipulator {
     private final var config: BitmovinAnalyticsConfig
     private final var player: Player
     private final var sourceMetadataProvider: SourceMetadataProvider<Source>
-    private final var castEventDataDecorator: CastEventDataDecorator
 
     private var isStalling: Bool
     private var isSeeking: Bool
@@ -41,12 +40,10 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         player: Player,
         config: BitmovinAnalyticsConfig,
         stateMachine: StateMachine,
-        sourceMetadataProvider: SourceMetadataProvider<Source>,
-        castEventDataDecorator: CastEventDataDecorator
+        sourceMetadataProvider: SourceMetadataProvider<Source>
     ) {
         self.player = player
         self.config = config
-        self.castEventDataDecorator = castEventDataDecorator
         self.sourceMetadataProvider = sourceMetadataProvider
 
         self.isStalling = false
@@ -96,14 +93,12 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         drmCertificateDownloadTime = nil
     }
 
-    func decorateEventData(eventData: EventData) {
+    func manipulate(eventData: EventData) {
         // PlayerType
         eventData.player = PlayerType.bitmovin.rawValue
 
         // PlayerTech
         eventData.playerTech = "ios:bitmovin"
-
-        self.castEventDataDecorator.decorate(eventData)
 
         // version
         if let sdkVersion = BitmovinPlayerUtil.playerVersion() {

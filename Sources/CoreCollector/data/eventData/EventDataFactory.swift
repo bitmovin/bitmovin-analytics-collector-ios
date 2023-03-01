@@ -2,7 +2,7 @@ import AVFoundation
 import Foundation
 import UIKit
 
-class EventDataFactory: EventDataManipulatorPipeline {
+public class EventDataFactory: EventDataManipulatorPipeline {
     private final var config: BitmovinAnalyticsConfig
     private final let userIdProvider: UserIdProvider
 
@@ -10,16 +10,16 @@ class EventDataFactory: EventDataManipulatorPipeline {
 
     private var sequenceNumber: Int32 = 0
 
-    init(_ config: BitmovinAnalyticsConfig, _ userIdProvider: UserIdProvider) {
+    public init(_ config: BitmovinAnalyticsConfig, _ userIdProvider: UserIdProvider) {
         self.config = config
         self.userIdProvider = userIdProvider
     }
 
-    func clearEventDataManipulators() {
+    public func clearEventDataManipulators() {
         manipulators.removeAll()
     }
 
-    func registerEventDataManipulator(manipulator: EventDataManipulator) {
+    public func registerEventDataManipulator(manipulator: EventDataManipulator) {
         manipulators.append(manipulator)
     }
 
@@ -53,7 +53,11 @@ class EventDataFactory: EventDataManipulatorPipeline {
 
     private func setDataFromManipulator(_ eventData: EventData) {
         manipulators.forEach { manipulator in
-            manipulator.manipulate(eventData: eventData)
+            do {
+                try manipulator.manipulate(eventData: eventData)
+            } catch {
+                print("EventDataManipulator throwed error - data might be incomplete")
+            }
         }
     }
 

@@ -6,7 +6,7 @@ import CoreCollector
 #endif
 
 // This class could be used as a base for the interface EventDataDecorator
-class CastEventDataDecorator {
+class CastEventDataManipulator: EventDataManipulator {
     private final var player: Player
 
     private var isCasting = false
@@ -18,7 +18,7 @@ class CastEventDataDecorator {
 
     // it first applies the data it has and then updates the information it holds
     // this delays the setting of the values by one sample
-    func decorate(_ eventData: EventData) {
+    func manipulate(eventData: EventData) {
         applyCastInfo(to: eventData)
         updateCastInfo()
     }

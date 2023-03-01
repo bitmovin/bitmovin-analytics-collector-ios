@@ -6,7 +6,11 @@ import CoreCollector
 #endif
 
 internal enum AVPlayerAdapterFactory {
-    static func createAdapter(stateMachine: StateMachine, player: AVPlayer) -> AVPlayerAdapter {
+    static func createAdapter(
+        stateMachine: StateMachine,
+        eventDataFactory: EventDataFactory,
+        player: AVPlayer
+    ) -> AVPlayerAdapter {
         let errorHandler = ErrorHandler()
         let bitrateDetectionService = BitrateDetectionService()
         let downloadSpeedMeter = DownloadSpeedMeter()
@@ -17,6 +21,7 @@ internal enum AVPlayerAdapterFactory {
             playbackTypeDetectionService: playbackTypeDetectionService,
             downloadSpeedMeter: downloadSpeedMeter
         )
+        eventDataFactory.registerEventDataManipulator(manipulator: manipulator)
 
         return AVPlayerAdapter(
             player: player,

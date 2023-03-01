@@ -1,3 +1,3 @@
 public protocol EventDataManipulator {
-    func manipulate(eventData: EventData)
+    func manipulate(eventData: EventData) throws
 }
