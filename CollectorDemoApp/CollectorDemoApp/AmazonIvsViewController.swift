@@ -1,8 +1,10 @@
 import AmazonIVSPlayer
 import Foundation
 import UIKit
+import CoreCollector
+import AmazonIVSPlayerCollector
 
-class AmazonIvsViewController: UIViewController {
+class AmazonIvsViewController: UIViewController, IVSPlayer.Delegate {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +29,28 @@ class AmazonIvsViewController: UIViewController {
     }
 
     // MARK: - Bitmovin Analytics
+
+    private var collector: AmazonIVSCollector? = nil
     private func createConfig() {
         // create config
+        let config = BitmovinAnalyticsConfig(key: AppConfig.analyticsLicenseKey)
         // create adapter
+        self.collector = AmazonIVSCollector(config: config)
+
     }
 
     private func attachCollector() {
         // attach adapter
+        guard let player = player else {
+            return
+        }
+
+        player.delegate = self
+        collector?.attachPlayer(player: player)
+    }
+
+    func player(_ player: IVSPlayer, didChangeState state: IVSPlayer.State) {
+        print("Yeah we also got it")
     }
 
     // MARK: - Amazon player

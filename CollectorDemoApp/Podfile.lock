@@ -1,5 +1,4 @@
 PODS:
-  - AmazonIVSPlayer (1.16.0)
   - google-cast-sdk (4.6.1):
     - google-cast-sdk/Core (= 4.6.1)
     - Protobuf (~> 3.13)
@@ -9,23 +8,20 @@ PODS:
   - Protobuf (3.22.0)
 
 DEPENDENCIES:
-  - AmazonIVSPlayer (~> 1.16.0)
   - google-cast-sdk (= 4.6.1)
   - GoogleAds-IMA-iOS-SDK (= 3.18.4)
 
 SPEC REPOS:
   trunk:
-    - AmazonIVSPlayer
     - google-cast-sdk
     - GoogleAds-IMA-iOS-SDK
     - Protobuf
 
 SPEC CHECKSUMS:
-  AmazonIVSPlayer: e9092086094e70ba1e39b3f6f57f623da05b4b27
   google-cast-sdk: 9fc76175641bc24ef2515e0263344bd2c5c4e75c
   GoogleAds-IMA-iOS-SDK: b01284e3bf3d64ba948de6692ffda531452c3713
   Protobuf: 5e6cbc143d02fe08585d86b0098f8b755d2caaab
 
-PODFILE CHECKSUM: 668eaf800a70b39ceebd866211125f1bc8de2926
+PODFILE CHECKSUM: 0a17f2f7f50e8decd99837deee9ce9f27a30ce80
 
 COCOAPODS: 1.11.3

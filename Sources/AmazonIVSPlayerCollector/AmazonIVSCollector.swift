@@ -6,29 +6,47 @@ import CoreCollector
 @objc
 public class AmazonIVSCollector: NSObject, Collector {
     public typealias TPlayer = IVSPlayer
+    private var analytics: BitmovinAnalyticsInternal
+    private let stateMachine: StateMachine
+    private let userIdProvider: UserIdProvider
+    private let eventDataFactory: EventDataFactory
+
+    public init(config: BitmovinAnalyticsConfig) {
+        self.stateMachine = StateMachine(config: config)
+        self.userIdProvider = UserIdProviderFactory.create(randomizeUserId: config.randomizeUserId)
+        self.eventDataFactory = EventDataFactory(config, userIdProvider)
+        self.analytics = BitmovinAnalyticsInternal.createAnalytics(
+            config: config,
+            stateMachine: self.stateMachine,
+            eventDataFactory: eventDataFactory
+        )
+    }
 
     public func attachPlayer(player: IVSPlayer) {
-        
+        let adapter = AmazonIVSPlayerAdapterFactory.createAdapter(
+            player: player,
+            stateMachine: self.stateMachine
+        )
+        analytics.attach(adapter: adapter)
     }
 
     public func detachPlayer() {
-
+        analytics.detachPlayer()
     }
 
     public func getCustomData() -> CustomData {
-
-        return CustomData()
+        analytics.getCustomData()
     }
 
     public func setCustomData(customData: CustomData) {
-
+        analytics.setCustomData(customData: customData)
     }
 
     public func setCustomDataOnce(customData: CustomData) {
-
+        analytics.setCustomDataOnce(customData: customData)
     }
 
     public func getUserId() -> String {
-        return ""
+        self.userIdProvider.getUserId()
     }
 }

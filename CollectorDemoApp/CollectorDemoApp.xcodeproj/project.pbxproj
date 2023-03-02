@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C9F52909250A2416284A39F /* Pods_CollectorDemoAppTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACF2489EF66A6971D7BC4DF /* Pods_CollectorDemoAppTV.framework */; };
+		9D3869AF29AF82F100F6531D /* AmazonIVSPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9D3869AE29AF82F100F6531D /* AmazonIVSPlayerCollector */; };
 		9D6FA9EE29AE2C6900B2BF1A /* AVPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9D6FA9ED29AE2C6900B2BF1A /* AVPlayerCollector */; };
 		9D6FA9F029AE2C6900B2BF1A /* BitmovinPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9D6FA9EF29AE2C6900B2BF1A /* BitmovinPlayerCollector */; };
 		9D6FA9F629AE2C8900B2BF1A /* bitmovin-analytics-collector-ios-internal in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D6FA9EC29AE2BFA00B2BF1A /* bitmovin-analytics-collector-ios-internal */; };
@@ -98,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D3869AF29AF82F100F6531D /* AmazonIVSPlayerCollector in Frameworks */,
 				9D6FA9EE29AE2C6900B2BF1A /* AVPlayerCollector in Frameworks */,
 				C2B45EC798D382C918568864 /* Pods_CollectorDemoApp.framework in Frameworks */,
 				9D6FA9F029AE2C6900B2BF1A /* BitmovinPlayerCollector in Frameworks */,
@@ -265,6 +267,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				9D3869B129AF82FA00F6531D /* PBXTargetDependency */,
 				9D6FA9F229AE2C7700B2BF1A /* PBXTargetDependency */,
 				9D6FA9F429AE2C7700B2BF1A /* PBXTargetDependency */,
 			);
@@ -272,6 +275,7 @@
 			packageProductDependencies = (
 				9D6FA9ED29AE2C6900B2BF1A /* AVPlayerCollector */,
 				9D6FA9EF29AE2C6900B2BF1A /* BitmovinPlayerCollector */,
+				9D3869AE29AF82F100F6531D /* AmazonIVSPlayerCollector */,
 			);
 			productName = CollectorDemoApp;
 			productReference = 9D8F5F96299A1DE700090B46 /* CollectorDemoApp.app */;
@@ -512,6 +516,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9D3869B129AF82FA00F6531D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 9D3869B029AF82FA00F6531D /* AmazonIVSPlayerCollector */;
+		};
 		9D6FA9F229AE2C7700B2BF1A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			productRef = 9D6FA9F129AE2C7700B2BF1A /* AVPlayerCollector */;
@@ -843,6 +851,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9D3869AE29AF82F100F6531D /* AmazonIVSPlayerCollector */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AmazonIVSPlayerCollector;
+		};
+		9D3869B029AF82FA00F6531D /* AmazonIVSPlayerCollector */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AmazonIVSPlayerCollector;
+		};
 		9D6FA9ED29AE2C6900B2BF1A /* AVPlayerCollector */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AVPlayerCollector;

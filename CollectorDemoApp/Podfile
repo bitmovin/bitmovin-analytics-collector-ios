@@ -54,7 +54,7 @@ target 'CollectorDemoApp' do
   use_frameworks!
   for_ios
 
-  amazon_ivs_player
+  # amazon_ivs_player
   
   google_Adsima_sdk
   google_cast_sdk

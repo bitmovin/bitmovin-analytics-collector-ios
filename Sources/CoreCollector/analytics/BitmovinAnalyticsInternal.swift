@@ -352,7 +352,7 @@ public extension BitmovinAnalyticsInternal {
         stateMachine: StateMachine,
         eventDataFactory: EventDataFactory
     ) -> BitmovinAnalyticsInternal {
-        return BitmovinAnalyticsInternal(
+        BitmovinAnalyticsInternal(
             config: config,
             stateMachine: stateMachine,
             eventDataFactory: eventDataFactory
