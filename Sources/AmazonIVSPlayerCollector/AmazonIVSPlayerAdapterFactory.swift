@@ -10,8 +10,12 @@ enum AmazonIVSPlayerAdapterFactory {
         player: IVSPlayer,
         stateMachine: StateMachine
     ) -> AmazonIVSPlayerAdapter {
-        let playerListener = AmazonIVSPlayerListener(player: player)
         let playerContext = AmazonIVSPlayerContext(player: player)
+        let videoStartupService = VideoStartupService(playerContext: playerContext,
+                                                      stateMachine: stateMachine)
+        let playerListener = AmazonIVSPlayerListener(player: player,
+                                                     videoStartupService: videoStartupService,
+                                                     stateMachine: stateMachine)
 
         return AmazonIVSPlayerAdapter(
             stateMachine: stateMachine,
