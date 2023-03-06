@@ -260,7 +260,7 @@ public class SourceMetadata: NSObject {
     public private(set) var experimentName: String?
 }
 
-extension SourceMetadata: CustomDataConfig{
+extension SourceMetadata: CustomDataConfig {
     internal func getCustomData() -> CustomData {
         let customData = CustomData()
         customData.customData1 = self.customData1

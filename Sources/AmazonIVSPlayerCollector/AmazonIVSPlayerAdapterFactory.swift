@@ -15,9 +15,14 @@ enum AmazonIVSPlayerAdapterFactory {
             playerContext: playerContext,
             stateMachine: stateMachine
         )
+        let playbackService = PlaybackService(
+            playerContext: playerContext,
+            stateMachine: stateMachine
+        )
         let playerListener = AmazonIVSPlayerListener(
             player: player,
             videoStartupService: videoStartupService,
+            playbackService: playbackService,
             stateMachine: stateMachine
         )
 
