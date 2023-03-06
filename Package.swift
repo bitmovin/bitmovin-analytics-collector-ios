@@ -28,6 +28,7 @@ let package = Package(
         .package(name: "BitmovinPlayer", url: "https://github.com/bitmovin/player-ios.git", from: "3.0.0"),
         .package(url: "https://github.com/Quick/Quick.git", exact: "5.0.1"),
         .package(url: "https://github.com/Quick/Nimble.git", exact: "10.0.0"),
+        .package(url: "https://github.com/Brightify/Cuckoo.git", from: "1.9.1"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -55,15 +56,19 @@ let package = Package(
         ),
         .testTarget(
             name: "CoreCollectorTests",
-            dependencies: ["CoreCollector", "Quick", "Nimble"]
+            dependencies: ["CoreCollector", "Quick", "Nimble", "Cuckoo"]
         ),
         .testTarget(
             name: "BitmovinPlayerCollectorTests",
-            dependencies: ["BitmovinPlayerCollector", "BitmovinPlayer", "Quick", "Nimble"]
+            dependencies: ["BitmovinPlayerCollector", "BitmovinPlayer", "Quick", "Nimble", "Cuckoo"]
         ),
         .testTarget(
             name: "AVPlayerCollectorTests",
-            dependencies: ["AVPlayerCollector", "Quick", "Nimble"]
+            dependencies: ["AVPlayerCollector", "Quick", "Nimble", "Cuckoo"]
+        ),
+        .testTarget(
+            name: "AmazonIVSPlayerCollectorTests",
+            dependencies: ["AmazonIVSPlayerCollector", "Quick", "Nimble", "Cuckoo"]
         ),
     ]
 )

@@ -17,7 +17,7 @@ class BitmovinPlayerAdapterTests: XCTestCase {
         playerConfig.key = "asdf"
         let player = PlayerFactory.create(playerConfig: playerConfig)
         let config = BitmovinAnalyticsConfig(key: "")
-        let stateMachine = StateMachine(config: config)
+        let stateMachine = DefaultStateMachine()
         let adapter = BitmovinPlayerAdapter(player: player, config: config, stateMachine: stateMachine, sourceMetadataProvider: SourceMetadataProvider<Source>())
 
         adapter.stopMonitoring()
@@ -29,7 +29,7 @@ class BitmovinPlayerAdapterTests: XCTestCase {
         playerConfig.key = "asdf"
         let player = PlayerFactory.create(playerConfig: playerConfig)
         let config = BitmovinAnalyticsConfig(key: "")
-        let stateMachine = StateMachine(config: config)
+        let stateMachine = DefaultStateMachine()
         let detector = CastEventDataManipulator(player: player)
         let adapter = BitmovinPlayerAdapter(player: player, config: config, stateMachine: stateMachine, sourceMetadataProvider: SourceMetadataProvider<Source>())
 

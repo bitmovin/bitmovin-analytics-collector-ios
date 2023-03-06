@@ -1,0 +1,4 @@
+$(SOURCES_ROOT)/CoreCollector/adapters/PlayerAdapter.swift
+$(SOURCES_ROOT)/CoreCollector/adapters/PlayerContext.swift
+$(SOURCES_ROOT)/CoreCollector/stateMachines/StateMachine.swift
+$(SOURCES_ROOT)/CoreCollector/stateMachines/StateMachineListener.swift

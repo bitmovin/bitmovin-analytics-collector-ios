@@ -1,6 +1,6 @@
+import Nimble
 import Quick
 import UIKit
-import Nimble
 #if !SWIFT_PACKAGE
 @testable import BitmovinAnalyticsCollector
 #endif
@@ -10,7 +10,6 @@ import Nimble
 #endif
 
 class EventDataFactoryTests: QuickSpec {
-
     override func spec() {
         describe("createEventData") {
             it("should return EventData with basic data set") {
@@ -52,7 +51,7 @@ class EventDataFactoryTests: QuickSpec {
                 // arrange
                 expect(eventData.analyticsVersion).notTo(beNil())
             }
-            it("should return eventdata with config data set"){
+            it("should return eventdata with config data set") {
                 // arrange
                 let config = self.getTestBitmovinConfig()
                 let eventDataFactory = self.createDefaultEventDataFactoryForTest(config: config)

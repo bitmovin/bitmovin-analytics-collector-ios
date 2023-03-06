@@ -15,14 +15,13 @@ public class AVPlayerCollector: NSObject, Collector {
     private let eventDataFactory: EventDataFactory
 
     public init(config: BitmovinAnalyticsConfig) {
-        self.stateMachine = StateMachine(config: config)
         self.userIdProvider = UserIdProviderFactory.create(randomizeUserId: config.randomizeUserId)
         self.eventDataFactory = EventDataFactory(config, userIdProvider)
         self.analytics = BitmovinAnalyticsInternal.createAnalytics(
             config: config,
-            stateMachine: self.stateMachine,
             eventDataFactory: eventDataFactory
         )
+        self.stateMachine = self.analytics.getStateMachine()
     }
 
     /**

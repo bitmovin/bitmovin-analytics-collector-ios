@@ -256,6 +256,7 @@
 			buildConfigurationList = 9D8F5FBA299A1DE800090B46 /* Build configuration list for PBXNativeTarget "CollectorDemoApp" */;
 			buildPhases = (
 				11785C31D2D8601488FBFD6A /* [CP] Check Pods Manifest.lock */,
+				9DE241A129B0E4D000163B1C /* [CUSTOM] Run Cuckoo generation */,
 				9D8F5F92299A1DE700090B46 /* Sources */,
 				9D8F5F93299A1DE700090B46 /* Frameworks */,
 				9D8F5F94299A1DE700090B46 /* Resources */,
@@ -419,6 +420,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/../scripts/run_swiftlint\" -xcode -path \"${SOURCE_ROOT}/..\"\nexit 0\n";
+		};
+		9DE241A129B0E4D000163B1C /* [CUSTOM] Run Cuckoo generation */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[CUSTOM] Run Cuckoo generation";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "REPO_ROOT=\"${PROJECT_DIR}/..\"\nPATH_TO_SCRIPT=\"${REPO_ROOT}/scripts/run_cuckoo\"\nbash \"$PATH_TO_SCRIPT\"\n";
 		};
 		C3F453CB4C3AE6F603670379 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

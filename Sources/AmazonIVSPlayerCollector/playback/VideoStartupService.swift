@@ -4,11 +4,11 @@ import CoreCollector
 import AmazonIVSPlayer
 
 class VideoStartupService {
-    private let playerContext: AmazonIVSPlayerContext
+    private let playerContext: PlayerContext
     private let stateMachine: StateMachine
 
     init(
-        playerContext: AmazonIVSPlayerContext,
+        playerContext: PlayerContext,
         stateMachine: StateMachine
     ) {
         self.playerContext = playerContext
@@ -24,7 +24,7 @@ class VideoStartupService {
     }
 
     func shouldStartup(state: IVSPlayer.State) {
-        guard !stateMachine.didStartPlayingVideo else {
+        if stateMachine.didStartPlayingVideo {
             return
         }
 

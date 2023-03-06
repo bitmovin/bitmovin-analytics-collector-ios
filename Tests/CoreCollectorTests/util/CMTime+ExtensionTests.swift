@@ -1,6 +1,6 @@
 import AVFoundation
-import Quick
 import Nimble
+import Quick
 
 class CMTimeExtentionTests: QuickSpec {
     override func spec() {

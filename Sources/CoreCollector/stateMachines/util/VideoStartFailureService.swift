@@ -3,7 +3,7 @@ import Foundation
 public class VideoStartFailureService {
     private static var videoStartFailedTimeoutSeconds: TimeInterval = 60
 
-    private weak var stateMachine: StateMachine?
+    private weak var stateMachine: DefaultStateMachine?
 
     private var videoStartFailedWorkItem: DispatchWorkItem?
     private let queue = DispatchQueue(label: "com.bitmovin.analytics.core.utils.VideoStartFailureService")
@@ -11,7 +11,7 @@ public class VideoStartFailureService {
     public private(set) var videoStartFailed = false
     public private(set) var videoStartFailedReason: String?
 
-    func initialise(stateMachine: StateMachine) {
+    func initialise(stateMachine: DefaultStateMachine) {
         self.stateMachine = stateMachine
     }
 

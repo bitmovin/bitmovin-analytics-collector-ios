@@ -1,5 +1,5 @@
-import Quick
 import Nimble
+import Quick
 
 #if !SWIFT_PACKAGE
 @testable import BitmovinAnalyticsCollector

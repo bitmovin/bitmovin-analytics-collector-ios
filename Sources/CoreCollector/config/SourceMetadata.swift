@@ -2,7 +2,7 @@ import Foundation
 
 @objc
 @objcMembers
-public class SourceMetadata: NSObject, CustomDataConfig {
+public class SourceMetadata: NSObject {
     public init(
         videoId: String? = nil,
         title: String? = nil,
@@ -258,7 +258,9 @@ public class SourceMetadata: NSObject, CustomDataConfig {
      * Experiment name needed for A/B testing
      */
     public private(set) var experimentName: String?
+}
 
+extension SourceMetadata: CustomDataConfig{
     internal func getCustomData() -> CustomData {
         let customData = CustomData()
         customData.customData1 = self.customData1

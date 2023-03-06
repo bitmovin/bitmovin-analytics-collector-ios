@@ -1,7 +1,11 @@
 excluded:
-  - GeneratedMocks.swift # we have to keep it to avoid SwiftLint errors after using older branches
-  - GeneratedMocks-iOS.swift
-  - GeneratedMocks-tvOS.swift
+  - AmazonIVSPlayerCollectorTests/GeneratedMocks.swift 
+  - AmazonIVSPlayerCollectorTests/GeneratedMocks-Core.swift 
+  - BitmovinPlayerCollectorTests/GeneratedMocks.swift 
+  - BitmovinPlayerCollectorTests/GeneratedMocks-Core.swift 
+  - AVPlayerCollectorTests/GeneratedMocks.swift 
+  - AVPlayerCollectorTests/GeneratedMocks-Core.swift 
+  - CoreCollectorTests/GeneratedMocks.swift 
 disabled_rules:
   - force_cast
   - force_try

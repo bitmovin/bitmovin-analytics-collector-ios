@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+SCRIPT_PATH="$(cd "$(dirname "$0")" && pwd)"
+REPO_ROOT="${SCRIPT_PATH}/.."
+SOURCES_ROOT="${SCRIPT_PATH}/../Sources"
+
+if [ "${ACTION}" == "indexbuild" ]; then
+  echo "Not running Cuckoo generator during indexing."
+  exit 0
+fi
+
+# Skip for preview builds
+if [ "${ENABLE_PREVIEWS}" = "YES" ]; then
+  echo "Not running Cuckoo generator during preview builds."
+  exit 0
+fi
+
+run_cuckoo_generator() {
+  TESTABLE_TARGET="$1"
+  MOCKABLE_FILES_FILE="$2"
+  OUTPUT_FILE="$3"
+
+  echo "Generated Mocks File = ${OUTPUT_FILE}"
+
+  # Read files from file list
+  INPUT_SWIFT_FILES=()
+  while IFS= read -r line; do
+      INPUT_SWIFT_FILES+=(${line//\$(SOURCES_ROOT\)/$SOURCES_ROOT})
+  done <$MOCKABLE_FILES_FILE
+
+  # Generate mock files, include as many input files as you'd like to create mocks for.
+  "${SCRIPT_PATH}/cuckoo_generator" generate --no-timestamp --testable "${TESTABLE_TARGET}" \
+  --output "${OUTPUT_FILE}" ${INPUT_SWIFT_FILES[@]}
+}
+
+
+generate() {
+    TESTABLE_TARGET=$1
+    
+    TESTS_PATH="${REPO_ROOT}/Tests/${TESTABLE_TARGET}Tests"
+    INPUT_FILE_LIST="${TESTS_PATH}/MockableFiles.xcfilelist"
+    OUTPUT_FILE="${TESTS_PATH}/GeneratedMocks.swift"
+    run_cuckoo_generator "$TESTABLE_TARGET" "$INPUT_FILE_LIST" "$OUTPUT_FILE" 2>&1
+}
+
+cpyCoreTo() {
+    TESTABLE_TARGET=$1
+    CORE_MOCK_FILE="${REPO_ROOT}/Tests/CoreCollectorTests/GeneratedMocks.swift"
+    COPIED_CORE_MOCK_FILE_NAME="GeneratedMocks-Core.swift"
+    cp "${CORE_MOCK_FILE}" "${REPO_ROOT}/Tests/${TESTABLE_TARGET}Tests/${COPIED_CORE_MOCK_FILE_NAME}"
+}
+
+generate "CoreCollector"
+generate "AmazonIVSPlayerCollector"
+generate "BitmovinPlayerCollector"
+generate "AVPlayerCollector"
+
+# we need to copy the generated mocks from the CoreCollector package 
+# to the other packages so we can use the mock also in there
+cpyCoreTo "AmazonIVSPlayerCollector"
+cpyCoreTo "BitmovinPlayerCollector"
+cpyCoreTo "AVPlayerCollector"

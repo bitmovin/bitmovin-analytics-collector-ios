@@ -13,7 +13,7 @@ public class BitmovinAnalyticsInternal: NSObject {
     internal var adAdapter: AdAdapter?
 
     private var config: BitmovinAnalyticsConfig
-    private let stateMachine: StateMachine
+    private let stateMachine: DefaultStateMachine
     private let eventDataDispatcher: EventDataDispatcher
     private let authenticationService: AuthenticationService
     private let eventDataFactory: EventDataFactory
@@ -24,7 +24,7 @@ public class BitmovinAnalyticsInternal: NSObject {
 
     convenience init(
         config: BitmovinAnalyticsConfig,
-        stateMachine: StateMachine,
+        stateMachine: DefaultStateMachine,
         eventDataFactory: EventDataFactory
     ) {
         let notificationCenter = NotificationCenter()
@@ -46,7 +46,7 @@ public class BitmovinAnalyticsInternal: NSObject {
         _ notificationCenter: NotificationCenter,
         _ eventDataDispatcher: EventDataDispatcher,
         _ authenticationService: AuthenticationService,
-        _ stateMachine: StateMachine,
+        _ stateMachine: DefaultStateMachine,
         _ eventDataFactory: EventDataFactory
     ) {
         self.config = config
@@ -115,6 +115,10 @@ public class BitmovinAnalyticsInternal: NSObject {
 
     public func attachAd(adAdapter: AdAdapter) {
         self.adAdapter = adAdapter
+    }
+
+    public func getStateMachine() -> StateMachine {
+        self.stateMachine
     }
 
     public func getCustomData() -> CustomData {
@@ -287,8 +291,6 @@ extension BitmovinAnalyticsInternal: StateMachineListener {
             eventData.errorCode = errorData.code
             eventData.errorMessage = errorData.message
             eventData.errorData = errorData.data
-            // error data is only send in the payload once and then cleared from state machine
-            stateMachine.setErrorData(error: nil)
         }
         sendEventData(eventData: eventData)
     }
@@ -316,8 +318,6 @@ extension BitmovinAnalyticsInternal: StateMachineListener {
             eventData.errorCode = errorData.code
             eventData.errorMessage = errorData.message
             eventData.errorData = errorData.data
-            // error data is only send in the payload once and then cleared from state machine
-            stateMachine.setErrorData(error: nil)
         }
         sendEventData(eventData: eventData)
     }
@@ -349,10 +349,10 @@ extension BitmovinAnalyticsInternal: StateMachineListener {
 public extension BitmovinAnalyticsInternal {
     static func createAnalytics(
         config: BitmovinAnalyticsConfig,
-        stateMachine: StateMachine,
         eventDataFactory: EventDataFactory
     ) -> BitmovinAnalyticsInternal {
-        BitmovinAnalyticsInternal(
+        let stateMachine = DefaultStateMachine()
+        return BitmovinAnalyticsInternal(
             config: config,
             stateMachine: stateMachine,
             eventDataFactory: eventDataFactory

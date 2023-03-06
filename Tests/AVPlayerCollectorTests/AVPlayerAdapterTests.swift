@@ -1,6 +1,6 @@
 import AVKit
-import Quick
 import Nimble
+import Quick
 
 #if !SWIFT_PACKAGE
 @testable import BitmovinAnalyticsCollector
@@ -12,14 +12,13 @@ import Nimble
 #endif
 
 class AVPlayerAdapterTests: QuickSpec {
-
     override func spec() {
         describe("stopMonitoring") {
             it("should not fail on multiple calls") {
                 // arrange
                 let player = AVPlayer()
                 let config = BitmovinAnalyticsConfig(key: "")
-                let stateMachine = StateMachine(config: config)
+                let stateMachine = DefaultStateMachine()
                 let adapter = self.createAdapter(stateMachine, player)
 
                 // act

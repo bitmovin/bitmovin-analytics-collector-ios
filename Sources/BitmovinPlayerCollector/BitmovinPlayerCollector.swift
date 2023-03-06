@@ -16,14 +16,13 @@ public class BitmovinPlayerCollector: NSObject, Collector {
 
     @objc
     public init(config: BitmovinAnalyticsConfig) {
-        self.stateMachine = StateMachine(config: config)
         self.userIdProvider = UserIdProviderFactory.create(randomizeUserId: config.randomizeUserId)
         self.eventDataFactory = EventDataFactory(config, userIdProvider)
         self.analytics = BitmovinAnalyticsInternal.createAnalytics(
             config: config,
-            stateMachine: self.stateMachine,
             eventDataFactory: eventDataFactory
         )
+        self.stateMachine = self.analytics.getStateMachine()
         self.config = config
     }
     /**

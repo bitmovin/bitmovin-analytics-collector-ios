@@ -11,10 +11,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - linter and formater
 - example view with Amazon IVS player
 - quick & nimble test framework
+- cuckoo mocking framework
 - Amazon IVS adapter & listeners
 
 ### Changed
 - updated example app 
+- extracted StateMachine interface for testing [internal]
 
 ### Removed
 - MIT License

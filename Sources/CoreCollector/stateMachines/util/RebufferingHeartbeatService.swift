@@ -8,11 +8,11 @@ public class RebufferingHeartbeatService {
     private var heartbeatWorkerItem: DispatchWorkItem?
     private var currentIntervalIndex: Int = 0
 
-    private weak var stateMachine: StateMachine?
+    private weak var stateMachine: DefaultStateMachine?
 
     private let timeoutHandler = RebufferingTimeoutHandler()
 
-    func initialise(stateMachine: StateMachine) {
+    func initialise(stateMachine: DefaultStateMachine) {
         self.stateMachine = stateMachine
         self.timeoutHandler.initialise(stateMachine: stateMachine)
     }

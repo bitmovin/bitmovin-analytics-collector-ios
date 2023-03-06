@@ -18,7 +18,7 @@ public enum PlayerState: String {
     case sourceChanged
     case customdatachange
 
-    func onEntry(stateMachine: StateMachine) {
+    func onEntry(stateMachine: DefaultStateMachine) {
         switch self {
         case .ad:
             return
@@ -58,7 +58,7 @@ public enum PlayerState: String {
         }
     }
 
-    func onExit(stateMachine: StateMachine, duration: Int64, destinationState: PlayerState) {
+    func onExit(stateMachine: DefaultStateMachine, duration: Int64, destinationState: PlayerState) {
         if destinationState == .playAttemptFailed {
             stateMachine.rebufferingHeartbeatService.disableHeartbeat()
             stateMachine.listener?.onVideoStartFailed(stateMachine)

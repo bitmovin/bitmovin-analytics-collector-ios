@@ -5,9 +5,9 @@ public class RebufferingTimeoutHandler {
 
     private let queue = DispatchQueue(label: "com.bitmovin.analytics.core.utils.RebufferingTimeoutHandler")
     private var rebufferingTimeoutWorkItem: DispatchWorkItem?
-    private weak var stateMachine: StateMachine?
+    private weak var stateMachine: DefaultStateMachine?
 
-    func initialise(stateMachine: StateMachine) {
+    func initialise(stateMachine: DefaultStateMachine) {
         self.stateMachine = stateMachine
     }
 
