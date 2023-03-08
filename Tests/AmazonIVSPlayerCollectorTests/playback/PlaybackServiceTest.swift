@@ -80,6 +80,25 @@ class PlaybackServiceTest: QuickSpec {
                 verify(mockStateMachine).pause(time: equal(to: position))
             }
         }
+        
+        describe("onStateChange") {
+            it("should transition into buffering state") {
+                // arrange
+                stub(mockStateMachine) { stub in
+                    when(stub.transitionState(destinationState: any(), time: any())).thenDoNothing()
+                }
 
+                let position = CMTime(seconds: 1, preferredTimescale: 1_000)
+                stub(mockPlayerContext) { stub in
+                    when(stub.position.get).thenReturn(position)
+                }
+
+                // act
+                playbackService.onBuferring()
+
+                // assert
+                verify(mockStateMachine).transitionState(destinationState: equal(to: PlayerState.buffering), time: equal(to: position))
+            }
+        }
     }
 }

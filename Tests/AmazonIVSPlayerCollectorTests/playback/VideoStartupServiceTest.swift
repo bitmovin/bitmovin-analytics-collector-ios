@@ -41,6 +41,8 @@ class VideoStartupServiceTest: QuickSpec {
                 // arrange
                 stub(mockStateMachine) { stub in
                     when(stub.playing(time: any())).thenDoNothing()
+                    when(stub.play(time: any())).thenDoNothing()
+                    when(stub.didStartPlayingVideo.get).thenReturn(false)
                 }
 
                 let position = CMTime(seconds: 1, preferredTimescale: 1_000)
@@ -52,6 +54,7 @@ class VideoStartupServiceTest: QuickSpec {
                 videoStartupService.onStateChange(state: .playing)
 
                 // assert
+                verify(mockStateMachine).play(time: isNil())
                 verify(mockStateMachine).playing(time: equal(to: position))
             }
         }

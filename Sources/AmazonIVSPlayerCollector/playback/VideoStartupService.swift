@@ -19,7 +19,9 @@ class VideoStartupService {
         if state == IVSPlayer.State.buffering {
             stateMachine.play(time: nil)
         } else if state == IVSPlayer.State.playing {
-            stateMachine.playing(time: playerContext.position)
+            // for VOD videos with autoplay, buffering is not triggered
+            // and we don't have a way to detect intention to play
+            shouldStartup(state: state)
         }
     }
 

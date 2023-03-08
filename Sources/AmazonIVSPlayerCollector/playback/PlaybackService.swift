@@ -24,4 +24,8 @@ class PlaybackService {
             stateMachine.playing(time: playerContext.position)
         }
     }
+
+    func onBuferring() {
+        stateMachine.transitionState(destinationState: .buffering, time: playerContext.position)
+    }
 }

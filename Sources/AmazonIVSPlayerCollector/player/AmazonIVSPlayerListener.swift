@@ -22,13 +22,17 @@ class AmazonIVSPlayerListener: NSObject, IVSPlayer.Delegate {
     }
 
     func player(_ player: IVSPlayer, didChangeState state: IVSPlayer.State) {
-        print("We got and player state change \(state)")
         if !stateMachine.didStartPlayingVideo {
             videoStartupService.onStateChange(state: state)
         } else {
             playbackService.onStateChange(state: state)
         }
         self.customerDelegate?.player?(player, didChangeState: state)
+    }
+
+    func playerWillRebuffer(_ player: IVSPlayer) {
+        playbackService.onBuferring()
+        self.customerDelegate?.playerWillRebuffer?(player)
     }
 
     func startMonitoring() {
