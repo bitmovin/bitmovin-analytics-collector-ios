@@ -35,5 +35,5 @@ internal class AmazonIVSPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         self.playerContext.position
     }
 
-    var currentSourceMetadata: CoreCollector.SourceMetadata?
+    var currentSourceMetadata: SourceMetadata?
 }

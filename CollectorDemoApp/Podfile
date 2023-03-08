@@ -17,27 +17,11 @@ def amazon_ivs_player
   pod 'AmazonIVSPlayer', '~> 1.16.0'
 end
 
-def core_collector
+def collectors
   pod 'BitmovinAnalyticsCollector/Core', :path => '../BitmovinAnalyticsCollector.v2.podspec'
-  # pod 'BitmovinAnalyticsCollector/Core', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['CoreTests']
-end
-
-# not imported via Podfile
-def av_collector
   pod 'BitmovinAnalyticsCollector/AVPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec'
-  pod 'BitmovinAnalyticsCollector/AVPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['AVPlayerTests'] 
-end
-
-# not imported via Podfile
-def bitmovin_collector
   pod 'BitmovinAnalyticsCollector/BitmovinPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec'
-  pod 'BitmovinAnalyticsCollector/BitmovinPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['BitmovinPlayerTests']
-end
-
-def ivs_collector
   pod 'BitmovinAnalyticsCollector/AmazonIVSPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec'
-  # no test files yet -> uncomment once test files are present
-  # pod 'BitmovinAnalyticsCollector/AmazonIVSPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec', :testspecs => ['AmazonIVSPlayerTests']
 end
 
 
@@ -53,9 +37,14 @@ end
 target 'CollectorDemoApp' do
   use_frameworks!
   for_ios
+  google_Adsima_sdk
+  google_cast_sdk
+end
 
-  # amazon_ivs_player
-  
+target 'CollectorDemoAppCocoa' do
+  use_frameworks!
+  for_ios
+  collectors
   google_Adsima_sdk
   google_cast_sdk
 end
