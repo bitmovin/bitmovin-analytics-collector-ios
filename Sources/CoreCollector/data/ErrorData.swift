@@ -15,3 +15,11 @@ public class ErrorData {
         self.data = data
     }
 }
+
+extension ErrorData: Equatable {
+    // we need Equatable interface implementation to be able to write tests
+    // all ErrorData properties are internal and not visible from tests
+    public static func == (lhs: ErrorData, rhs: ErrorData) -> Bool {
+        lhs.code == rhs.code && lhs.data == rhs.data && lhs.message == rhs.message
+    }
+}

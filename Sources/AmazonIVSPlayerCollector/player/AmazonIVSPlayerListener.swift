@@ -8,6 +8,7 @@ class AmazonIVSPlayerListener: NSObject, IVSPlayer.Delegate {
     private weak var customerDelegate: IVSPlayer.Delegate?
     private let videoStartupService: VideoStartupService
     private let playbackService: PlaybackService
+    private let errorService: ErrorService
     private let stateMachine: StateMachine
     private let qualityProvider: PlaybackQualityProvider
 
@@ -16,11 +17,13 @@ class AmazonIVSPlayerListener: NSObject, IVSPlayer.Delegate {
         videoStartupService: VideoStartupService,
         stateMachine: StateMachine,
         playbackService: PlaybackService,
+        errorService: ErrorService,
         qualityProvider: PlaybackQualityProvider
     ) {
         self.player = player
         self.videoStartupService = videoStartupService
         self.playbackService = playbackService
+        self.errorService = errorService
         self.stateMachine = stateMachine
         self.qualityProvider = qualityProvider
     }
@@ -50,16 +53,17 @@ class AmazonIVSPlayerListener: NSObject, IVSPlayer.Delegate {
         self.customerDelegate?.playerWillRebuffer?(player)
     }
 
+    func player(_ player: IVSPlayer, didFailWithError error: Error) {
+        errorService.onError(error: error)
+        self.customerDelegate?.player?(player, didFailWithError: error)
+    }
+
     func player(_ player: IVSPlayer, didChangeDuration duration: CMTime) {
         self.customerDelegate?.player?(player, didChangeDuration: duration)
     }
 
     func playerNetworkDidBecomeUnavailable(_ player: IVSPlayer) {
         self.customerDelegate?.playerNetworkDidBecomeUnavailable?(player)
-    }
-
-    func player(_ player: IVSPlayer, didFailWithError error: Error) {
-        self.customerDelegate?.player?(player, didFailWithError: error)
     }
 
     func player(_ player: IVSPlayer, didSeekTo time: CMTime) {
