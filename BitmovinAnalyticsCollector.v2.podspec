@@ -23,38 +23,22 @@ DESC
   }
   s.subspec 'Core' do |core|
     core.source_files = 'Sources/CoreCollector/**/*.{swift}'
-
-    core.test_spec 'CoreTests' do |core_test_spec|
-      core_test_spec.source_files = 'Tests/CoreCollectorTests/**/*'
-    end
   end
 
   s.subspec 'BitmovinPlayer' do |bitmovinplayerv3|
     bitmovinplayerv3.source_files = 'Sources/BitmovinPlayerCollector/**/*.{swift}'
-    bitmovinplayerv3.tvos.dependency 'BitmovinPlayer', '~>3.0'
-    bitmovinplayerv3.ios.dependency 'BitmovinPlayer', '~>3.0'
-
-    bitmovinplayerv3.test_spec 'BitmovinPlayerTests' do |bitmovinplayerv3_test_spec|
-      bitmovinplayerv3_test_spec.source_files = 'Tests/BitmovinPlayerCollectorTests/**/*'
-    end
+    bitmovinplayerv3.tvos.dependency 'BitmovinPlayer', '~>3.35'
+    bitmovinplayerv3.ios.dependency 'BitmovinPlayer', '~>3.35'
   end
 
   s.subspec 'AmazonIVSPlayer' do |ivsplayer|
     ivsplayer.source_files = 'Sources/AmazonIVSPlayerCollector/**/*.{swift}'
-    ivsplayer.tvos.dependency 'AmazonIVSPlayer', '1.16.0'
-    ivsplayer.ios.dependency 'AmazonIVSPlayer', '1.16.0'
-    
-    ivsplayer.test_spec 'AmazonIVSPlayerTests' do |ivsplayer_test_spec|
-      ivsplayer_test_spec.source_files = 'Tests/AmazonIVSPlayerCollectorTests/**/*'
-    end
+    ivsplayer.tvos.dependency 'AmazonIVSPlayer', '1.17.0'
+    ivsplayer.ios.dependency 'AmazonIVSPlayer', '1.17.0'
   end
 
   s.subspec 'AVPlayer' do |avplayer|
     avplayer.source_files = 'Sources/AVPlayerCollector/**/*.{swift}'
-
-    avplayer.test_spec 'AVPlayerTests' do |avplayer_test_spec|
-      avplayer_test_spec.source_files = 'Tests/AVPlayerCollectorTests/**/*'
-    end
   end
 
 end

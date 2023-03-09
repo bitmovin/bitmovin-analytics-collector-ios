@@ -25,7 +25,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(name: "BitmovinPlayer", url: "https://github.com/bitmovin/player-ios.git", from: "3.0.0"),
+        .package(url: "https://github.com/bitmovin/player-ios.git", from: "3.35.0"),
         .package(url: "https://github.com/Quick/Quick.git", exact: "5.0.1"),
         .package(url: "https://github.com/Quick/Nimble.git", exact: "10.0.0"),
         .package(url: "https://github.com/Brightify/Cuckoo.git", from: "1.9.1"),
@@ -39,36 +39,66 @@ let package = Package(
         ),
         .target(
             name: "AVPlayerCollector",
-            dependencies: ["CoreCollector"]
+            dependencies: [
+                "CoreCollector"
+            ]
         ),
         .target(
             name: "BitmovinPlayerCollector",
-            dependencies: ["BitmovinPlayer", "CoreCollector"]
+            dependencies: [
+                .product(name: "BitmovinPlayer", package: "player-ios"),
+                "CoreCollector"
+            ]
         ),
         .binaryTarget(
             name: "AmazonIVSPlayer",
-            url: "https://player.live-video.net/1.16.0/AmazonIVSPlayer.xcframework.zip",
-            checksum: "23c35fbab391039caf13b057e5421a88c5b1dc54e662fa36e6c97dc21b0eb8fd"
+            url: "https://player.live-video.net/1.17.0/AmazonIVSPlayer.xcframework.zip",
+            checksum: "bccc9ae5a02b3fb6c5535869607403609e4e9854f322052d37a8a71cef9657e6"
         ),
         .target(
             name: "AmazonIVSPlayerCollector",
-            dependencies: ["CoreCollector", "AmazonIVSPlayer"]
+            dependencies: [
+                "CoreCollector",
+                "AmazonIVSPlayer"
+            ]
         ),
         .testTarget(
             name: "CoreCollectorTests",
-            dependencies: ["CoreCollector", "Quick", "Nimble", "Cuckoo"]
+            dependencies: [
+                "CoreCollector",
+                "Quick",
+                "Nimble",
+                "Cuckoo"
+            ]
         ),
         .testTarget(
             name: "BitmovinPlayerCollectorTests",
-            dependencies: ["BitmovinPlayerCollector", "BitmovinPlayer", "Quick", "Nimble", "Cuckoo"]
+            dependencies: [
+                "BitmovinPlayerCollector",
+                .product(name: "BitmovinPlayer", package: "player-ios"),
+                "Quick",
+                "Nimble",
+                "Cuckoo"
+            ]
         ),
         .testTarget(
             name: "AVPlayerCollectorTests",
-            dependencies: ["AVPlayerCollector", "Quick", "Nimble", "Cuckoo"]
+            dependencies: [
+                "AVPlayerCollector",
+                "Quick",
+                "Nimble",
+                "Cuckoo"
+            ]
         ),
         .testTarget(
             name: "AmazonIVSPlayerCollectorTests",
-            dependencies: ["AmazonIVSPlayerCollector", "Quick", "Nimble", "Cuckoo"]
+            dependencies: [
+                "AmazonIVSPlayerCollector",
+                "AmazonIVSPlayer",
+                "Quick",
+                "Nimble",
+                "Cuckoo"
+            ]
         ),
     ]
 )

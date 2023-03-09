@@ -24,14 +24,7 @@
   "subspecs": [
     {
       "name": "Core",
-      "source_files": "Sources/CoreCollector/**/*.{swift}",
-      "testspecs": [
-        {
-          "name": "CoreTests",
-          "test_type": "unit",
-          "source_files": "Tests/CoreCollectorTests/**/*"
-        }
-      ]
+      "source_files": "Sources/CoreCollector/**/*.{swift}"
     },
     {
       "name": "BitmovinPlayer",
@@ -39,24 +32,17 @@
       "tvos": {
         "dependencies": {
           "BitmovinPlayer": [
-            "~>3.0"
+            "~>3.35"
           ]
         }
       },
       "ios": {
         "dependencies": {
           "BitmovinPlayer": [
-            "~>3.0"
+            "~>3.35"
           ]
         }
-      },
-      "testspecs": [
-        {
-          "name": "BitmovinPlayerTests",
-          "test_type": "unit",
-          "source_files": "Tests/BitmovinPlayerCollectorTests/**/*"
-        }
-      ]
+      }
     },
     {
       "name": "AmazonIVSPlayer",
@@ -64,35 +50,21 @@
       "tvos": {
         "dependencies": {
           "AmazonIVSPlayer": [
-            "~> 1.16.0"
+            "1.17.0"
           ]
         }
       },
       "ios": {
         "dependencies": {
           "AmazonIVSPlayer": [
-            "~> 1.16.0"
+            "1.17.0"
           ]
         }
-      },
-      "testspecs": [
-        {
-          "name": "AmazonIVSPlayerTests",
-          "test_type": "unit",
-          "source_files": "Tests/AmazonIVSPlayerCollectorTests/**/*"
-        }
-      ]
+      }
     },
     {
       "name": "AVPlayer",
-      "source_files": "Sources/AVPlayerCollector/**/*.{swift}",
-      "testspecs": [
-        {
-          "name": "AVPlayerTests",
-          "test_type": "unit",
-          "source_files": "Tests/AVPlayerCollectorTests/**/*"
-        }
-      ]
+      "source_files": "Sources/AVPlayerCollector/**/*.{swift}"
     }
   ],
   "swift_version": "5.0"

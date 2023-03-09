@@ -10,11 +10,11 @@ def for_tvos
 end
 
 def bitmovin_player
-  pod 'BitmovinPlayer', '~>3.1.0'
+  pod 'BitmovinPlayer', '~> 3.35.0'
 end
 
 def amazon_ivs_player
-  pod 'AmazonIVSPlayer', '~> 1.16.0'
+  pod 'AmazonIVSPlayer', '~> 1.17.0'
 end
 
 def collectors
