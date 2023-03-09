@@ -42,11 +42,37 @@ class AmazonIVSPlayerListener: NSObject, IVSPlayer.Delegate {
         stateMachine.videoQualityChange(time: player.position) { [qualityProvider = self.qualityProvider] in
             qualityProvider.currentQuality = quality
         }
+        self.customerDelegate?.player?(player, didChangeQuality: quality)
     }
 
     func playerWillRebuffer(_ player: IVSPlayer) {
-        playbackService.onBuferring()
+        playbackService.onBuffering()
         self.customerDelegate?.playerWillRebuffer?(player)
+    }
+
+    func player(_ player: IVSPlayer, didChangeDuration duration: CMTime) {
+        self.customerDelegate?.player?(player, didChangeDuration: duration)
+    }
+
+    func playerNetworkDidBecomeUnavailable(_ player: IVSPlayer) {
+        self.customerDelegate?.playerNetworkDidBecomeUnavailable?(player)
+    }
+
+    func player(_ player: IVSPlayer, didFailWithError error: Error) {
+        self.customerDelegate?.player?(player, didFailWithError: error)
+    }
+
+    func player(_ player: IVSPlayer, didSeekTo time: CMTime) {
+        playbackService.onSeekCompleted(time: time)
+        self.customerDelegate?.player?(player, didSeekTo: time)
+    }
+
+    func player(_ player: IVSPlayer, didOutputCue cue: IVSCue) {
+        self.customerDelegate?.player?(player, didOutputCue: cue)
+    }
+
+    func player(_ player: IVSPlayer, didChangeVideoSize videoSize: CGSize) {
+        self.customerDelegate?.player?(player, didChangeVideoSize: videoSize)
     }
 
     func startMonitoring() {

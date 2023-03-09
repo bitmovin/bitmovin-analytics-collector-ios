@@ -25,7 +25,17 @@ class PlaybackService {
         }
     }
 
-    func onBuferring() {
+    func onBuffering() {
         stateMachine.transitionState(destinationState: .buffering, time: playerContext.position)
+    }
+
+    func onSeekCompleted(time: CMTime) {
+        if playerContext.isLive {
+            return
+        }
+
+        let currentState = stateMachine.state
+        stateMachine.seek(time: time)
+        stateMachine.transitionState(destinationState: currentState, time: time)
     }
 }

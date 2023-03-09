@@ -13,4 +13,8 @@ class AmazonIVSPlayerContext: PlayerContext {
     var position: CMTime {
         player.position
     }
+
+    var isLive: Bool {
+        player.duration.isIndefinite
+    }
 }
