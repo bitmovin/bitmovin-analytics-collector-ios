@@ -28,21 +28,6 @@ class UtilTests: XCTestCase {
         }
     }
 
-    func test_getSupportedVideoCodecs() throws {
-        // Act
-        let supportedVideoCodecs = Util.getSupportedVideoCodecs()
-
-        // Assert
-        if #available(iOS 11, tvOS 11, *) {
-            XCTAssertEqual(supportedVideoCodecs.count, 2)
-            XCTAssertTrue(supportedVideoCodecs.contains("avc"))
-            XCTAssertTrue(supportedVideoCodecs.contains("hevc"))
-        } else {
-            XCTAssertEqual(supportedVideoCodecs.count, 1)
-            XCTAssertEqual(supportedVideoCodecs[0], "avc")
-        }
-    }
-
     func test_streamType() throws {
         // Arrange
         let tests: [(streamURL: String, expectedStreamType: StreamType?)] = [

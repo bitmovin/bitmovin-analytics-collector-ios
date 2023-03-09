@@ -1,1 +1,3 @@
 $(SOURCES_ROOT)/AmazonIVSPlayerCollector/playback/VideoStartupService.swift
+$(SOURCES_ROOT)/AmazonIVSPlayerCollector/player/IVSQualityProtocol.swift
+$(SOURCES_ROOT)/AmazonIVSPlayerCollector/player/IVSPlayerProtocol.swift

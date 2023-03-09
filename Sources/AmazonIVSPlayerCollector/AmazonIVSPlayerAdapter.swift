@@ -7,14 +7,20 @@ import Foundation
 internal class AmazonIVSPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     private let playerListener: AmazonIVSPlayerListener
     private let playerContext: AmazonIVSPlayerContext
+    private let statisticsProvider: PlayerStatisticsProvider
+    private let qualityProvider: PlaybackQualityProvider
 
     init(
         stateMachine: StateMachine,
         playerListener: AmazonIVSPlayerListener,
-        playerContext: AmazonIVSPlayerContext
+        playerContext: AmazonIVSPlayerContext,
+        statisticsProvider: PlayerStatisticsProvider,
+        qualityProvider: PlaybackQualityProvider
     ) {
         self.playerContext = playerContext
         self.playerListener = playerListener
+        self.statisticsProvider = statisticsProvider
+        self.qualityProvider = qualityProvider
         super.init(stateMachine: stateMachine)
     }
 
@@ -23,6 +29,8 @@ internal class AmazonIVSPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     }
 
     func resetSourceState() {
+        statisticsProvider.reset()
+        qualityProvider.reset()
     }
 
     override func stopMonitoring() {

@@ -164,10 +164,10 @@ public class EventDataFactory: EventDataManipulatorPipeline {
 
     private func setVideoTime(_ eventData: EventData, _ videoTimeStart: CMTime?, _ videoTimeEnd: CMTime?) {
         if let timeStart = videoTimeStart, CMTIME_IS_NUMERIC(_: timeStart) {
-            eventData.videoTimeStart = timeStart.toMillis()
+            eventData.videoTimeStart = timeStart.toMillis() ?? 0
         }
         if let timeEnd = videoTimeEnd, CMTIME_IS_NUMERIC(_: timeEnd) {
-            eventData.videoTimeEnd = timeEnd.toMillis()
+            eventData.videoTimeEnd = timeEnd.toMillis() ?? 0
         }
     }
 }

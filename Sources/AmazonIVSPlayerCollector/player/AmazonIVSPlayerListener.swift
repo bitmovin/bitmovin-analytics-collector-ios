@@ -9,16 +9,20 @@ class AmazonIVSPlayerListener: NSObject, IVSPlayer.Delegate {
     private let videoStartupService: VideoStartupService
     private let playbackService: PlaybackService
     private let stateMachine: StateMachine
+    private let qualityProvider: PlaybackQualityProvider
+
     init(
         player: IVSPlayer,
         videoStartupService: VideoStartupService,
+        stateMachine: StateMachine,
         playbackService: PlaybackService,
-        stateMachine: StateMachine
+        qualityProvider: PlaybackQualityProvider
     ) {
         self.player = player
         self.videoStartupService = videoStartupService
         self.playbackService = playbackService
         self.stateMachine = stateMachine
+        self.qualityProvider = qualityProvider
     }
 
     func player(_ player: IVSPlayer, didChangeState state: IVSPlayer.State) {
@@ -28,6 +32,16 @@ class AmazonIVSPlayerListener: NSObject, IVSPlayer.Delegate {
             playbackService.onStateChange(state: state)
         }
         self.customerDelegate?.player?(player, didChangeState: state)
+    }
+
+    func player(_ player: IVSPlayer, didChangeQuality quality: IVSQuality?) {
+        guard qualityProvider.didQualityChange(newQuality: quality) else {
+            return
+        }
+
+        stateMachine.videoQualityChange(time: player.position) { [qualityProvider = self.qualityProvider] in
+            qualityProvider.currentQuality = quality
+        }
     }
 
     func playerWillRebuffer(_ player: IVSPlayer) {

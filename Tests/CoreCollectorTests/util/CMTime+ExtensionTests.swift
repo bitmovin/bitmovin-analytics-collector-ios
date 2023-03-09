@@ -14,5 +14,30 @@ class CMTimeExtentionTests: QuickSpec {
             // assert
             expect(timeInMillis).to(equal(123_000))
         }
+        it("should return nil if value is invalid") {
+            // arrange
+            let time = CMTime()
+
+            // act
+            let invalidTime = time.toMillis()
+
+            // assert
+            expect(invalidTime).to(beNil())
+        }
+        it("should return nil if value is infinity") {
+            // arrange
+            let time = CMTime(
+                value: CMTimeValue(),
+                timescale: CMTimeScale(),
+                flags: CMTimeFlags.positiveInfinity,
+                epoch: CMTimeEpoch()
+            )
+
+            // act
+            let invalidTime = time.toMillis()
+
+            // assert
+            expect(invalidTime).to(beNil())
+        }
     }
 }

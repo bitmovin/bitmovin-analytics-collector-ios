@@ -78,7 +78,7 @@ class IVSPlayerController: NSObject {
         displayLink.isPaused = player?.state != .playing
         displayLink.add(to: .main, forMode: .common)
         playbackPositionDisplayLink = displayLink
-        seekSlider.isHidden = true
+        seekSlider.isHidden = false
     }
 
     private func tearDownDisplayLink() {

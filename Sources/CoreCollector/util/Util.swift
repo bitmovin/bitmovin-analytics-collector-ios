@@ -47,14 +47,6 @@ public enum Util {
         }
     }
 
-    static func getSupportedVideoCodecs() -> [String] {
-        var codecs = ["avc"]
-        if #available(iOS 11, tvOS 11, *) {
-            codecs.append("hevc")
-        }
-        return codecs
-    }
-
     public static func streamType(from url: String) -> StreamType? {
         var path = url.lowercased()
         if let components = URLComponents(string: url) {

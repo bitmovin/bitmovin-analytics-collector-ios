@@ -10,6 +10,7 @@ public class AmazonIVSCollector: NSObject, Collector {
     private let stateMachine: StateMachine
     private let userIdProvider: UserIdProvider
     private let eventDataFactory: EventDataFactory
+    private let config: BitmovinAnalyticsConfig
 
     public init(config: BitmovinAnalyticsConfig) {
         self.userIdProvider = UserIdProviderFactory.create(randomizeUserId: config.randomizeUserId)
@@ -18,13 +19,16 @@ public class AmazonIVSCollector: NSObject, Collector {
             config: config,
             eventDataFactory: eventDataFactory
         )
+        self.config = config
         self.stateMachine = self.analytics.getStateMachine()
     }
 
     public func attachPlayer(player: IVSPlayer) {
         let adapter = AmazonIVSPlayerAdapterFactory.createAdapter(
             player: player,
-            stateMachine: self.stateMachine
+            stateMachine: self.stateMachine,
+            config: self.config,
+            manipulatorPipeline: self.eventDataFactory
         )
         analytics.attach(adapter: adapter)
     }
