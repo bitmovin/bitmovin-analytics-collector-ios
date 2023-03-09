@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C9F52909250A2416284A39F /* Pods_CollectorDemoAppTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACF2489EF66A6971D7BC4DF /* Pods_CollectorDemoAppTV.framework */; };
-		59A050E115BB4C4FBDC6351A /* Pods_CollectorDemoAppCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92EF3991DF53D446B0609D22 /* Pods_CollectorDemoAppCocoa.framework */; };
+		54DD37D8FD15A95D8F3AAB88 /* Pods_CollectorDemoAppCocoaPods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E03350B85318B30D1FCD8DD /* Pods_CollectorDemoAppCocoaPods.framework */; };
 		9D3869AF29AF82F100F6531D /* AmazonIVSPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9D3869AE29AF82F100F6531D /* AmazonIVSPlayerCollector */; };
 		9D6FA9EE29AE2C6900B2BF1A /* AVPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9D6FA9ED29AE2C6900B2BF1A /* AVPlayerCollector */; };
 		9D6FA9F029AE2C6900B2BF1A /* BitmovinPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9D6FA9EF29AE2C6900B2BF1A /* BitmovinPlayerCollector */; };
@@ -69,12 +69,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		192733192E5CBE189BD0F9BF /* Pods-CollectorDemoAppCocoa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppCocoa.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppCocoa/Pods-CollectorDemoAppCocoa.debug.xcconfig"; sourceTree = "<group>"; };
 		3C777BE8E1D5FB8B3F89C767 /* Pods-CollectorDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoApp.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		414D90E23E7C1089E3A5C082 /* Pods_CollectorDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4861CA2F530A861CEF35DD7A /* Pods-CollectorDemoAppCocoaPods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppCocoaPods.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods.debug.xcconfig"; sourceTree = "<group>"; };
 		64C07D9C2569E490F98602D8 /* Pods-CollectorDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoApp.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp.release.xcconfig"; sourceTree = "<group>"; };
+		6C30AE3E15788440A934C440 /* Pods-CollectorDemoAppCocoaPods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppCocoaPods.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods.release.xcconfig"; sourceTree = "<group>"; };
 		73976C7C38B766C8A915F9D8 /* Pods-CollectorDemoAppTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTV.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV.release.xcconfig"; sourceTree = "<group>"; };
-		92EF3991DF53D446B0609D22 /* Pods_CollectorDemoAppCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoAppCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E03350B85318B30D1FCD8DD /* Pods_CollectorDemoAppCocoaPods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoAppCocoaPods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D6FA9EC29AE2BFA00B2BF1A /* bitmovin-analytics-collector-ios-internal */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "bitmovin-analytics-collector-ios-internal"; path = ..; sourceTree = "<group>"; };
 		9D8F5F96299A1DE700090B46 /* CollectorDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D8F5FCE299A1F8300090B46 /* CollectorDemoAppTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoAppTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,7 +102,7 @@
 		9D8F6030299A65FC00090B46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		9DA89914299CB13E004BE1CD /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		9DCA88EA29A647F400D1EC9C /* AmazonIvsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmazonIvsViewController.swift; sourceTree = "<group>"; };
-		9DD0AA6729B87FA70083AFDB /* CollectorDemoAppCocoa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoAppCocoa.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DD0AA6729B87FA70083AFDB /* CollectorDemoAppCocoaPods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoAppCocoaPods.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DD0AA6C29B882FD0083AFDB /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		9DD0AA6E29B883760083AFDB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DD0AA7229B883DB0083AFDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -112,7 +113,6 @@
 		9DD665C6299B751D00608720 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		9DD665C7299B751D00608720 /* VideoAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoAssets.swift; sourceTree = "<group>"; };
 		9DE5886F29A7542B00C68DCA /* IVSPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IVSPlayerController.swift; sourceTree = "<group>"; };
-		EF17AAAE983C164CCDB54B49 /* Pods-CollectorDemoAppCocoa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppCocoa.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppCocoa/Pods-CollectorDemoAppCocoa.release.xcconfig"; sourceTree = "<group>"; };
 		F2F76AFBBE83BCF6740A68BB /* Pods-CollectorDemoAppTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTV.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV.debug.xcconfig"; sourceTree = "<group>"; };
 		FACF2489EF66A6971D7BC4DF /* Pods_CollectorDemoAppTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoAppTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -141,7 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59A050E115BB4C4FBDC6351A /* Pods_CollectorDemoAppCocoa.framework in Frameworks */,
+				54DD37D8FD15A95D8F3AAB88 /* Pods_CollectorDemoAppCocoaPods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,8 +152,8 @@
 			isa = PBXGroup;
 			children = (
 				FACF2489EF66A6971D7BC4DF /* Pods_CollectorDemoAppTV.framework */,
-				92EF3991DF53D446B0609D22 /* Pods_CollectorDemoAppCocoa.framework */,
 				414D90E23E7C1089E3A5C082 /* Pods_CollectorDemoApp.framework */,
+				7E03350B85318B30D1FCD8DD /* Pods_CollectorDemoAppCocoaPods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -173,7 +173,7 @@
 				9DA89913299CB13E004BE1CD /* Shared */,
 				9D8F5FF6299A249500090B46 /* CollectorDemoAppTV */,
 				9D8F5F98299A1DE700090B46 /* CollectorDemoApp */,
-				9DD0AA6B29B882B80083AFDB /* CollectorDemoAppCocoa */,
+				9DD0AA6B29B882B80083AFDB /* CollectorDemoAppCocoaPods */,
 				9D8F5F97299A1DE700090B46 /* Products */,
 				DFEAE2400C8B4C976388A5EF /* Pods */,
 				50781196ABFF9B57DB4AF32A /* Frameworks */,
@@ -185,7 +185,7 @@
 			children = (
 				9D8F5F96299A1DE700090B46 /* CollectorDemoApp.app */,
 				9D8F5FCE299A1F8300090B46 /* CollectorDemoAppTV.app */,
-				9DD0AA6729B87FA70083AFDB /* CollectorDemoAppCocoa.app */,
+				9DD0AA6729B87FA70083AFDB /* CollectorDemoAppCocoaPods.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -252,7 +252,7 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		9DD0AA6B29B882B80083AFDB /* CollectorDemoAppCocoa */ = {
+		9DD0AA6B29B882B80083AFDB /* CollectorDemoAppCocoaPods */ = {
 			isa = PBXGroup;
 			children = (
 				9DD0AA7729B884A90083AFDB /* AppDelegate.swift */,
@@ -260,7 +260,7 @@
 				9DD0AA6E29B883760083AFDB /* Info.plist */,
 				9DD0AA6C29B882FD0083AFDB /* MainController.swift */,
 			);
-			path = CollectorDemoAppCocoa;
+			path = CollectorDemoAppCocoaPods;
 			sourceTree = "<group>";
 		};
 		9DD0AA7029B883DB0083AFDB /* Base.lproj */ = {
@@ -298,8 +298,8 @@
 				64C07D9C2569E490F98602D8 /* Pods-CollectorDemoApp.release.xcconfig */,
 				F2F76AFBBE83BCF6740A68BB /* Pods-CollectorDemoAppTV.debug.xcconfig */,
 				73976C7C38B766C8A915F9D8 /* Pods-CollectorDemoAppTV.release.xcconfig */,
-				192733192E5CBE189BD0F9BF /* Pods-CollectorDemoAppCocoa.debug.xcconfig */,
-				EF17AAAE983C164CCDB54B49 /* Pods-CollectorDemoAppCocoa.release.xcconfig */,
+				4861CA2F530A861CEF35DD7A /* Pods-CollectorDemoAppCocoaPods.debug.xcconfig */,
+				6C30AE3E15788440A934C440 /* Pods-CollectorDemoAppCocoaPods.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -357,9 +357,9 @@
 			productReference = 9D8F5FCE299A1F8300090B46 /* CollectorDemoAppTV.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9DD0AA3A29B87FA60083AFDB /* CollectorDemoAppCocoa */ = {
+		9DD0AA3A29B87FA60083AFDB /* CollectorDemoAppCocoaPods */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9DD0AA6429B87FA60083AFDB /* Build configuration list for PBXNativeTarget "CollectorDemoAppCocoa" */;
+			buildConfigurationList = 9DD0AA6429B87FA60083AFDB /* Build configuration list for PBXNativeTarget "CollectorDemoAppCocoaPods" */;
 			buildPhases = (
 				9DD0AA4129B87FA60083AFDB /* [CP] Check Pods Manifest.lock */,
 				9DD0AA4229B87FA60083AFDB /* [CUSTOM] Run Cuckoo generation */,
@@ -375,9 +375,9 @@
 			);
 			dependencies = (
 			);
-			name = CollectorDemoAppCocoa;
+			name = CollectorDemoAppCocoaPods;
 			productName = CollectorDemoApp;
-			productReference = 9DD0AA6729B87FA70083AFDB /* CollectorDemoAppCocoa.app */;
+			productReference = 9DD0AA6729B87FA70083AFDB /* CollectorDemoAppCocoaPods.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -414,7 +414,7 @@
 			targets = (
 				9D8F5F95299A1DE700090B46 /* CollectorDemoApp */,
 				9D8F5FC3299A1F8300090B46 /* CollectorDemoAppTV */,
-				9DD0AA3A29B87FA60083AFDB /* CollectorDemoAppCocoa */,
+				9DD0AA3A29B87FA60083AFDB /* CollectorDemoAppCocoaPods */,
 			);
 		};
 /* End PBXProject section */
@@ -525,7 +525,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CollectorDemoAppCocoa-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-CollectorDemoAppCocoaPods-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -574,15 +574,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoa/Pods-CollectorDemoAppCocoa-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoa/Pods-CollectorDemoAppCocoa-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoa/Pods-CollectorDemoAppCocoa-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9DD0AA6129B87FA60083AFDB /* [CP] Copy Pods Resources */ = {
@@ -591,15 +591,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoa/Pods-CollectorDemoAppCocoa-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoa/Pods-CollectorDemoAppCocoa-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoa/Pods-CollectorDemoAppCocoa-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9DE241A129B0E4D000163B1C /* [CUSTOM] Run Cuckoo generation */ = {
@@ -1045,7 +1045,7 @@
 		};
 		9DD0AA6529B87FA60083AFDB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 192733192E5CBE189BD0F9BF /* Pods-CollectorDemoAppCocoa.debug.xcconfig */;
+			baseConfigurationReference = 4861CA2F530A861CEF35DD7A /* Pods-CollectorDemoAppCocoaPods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1056,8 +1056,8 @@
 				DEVELOPMENT_TEAM = 7UXPEM3WRB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = CollectorDemoAppCocoa/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = CollectorDemoApp;
+				INFOPLIST_FILE = CollectorDemoAppCocoaPods/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CollectorDemoAppCocoaPods;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1069,7 +1069,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.analytics.ios.CollectorDemoApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.analytics.ios.CollectorDemoAppCocoaPods;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1084,7 +1084,7 @@
 		};
 		9DD0AA6629B87FA60083AFDB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EF17AAAE983C164CCDB54B49 /* Pods-CollectorDemoAppCocoa.release.xcconfig */;
+			baseConfigurationReference = 6C30AE3E15788440A934C440 /* Pods-CollectorDemoAppCocoaPods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1095,8 +1095,8 @@
 				DEVELOPMENT_TEAM = 7UXPEM3WRB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = CollectorDemoAppCocoa/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = CollectorDemoApp;
+				INFOPLIST_FILE = CollectorDemoAppCocoaPods/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CollectorDemoAppCocoaPods;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1108,7 +1108,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.analytics.ios.CollectorDemoApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.analytics.ios.CollectorDemoAppCocoaPods;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1150,7 +1150,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9DD0AA6429B87FA60083AFDB /* Build configuration list for PBXNativeTarget "CollectorDemoAppCocoa" */ = {
+		9DD0AA6429B87FA60083AFDB /* Build configuration list for PBXNativeTarget "CollectorDemoAppCocoaPods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9DD0AA6529B87FA60083AFDB /* Debug */,

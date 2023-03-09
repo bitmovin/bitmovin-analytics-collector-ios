@@ -41,7 +41,7 @@ target 'CollectorDemoApp' do
   google_cast_sdk
 end
 
-target 'CollectorDemoAppCocoa' do
+target 'CollectorDemoAppCocoaPods' do
   use_frameworks!
   for_ios
   collectors
