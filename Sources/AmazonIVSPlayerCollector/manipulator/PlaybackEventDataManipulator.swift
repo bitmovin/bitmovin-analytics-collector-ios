@@ -22,6 +22,7 @@ class PlaybackEventDataManipulator: EventDataManipulator {
 
         // IVS player only supports HLS, thus we hardcode it here
         eventData.streamFormat = StreamType.hls.rawValue
+        eventData.m3u8Url = player.path?.absoluteString
 
         setLive(eventData)
     }
