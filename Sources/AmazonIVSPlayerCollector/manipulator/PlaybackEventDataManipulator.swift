@@ -5,7 +5,7 @@ import AmazonIVSPlayer
 import Foundation
 
 class PlaybackEventDataManipulator: EventDataManipulator {
-    private let player: IVSPlayer
+    private weak var player: IVSPlayer?
     private let config: BitmovinAnalyticsConfig
 
     init(
@@ -17,6 +17,10 @@ class PlaybackEventDataManipulator: EventDataManipulator {
     }
 
     func manipulate(eventData: EventData) throws {
+        guard let player = self.player else {
+            return
+        }
+        
         eventData.isMuted = player.muted
         eventData.videoDuration = player.duration.toMillis() ?? 0
 
@@ -24,10 +28,10 @@ class PlaybackEventDataManipulator: EventDataManipulator {
         eventData.streamFormat = StreamType.hls.rawValue
         eventData.m3u8Url = player.path?.absoluteString
 
-        setLive(eventData)
+        setLive(eventData, player)
     }
 
-    private func setLive(_ eventData: EventData) {
+    private func setLive(_ eventData: EventData, _ player: IVSPlayer) {
         let isLiveConfig = config.isLive
         if isLiveConfig {
             eventData.isLive = isLiveConfig

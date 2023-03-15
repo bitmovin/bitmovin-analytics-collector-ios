@@ -30,7 +30,8 @@ class PlaybackService {
     }
 
     func onSeekCompleted(time: CMTime) {
-        if playerContext.isLive {
+        let seekEnabled = playerContext.isLive == false
+        if !seekEnabled {
             return
         }
 

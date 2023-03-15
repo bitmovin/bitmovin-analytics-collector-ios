@@ -123,6 +123,26 @@ class PlaybackServiceTest: QuickSpec {
                 // assert
                 verify(mockStateMachine, never()).seek(time: any())
             }
+            it("should not transition into seek state when no info") {
+                // arrange
+                stub(mockStateMachine) { stub in
+                    when(stub.transitionState(destinationState: any(), time: any())).thenDoNothing()
+                    when(stub.seek(time: any())).thenDoNothing()
+                    when(stub.state.get).thenReturn(PlayerState.playing)
+                }
+
+                stub(mockPlayerContext) { stub in
+                    when(stub.position.get).thenReturn(nil)
+                    when(stub.isLive.get).thenReturn(nil)
+                }
+                let seekToTime = CMTime(seconds: 5, preferredTimescale: 1_000)
+
+                // act
+                playbackService.onSeekCompleted(time: seekToTime)
+
+                // assert
+                verify(mockStateMachine, never()).seek(time: any())
+            }
             
             it("should transition from playing to seek and back") {
                 // arrange

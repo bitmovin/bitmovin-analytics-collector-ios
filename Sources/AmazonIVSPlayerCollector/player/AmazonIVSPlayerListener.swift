@@ -4,7 +4,7 @@ import CoreCollector
 #endif
 
 class AmazonIVSPlayerListener: NSObject, IVSPlayer.Delegate {
-    private let player: IVSPlayer
+    private weak var player: IVSPlayer?
     private weak var customerDelegate: IVSPlayer.Delegate?
     private let videoStartupService: VideoStartupService
     private let playbackService: PlaybackService
@@ -80,13 +80,20 @@ class AmazonIVSPlayerListener: NSObject, IVSPlayer.Delegate {
     }
 
     func startMonitoring() {
+        guard let player = player else {
+            return
+        }
+
         customerDelegate = player.delegate
         player.delegate = self
-        videoStartupService.shouldStartup(state: self.player.state)
+        videoStartupService.shouldStartup(state: player.state)
     }
 
     func stopMonitoring() {
-        player.delegate = customerDelegate
+        if let player = self.player {
+            player.delegate = customerDelegate
+        }
+
         customerDelegate = nil
     }
 }
