@@ -20,7 +20,6 @@ internal class EventDataDispatcherFactory {
 
         let authDispatcher = AuthenticatedDispatcher(
             authenticationService: self.authenticationService,
-            httpClient: httpClient,
             notificationCenter: self.notificationCenter,
             innerDispatcher: httpDispatcher
         )

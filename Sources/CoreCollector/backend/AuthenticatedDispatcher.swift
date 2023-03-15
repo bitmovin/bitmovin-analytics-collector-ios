@@ -2,7 +2,6 @@ import Foundation
 
 internal class AuthenticatedDispatcher: EventDataDispatcher {
     private let notificationCenter: NotificationCenter
-    private let httpClient: HttpClient
     private let innerDispatcher: EventDataDispatcher
 
     private var enabled = false
@@ -14,11 +13,9 @@ internal class AuthenticatedDispatcher: EventDataDispatcher {
 
     init(
         authenticationService: AuthenticationService,
-        httpClient: HttpClient,
         notificationCenter: NotificationCenter,
         innerDispatcher: EventDataDispatcher
     ) {
-        self.httpClient = httpClient
         self.innerDispatcher = innerDispatcher
         self.notificationCenter = notificationCenter
         self.analyticsBackendUrl = BitmovinAnalyticsConfig.analyticsUrl
@@ -48,7 +45,7 @@ internal class AuthenticatedDispatcher: EventDataDispatcher {
     }
 
     func disable() {
-        self.enabled = false
+        enabled = false
         innerDispatcher.disable()
     }
 
@@ -57,13 +54,13 @@ internal class AuthenticatedDispatcher: EventDataDispatcher {
     }
 
     private func setupObserver(_ authenticationService: AuthenticationService) {
-        self.notificationCenter.addObserver(
+        notificationCenter.addObserver(
             self,
             selector: #selector(self.handleAuthenticationSuccess),
             name: .authenticationSuccess,
             object: authenticationService
         )
-        self.notificationCenter.addObserver(
+        notificationCenter.addObserver(
             self,
             selector: #selector(self.handleAuthenticationFailed),
             name: .authenticationFailed,
@@ -72,39 +69,33 @@ internal class AuthenticatedDispatcher: EventDataDispatcher {
     }
 
     private func removeObserver() {
-        self.notificationCenter.removeObserver(self)
+        notificationCenter.removeObserver(self)
     }
 
     @objc
     private func handleAuthenticationSuccess(_ notification: Notification) {
-        self.enabled = true
-        self.flushEventQueues()
+        enabled = true
+        flushEventQueues()
     }
 
     private func flushEventQueues() {
-        let events = self.events.enumerated().reversed()
-        for (index, eventData) in events {
-            self.httpClient.post(
-                urlString: self.analyticsBackendUrl,
-                json: eventData.jsonString(),
-                completionHandler: nil
-            )
-            self.events.remove(at: index)
+        if !events.isEmpty {
+            for eventData in events {
+                innerDispatcher.add(eventData)
+            }
+            events.removeAll()
         }
 
-        let adEvents = self.adEvents.enumerated().reversed()
-        for (index, adEventData) in adEvents {
-            self.httpClient.post(
-                urlString: self.adAnalyticsBackendUrl,
-                json: Util.toJson(object: adEventData),
-                completionHandler: nil
-            )
-            self.adEvents.remove(at: index)
+        if !adEvents.isEmpty {
+            for adEventData in adEvents {
+                innerDispatcher.addAd(adEventData)
+            }
+            adEvents.removeAll()
         }
     }
 
     @objc
     private func handleAuthenticationFailed(_ notification: Notification) {
-        self.disable()
+        disable()
     }
 }

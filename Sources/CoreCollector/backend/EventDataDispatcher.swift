@@ -1,6 +1,4 @@
-import Foundation
-
-public protocol EventDataDispatcher {
+internal protocol EventDataDispatcher {
     func add(_ eventData: EventData)
     func addAd(_ adEventData: AdEventData)
     func disable()
