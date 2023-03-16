@@ -45,12 +45,7 @@ class AmazonIvsViewController: UIViewController, IVSPlayer.Delegate {
             return
         }
 
-        player.delegate = self
         collector?.attachPlayer(player: player)
-    }
-
-    func player(_ player: IVSPlayer, didChangeState state: IVSPlayer.State) {
-        print("Yeah we also got it")
     }
 
     // MARK: - Amazon player
