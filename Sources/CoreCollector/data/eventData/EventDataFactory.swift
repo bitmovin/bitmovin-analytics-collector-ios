@@ -15,10 +15,12 @@ public class EventDataFactory: EventDataManipulatorPipeline {
         self.userIdProvider = userIdProvider
     }
 
-    public func clearEventDataManipulators() {
+    func clearEventDataManipulators() {
         manipulators.removeAll()
     }
 
+    // use only for adapter manipulator
+    // they are cleaned on detach
     public func registerEventDataManipulator(manipulator: EventDataManipulator) {
         manipulators.append(manipulator)
     }

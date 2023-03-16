@@ -88,6 +88,7 @@ public class BitmovinAnalyticsInternal: NSObject {
         guard isPlayerAttached else {
             return
         }
+        eventDataFactory.clearEventDataManipulators()
         isPlayerAttached = false
         detachAd()
         adapter?.destroy()
