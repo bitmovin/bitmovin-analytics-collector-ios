@@ -8,11 +8,15 @@ import CoreCollector
 enum AmazonIVSPlayerAdapterFactory {
     static func createAdapter(
         player: IVSPlayer,
-        stateMachine: StateMachine,
+        analytics: BitmovinAnalyticsInternal,
         config: BitmovinAnalyticsConfig,
         manipulatorPipeline: EventDataManipulatorPipeline
     ) -> AmazonIVSPlayerAdapter {
         let playerContext = AmazonIVSPlayerContext(player: player)
+
+        let stateMachine = StateMachineFactory.create(playerContext: playerContext)
+        analytics.setStateMachine(stateMachine)
+
         let videoStartupService = VideoStartupService(
             playerContext: playerContext,
             stateMachine: stateMachine

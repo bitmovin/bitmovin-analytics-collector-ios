@@ -40,7 +40,7 @@ public enum PlayerState: String {
         case .paused:
             return
         case .playing:
-            stateMachine.enableHeartbeat()
+            stateMachine.playingHeartbeatService.enableHeartbeat()
             return
         case .qualitychange:
             stateMachine.qualityChangeCounter.increaseCounter()
@@ -90,7 +90,7 @@ public enum PlayerState: String {
             return
         case .playing:
             stateMachine.listener?.onPlayingExit(withDuration: duration)
-            stateMachine.disableHeartbeat()
+            stateMachine.playingHeartbeatService.disableHeartbeat()
             return
         case .paused:
             stateMachine.listener?.onPauseExit(withDuration: duration)

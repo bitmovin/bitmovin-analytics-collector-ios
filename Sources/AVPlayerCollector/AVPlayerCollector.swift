@@ -10,7 +10,6 @@ public class AVPlayerCollector: NSObject, Collector {
     public typealias TPlayer = AVPlayer
 
     private var analytics: BitmovinAnalyticsInternal
-    private let stateMachine: StateMachine
     private let userIdProvider: UserIdProvider
     private let eventDataFactory: EventDataFactory
 
@@ -21,7 +20,6 @@ public class AVPlayerCollector: NSObject, Collector {
             config: config,
             eventDataFactory: eventDataFactory
         )
-        self.stateMachine = self.analytics.getStateMachine()
     }
 
     /**
@@ -29,16 +27,12 @@ public class AVPlayerCollector: NSObject, Collector {
      * will start monitoring and sending analytics data based on the attached player instance.
      */
     public func attachPlayer(player: AVPlayer) {
-        let adapter = buildAdapter(player: player)
-        analytics.attach(adapter: adapter)
-    }
-
-    private func buildAdapter(player: AVPlayer) -> AVPlayerAdapter {
-        AVPlayerAdapterFactory.createAdapter(
-            stateMachine: self.stateMachine,
+        let adapter = AVPlayerAdapterFactory.createAdapter(
+            analytics: analytics,
             eventDataFactory: eventDataFactory,
             player: player
         )
+        analytics.attach(adapter: adapter)
     }
 
     public func detachPlayer() {

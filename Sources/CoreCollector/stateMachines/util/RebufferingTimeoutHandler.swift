@@ -1,30 +1,22 @@
 import Foundation
 
+// could be generified to TimeoutHandler
 public class RebufferingTimeoutHandler {
     private static var rebufferingTimeoutSeconds: TimeInterval = 2 * 60
 
     private let queue = DispatchQueue(label: "com.bitmovin.analytics.core.utils.RebufferingTimeoutHandler")
     private var rebufferingTimeoutWorkItem: DispatchWorkItem?
-    private weak var stateMachine: DefaultStateMachine?
-
-    func initialise(stateMachine: DefaultStateMachine) {
-        self.stateMachine = stateMachine
-    }
+    weak var listeners: RebufferTimeoutListener?
 
     func startInterval() {
         resetInterval()
         rebufferingTimeoutWorkItem = DispatchWorkItem { [weak self] in
             guard let self = self else { return }
-            self.rebufferTimeoutReached()
+            self.listeners?.onRebufferTimeout()
             self.resetInterval()
         }
 
         queue.asyncAfter(deadline: .now() + RebufferingTimeoutHandler.rebufferingTimeoutSeconds, execute: rebufferingTimeoutWorkItem!)
-    }
-
-    private func rebufferTimeoutReached() {
-        stateMachine?.error(withError: ErrorData.BUFFERING_TIMEOUT_REACHED, time: stateMachine?.listener?.currentTime)
-        stateMachine?.listener?.stateMachineStopsCollecting()
     }
 
     func resetInterval() {
@@ -35,4 +27,8 @@ public class RebufferingTimeoutHandler {
         rebufferingTimeoutWorkItem?.cancel()
         rebufferingTimeoutWorkItem = nil
     }
+}
+
+protocol RebufferTimeoutListener: AnyObject {
+    func onRebufferTimeout()
 }

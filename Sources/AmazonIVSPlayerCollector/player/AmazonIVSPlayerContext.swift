@@ -17,4 +17,8 @@ class AmazonIVSPlayerContext: PlayerContext {
     var isLive: Bool? {
         player?.duration.isIndefinite
     }
+
+    var isPlaying: Bool {
+        player != nil && player?.state == IVSPlayer.State.playing
+    }
 }

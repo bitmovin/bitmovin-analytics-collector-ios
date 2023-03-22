@@ -7,7 +7,6 @@ import CoreCollector
 public class AmazonIVSCollector: NSObject, Collector {
     public typealias TPlayer = IVSPlayer
     private var analytics: BitmovinAnalyticsInternal
-    private let stateMachine: StateMachine
     private let userIdProvider: UserIdProvider
     private let eventDataFactory: EventDataFactory
     private let config: BitmovinAnalyticsConfig
@@ -20,13 +19,12 @@ public class AmazonIVSCollector: NSObject, Collector {
             eventDataFactory: eventDataFactory
         )
         self.config = config
-        self.stateMachine = self.analytics.getStateMachine()
     }
 
     public func attachPlayer(player: IVSPlayer) {
         let adapter = AmazonIVSPlayerAdapterFactory.createAdapter(
             player: player,
-            stateMachine: self.stateMachine,
+            analytics: analytics,
             config: self.config,
             manipulatorPipeline: self.eventDataFactory
         )

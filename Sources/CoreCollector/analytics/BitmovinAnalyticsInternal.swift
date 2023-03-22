@@ -13,7 +13,9 @@ public class BitmovinAnalyticsInternal: NSObject {
     internal var adAdapter: AdAdapter?
 
     private var config: BitmovinAnalyticsConfig
-    private let stateMachine: DefaultStateMachine
+
+    // we want to get rid of it in this class
+    private var stateMachine: DefaultStateMachine?
     private let eventDataDispatcher: EventDataDispatcher
     private let authenticationService: AuthenticationService
     private let eventDataFactory: EventDataFactory
@@ -24,7 +26,6 @@ public class BitmovinAnalyticsInternal: NSObject {
 
     convenience init(
         config: BitmovinAnalyticsConfig,
-        stateMachine: DefaultStateMachine,
         eventDataFactory: EventDataFactory
     ) {
         let notificationCenter = NotificationCenter()
@@ -36,7 +37,6 @@ public class BitmovinAnalyticsInternal: NSObject {
             notificationCenter,
             dispatcherFactory.createDispatcher(),
             authenticationService,
-            stateMachine,
             eventDataFactory
         )
     }
@@ -46,11 +46,9 @@ public class BitmovinAnalyticsInternal: NSObject {
         _ notificationCenter: NotificationCenter,
         _ eventDataDispatcher: EventDataDispatcher,
         _ authenticationService: AuthenticationService,
-        _ stateMachine: DefaultStateMachine,
         _ eventDataFactory: EventDataFactory
     ) {
         self.config = config
-        self.stateMachine = stateMachine
         self.eventDataFactory = eventDataFactory
         self.notificationCenter = notificationCenter
         self.authenticationService = authenticationService
@@ -66,12 +64,12 @@ public class BitmovinAnalyticsInternal: NSObject {
     }
 
     deinit {
-        if self.stateMachine.state == .playing {
-            let enterTimestamp = stateMachine.stateEnterTimestamp
-            let duration = Date().timeIntervalSince1970Millis - enterTimestamp
-            if duration < 90_000 {
-                self.stateMachine.videoTimeEnd = self.adapter?.currentTime
-                if self.stateMachine.state == .playing {
+        if let stateMachine = self.stateMachine, let state = self.stateMachine?.state {
+            if state == .playing {
+                let enterTimestamp = stateMachine.stateEnterTimestamp
+                let duration = Date().timeIntervalSince1970Millis - enterTimestamp
+                if duration < 90_000 {
+                    stateMachine.videoTimeEnd = self.adapter?.currentTime
                     onPlayingExit(withDuration: duration)
                 }
             }
@@ -95,7 +93,8 @@ public class BitmovinAnalyticsInternal: NSObject {
         eventDataDispatcher.resetSourceState()
         eventDataDispatcher.disable()
         eventDataFactory.reset()
-        stateMachine.reset()
+        stateMachine?.reset()
+        stateMachine = nil
         adapter = nil
     }
 
@@ -104,7 +103,7 @@ public class BitmovinAnalyticsInternal: NSObject {
             detachPlayer()
         }
         isPlayerAttached = true
-        stateMachine.listener = self
+        stateMachine?.listener = self
         self.authenticationService.authenticate()
         self.adapter = adapter
         self.adapter?.initialize()
@@ -118,8 +117,11 @@ public class BitmovinAnalyticsInternal: NSObject {
         self.adAdapter = adAdapter
     }
 
-    public func getStateMachine() -> StateMachine {
-        self.stateMachine
+    public func setStateMachine(_ stateMachine: StateMachine) {
+        guard let stateMachine = stateMachine as? DefaultStateMachine else {
+            return
+        }
+        self.stateMachine = stateMachine
     }
 
     public func getCustomData() -> CustomData {
@@ -134,7 +136,7 @@ public class BitmovinAnalyticsInternal: NSObject {
         let sourceMetadata = adapter?.currentSourceMetadata
         let customDataConfig: CustomDataConfig = sourceMetadata ?? self.config
 
-        self.stateMachine.changeCustomData(
+        self.stateMachine?.changeCustomData(
             customData: customData,
             time: self.currentTime,
             customDataConfig: customDataConfig
@@ -174,6 +176,8 @@ public class BitmovinAnalyticsInternal: NSObject {
     }
 
     func createEventData(duration: Int64) -> EventData {
+        let stateMachine = self.stateMachine!
+
         var drmLoadTime: Int64?
         if adapter?.drmDownloadTime != nil && !didSendDrmLoadTime {
             drmLoadTime = adapter?.drmDownloadTime
@@ -181,17 +185,17 @@ public class BitmovinAnalyticsInternal: NSObject {
         }
 
         let eventData = self.eventDataFactory.createEventData(
-            self.stateMachine.state.rawValue,
-            self.stateMachine.impressionId,
-            self.stateMachine.videoTimeStart,
-            self.stateMachine.videoTimeEnd,
+            stateMachine.state.rawValue,
+            stateMachine.impressionId,
+            stateMachine.videoTimeStart,
+            stateMachine.videoTimeEnd,
             drmLoadTime,
             self.adapter?.currentSourceMetadata
         )
 
-        if self.stateMachine.videoStartFailureService.videoStartFailed {
-            eventData.videoStartFailed = self.stateMachine.videoStartFailureService.videoStartFailed
-            eventData.videoStartFailedReason = self.stateMachine.videoStartFailureService.videoStartFailedReason
+        if stateMachine.videoStartFailureService.videoStartFailed {
+            eventData.videoStartFailed = stateMachine.videoStartFailureService.videoStartFailed
+            eventData.videoStartFailedReason = stateMachine.videoStartFailureService.videoStartFailedReason
                 ?? VideoStartFailedReason.unknown
             stateMachine.videoStartFailureService.reset()
         }
@@ -352,10 +356,8 @@ public extension BitmovinAnalyticsInternal {
         config: BitmovinAnalyticsConfig,
         eventDataFactory: EventDataFactory
     ) -> BitmovinAnalyticsInternal {
-        let stateMachine = DefaultStateMachine()
-        return BitmovinAnalyticsInternal(
+        BitmovinAnalyticsInternal(
             config: config,
-            stateMachine: stateMachine,
             eventDataFactory: eventDataFactory
         )
     }

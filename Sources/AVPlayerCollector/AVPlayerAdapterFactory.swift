@@ -7,7 +7,7 @@ import CoreCollector
 
 internal enum AVPlayerAdapterFactory {
     static func createAdapter(
-        stateMachine: StateMachine,
+        analytics: BitmovinAnalyticsInternal,
         eventDataFactory: EventDataFactory,
         player: AVPlayer
     ) -> AVPlayerAdapter {
@@ -23,6 +23,9 @@ internal enum AVPlayerAdapterFactory {
         )
         eventDataFactory.registerEventDataManipulator(manipulator: manipulator)
 
+        var playerContext = AVPlayerContext(player: player, playbackTypeDetectionService: playbackTypeDetectionService)
+        var stateMachine = StateMachineFactory.create(playerContext: playerContext)
+        analytics.setStateMachine(stateMachine)
         return AVPlayerAdapter(
             player: player,
             stateMachine: stateMachine,

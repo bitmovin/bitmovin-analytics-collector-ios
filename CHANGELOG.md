@@ -13,10 +13,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - quick & nimble test framework
 - cuckoo mocking framework
 - Amazon IVS adapter & listeners
+- heartbeat now checks if player is still playing before continuing with heartbeat
 
 ### Changed
 - updated example app 
-- extracted StateMachine interface for testing [internal]
+- [internal] extracted StateMachine interface for testing 
+- [internal] stateMachine is created new on every attach
 
 ### Removed
 - MIT License

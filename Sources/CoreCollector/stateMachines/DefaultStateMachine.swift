@@ -1,7 +1,7 @@
 import AVFoundation
 import Foundation
 
-class DefaultStateMachine: StateMachine {
+class DefaultStateMachine: StateMachine, RebufferHeartbeatListener, PlayingHeartbeatListener, RebufferTimeoutListener {
     private(set) var state: PlayerState
     private(set) var impressionId: String
     weak var listener: StateMachineListener?
@@ -24,25 +24,33 @@ class DefaultStateMachine: StateMachine {
     var qualityChangeCounter: QualityChangeCounter
     var rebufferingHeartbeatService: RebufferingHeartbeatService
     var videoStartFailureService: VideoStartFailureService
+    var playingHeartbeatService: PlayingHeartbeatService
+
+    private let playerContext: PlayerContext
 
     // error tracking
     private var errorData: ErrorData?
 
-    init() {
+    init(playerContext: PlayerContext) {
         state = .ready
         impressionId = NSUUID().uuidString
         qualityChangeCounter = QualityChangeCounter()
-        rebufferingHeartbeatService = RebufferingHeartbeatService()
+        let rebufferingTimeoutHandler = RebufferingTimeoutHandler()
+        rebufferingHeartbeatService = RebufferingHeartbeatService(timeoutHandler: rebufferingTimeoutHandler)
+        playingHeartbeatService = PlayingHeartbeatService()
         videoStartFailureService = VideoStartFailureService()
+        self.playerContext = playerContext
         print("Generated Bitmovin Analytics impression ID: " + impressionId.lowercased())
 
         // needs to happen after init of properties
-        rebufferingHeartbeatService.initialise(stateMachine: self)
+        rebufferingTimeoutHandler.listeners = self
         videoStartFailureService.initialise(stateMachine: self)
+        rebufferingHeartbeatService.listener = self
+        playingHeartbeatService.listener = self
     }
 
     deinit {
-        disableHeartbeat()
+        self.playingHeartbeatService.disableHeartbeat()
         self.rebufferingHeartbeatService.disableHeartbeat()
     }
 
@@ -51,7 +59,7 @@ class DefaultStateMachine: StateMachine {
         didAttemptPlayingVideo = false
         didStartPlayingVideo = false
         startupTime = 0
-        disableHeartbeat()
+        self.playingHeartbeatService.disableHeartbeat()
         rebufferingHeartbeatService.disableHeartbeat()
         videoStartFailureService.reset()
         qualityChangeCounter.resetInterval()
@@ -210,24 +218,26 @@ class DefaultStateMachine: StateMachine {
         return true
     }
 
-    func enableHeartbeat() {
-        let interval = Double(heartbeatInterval) / 1_000.0
-        heartbeatTimer?.invalidate()
-        heartbeatTimer = Timer.scheduledTimer(
-            timeInterval: interval,
-            target: self,
-            selector: #selector(DefaultStateMachine.onHeartbeat),
-            userInfo: nil,
-            repeats: true
-        )
+    func onRebufferTimeout() {
+        error(withError: ErrorData.BUFFERING_TIMEOUT_REACHED, time: listener?.currentTime)
+        listener?.stateMachineStopsCollecting()
     }
 
-    func disableHeartbeat() {
-        heartbeatTimer?.invalidate()
+    func onRebufferHeartbeat() {
+        onHeartbeat()
     }
 
-    @objc
-    func onHeartbeat() {
+    func onPlayingHeartbeat() -> Bool {
+        if playerContext.isPlaying {
+            onHeartbeat()
+            return true
+        } else {
+            pause(time: playerContext.position)
+            return false
+        }
+    }
+
+    private func onHeartbeat() {
         videoTimeEnd = listener?.currentTime
         let timestamp = Date().timeIntervalSince1970Millis
         let duration = timestamp - stateEnterTimestamp

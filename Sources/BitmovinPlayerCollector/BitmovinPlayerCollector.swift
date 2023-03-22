@@ -10,7 +10,6 @@ public class BitmovinPlayerCollector: NSObject, Collector {
     private var sourceMetadataProvider = SourceMetadataProvider<Source>()
     private var analytics: BitmovinAnalyticsInternal
     private var config: BitmovinAnalyticsConfig
-    private let stateMachine: StateMachine
     private let userIdProvider: UserIdProvider
     private let eventDataFactory: EventDataFactory
 
@@ -22,7 +21,6 @@ public class BitmovinPlayerCollector: NSObject, Collector {
             config: config,
             eventDataFactory: eventDataFactory
         )
-        self.stateMachine = self.analytics.getStateMachine()
         self.config = config
     }
     /**
@@ -34,10 +32,13 @@ public class BitmovinPlayerCollector: NSObject, Collector {
         let castManipulator = CastEventDataManipulator(player: player)
         eventDataFactory.registerEventDataManipulator(manipulator: castManipulator)
 
+        let playerContext = BitmovinPlayerContext(player: player)
+        let stateMachine = StateMachineFactory.create(playerContext: playerContext)
+        analytics.setStateMachine(stateMachine)
         let adapter = BitmovinPlayerAdapter(
             player: player,
             config: self.config,
-            stateMachine: self.stateMachine,
+            stateMachine: stateMachine,
             sourceMetadataProvider: sourceMetadataProvider
         )
         eventDataFactory.registerEventDataManipulator(manipulator: adapter)
