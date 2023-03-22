@@ -4,16 +4,21 @@ import CoreCollector
 import AmazonIVSPlayer
 
 class PlayerInfoManipulator: EventDataManipulator {
-    private weak var player: IVSPlayer?
-    internal init(player: IVSPlayer) {
+    private let playerTech = "ios:amazonivs"
+
+    private weak var player: IVSPlayerProtocol?
+
+    internal init(player: IVSPlayerProtocol) {
         self.player = player
     }
 
-    func manipulate(eventData: EventData) throws {
+    func manipulate(eventData: EventData) {
         guard let player = self.player else {
             return
         }
 
-        eventData.version = player.version
+        eventData.version = PlayerType.amazonivs.rawValue + "-" + player.version
+        eventData.player = PlayerType.amazonivs.rawValue
+        eventData.playerTech = playerTech
     }
 }
