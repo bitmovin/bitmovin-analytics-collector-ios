@@ -6,7 +6,7 @@ import CoreCollector
 class PlayerStatisticsProvider {
     private weak var player: IVSPlayerProtocol?
     private var prevTotalDroppedFrames: Int = 0
-    
+
     init(player: IVSPlayerProtocol) {
         self.player = player
     }

@@ -13,7 +13,7 @@ class PlayerInfoManipulator: EventDataManipulator {
         guard let player = self.player else {
             return
         }
-        
+
         eventData.version = player.version
     }
 }

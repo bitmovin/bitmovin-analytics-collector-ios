@@ -20,7 +20,7 @@ class PlaybackEventDataManipulator: EventDataManipulator {
         guard let player = self.player else {
             return
         }
-        
+
         eventData.isMuted = player.muted
         eventData.videoDuration = player.duration.toMillis() ?? 0
 
