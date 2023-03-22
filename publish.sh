@@ -43,11 +43,11 @@ then
 fi
 
 echo "Make sure you have fastlane installed on your computer before releasing: (sudo gem install fastlane -NV)"
-echo "Make sure to bump the version in the .podspec, README and CHANGELOG first and merge that PR into develop."
+echo "Make sure to bump the version in the .podspec, README and CHANGELOG first and merge that PR into main."
 echo "If you've changed the version of the player dependency, make sure to also update the .podspec.json files in the Specs folder."
 echo "Version (without leading \"v\")":
 read VERSION
-git checkout develop || exit
+git checkout main || exit
 git pull || exit
 
 echo "Generating BuildConfig.swift file..."
@@ -55,12 +55,9 @@ chmod +x ./scripts/generateBuildConfig.sh
 (./scripts/generateBuildConfig.sh "VERSION=$VERSION") > BitmovinAnalyticsCollector/Classes/Collector/util/BuildConfig.swift || exit
 git add BitmovinAnalyticsCollector/Classes/Collector/util/BuildConfig.swift || exit
 git commit -m "Generated BuildConfig.swift" || exit
-git push origin develop || exit
+git push origin main || exit
 echo "Generated BuildConfig.swift file."
 
-git checkout main || exit
-git pull || exit
-git merge develop || exit
 git tag -a $VERSION -m "v$VERSION" || exit
 git push origin main $VERSION || exit
 
