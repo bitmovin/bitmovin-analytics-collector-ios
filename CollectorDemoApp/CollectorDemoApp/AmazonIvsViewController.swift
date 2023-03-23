@@ -32,7 +32,6 @@ class AmazonIvsViewController: UIViewController, IVSPlayer.Delegate {
 
     private var collector: AmazonIVSCollector? = nil
     private func createConfig() {
-        // create config
         let config = BitmovinAnalyticsConfig(key: AppConfig.analyticsLicenseKey)
         // create adapter
         self.collector = AmazonIVSCollector(config: config)
@@ -40,7 +39,6 @@ class AmazonIvsViewController: UIViewController, IVSPlayer.Delegate {
     }
 
     private func attachCollector() {
-        // attach adapter
         guard let player = player else {
             return
         }

@@ -1,0 +1,13 @@
+name: Install CocoaPods dependencies
+description: Installs CocoaPods dependencies
+runs:
+  using: "composite"
+  steps:
+    - name: Install pods
+      working-directory: CollectorDemoApp
+      run: bundle exec pod install --deployment
+      shell: bash
+      env:
+        # Setting the location for the stored pods and CocoaPods caches to be exclusive to each runner as we observed
+        # errors regarding the global Cache when multiple jobs execute `pod install` commands concurrently.
+        CP_HOME_DIR: ${{ github.workspace }}/../../../CocoaPodsCaches

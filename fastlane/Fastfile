@@ -60,4 +60,18 @@ lane :release do
         # "bundle exec pod repo add bm-#{COCOA_DEPLOY_REPO} git@github.com:rolandgriesser/#{COCOA_DEPLOY_REPO}.git || bundle exec pod repo update bm-#{COCOA_DEPLOY_REPO};"\
         # "bundle exec pod repo push bm-#{COCOA_DEPLOY_REPO} #{spec_output_path} --allow-warnings --skip-import-validation --skip-tests")
     end
+
+end
+
+lane :build_collector do
+  scan(
+    scheme: "CollectorDemoApp",
+    workspace: "./CollectorDemoApp/CollectorDemoApp.xcworkspace",
+    sdk: "iphoneos",
+    destination: "generic/platform=iOS",
+    clean: true,
+    build_for_testing: true,
+    configuration: "Debug",
+    xcargs: "CODE_SIGNING_ALLOWED='NO'"
+  )
 end

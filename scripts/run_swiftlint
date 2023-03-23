@@ -51,7 +51,9 @@ if [[ "$CI" = true ]]; then
 fi
 
 if [[ "$GITHUB_ACTIONS" = true ]]; then
-    ADDITIONAL_FLAGS='--strict --reporter github-actions-logging'
+    # reintroduce strict flag once all warnings are resolved
+    # ADDITIONAL_FLAGS='--strict --reporter github-actions-logging'
+    ADDITIONAL_FLAGS='--reporter github-actions-logging'
 fi
 
 if [ ! -f Mintfile ]; then

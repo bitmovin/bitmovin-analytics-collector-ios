@@ -3,6 +3,10 @@ excluded:
   - Pods
   - vendor
   - Sources/CoreCollector/util/BuildConfig.swift
+  - CollectorDemoApp
+  - .swiftpm
+  - fastlane
+  - .build
 
 disabled_rules:
   - todo
@@ -52,7 +56,6 @@ opt_in_rules:
   - override_in_extension
   - quick_discouraged_call
   - quick_discouraged_focused_test
-  - unused_import
   - yoda_condition
 
   #style
@@ -81,6 +84,9 @@ opt_in_rules:
   - vertical_parameter_alignment_on_call
   - vertical_whitespace_closing_braces
   - vertical_whitespace_opening_braces
+
+analyzer_rules:
+  - unused_import
 
 deployment_target:
   iOS_deployment_target: 12.0
