@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - cuckoo mocking framework
 - Amazon IVS adapter & listeners
 - heartbeat now checks if player is still playing before continuing with heartbeat
+- [internal] fastlane build & test lanes
+- [internal] added github workflow build, lint checks & tests
 
 ### Changed
 - updated example app 
@@ -22,6 +24,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 - MIT License
+- removed support for iOS/tvOS 12 & 13
 
 ## 2.10.0
 

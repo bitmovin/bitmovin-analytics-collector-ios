@@ -1,7 +1,7 @@
-import BitmovinPlayerCollector
-import BitmovinPlayer
-import CoreCollector
+import Foundation
 import UIKit
+import BitmovinAnalyticsCollector
+import BitmovinPlayer
 
 class ViewController: UIViewController {
     private var player: Player?
@@ -68,7 +68,7 @@ class ViewController: UIViewController {
         config.playbackConfig = playbackConfig
         // Create player based on player configuration
         let player = PlayerFactory.create(playerConfig: config)
-        player.add(listener: self)
+        player.mute()
         analyticsCollector.attachBitmovinPlayer(player: player)
 
         // Create player view and pass the player instance to it
@@ -86,11 +86,5 @@ class ViewController: UIViewController {
         let source = SourceFactory.create(from: sourceConfig!)
         player.load(source: source)
         self.player = player
-    }
-}
-
-extension ViewController: PlayerListener {
-    func onEvent(_ event: Event, player: Player) {
-        print(event.name)
     }
 }

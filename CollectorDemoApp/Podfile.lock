@@ -6,7 +6,7 @@ PODS:
   - BitmovinAnalyticsCollector/BitmovinPlayer (2.10.0):
     - BitmovinPlayer (~> 3.35)
   - BitmovinAnalyticsCollector/Core (2.10.0)
-  - BitmovinPlayer (3.35.1)
+  - BitmovinPlayer (3.35.0)
   - google-cast-sdk (4.6.1):
     - google-cast-sdk/Core (= 4.6.1)
     - Protobuf (~> 3.13)
@@ -38,12 +38,12 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AmazonIVSPlayer: e64a0a905b60de5760a377eb256895cfae09c694
-  BitmovinAnalyticsCollector: be0d26d58b06397e754e263e22d591cdaf5b22fb
-  BitmovinPlayer: a649b8803e67d9fa4d8c84b2788a6e7a0be4d0db
+  BitmovinAnalyticsCollector: d08fe192802a58eddcb4b8a5af6f9d5bacecc9a6
+  BitmovinPlayer: 44df4916e616d56fde2ed88e68f98a9a454fc3a3
   google-cast-sdk: 9fc76175641bc24ef2515e0263344bd2c5c4e75c
   GoogleAds-IMA-iOS-SDK: b01284e3bf3d64ba948de6692ffda531452c3713
   Protobuf: d7f7c8329edf5eb8af65547a8ba3e9c1cee927d5
 
-PODFILE CHECKSUM: 5a0235e4178613c8466fbe0f8fc562a1602debd6
+PODFILE CHECKSUM: ee69a4fee378da37745b85e58712342581bf5d24
 
 COCOAPODS: 1.12.0

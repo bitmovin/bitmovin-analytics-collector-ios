@@ -8,10 +8,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--View Controller-->
         <scene sceneID="xny-9Z-IFd">
             <objects>
-                <viewController id="wyb-PO-Ovp" customClass="MainViewController" customModule="CollectorDemoAppCocoa" customModuleProvider="target" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3H2-N0-2Jx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="wyb-PO-Ovp" customClass="ViewController" customModule="CollectorDemoAppCocoaPods" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Xu-Dj-GZe"/>
                         <viewControllerLayoutGuide type="bottom" id="90D-Im-ecy"/>
@@ -22,7 +23,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3H2-N0-2Jx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1457" y="348"/>
         </scene>

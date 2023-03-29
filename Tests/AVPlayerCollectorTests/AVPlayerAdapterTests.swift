@@ -18,7 +18,8 @@ class AVPlayerAdapterTests: QuickSpec {
                 // arrange
                 let player = AVPlayer()
                 let config = BitmovinAnalyticsConfig(key: "")
-                let stateMachine = DefaultStateMachine()
+                let playerContext = MockPlayerContext()
+                let stateMachine = DefaultStateMachine(playerContext: playerContext)
                 let adapter = self.createAdapter(stateMachine, player)
 
                 // act
@@ -35,8 +36,12 @@ class AVPlayerAdapterTests: QuickSpec {
         _ player: AVPlayer
     ) -> AVPlayerAdapter {
         let eventDataFactory = EventDataFactory(BitmovinAnalyticsConfig(key: ""), UserDefaultUserIdProvider())
+        let analytics = BitmovinAnalyticsInternal.createAnalytics(
+            config: BitmovinAnalyticsConfig(key: "test-key"),
+            eventDataFactory: eventDataFactory
+        )
         return AVPlayerAdapterFactory.createAdapter(
-            stateMachine: stateMachine,
+            analytics: analytics,
             eventDataFactory: eventDataFactory,
             player: player
         )

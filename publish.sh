@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# Exit on any error
+set -e 
+
+# do not continue if you fail in a pipe ( | )
+set -o pipefail
+
 setEnvVariable () {
   EXPORT_TOKEN="\nexport $1=$2"
     if test -e ~/.bashrc; then
@@ -38,8 +44,9 @@ read RUN_BUILD_CHECKS
 
 if [ $RUN_BUILD_CHECKS = y ]
 then
-  chmod +x ./scripts/buildProjects.sh 
-  time ./scripts/buildProjects.sh || exit 
+  bundle exec fastlane build_collector
+  bundle exec fastlane build_collector_for_tv
+  bundle exec fastlane test_collector 
 fi
 
 echo "Make sure you have fastlane installed on your computer before releasing: (sudo gem install fastlane -NV)"

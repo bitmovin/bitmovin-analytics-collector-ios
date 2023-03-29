@@ -1,4 +1,4 @@
-name: Build workspace
+name: Test workspace
 on:
   push:
     paths:
@@ -12,14 +12,10 @@ on:
       - '**/*.xcconfig'
       - '**/*.xcscheme'
       - '**/*.pbxproj'
-      - 'Podfile*'
       - 'Gemfile*'
       - 'fastlane/**'
-      - 'Brewfile*'
-      - 'CollectorDemoApp/Podfile'
-      - 'CollectorDemoApp/Podfile.lock'
       - '.github/actions/**'
-      - '.github/workflows/build_collector_app.yml'
+      - '.github/workflows/test_collector.yml'
     branches:
       - '**'
     tags-ignore:
@@ -34,8 +30,8 @@ env:
   LC_ALL: en_US.UTF-8
   LANG: en_US.UTF-8
 jobs:
-  build_apps:
-    name: "Build App"
+  test_package:
+    name: "Test SPM Package"
     runs-on: self-hosted
     concurrency:
       group: build-workspace-apps-${{ inputs.ref || github.event.pull_request.number || github.ref }}
@@ -48,8 +44,7 @@ jobs:
         with:
           version: 14
       - uses: ./.github/actions/prepare-dependencies
-      - name: Build Collector demo app iOS
-        run: bundle exec fastlane build_collector
-      - name: Build Collector demo app tvOS
-        run: bundle exec fastlane build_collector_for_tv
+      - uses: ./.github/actions/generate-mocks
+      - name: Test Collector spm package
+        run: bundle exec fastlane test_collector
     

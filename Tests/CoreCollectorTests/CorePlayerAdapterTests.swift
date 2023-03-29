@@ -10,7 +10,8 @@ import XCTest
 class CorePlayerAdapterTests: XCTestCase {
     func testDestroyWontFailOnMultipleCalls() throws {
         let config = BitmovinAnalyticsConfig(key: "")
-        let stateMachine = DefaultStateMachine()
+        let mockPlayerContext = MockPlayerContext()
+        let stateMachine = DefaultStateMachine(playerContext: mockPlayerContext)
         let adapter = CorePlayerAdapter(stateMachine: stateMachine)
 
         adapter.destroy()

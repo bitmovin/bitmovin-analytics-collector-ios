@@ -12,8 +12,8 @@ DESC
   s.author           = { 'Bitmovin Inc' => 'admin@bitmovin.com' }
   s.source           = { :git => 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '12.0'
-  s.tvos.deployment_target = '12.0'
+  s.ios.deployment_target = '14.2'
+  s.tvos.deployment_target = '14.2'
   s.swift_version = '5.0'
 
   s.pod_target_xcconfig = {

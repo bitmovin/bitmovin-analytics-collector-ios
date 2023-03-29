@@ -1,5 +1,3 @@
-import BitmovinPlayer
-import GoogleCast
 import UIKit
 
 @UIApplicationMain

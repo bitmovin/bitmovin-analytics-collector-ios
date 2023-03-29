@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C9F52909250A2416284A39F /* Pods_CollectorDemoAppTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACF2489EF66A6971D7BC4DF /* Pods_CollectorDemoAppTV.framework */; };
-		54DD37D8FD15A95D8F3AAB88 /* Pods_CollectorDemoAppCocoaPods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E03350B85318B30D1FCD8DD /* Pods_CollectorDemoAppCocoaPods.framework */; };
+		79CFBDE266D7173A3728ED64 /* Pods_CollectorDemoAppTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2139A901497FFA4714AD500A /* Pods_CollectorDemoAppTV.framework */; };
+		96B576F7205BE09A08BB2B70 /* libPods-CollectorDemoAppTVCocoaPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB1F5F69DFBB5DE75E5EF93 /* libPods-CollectorDemoAppTVCocoaPods.a */; };
 		9D3869AF29AF82F100F6531D /* AmazonIVSPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9D3869AE29AF82F100F6531D /* AmazonIVSPlayerCollector */; };
 		9D6FA9EE29AE2C6900B2BF1A /* AVPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9D6FA9ED29AE2C6900B2BF1A /* AVPlayerCollector */; };
 		9D6FA9F029AE2C6900B2BF1A /* BitmovinPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9D6FA9EF29AE2C6900B2BF1A /* BitmovinPlayerCollector */; };
 		9D6FA9F629AE2C8900B2BF1A /* bitmovin-analytics-collector-ios-internal in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D6FA9EC29AE2BFA00B2BF1A /* bitmovin-analytics-collector-ios-internal */; };
-		9D8F6018299A61E200090B46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F6011299A61E200090B46 /* Assets.xcassets */; };
 		9D8F6019299A61E200090B46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F6012299A61E200090B46 /* AppDelegate.swift */; };
 		9D8F601A299A61E200090B46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F6013299A61E200090B46 /* ViewController.swift */; };
 		9D8F6031299A65FC00090B46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F601C299A65FB00090B46 /* Assets.xcassets */; };
@@ -32,8 +31,18 @@
 		9D8F6040299A65FC00090B46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F602F299A65FC00090B46 /* Main.storyboard */; };
 		9DA89915299CB13E004BE1CD /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA89914299CB13E004BE1CD /* AppConfig.swift */; };
 		9DA89916299CB13E004BE1CD /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA89914299CB13E004BE1CD /* AppConfig.swift */; };
+		9DADFEE129D2AFD60013F1A7 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA89914299CB13E004BE1CD /* AppConfig.swift */; };
+		9DADFEE229D2AFDB0013F1A7 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA89914299CB13E004BE1CD /* AppConfig.swift */; };
+		9DB3FDC229D1783100E4CAA3 /* AVPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9DB3FDC129D1783100E4CAA3 /* AVPlayerCollector */; };
+		9DB3FDC429D1783100E4CAA3 /* BitmovinPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9DB3FDC329D1783100E4CAA3 /* BitmovinPlayerCollector */; };
+		9DB3FDF429D17E8000E4CAA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD0AA7729B884A90083AFDB /* AppDelegate.swift */; };
+		9DB3FDF729D17E8C00E4CAA3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD0AA6C29B882FD0083AFDB /* ViewController.swift */; };
+		9DB3FDFA29D1940D00E4CAA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F601C299A65FB00090B46 /* Assets.xcassets */; };
+		9DB3FDFB29D194CB00E4CAA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F6016299A61E200090B46 /* Main.storyboard */; };
+		9DB3FDFC29D197D400E4CAA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F601C299A65FB00090B46 /* Assets.xcassets */; };
+		9DB3FDFD29D197DD00E4CAA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F601C299A65FB00090B46 /* Assets.xcassets */; };
 		9DCA88EB29A647F400D1EC9C /* AmazonIvsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCA88EA29A647F400D1EC9C /* AmazonIvsViewController.swift */; };
-		9DD0AA6D29B882FD0083AFDB /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD0AA6C29B882FD0083AFDB /* MainController.swift */; };
+		9DD0AA6D29B882FD0083AFDB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD0AA6C29B882FD0083AFDB /* ViewController.swift */; };
 		9DD0AA7529B883DB0083AFDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DD0AA7129B883DB0083AFDB /* LaunchScreen.storyboard */; };
 		9DD0AA7629B883DB0083AFDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DD0AA7329B883DB0083AFDB /* Main.storyboard */; };
 		9DD0AA7829B884A90083AFDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD0AA7729B884A90083AFDB /* AppDelegate.swift */; };
@@ -43,7 +52,8 @@
 		9DD665CA299B751D00608720 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD665C6299B751D00608720 /* PlayerView.swift */; };
 		9DD665CB299B751D00608720 /* VideoAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD665C7299B751D00608720 /* VideoAssets.swift */; };
 		9DE5887029A7542B00C68DCA /* IVSPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5886F29A7542B00C68DCA /* IVSPlayerController.swift */; };
-		F0A3D18317DCFBA685E8DF7E /* Pods_CollectorDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414D90E23E7C1089E3A5C082 /* Pods_CollectorDemoApp.framework */; };
+		D1AB2510EDA14C4BEB0F7FD1 /* Pods_CollectorDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F10E174AEA18176F06BDF84 /* Pods_CollectorDemoApp.framework */; };
+		EF3AE0CA76C05EDDAA53C787 /* Pods_CollectorDemoAppCocoaPods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6363D0EA977656A5C66C82F6 /* Pods_CollectorDemoAppCocoaPods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,30 +67,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9DD0AA6229B87FA60083AFDB /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3C777BE8E1D5FB8B3F89C767 /* Pods-CollectorDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoApp.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
-		414D90E23E7C1089E3A5C082 /* Pods_CollectorDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4861CA2F530A861CEF35DD7A /* Pods-CollectorDemoAppCocoaPods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppCocoaPods.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods.debug.xcconfig"; sourceTree = "<group>"; };
-		64C07D9C2569E490F98602D8 /* Pods-CollectorDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoApp.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp.release.xcconfig"; sourceTree = "<group>"; };
-		6C30AE3E15788440A934C440 /* Pods-CollectorDemoAppCocoaPods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppCocoaPods.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods.release.xcconfig"; sourceTree = "<group>"; };
-		73976C7C38B766C8A915F9D8 /* Pods-CollectorDemoAppTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTV.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV.release.xcconfig"; sourceTree = "<group>"; };
-		7E03350B85318B30D1FCD8DD /* Pods_CollectorDemoAppCocoaPods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoAppCocoaPods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		113757787A21558FC1DC8787 /* Pods-CollectorDemoAppTVCocoaPods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTVCocoaPods.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppTVCocoaPods/Pods-CollectorDemoAppTVCocoaPods.debug.xcconfig"; sourceTree = "<group>"; };
+		20E079D6A2BED74B283A3B24 /* Pods-CollectorDemoAppCocoaPods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppCocoaPods.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods.release.xcconfig"; sourceTree = "<group>"; };
+		2139A901497FFA4714AD500A /* Pods_CollectorDemoAppTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoAppTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		27989DBC2C1A13750A807605 /* Pods-CollectorDemoAppTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTV.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV.debug.xcconfig"; sourceTree = "<group>"; };
+		2F10E174AEA18176F06BDF84 /* Pods_CollectorDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3171027DBF1470DD82EE993A /* Pods-CollectorDemoAppTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTV.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV.release.xcconfig"; sourceTree = "<group>"; };
+		3AB1F5F69DFBB5DE75E5EF93 /* libPods-CollectorDemoAppTVCocoaPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CollectorDemoAppTVCocoaPods.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		553B45211679383C2A0F5CD0 /* Pods-CollectorDemoAppCocoaPods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppCocoaPods.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods.debug.xcconfig"; sourceTree = "<group>"; };
+		6363D0EA977656A5C66C82F6 /* Pods_CollectorDemoAppCocoaPods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoAppCocoaPods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D9F699843C59A110E606564 /* Pods-CollectorDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoApp.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		9D6FA9EC29AE2BFA00B2BF1A /* bitmovin-analytics-collector-ios-internal */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "bitmovin-analytics-collector-ios-internal"; path = ..; sourceTree = "<group>"; };
 		9D8F5F96299A1DE700090B46 /* CollectorDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D8F5FCE299A1F8300090B46 /* CollectorDemoAppTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoAppTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D8F6010299A61E200090B46 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9D8F6011299A61E200090B46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D8F6012299A61E200090B46 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D8F6013299A61E200090B46 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9D8F6016299A61E200090B46 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -101,9 +104,10 @@
 		9D8F602E299A65FC00090B46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9D8F6030299A65FC00090B46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		9DA89914299CB13E004BE1CD /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		9DB3FDEE29D17CAE00E4CAA3 /* CollectorDemoAppTVCocoaPods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoAppTVCocoaPods.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DCA88EA29A647F400D1EC9C /* AmazonIvsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmazonIvsViewController.swift; sourceTree = "<group>"; };
 		9DD0AA6729B87FA70083AFDB /* CollectorDemoAppCocoaPods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoAppCocoaPods.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9DD0AA6C29B882FD0083AFDB /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		9DD0AA6C29B882FD0083AFDB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9DD0AA6E29B883760083AFDB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DD0AA7229B883DB0083AFDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9DD0AA7429B883DB0083AFDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
@@ -113,8 +117,8 @@
 		9DD665C6299B751D00608720 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		9DD665C7299B751D00608720 /* VideoAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoAssets.swift; sourceTree = "<group>"; };
 		9DE5886F29A7542B00C68DCA /* IVSPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IVSPlayerController.swift; sourceTree = "<group>"; };
-		F2F76AFBBE83BCF6740A68BB /* Pods-CollectorDemoAppTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTV.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV.debug.xcconfig"; sourceTree = "<group>"; };
-		FACF2489EF66A6971D7BC4DF /* Pods_CollectorDemoAppTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoAppTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7C310C361410E272DBB8B82 /* Pods-CollectorDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoApp.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp.release.xcconfig"; sourceTree = "<group>"; };
+		DDBD753B2D5069ACFA4F705A /* Pods-CollectorDemoAppTVCocoaPods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTVCocoaPods.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppTVCocoaPods/Pods-CollectorDemoAppTVCocoaPods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,7 +129,7 @@
 				9D3869AF29AF82F100F6531D /* AmazonIVSPlayerCollector in Frameworks */,
 				9D6FA9EE29AE2C6900B2BF1A /* AVPlayerCollector in Frameworks */,
 				9D6FA9F029AE2C6900B2BF1A /* BitmovinPlayerCollector in Frameworks */,
-				F0A3D18317DCFBA685E8DF7E /* Pods_CollectorDemoApp.framework in Frameworks */,
+				D1AB2510EDA14C4BEB0F7FD1 /* Pods_CollectorDemoApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +137,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C9F52909250A2416284A39F /* Pods_CollectorDemoAppTV.framework in Frameworks */,
+				9DB3FDC229D1783100E4CAA3 /* AVPlayerCollector in Frameworks */,
+				9DB3FDC429D1783100E4CAA3 /* BitmovinPlayerCollector in Frameworks */,
+				79CFBDE266D7173A3728ED64 /* Pods_CollectorDemoAppTV.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9DB3FDE229D17CAE00E4CAA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96B576F7205BE09A08BB2B70 /* libPods-CollectorDemoAppTVCocoaPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,19 +155,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54DD37D8FD15A95D8F3AAB88 /* Pods_CollectorDemoAppCocoaPods.framework in Frameworks */,
+				EF3AE0CA76C05EDDAA53C787 /* Pods_CollectorDemoAppCocoaPods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		50781196ABFF9B57DB4AF32A /* Frameworks */ = {
+		68A265715B3D1FBECD55E698 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FACF2489EF66A6971D7BC4DF /* Pods_CollectorDemoAppTV.framework */,
-				414D90E23E7C1089E3A5C082 /* Pods_CollectorDemoApp.framework */,
-				7E03350B85318B30D1FCD8DD /* Pods_CollectorDemoAppCocoaPods.framework */,
+				2F10E174AEA18176F06BDF84 /* Pods_CollectorDemoApp.framework */,
+				6363D0EA977656A5C66C82F6 /* Pods_CollectorDemoAppCocoaPods.framework */,
+				2139A901497FFA4714AD500A /* Pods_CollectorDemoAppTV.framework */,
+				3AB1F5F69DFBB5DE75E5EF93 /* libPods-CollectorDemoAppTVCocoaPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -176,7 +191,7 @@
 				9DD0AA6B29B882B80083AFDB /* CollectorDemoAppCocoaPods */,
 				9D8F5F97299A1DE700090B46 /* Products */,
 				DFEAE2400C8B4C976388A5EF /* Pods */,
-				50781196ABFF9B57DB4AF32A /* Frameworks */,
+				68A265715B3D1FBECD55E698 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -186,6 +201,7 @@
 				9D8F5F96299A1DE700090B46 /* CollectorDemoApp.app */,
 				9D8F5FCE299A1F8300090B46 /* CollectorDemoAppTV.app */,
 				9DD0AA6729B87FA70083AFDB /* CollectorDemoAppCocoaPods.app */,
+				9DB3FDEE29D17CAE00E4CAA3 /* CollectorDemoAppTVCocoaPods.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -204,7 +220,6 @@
 				9D8F6027299A65FC00090B46 /* BitmovinDrmViewController.swift */,
 				9D8F602B299A65FC00090B46 /* BitmovinViewController.swift */,
 				9DCA88EA29A647F400D1EC9C /* AmazonIvsViewController.swift */,
-				9D8F601C299A65FB00090B46 /* Assets.xcassets */,
 				9D8F6028299A65FC00090B46 /* Images.xcassets */,
 				9D8F602A299A65FC00090B46 /* Info.plist */,
 			);
@@ -215,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				9D8F6012299A61E200090B46 /* AppDelegate.swift */,
-				9D8F6011299A61E200090B46 /* Assets.xcassets */,
 				9D8F6016299A61E200090B46 /* Main.storyboard */,
 				9D8F6010299A61E200090B46 /* Info.plist */,
 				9D8F6013299A61E200090B46 /* ViewController.swift */,
@@ -247,6 +261,7 @@
 		9DA89913299CB13E004BE1CD /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				9D8F601C299A65FB00090B46 /* Assets.xcassets */,
 				9DA89914299CB13E004BE1CD /* AppConfig.swift */,
 			);
 			path = Shared;
@@ -258,7 +273,7 @@
 				9DD0AA7729B884A90083AFDB /* AppDelegate.swift */,
 				9DD0AA7029B883DB0083AFDB /* Base.lproj */,
 				9DD0AA6E29B883760083AFDB /* Info.plist */,
-				9DD0AA6C29B882FD0083AFDB /* MainController.swift */,
+				9DD0AA6C29B882FD0083AFDB /* ViewController.swift */,
 			);
 			path = CollectorDemoAppCocoaPods;
 			sourceTree = "<group>";
@@ -294,12 +309,14 @@
 		DFEAE2400C8B4C976388A5EF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3C777BE8E1D5FB8B3F89C767 /* Pods-CollectorDemoApp.debug.xcconfig */,
-				64C07D9C2569E490F98602D8 /* Pods-CollectorDemoApp.release.xcconfig */,
-				F2F76AFBBE83BCF6740A68BB /* Pods-CollectorDemoAppTV.debug.xcconfig */,
-				73976C7C38B766C8A915F9D8 /* Pods-CollectorDemoAppTV.release.xcconfig */,
-				4861CA2F530A861CEF35DD7A /* Pods-CollectorDemoAppCocoaPods.debug.xcconfig */,
-				6C30AE3E15788440A934C440 /* Pods-CollectorDemoAppCocoaPods.release.xcconfig */,
+				8D9F699843C59A110E606564 /* Pods-CollectorDemoApp.debug.xcconfig */,
+				B7C310C361410E272DBB8B82 /* Pods-CollectorDemoApp.release.xcconfig */,
+				553B45211679383C2A0F5CD0 /* Pods-CollectorDemoAppCocoaPods.debug.xcconfig */,
+				20E079D6A2BED74B283A3B24 /* Pods-CollectorDemoAppCocoaPods.release.xcconfig */,
+				27989DBC2C1A13750A807605 /* Pods-CollectorDemoAppTV.debug.xcconfig */,
+				3171027DBF1470DD82EE993A /* Pods-CollectorDemoAppTV.release.xcconfig */,
+				113757787A21558FC1DC8787 /* Pods-CollectorDemoAppTVCocoaPods.debug.xcconfig */,
+				DDBD753B2D5069ACFA4F705A /* Pods-CollectorDemoAppTVCocoaPods.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -311,15 +328,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9D8F5FBA299A1DE800090B46 /* Build configuration list for PBXNativeTarget "CollectorDemoApp" */;
 			buildPhases = (
-				11785C31D2D8601488FBFD6A /* [CP] Check Pods Manifest.lock */,
+				976DDB56B6CE58C0EEDA2A8A /* [CP] Check Pods Manifest.lock */,
 				9DE241A129B0E4D000163B1C /* [CUSTOM] Run Cuckoo generation */,
 				9D8F5F92299A1DE700090B46 /* Sources */,
 				9D8F5F93299A1DE700090B46 /* Frameworks */,
 				9D8F5F94299A1DE700090B46 /* Resources */,
 				9D2CDEB3299F84FA004B6176 /* [CUSTOM] Run SwiftLint */,
-				FF700B0D214847F9FE5D7DDC /* [CP] Embed Pods Frameworks */,
-				C3F453CB4C3AE6F603670379 /* [CP] Copy Pods Resources */,
 				9D6FA9F529AE2C7E00B2BF1A /* CopyFiles */,
+				F4BC02B6F7299A0502CA7D47 /* [CP] Embed Pods Frameworks */,
+				7539A3FC4F2D54FC19851ED3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -342,34 +359,55 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9D8F5FCB299A1F8300090B46 /* Build configuration list for PBXNativeTarget "CollectorDemoAppTV" */;
 			buildPhases = (
-				F9634EFB02652F95399DBF52 /* [CP] Check Pods Manifest.lock */,
+				8B4E1F9CC7B0A6B901FBEF48 /* [CP] Check Pods Manifest.lock */,
 				9D8F5FC4299A1F8300090B46 /* Sources */,
 				9D8F5FC7299A1F8300090B46 /* Frameworks */,
 				9D8F5FC8299A1F8300090B46 /* Resources */,
-				9D2CDED8299F9863004B6176 /* [CUSTOM] Run SwiftLint */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9DB3FDC629D1799900E4CAA3 /* PBXTargetDependency */,
+				9DB3FDCA29D1799900E4CAA3 /* PBXTargetDependency */,
+			);
+			name = CollectorDemoAppTV;
+			packageProductDependencies = (
+				9DB3FDC129D1783100E4CAA3 /* AVPlayerCollector */,
+				9DB3FDC329D1783100E4CAA3 /* BitmovinPlayerCollector */,
+			);
+			productName = CollectorDemoApp;
+			productReference = 9D8F5FCE299A1F8300090B46 /* CollectorDemoAppTV.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9DB3FDD829D17CAE00E4CAA3 /* CollectorDemoAppTVCocoaPods */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9DB3FDEB29D17CAE00E4CAA3 /* Build configuration list for PBXNativeTarget "CollectorDemoAppTVCocoaPods" */;
+			buildPhases = (
+				D799125BF334E8393F0409F8 /* [CP] Check Pods Manifest.lock */,
+				9DB3FDDE29D17CAE00E4CAA3 /* Sources */,
+				9DB3FDE229D17CAE00E4CAA3 /* Frameworks */,
+				9DB3FDE629D17CAE00E4CAA3 /* Resources */,
+				D76532510E535147DFDD6B86 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = CollectorDemoAppTV;
+			name = CollectorDemoAppTVCocoaPods;
 			productName = CollectorDemoApp;
-			productReference = 9D8F5FCE299A1F8300090B46 /* CollectorDemoAppTV.app */;
+			productReference = 9DB3FDEE29D17CAE00E4CAA3 /* CollectorDemoAppTVCocoaPods.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9DD0AA3A29B87FA60083AFDB /* CollectorDemoAppCocoaPods */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9DD0AA6429B87FA60083AFDB /* Build configuration list for PBXNativeTarget "CollectorDemoAppCocoaPods" */;
 			buildPhases = (
-				9DD0AA4129B87FA60083AFDB /* [CP] Check Pods Manifest.lock */,
-				9DD0AA4229B87FA60083AFDB /* [CUSTOM] Run Cuckoo generation */,
+				7B460336F2B0F855C87C55B3 /* [CP] Check Pods Manifest.lock */,
 				9DD0AA4329B87FA60083AFDB /* Sources */,
 				9DD0AA5529B87FA60083AFDB /* Frameworks */,
 				9DD0AA5A29B87FA60083AFDB /* Resources */,
-				9DD0AA5F29B87FA60083AFDB /* [CUSTOM] Run SwiftLint */,
-				9DD0AA6029B87FA60083AFDB /* [CP] Embed Pods Frameworks */,
-				9DD0AA6129B87FA60083AFDB /* [CP] Copy Pods Resources */,
-				9DD0AA6229B87FA60083AFDB /* CopyFiles */,
+				0B16A24FD699F65F5F034477 /* [CP] Embed Pods Frameworks */,
+				CA7356DD9F526E7D3436924B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -415,6 +453,7 @@
 				9D8F5F95299A1DE700090B46 /* CollectorDemoApp */,
 				9D8F5FC3299A1F8300090B46 /* CollectorDemoAppTV */,
 				9DD0AA3A29B87FA60083AFDB /* CollectorDemoAppCocoaPods */,
+				9DB3FDD829D17CAE00E4CAA3 /* CollectorDemoAppTVCocoaPods */,
 			);
 		};
 /* End PBXProject section */
@@ -435,8 +474,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DB3FDFD29D197DD00E4CAA3 /* Assets.xcassets in Resources */,
 				9DD665BF299B522C00608720 /* Main.storyboard in Resources */,
-				9D8F6018299A61E200090B46 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9DB3FDE629D17CAE00E4CAA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DB3FDFB29D194CB00E4CAA3 /* Main.storyboard in Resources */,
+				9DB3FDFA29D1940D00E4CAA3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +492,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DB3FDFC29D197D400E4CAA3 /* Assets.xcassets in Resources */,
 				9DD0AA7529B883DB0083AFDB /* LaunchScreen.storyboard in Resources */,
 				9DD0AA7629B883DB0083AFDB /* Main.storyboard in Resources */,
 			);
@@ -452,7 +501,85 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		11785C31D2D8601488FBFD6A /* [CP] Check Pods Manifest.lock */ = {
+		0B16A24FD699F65F5F034477 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7539A3FC4F2D54FC19851ED3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B460336F2B0F855C87C55B3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CollectorDemoAppCocoaPods-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B4E1F9CC7B0A6B901FBEF48 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CollectorDemoAppTV-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		976DDB56B6CE58C0EEDA2A8A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -492,116 +619,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/../scripts/run_swiftlint\" -xcode -path \"${SOURCE_ROOT}/..\"\nexit 0\n";
 		};
-		9D2CDED8299F9863004B6176 /* [CUSTOM] Run SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "[CUSTOM] Run SwiftLint";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../scripts/run_swiftlint\" -xcode -path \"${SOURCE_ROOT}/..\"\nexit 0\n";
-		};
-		9DD0AA4129B87FA60083AFDB /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CollectorDemoAppCocoaPods-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9DD0AA4229B87FA60083AFDB /* [CUSTOM] Run Cuckoo generation */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "[CUSTOM] Run Cuckoo generation";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "REPO_ROOT=\"${PROJECT_DIR}/..\"\nPATH_TO_SCRIPT=\"${REPO_ROOT}/scripts/run_cuckoo\"\nbash \"$PATH_TO_SCRIPT\"\n";
-		};
-		9DD0AA5F29B87FA60083AFDB /* [CUSTOM] Run SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "[CUSTOM] Run SwiftLint";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../scripts/run_swiftlint\" -xcode -path \"${SOURCE_ROOT}/..\"\nexit 0\n";
-		};
-		9DD0AA6029B87FA60083AFDB /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9DD0AA6129B87FA60083AFDB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		9DE241A129B0E4D000163B1C /* [CUSTOM] Run Cuckoo generation */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -620,24 +637,41 @@
 			shellPath = /bin/sh;
 			shellScript = "REPO_ROOT=\"${PROJECT_DIR}/..\"\nPATH_TO_SCRIPT=\"${REPO_ROOT}/scripts/run_cuckoo\"\nbash \"$PATH_TO_SCRIPT\"\n";
 		};
-		C3F453CB4C3AE6F603670379 /* [CP] Copy Pods Resources */ = {
+		CA7356DD9F526E7D3436924B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F9634EFB02652F95399DBF52 /* [CP] Check Pods Manifest.lock */ = {
+		D76532510E535147DFDD6B86 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppTVCocoaPods/Pods-CollectorDemoAppTVCocoaPods-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppTVCocoaPods/Pods-CollectorDemoAppTVCocoaPods-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppTVCocoaPods/Pods-CollectorDemoAppTVCocoaPods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D799125BF334E8393F0409F8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -652,14 +686,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CollectorDemoAppTV-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-CollectorDemoAppTVCocoaPods-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FF700B0D214847F9FE5D7DDC /* [CP] Embed Pods Frameworks */ = {
+		F4BC02B6F7299A0502CA7D47 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -713,12 +747,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9DB3FDDE29D17CAE00E4CAA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DADFEE129D2AFD60013F1A7 /* AppConfig.swift in Sources */,
+				9DB3FDF429D17E8000E4CAA3 /* AppDelegate.swift in Sources */,
+				9DB3FDF729D17E8C00E4CAA3 /* ViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9DD0AA4329B87FA60083AFDB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DADFEE229D2AFDB0013F1A7 /* AppConfig.swift in Sources */,
 				9DD0AA7829B884A90083AFDB /* AppDelegate.swift in Sources */,
-				9DD0AA6D29B882FD0083AFDB /* MainController.swift in Sources */,
+				9DD0AA6D29B882FD0083AFDB /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,6 +781,14 @@
 		9D6FA9F429AE2C7700B2BF1A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			productRef = 9D6FA9F329AE2C7700B2BF1A /* BitmovinPlayerCollector */;
+		};
+		9DB3FDC629D1799900E4CAA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 9DB3FDC529D1799900E4CAA3 /* AVPlayerCollector */;
+		};
+		9DB3FDCA29D1799900E4CAA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 9DB3FDC929D1799900E4CAA3 /* BitmovinPlayerCollector */;
 		};
 /* End PBXTargetDependency section */
 
@@ -825,14 +878,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TVOS_DEPLOYMENT_TARGET = 12.0;
+				TVOS_DEPLOYMENT_TARGET = 14.2;
 			};
 			name = Debug;
 		};
@@ -880,20 +933,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				TVOS_DEPLOYMENT_TARGET = 12.0;
+				TVOS_DEPLOYMENT_TARGET = 14.2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		9D8F5FBB299A1DE800090B46 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3C777BE8E1D5FB8B3F89C767 /* Pods-CollectorDemoApp.debug.xcconfig */;
+			baseConfigurationReference = 8D9F699843C59A110E606564 /* Pods-CollectorDemoApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -911,7 +964,6 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -932,7 +984,7 @@
 		};
 		9D8F5FBC299A1DE800090B46 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 64C07D9C2569E490F98602D8 /* Pods-CollectorDemoApp.release.xcconfig */;
+			baseConfigurationReference = B7C310C361410E272DBB8B82 /* Pods-CollectorDemoApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -950,7 +1002,6 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -970,7 +1021,7 @@
 		};
 		9D8F5FCC299A1F8300090B46 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2F76AFBBE83BCF6740A68BB /* Pods-CollectorDemoAppTV.debug.xcconfig */;
+			baseConfigurationReference = 27989DBC2C1A13750A807605 /* Pods-CollectorDemoAppTV.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1002,13 +1053,12 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
 		9D8F5FCD299A1F8300090B46 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 73976C7C38B766C8A915F9D8 /* Pods-CollectorDemoAppTV.release.xcconfig */;
+			baseConfigurationReference = 3171027DBF1470DD82EE993A /* Pods-CollectorDemoAppTV.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1039,13 +1089,85 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "CollectorDemoAppTV/CollectorDemoAppTV-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 12.0;
+			};
+			name = Release;
+		};
+		9DB3FDEC29D17CAE00E4CAA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 113757787A21558FC1DC8787 /* Pods-CollectorDemoAppTVCocoaPods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = CollectorDemoAppTV/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CollectorDemoAppTVCocoaPods;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.analytics.ios.CollectorDemoApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "CollectorDemoAppTV/CollectorDemoAppTV-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Debug;
+		};
+		9DB3FDED29D17CAE00E4CAA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DDBD753B2D5069ACFA4F705A /* Pods-CollectorDemoAppTVCocoaPods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = CollectorDemoAppTV/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CollectorDemoAppTVCocoaPods;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.analytics.ios.CollectorDemoApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "CollectorDemoAppTV/CollectorDemoAppTV-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
 			};
 			name = Release;
 		};
 		9DD0AA6529B87FA60083AFDB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4861CA2F530A861CEF35DD7A /* Pods-CollectorDemoAppCocoaPods.debug.xcconfig */;
+			baseConfigurationReference = 553B45211679383C2A0F5CD0 /* Pods-CollectorDemoAppCocoaPods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1063,13 +1185,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.analytics.ios.CollectorDemoAppCocoaPods;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.analytics.ios.CollectorDemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1084,7 +1205,7 @@
 		};
 		9DD0AA6629B87FA60083AFDB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C30AE3E15788440A934C440 /* Pods-CollectorDemoAppCocoaPods.release.xcconfig */;
+			baseConfigurationReference = 20E079D6A2BED74B283A3B24 /* Pods-CollectorDemoAppCocoaPods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1102,13 +1223,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.analytics.ios.CollectorDemoAppCocoaPods;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.analytics.ios.CollectorDemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1150,6 +1270,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		9DB3FDEB29D17CAE00E4CAA3 /* Build configuration list for PBXNativeTarget "CollectorDemoAppTVCocoaPods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9DB3FDEC29D17CAE00E4CAA3 /* Debug */,
+				9DB3FDED29D17CAE00E4CAA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9DD0AA6429B87FA60083AFDB /* Build configuration list for PBXNativeTarget "CollectorDemoAppCocoaPods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1183,6 +1312,22 @@
 			productName = AVPlayerCollector;
 		};
 		9D6FA9F329AE2C7700B2BF1A /* BitmovinPlayerCollector */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BitmovinPlayerCollector;
+		};
+		9DB3FDC129D1783100E4CAA3 /* AVPlayerCollector */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AVPlayerCollector;
+		};
+		9DB3FDC329D1783100E4CAA3 /* BitmovinPlayerCollector */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BitmovinPlayerCollector;
+		};
+		9DB3FDC529D1799900E4CAA3 /* AVPlayerCollector */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AVPlayerCollector;
+		};
+		9DB3FDC929D1799900E4CAA3 /* BitmovinPlayerCollector */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BitmovinPlayerCollector;
 		};

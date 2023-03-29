@@ -12,7 +12,7 @@ lane :release do
     end
     release_dir = '.release'
 
-    spec = read_podspec(path: "Specs/BitmovinAnalyticsCollector.#{release_track}.podspec.json")
+    spec = read_podspec(path: "./BitmovinAnalyticsCollector.v2.podspec")
     spec_output_name = "#{pod_name}.podspec.json"
     spec["version"] = release_version
     spec["source"]["tag"] = release_version
@@ -27,7 +27,7 @@ lane :release do
     # end
 
     Dir.chdir("..") do
-      Dir.mkdir(release_dir) unless File.exists?(release_dir)
+      Dir.mkdir(release_dir) unless File.exist?(release_dir)
       File.write("#{release_dir}/#{spec_output_name}",JSON.pretty_generate(spec))
 
       Dir.chdir(release_dir) do
@@ -71,6 +71,55 @@ lane :build_collector do
     destination: "generic/platform=iOS",
     clean: true,
     build_for_testing: true,
+    configuration: "Debug",
+    xcargs: "CODE_SIGNING_ALLOWED='NO'"
+  )
+  scan(
+    scheme: "CollectorDemoAppCocoaPods",
+    workspace: "./CollectorDemoApp/CollectorDemoApp.xcworkspace",
+    sdk: "iphoneos",
+    destination: "generic/platform=iOS",
+    clean: true,
+    build_for_testing: true,
+    configuration: "Debug",
+    xcargs: "ENABLE_BITCODE='NO' CODE_SIGNING_ALLOWED='NO'"
+  )
+end
+
+lane :build_collector_for_tv do
+  scan(
+    scheme: "CollectorDemoAppTV",
+    workspace: "./CollectorDemoApp/CollectorDemoApp.xcworkspace",
+    sdk: "appletvos",
+    destination: "generic/platform=tvOS",
+    clean: true,
+    build_for_testing: true,
+    configuration: "Debug",
+    xcargs: "CODE_SIGNING_ALLOWED='NO'"
+  )
+  scan(
+    scheme: "CollectorDemoAppTVCocoaPods",
+    workspace: "./CollectorDemoApp/CollectorDemoApp.xcworkspace",
+    sdk: "appletvos",
+    destination: "generic/platform=tvOS",
+    clean: true,
+    build_for_testing: true,
+    configuration: "Debug",
+    xcargs: "CODE_SIGNING_ALLOWED='NO'"
+  )
+end
+
+lane :test_collector do
+  run_target_tests(target: "BitmovinAnalytics-Package")
+end
+
+private_lane :run_target_tests do |options|
+  scan(
+    scheme: options[:target],
+    package_path: "./",
+    destination: "name=iPhone 14",
+    code_coverage: true,
+    result_bundle: true,
     configuration: "Debug",
     xcargs: "CODE_SIGNING_ALLOWED='NO'"
   )

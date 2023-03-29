@@ -2,19 +2,11 @@ source 'https://github.com/bitmovin/cocoapod-specs.git'
 source 'https://cdn.cocoapods.org/'
 
 def for_ios 
-  platform :ios, '12.0'
+  platform :ios, '14.2'
 end
 
 def for_tvos 
-  platform :tvos, '12.0'
-end
-
-def bitmovin_player
-  pod 'BitmovinPlayer', '~> 3.35.0'
-end
-
-def amazon_ivs_player
-  pod 'AmazonIVSPlayer', '~> 1.17.0'
+  platform :tvos, '14.2'
 end
 
 def collectors
@@ -24,6 +16,11 @@ def collectors
   pod 'BitmovinAnalyticsCollector/AmazonIVSPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec'
 end
 
+def tv_collectors
+  pod 'BitmovinAnalyticsCollector/Core', :path => '../BitmovinAnalyticsCollector.v2.podspec'
+  pod 'BitmovinAnalyticsCollector/AVPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec'
+  pod 'BitmovinAnalyticsCollector/BitmovinPlayer', :path => '../BitmovinAnalyticsCollector.v2.podspec'
+end
 
 def google_Adsima_sdk
   pod 'GoogleAds-IMA-iOS-SDK', '3.18.4'
@@ -52,4 +49,10 @@ end
 target 'CollectorDemoAppTV' do
   use_frameworks!
   for_tvos
+end
+
+target 'CollectorDemoAppTVCocoaPods' do
+  # use_frameworks! # Disable because of cocoapod bug related to subspecs
+  for_tvos
+  tv_collectors
 end
