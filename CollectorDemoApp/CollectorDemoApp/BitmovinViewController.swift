@@ -4,6 +4,7 @@ import BitmovinPlayer
 import UIKit
 
 class BitmovinViewController: UIViewController {
+    private let logger = _AnalyticsLogger(className: "BitmovinViewController")
     var player: Player?
     private var analyticsCollector: BitmovinPlayerCollector
     private var config: BitmovinAnalyticsConfig
@@ -69,7 +70,7 @@ class BitmovinViewController: UIViewController {
         config.isLive = false
         config.ads = adsActive
         analyticsCollector = BitmovinPlayerCollector(config: config)
-        print("Setup of collector finished")
+        logger.d("Setup of collector finished")
 
         super.init(coder: aDecoder)
     }
@@ -90,7 +91,7 @@ class BitmovinViewController: UIViewController {
     }
 
     func attachAnalytics(player: Player) {
-        print("attach Analytics to Player")
+        logger.d("attach Analytics to Player")
         // attach player to collector
         analyticsCollector.attachPlayer(player: player)
 

@@ -4,6 +4,7 @@ import AVPlayerCollector
 import UIKit
 
 class AVFoundationViewController: UIViewController {
+    private let logger = _AnalyticsLogger(className: "AVFoundationViewController")
     private static var playerViewControllerKVOContext = 0
     private var analyticsCollector: AVPlayerCollector
     private var isSeeking = false
@@ -91,14 +92,14 @@ class AVFoundationViewController: UIViewController {
         playerView.playerLayer.player = player
         setupPlayerObserver()
 
-        print("------- attach analytics")
+        logger.d("------- attach analytics")
         analyticsCollector.attachPlayer(player: player)
 
-        print("------- set item")
+        logger.d("------- set item")
         let asset = AVURLAsset(url: url!, options: nil)
         player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
 
-        print("------- player play")
+        logger.d("------- player play")
         player.play()
     }
 

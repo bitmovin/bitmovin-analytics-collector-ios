@@ -1,6 +1,7 @@
 import Foundation
 
 public class BitmovinAdAnalytics {
+    private let logger = _AnalyticsLogger(className: "BitmovinAdAnalytics")
     private weak var analytics: BitmovinAnalyticsInternal?
 
     private var adPodPosition = 0
@@ -45,11 +46,11 @@ public class BitmovinAdAnalytics {
         if adBreak.tagType == AnalyticsAdTagType.VMAP {
             sendAnalyticsRequest(adBreak: adBreak)
         }
-        print("OnAdManifestLoaded in \(downloadTime)")
+        logger.d("OnAdManifestLoaded in \(downloadTime)")
     }
 
     public func onAdStarted(ad: AnalyticsAd) {
-        print("onAdStarted")
+        logger.d("onAdStarted")
 
         let currentTimestamp = Date().timeIntervalSince1970
 
@@ -75,7 +76,7 @@ public class BitmovinAdAnalytics {
     }
 
     public func onAdFinished() {
-        print("onAdFinished")
+        logger.d("onAdFinished")
         guard let adSample = self.activeAdSample else {
             return
         }
@@ -88,20 +89,20 @@ public class BitmovinAdAnalytics {
     }
 
     public func onAdBreakStarted(adBreak: AnalyticsAdBreak) {
-        print("onAdBreakStarted")
+        logger.d("onAdBreakStarted")
         self.adPodPosition = 0
         self.activeAdBreak = adBreak
         self.adStartupTimestamp = Date().timeIntervalSince1970
     }
 
     public func onAdBreakFinished() {
-        print("onAdBreakFinished")
+        logger.d("onAdBreakFinished")
         self.activeAdBreak = nil
         resetActiveAd()
     }
 
     public func onAdClicked(clickThroughUrl: String?) {
-        print("onAdClicked")
+        logger.d("onAdClicked")
         guard let adSample = self.activeAdSample else {
             return
         }
@@ -119,7 +120,7 @@ public class BitmovinAdAnalytics {
     }
 
     public func onAdSkipped() {
-        print("onAdSkipped")
+        logger.d("onAdSkipped")
         guard let adSample = self.activeAdSample else {
             return
         }
@@ -141,7 +142,7 @@ public class BitmovinAdAnalytics {
     }
 
     public func onAdError(adBreak: AnalyticsAdBreak, code: Int?, message: String?) {
-        print("onAdError")
+        logger.d("onAdError")
         let adSample = self.activeAdSample ?? AdSample()
 
         if (adSample.ad.id != nil && adBreak.ads.contains { $0.id == adSample.ad.id }) {

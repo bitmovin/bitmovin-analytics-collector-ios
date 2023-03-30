@@ -1,6 +1,7 @@
 import Foundation
 
 internal class HttpEventDataDispatcher: EventDataDispatcher {
+    private let logger = _AnalyticsLogger(className: "HttpEventDataDispatcher")
     private let httpClient: HttpClient
 
     private let analyticsBackendUrl: String
@@ -15,13 +16,13 @@ internal class HttpEventDataDispatcher: EventDataDispatcher {
 
     func add(_ eventData: EventData) {
         let json = Util.toJson(object: eventData)
-        print("send payload: " + json.replacingOccurrences(of: ",", with: "\n\t"))
+        logger.d("send payload: \(json.replacingOccurrences(of: ",", with: "\n\t"))")
         httpClient.post(urlString: self.analyticsBackendUrl, json: eventData.jsonString(), completionHandler: nil)
     }
 
     func addAd(_ adEventData: AdEventData) {
         let json = Util.toJson(object: adEventData)
-        print("send Ad payload: " + json)
+        logger.d("send Ad payload: \(json)")
         httpClient.post(urlString: self.adAnalyticsBackendUrl, json: json, completionHandler: nil)
     }
 

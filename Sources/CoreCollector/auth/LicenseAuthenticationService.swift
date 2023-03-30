@@ -1,6 +1,7 @@
 import Foundation
 
 internal class LicenseAuthenticationService: AuthenticationService {
+    private let logger = _AnalyticsLogger(className: "LicenseAuthenticationService")
     private let config: BitmovinAnalyticsConfig
     private let httpClient: HttpClient
     private let notificationCenter: NotificationCenter
@@ -27,10 +28,10 @@ internal class LicenseAuthenticationService: AuthenticationService {
     private func handleLicenseCallResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
         let granted = self.validateResponse(data, response, error)
         if granted {
-            DPrint("License Call: success")
+            logger.i("Bitmovin Analytics license call successful")
             self.notificationCenter.post(name: .authenticationSuccess, object: self)
         } else {
-            DPrint("License Call: failed")
+            logger.e("Bitmovin Analytics license call failed")
             self.notificationCenter.post(name: .authenticationFailed, object: self)
         }
     }
@@ -50,23 +51,23 @@ internal class LicenseAuthenticationService: AuthenticationService {
 
         do {
             guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else {
-                DPrint("Licensing failed. Could not decode JSON response: \(data)")
+                logger.e("Bitmovin Analytics licensing failed. Could not decode JSON response: \(data)")
                 return false
             }
 
             guard httpResponse.statusCode < 400 else {
                 let message = json["message"] as? String
-                DPrint("Licensing failed. Reason: \(message ?? "Unknown error")")
+                logger.e("Bitmovin Analytics licensing failed. Reason: \(message ?? "Unknown error")")
                 return false
             }
 
             guard let status = json["status"] as? String else {
-                DPrint("Licensing failed. Reason: status not set")
+                logger.e("Bitmovin Analytics licensing failed. Reason: status not set")
                 return false
             }
 
             guard status == "granted" else {
-                DPrint("Licensing failed. Reason given by server: \(status)")
+                logger.e("Bitmovin Analytics licensing failed. Reason given by server: \(status)")
                 return false
             }
 

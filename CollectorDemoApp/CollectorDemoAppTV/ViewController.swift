@@ -4,6 +4,7 @@ import CoreCollector
 import UIKit
 
 class ViewController: UIViewController {
+    private let logger = _AnalyticsLogger(className: "ViewController")
     private var player: Player?
     private var analyticsCollector: BitmovinAnalytics
     private var config: BitmovinAnalyticsConfig
@@ -91,6 +92,6 @@ class ViewController: UIViewController {
 
 extension ViewController: PlayerListener {
     func onEvent(_ event: Event, player: Player) {
-        print(event.name)
+        logger.d(event.name)
     }
 }

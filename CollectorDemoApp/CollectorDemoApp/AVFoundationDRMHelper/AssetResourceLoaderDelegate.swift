@@ -8,8 +8,10 @@
  */
 
 import AVFoundation
+import CoreCollector
 
 class AssetResourceLoaderDelegate: NSObject {
+    private let logger = _AnalyticsLogger(className: "AssetResourceLoaderDelegate")
     weak var asset: Asset?
 
     init(asset: Asset) {
@@ -129,8 +131,8 @@ class AssetResourceLoaderDelegate: NSObject {
         guard let contentKeyIdentifierURL = resourceLoadingRequest.request.url,
             let assetIDString = self.asset?.fairPlayConfig?.prepareContentId?(contentKeyIdentifierURL.absoluteString),
             let assetIDData = assetIDString.data(using: .utf8) else {
-                print("Failed to get url or assetIDString for the request object of the resource.")
-                return
+            logger.e("Failed to get url or assetIDString for the request object of the resource.")
+            return
         }
 
         let provideOnlineKey: () -> Void = { () in
@@ -191,14 +193,14 @@ class AssetResourceLoaderDelegate: NSObject {
 extension AssetResourceLoaderDelegate: AVAssetResourceLoaderDelegate {
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader,
                         shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
-        print("\(#function) was called in AssetLoaderDelegate with loadingRequest: \(loadingRequest)")
+        logger.d("\(#function) was called in AssetLoaderDelegate with loadingRequest: \(loadingRequest)")
 
         return shouldLoadOrRenewRequestedResource(resourceLoadingRequest: loadingRequest)
     }
 
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader,
                         shouldWaitForRenewalOfRequestedResource renewalRequest: AVAssetResourceRenewalRequest) -> Bool {
-        print("\(#function) was called in AssetLoaderDelegate with renewalRequest: \(renewalRequest)")
+        logger.d("\(#function) was called in AssetLoaderDelegate with renewalRequest: \(renewalRequest)")
 
         return shouldLoadOrRenewRequestedResource(resourceLoadingRequest: renewalRequest)
     }

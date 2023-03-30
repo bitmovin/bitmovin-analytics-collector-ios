@@ -3,6 +3,7 @@ import Foundation
 import UIKit
 
 public class EventDataFactory: EventDataManipulatorPipeline {
+    private let logger = _AnalyticsLogger(className: "EventDataFactory")
     private final var config: BitmovinAnalyticsConfig
     private final let userIdProvider: UserIdProvider
 
@@ -58,7 +59,7 @@ public class EventDataFactory: EventDataManipulatorPipeline {
             do {
                 try manipulator.manipulate(eventData: eventData)
             } catch {
-                print("EventDataManipulator throwed error - data might be incomplete")
+                logger.e("EventDataManipulator throwed error - data might be incomplete")
             }
         }
     }

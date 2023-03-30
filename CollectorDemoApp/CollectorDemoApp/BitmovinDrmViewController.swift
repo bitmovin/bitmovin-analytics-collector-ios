@@ -4,6 +4,7 @@ import BitmovinPlayer
 import UIKit
 
 class BitmovinDrmViewController: UIViewController {
+    private let logger = _AnalyticsLogger(className: "BitmovinDrmViewController")
     var player: Player?
     private var analyticsCollector: BitmovinPlayerCollector
     private var config: BitmovinAnalyticsConfig
@@ -63,7 +64,7 @@ class BitmovinDrmViewController: UIViewController {
         config.isLive = false
         config.ads = false
         analyticsCollector = BitmovinPlayerCollector(config: config)
-        print("Setup of collector finished")
+        logger.d("Setup of collector finished")
 
         super.init(coder: aDecoder)
     }

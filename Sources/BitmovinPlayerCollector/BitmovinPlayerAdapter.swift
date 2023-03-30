@@ -4,6 +4,7 @@ import CoreCollector
 #endif
 
 internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter, EventDataManipulator {
+    private let logger = _AnalyticsLogger(className: "BitmovinPlayerAdapter")
     private final var config: BitmovinAnalyticsConfig
     private final var player: Player
     private final var sourceMetadataProvider: SourceMetadataProvider<Source>
@@ -74,16 +75,17 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter, EventDat
 
         stateMachine.play(time: currentTime)
 
-        print("""
-            BitmovinPlayerAdapter shouldTransitionToStartup
-            \n\t isAutoplayEnabled: \(player.config.playbackConfig.isAutoplayEnabled)
-            \n\t isPlaying: \(player.isPlaying) \n\t isPaused: \(player.isPaused)
-            \n\t isSourceLoadedAndWillAutoPlay: \(isSourceLoadedAndWillAutoPlay)
-            \n\t isPlayingWithoutBeingTracked: \(isPlayingWithoutBeingTracked)
-            \n\t source \n\t\t loadingState \(String(describing: player.source?.loadingState.rawValue))
-            \n\t\t isActive: \(String(describing: player.source?.isActive))
-            \n\t\t duration: \(String(describing: player.source?.duration))
-        """)
+        logger.d(
+        """
+        shouldTransitionToStartup isAutoplayEnabled: \(player.config.playbackConfig.isAutoplayEnabled),
+        isPlaying: \(player.isPlaying), isPaused: \(player.isPaused),
+        isSourceLoadedAndWillAutoPlay: \(isSourceLoadedAndWillAutoPlay),
+        isPlayingWithoutBeingTracked: \(isPlayingWithoutBeingTracked),
+        loadingState \(String(describing: player.source?.loadingState.rawValue)),
+        isActive: \(String(describing: player.source?.isActive)),
+        duration: \(String(describing: player.source?.duration))
+        """
+        )
     }
 
     func resetSourceState() {
@@ -198,7 +200,7 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter, EventDat
     private var isEventRelevantForCurrentSource: Bool {
         let isRelevant = player.source === overrideCurrentSource
         if !isRelevant {
-            print("Event isn't relevant for current source.")
+            logger.d("Event isn't relevant for current source.")
         }
         return isRelevant
     }
@@ -209,12 +211,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
         guard isEventRelevantForCurrentSource else {
             return
         }
-        print("""
-            BitmovinAdapter: onPlay
-            isPlaying: \(player.isPlaying)
-            isPaused: \(player.isPaused)
-            isStalling: \(isStalling)
-        """)
+        logger.d("onPlay isPlaying: \(player.isPlaying), isPaused: \(player.isPaused), isStalling: \(isStalling)")
         stateMachine.play(time: nil)
 
         if isStalling && stateMachine.state != .seeking && stateMachine.state != .buffering {
@@ -223,19 +220,12 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onTimeChanged(_ event: TimeChangedEvent, player: Player) {
-        print("""
-            BitmovinAdapter: onTimeChanged \(event.currentTime)
-            isPlaying: \(player.isPlaying)
-            isPaused: \(player.isPaused)
-            isStalling: \(isStalling)
-            isSeeking: \(isSeeking)
-        """)
 
         // When seeking between sources, there might be onTimeChanged events that
         // do not indicate actual playback (from the last time in the old source to
         // 0.0 in the new source for example)
         guard event.currentTime != previousTime else {
-            print("Ignoring onTimeChanged, time didn't change.")
+            logger.d("Ignoring onTimeChanged, time didn't change.")
             return
         }
 
@@ -250,11 +240,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
         guard isEventRelevantForCurrentSource else {
             return
         }
-        print("""
-            BitmovinAdapter: onPlaying isPlaying: \(player.isPlaying)
-            isPaused: \(player.isPaused)
-            isStalling: \(isStalling)
-        """)
+        logger.d("onPlaying: isPlaying: \(player.isPlaying), isPaused: \(player.isPaused), isStalling: \(isStalling)")
         if !isSeeking && !isStalling {
             stateMachine.playing(time: currentTime)
         }
@@ -292,21 +278,13 @@ extension BitmovinPlayerAdapter: PlayerListener {
         guard isEventRelevantForCurrentSource else {
             return
         }
-        print("""
-            BitmovinAdapter: onStallStarted \(player.currentTime)
-            isPlaying: \(player.isPlaying)
-            isPaused: \(player.isPaused)
-        """)
+        logger.d("onStallStarted currentTime: \(player.currentTime), isPlaying: \(player.isPlaying), isPaused: \(player.isPaused)")
         isStalling = true
         stateMachine.transitionState(destinationState: .buffering, time: currentTime)
     }
 
     func onStallEnded(_ event: StallEndedEvent, player: Player) {
-        print("""
-            BitmovinAdapter: onStallEnded \(player.currentTime)
-            isPlaying: \(player.isPlaying)
-            isPaused: \(player.isPaused)
-        """)
+        logger.d("onStallEnded currentTime: \(player.currentTime), isPlaying: \(player.isPlaying), isPaused: \(player.isPaused)")
         isStalling = false
         transitionToPausedOrBufferingOrPlaying()
     }
@@ -315,11 +293,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
         guard isEventRelevantForCurrentSource else {
             return
         }
-        print("""
-            BitmovinAdapter: onSeek \(player.currentTime)
-            isPlaying: \(player.isPlaying)
-            isPaused: \(player.isPaused)
-        """)
+        logger.d("onSeek currentTime: \(player.currentTime), isPlaying: \(player.isPlaying), isPaused: \(player.isPaused)")
         isSeeking = true
         stateMachine.seek(time: currentTime)
     }
@@ -377,11 +351,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
         guard isEventRelevantForCurrentSource else {
             return
         }
-        print("""
-            BitmovinAdapter: onSeeked \(player.currentTime)
-            isPlaying: \(player.isPlaying)
-            isPaused: \(player.isPaused)
-        """)
+        logger.d("onSeeked: currentTime: \(player.currentTime), isPlaying: \(player.isPlaying), isPaused: \(player.isPaused)")
         isSeeking = false
         if !isStalling {
             transitionToPausedOrBufferingOrPlaying()
@@ -415,7 +385,7 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onSourceMetadataChanged(_ event: SourceMetadataChangedEvent, player: Player) {
-        print("BitmovinAdapter: onSourceMetadataChanged \(event.name)")
+        logger.d("onSourceMetadataChanged \(event.name)")
     }
 
     func onPlayerActive(_ event: PlayerActiveEvent, player: Player) {
@@ -430,15 +400,15 @@ extension BitmovinPlayerAdapter: PlayerListener {
         if player.config.playbackConfig.isAutoplayEnabled && !stateMachine.didAttemptPlayingVideo {
             stateMachine.play(time: currentTime)
         }
-        print("BitmovinAdapter: onSourceLoad \(event.source.sourceConfig.url)")
+        logger.d("onSourceLoad: \(event.source.sourceConfig.url)")
     }
 
     func onSourceLoaded(_ event: SourceLoadedEvent, player: Player) {
-        print("BitmovinAdapter: onSourceLoaded \(event.source.sourceConfig.url)")
+        logger.d("onSourceLoaded: \(event.source.sourceConfig.url)")
     }
 
     func onSourceUnload(_ event: SourceUnloadEvent, player: Player) {
-        print("BitmovinAdapter: onSourceUnload")
+        logger.d("onSourceUnload")
         if !stateMachine.didStartPlayingVideo && stateMachine.didAttemptPlayingVideo {
             stateMachine.onPlayAttemptFailed(withReason: VideoStartFailedReason.pageClosed)
         }
@@ -449,13 +419,9 @@ extension BitmovinPlayerAdapter: PlayerListener {
     }
 
     func onPlaylistTransition(_ event: PlaylistTransitionEvent, player: Player) {
-        print("""
-            ------------- \n
-            BitmovinAdapter: onPlaylistTransition \(player.currentTime)
-            \n\t isPlaying: \(player.isPlaying)
-            \n\t isPaused: \(player.isPaused)
-            \n\t from: \(event.from.sourceConfig.url)
-            \n\t to: \(event.to.sourceConfig.url)
+        logger.d("""
+        onPlaylistTransition \(player.currentTime), isPlaying: \(player.isPlaying),
+        isPaused: \(player.isPaused), from: \(event.from.sourceConfig.url), to: \(event.to.sourceConfig.url)
         """)
         overrideCurrentSource = event.from
         let previousVideoDuration = Util.timeIntervalToCMTime(_: event.from.duration)

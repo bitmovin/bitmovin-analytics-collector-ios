@@ -2,6 +2,7 @@ import AVFoundation
 import Foundation
 
 class DefaultStateMachine: StateMachine, RebufferHeartbeatListener, PlayingHeartbeatListener, RebufferTimeoutListener {
+    private let logger = _AnalyticsLogger(className: "DefaultStateMachine")
     private(set) var state: PlayerState
     private(set) var impressionId: String
     weak var listener: StateMachineListener?
@@ -40,7 +41,7 @@ class DefaultStateMachine: StateMachine, RebufferHeartbeatListener, PlayingHeart
         playingHeartbeatService = PlayingHeartbeatService()
         videoStartFailureService = VideoStartFailureService()
         self.playerContext = playerContext
-        print("Generated Bitmovin Analytics impression ID: " + impressionId.lowercased())
+        logger.i("Generated Bitmovin Analytics impression ID: \(impressionId.lowercased())")
 
         // needs to happen after init of properties
         rebufferingTimeoutHandler.listeners = self
@@ -64,7 +65,7 @@ class DefaultStateMachine: StateMachine, RebufferHeartbeatListener, PlayingHeart
         videoStartFailureService.reset()
         qualityChangeCounter.resetInterval()
         listener?.stateMachineResetSourceState()
-        print("Generated Bitmovin Analytics impression ID: " + impressionId.lowercased())
+        logger.i("Generated Bitmovin Analytics impression ID: \( impressionId.lowercased())")
     }
 
     func reset() {
@@ -88,7 +89,7 @@ class DefaultStateMachine: StateMachine, RebufferHeartbeatListener, PlayingHeart
         let performTransition = checkUnallowedTransitions(destinationState: destinationState)
 
         if performTransition {
-            print("[StateMachine] Transitioning from state \(state) to \(destinationState)")
+            logger.d("Transitioning from state \(state) to \(destinationState)")
             let usedEnterTimestamp = overrideEnterTimestamp ?? Date().timeIntervalSince1970Millis
             videoTimeEnd = playerTime
 
