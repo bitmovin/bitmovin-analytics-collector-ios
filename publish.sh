@@ -59,8 +59,8 @@ git pull || exit
 
 echo "Generating BuildConfig.swift file..."
 chmod +x ./scripts/generateBuildConfig.sh 
-(./scripts/generateBuildConfig.sh "VERSION=$VERSION") > BitmovinAnalyticsCollector/Classes/Collector/util/BuildConfig.swift || exit
-git add BitmovinAnalyticsCollector/Classes/Collector/util/BuildConfig.swift || exit
+(./scripts/generateBuildConfig.sh "VERSION=$VERSION") > Sources/CoreCollector/util/BuildConfig.swift || exit
+git add Sources/CoreCollector/util/BuildConfig.swift || exit
 git commit -m "Generated BuildConfig.swift" || exit
 git push origin main || exit
 echo "Generated BuildConfig.swift file."

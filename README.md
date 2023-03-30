@@ -55,7 +55,7 @@ A full example app can be seen [here](https://github.com/bitmovin/bitmovin-analy
 ## Installation
 
 To add the `BitmovinAnalyticsCollector` as a dependency to your project, you have two options: Using CocoaPods or Swift Package Manager.
-We provide our collector for platform `iOS: 12.0+` and `tvOS: 12.0+`
+We provide our collector for platform `iOS: 14.2+` and `tvOS: 14.2+`
 
 ## Using [Swift Package Manager](https://swift.org/package-manager/)
 

@@ -2,11 +2,11 @@ source 'https://github.com/bitmovin/cocoapod-specs.git'
 source 'https://cdn.cocoapods.org/'
 
 def for_ios 
-  platform :ios, '12.0'
+  platform :ios, '14.2'
 end
 
 def for_tvos 
-  platform :tvos, '12.0'
+  platform :tvos, '14.2'
 end
 
 def collectors
