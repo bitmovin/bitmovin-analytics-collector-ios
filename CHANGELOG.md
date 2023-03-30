@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+## 2.11.0-beta.1
+
 ### Added
 - linter and formater
 - example view with Amazon IVS player

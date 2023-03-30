@@ -55,6 +55,7 @@ A full example app can be seen [here](https://github.com/bitmovin/bitmovin-analy
 ## Installation
 
 To add the `BitmovinAnalyticsCollector` as a dependency to your project, you have two options: Using CocoaPods or Swift Package Manager.
+We provide our collector for platform `iOS: 12.0+` and `tvOS: 12.0+`
 
 ## Using [Swift Package Manager](https://swift.org/package-manager/)
 
@@ -62,9 +63,10 @@ Swift Package Manager is a tool for managing the distribution of Swift framework
 
 Swift Package Manager support since `2.8.0`
 
-We provide two products:
+We provide three products:
 - `BitmovinPlayerCollector` including BitmovinPlayer v3 Collector
 - `AVPlayerCollector` including AVPlayer Collector
+- `AmazonIVSPlayerCollector` including Amazon IVS Player Collector
 
 ### Using Xcode
 
@@ -93,6 +95,7 @@ let package = Package(
       dependencies: [
         .product(name: "BitmovinPlayerCollector", package: "BitmovinAnalytics"),
         .product(name: "AVPlayerCollector", package: "BitmovinAnalytics")
+        .product(name: "AmazonIVSPlayerCollector", package: "BitmovinAnalytics")
       ]),
   ]
   ...
@@ -107,6 +110,7 @@ We have split the `BitmovinAnalytics` into 3 targets
 - CoreCollector - including shared code for all collectors
 - BitmovinPlayerCollector - including `BitmovinPlayer` Collector
 - AVPlayerCollector - including `AVPlayer` Collector
+- AmazonIVSPlayerCollector - including `AmazonIVSPlayer` Collector
 
 if you are working with our Collectors you need to add at least `import CoreCollector` as many Classes are relocated to that package
 
@@ -125,12 +129,12 @@ To install it, check which Player/version you are using and add the following li
 
 ### Bitmovin Player v3
 
-The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` version `>= 3.0.0`.
+The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` version `>= 3.35.0`.
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '2.9.4'
-pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '2.9.4'
+pod 'BitmovinAnalyticsCollector/Core', '2.11.0-beta.1'
+pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '2.11.0-beta.1'
 pod 'BitmovinPlayer', '3.0.0'
 
 use_frameworks!
@@ -138,25 +142,23 @@ use_frameworks!
 
 ### AVPlayer
 
-We provide builds of our AVPlayerCollector to support platforms `iOS 12.0+`.
-Use the BitmovinAnalyticsCollector version `2.8.0` for deployment targets `iOS 12.0+`.
-
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '2.9.4'
-pod 'BitmovinAnalyticsCollector/AVPlayer', '2.9.4'
+pod 'BitmovinAnalyticsCollector/Core', '2.11.0-beta.1'
+pod 'BitmovinAnalyticsCollector/AVPlayer', '2.11.0-beta.1'
 
 use_frameworks!
 ```
 
-To include all available collectors, add the following lines (the dependency on BitmovinPlayer applies here as well):
+### AmazonIVSPlayer
 
-**BitmovinPlayer v3 and AVPlayer**
+The collector for the Amazon IVS Player has a dependency on `AmazonIVSPlayer` version `1.17.0`.
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector', '2.9.4'
-pod 'BitmovinPlayer', '3.0.0'
+pod 'BitmovinAnalyticsCollector/Core', '2.11.0-beta.1'
+pod 'BitmovinAnalyticsCollector/AmazonIVSPlayer', '2.11.0-beta.1'
+pod 'AmazonIVSPlayer', '1.17.0'
 
 use_frameworks!
 ```
