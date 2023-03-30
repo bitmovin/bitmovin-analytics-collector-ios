@@ -52,4 +52,22 @@ jobs:
         run: bundle exec fastlane build_collector
       - name: Build Collector demo app tvOS
         run: bundle exec fastlane build_collector_for_tv
+  test_package:
+    name: "Test SPM Package"
+    needs: build_apps
+    runs-on: self-hosted
+    concurrency:
+      group: build-workspace-apps-${{ inputs.ref || github.event.pull_request.number || github.ref }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+      - uses: ./.github/actions/select-xcode
+        with:
+          version: 14
+      - uses: ./.github/actions/prepare-dependencies
+      - uses: ./.github/actions/generate-mocks
+      - name: Test Collector spm package
+        run: bundle exec fastlane test_collector
     
