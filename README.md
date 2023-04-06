@@ -6,8 +6,8 @@ To get started collecting data with Bitmovin Analytics you need a License-Key wh
 
 ## Supported Platforms
 
-- iOS 12.0+
-- tvOS 12.0+
+- iOS 14.0+
+- tvOS 14.0+
 
 ## Supported Video Players
 
@@ -55,7 +55,7 @@ A full example app can be seen [here](https://github.com/bitmovin/bitmovin-analy
 ## Installation
 
 To add the `BitmovinAnalyticsCollector` as a dependency to your project, you have two options: Using CocoaPods or Swift Package Manager.
-We provide our collector for platform `iOS: 14.2+` and `tvOS: 14.2+`
+We provide our collector for platform `iOS: 14.0+` and `tvOS: 14.0+`
 
 ## Using [Swift Package Manager](https://swift.org/package-manager/)
 

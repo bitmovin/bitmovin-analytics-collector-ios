@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Development V2
 
 ### Removed
-- removed support for iOS/tvOS 12.0, 13.0, 14.0, 14.1
+- removed support for iOS/tvOS 12.0, 13.0
 
 ## 2.11.0-beta.1
 
