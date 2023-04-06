@@ -63,6 +63,7 @@ class BitmovinDrmViewController: UIViewController {
         config.path = "/vod/breadcrumb/"
         config.isLive = false
         config.ads = false
+        config.playerKey = "a6e31908-550a-4f75-b4bc-a9d89880a733"
         analyticsCollector = BitmovinPlayerCollector(config: config)
         logger.d("Setup of collector finished")
 

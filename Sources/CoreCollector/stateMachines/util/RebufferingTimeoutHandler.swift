@@ -2,7 +2,7 @@ import Foundation
 
 // could be generified to TimeoutHandler
 public class RebufferingTimeoutHandler {
-    private static var rebufferingTimeoutSeconds: TimeInterval = 2 * 60
+    private static let rebufferingTimeoutSeconds: TimeInterval = 2 * 60
 
     private let queue = DispatchQueue(label: "com.bitmovin.analytics.core.utils.RebufferingTimeoutHandler")
     private var rebufferingTimeoutWorkItem: DispatchWorkItem?

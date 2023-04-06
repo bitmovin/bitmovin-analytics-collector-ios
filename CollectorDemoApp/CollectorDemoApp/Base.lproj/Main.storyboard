@@ -367,7 +367,7 @@
                                 </connections>
                             </slider>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k2B-HR-6u1" customClass="PlayerView" customModule="CollectorDemoApp" customModuleProvider="target">
-                                <rect key="frame" x="-4" y="38" width="383" height="606"/>
+                                <rect key="frame" x="-4" y="64" width="383" height="580"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ph-2J-7JL">
@@ -431,7 +431,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iOr-98-ayF">
-                                <rect key="frame" x="121" y="4" width="112" height="30"/>
+                                <rect key="frame" x="158" y="4" width="112" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Set custom data"/>
                                 <connections>
@@ -440,12 +440,30 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWf-bV-bem">
-                                <rect key="frame" x="322" y="0.0" width="37" height="30"/>
+                                <rect key="frame" x="322" y="4" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Done"/>
                                 <connections>
                                     <action selector="doneButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qsy-FZ-Hwv"/>
                                     <action selector="doneButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="uFt-mO-dKS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahp-DQ-kuk">
+                                <rect key="frame" x="10" y="33" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Create"/>
+                                <connections>
+                                    <action selector="createButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="RoW-rm-DN3"/>
+                                    <action selector="createButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="epO-hz-iBC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="00A-Ry-M5i">
+                                <rect key="frame" x="106" y="33" width="54" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Release"/>
+                                <connections>
+                                    <action selector="releaseButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ih9-Wz-BPP"/>
+                                    <action selector="releaseButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="mq1-0g-XDs"/>
                                 </connections>
                             </button>
                         </subviews>

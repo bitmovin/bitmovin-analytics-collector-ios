@@ -10,7 +10,7 @@ class AVFoundationViewController: UIViewController {
     private var isSeeking = false
     private var timeObserverToken: Any?
     private var config: BitmovinAnalyticsConfig
-    @objc private let player = AVPlayer()
+    @objc private var player: AVPlayer? = AVPlayer()
 
     @IBOutlet var playButton: UIButton!
     @IBOutlet var slider: UISlider!
@@ -27,7 +27,7 @@ class AVFoundationViewController: UIViewController {
     let corruptedUrl = URL(string: VideoAssets.corruptRedBull)
 
     var duration: Double {
-        guard let currentItem = player.currentItem else { return 0.0 }
+        guard let currentItem = player?.currentItem else { return 0.0 }
         return CMTimeGetSeconds(currentItem.duration)
     }
 
@@ -88,22 +88,18 @@ class AVFoundationViewController: UIViewController {
     }
 
     override func viewWillAppear(_: Bool) {
-        player.isMuted = true
-        playerView.playerLayer.player = player
-        setupPlayerObserver()
-
-        logger.d("------- attach analytics")
-        analyticsCollector.attachPlayer(player: player)
-
-        logger.d("------- set item")
-        let asset = AVURLAsset(url: url!, options: nil)
-        player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
-
-        logger.d("------- player play")
-        player.play()
+        guard let player = player else {
+            return
+        }
+        
+        initPlayerWithCollectorAndPlay(player: player)
     }
 
     @IBAction func setupPlayerObserver() {
+        guard let player = player else {
+            return
+        }
+        
         addObserver(self, forKeyPath: #keyPath(AVFoundationViewController.player.rate), options: [.new, .initial], context: &AVFoundationViewController.playerViewControllerKVOContext)
         addObserver(self, forKeyPath: #keyPath(AVFoundationViewController.player.currentItem.duration), options: [.new, .initial], context: &AVFoundationViewController.playerViewControllerKVOContext)
         let interval = CMTimeMake(value: 1, timescale: 1)
@@ -117,6 +113,10 @@ class AVFoundationViewController: UIViewController {
     }
 
     @IBAction func reloadPlayer() {
+        guard let player = player else {
+            return
+        }
+        
         analyticsCollector.detachPlayer()
         player.pause()
         let asset = AVURLAsset(url: url!, options: nil)
@@ -140,6 +140,10 @@ class AVFoundationViewController: UIViewController {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         guard context == &AVFoundationViewController.playerViewControllerKVOContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+            return
+        }
+        
+        guard let player = player else {
             return
         }
 
@@ -188,6 +192,10 @@ class AVFoundationViewController: UIViewController {
     }
 
     @IBAction func playPauseButtonWasPressed(_: UIButton) {
+        guard let player = player else {
+            return
+        }
+        
         if player.rate != 1.0 {
             player.play()
         } else {
@@ -197,6 +205,10 @@ class AVFoundationViewController: UIViewController {
     }
 
     @IBAction func jumpForwardButtomPressed(_: UIButton) {
+        guard let player = player else {
+            return
+        }
+        
         let currentTime = player.currentTime()
         let deltaTime = CMTimeMakeWithSeconds(30, preferredTimescale: 30)
         player.seek(to: CMTimeAdd(currentTime, deltaTime), completionHandler: { completed in
@@ -206,6 +218,10 @@ class AVFoundationViewController: UIViewController {
     }
 
     @IBAction func backButtonPressed(_: UIButton) {
+        guard let player = player else {
+            return
+        }
+        
         let currentTime = player.currentTime()
         let deltaTime = CMTimeMakeWithSeconds(30, preferredTimescale: 30)
         player.seek(to: CMTimeSubtract(currentTime, deltaTime), completionHandler: { completed in
@@ -216,16 +232,27 @@ class AVFoundationViewController: UIViewController {
 
     @IBAction func rewindButtonWasPressed(_: UIButton) {
         // Rewind no faster than -2.0.
-
+        guard let player = player else {
+            return
+        }
+        
         player.rate = max(player.rate - 2.0, -2.0)
     }
 
     @IBAction func fastForwardButtonWasPressed(_: UIButton) {
         // Fast forward no faster than 2.0.
+        guard let player = player else {
+            return
+        }
+        
         player.rate = min(player.rate + 2.0, 2.0)
     }
 
     @IBAction func timeSliderDidChange(_: UISlider) {
+        guard let player = player else {
+            return
+        }
+        
         isSeeking = true
         player.seek(to: CMTimeMakeWithSeconds(Float64(slider.value), preferredTimescale: 30)) { [weak self] _ in
             self?.isSeeking = false
@@ -242,6 +269,27 @@ class AVFoundationViewController: UIViewController {
     @IBAction func doneButtonWasPressed(_: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func releaseButtonWasPressed(_: UIButton) {
+        analyticsCollector.detachPlayer()
+        player?.replaceCurrentItem(with: nil)
+        player = nil
+    }
+    
+    @IBAction func createButtonWasPressed(_: UIButton) {
+        if player != nil {
+            return
+        }
+        
+        player = AVPlayer()
+        
+        guard let player = player else {
+            return
+        }
+        
+        initPlayerWithCollectorAndPlay(player: player)
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -251,5 +299,21 @@ class AVFoundationViewController: UIViewController {
         let components = NSDateComponents()
         components.second = Int(max(0.0, time))
         return timeRemainingFormatter.string(from: components as DateComponents)!
+    }
+    
+    private func initPlayerWithCollectorAndPlay(player: AVPlayer){
+        player.isMuted = true
+        playerView.playerLayer.player = player
+        setupPlayerObserver()
+
+        logger.d("------- attach analytics")
+        analyticsCollector.attachPlayer(player: player)
+
+        logger.d("------- set item")
+        let asset = AVURLAsset(url: url!, options: nil)
+        player.replaceCurrentItem(with: AVPlayerItem(asset: asset))
+
+        logger.d("------- player play")
+        player.play()
     }
 }

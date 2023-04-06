@@ -1,6 +1,6 @@
-import CoreCollector
-import BitmovinPlayerCollector
 import BitmovinPlayer
+import BitmovinPlayerCollector
+import CoreCollector
 import UIKit
 
 class BitmovinViewController: UIViewController {
@@ -69,6 +69,7 @@ class BitmovinViewController: UIViewController {
         config.path = "/vod/breadcrumb/"
         config.isLive = false
         config.ads = adsActive
+        config.playerKey = "a6e31908-550a-4f75-b4bc-a9d89880a733"
         analyticsCollector = BitmovinPlayerCollector(config: config)
         logger.d("Setup of collector finished")
 
@@ -97,14 +98,22 @@ class BitmovinViewController: UIViewController {
 
         // setup analytics SourceMetadata for redbull Source
         let redbullMetadata = SourceMetadata(
+            videoId: "redbullId",
             title: "redbull",
-            experimentName: "experiment-bitmovin-v3-upgrade")
+            path: "vod/redbull",
+            cdnProvider: "customRedbullCdnProvider",
+            experimentName: "experiment-bitmovin-v3-upgrade"
+        )
         self.analyticsCollector.addSourceMetadata(playerSource: redbullSource, sourceMetadata: redbullMetadata)
 
         // setup analytics SourceMetadata for Sintel Source
-        let sintelMetadata = SourceMetadata(videoId: "sintelID",
-                                            title: "sintel",
-                                            experimentName: "experiment-bitmovin-v3-upgrade")
+        let sintelMetadata = SourceMetadata(
+            videoId: "sintelID",
+            title: "sintel",
+            path: "vod/sintel",
+            cdnProvider: "customSintelCdnProvider",
+            experimentName: "experiment-bitmovin-v3-upgrade"
+        )
         self.analyticsCollector.addSourceMetadata(playerSource: sintelSource, sourceMetadata: sintelMetadata)
     }
 
@@ -188,10 +197,14 @@ class BitmovinViewController: UIViewController {
 
     @IBAction func sourceChangeWasPressed(_: UIButton) {
         // setup sourceMetadata important for analytics
-        let liveMetadata = SourceMetadata(videoId: "liveSim",
-                                          title: "liveSim",
-                                          isLive: true,
-                                          experimentName: "experiment-bitmovin-v3-upgrade")
+        let liveMetadata = SourceMetadata(
+            videoId: "liveSim",
+            title: "liveSim",
+            path: "live/sim",
+            isLive: true,
+            cdnProvider: "cdnLiveSim",
+            experimentName: "experiment-bitmovin-v3-upgrade"
+        )
 
         // add sourceMetadata to collector
         self.analyticsCollector.addSourceMetadata(playerSource: liveSimSource, sourceMetadata: liveMetadata)
