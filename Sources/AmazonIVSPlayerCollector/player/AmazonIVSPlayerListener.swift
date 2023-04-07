@@ -4,28 +4,25 @@ import CoreCollector
 #endif
 
 class AmazonIVSPlayerListener: NSObject, IVSPlayer.Delegate {
-    private weak var player: IVSPlayer?
+    private weak var player: IVSPlayerProtocol?
     private weak var customerDelegate: IVSPlayer.Delegate?
     private let videoStartupService: VideoStartupService
     private let playbackService: PlaybackService
     private let errorService: ErrorService
     private let stateMachine: StateMachine
-    private let qualityProvider: PlaybackQualityProvider
 
     init(
-        player: IVSPlayer,
+        player: IVSPlayerProtocol,
         videoStartupService: VideoStartupService,
         stateMachine: StateMachine,
         playbackService: PlaybackService,
-        errorService: ErrorService,
-        qualityProvider: PlaybackQualityProvider
+        errorService: ErrorService
     ) {
         self.player = player
         self.videoStartupService = videoStartupService
         self.playbackService = playbackService
         self.errorService = errorService
         self.stateMachine = stateMachine
-        self.qualityProvider = qualityProvider
     }
 
     func player(_ player: IVSPlayer, didChangeState state: IVSPlayer.State) {
@@ -38,13 +35,7 @@ class AmazonIVSPlayerListener: NSObject, IVSPlayer.Delegate {
     }
 
     func player(_ player: IVSPlayer, didChangeQuality quality: IVSQuality?) {
-        guard qualityProvider.didQualityChange(newQuality: quality) else {
-            return
-        }
-
-        stateMachine.videoQualityChange(time: player.position) { [qualityProvider = self.qualityProvider] in
-            qualityProvider.currentQuality = quality
-        }
+        playbackService.onQualityChange(quality)
         self.customerDelegate?.player?(player, didChangeQuality: quality)
     }
 

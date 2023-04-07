@@ -17,28 +17,32 @@ enum AmazonIVSPlayerAdapterFactory {
         let stateMachine = StateMachineFactory.create(playerContext: playerContext)
         analytics.setStateMachine(stateMachine)
 
-        let videoStartupService = VideoStartupService(
+        let videoStartupService = DefaultVideoStartupService(
             playerContext: playerContext,
             stateMachine: stateMachine
         )
 
-        let qualityProvider = PlaybackQualityProvider()
+        let qualityProvider = DefaultPlaybackQualityProvider()
+        let statisticsProvider = DefaultPlayerStatisticsProvider(player: player)
 
-        let playbackService = PlaybackService(
+        let playbackService = DefaultPlaybackService(
+            playerContext: playerContext,
+            stateMachine: stateMachine,
+            qualityProvider: qualityProvider,
+            statisticsProvider: statisticsProvider
+        )
+
+        let errorService = DefaultErrorService(
             playerContext: playerContext,
             stateMachine: stateMachine
         )
-        let errorService = ErrorService(
-            playerContext: playerContext,
-            stateMachine: stateMachine
-        )
+
         let playerListener = AmazonIVSPlayerListener(
             player: player,
             videoStartupService: videoStartupService,
             stateMachine: stateMachine,
             playbackService: playbackService,
-            errorService: errorService,
-            qualityProvider: qualityProvider
+            errorService: errorService
         )
 
         let playbackManipulator = PlaybackEventDataManipulator(
@@ -50,7 +54,6 @@ enum AmazonIVSPlayerAdapterFactory {
         let playerInfoManipulator = PlayerInfoManipulator(player: player)
         manipulatorPipeline.registerEventDataManipulator(manipulator: playerInfoManipulator)
 
-        let statisticsProvider = PlayerStatisticsProvider(player: player)
         let qualityManipulator = QualityEventDataManipulator(
             statisticsProvider: statisticsProvider,
             qualityProvider: qualityProvider

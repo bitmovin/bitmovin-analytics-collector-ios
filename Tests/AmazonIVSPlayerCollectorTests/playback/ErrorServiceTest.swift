@@ -12,14 +12,14 @@ class ErrorServiceTest: QuickSpec {
         // arrange
         var mockStateMachine = MockStateMachine()
         var mockPlayerContext = MockPlayerContext()
-        var errorService = ErrorService(
+        var errorService = DefaultErrorService(
             playerContext: mockPlayerContext,
             stateMachine: mockStateMachine
         )
         beforeEach {
             mockStateMachine = MockStateMachine()
             mockPlayerContext = MockPlayerContext()
-            errorService = ErrorService(
+            errorService = DefaultErrorService(
                 playerContext: mockPlayerContext,
                 stateMachine: mockStateMachine
             )

@@ -11,7 +11,7 @@ class PlaybackQualityProviderTests: QuickSpec {
         describe("didVideoChange") {
             it("should return false if both qualities are nil") {
                 // arrange
-                let qualityProvider = PlaybackQualityProvider()
+                let qualityProvider = DefaultPlaybackQualityProvider()
 
                 // act
                 let didChange = qualityProvider.didQualityChange(newQuality: nil)
@@ -21,7 +21,7 @@ class PlaybackQualityProviderTests: QuickSpec {
             }
             it("should return true if new quality is nil") {
                 // arrange
-                let qualityProvider = PlaybackQualityProvider()
+                let qualityProvider = DefaultPlaybackQualityProvider()
                 qualityProvider.currentQuality = MockIVSQualityProtocol()
 
                 // act
@@ -32,7 +32,7 @@ class PlaybackQualityProviderTests: QuickSpec {
             }
             it("should return true if new quality is not nil") {
                 // arrange
-                let qualityProvider = PlaybackQualityProvider()
+                let qualityProvider = DefaultPlaybackQualityProvider()
 
                 // act
                 let didChange = qualityProvider.didQualityChange(newQuality: MockIVSQualityProtocol())

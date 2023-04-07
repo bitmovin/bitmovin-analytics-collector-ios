@@ -14,7 +14,7 @@ class PlayerStatisticsProviderTests: QuickSpec {
                 stub(mockedPlayer) { stub in
                     when(stub.videoFramesDropped.get).thenReturn(10).thenReturn(25)
                 }
-                let statProvider = PlayerStatisticsProvider(player: mockedPlayer)
+                let statProvider = DefaultPlayerStatisticsProvider(player: mockedPlayer)
                 _ = statProvider.getDroppedFramesDelta()
 
                 // act
@@ -32,7 +32,7 @@ class PlayerStatisticsProviderTests: QuickSpec {
                 stub(mockedPlayer) { stub in
                     when(stub.videoFramesDropped.get).thenReturn(10)
                 }
-                let statProvider = PlayerStatisticsProvider(player: mockedPlayer)
+                let statProvider = DefaultPlayerStatisticsProvider(player: mockedPlayer)
 
                 // act
                 let droppedFrames = statProvider.getDroppedFramesDelta()
@@ -47,7 +47,7 @@ class PlayerStatisticsProviderTests: QuickSpec {
                 stub(mockedPlayer) { stub in
                     when(stub.videoFramesDropped.get).thenReturn(5).thenReturn(15)
                 }
-                let statProvider = PlayerStatisticsProvider(player: mockedPlayer)
+                let statProvider = DefaultPlayerStatisticsProvider(player: mockedPlayer)
 
                 // act
                 let droppedFrames1 = statProvider.getDroppedFramesDelta()

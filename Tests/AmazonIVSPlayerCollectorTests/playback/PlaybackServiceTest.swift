@@ -8,23 +8,30 @@ import CoreCollector
 
 class PlaybackServiceTest: QuickSpec {
     override func spec() {
-        
         // arrange
         var mockStateMachine = MockStateMachine()
         var mockPlayerContext = MockPlayerContext()
-        var playbackService = PlaybackService(
+        var mockPlaybackQualityProvider = MockPlaybackQualityProvider()
+        var mockStatisticProvider = MockPlayerStatisticsProvider()
+        var playbackService = DefaultPlaybackService(
             playerContext: mockPlayerContext,
-            stateMachine: mockStateMachine
+            stateMachine: mockStateMachine,
+            qualityProvider: mockPlaybackQualityProvider,
+            statisticsProvider: mockStatisticProvider
         )
         beforeEach {
             mockStateMachine = MockStateMachine()
             mockPlayerContext = MockPlayerContext()
-            playbackService = PlaybackService(
+            mockPlaybackQualityProvider = MockPlaybackQualityProvider()
+            mockStatisticProvider = MockPlayerStatisticsProvider()
+            playbackService = DefaultPlaybackService(
                 playerContext: mockPlayerContext,
-                stateMachine: mockStateMachine
+                stateMachine: mockStateMachine,
+                qualityProvider: mockPlaybackQualityProvider,
+                statisticsProvider: mockStatisticProvider
             )
         }
-        
+
         describe("onStateChange") {
             it("should transition into playing when state is playing") {
                 // arrange
@@ -100,7 +107,6 @@ class PlaybackServiceTest: QuickSpec {
                 verify(mockStateMachine).transitionState(destinationState: equal(to: PlayerState.buffering), time: equal(to: position))
             }
         }
-        
         describe("onSeekCompleted") {
             it("should not transition into seek state if live stream") {
                 // arrange
@@ -116,7 +122,7 @@ class PlaybackServiceTest: QuickSpec {
                     when(stub.isLive.get).thenReturn(true)
                 }
                 let seekToTime = CMTime(seconds: 5, preferredTimescale: 1_000)
-                
+
                 // act
                 playbackService.onSeekCompleted(time: seekToTime)
 
@@ -143,7 +149,6 @@ class PlaybackServiceTest: QuickSpec {
                 // assert
                 verify(mockStateMachine, never()).seek(time: any())
             }
-            
             it("should transition from playing to seek and back") {
                 // arrange
                 stub(mockStateMachine) { stub in
@@ -158,13 +163,43 @@ class PlaybackServiceTest: QuickSpec {
                     when(stub.isLive.get).thenReturn(false)
                 }
                 let seekToTime = CMTime(seconds: 5, preferredTimescale: 1_000)
-                
+
                 // act
                 playbackService.onSeekCompleted(time: seekToTime)
 
                 // assert
                 verify(mockStateMachine, times(1)).seek(time: equal(to: seekToTime))
                 verify(mockStateMachine, times(1)).transitionState(destinationState: equal(to: PlayerState.playing), time: equal(to: seekToTime))
+            }
+        }
+        describe("onQualityChange") {
+            it("should call videoQualityChange on statemachine and reset statistics") {
+                // arrange
+                stub(mockStateMachine) { stub in
+                    when(stub.videoQualityChange(time: any(), setQualityFunction: any())).thenDoNothing()
+                }
+
+                let position = CMTime(seconds: 100, preferredTimescale: CMTimeScale())
+
+                stub(mockPlayerContext) { stub in
+                    when(stub.position.get).thenReturn(position)
+                }
+
+                stub(mockStatisticProvider) { stub in
+                    when(stub.reset()).thenDoNothing()
+                }
+
+                stub(mockPlaybackQualityProvider) { stub in
+                    when(stub.didQualityChange(newQuality: any())).thenReturn(true)
+                }
+
+                // act
+                playbackService.onQualityChange(MockIVSQualityProtocol())
+
+                // assert
+                verify(mockStateMachine, times(1)).videoQualityChange(time: equal(to: position), setQualityFunction: any())
+
+                verify(mockStatisticProvider, times(1)).reset()
             }
         }
     }

@@ -4,6 +4,8 @@ import AmazonIVSPlayer
 protocol IVSPlayerProtocol: AnyObject {
     var videoFramesDropped: Int { get }
     var version: String { get }
+    var delegate: IVSPlayer.Delegate? { get set }
+    var state: IVSPlayer.State { get }
 }
 
 extension IVSPlayer: IVSPlayerProtocol {}

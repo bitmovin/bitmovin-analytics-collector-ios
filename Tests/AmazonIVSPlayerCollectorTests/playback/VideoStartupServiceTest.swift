@@ -11,14 +11,14 @@ class VideoStartupServiceTest: QuickSpec {
         // arrange
         var mockStateMachine = MockStateMachine()
         var mockPlayerContext = MockPlayerContext()
-        var videoStartupService = VideoStartupService(
+        var videoStartupService = DefaultVideoStartupService(
             playerContext: mockPlayerContext,
             stateMachine: mockStateMachine
         )
         beforeEach {
             mockStateMachine = MockStateMachine()
             mockPlayerContext = MockPlayerContext()
-            videoStartupService = VideoStartupService(
+            videoStartupService = DefaultVideoStartupService(
                 playerContext: mockPlayerContext,
                 stateMachine: mockStateMachine
             )
