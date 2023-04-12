@@ -29,10 +29,8 @@ internal class HttpEventDataDispatcher: EventDataDispatcher, CallbackEventDataDi
         httpClient.post(
             urlString: analyticsBackendUrl,
             json: eventData.jsonString()
-        ) { [weak self] data, response, error in
-            guard let self else { return }
-
-            completionHandler(self.httpDispatchResult(for: data, response: response, error: error))
+        ) { data, response, error in
+            completionHandler(HttpDispatchResult.from(data: data, response: response, error: error))
         }
     }
 
@@ -43,10 +41,8 @@ internal class HttpEventDataDispatcher: EventDataDispatcher, CallbackEventDataDi
         httpClient.post(
             urlString: adAnalyticsBackendUrl,
             json: json
-        ) { [weak self] data, response, error in
-            guard let self else { return }
-
-            completionHandler(self.httpDispatchResult(for: data, response: response, error: error))
+        ) { data, response, error in
+            completionHandler(HttpDispatchResult.from(data: data, response: response, error: error))
         }
     }
 
@@ -54,26 +50,5 @@ internal class HttpEventDataDispatcher: EventDataDispatcher, CallbackEventDataDi
     }
 
     func resetSourceState() {
-    }
-}
-
-private extension HttpEventDataDispatcher {
-    func httpDispatchResult(for data: Data?, response: URLResponse?, error: Error?) -> HttpDispatchResult {
-        if let error {
-            return .failure(code: nil, error: error)
-        }
-
-        guard let httpResponse = response as? HTTPURLResponse else {
-            return .failure(code: nil, error: nil)
-        }
-
-        let statusCode = httpResponse.statusCode
-
-        guard (200..<300).contains(statusCode) else {
-            return .failure(code: statusCode, error: nil)
-        }
-
-        return .success(code: statusCode)
-
     }
 }
