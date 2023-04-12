@@ -1,4 +1,4 @@
-import BitmovinPlayer
+import BitmovinPlayerCore
 #if SWIFT_PACKAGE
 import CoreCollector
 #endif

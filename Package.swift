@@ -25,7 +25,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/bitmovin/player-ios.git", from: "3.35.0"),
+        .package(url: "https://github.com/bitmovin/player-ios-core", from: "3.38.1-a.1"),
         .package(url: "https://github.com/Quick/Quick.git", exact: "5.0.1"),
         .package(url: "https://github.com/Quick/Nimble.git", exact: "10.0.0"),
         .package(url: "https://github.com/Brightify/Cuckoo.git", from: "1.9.1"),
@@ -46,7 +46,7 @@ let package = Package(
         .target(
             name: "BitmovinPlayerCollector",
             dependencies: [
-                .product(name: "BitmovinPlayer", package: "player-ios"),
+                .product(name: "BitmovinPlayerCore", package: "player-ios-core"),
                 "CoreCollector"
             ]
         ),
@@ -75,7 +75,7 @@ let package = Package(
             name: "BitmovinPlayerCollectorTests",
             dependencies: [
                 "BitmovinPlayerCollector",
-                .product(name: "BitmovinPlayer", package: "player-ios"),
+                .product(name: "BitmovinPlayerCore", package: "player-ios-core"),
                 "Quick",
                 "Nimble",
                 "Cuckoo"

@@ -12,8 +12,8 @@ DESC
   s.author           = { 'Bitmovin Inc' => 'admin@bitmovin.com' }
   s.source           = { :git => 'https://github.com/bitmovin/bitmovin-analytics-collector-ios.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '14.2'
-  s.tvos.deployment_target = '14.2'
+  s.ios.deployment_target = '14.0'
+  s.tvos.deployment_target = '14.0'
   s.swift_version = '5.0'
 
   s.pod_target_xcconfig = {
@@ -27,8 +27,8 @@ DESC
 
   s.subspec 'BitmovinPlayer' do |bitmovinplayerv3|
     bitmovinplayerv3.source_files = 'Sources/BitmovinPlayerCollector/**/*.{swift}'
-    bitmovinplayerv3.tvos.dependency 'BitmovinPlayer', '~>3.35'
-    bitmovinplayerv3.ios.dependency 'BitmovinPlayer', '~>3.35'
+    bitmovinplayerv3.tvos.dependency 'BitmovinPlayerCore', '~> 3.38.1-a.1'
+    bitmovinplayerv3.ios.dependency 'BitmovinPlayerCore', '~> 3.38.1-a.1'
   end
 
   s.subspec 'AmazonIVSPlayer' do |ivsplayer|

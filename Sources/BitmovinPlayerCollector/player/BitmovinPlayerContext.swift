@@ -1,7 +1,7 @@
 #if SWIFT_PACKAGE
 import CoreCollector
 #endif
-import BitmovinPlayer
+import BitmovinPlayerCore
 
 class BitmovinPlayerContext: PlayerContext {
     private weak var player: Player?
