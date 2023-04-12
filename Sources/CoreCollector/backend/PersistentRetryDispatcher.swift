@@ -1,10 +1,21 @@
 import Foundation
 
 internal class PersistentRetryDispatcher: EventDataDispatcher {
+    private enum OperationMode {
+        case online
+        case offline
+        case disabled
+    }
+
     private let notificationCenter: NotificationCenter
     private let innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher
-    // TODO: we need a tri-state to track the transitions from offline to online to not flush on every successful request
-    private var isEnabled = true
+    private var currentOperationMode: OperationMode = .offline {
+        didSet {
+            if oldValue != .online, currentOperationMode == .online {
+                flushQueue()
+            }
+        }
+    }
     // TODO: needs to be persistent
     private var queue: [EventData] = []
 
@@ -24,35 +35,41 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
     }
 
     func add(_ eventData: EventData) {
-        guard isEnabled else { return }
+        guard currentOperationMode != .disabled else { return }
 
         innerDispatcher.add(eventData) { [weak self] result in
+            guard let self, self.currentOperationMode != .disabled else { return }
+
             switch result {
             case .success:
-                self?.removeFromQueue(eventData: eventData)
-                self?.flushQueue()
+                self.removeFromQueue(eventData: eventData)
+                self.currentOperationMode = .online
             case .failure:
-                self?.addToQueue(eventData: eventData)
+                self.addToQueue(eventData: eventData)
+                self.currentOperationMode = .offline
             }
         }
     }
 
     func addAd(_ adEventData: AdEventData) {
-        guard isEnabled else { return }
+        guard currentOperationMode != .disabled else { return }
 
         innerDispatcher.addAd(adEventData) { [weak self] result in
+            guard let self, self.currentOperationMode != .disabled else { return }
+
             switch result {
             case .success:
-                self?.removeFromQueue(adEventData: adEventData)
-                self?.flushQueue()
+                self.removeFromQueue(adEventData: adEventData)
+                self.currentOperationMode = .online
             case .failure:
-                self?.addToQueue(adEventData: adEventData)
+                self.addToQueue(adEventData: adEventData)
+                self.currentOperationMode = .offline
             }
         }
     }
 
     func disable() {
-        isEnabled = false
+        currentOperationMode = .disabled
         innerDispatcher.disable()
         clearQueue()
     }
@@ -108,7 +125,7 @@ private extension PersistentRetryDispatcher {
 
     @objc
     func handleAuthenticationSuccess(_ notification: Notification) {
-        flushQueue()
+        currentOperationMode = .online
     }
 
     @objc
