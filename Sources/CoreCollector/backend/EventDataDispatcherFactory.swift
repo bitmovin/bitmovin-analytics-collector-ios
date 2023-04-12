@@ -15,15 +15,21 @@ internal class EventDataDispatcherFactory {
         self.authenticationService = authenticationService
     }
 
-    func createDispatcher() -> EventDataDispatcher {
-        let httpDispatcher = HttpEventDataDispatcher(httpClient: self.httpClient)
+    func createDispatcher(config: BitmovinAnalyticsConfig) -> EventDataDispatcher {
+        let httpDispatcher = HttpEventDataDispatcher(httpClient: httpClient)
 
-        let authDispatcher = AuthenticatedDispatcher(
-            authenticationService: self.authenticationService,
-            notificationCenter: self.notificationCenter,
+        if config.offlinePlaybackAnalyticsEnabled {
+            return PersistentRetryDispatcher(
+                authenticationService: authenticationService,
+                notificationCenter: notificationCenter,
+                innerDispatcher: httpDispatcher
+            )
+        }
+
+        return AuthenticatedDispatcher(
+            authenticationService: authenticationService,
+            notificationCenter: notificationCenter,
             innerDispatcher: httpDispatcher
         )
-
-        return authDispatcher
     }
 }

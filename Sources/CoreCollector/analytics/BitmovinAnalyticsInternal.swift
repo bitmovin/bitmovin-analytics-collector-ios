@@ -35,7 +35,7 @@ public class BitmovinAnalyticsInternal: NSObject {
         self.init(
             config,
             notificationCenter,
-            dispatcherFactory.createDispatcher(),
+            dispatcherFactory.createDispatcher(config: config),
             authenticationService,
             eventDataFactory
         )
