@@ -218,6 +218,11 @@ public class BitmovinAnalyticsConfig: NSObject {
      */
     public var randomizeUserId = false
 
+    /**
+     * Whether analytics data collection for offline playback is enabled
+     */
+    public var offlinePlaybackAnalyticsEnabled = false
+
     public init(key: String, playerKey: String) {
         self.key = key
         self.playerKey = playerKey
