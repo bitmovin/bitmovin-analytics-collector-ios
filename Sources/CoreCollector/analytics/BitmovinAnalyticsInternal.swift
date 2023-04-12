@@ -244,7 +244,7 @@ public class BitmovinAnalyticsInternal: NSObject {
 
     @objc
     private func handleAuthenticationError(notification _: Notification) {
-        // TODO: Do not detach if offline analytics is enabled
+        guard !config.offlinePlaybackAnalyticsEnabled else { return }
         detachPlayer()
     }
 
