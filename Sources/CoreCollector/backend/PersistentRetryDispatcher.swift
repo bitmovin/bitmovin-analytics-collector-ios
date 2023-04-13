@@ -5,11 +5,13 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
         case online
         case offline
         case disabled
+        case unauthenticated
     }
 
+    private let authenticationService: AuthenticationService
     private let notificationCenter: NotificationCenter
     private let innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher
-    private var currentOperationMode: OperationMode = .offline {
+    private var currentOperationMode: OperationMode = .unauthenticated {
         didSet {
             if oldValue != .online, currentOperationMode == .online {
                 flushQueue()
@@ -24,6 +26,7 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
         notificationCenter: NotificationCenter,
         innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher
     ) {
+        self.authenticationService = authenticationService
         self.notificationCenter = notificationCenter
         self.innerDispatcher = innerDispatcher
 
@@ -36,9 +39,14 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
 
     func add(_ eventData: EventData) {
         guard currentOperationMode != .disabled else { return }
+        guard currentOperationMode != .unauthenticated else {
+            addToQueue(eventData: eventData)
+            authenticationService.authenticate()
+            return
+        }
 
         innerDispatcher.add(eventData) { [weak self] result in
-            guard let self, self.currentOperationMode != .disabled else { return }
+            guard let self else { return }
 
             switch result {
             case .success:
@@ -53,9 +61,14 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
 
     func addAd(_ adEventData: AdEventData) {
         guard currentOperationMode != .disabled else { return }
+        guard currentOperationMode != .unauthenticated else {
+            addToQueue(adEventData: adEventData)
+            authenticationService.authenticate()
+            return
+        }
 
         innerDispatcher.addAd(adEventData) { [weak self] result in
-            guard let self, self.currentOperationMode != .disabled else { return }
+            guard let self else { return }
 
             switch result {
             case .success:
