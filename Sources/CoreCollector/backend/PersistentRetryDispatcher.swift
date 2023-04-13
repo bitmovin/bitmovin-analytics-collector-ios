@@ -1,5 +1,7 @@
 import Foundation
 
+// TODO: Rename to something that conveys "offline"
+// TODO: Extract the authentication part to `AuthenticatedOfflineDispatcher`
 internal class PersistentRetryDispatcher: EventDataDispatcher {
     private enum OperationMode {
         case online
