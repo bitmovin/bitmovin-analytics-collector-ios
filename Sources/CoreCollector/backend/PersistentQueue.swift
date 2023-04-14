@@ -65,6 +65,7 @@ internal class PersistentQueue<T: Codable & Equatable> {
         }
     }
 
+    // TODO: remove if still unused in the end
     func addAll(entries: [T]) {
         serialQueue.sync {
             cache.entries.append(contentsOf: entries)
@@ -88,6 +89,7 @@ internal class PersistentQueue<T: Codable & Equatable> {
         }
     }
 
+    // TODO: remove if still unused in the end
     func update(entry: T) {
         serialQueue.sync {
             if let index = cache.entries.firstIndex(of: entry) {
@@ -97,6 +99,7 @@ internal class PersistentQueue<T: Codable & Equatable> {
         }
     }
 
+    // TODO: remove if still unused in the end
     func all() -> [T] {
         serialQueue.sync {
             cache.entries

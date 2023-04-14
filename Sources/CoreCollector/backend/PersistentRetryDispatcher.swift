@@ -1,7 +1,7 @@
 import Foundation
 
-// TODO: Rename to something that conveys "offline"
-// TODO: Extract the authentication part to `AuthenticatedOfflineDispatcher`
+// TODO: Rename to something that conveys "offline" and maybe get rid of "retry" naming
+// TODO: Maybe extract the authentication part to something like an `AuthenticatedOfflineDispatcher`
 internal class PersistentRetryDispatcher: EventDataDispatcher {
     private enum OperationMode {
         case unauthenticated
