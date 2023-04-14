@@ -16,12 +16,12 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
     private var currentOperationMode: OperationMode = .unauthenticated {
         didSet {
             if oldValue != .online, currentOperationMode == .online {
-                flushQueue()
+                sendQueuedEventData()
             }
         }
     }
-    // TODO: needs to be persistent
-    private var queue: [EventData] = []
+    private let eventDataQueue: PersistentQueue<PersistentEventData>
+    private let adEventDataQueue: PersistentQueue<PersistentAdEventData>
 
     init(
         authenticationService: AuthenticationService,
@@ -31,6 +31,10 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
         self.authenticationService = authenticationService
         self.notificationCenter = notificationCenter
         self.innerDispatcher = innerDispatcher
+
+        // TODO: use correct URLs
+        self.eventDataQueue = PersistentQueue(fileUrl: URL(string: "")!)
+        self.adEventDataQueue = PersistentQueue(fileUrl: URL(string: "")!)
 
         self.addObserver(authenticationService)
     }
@@ -42,7 +46,7 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
     func add(_ eventData: EventData) {
         guard currentOperationMode != .disabled else { return }
         guard currentOperationMode != .unauthenticated else {
-            addToQueue(eventData: eventData)
+            eventDataQueue.add(entry: PersistentEventData(eventData: eventData))
             authenticationService.authenticate()
             return
         }
@@ -52,10 +56,10 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
 
             switch result {
             case .success:
-                self.removeFromQueue(eventData: eventData)
+                self.eventDataQueue.remove(entry: PersistentEventData(eventData: eventData))
                 self.currentOperationMode = .online
             case .failure:
-                self.addToQueue(eventData: eventData)
+                self.eventDataQueue.add(entry: PersistentEventData(eventData: eventData))
                 self.currentOperationMode = .offline
             }
         }
@@ -64,7 +68,7 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
     func addAd(_ adEventData: AdEventData) {
         guard currentOperationMode != .disabled else { return }
         guard currentOperationMode != .unauthenticated else {
-            addToQueue(adEventData: adEventData)
+            adEventDataQueue.add(entry: PersistentAdEventData(adEventData: adEventData))
             authenticationService.authenticate()
             return
         }
@@ -74,10 +78,10 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
 
             switch result {
             case .success:
-                self.removeFromQueue(adEventData: adEventData)
+                self.adEventDataQueue.remove(entry: PersistentAdEventData(adEventData: adEventData))
                 self.currentOperationMode = .online
             case .failure:
-                self.addToQueue(adEventData: adEventData)
+                self.adEventDataQueue.add(entry: PersistentAdEventData(adEventData: adEventData))
                 self.currentOperationMode = .offline
             }
         }
@@ -86,7 +90,8 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
     func disable() {
         currentOperationMode = .disabled
         innerDispatcher.disable()
-        clearQueue()
+        eventDataQueue.removeAll()
+        adEventDataQueue.removeAll()
     }
 
     func resetSourceState() {
@@ -95,28 +100,13 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
 }
 
 private extension PersistentRetryDispatcher {
-    func flushQueue() {
-        // TODO
-    }
-
-    func removeFromQueue(eventData: EventData) {
-        // TODO
-    }
-
-    func removeFromQueue(adEventData: AdEventData) {
-        // TODO
-    }
-
-    func addToQueue(eventData: EventData) {
-        // TODO
-    }
-
-    func addToQueue(adEventData: AdEventData) {
-        // TODO
-    }
-
-    func clearQueue() {
-        queue = []
+    func sendQueuedEventData() {
+        eventDataQueue.all().forEach { persistentEventData in
+            add(persistentEventData.eventData)
+        }
+        adEventDataQueue.all().forEach { persistentAdEventData in
+            addAd(persistentAdEventData.adEventData)
+        }
     }
 
     func addObserver(_ authenticationService: AuthenticationService) {
