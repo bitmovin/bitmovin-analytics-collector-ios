@@ -102,4 +102,10 @@ internal class PersistentQueue<T: Codable & Equatable> {
             cache.entries
         }
     }
+
+    func next() -> T? {
+        serialQueue.sync {
+            cache.entries.first
+        }
+    }
 }

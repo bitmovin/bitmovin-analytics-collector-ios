@@ -4,22 +4,15 @@ import Foundation
 // TODO: Extract the authentication part to `AuthenticatedOfflineDispatcher`
 internal class PersistentRetryDispatcher: EventDataDispatcher {
     private enum OperationMode {
-        case online
-        case offline
-        case disabled
         case unauthenticated
+        case authenticated
+        case disabled
     }
 
     private let authenticationService: AuthenticationService
     private let notificationCenter: NotificationCenter
     private let innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher
-    private var currentOperationMode: OperationMode = .unauthenticated {
-        didSet {
-            if oldValue != .online, currentOperationMode == .online {
-                sendQueuedEventData()
-            }
-        }
-    }
+    private var currentOperationMode: OperationMode = .unauthenticated
     private let eventDataQueue: PersistentQueue<PersistentEventData>
     private let adEventDataQueue: PersistentQueue<PersistentAdEventData>
 
@@ -45,7 +38,7 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
 
     func add(_ eventData: EventData) {
         guard currentOperationMode != .disabled else { return }
-        guard currentOperationMode != .unauthenticated else {
+        guard currentOperationMode == .authenticated else {
             eventDataQueue.add(entry: PersistentEventData(eventData: eventData))
             authenticationService.authenticate()
             return
@@ -56,18 +49,16 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
 
             switch result {
             case .success:
-                self.eventDataQueue.remove(entry: PersistentEventData(eventData: eventData))
-                self.currentOperationMode = .online
+                self.sendQueuedEventData()
             case .failure:
                 self.eventDataQueue.add(entry: PersistentEventData(eventData: eventData))
-                self.currentOperationMode = .offline
             }
         }
     }
 
     func addAd(_ adEventData: AdEventData) {
         guard currentOperationMode != .disabled else { return }
-        guard currentOperationMode != .unauthenticated else {
+        guard currentOperationMode == .authenticated else {
             adEventDataQueue.add(entry: PersistentAdEventData(adEventData: adEventData))
             authenticationService.authenticate()
             return
@@ -78,11 +69,9 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
 
             switch result {
             case .success:
-                self.adEventDataQueue.remove(entry: PersistentAdEventData(adEventData: adEventData))
-                self.currentOperationMode = .online
+                self.sendQueuedEventData()
             case .failure:
                 self.adEventDataQueue.add(entry: PersistentAdEventData(adEventData: adEventData))
-                self.currentOperationMode = .offline
             }
         }
     }
@@ -100,12 +89,17 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
 }
 
 private extension PersistentRetryDispatcher {
+    // TODO: send them one by one or all at once? We should weigh-in pros and cons
     func sendQueuedEventData() {
-        eventDataQueue.all().forEach { persistentEventData in
-            add(persistentEventData.eventData)
+        if let next = eventDataQueue.next() {
+            eventDataQueue.remove(entry: next)
+            add(next.eventData)
+            return
         }
-        adEventDataQueue.all().forEach { persistentAdEventData in
-            addAd(persistentAdEventData.adEventData)
+
+        if let nextAd = adEventDataQueue.next() {
+            adEventDataQueue.remove(entry: nextAd)
+            addAd(nextAd.adEventData)
         }
     }
 
@@ -130,7 +124,8 @@ private extension PersistentRetryDispatcher {
 
     @objc
     func handleAuthenticationSuccess(_ notification: Notification) {
-        currentOperationMode = .online
+        currentOperationMode = .authenticated
+        sendQueuedEventData()
     }
 
     @objc
