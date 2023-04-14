@@ -25,9 +25,18 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
         self.notificationCenter = notificationCenter
         self.innerDispatcher = innerDispatcher
 
-        // TODO: use correct URLs
-        self.eventDataQueue = PersistentQueue(fileUrl: URL(string: "")!)
-        self.adEventDataQueue = PersistentQueue(fileUrl: URL(string: "")!)
+        // TODO: handle gracefully
+        let appSupportDirectory = try! FileManager.default.url(
+            for: .applicationSupportDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: true
+        )
+
+        let offlineStorageDirectory = appSupportDirectory.appendingPathComponent("com.bitmovin.player/offline")
+
+        self.eventDataQueue = PersistentQueue(fileUrl: offlineStorageDirectory.appendingPathComponent("eventData.json"))
+        self.adEventDataQueue = PersistentQueue(fileUrl: offlineStorageDirectory.appendingPathComponent("adEventData.json"))
 
         self.addObserver(authenticationService)
     }
