@@ -1,9 +1,5 @@
 import Foundation
 
-private let bitmovinOfflineStoragePath = "com.bitmovin.player/offline"
-private let eventDataOfflineStorageFile = "eventData.json"
-private let adEventDataOfflineStorageFile = "adEventData.json"
-
 // TODO: Rename to something that conveys "offline" and maybe get rid of "retry" naming
 // TODO: Maybe extract the authentication part to something like an `AuthenticatedOfflineDispatcher`. The persistent
 // queue should be injected to here and the `AuthenticatedOfflineDispatcher` so that both can access it
@@ -25,30 +21,15 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
     init(
         authenticationService: AuthenticationService,
         notificationCenter: NotificationCenter,
-        innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher
+        innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher,
+        eventDataQueue: PersistentQueue<PersistentEventData>,
+        adEventDataQueue: PersistentQueue<PersistentAdEventData>
     ) {
         self.authenticationService = authenticationService
         self.notificationCenter = notificationCenter
         self.innerDispatcher = innerDispatcher
-
-        var baseDirectory: URL
-        if let applicationSupportDirectory = try? FileManager.default.url(
-            for: .applicationSupportDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: true
-        ) {
-            baseDirectory = applicationSupportDirectory.appendingPathComponent(bitmovinOfflineStoragePath)
-        } else {
-            baseDirectory = FileManager.default.temporaryDirectory.appendingPathComponent(bitmovinOfflineStoragePath)
-        }
-
-        self.eventDataQueue = PersistentQueue(
-            fileUrl: baseDirectory.appendingPathComponent(eventDataOfflineStorageFile)
-        )
-        self.adEventDataQueue = PersistentQueue(
-            fileUrl: baseDirectory.appendingPathComponent(adEventDataOfflineStorageFile)
-        )
+        self.eventDataQueue = eventDataQueue
+        self.adEventDataQueue = adEventDataQueue
 
         self.addObserver(authenticationService)
     }

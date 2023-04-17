@@ -4,6 +4,7 @@ internal class EventDataDispatcherFactory {
     private let httpClient: HttpClient
     private let authenticationService: AuthenticationService
     private let notificationCenter: NotificationCenter
+    private let persistentQueueFactory = PersistentQueueFactory()
 
     init(
         _ httpClient: HttpClient,
@@ -15,7 +16,6 @@ internal class EventDataDispatcherFactory {
         self.authenticationService = authenticationService
     }
 
-    // TODO: DI: Inject persistent storage to dispatchers from here
     func createDispatcher(config: BitmovinAnalyticsConfig) -> EventDataDispatcher {
         let httpDispatcher = HttpEventDataDispatcher(httpClient: httpClient)
 
@@ -23,7 +23,9 @@ internal class EventDataDispatcherFactory {
             return PersistentRetryDispatcher(
                 authenticationService: authenticationService,
                 notificationCenter: notificationCenter,
-                innerDispatcher: httpDispatcher
+                innerDispatcher: httpDispatcher,
+                eventDataQueue: persistentQueueFactory.createForEventData(),
+                adEventDataQueue: persistentQueueFactory.createForAdEventData()
             )
         }
 
