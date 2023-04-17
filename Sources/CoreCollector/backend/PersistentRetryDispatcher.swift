@@ -3,7 +3,8 @@ import Foundation
 private let bitmovinOfflineStoragePath = "com.bitmovin.player/offline"
 
 // TODO: Rename to something that conveys "offline" and maybe get rid of "retry" naming
-// TODO: Maybe extract the authentication part to something like an `AuthenticatedOfflineDispatcher`
+// TODO: Maybe extract the authentication part to something like an `AuthenticatedOfflineDispatcher`. The persistent
+// queue should be injected to here and the `AuthenticatedOfflineDispatcher` so that both can access it
 internal class PersistentRetryDispatcher: EventDataDispatcher {
     private enum OperationMode {
         case unauthenticated

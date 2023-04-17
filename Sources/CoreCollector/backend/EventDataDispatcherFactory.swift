@@ -15,6 +15,7 @@ internal class EventDataDispatcherFactory {
         self.authenticationService = authenticationService
     }
 
+    // TODO: DI: Inject persistent storage to dispatchers from here
     func createDispatcher(config: BitmovinAnalyticsConfig) -> EventDataDispatcher {
         let httpDispatcher = HttpEventDataDispatcher(httpClient: httpClient)
 
