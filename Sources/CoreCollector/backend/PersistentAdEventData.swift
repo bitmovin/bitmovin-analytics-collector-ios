@@ -1,3 +1,4 @@
+// TODO: Maybe remove, does not seem that we need it
 internal class PersistentAdEventData: Codable, Equatable {
     let adEventData: AdEventData
     var retryCount: Int = 0

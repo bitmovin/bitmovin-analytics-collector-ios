@@ -1,3 +1,4 @@
+// TODO: Maybe remove, does not seem that we need it
 internal class PersistentEventData: Codable, Equatable {
     let eventData: EventData
     var retryCount: Int = 0
