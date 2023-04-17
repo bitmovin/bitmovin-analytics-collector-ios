@@ -3,13 +3,13 @@ import Foundation
 internal class OfflineEventDataDispatcher: EventDataDispatcher, PersistentEventDataDispatcher {
     private let logger = _AnalyticsLogger(className: "OfflineEventDataDispatcher")
     private let innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher
-    private let eventDataQueue: PersistentQueue<PersistentEventData>
-    private let adEventDataQueue: PersistentQueue<PersistentAdEventData>
+    private let eventDataQueue: PersistentQueue<EventData>
+    private let adEventDataQueue: PersistentQueue<AdEventData>
 
     init(
         innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher,
-        eventDataQueue: PersistentQueue<PersistentEventData>,
-        adEventDataQueue: PersistentQueue<PersistentAdEventData>
+        eventDataQueue: PersistentQueue<EventData>,
+        adEventDataQueue: PersistentQueue<AdEventData>
     ) {
         self.innerDispatcher = innerDispatcher
         self.eventDataQueue = eventDataQueue
@@ -25,7 +25,7 @@ internal class OfflineEventDataDispatcher: EventDataDispatcher, PersistentEventD
                 self.sendQueuedEventData()
             case .failure:
                 self.logger.d("Failed to send event data. Data is being persisted and retried later")
-                self.eventDataQueue.add(entry: PersistentEventData(eventData: eventData))
+                self.eventDataQueue.add(entry: eventData)
             }
         }
     }
@@ -39,7 +39,7 @@ internal class OfflineEventDataDispatcher: EventDataDispatcher, PersistentEventD
                 self.sendQueuedEventData()
             case .failure:
                 self.logger.d("Failed to send ad event data. Data is being persisted and retried later")
-                self.adEventDataQueue.add(entry: PersistentAdEventData(adEventData: adEventData))
+                self.adEventDataQueue.add(entry: adEventData)
             }
         }
     }
@@ -57,14 +57,14 @@ internal class OfflineEventDataDispatcher: EventDataDispatcher, PersistentEventD
         if let next = eventDataQueue.next() {
             logger.d("Retrying sending persisted event data")
             eventDataQueue.remove(entry: next)
-            add(next.eventData)
+            add(next)
             return
         }
 
         if let nextAd = adEventDataQueue.next() {
             logger.d("Retrying sending persisted ad event data")
             adEventDataQueue.remove(entry: nextAd)
-            addAd(nextAd.adEventData)
+            addAd(nextAd)
         }
     }
 }

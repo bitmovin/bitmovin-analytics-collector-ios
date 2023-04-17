@@ -11,16 +11,16 @@ class PersistentAuthenticatedDispatcher: EventDataDispatcher {
     private let authenticationService: AuthenticationService
     private let notificationCenter: NotificationCenter
     private let innerDispatcher: EventDataDispatcher & PersistentEventDataDispatcher
-    private let eventDataQueue: PersistentQueue<PersistentEventData>
-    private let adEventDataQueue: PersistentQueue<PersistentAdEventData>
+    private let eventDataQueue: PersistentQueue<EventData>
+    private let adEventDataQueue: PersistentQueue<AdEventData>
     private var currentOperationMode: OperationMode = .unauthenticated
 
     init(
         authenticationService: AuthenticationService,
         notificationCenter: NotificationCenter,
         innerDispatcher: EventDataDispatcher & PersistentEventDataDispatcher,
-        eventDataQueue: PersistentQueue<PersistentEventData>,
-        adEventDataQueue: PersistentQueue<PersistentAdEventData>
+        eventDataQueue: PersistentQueue<EventData>,
+        adEventDataQueue: PersistentQueue<AdEventData>
     ) {
         self.authenticationService = authenticationService
         self.notificationCenter = notificationCenter
@@ -39,7 +39,7 @@ class PersistentAuthenticatedDispatcher: EventDataDispatcher {
         guard currentOperationMode != .disabled else { return }
         guard currentOperationMode == .authenticated else {
             logger.d("Received event data but not authenticated. Trying to authenticate")
-            eventDataQueue.add(entry: PersistentEventData(eventData: eventData))
+            eventDataQueue.add(entry: eventData)
             authenticationService.authenticate()
             return
         }
@@ -51,7 +51,7 @@ class PersistentAuthenticatedDispatcher: EventDataDispatcher {
         guard currentOperationMode != .disabled else { return }
         guard currentOperationMode == .authenticated else {
             logger.d("Received ad event data but not authenticated. Trying to authenticate")
-            adEventDataQueue.add(entry: PersistentAdEventData(adEventData: adEventData))
+            adEventDataQueue.add(entry: adEventData)
             authenticationService.authenticate()
             return
         }

@@ -18,14 +18,14 @@ internal class PersistentQueueFactory {
         return FileManager.default.temporaryDirectory.appendingPathComponent(bitmovinOfflineStoragePath)
     }()
 
-    func createForEventData() -> PersistentQueue<PersistentEventData> {
-        PersistentQueue<PersistentEventData>(
+    func createForEventData() -> PersistentQueue<EventData> {
+        PersistentQueue<EventData>(
             fileUrl: baseDirectory.appendingPathComponent(eventDataOfflineStorageFile)
         )
     }
 
-    func createForAdEventData() -> PersistentQueue<PersistentAdEventData> {
-        PersistentQueue<PersistentAdEventData>(
+    func createForAdEventData() -> PersistentQueue<AdEventData> {
+        PersistentQueue<AdEventData>(
             fileUrl: baseDirectory.appendingPathComponent(adEventDataOfflineStorageFile)
         )
     }
