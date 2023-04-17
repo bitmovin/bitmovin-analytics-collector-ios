@@ -52,10 +52,8 @@ internal class PersistentQueue<T: Codable & Equatable> {
     }
 
     private func persistStore(_ store: Store) throws {
-        try serialQueue.sync {
-            let data = try JSONEncoder().encode(store)
-            try data.write(to: fileUrl, options: .atomic)
-        }
+        let data = try JSONEncoder().encode(store)
+        try data.write(to: fileUrl, options: .atomic)
     }
 
     func add(entry: T) {
