@@ -72,16 +72,6 @@ internal class PersistentQueue<T: Codable & Equatable> {
         }
     }
 
-    func remove(entry: T) {
-        serialQueue.sync {
-            guard var stored = try? fetchStore() else { return }
-            if let index = stored.entries.firstIndex(of: entry) {
-                stored.entries.remove(at: index)
-                try? persistStore(stored)
-            }
-        }
-    }
-
     func removeAll() {
         serialQueue.sync {
             try? persistStore(Store())
