@@ -20,12 +20,21 @@ internal class EventDataDispatcherFactory {
         let httpDispatcher = HttpEventDataDispatcher(httpClient: httpClient)
 
         if config.offlinePlaybackAnalyticsEnabled {
-            return PersistentRetryDispatcher(
+            let eventDataQueue = persistentQueueFactory.createForEventData()
+            let adEventDataQueue = persistentQueueFactory.createForAdEventData()
+
+            let persistentRetryDispatcher = PersistentRetryDispatcher(
+                innerDispatcher: httpDispatcher,
+                eventDataQueue: eventDataQueue,
+                adEventDataQueue: adEventDataQueue
+            )
+
+            return PersistentAuthenticatedDispatcher(
                 authenticationService: authenticationService,
                 notificationCenter: notificationCenter,
-                innerDispatcher: httpDispatcher,
-                eventDataQueue: persistentQueueFactory.createForEventData(),
-                adEventDataQueue: persistentQueueFactory.createForAdEventData()
+                innerDispatcher: persistentRetryDispatcher,
+                eventDataQueue: eventDataQueue,
+                adEventDataQueue: adEventDataQueue
             )
         }
 
