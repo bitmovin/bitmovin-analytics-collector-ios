@@ -1,8 +1,7 @@
 import Foundation
 
-// TODO: Rename to something that conveys "offline" and maybe get rid of "retry" naming
-internal class PersistentRetryDispatcher: EventDataDispatcher, PersistentEventDataDispatcher {
-    private let logger = _AnalyticsLogger(className: "PersistentRetryDispatcher")
+internal class OfflineEventDataDispatcher: EventDataDispatcher, PersistentEventDataDispatcher {
+    private let logger = _AnalyticsLogger(className: "OfflineEventDataDispatcher")
     private let innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher
     private let eventDataQueue: PersistentQueue<PersistentEventData>
     private let adEventDataQueue: PersistentQueue<PersistentAdEventData>

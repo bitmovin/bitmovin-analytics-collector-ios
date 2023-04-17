@@ -23,7 +23,7 @@ internal class EventDataDispatcherFactory {
             let eventDataQueue = persistentQueueFactory.createForEventData()
             let adEventDataQueue = persistentQueueFactory.createForAdEventData()
 
-            let persistentRetryDispatcher = PersistentRetryDispatcher(
+            let offlineEventDataDispatcher = OfflineEventDataDispatcher(
                 innerDispatcher: httpDispatcher,
                 eventDataQueue: eventDataQueue,
                 adEventDataQueue: adEventDataQueue
@@ -32,7 +32,7 @@ internal class EventDataDispatcherFactory {
             return PersistentAuthenticatedDispatcher(
                 authenticationService: authenticationService,
                 notificationCenter: notificationCenter,
-                innerDispatcher: persistentRetryDispatcher,
+                innerDispatcher: offlineEventDataDispatcher,
                 eventDataQueue: eventDataQueue,
                 adEventDataQueue: adEventDataQueue
             )
