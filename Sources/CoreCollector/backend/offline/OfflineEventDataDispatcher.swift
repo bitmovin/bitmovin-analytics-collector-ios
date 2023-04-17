@@ -54,16 +54,14 @@ internal class OfflineEventDataDispatcher: EventDataDispatcher, PersistentEventD
 
     // TODO: send them one by one or all at once? We should weigh-in pros and cons
     func sendQueuedEventData() {
-        if let next = eventDataQueue.next() {
+        if let next = eventDataQueue.removeFirst() {
             logger.d("Retrying sending persisted event data")
-            eventDataQueue.remove(entry: next)
             add(next)
             return
         }
 
-        if let nextAd = adEventDataQueue.next() {
+        if let nextAd = adEventDataQueue.removeFirst() {
             logger.d("Retrying sending persisted ad event data")
-            adEventDataQueue.remove(entry: nextAd)
             addAd(nextAd)
         }
     }

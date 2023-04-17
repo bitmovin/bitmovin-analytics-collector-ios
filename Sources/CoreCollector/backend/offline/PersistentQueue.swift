@@ -1,5 +1,7 @@
 import Foundation
 
+private let serialQueue = DispatchQueue(label: "com.bitmovin.core-collector.persistence-queue")
+
 internal class PersistentQueue<T: Codable & Equatable> {
     private struct Store: Codable {
         var entries: [T] = []
@@ -7,15 +9,12 @@ internal class PersistentQueue<T: Codable & Equatable> {
 
     private let logger = _AnalyticsLogger(className: "PersistentQueue")
     private let fileUrl: URL
-    private let serialQueue: DispatchQueue
-    private var cache: Store = Store()
     private var fileExists: Bool {
         FileManager.default.fileExists(atPath: fileUrl.path)
     }
 
     init(fileUrl: URL) {
         self.fileUrl = fileUrl
-        self.serialQueue = DispatchQueue(label: "com.bitmovin.core-collector.persistence-queue")
 
         initPersistentStorage()
     }
@@ -23,10 +22,9 @@ internal class PersistentQueue<T: Codable & Equatable> {
     private func initPersistentStorage() {
         guard !fileExists else {
             do {
-                cache = try fetchStore()
-                logger.d("Fetched persisted data into local cache. Found \(cache.entries.count) entries at \(fileUrl)")
+                let _ = try fetchStore()
             } catch {
-                logger.e("Failed to fetch persisted data")
+                logger.e("Failed to fetch persisted data, might be corrupted")
                 createNewPersistentStore()
             }
             return
@@ -37,30 +35,26 @@ internal class PersistentQueue<T: Codable & Equatable> {
 
     private func createNewPersistentStore() {
         logger.d("Creating new store")
-        cache = Store()
-
-        try? ensureDirectoryExists()
-        try? persistStore(cache)
+        serialQueue.sync {
+            try? ensureDirectoryExists()
+            try? persistStore(Store())
+        }
     }
 
     private func ensureDirectoryExists() throws {
-        try serialQueue.sync {
-            let directoryURL = fileUrl.deletingLastPathComponent()
-            logger.d("Ensuring that directory \(directoryURL) exists")
+        let directoryURL = fileUrl.deletingLastPathComponent()
+        logger.d("Ensuring that directory \(directoryURL) exists")
 
-            try FileManager.default.createDirectory(
-                at: directoryURL,
-                withIntermediateDirectories: true,
-                attributes: nil
-            )
-        }
+        try FileManager.default.createDirectory(
+            at: directoryURL,
+            withIntermediateDirectories: true,
+            attributes: nil
+        )
     }
 
     private func fetchStore() throws -> Store {
-        try serialQueue.sync {
-            let data = try Data(contentsOf: fileUrl)
-            return try JSONDecoder().decode(Store.self, from: data)
-        }
+        let data = try Data(contentsOf: fileUrl)
+        return try JSONDecoder().decode(Store.self, from: data)
     }
 
     private func persistStore(_ store: Store) throws {
@@ -72,30 +66,39 @@ internal class PersistentQueue<T: Codable & Equatable> {
 
     func add(entry: T) {
         serialQueue.sync {
-            cache.entries.append(entry)
-            try? persistStore(cache)
+            guard var stored = try? fetchStore() else { return }
+            stored.entries.append(entry)
+            try? persistStore(stored)
         }
     }
 
     func remove(entry: T) {
         serialQueue.sync {
-            if let index = cache.entries.firstIndex(of: entry) {
-                cache.entries.remove(at: index)
-                try? persistStore(cache)
+            guard var stored = try? fetchStore() else { return }
+            if let index = stored.entries.firstIndex(of: entry) {
+                stored.entries.remove(at: index)
+                try? persistStore(stored)
             }
         }
     }
 
     func removeAll() {
         serialQueue.sync {
-            cache.entries = []
-            try? persistStore(cache)
+            try? persistStore(Store())
         }
     }
 
-    func next() -> T? {
+    func removeFirst() -> T? {
         serialQueue.sync {
-            cache.entries.first
+            guard var stored = try? fetchStore(),
+                  let _ = stored.entries.first else {
+                return nil
+            }
+
+            let first = stored.entries.removeFirst()
+            try? persistStore(stored)
+
+            return first
         }
     }
 }
