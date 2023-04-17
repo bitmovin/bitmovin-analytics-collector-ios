@@ -1,6 +1,6 @@
 import Foundation
 
-public class EventData: Codable, Equatable {
+public class EventData: Codable {
     public var domain: String?
     public var path: String?
     public var language: String?
@@ -119,9 +119,5 @@ public class EventData: Codable, Equatable {
 
     public func jsonString() -> String {
         Util.toJson(object: self)
-    }
-
-    public static func == (lhs: EventData, rhs: EventData) -> Bool {
-        lhs.impressionId == rhs.impressionId && lhs.sequenceNumber == rhs.sequenceNumber
     }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-public class AdEventData: Codable, Equatable {
+public class AdEventData: Codable {
     //  EventData data
     var audioCodec: String?
     var cdnProvider: String?
@@ -138,10 +138,6 @@ public class AdEventData: Codable, Equatable {
     var autoplay: Bool?
     var time: Int64?
     var adImpressionId: String?
-
-    public static func == (lhs: AdEventData, rhs: AdEventData) -> Bool {
-        lhs.adImpressionId == rhs.adImpressionId && lhs.videoImpressionId == rhs.videoImpressionId
-    }
 
     public func setEventData(eventData: EventData) {
         self.analyticsVersion = eventData.analyticsVersion

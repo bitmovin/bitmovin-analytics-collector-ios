@@ -2,7 +2,7 @@ import Foundation
 
 private let serialQueue = DispatchQueue(label: "com.bitmovin.core-collector.persistence-queue")
 
-internal class PersistentQueue<T: Codable & Equatable> {
+internal class PersistentQueue<T: Codable> {
     private struct Store: Codable {
         var entries: [T] = []
     }
