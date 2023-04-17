@@ -99,8 +99,6 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
     func disable() {
         currentOperationMode = .disabled
         innerDispatcher.disable()
-        eventDataQueue.removeAll()
-        adEventDataQueue.removeAll()
     }
 
     func resetSourceState() {
@@ -150,6 +148,8 @@ private extension PersistentRetryDispatcher {
 
     @objc
     func handleAuthenticationDenied(_ notification: Notification) {
+        eventDataQueue.removeAll()
+        adEventDataQueue.removeAll()
         disable()
     }
 }
