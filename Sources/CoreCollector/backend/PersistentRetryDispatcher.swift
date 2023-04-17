@@ -14,6 +14,7 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
         case disabled
     }
 
+    private let logger = _AnalyticsLogger(className: "PersistentRetryDispatcher")
     private let authenticationService: AuthenticationService
     private let notificationCenter: NotificationCenter
     private let innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher
@@ -59,6 +60,7 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
     func add(_ eventData: EventData) {
         guard currentOperationMode != .disabled else { return }
         guard currentOperationMode == .authenticated else {
+            logger.d("Received event data but not authenticated. Trying to authenticate")
             eventDataQueue.add(entry: PersistentEventData(eventData: eventData))
             authenticationService.authenticate()
             return
@@ -71,6 +73,7 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
             case .success:
                 self.sendQueuedEventData()
             case .failure:
+                self.logger.d("Failed to send event data. Data is being persisted and retried later")
                 self.eventDataQueue.add(entry: PersistentEventData(eventData: eventData))
             }
         }
@@ -79,6 +82,7 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
     func addAd(_ adEventData: AdEventData) {
         guard currentOperationMode != .disabled else { return }
         guard currentOperationMode == .authenticated else {
+            logger.d("Received ad event data but not authenticated. Trying to authenticate")
             adEventDataQueue.add(entry: PersistentAdEventData(adEventData: adEventData))
             authenticationService.authenticate()
             return
@@ -91,6 +95,7 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
             case .success:
                 self.sendQueuedEventData()
             case .failure:
+                self.logger.d("Failed to send ad event data. Data is being persisted and retried later")
                 self.adEventDataQueue.add(entry: PersistentAdEventData(adEventData: adEventData))
             }
         }
@@ -110,12 +115,14 @@ private extension PersistentRetryDispatcher {
     // TODO: send them one by one or all at once? We should weigh-in pros and cons
     func sendQueuedEventData() {
         if let next = eventDataQueue.next() {
+            logger.d("Retrying sending persisted event data")
             eventDataQueue.remove(entry: next)
             add(next.eventData)
             return
         }
 
         if let nextAd = adEventDataQueue.next() {
+            logger.d("Retrying sending persisted ad event data")
             adEventDataQueue.remove(entry: nextAd)
             addAd(nextAd.adEventData)
         }
@@ -142,12 +149,14 @@ private extension PersistentRetryDispatcher {
 
     @objc
     func handleAuthenticationSuccess(_ notification: Notification) {
+        logger.d("Authentication success")
         currentOperationMode = .authenticated
         sendQueuedEventData()
     }
 
     @objc
     func handleAuthenticationDenied(_ notification: Notification) {
+        logger.d("Authentication denied")
         eventDataQueue.removeAll()
         adEventDataQueue.removeAll()
         disable()
