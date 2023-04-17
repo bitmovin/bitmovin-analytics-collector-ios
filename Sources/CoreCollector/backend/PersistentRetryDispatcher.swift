@@ -1,6 +1,8 @@
 import Foundation
 
 private let bitmovinOfflineStoragePath = "com.bitmovin.player/offline"
+private let eventDataOfflineStorageFile = "eventData.json"
+private let adEventDataOfflineStorageFile = "adEventData.json"
 
 // TODO: Rename to something that conveys "offline" and maybe get rid of "retry" naming
 // TODO: Maybe extract the authentication part to something like an `AuthenticatedOfflineDispatcher`. The persistent
@@ -40,8 +42,12 @@ internal class PersistentRetryDispatcher: EventDataDispatcher {
             baseDirectory = FileManager.default.temporaryDirectory.appendingPathComponent(bitmovinOfflineStoragePath)
         }
 
-        self.eventDataQueue = PersistentQueue(fileUrl: baseDirectory.appendingPathComponent("eventData.json"))
-        self.adEventDataQueue = PersistentQueue(fileUrl: baseDirectory.appendingPathComponent("adEventData.json"))
+        self.eventDataQueue = PersistentQueue(
+            fileUrl: baseDirectory.appendingPathComponent(eventDataOfflineStorageFile)
+        )
+        self.adEventDataQueue = PersistentQueue(
+            fileUrl: baseDirectory.appendingPathComponent(adEventDataOfflineStorageFile)
+        )
 
         self.addObserver(authenticationService)
     }
