@@ -5,14 +5,20 @@ import AmazonIVSPlayer
 
 class DefaultVideoStartupService: VideoStartupService {
     private let playerContext: PlayerContext
+    private weak var player: IVSPlayerProtocol?
     private let stateMachine: StateMachine
+    private let playbackQualityProvider: PlaybackQualityProvider
 
     init(
         playerContext: PlayerContext,
-        stateMachine: StateMachine
+        stateMachine: StateMachine,
+        player: IVSPlayerProtocol,
+        playbackQualityProvider: PlaybackQualityProvider
     ) {
         self.playerContext = playerContext
         self.stateMachine = stateMachine
+        self.player = player
+        self.playbackQualityProvider = playbackQualityProvider
     }
 
     func onStateChange(state: IVSPlayer.State) {
@@ -40,6 +46,9 @@ class DefaultVideoStartupService: VideoStartupService {
             stateMachine.play(time: nil)
         }
 
+        // we set the initial quality during startup, to avoid sending a sample on the first quality change event
+        // which is just the initial quality and not a real change
+        playbackQualityProvider.currentQuality = player?.qualityProtocol
         if isPlaying {
             stateMachine.playing(time: playerContext.position)
         }

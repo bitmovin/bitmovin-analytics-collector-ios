@@ -17,12 +17,14 @@ enum AmazonIVSPlayerAdapterFactory {
         let stateMachine = StateMachineFactory.create(playerContext: playerContext)
         analytics.setStateMachine(stateMachine)
 
+        let qualityProvider = DefaultPlaybackQualityProvider()
         let videoStartupService = DefaultVideoStartupService(
             playerContext: playerContext,
-            stateMachine: stateMachine
+            stateMachine: stateMachine,
+            player: player,
+            playbackQualityProvider: qualityProvider
         )
 
-        let qualityProvider = DefaultPlaybackQualityProvider()
         let statisticsProvider = DefaultPlayerStatisticsProvider(player: player)
 
         let playbackService = DefaultPlaybackService(
