@@ -61,7 +61,27 @@ class PersistentQueueTests: QuickSpec {
             }
         }
         describe("removing all entries") {
-            // TODO
+            context("when entries exist in database") {
+                beforeEach {
+                    persistentQueue.add(entry: EventData("1"))
+                    persistentQueue.add(entry: EventData("2"))
+                    persistentQueue.add(entry: EventData("3"))
+                }
+                it("removes all entries") {
+                    persistentQueue.removeAll()
+
+                    let first = persistentQueue.removeFirst()
+                    expect(first).to(beNil())
+                }
+            }
+            context("when no entries exist in database") {
+                it("keeps database in empty state") {
+                    persistentQueue.removeAll()
+
+                    let first = persistentQueue.removeFirst()
+                    expect(first).to(beNil())
+                }
+            }
         }
         describe("database integrity") {
             context("when file is corrupted") {
@@ -83,6 +103,22 @@ class PersistentQueueTests: QuickSpec {
                         expect(first?.impressionId).to(equal("1"))
                         expect(second).to(beNil())
                     }
+                }
+            }
+            context("when file is not corrupted") {
+                beforeEach {
+                    persistentQueue.add(entry: EventData("1"))
+                    persistentQueue.add(entry: EventData("2"))
+                    persistentQueue = PersistentQueue(fileUrl: fileLocation)
+                }
+                it("uses the existing database") {
+                    let first = persistentQueue.removeFirst()
+                    let second = persistentQueue.removeFirst()
+                    let third = persistentQueue.removeFirst()
+
+                    expect(first?.impressionId).to(equal("1"))
+                    expect(second?.impressionId).to(equal("2"))
+                    expect(third).to(beNil())
                 }
             }
         }
