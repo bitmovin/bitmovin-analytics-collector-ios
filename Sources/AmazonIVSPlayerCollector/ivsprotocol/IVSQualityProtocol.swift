@@ -1,7 +1,7 @@
 import AmazonIVSPlayer
 
 // We created our own protocol to work with and also to enable proper mocking of that class
-internal protocol IVSQualityProtocol {
+internal protocol IVSQualityProtocol: AnyObject {
     var name: String { get }
     var codecs: String { get }
     var bitrate: Int { get }
