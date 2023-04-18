@@ -6,6 +6,11 @@ protocol IVSPlayerProtocol: AnyObject {
     var version: String { get }
     var delegate: IVSPlayer.Delegate? { get set }
     var state: IVSPlayer.State { get }
+    var qualityProtocol: IVSQualityProtocol? { get }
 }
 
-extension IVSPlayer: IVSPlayerProtocol {}
+extension IVSPlayer: IVSPlayerProtocol {
+    var qualityProtocol: IVSQualityProtocol? {
+        self.quality
+    }
+}
