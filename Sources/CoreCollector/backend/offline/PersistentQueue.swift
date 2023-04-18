@@ -3,10 +3,6 @@ import Foundation
 private let serialQueue = DispatchQueue(label: "com.bitmovin.core-collector.persistence-queue")
 
 internal class PersistentQueue<T: Codable> {
-    private struct Store: Codable {
-        var entries: [T] = []
-    }
-
     private let logger = _AnalyticsLogger(className: "PersistentQueue")
     private let fileUrl: URL
     private var fileExists: Bool {
@@ -19,26 +15,62 @@ internal class PersistentQueue<T: Codable> {
         initPersistentStorage()
     }
 
-    private func initPersistentStorage() {
-        guard !fileExists else {
-            do {
-                let _ = try fetchStore()
-            } catch {
-                logger.e("Failed to fetch persisted data, might be corrupted")
-                createNewPersistentStore()
+    func add(entry: T) {
+        serialQueue.sync {
+            if let data = try? JSONEncoder().encode(entry) {
+                appendLine(data, to: fileUrl)
             }
-            return
         }
-
-        createNewPersistentStore()
     }
 
-    private func createNewPersistentStore() {
-        logger.d("Creating new store")
+    func removeAll() {
+        serialQueue.sync {
+            writeEmptyFile(to: fileUrl)
+        }
+    }
+
+    func removeFirst() -> T? {
+        serialQueue.sync {
+            guard let next = removeFirstLine(from: fileUrl) else {
+                return nil
+            }
+
+            return try? JSONDecoder().decode(T.self, from: next)
+        }
+    }
+}
+
+private extension PersistentQueue {
+    private func initPersistentStorage() {
+        if fileExists {
+            if !hasIntegrity() {
+                createNewDatabase()
+            }
+        } else {
+            createNewDatabase()
+        }
+    }
+
+    private func createNewDatabase() {
+        logger.d("Creating new database file")
         serialQueue.sync {
             try? ensureDirectoryExists()
-            try? persistStore(Store())
+            writeEmptyFile(to: fileUrl)
         }
+    }
+
+    private func hasIntegrity() -> Bool {
+        if let firstEntry = readFirstLine(from: fileUrl) {
+            do {
+                _ = try JSONDecoder().decode(T.self, from: firstEntry)
+            } catch {
+                return false
+            }
+
+            return true
+        }
+
+        return true
     }
 
     private func ensureDirectoryExists() throws {
@@ -52,43 +84,80 @@ internal class PersistentQueue<T: Codable> {
         )
     }
 
-    private func fetchStore() throws -> Store {
-        let data = try Data(contentsOf: fileUrl)
-        return try JSONDecoder().decode(Store.self, from: data)
+    func writeEmptyFile(to file: URL) {
+        try? "".write(to: file, atomically: true, encoding: .utf8)
     }
 
-    private func persistStore(_ store: Store) throws {
-        let data = try JSONEncoder().encode(store)
-        try data.write(to: fileUrl, options: .atomic)
-
-        logger.d("Data written to disk. Store has \(store.entries.count) entries stored at \(fileUrl)")
-    }
-
-    func add(entry: T) {
-        serialQueue.sync {
-            guard var stored = try? fetchStore() else { return }
-            stored.entries.append(entry)
-            try? persistStore(stored)
+    func appendLine(_ line: Data, to file: URL) {
+        guard let fileHandle = try? FileHandle(forWritingTo: file) else { return }
+        defer {
+            fileHandle.closeFile()
         }
-    }
 
-    func removeAll() {
-        serialQueue.sync {
-            try? persistStore(Store())
+        fileHandle.seekToEndOfFile()
+
+        guard let newLine = "\n".data(using: .utf8) else {
+            return
         }
+
+        var line = line
+        line.append(newLine)
+        fileHandle.write(line)
     }
 
-    func removeFirst() -> T? {
-        serialQueue.sync {
-            guard var stored = try? fetchStore(),
-                  let _ = stored.entries.first else {
-                return nil
+    func readFirstLine(from file: URL) -> Data? {
+        guard let fileHandle = try? FileHandle(forReadingFrom: file) else { return nil }
+        defer {
+            fileHandle.closeFile()
+        }
+
+        guard let line = fileHandle.readFirstLine() else {
+            return nil
+        }
+
+        return line
+    }
+
+    func removeFirstLine(from file: URL) -> Data? {
+        guard let fileHandle = try? FileHandle(forUpdating: file) else { return nil }
+        guard let line = fileHandle.readFirstLine() else {
+            fileHandle.closeFile()
+            return nil
+        }
+
+        let remainingData = fileHandle.readDataToEndOfFile()
+        fileHandle.closeFile()
+
+        try? remainingData.write(to: file, options: .atomic)
+        return line
+    }
+}
+
+private extension FileHandle {
+    func readFirstLine() -> Data? {
+        let chunkSize = 4096
+        seek(toFileOffset: 0)
+
+        var data = readData(ofLength: chunkSize)
+        var range = data.range(of: Data("\n".utf8))
+
+        while range == nil && data.count > 0 {
+            let newData = self.readData(ofLength: chunkSize)
+            if newData.count == 0 {
+                break
             }
-
-            let first = stored.entries.removeFirst()
-            try? persistStore(stored)
-
-            return first
+            data.append(newData)
+            range = data.range(of: Data("\n".utf8))
         }
+
+        guard let range else {
+            // No new-line character found, return all data
+            return data
+        }
+
+        let lineData = data.subdata(in: 0..<range.upperBound)
+        seek(toFileOffset: UInt64(lineData.count))
+
+        return lineData
     }
 }
