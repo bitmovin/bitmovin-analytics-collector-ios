@@ -3,17 +3,14 @@ import Foundation
 internal class OfflineEventDataDispatcher: EventDataDispatcher, PersistentEventDataDispatcher {
     private let logger = _AnalyticsLogger(className: "OfflineEventDataDispatcher")
     private let innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher
-    private let eventDataQueue: PersistentQueue<EventData>
-    private let adEventDataQueue: PersistentQueue<AdEventData>
+    private let eventDataQueue: PersistentEventDataQueue
 
     init(
         innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher,
-        eventDataQueue: PersistentQueue<EventData>,
-        adEventDataQueue: PersistentQueue<AdEventData>
+        eventDataQueue: PersistentEventDataQueue
     ) {
         self.innerDispatcher = innerDispatcher
         self.eventDataQueue = eventDataQueue
-        self.adEventDataQueue = adEventDataQueue
     }
 
     func add(_ eventData: EventData) {
@@ -25,7 +22,7 @@ internal class OfflineEventDataDispatcher: EventDataDispatcher, PersistentEventD
                 self.sendQueuedEventData()
             case .failure:
                 self.logger.d("Failed to send event data. Data is being persisted and retried later")
-                self.eventDataQueue.add(entry: eventData)
+                self.eventDataQueue.add(eventData)
             }
         }
     }
@@ -39,7 +36,7 @@ internal class OfflineEventDataDispatcher: EventDataDispatcher, PersistentEventD
                 self.sendQueuedEventData()
             case .failure:
                 self.logger.d("Failed to send ad event data. Data is being persisted and retried later")
-                self.adEventDataQueue.add(entry: adEventData)
+                self.eventDataQueue.addAd(adEventData)
             }
         }
     }
@@ -60,7 +57,7 @@ internal class OfflineEventDataDispatcher: EventDataDispatcher, PersistentEventD
             return
         }
 
-        if let nextAd = adEventDataQueue.removeFirst() {
+        if let nextAd = eventDataQueue.removeFirstAd() {
             logger.d("Retrying sending persisted ad event data")
             addAd(nextAd)
         }

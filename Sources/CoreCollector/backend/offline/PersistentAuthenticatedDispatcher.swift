@@ -11,22 +11,19 @@ class PersistentAuthenticatedDispatcher: EventDataDispatcher {
     private let authenticationService: AuthenticationService
     private let notificationCenter: NotificationCenter
     private let innerDispatcher: EventDataDispatcher & PersistentEventDataDispatcher
-    private let eventDataQueue: PersistentQueue<EventData>
-    private let adEventDataQueue: PersistentQueue<AdEventData>
+    private let eventDataQueue: PersistentEventDataQueue
     private var currentOperationMode: OperationMode = .unauthenticated
 
     init(
         authenticationService: AuthenticationService,
         notificationCenter: NotificationCenter,
         innerDispatcher: EventDataDispatcher & PersistentEventDataDispatcher,
-        eventDataQueue: PersistentQueue<EventData>,
-        adEventDataQueue: PersistentQueue<AdEventData>
+        eventDataQueue: PersistentEventDataQueue
     ) {
         self.authenticationService = authenticationService
         self.notificationCenter = notificationCenter
         self.innerDispatcher = innerDispatcher
         self.eventDataQueue = eventDataQueue
-        self.adEventDataQueue = adEventDataQueue
 
         self.addObserver(authenticationService)
     }
@@ -39,7 +36,7 @@ class PersistentAuthenticatedDispatcher: EventDataDispatcher {
         guard currentOperationMode != .disabled else { return }
         guard currentOperationMode == .authenticated else {
             logger.d("Received event data but not authenticated. Trying to authenticate")
-            eventDataQueue.add(entry: eventData)
+            eventDataQueue.add(eventData)
             authenticationService.authenticate()
             return
         }
@@ -51,7 +48,7 @@ class PersistentAuthenticatedDispatcher: EventDataDispatcher {
         guard currentOperationMode != .disabled else { return }
         guard currentOperationMode == .authenticated else {
             logger.d("Received ad event data but not authenticated. Trying to authenticate")
-            adEventDataQueue.add(entry: adEventData)
+            eventDataQueue.addAd(adEventData)
             authenticationService.authenticate()
             return
         }
@@ -101,7 +98,6 @@ private extension PersistentAuthenticatedDispatcher {
     func handleAuthenticationDenied(_ notification: Notification) {
         logger.d("Authentication denied")
         eventDataQueue.removeAll()
-        adEventDataQueue.removeAll()
         disable()
     }
 }
