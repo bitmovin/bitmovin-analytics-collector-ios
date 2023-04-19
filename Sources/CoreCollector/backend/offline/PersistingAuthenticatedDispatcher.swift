@@ -1,6 +1,6 @@
 import Foundation
 
-class PersistentAuthenticatedDispatcher: EventDataDispatcher {
+class PersistingAuthenticatedDispatcher: EventDataDispatcher {
     private enum OperationMode {
         case unauthenticated
         case authenticated
@@ -10,14 +10,14 @@ class PersistentAuthenticatedDispatcher: EventDataDispatcher {
     private let logger = _AnalyticsLogger(className: "PersistentAuthenticatedDispatcher")
     private let authenticationService: AuthenticationService
     private let notificationCenter: NotificationCenter
-    private let innerDispatcher: EventDataDispatcher & PersistentEventDataDispatcher
+    private let innerDispatcher: EventDataDispatcher & ResendingDispatcher
     private let eventDataQueue: PersistentEventDataQueue
     private var currentOperationMode: OperationMode = .unauthenticated
 
     init(
         authenticationService: AuthenticationService,
         notificationCenter: NotificationCenter,
-        innerDispatcher: EventDataDispatcher & PersistentEventDataDispatcher,
+        innerDispatcher: EventDataDispatcher & ResendingDispatcher,
         eventDataQueue: PersistentEventDataQueue
     ) {
         self.authenticationService = authenticationService
@@ -66,7 +66,7 @@ class PersistentAuthenticatedDispatcher: EventDataDispatcher {
     }
 }
 
-private extension PersistentAuthenticatedDispatcher {
+private extension PersistingAuthenticatedDispatcher {
     func addObserver(_ authenticationService: AuthenticationService) {
         notificationCenter.addObserver(
             self,

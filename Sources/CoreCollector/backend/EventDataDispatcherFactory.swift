@@ -22,15 +22,15 @@ internal class EventDataDispatcherFactory {
         if config.offlinePlaybackAnalyticsEnabled {
             let eventDataQueue = persistentQueueFactory.create()
 
-            let offlineEventDataDispatcher = OfflineEventDataDispatcher(
+            let persistingDispatcher = PersistingEventDataDispatcher(
                 innerDispatcher: httpDispatcher,
                 eventDataQueue: eventDataQueue
             )
 
-            return PersistentAuthenticatedDispatcher(
+            return PersistingAuthenticatedDispatcher(
                 authenticationService: authenticationService,
                 notificationCenter: notificationCenter,
-                innerDispatcher: offlineEventDataDispatcher,
+                innerDispatcher: persistingDispatcher,
                 eventDataQueue: eventDataQueue
             )
         }
