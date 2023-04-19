@@ -3,12 +3,14 @@ import Foundation
 internal class HttpEventDataDispatcher: EventDataDispatcher {
     private let logger = _AnalyticsLogger(className: "HttpEventDataDispatcher")
     private let httpClient: HttpClient
+    private let eventDataQueue: PersistentEventDataQueue
     private let analyticsBackendUrl: String
     private let adAnalyticsBackendUrl: String
     private var isEnabled: Bool = true
 
-    init(httpClient: HttpClient) {
+    init(httpClient: HttpClient, eventDataQueue: PersistentEventDataQueue) {
         self.httpClient = httpClient
+        self.eventDataQueue = eventDataQueue
 
         self.analyticsBackendUrl = BitmovinAnalyticsConfig.analyticsUrl
         self.adAnalyticsBackendUrl = BitmovinAnalyticsConfig.adAnalyticsUrl
@@ -44,8 +46,14 @@ extension HttpEventDataDispatcher: CallbackEventDataDispatcher {
             urlString: analyticsBackendUrl,
             json: eventData.jsonString()
         ) { data, response, error in
+            let result = HttpDispatchResult.from(data: data, response: response, error: error)
+
+            if case .success = result {
+                self.sendQueuedEventData()
+            }
+
             DispatchQueue.main.async {
-                completionHandler(HttpDispatchResult.from(data: data, response: response, error: error))
+                completionHandler(result)
             }
         }
     }
@@ -60,9 +68,30 @@ extension HttpEventDataDispatcher: CallbackEventDataDispatcher {
             urlString: adAnalyticsBackendUrl,
             json: json
         ) { data, response, error in
-            DispatchQueue.main.async {
-                completionHandler(HttpDispatchResult.from(data: data, response: response, error: error))
+            let result = HttpDispatchResult.from(data: data, response: response, error: error)
+
+            if case .success = result {
+                self.sendQueuedEventData()
             }
+
+            DispatchQueue.main.async {
+                completionHandler(result)
+            }
+        }
+    }
+}
+
+extension HttpEventDataDispatcher: ResendingDispatcher {
+    func sendQueuedEventData() {
+        if let next = eventDataQueue.removeFirst() {
+            logger.d("Retrying sending persisted event data")
+            add(next)
+            return
+        }
+
+        if let nextAd = eventDataQueue.removeFirstAd() {
+            logger.d("Retrying sending persisted ad event data")
+            addAd(nextAd)
         }
     }
 }

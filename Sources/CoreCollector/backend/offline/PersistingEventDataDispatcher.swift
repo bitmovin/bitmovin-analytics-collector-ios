@@ -2,11 +2,11 @@ import Foundation
 
 internal class PersistingEventDataDispatcher: EventDataDispatcher, ResendingDispatcher {
     private let logger = _AnalyticsLogger(className: "OfflineEventDataDispatcher")
-    private let innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher
+    private let innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher & ResendingDispatcher
     private let eventDataQueue: PersistentEventDataQueue
 
     init(
-        innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher,
+        innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher & ResendingDispatcher,
         eventDataQueue: PersistentEventDataQueue
     ) {
         self.innerDispatcher = innerDispatcher
@@ -17,10 +17,7 @@ internal class PersistingEventDataDispatcher: EventDataDispatcher, ResendingDisp
         innerDispatcher.add(eventData) { [weak self] result in
             guard let self else { return }
 
-            switch result {
-            case .success:
-                self.sendQueuedEventData()
-            case .failure:
+            if case .failure = result {
                 self.logger.d("Failed to send event data. Data is being persisted and retried later")
                 self.eventDataQueue.add(eventData)
             }
@@ -31,10 +28,7 @@ internal class PersistingEventDataDispatcher: EventDataDispatcher, ResendingDisp
         innerDispatcher.addAd(adEventData) { [weak self] result in
             guard let self else { return }
 
-            switch result {
-            case .success:
-                self.sendQueuedEventData()
-            case .failure:
+            if case .failure = result {
                 self.logger.d("Failed to send ad event data. Data is being persisted and retried later")
                 self.eventDataQueue.addAd(adEventData)
             }
@@ -49,17 +43,7 @@ internal class PersistingEventDataDispatcher: EventDataDispatcher, ResendingDisp
         innerDispatcher.resetSourceState()
     }
 
-    // TODO: send them one by one or all at once? We should weigh-in pros and cons
     func sendQueuedEventData() {
-        if let next = eventDataQueue.removeFirst() {
-            logger.d("Retrying sending persisted event data")
-            add(next)
-            return
-        }
-
-        if let nextAd = eventDataQueue.removeFirstAd() {
-            logger.d("Retrying sending persisted ad event data")
-            addAd(nextAd)
-        }
+        innerDispatcher.sendQueuedEventData()
     }
 }

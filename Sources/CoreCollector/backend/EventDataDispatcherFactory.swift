@@ -17,11 +17,10 @@ internal class EventDataDispatcherFactory {
     }
 
     func createDispatcher(config: BitmovinAnalyticsConfig) -> EventDataDispatcher {
-        let httpDispatcher = HttpEventDataDispatcher(httpClient: httpClient)
+        let eventDataQueue = persistentQueueFactory.create()
+        let httpDispatcher = HttpEventDataDispatcher(httpClient: httpClient, eventDataQueue: eventDataQueue)
 
         if config.offlinePlaybackAnalyticsEnabled {
-            let eventDataQueue = persistentQueueFactory.create()
-
             let persistingDispatcher = PersistingEventDataDispatcher(
                 innerDispatcher: httpDispatcher,
                 eventDataQueue: eventDataQueue
