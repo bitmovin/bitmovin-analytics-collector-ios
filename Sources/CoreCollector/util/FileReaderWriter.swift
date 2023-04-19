@@ -1,6 +1,9 @@
 import Foundation
 
 internal class FileReaderWriter {
+    private let lineSeparator = Data("\n".utf8)
+    private let chunkSize = 4096
+
     func writeEmptyFile(to file: URL) {
         try? "".write(to: file, atomically: true, encoding: .utf8)
     }
@@ -13,12 +16,8 @@ internal class FileReaderWriter {
 
         fileHandle.seekToEndOfFile()
 
-        guard let newLine = "\n".data(using: .utf8) else {
-            return
-        }
-
         var line = line
-        line.append(newLine)
+        line.append(lineSeparator)
         fileHandle.write(line)
     }
 
@@ -28,7 +27,7 @@ internal class FileReaderWriter {
             fileHandle.closeFile()
         }
 
-        guard let line = fileHandle.readFirstLine() else {
+        guard let line = fileHandle.readFirstLine(lineSeparator, chunkSize) else {
             return nil
         }
 
@@ -37,7 +36,7 @@ internal class FileReaderWriter {
 
     func removeFirstLine(from file: URL) -> Data? {
         guard let fileHandle = try? FileHandle(forUpdating: file) else { return nil }
-        guard let line = fileHandle.readFirstLine() else {
+        guard let line = fileHandle.readFirstLine(lineSeparator, chunkSize) else {
             fileHandle.closeFile()
             return nil
         }
@@ -51,12 +50,11 @@ internal class FileReaderWriter {
 }
 
 private extension FileHandle {
-    func readFirstLine() -> Data? {
-        let chunkSize = 4096
+    func readFirstLine(_ lineSeparator: Data, _ chunkSize: Int) -> Data? {
         seek(toFileOffset: 0)
 
         var data = readData(ofLength: chunkSize)
-        var range = data.range(of: Data("\n".utf8))
+        var range = data.range(of: lineSeparator)
 
         while range == nil && data.count > 0 {
             let newData = self.readData(ofLength: chunkSize)
@@ -64,7 +62,7 @@ private extension FileHandle {
                 break
             }
             data.append(newData)
-            range = data.range(of: Data("\n".utf8))
+            range = data.range(of: lineSeparator)
         }
 
         guard let range else {
