@@ -63,6 +63,12 @@ private extension PersistentQueue {
         serialQueue.sync {
             try? ensureDirectoryExists()
             fileReaderWriter.writeEmptyFile(to: fileUrl)
+
+            var resourceValues = URLResourceValues()
+            resourceValues.isExcludedFromBackup = true
+
+            var fileUrl = fileUrl
+            try? fileUrl.setResourceValues(resourceValues)
         }
     }
 
