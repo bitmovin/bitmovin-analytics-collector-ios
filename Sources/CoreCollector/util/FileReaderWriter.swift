@@ -71,7 +71,7 @@ private extension FileHandle {
 
         while range == nil && data.count > 0 {
             let newData = readData(ofLength: chunkSize)
-            if newData.count == 0 {
+            if newData.isEmpty {
                 break
             }
             data.append(newData)

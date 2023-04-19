@@ -1,6 +1,7 @@
 import Foundation
 
 internal class PersistentEventDataQueue {
+    private let logger = _AnalyticsLogger(className: "PersistentEventDataQueue")
     private let eventDataQueue: PersistentQueue<EventData>
     private let adEventDataQueue: PersistentQueue<AdEventData>
     private let maxSequenceNumber: Int = 1_000
@@ -23,6 +24,7 @@ internal class PersistentEventDataQueue {
         }
 
         eventDataQueue.add(entry: eventData)
+        logger.d("Added event data to queue. Current queue size: \(eventDataQueue.count) entries")
     }
 
     func addAd(_ adEventData: AdEventData) {
@@ -31,6 +33,7 @@ internal class PersistentEventDataQueue {
         }
 
         adEventDataQueue.add(entry: adEventData)
+        logger.d("Added ad event data to queue. Current queue size: \(adEventDataQueue.count) entries")
     }
 
     func removeFirst() -> EventData? {
@@ -40,6 +43,7 @@ internal class PersistentEventDataQueue {
             return next
         }
 
+        logger.d("Entry exceeding max age found, discarding and fetching next")
         return removeFirst()
     }
 
@@ -50,6 +54,7 @@ internal class PersistentEventDataQueue {
             return next
         }
 
+        logger.d("Entry exceeding max age found, discarding and fetching next")
         return removeFirstAd()
     }
 

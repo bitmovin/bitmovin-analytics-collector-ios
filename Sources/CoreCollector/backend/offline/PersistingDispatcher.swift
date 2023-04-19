@@ -18,7 +18,7 @@ internal class PersistingDispatcher: EventDataDispatcher, ResendingDispatcher {
             guard let self else { return }
 
             if case .failure = result {
-                self.logger.d("Failed to send event data. Data is being persisted and retried later")
+                self.logger.d("Failed to send event data")
                 self.eventDataQueue.add(eventData)
             }
         }
@@ -29,7 +29,7 @@ internal class PersistingDispatcher: EventDataDispatcher, ResendingDispatcher {
             guard let self else { return }
 
             if case .failure = result {
-                self.logger.d("Failed to send ad event data. Data is being persisted and retried later")
+                self.logger.d("Failed to send ad event data")
                 self.eventDataQueue.addAd(adEventData)
             }
         }
