@@ -69,7 +69,7 @@ private extension FileHandle {
         var data = readData(ofLength: chunkSize)
         var range = data.range(of: lineSeparator)
 
-        while range == nil && data.count > 0 {
+        while range == nil && !data.isEmpty {
             let newData = readData(ofLength: chunkSize)
             if newData.isEmpty {
                 break
@@ -80,7 +80,7 @@ private extension FileHandle {
 
         guard let range else {
             seekToEndOfFile()
-            return data.count > 0 ? data : nil
+            return !data.isEmpty ? data : nil
         }
 
         let lineData = data.subdata(in: 0..<range.upperBound)
