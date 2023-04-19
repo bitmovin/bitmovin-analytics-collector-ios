@@ -1,6 +1,6 @@
 import Foundation
 
-internal class HttpEventDataDispatcher: EventDataDispatcher, CallbackEventDataDispatcher {
+internal class HttpEventDataDispatcher: EventDataDispatcher {
     private let logger = _AnalyticsLogger(className: "HttpEventDataDispatcher")
     private let httpClient: HttpClient
     private let analyticsBackendUrl: String
@@ -26,6 +26,14 @@ internal class HttpEventDataDispatcher: EventDataDispatcher, CallbackEventDataDi
         addAd(adEventData) { _ in }
     }
 
+    func disable() {
+        isEnabled = false
+    }
+
+    func resetSourceState() { /* no-op */ }
+}
+
+extension HttpEventDataDispatcher: CallbackEventDataDispatcher {
     func add(_ eventData: EventData, completionHandler: @escaping (HttpDispatchResult) -> Void) {
         guard isEnabled else { return }
 
@@ -57,10 +65,4 @@ internal class HttpEventDataDispatcher: EventDataDispatcher, CallbackEventDataDi
             }
         }
     }
-
-    func disable() {
-        isEnabled = false
-    }
-
-    func resetSourceState() { /* no-op */ }
 }
