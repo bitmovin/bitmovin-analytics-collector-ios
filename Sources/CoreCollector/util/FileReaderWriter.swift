@@ -27,7 +27,7 @@ internal class FileReaderWriter {
             fileHandle.closeFile()
         }
 
-        guard let line = fileHandle.readFirstLine(lineSeparator, chunkSize) else {
+        guard let line = fileHandle.readLine(lineSeparator, chunkSize) else {
             return nil
         }
 
@@ -36,7 +36,7 @@ internal class FileReaderWriter {
 
     func removeFirstLine(from file: URL) -> Data? {
         guard let fileHandle = try? FileHandle(forUpdating: file) else { return nil }
-        guard let line = fileHandle.readFirstLine(lineSeparator, chunkSize) else {
+        guard let line = fileHandle.readLine(lineSeparator, chunkSize) else {
             fileHandle.closeFile()
             return nil
         }
@@ -47,17 +47,30 @@ internal class FileReaderWriter {
         try? remainingData.write(to: file, options: .atomic)
         return line
     }
+
+    func numberOfLines(in file: URL) -> Int {
+        guard let fileHandle = try? FileHandle(forReadingFrom: file) else { return 0 }
+        defer {
+            fileHandle.closeFile()
+        }
+
+        var numberOfLines = 0
+        while fileHandle.readLine(lineSeparator, chunkSize) != nil {
+            numberOfLines += 1
+        }
+
+        return numberOfLines
+    }
 }
 
 private extension FileHandle {
-    func readFirstLine(_ lineSeparator: Data, _ chunkSize: Int) -> Data? {
-        seek(toFileOffset: 0)
-
+    func readLine(_ lineSeparator: Data, _ chunkSize: Int) -> Data? {
+        let initialOffset = offsetInFile
         var data = readData(ofLength: chunkSize)
         var range = data.range(of: lineSeparator)
 
         while range == nil && data.count > 0 {
-            let newData = self.readData(ofLength: chunkSize)
+            let newData = readData(ofLength: chunkSize)
             if newData.count == 0 {
                 break
             }
@@ -66,12 +79,12 @@ private extension FileHandle {
         }
 
         guard let range else {
-            // No new-line character found, return all data
-            return data
+            seekToEndOfFile()
+            return data.count > 0 ? data : nil
         }
 
         let lineData = data.subdata(in: 0..<range.upperBound)
-        seek(toFileOffset: UInt64(lineData.count))
+        seek(toFileOffset: initialOffset + UInt64(lineData.count))
 
         return lineData
     }

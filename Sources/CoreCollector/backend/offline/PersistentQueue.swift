@@ -10,6 +10,12 @@ internal class PersistentQueue<T: Codable> {
         FileManager.default.fileExists(atPath: fileUrl.path)
     }
 
+    var count: Int {
+        serialQueue.sync {
+            fileReaderWriter.numberOfLines(in: fileUrl)
+        }
+    }
+
     init(fileUrl: URL) {
         self.fileUrl = fileUrl
 
@@ -85,4 +91,3 @@ private extension PersistentQueue {
         )
     }
 }
-

@@ -18,7 +18,7 @@ class PersistentQueueTests: QuickSpec {
         }
 
         describe("read and write performance") {
-            context("when adding \(iterationsForPerformanceTest) entries after each other") {
+            context("when adding \(iterationsForPerformanceTest) entries after each other to the queue") {
                 it("takes less than 5 milliseconds on average to add a new entry") {
                     let executionTime = PerformanceTestHelper.measure(
                         numberOfIterations: iterationsForPerformanceTest
@@ -43,7 +43,7 @@ class PersistentQueueTests: QuickSpec {
             }
         }
         describe("removing entries") {
-            context("when entries exist in database") {
+            context("when entries exist in the queue") {
                 it("removes entries from the beginning of the queue") {
                     persistentQueue.add(entry: EventData("1"))
                     persistentQueue.add(entry: EventData("2"))
@@ -53,7 +53,7 @@ class PersistentQueueTests: QuickSpec {
                     expect(first?.impressionId).to(equal("1"))
                 }
             }
-            context("when no entries exist in database") {
+            context("when no entries exist in the queue") {
                 it("does not return an entry") {
                     let first = persistentQueue.removeFirst()
                     expect(first).to(beNil())
@@ -61,7 +61,7 @@ class PersistentQueueTests: QuickSpec {
             }
         }
         describe("removing all entries") {
-            context("when entries exist in database") {
+            context("when entries exist in the queue") {
                 beforeEach {
                     persistentQueue.add(entry: EventData("1"))
                     persistentQueue.add(entry: EventData("2"))
@@ -74,8 +74,8 @@ class PersistentQueueTests: QuickSpec {
                     expect(first).to(beNil())
                 }
             }
-            context("when no entries exist in database") {
-                it("keeps database in empty state") {
+            context("when no entries exist in the queue") {
+                it("keeps queue empty") {
                     persistentQueue.removeAll()
 
                     let first = persistentQueue.removeFirst()
@@ -83,18 +83,35 @@ class PersistentQueueTests: QuickSpec {
                 }
             }
         }
+        describe("item count in queue") {
+            context("for a queue with no entries") {
+                it("returns 0") {
+                    expect(persistentQueue.count).to(equal(0))
+                }
+            }
+            context("for a queue with multiple entries") {
+                it("returns correct value") {
+                    let expectedCount = 10
+                    (0..<expectedCount).forEach { index in
+                        persistentQueue.add(entry: EventData(String(index)))
+                    }
+
+                    expect(persistentQueue.count).to(equal(expectedCount))
+                }
+            }
+        }
         describe("database integrity") {
             context("when file is corrupted") {
                 beforeEach {
-                    try? "not a valid database".write(to: fileLocation, atomically: true, encoding: .utf8)
+                    try? "not a valid queue".write(to: fileLocation, atomically: true, encoding: .utf8)
                     persistentQueue = PersistentQueue(fileUrl: fileLocation)
                 }
-                it("creates an empty database") {
+                it("creates an empty queue") {
                     let first = persistentQueue.removeFirst()
                     expect(first).to(beNil())
                 }
                 context("and a new entry is added") {
-                    it("is the only entry in the database") {
+                    it("is the only entry in the queue") {
                         persistentQueue.add(entry: EventData("1"))
 
                         let first = persistentQueue.removeFirst()
@@ -111,7 +128,7 @@ class PersistentQueueTests: QuickSpec {
                     persistentQueue.add(entry: EventData("2"))
                     persistentQueue = PersistentQueue(fileUrl: fileLocation)
                 }
-                it("uses the existing database") {
+                it("uses the existing queue") {
                     let first = persistentQueue.removeFirst()
                     let second = persistentQueue.removeFirst()
                     let third = persistentQueue.removeFirst()
