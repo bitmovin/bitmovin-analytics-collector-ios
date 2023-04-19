@@ -3,6 +3,7 @@ import Foundation
 internal class PersistentEventDataQueue {
     private let eventDataQueue: PersistentQueue<EventData>
     private let adEventDataQueue: PersistentQueue<AdEventData>
+    private let maxSequenceNumber: Int = 1000
 
     init(
         eventDataQueue: PersistentQueue<EventData>,
@@ -13,6 +14,8 @@ internal class PersistentEventDataQueue {
     }
 
     func add(_ eventData: EventData) {
+        guard eventData.sequenceNumber <= maxSequenceNumber else { return }
+
         eventDataQueue.add(entry: eventData)
     }
 
