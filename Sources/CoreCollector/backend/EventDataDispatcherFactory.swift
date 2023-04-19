@@ -21,7 +21,7 @@ internal class EventDataDispatcherFactory {
         let httpDispatcher = HttpEventDataDispatcher(httpClient: httpClient, eventDataQueue: eventDataQueue)
 
         if config.offlinePlaybackAnalyticsEnabled {
-            let persistingDispatcher = PersistingEventDataDispatcher(
+            let persistingDispatcher = PersistingDispatcher(
                 innerDispatcher: httpDispatcher,
                 eventDataQueue: eventDataQueue
             )

@@ -49,7 +49,7 @@ extension HttpEventDataDispatcher: CallbackEventDataDispatcher {
             let result = HttpDispatchResult.from(data: data, response: response, error: error)
 
             if case .success = result {
-                self.sendQueuedEventData()
+                self.sendPersistedEventData()
             }
 
             DispatchQueue.main.async {
@@ -71,7 +71,7 @@ extension HttpEventDataDispatcher: CallbackEventDataDispatcher {
             let result = HttpDispatchResult.from(data: data, response: response, error: error)
 
             if case .success = result {
-                self.sendQueuedEventData()
+                self.sendPersistedEventData()
             }
 
             DispatchQueue.main.async {
@@ -82,7 +82,7 @@ extension HttpEventDataDispatcher: CallbackEventDataDispatcher {
 }
 
 extension HttpEventDataDispatcher: ResendingDispatcher {
-    func sendQueuedEventData() {
+    func sendPersistedEventData() {
         if let next = eventDataQueue.removeFirst() {
             logger.d("Retrying sending persisted event data")
             add(next)

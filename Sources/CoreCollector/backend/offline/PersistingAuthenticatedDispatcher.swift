@@ -91,7 +91,7 @@ private extension PersistingAuthenticatedDispatcher {
         logger.d("Authentication success")
         currentOperationMode = .authenticated
 
-        innerDispatcher.sendQueuedEventData()
+        innerDispatcher.sendPersistedEventData()
     }
 
     @objc

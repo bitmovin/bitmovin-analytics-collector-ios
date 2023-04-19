@@ -1,6 +1,6 @@
 import Foundation
 
-internal class PersistingEventDataDispatcher: EventDataDispatcher, ResendingDispatcher {
+internal class PersistingDispatcher: EventDataDispatcher, ResendingDispatcher {
     private let logger = _AnalyticsLogger(className: "OfflineEventDataDispatcher")
     private let innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher & ResendingDispatcher
     private let eventDataQueue: PersistentEventDataQueue
@@ -43,7 +43,7 @@ internal class PersistingEventDataDispatcher: EventDataDispatcher, ResendingDisp
         innerDispatcher.resetSourceState()
     }
 
-    func sendQueuedEventData() {
-        innerDispatcher.sendQueuedEventData()
+    func sendPersistedEventData() {
+        innerDispatcher.sendPersistedEventData()
     }
 }
