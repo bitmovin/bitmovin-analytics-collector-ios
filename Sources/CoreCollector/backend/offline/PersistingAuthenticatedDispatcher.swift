@@ -7,7 +7,7 @@ class PersistingAuthenticatedDispatcher: EventDataDispatcher {
         case disabled
     }
 
-    private let logger = _AnalyticsLogger(className: "PersistentAuthenticatedDispatcher")
+    private let logger = _AnalyticsLogger(className: "PersistingAuthenticatedDispatcher")
     private let authenticationService: AuthenticationService
     private let notificationCenter: NotificationCenter
     private let innerDispatcher: EventDataDispatcher & ResendingDispatcher

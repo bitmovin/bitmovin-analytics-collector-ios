@@ -1,7 +1,7 @@
 import Foundation
 
 internal class PersistingDispatcher: EventDataDispatcher, ResendingDispatcher {
-    private let logger = _AnalyticsLogger(className: "OfflineEventDataDispatcher")
+    private let logger = _AnalyticsLogger(className: "PersistingDispatcher")
     private let innerDispatcher: EventDataDispatcher & CallbackEventDataDispatcher & ResendingDispatcher
     private let eventDataQueue: PersistentEventDataQueue
 
