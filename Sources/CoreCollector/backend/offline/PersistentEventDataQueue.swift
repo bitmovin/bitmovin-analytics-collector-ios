@@ -29,7 +29,7 @@ internal class PersistentEventDataQueue {
 
     func addAd(_ adEventData: AdEventData) async {
         while await adEventDataQueue.count >= maxEntries {
-            _ = await eventDataQueue.removeFirst()
+            _ = await adEventDataQueue.removeFirst()
         }
 
         await adEventDataQueue.add(entry: adEventData)
