@@ -164,8 +164,39 @@ class AuthenticatedDispatcherTests: QuickSpec {
             }
         }
         describe("authentication error") {
-            // TODO: add tests
-            // MARK: If offline analytics is enabled, we can continue otherwise it should be the same as .denied
+            it("should call innerDispatcher") {
+                // arrange
+                stub(mockInnerDispatcher) { stub in
+                    when(stub.disable()).thenDoNothing()
+                }
+
+                // act
+                mockNotificationCenter.post(name: .authenticationError, object: mockAuthService)
+
+                // assert
+                verify(mockInnerDispatcher).disable()
+            }
+            it("should not call add and addAd on innerDispatcher when authentication failed") {
+                // arrange
+                stub(mockInnerDispatcher) { stub in
+                    when(stub.disable()).thenDoNothing()
+                }
+
+                let eventData = EventData("test-impression")
+                let adEventData = AdEventData()
+
+                // emit authentication success event
+                mockNotificationCenter.post(name: .authenticationSuccess, object: mockAuthService)
+
+                // act
+                mockNotificationCenter.post(name: .authenticationError, object: mockAuthService)
+
+                // assert
+                verify(mockInnerDispatcher).disable()
+                dispatcher.addAd(adEventData)
+                dispatcher.add(eventData)
+                verifyNoMoreInteractions(mockInnerDispatcher)
+            }
         }
         describe("event flushing") {
             it("should not call innerDispatcher when queue is empty") {
