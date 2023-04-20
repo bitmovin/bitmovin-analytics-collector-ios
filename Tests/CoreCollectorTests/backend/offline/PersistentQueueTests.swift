@@ -70,16 +70,16 @@ class PersistentQueueTests: AsyncSpec {
                 it("removes all entries") {
                     await persistentQueue.removeAll()
 
-                    let first = await persistentQueue.removeFirst()
-                    expect(first).to(beNil())
+                    let count = await persistentQueue.count
+                    expect(count).to(equal(.zero))
                 }
             }
             context("when no entries exist in the queue") {
                 it("keeps queue empty") {
                     await persistentQueue.removeAll()
 
-                    let first = await persistentQueue.removeFirst()
-                    expect(first).to(beNil())
+                    let count = await persistentQueue.count
+                    expect(count).to(equal(.zero))
                 }
             }
         }
@@ -116,6 +116,9 @@ class PersistentQueueTests: AsyncSpec {
                     it("is the only entry in the queue") {
                         await persistentQueue.add(entry: EventData("1"))
 
+                        let count = await persistentQueue.count
+                        expect(count).to(equal(1))
+
                         let first = await persistentQueue.removeFirst()
                         let second = await persistentQueue.removeFirst()
 
@@ -131,13 +134,14 @@ class PersistentQueueTests: AsyncSpec {
                     persistentQueue = PersistentQueue(fileUrl: fileLocation)
                 }
                 it("uses the existing queue") {
+                    let count = await persistentQueue.count
+                    expect(count).to(equal(2))
+
                     let first = await persistentQueue.removeFirst()
                     let second = await persistentQueue.removeFirst()
-                    let third = await persistentQueue.removeFirst()
 
                     expect(first?.impressionId).to(equal("1"))
                     expect(second?.impressionId).to(equal("2"))
-                    expect(third).to(beNil())
                 }
             }
         }
