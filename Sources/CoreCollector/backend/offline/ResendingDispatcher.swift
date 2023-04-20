@@ -1,3 +1,3 @@
 internal protocol ResendingDispatcher {
-    func sendPersistedEventData() async
+    func sendPersistedEventData()
 }

@@ -49,7 +49,7 @@ internal class PersistingDispatcher: EventDataDispatcher, ResendingDispatcher {
         innerDispatcher.resetSourceState()
     }
 
-    func sendPersistedEventData() async {
-        await innerDispatcher.sendPersistedEventData()
+    func sendPersistedEventData() {
+        innerDispatcher.sendPersistedEventData()
     }
 }
