@@ -7,7 +7,7 @@ import Quick
 import CoreCollector
 
 class VideoStartupServiceTest: QuickSpec {
-    override func spec() {
+    override class func spec() {
         // arrange
         var mockStateMachine = MockStateMachine()
         var mockPlayerContext = MockPlayerContext()

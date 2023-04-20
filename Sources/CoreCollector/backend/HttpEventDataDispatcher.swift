@@ -49,7 +49,9 @@ extension HttpEventDataDispatcher: CallbackEventDataDispatcher {
             let result = HttpDispatchResult.from(data: data, response: response, error: error)
 
             if case .success = result {
-                self.sendPersistedEventData()
+                Task {
+                    await self.sendPersistedEventData()
+                }
             }
 
             DispatchQueue.main.async {
@@ -71,7 +73,9 @@ extension HttpEventDataDispatcher: CallbackEventDataDispatcher {
             let result = HttpDispatchResult.from(data: data, response: response, error: error)
 
             if case .success = result {
-                self.sendPersistedEventData()
+                Task {
+                    await self.sendPersistedEventData()
+                }
             }
 
             DispatchQueue.main.async {
@@ -82,14 +86,14 @@ extension HttpEventDataDispatcher: CallbackEventDataDispatcher {
 }
 
 extension HttpEventDataDispatcher: ResendingDispatcher {
-    func sendPersistedEventData() {
-        if let next = eventDataQueue.removeFirst() {
+    func sendPersistedEventData() async {
+        if let next = await eventDataQueue.removeFirst() {
             logger.d("Retrying sending persisted event data")
             add(next)
             return
         }
 
-        if let nextAd = eventDataQueue.removeFirstAd() {
+        if let nextAd = await eventDataQueue.removeFirstAd() {
             logger.d("Retrying sending persisted ad event data")
             addAd(nextAd)
         }

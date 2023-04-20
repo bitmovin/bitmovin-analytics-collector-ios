@@ -1,15 +1,14 @@
 import Foundation
 import XCTest
 
-public class PerformanceTestHelper: NSObject {
+public class PerformanceTestHelper {
     /// Measures performance of `actionBlock`
     /// - Parameters:
     ///   - numberOfIterations: number of iterations to run
     ///   - actionBlock: closure to test for execution time
     /// - Returns: average execution time per iteration
-    @objc
-    static func measure(numberOfIterations: Int, actionBlock: () -> Void) -> TimeInterval {
-        measure(numberOfIterations: numberOfIterations, beforeBlock: {}, actionBlock: actionBlock, afterBlock: {})
+    static func measure(numberOfIterations: Int, actionBlock: () async -> Void) async -> TimeInterval {
+        await measure(numberOfIterations: numberOfIterations, beforeBlock: {}, actionBlock: actionBlock, afterBlock: {})
     }
 
     /// Measures performance of `actionBlock`
@@ -19,19 +18,18 @@ public class PerformanceTestHelper: NSObject {
     ///   - actionBlock: closure to test for execution time
     ///   - afterBlock: closure performed after action, not measured into execution time
     /// - Returns: average execution time per iteration
-    @objc
     static func measure(
         numberOfIterations: Int,
         beforeBlock: () -> Void,
-        actionBlock: () -> Void,
+        actionBlock: () async -> Void,
         afterBlock: () -> Void
-    ) -> TimeInterval {
+    ) async -> TimeInterval {
         assert(numberOfIterations > 0)
         var executionTimes = [CFTimeInterval]()
         for _ in 1...numberOfIterations {
             beforeBlock()
             let start = CACurrentMediaTime()
-            actionBlock()
+            await actionBlock()
             let executionTime = CACurrentMediaTime() - start
             afterBlock()
             executionTimes.append(executionTime)

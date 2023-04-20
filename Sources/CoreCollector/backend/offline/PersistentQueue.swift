@@ -1,54 +1,60 @@
 import Foundation
 
-private let serialQueue = DispatchQueue(label: "com.bitmovin.core-collector.persistence-queue")
-
 internal class PersistentQueue<T: Codable> {
     private let logger = _AnalyticsLogger(className: "PersistentQueue")
     private let fileReaderWriter = FileReaderWriter()
+    private var databaseInitialized: Bool = false
     private let fileUrl: URL
     private var fileExists: Bool {
         FileManager.default.fileExists(atPath: fileUrl.path)
     }
 
+    @PersistentQueueActor
     var count: Int {
-        serialQueue.sync {
-            fileReaderWriter.numberOfLines(in: fileUrl)
-        }
+        ensureDatabaseInitialized()
+        return fileReaderWriter.numberOfLines(in: fileUrl)
     }
 
     init(fileUrl: URL) {
         self.fileUrl = fileUrl
-
-        initPersistentStorage()
     }
 
+    @PersistentQueueActor
     func add(entry: T) {
-        serialQueue.sync {
-            if let data = try? JSONEncoder().encode(entry) {
-                fileReaderWriter.appendLine(data, to: fileUrl)
-            }
+        ensureDatabaseInitialized()
+
+        if let data = try? JSONEncoder().encode(entry) {
+            fileReaderWriter.appendLine(data, to: fileUrl)
         }
     }
 
+    @PersistentQueueActor
     func removeAll() {
-        serialQueue.sync {
-            fileReaderWriter.writeEmptyFile(to: fileUrl)
-        }
+        ensureDatabaseInitialized()
+
+        fileReaderWriter.writeEmptyFile(to: fileUrl)
     }
 
+    @PersistentQueueActor
     func removeFirst() -> T? {
-        serialQueue.sync {
-            guard let next = fileReaderWriter.removeFirstLine(from: fileUrl) else {
-                return nil
-            }
+        ensureDatabaseInitialized()
 
-            return try? JSONDecoder().decode(T.self, from: next)
+        guard let next = fileReaderWriter.removeFirstLine(from: fileUrl) else {
+            return nil
         }
+
+        return try? JSONDecoder().decode(T.self, from: next)
     }
 }
 
+@PersistentQueueActor
 private extension PersistentQueue {
-    private func initPersistentStorage() {
+    private func ensureDatabaseInitialized() {
+        guard !databaseInitialized else { return }
+        defer {
+            databaseInitialized = true
+        }
+
         if fileExists {
             if !hasIntegrity() {
                 createNewDatabase()
@@ -60,16 +66,14 @@ private extension PersistentQueue {
 
     private func createNewDatabase() {
         logger.d("Creating new database file")
-        serialQueue.sync {
-            try? ensureDirectoryExists()
-            fileReaderWriter.writeEmptyFile(to: fileUrl)
+        try? ensureDirectoryExists()
+        fileReaderWriter.writeEmptyFile(to: fileUrl)
 
-            var resourceValues = URLResourceValues()
-            resourceValues.isExcludedFromBackup = true
+        var resourceValues = URLResourceValues()
+        resourceValues.isExcludedFromBackup = true
 
-            var fileUrl = fileUrl
-            try? fileUrl.setResourceValues(resourceValues)
-        }
+        var fileUrl = fileUrl
+        try? fileUrl.setResourceValues(resourceValues)
     }
 
     private func hasIntegrity() -> Bool {

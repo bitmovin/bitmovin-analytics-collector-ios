@@ -6,7 +6,7 @@ import Quick
 import Foundation
 
 class AuthenticatedDispatcherTests: QuickSpec {
-    override func spec() {
+    override class func spec() {
         var mockAuthService = MockAuthenticationService()
         var mockInnerDispatcher = MockEventDataDispatcher()
         var mockNotificationCenter = NotificationCenter()

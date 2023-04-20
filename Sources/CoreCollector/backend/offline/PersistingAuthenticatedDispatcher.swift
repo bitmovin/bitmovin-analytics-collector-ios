@@ -36,8 +36,10 @@ class PersistingAuthenticatedDispatcher: EventDataDispatcher {
         guard currentOperationMode != .disabled else { return }
         guard currentOperationMode == .authenticated else {
             logger.d("Received event data but not authenticated. Trying to authenticate")
-            eventDataQueue.add(eventData)
-            authenticationService.authenticate()
+            Task {
+                await eventDataQueue.add(eventData)
+                authenticationService.authenticate()
+            }
             return
         }
 
@@ -48,8 +50,10 @@ class PersistingAuthenticatedDispatcher: EventDataDispatcher {
         guard currentOperationMode != .disabled else { return }
         guard currentOperationMode == .authenticated else {
             logger.d("Received ad event data but not authenticated. Trying to authenticate")
-            eventDataQueue.addAd(adEventData)
-            authenticationService.authenticate()
+            Task {
+                await eventDataQueue.addAd(adEventData)
+                authenticationService.authenticate()
+            }
             return
         }
 
@@ -91,13 +95,18 @@ private extension PersistingAuthenticatedDispatcher {
         logger.d("Authentication success")
         currentOperationMode = .authenticated
 
-        innerDispatcher.sendPersistedEventData()
+        Task {
+            await innerDispatcher.sendPersistedEventData()
+        }
     }
 
     @objc
     func handleAuthenticationDenied(_ notification: Notification) {
         logger.d("Authentication denied")
-        eventDataQueue.removeAll()
         disable()
+
+        Task {
+            await eventDataQueue.removeAll()
+        }
     }
 }

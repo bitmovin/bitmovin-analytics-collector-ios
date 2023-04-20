@@ -7,7 +7,7 @@ import Quick
 @testable import CoreCollector
 
 class PlayerInfoManipulatorTest: QuickSpec {
-    override func spec() {
+    override class func spec() {
         describe("manipulate") {
             it("should set ivs player_tech, player and player_version") {
                 // arrange

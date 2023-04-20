@@ -10,7 +10,7 @@ import Quick
 #endif
 
 class EventDataTests: QuickSpec {
-    override func spec() {
+    override class func spec() {
         // Arrange
         let impressionId = "097170EB-51BA-435F-9F6F-727896EBEB45"
 

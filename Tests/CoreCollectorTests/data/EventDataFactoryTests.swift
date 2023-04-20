@@ -10,11 +10,11 @@ import UIKit
 #endif
 
 class EventDataFactoryTests: QuickSpec {
-    override func spec() {
+    override class func spec() {
         describe("createEventData") {
             it("should return EventData with basic data set") {
                 // arrange
-                let eventDataFactory = self.createDefaultEventDataFactoryForTest()
+                let eventDataFactory = createDefaultEventDataFactoryForTest()
 
                 // act
                 let eventData = eventDataFactory.createEventData(
@@ -36,7 +36,7 @@ class EventDataFactoryTests: QuickSpec {
             }
             it("should return eventdata with analytics version set") {
                 // arrange
-                let eventDataFactory = self.createDefaultEventDataFactoryForTest()
+                let eventDataFactory = createDefaultEventDataFactoryForTest()
 
                 // act
                 let eventData = eventDataFactory.createEventData(
@@ -53,8 +53,8 @@ class EventDataFactoryTests: QuickSpec {
             }
             it("should return eventdata with config data set") {
                 // arrange
-                let config = self.getTestBitmovinConfig()
-                let eventDataFactory = self.createDefaultEventDataFactoryForTest(config: config)
+                let config = getTestBitmovinConfig()
+                let eventDataFactory = createDefaultEventDataFactoryForTest(config: config)
 
                 // act
                 let eventData = eventDataFactory.createEventData(
@@ -109,7 +109,7 @@ class EventDataFactoryTests: QuickSpec {
             }
             it("should return eventdata with sourceMetaData set") {
                 // arrange
-                let eventDataFactory = self.createDefaultEventDataFactoryForTest()
+                let eventDataFactory = createDefaultEventDataFactoryForTest()
                 let currentSourceMetadata = SourceMetadata(
                     videoId: "test-video-id-sourceMetadata",
                     title: "test-title-sourceMetadata",
@@ -197,7 +197,7 @@ class EventDataFactoryTests: QuickSpec {
             }
             it("should return eventdata with parameter set") {
                 // arrange
-                let eventDataFactory = self.createDefaultEventDataFactoryForTest()
+                let eventDataFactory = createDefaultEventDataFactoryForTest()
 
                 // act
                 let eventData = eventDataFactory.createEventData(
@@ -222,7 +222,7 @@ class EventDataFactoryTests: QuickSpec {
                 mockUserIdProvider.setActionForGetUserId {
                     "user-Id"
                 }
-                let eventDataFactory = self.createDefaultEventDataFactoryForTest(userIdProvider: mockUserIdProvider)
+                let eventDataFactory = createDefaultEventDataFactoryForTest(userIdProvider: mockUserIdProvider)
 
                 // act
                 let eventData = eventDataFactory.createEventData(
@@ -239,7 +239,7 @@ class EventDataFactoryTests: QuickSpec {
             }
             it("should return eventdata with increasing sequence number") {
                 // arrange
-                let eventDataFactory = self.createDefaultEventDataFactoryForTest()
+                let eventDataFactory = createDefaultEventDataFactoryForTest()
 
                 // act
                 let eventData = eventDataFactory.createEventData(
@@ -267,7 +267,7 @@ class EventDataFactoryTests: QuickSpec {
         describe("reset") {
             it("should reset the sequence number") {
                 // arrange
-                let eventDataFactory = self.createDefaultEventDataFactoryForTest()
+                let eventDataFactory = createDefaultEventDataFactoryForTest()
 
                 // act
                 let eventData = eventDataFactory.createEventData(
@@ -304,54 +304,54 @@ class EventDataFactoryTests: QuickSpec {
             }
         }
     }
+}
 
-    private func createDefaultEventDataFactoryForTest(
-        config: BitmovinAnalyticsConfig? = nil,
-        userIdProvider: UserIdProvider? = nil
-    ) -> EventDataFactory {
-        let conf = config ?? getTestBitmovinConfig()
-        let userProv = userIdProvider ?? RandomizedUserIdProvider()
-        return EventDataFactory(conf, userProv)
-    }
+private func createDefaultEventDataFactoryForTest(
+    config: BitmovinAnalyticsConfig? = nil,
+    userIdProvider: UserIdProvider? = nil
+) -> EventDataFactory {
+    let conf = config ?? getTestBitmovinConfig()
+    let userProv = userIdProvider ?? RandomizedUserIdProvider()
+    return EventDataFactory(conf, userProv)
+}
 
-    private func getTestBitmovinConfig() -> BitmovinAnalyticsConfig {
-        let config = BitmovinAnalyticsConfig(key: "analytics-key", playerKey: "player-key")
-        config.customerUserId = "test-customer-user-id"
-        config.cdnProvider = "test-custom_cdn_provider"
-        config.customData1 = "test-customData1"
-        config.customData2 = "test-customData2"
-        config.customData3 = "test-customData3"
-        config.customData4 = "test-customData4"
-        config.customData5 = "test-customData5"
-        config.customData6 = "test-customData6"
-        config.customData7 = "test-customData7"
-        config.customData8 = "test-customData8"
-        config.customData9 = "test-customData9"
-        config.customData10 = "test-customData10"
-        config.customData11 = "test-customData11"
-        config.customData12 = "test-customData12"
-        config.customData13 = "test-customData13"
-        config.customData14 = "test-customData14"
-        config.customData15 = "test-customData15"
-        config.customData16 = "test-customData16"
-        config.customData17 = "test-customData17"
-        config.customData18 = "test-customData18"
-        config.customData19 = "test-customData19"
-        config.customData20 = "test-customData20"
-        config.customData21 = "test-customData21"
-        config.customData22 = "test-customData22"
-        config.customData23 = "test-customData23"
-        config.customData24 = "test-customData24"
-        config.customData25 = "test-customData25"
-        config.customData26 = "test-customData26"
-        config.customData27 = "test-customData27"
-        config.customData28 = "test-customData28"
-        config.customData29 = "test-customData29"
-        config.customData30 = "test-customData30"
-        config.experimentName = "test-experiment"
-        config.videoId = "test-video-id"
-        config.title = "test-title"
-        config.path = "test-path"
-        return config
-    }
+private func getTestBitmovinConfig() -> BitmovinAnalyticsConfig {
+    let config = BitmovinAnalyticsConfig(key: "analytics-key", playerKey: "player-key")
+    config.customerUserId = "test-customer-user-id"
+    config.cdnProvider = "test-custom_cdn_provider"
+    config.customData1 = "test-customData1"
+    config.customData2 = "test-customData2"
+    config.customData3 = "test-customData3"
+    config.customData4 = "test-customData4"
+    config.customData5 = "test-customData5"
+    config.customData6 = "test-customData6"
+    config.customData7 = "test-customData7"
+    config.customData8 = "test-customData8"
+    config.customData9 = "test-customData9"
+    config.customData10 = "test-customData10"
+    config.customData11 = "test-customData11"
+    config.customData12 = "test-customData12"
+    config.customData13 = "test-customData13"
+    config.customData14 = "test-customData14"
+    config.customData15 = "test-customData15"
+    config.customData16 = "test-customData16"
+    config.customData17 = "test-customData17"
+    config.customData18 = "test-customData18"
+    config.customData19 = "test-customData19"
+    config.customData20 = "test-customData20"
+    config.customData21 = "test-customData21"
+    config.customData22 = "test-customData22"
+    config.customData23 = "test-customData23"
+    config.customData24 = "test-customData24"
+    config.customData25 = "test-customData25"
+    config.customData26 = "test-customData26"
+    config.customData27 = "test-customData27"
+    config.customData28 = "test-customData28"
+    config.customData29 = "test-customData29"
+    config.customData30 = "test-customData30"
+    config.experimentName = "test-experiment"
+    config.videoId = "test-video-id"
+    config.title = "test-title"
+    config.path = "test-path"
+    return config
 }

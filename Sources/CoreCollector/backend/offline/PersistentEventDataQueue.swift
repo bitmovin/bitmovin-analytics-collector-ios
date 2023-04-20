@@ -16,51 +16,51 @@ internal class PersistentEventDataQueue {
         self.adEventDataQueue = adEventDataQueue
     }
 
-    func add(_ eventData: EventData) {
+    func add(_ eventData: EventData) async {
         guard eventData.sequenceNumber <= maxSequenceNumber else { return }
 
-        while eventDataQueue.count >= maxEntries {
-            _ = eventDataQueue.removeFirst()
+        while await eventDataQueue.count >= maxEntries {
+            _ = await eventDataQueue.removeFirst()
         }
 
-        eventDataQueue.add(entry: eventData)
-        logger.d("Added event data to queue. Current queue size: \(eventDataQueue.count) entries")
+        await eventDataQueue.add(entry: eventData)
+        logger.d("Added event data to queue")
     }
 
-    func addAd(_ adEventData: AdEventData) {
-        while adEventDataQueue.count >= maxEntries {
-            _ = eventDataQueue.removeFirst()
+    func addAd(_ adEventData: AdEventData) async {
+        while await adEventDataQueue.count >= maxEntries {
+            _ = await eventDataQueue.removeFirst()
         }
 
-        adEventDataQueue.add(entry: adEventData)
-        logger.d("Added ad event data to queue. Current queue size: \(adEventDataQueue.count) entries")
+        await adEventDataQueue.add(entry: adEventData)
+        logger.d("Added ad event data to queue")
     }
 
-    func removeFirst() -> EventData? {
-        guard let next = eventDataQueue.removeFirst() else { return nil }
+    func removeFirst() async -> EventData? {
+        guard let next = await eventDataQueue.removeFirst() else { return nil }
 
         if next.age <= maxEntryAge {
             return next
         }
 
         logger.d("Entry exceeding max age found, discarding and fetching next")
-        return removeFirst()
+        return await removeFirst()
     }
 
-    func removeFirstAd() -> AdEventData? {
-        guard let next = adEventDataQueue.removeFirst() else { return nil }
+    func removeFirstAd() async -> AdEventData? {
+        guard let next = await adEventDataQueue.removeFirst() else { return nil }
 
         if next.age <= maxEntryAge {
             return next
         }
 
         logger.d("Entry exceeding max age found, discarding and fetching next")
-        return removeFirstAd()
+        return await removeFirstAd()
     }
 
-    func removeAll() {
-        eventDataQueue.removeAll()
-        adEventDataQueue.removeAll()
+    func removeAll() async {
+        await eventDataQueue.removeAll()
+        await adEventDataQueue.removeAll()
     }
 }
 

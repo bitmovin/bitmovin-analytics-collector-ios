@@ -19,7 +19,10 @@ internal class PersistingDispatcher: EventDataDispatcher, ResendingDispatcher {
 
             if case .failure = result {
                 self.logger.d("Failed to send event data")
-                self.eventDataQueue.add(eventData)
+
+                Task {
+                    await self.eventDataQueue.add(eventData)
+                }
             }
         }
     }
@@ -30,7 +33,10 @@ internal class PersistingDispatcher: EventDataDispatcher, ResendingDispatcher {
 
             if case .failure = result {
                 self.logger.d("Failed to send ad event data")
-                self.eventDataQueue.addAd(adEventData)
+
+                Task {
+                    await self.eventDataQueue.addAd(adEventData)
+                }
             }
         }
     }
@@ -43,7 +49,7 @@ internal class PersistingDispatcher: EventDataDispatcher, ResendingDispatcher {
         innerDispatcher.resetSourceState()
     }
 
-    func sendPersistedEventData() {
-        innerDispatcher.sendPersistedEventData()
+    func sendPersistedEventData() async {
+        await innerDispatcher.sendPersistedEventData()
     }
 }
