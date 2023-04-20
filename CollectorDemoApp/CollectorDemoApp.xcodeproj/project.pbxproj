@@ -56,6 +56,7 @@
 		ACB3066C29ED5133003CB501 /* art-of-motion.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ACB3066A29ED5133003CB501 /* art-of-motion.mp4 */; };
 		ACB3066D29ED5133003CB501 /* art-of-motion.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ACB3066A29ED5133003CB501 /* art-of-motion.mp4 */; };
 		ACB3066E29ED5133003CB501 /* art-of-motion.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ACB3066A29ED5133003CB501 /* art-of-motion.mp4 */; };
+		ACB3067A29F17B70003CB501 /* StoryboardInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB3067929F17B70003CB501 /* StoryboardInitializable.swift */; };
 		D1AB2510EDA14C4BEB0F7FD1 /* Pods_CollectorDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F10E174AEA18176F06BDF84 /* Pods_CollectorDemoApp.framework */; };
 		EF3AE0CA76C05EDDAA53C787 /* Pods_CollectorDemoAppCocoaPods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6363D0EA977656A5C66C82F6 /* Pods_CollectorDemoAppCocoaPods.framework */; };
 /* End PBXBuildFile section */
@@ -122,6 +123,7 @@
 		9DD665C7299B751D00608720 /* VideoAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoAssets.swift; sourceTree = "<group>"; };
 		9DE5886F29A7542B00C68DCA /* IVSPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IVSPlayerController.swift; sourceTree = "<group>"; };
 		ACB3066A29ED5133003CB501 /* art-of-motion.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "art-of-motion.mp4"; sourceTree = "<group>"; };
+		ACB3067929F17B70003CB501 /* StoryboardInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInitializable.swift; sourceTree = "<group>"; };
 		B7C310C361410E272DBB8B82 /* Pods-CollectorDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoApp.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp.release.xcconfig"; sourceTree = "<group>"; };
 		DDBD753B2D5069ACFA4F705A /* Pods-CollectorDemoAppTVCocoaPods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTVCocoaPods.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppTVCocoaPods/Pods-CollectorDemoAppTVCocoaPods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -300,6 +302,7 @@
 				9DD665C5299B751D00608720 /* AdAssets.swift */,
 				9DD665C6299B751D00608720 /* PlayerView.swift */,
 				9DD665C7299B751D00608720 /* VideoAssets.swift */,
+				ACB3067929F17B70003CB501 /* StoryboardInitializable.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -749,6 +752,7 @@
 				9D8F603A299A65FC00090B46 /* BitmovinDrmViewController.swift in Sources */,
 				9D8F6035299A65FC00090B46 /* FairPlayConfiguration.swift in Sources */,
 				9D8F6034299A65FC00090B46 /* AVFoundationViewController.swift in Sources */,
+				ACB3067A29F17B70003CB501 /* StoryboardInitializable.swift in Sources */,
 				9DD665C8299B751D00608720 /* DebugBitmovinPlayerListener.swift in Sources */,
 				9D8F6036299A65FC00090B46 /* Stream.swift in Sources */,
 				9DCA88EB29A647F400D1EC9C /* AmazonIvsViewController.swift in Sources */,
