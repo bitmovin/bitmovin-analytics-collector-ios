@@ -45,7 +45,9 @@ extension HttpEventDataDispatcher: CallbackEventDataDispatcher {
         httpClient.post(
             urlString: analyticsBackendUrl,
             json: eventData.jsonString()
-        ) { data, response, error in
+        ) { [weak self] data, response, error in
+            guard let self else { return }
+
             let result = HttpDispatchResult.from(data: data, response: response, error: error)
 
             if case .success = result {
@@ -65,7 +67,9 @@ extension HttpEventDataDispatcher: CallbackEventDataDispatcher {
         httpClient.post(
             urlString: adAnalyticsBackendUrl,
             json: json
-        ) { data, response, error in
+        ) { [weak self] data, response, error in
+            guard let self else { return }
+
             let result = HttpDispatchResult.from(data: data, response: response, error: error)
 
             if case .success = result {
