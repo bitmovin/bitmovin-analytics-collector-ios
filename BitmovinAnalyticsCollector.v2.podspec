@@ -33,8 +33,8 @@ DESC
 
   s.subspec 'AmazonIVSPlayer' do |ivsplayer|
     ivsplayer.source_files = 'Sources/AmazonIVSPlayerCollector/**/*.{swift}'
-    ivsplayer.tvos.dependency 'AmazonIVSPlayer', '1.17.0'
-    ivsplayer.ios.dependency 'AmazonIVSPlayer', '1.17.0'
+    ivsplayer.tvos.dependency 'AmazonIVSPlayer', '1.18.0'
+    ivsplayer.ios.dependency 'AmazonIVSPlayer', '1.18.0'
   end
 
   s.subspec 'AVPlayer' do |avplayer|

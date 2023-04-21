@@ -1,7 +1,7 @@
 PODS:
-  - AmazonIVSPlayer (1.17.0)
+  - AmazonIVSPlayer (1.18.0)
   - BitmovinAnalyticsCollector/AmazonIVSPlayer (2.10.0):
-    - AmazonIVSPlayer (= 1.17.0)
+    - AmazonIVSPlayer (= 1.18.0)
   - BitmovinAnalyticsCollector/AVPlayer (2.10.0)
   - BitmovinAnalyticsCollector/BitmovinPlayer (2.10.0):
     - BitmovinPlayer (~> 3.35)
@@ -37,8 +37,8 @@ EXTERNAL SOURCES:
     :path: "../BitmovinAnalyticsCollector.v2.podspec"
 
 SPEC CHECKSUMS:
-  AmazonIVSPlayer: e64a0a905b60de5760a377eb256895cfae09c694
-  BitmovinAnalyticsCollector: fd23b5b643e092bd50084e2cff15144c15bb292b
+  AmazonIVSPlayer: 15b74392987e2385f9a859201273185f76d58959
+  BitmovinAnalyticsCollector: e338f36d83c98df226f587cf458348a4bf8f841a
   BitmovinPlayer: 44df4916e616d56fde2ed88e68f98a9a454fc3a3
   google-cast-sdk: 9fc76175641bc24ef2515e0263344bd2c5c4e75c
   GoogleAds-IMA-iOS-SDK: b01284e3bf3d64ba948de6692ffda531452c3713
@@ -46,4 +46,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 7710b9b5e89627c4aeabded6ba454861e8753d30
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.12.1

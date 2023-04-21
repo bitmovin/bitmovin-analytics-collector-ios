@@ -152,13 +152,13 @@ use_frameworks!
 
 ### AmazonIVSPlayer
 
-The collector for the Amazon IVS Player has a dependency on `AmazonIVSPlayer` version `1.17.0`.
+The collector for the Amazon IVS Player has a dependency on `AmazonIVSPlayer` version `1.18.0`.
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
 pod 'BitmovinAnalyticsCollector/Core', '2.11.0-beta.1'
 pod 'BitmovinAnalyticsCollector/AmazonIVSPlayer', '2.11.0-beta.1'
-pod 'AmazonIVSPlayer', '1.17.0'
+pod 'AmazonIVSPlayer', '1.18.0'
 
 use_frameworks!
 ```

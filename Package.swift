@@ -52,8 +52,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "AmazonIVSPlayer",
-            url: "https://player.live-video.net/1.17.0/AmazonIVSPlayer.xcframework.zip",
-            checksum: "bccc9ae5a02b3fb6c5535869607403609e4e9854f322052d37a8a71cef9657e6"
+            url: "https://player.live-video.net/1.18.0/AmazonIVSPlayer.xcframework.zip",
+            checksum: "1b50c62c49f2ceb6eb78c276d798fe6fdfa41b8982f8ad369eebe14bfacbdb5f"
         ),
         .target(
             name: "AmazonIVSPlayerCollector",

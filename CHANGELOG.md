@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 - removed support for iOS/tvOS 12.0, 13.0
 
+### Changed
+- update dependency to AmavonIVSPlayer to 1.18.0
+
 ## 2.11.0-beta.1
 
 ### Added
