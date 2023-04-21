@@ -89,5 +89,5 @@ chmod +x ./scripts/notifyCollectorReleaseChannel.sh
 ./scripts/notifyCollectorReleaseChannel.sh "ios" $VERSION
 ./scripts/notifyCollectorReleaseChannel.sh "tvos" $VERSION
 
-echo "Don't forget to update the changelog in Contentful."
-open "https://app.contentful.com/spaces/blfijbdi3ei3/entries"
+echo "Don't forget to update the changelog."
+open "https://dash.readme.com/project/bitmovin-playback/v1/docs/analytics-collector-ios-releases"
