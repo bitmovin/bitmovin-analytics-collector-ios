@@ -107,6 +107,7 @@ class PlaybackServiceTest: QuickSpec {
                 verify(mockStateMachine).transitionState(destinationState: equal(to: PlayerState.buffering), time: equal(to: position))
             }
         }
+
         describe("onSeekCompleted") {
             it("should not transition into seek state if live stream") {
                 // arrange
@@ -172,7 +173,28 @@ class PlaybackServiceTest: QuickSpec {
                 verify(mockStateMachine, times(1)).transitionState(destinationState: equal(to: PlayerState.playing), time: equal(to: seekToTime))
             }
         }
+
         describe("onQualityChange") {
+            it("should not cause state transition when quality was not set before ") {
+                // arrange
+                var receivedQuality: IVSQualityProtocol?
+                stub(mockPlaybackQualityProvider) { stub in
+                    when(stub.currentQuality.get).thenReturn(nil)
+                    when(stub.currentQuality.set(any())).then { quality in
+                        receivedQuality = quality
+                    }
+                }
+                let quality: IVSQualityProtocol = IVSQualityProtocolStub()
+                
+                // act
+
+                playbackService.onQualityChange(quality)
+
+                // assert
+                expect(receivedQuality) === quality
+                verify(mockStateMachine, times(0)).videoQualityChange(time: any(), setQualityFunction: any())
+                verify(mockStatisticProvider, times(0)).reset()
+            }
             it("should call videoQualityChange on statemachine and reset statistics") {
                 // arrange
                 stub(mockStateMachine) { stub in
@@ -191,6 +213,10 @@ class PlaybackServiceTest: QuickSpec {
 
                 stub(mockPlaybackQualityProvider) { stub in
                     when(stub.didQualityChange(newQuality: any())).thenReturn(true)
+                }
+
+                stub(mockPlaybackQualityProvider) { stub in
+                    when(stub.currentQuality.get).thenReturn(MockIVSQualityProtocol())
                 }
 
                 // act

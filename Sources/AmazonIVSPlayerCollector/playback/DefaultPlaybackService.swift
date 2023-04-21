@@ -47,6 +47,12 @@ class DefaultPlaybackService: PlaybackService {
     }
 
     func onQualityChange(_ quality: IVSQualityProtocol?) {
+        //initial quality change will not trigger state change
+        if qualityProvider.currentQuality == nil {
+            qualityProvider.currentQuality = quality
+            return
+        }
+
         guard qualityProvider.didQualityChange(newQuality: quality) else {
             return
         }
