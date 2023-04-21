@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+## v2.11.0
+
 ### Added
 - [internal] Release/Create Buttons for AV Example App
 
