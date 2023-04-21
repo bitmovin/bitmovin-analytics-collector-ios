@@ -5,11 +5,8 @@ internal protocol IVSQualityProtocol: AnyObject {
     var name: String { get }
     var codecs: String { get }
     var bitrate: Int { get }
-    var framerate: Float { get }
     var width: Int { get }
     var height: Int { get }
-
-    func isEqual(to other: IVSQuality) -> Bool
 }
 
 // with this extension we enable us to use instances of IVSQuality from the AmazonIVSPlayer package

@@ -15,7 +15,7 @@ class DefaultPlaybackQualityProvider: PlaybackQualityProvider {
             return true
         }
 
-        return newQuality!.isEqual(to: self.currentQuality! as! IVSQuality)
+        return !isEqualByProperties(newQuality, self.currentQuality)
     }
 
     func reset() {
@@ -29,6 +29,14 @@ class DefaultPlaybackQualityProvider: PlaybackQualityProvider {
     private func isOnlyOneNil(_ quality1: IVSQualityProtocol?, _ quality2: IVSQualityProtocol?) -> Bool {
         (quality1 == nil && quality2 != nil) ||
             (quality1 != nil && quality2 == nil)
+    }
+
+    private func isEqualByProperties(_ quality1: IVSQualityProtocol?, _ quality2: IVSQualityProtocol?) -> Bool {
+        quality1?.name == quality2?.name &&
+        quality1?.width == quality2?.width &&
+        quality1?.height == quality2?.height &&
+        quality1?.bitrate == quality2?.bitrate &&
+        quality1?.codecs == quality2?.codecs
     }
 
 }
