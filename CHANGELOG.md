@@ -2,10 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/) 
+The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
+
+### Added
+- [internal] A Xcode worksapce to collect all future target together
 
 ## v2.11.0
 
@@ -31,8 +34,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [internal] added github workflow build, lint checks & tests
 
 ### Changed
-- updated example app 
-- [internal] extracted StateMachine interface for testing 
+- updated example app
+- [internal] extracted StateMachine interface for testing
 - [internal] stateMachine is created new on every attach
 
 ### Removed
@@ -41,7 +44,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## 2.10.0
 
 ### Fixed
-- casting information was set in sample before casting 
+- casting information was set in sample before casting
 
 ### Added
 - `ad` sample to track when in the session an ad was played
@@ -49,9 +52,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - improved error handling for license call handler and event data decoration
 - [Internal] removed unused method on eventDispatcher
-  
+
 ## Development V1
-- the v1 project has been deprectated and removed from that repository 
+- the v1 project has been deprectated and removed from that repository
 ## 1.30.0
 
 ### Added
@@ -83,7 +86,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Improvements of DispatchQueue creation
-- 
+-
 ### Fixed
 - Fixed typo of unknown Player Error
 
@@ -124,7 +127,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - AVPlayer: reworked tracking of video bitrate
 
 ### Fixed
-- AVPlayer: wrongly track multiple seek events instead of one event for progressice sources 
+- AVPlayer: wrongly track multiple seek events instead of one event for progressice sources
 
 ## 1.29.0
 
@@ -152,7 +155,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - during `paused` state we do not track `qualityChange`, `seeking` and `buffering`
 - reworked tracking of seeking
 
-### Added 
+### Added
 
 - new AVPlayer adapter with deployment_target `iOS:12` and `tvOS:12`
 - SwiftPM support
@@ -176,7 +179,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-- tracking of `analytics_version` don't use `CFBundleShortVersionString` 
+- tracking of `analytics_version` don't use `CFBundleShortVersionString`
 - fixed type in compiler config `ENABLE_BITCODE`
 
 ## 1.27.0
@@ -187,7 +190,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-- tracking of `analytics_version` don't use `CFBundleShortVersionString` 
+- tracking of `analytics_version` don't use `CFBundleShortVersionString`
 - fixed type in compiler config `ENABLE_BITCODE`
 
 ## 1.26.1
@@ -213,14 +216,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - startup time tracking when autoplay is enabled starts from `SourceLoad` event
-- transition to `playing` state if collector is attached after player started playing 
+- transition to `playing` state if collector is attached after player started playing
 
 ## 1.25.0
 
 ### Changed
 
 - startup time tracking when autoplay is enabled starts from `SourceLoaded` event
-- transition to `playing` state if collector is attached after player started playing 
+- transition to `playing` state if collector is attached after player started playing
 
 ## 1.24.1
 
@@ -302,7 +305,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- `setCustomData` and `setCustomDataOnce` methods 
+- `setCustomData` and `setCustomDataOnce` methods
 - `randomizedUserId` configuration property
 
 
@@ -314,7 +317,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- `setCustomData` and `setCustomDataOnce` methods 
+- `setCustomData` and `setCustomDataOnce` methods
 - `randomizedUserId` configuration property
 
 ### Fixed
@@ -398,7 +401,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- We now stop collecting events after the collector encounters a video startup failure and rebuffer timeout 
+- We now stop collecting events after the collector encounters a video startup failure and rebuffer timeout
 - errors will have a timeout of 1 minute before they will occur again (AN-1777)
 
 ### Fixed
@@ -409,7 +412,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- Updated `BitmovinPlayer` dependency to `2.51.0` (AN-1706) 
+- Updated `BitmovinPlayer` dependency to `2.51.0` (AN-1706)
 
 ## 1.16.0
 
@@ -489,7 +492,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- `subtitleEnabled` and `subtitleLanguage` in outgoing payload 
+- `subtitleEnabled` and `subtitleLanguage` in outgoing payload
 - `audioLanguage` in outgoing payload
 
 ## 1.7.5
@@ -530,8 +533,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Collector didn't populate `buffered` field when buffering occured
 - Collector didn't correctly report `streamFormat`, `m3u8Url`, `mpdUrl` or `progUrl`
 - `videoTimeStart` and `videoTimeEnd` were not set when sending out heartbeats
-- Collector didn't report errors when using the `AVPlayerCollector` 
-- Collector didn't reset on `onSourceUnloaded` and continued sending samples with the inital `impression_id`, if `detachPlayer` wasn't called 
+- Collector didn't report errors when using the `AVPlayerCollector`
+- Collector didn't reset on `onSourceUnloaded` and continued sending samples with the inital `impression_id`, if `detachPlayer` wasn't called
 
 ## 1.7.0
 
@@ -543,7 +546,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 - Collector didn't report the correct version of the Bitmovin player
-- Added additional cases to the  `platform` field (`watchOS`,  `macOS`, `Linux` and `unknown`) 
+- Added additional cases to the  `platform` field (`watchOS`,  `macOS`, `Linux` and `unknown`)
 
 ## 1.6.0
 - Split project into Core, AVPlayer and BitmovinPlayer to avoid unnecessary dependency imports
