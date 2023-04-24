@@ -1,7 +1,5 @@
 import BitmovinPlayer
-#if SWIFT_PACKAGE
 import CoreCollector
-#endif
 
 internal enum BitmovinPlayerUtil {
     static func playerVersion() -> String? {

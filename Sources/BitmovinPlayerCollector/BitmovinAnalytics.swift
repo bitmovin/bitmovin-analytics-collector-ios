@@ -1,7 +1,5 @@
 import BitmovinPlayer
-#if SWIFT_PACKAGE
 import CoreCollector
-#endif
 
 public class BitmovinAnalytics: BitmovinPlayerCollector {
     override public init(config: BitmovinAnalyticsConfig) {

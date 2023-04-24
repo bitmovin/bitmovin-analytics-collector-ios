@@ -1,7 +1,5 @@
 import BitmovinPlayer
-#if SWIFT_PACKAGE
 import CoreCollector
-#endif
 
 internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter, EventDataManipulator {
     private let logger = _AnalyticsLogger(className: "BitmovinPlayerAdapter")
