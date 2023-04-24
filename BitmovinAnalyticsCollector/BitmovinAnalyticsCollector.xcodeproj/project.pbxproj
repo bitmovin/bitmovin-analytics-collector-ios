@@ -137,6 +137,26 @@
 		37EEC4A229F6C0EE005D0457 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC4A129F6C0EE005D0457 /* Quick */; };
 		37EEC4A429F6C0F2005D0457 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC4A329F6C0F2005D0457 /* Nimble */; };
 		37EEC4A629F6C0F6005D0457 /* Cuckoo in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC4A529F6C0F6005D0457 /* Cuckoo */; };
+		37EEC4CC29F6C207005D0457 /* AmazonIVSPlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4B429F6C207005D0457 /* AmazonIVSPlayerAdapter.swift */; };
+		37EEC4CD29F6C207005D0457 /* VideoStartupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4B629F6C207005D0457 /* VideoStartupService.swift */; };
+		37EEC4CE29F6C207005D0457 /* DefaultErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4B729F6C207005D0457 /* DefaultErrorService.swift */; };
+		37EEC4CF29F6C207005D0457 /* DefaultPlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4B829F6C207005D0457 /* DefaultPlaybackService.swift */; };
+		37EEC4D029F6C207005D0457 /* ErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4B929F6C207005D0457 /* ErrorService.swift */; };
+		37EEC4D129F6C207005D0457 /* PlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4BA29F6C207005D0457 /* PlaybackService.swift */; };
+		37EEC4D229F6C207005D0457 /* DefaultVideoStartupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4BB29F6C207005D0457 /* DefaultVideoStartupService.swift */; };
+		37EEC4D329F6C207005D0457 /* DefaultPlaybackQualityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4BD29F6C207005D0457 /* DefaultPlaybackQualityProvider.swift */; };
+		37EEC4D429F6C207005D0457 /* AmazonIVSPlayerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4BE29F6C207005D0457 /* AmazonIVSPlayerContext.swift */; };
+		37EEC4D529F6C207005D0457 /* DefaultPlayerStatisticsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4BF29F6C207005D0457 /* DefaultPlayerStatisticsProvider.swift */; };
+		37EEC4D629F6C207005D0457 /* AmazonIVSPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4C029F6C207005D0457 /* AmazonIVSPlayerListener.swift */; };
+		37EEC4D729F6C207005D0457 /* PlaybackQualityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4C129F6C207005D0457 /* PlaybackQualityProvider.swift */; };
+		37EEC4D829F6C207005D0457 /* PlayerStatisticsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4C229F6C207005D0457 /* PlayerStatisticsProvider.swift */; };
+		37EEC4D929F6C207005D0457 /* IVSQualityProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4C429F6C207005D0457 /* IVSQualityProtocol.swift */; };
+		37EEC4DA29F6C207005D0457 /* IVSPlayerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4C529F6C207005D0457 /* IVSPlayerProtocol.swift */; };
+		37EEC4DB29F6C207005D0457 /* AmazonIVSCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4C629F6C207005D0457 /* AmazonIVSCollector.swift */; };
+		37EEC4DC29F6C207005D0457 /* PlayerInfoManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4C829F6C207005D0457 /* PlayerInfoManipulator.swift */; };
+		37EEC4DD29F6C207005D0457 /* PlaybackEventDataManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4C929F6C207005D0457 /* PlaybackEventDataManipulator.swift */; };
+		37EEC4DE29F6C207005D0457 /* QualityEventDataManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4CA29F6C207005D0457 /* QualityEventDataManipulator.swift */; };
+		37EEC4DF29F6C207005D0457 /* AmazonIVSPlayerAdapterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4CB29F6C207005D0457 /* AmazonIVSPlayerAdapterFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -313,6 +333,30 @@
 		37EEC49629F6C0AD005D0457 /* GeneratedMocks-Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GeneratedMocks-Core.swift"; path = "../../Tests/AVPlayerCollectorTests/GeneratedMocks-Core.swift"; sourceTree = "<group>"; };
 		37EEC49729F6C0AD005D0457 /* MockableFiles.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; name = MockableFiles.xcfilelist; path = ../../Tests/AVPlayerCollectorTests/MockableFiles.xcfilelist; sourceTree = "<group>"; };
 		37EEC49929F6C0AD005D0457 /* AccessLogProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessLogProviderMock.swift; sourceTree = "<group>"; };
+		37EEC4AD29F6C1F2005D0457 /* AmazonIVSPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AmazonIVSPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EEC4B429F6C207005D0457 /* AmazonIVSPlayerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AmazonIVSPlayerAdapter.swift; path = ../../Sources/AmazonIVSPlayerCollector/AmazonIVSPlayerAdapter.swift; sourceTree = "<group>"; };
+		37EEC4B629F6C207005D0457 /* VideoStartupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoStartupService.swift; sourceTree = "<group>"; };
+		37EEC4B729F6C207005D0457 /* DefaultErrorService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultErrorService.swift; sourceTree = "<group>"; };
+		37EEC4B829F6C207005D0457 /* DefaultPlaybackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPlaybackService.swift; sourceTree = "<group>"; };
+		37EEC4B929F6C207005D0457 /* ErrorService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorService.swift; sourceTree = "<group>"; };
+		37EEC4BA29F6C207005D0457 /* PlaybackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackService.swift; sourceTree = "<group>"; };
+		37EEC4BB29F6C207005D0457 /* DefaultVideoStartupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultVideoStartupService.swift; sourceTree = "<group>"; };
+		37EEC4BD29F6C207005D0457 /* DefaultPlaybackQualityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPlaybackQualityProvider.swift; sourceTree = "<group>"; };
+		37EEC4BE29F6C207005D0457 /* AmazonIVSPlayerContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazonIVSPlayerContext.swift; sourceTree = "<group>"; };
+		37EEC4BF29F6C207005D0457 /* DefaultPlayerStatisticsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPlayerStatisticsProvider.swift; sourceTree = "<group>"; };
+		37EEC4C029F6C207005D0457 /* AmazonIVSPlayerListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazonIVSPlayerListener.swift; sourceTree = "<group>"; };
+		37EEC4C129F6C207005D0457 /* PlaybackQualityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackQualityProvider.swift; sourceTree = "<group>"; };
+		37EEC4C229F6C207005D0457 /* PlayerStatisticsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerStatisticsProvider.swift; sourceTree = "<group>"; };
+		37EEC4C429F6C207005D0457 /* IVSQualityProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IVSQualityProtocol.swift; sourceTree = "<group>"; };
+		37EEC4C529F6C207005D0457 /* IVSPlayerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IVSPlayerProtocol.swift; sourceTree = "<group>"; };
+		37EEC4C629F6C207005D0457 /* AmazonIVSCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AmazonIVSCollector.swift; path = ../../Sources/AmazonIVSPlayerCollector/AmazonIVSCollector.swift; sourceTree = "<group>"; };
+		37EEC4C829F6C207005D0457 /* PlayerInfoManipulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerInfoManipulator.swift; sourceTree = "<group>"; };
+		37EEC4C929F6C207005D0457 /* PlaybackEventDataManipulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackEventDataManipulator.swift; sourceTree = "<group>"; };
+		37EEC4CA29F6C207005D0457 /* QualityEventDataManipulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QualityEventDataManipulator.swift; sourceTree = "<group>"; };
+		37EEC4CB29F6C207005D0457 /* AmazonIVSPlayerAdapterFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AmazonIVSPlayerAdapterFactory.swift; path = ../../Sources/AmazonIVSPlayerCollector/AmazonIVSPlayerAdapterFactory.swift; sourceTree = "<group>"; };
+		37EEC4E029F6C234005D0457 /* AmazonIVSPlayerCollector-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollector-Release.xcconfig"; sourceTree = "<group>"; };
+		37EEC4E129F6C234005D0457 /* AmazonIVSPlayerCollector-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollector-Shared.xcconfig"; sourceTree = "<group>"; };
+		37EEC4E229F6C234005D0457 /* AmazonIVSPlayerCollector-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollector-Debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +417,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		37EEC4AA29F6C1F2005D0457 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -385,6 +436,7 @@
 				37EEC43629F6BACA005D0457 /* BitmovinPlayerCollectorTests */,
 				37EEC45929F6BF2C005D0457 /* AVPlayerCollector */,
 				37EEC48529F6C024005D0457 /* AVPlayerCollectorTests */,
+				37EEC4AE29F6C1F2005D0457 /* AmazonIVSPlayerCollector */,
 				37EEC3A929F6AED6005D0457 /* xcconfig */,
 				37EEC2DF29F6A86B005D0457 /* Products */,
 				37EEC3F729F6B571005D0457 /* Frameworks */,
@@ -400,6 +452,7 @@
 				37EEC43529F6BACA005D0457 /* BitmovinPlayerCollectorTests.xctest */,
 				37EEC45829F6BF2C005D0457 /* AVPlayerCollector.framework */,
 				37EEC48429F6C024005D0457 /* AVPlayerCollectorTests.xctest */,
+				37EEC4AD29F6C1F2005D0457 /* AmazonIVSPlayerCollector.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -641,6 +694,9 @@
 				37EEC48E29F6C050005D0457 /* AVPlayerCollectorTests-Debug.xcconfig */,
 				37EEC48F29F6C050005D0457 /* AVPlayerCollectorTests-Release.xcconfig */,
 				37EEC49029F6C050005D0457 /* AVPlayerCollectorTests-Shared.xcconfig */,
+				37EEC4E229F6C234005D0457 /* AmazonIVSPlayerCollector-Debug.xcconfig */,
+				37EEC4E029F6C234005D0457 /* AmazonIVSPlayerCollector-Release.xcconfig */,
+				37EEC4E129F6C234005D0457 /* AmazonIVSPlayerCollector-Shared.xcconfig */,
 			);
 			path = xcconfig;
 			sourceTree = "<group>";
@@ -852,6 +908,69 @@
 			path = ../../Tests/AVPlayerCollectorTests/mock;
 			sourceTree = "<group>";
 		};
+		37EEC4AE29F6C1F2005D0457 /* AmazonIVSPlayerCollector */ = {
+			isa = PBXGroup;
+			children = (
+				37EEC4C329F6C207005D0457 /* ivsprotocol */,
+				37EEC4C729F6C207005D0457 /* manipulator */,
+				37EEC4B529F6C207005D0457 /* playback */,
+				37EEC4BC29F6C207005D0457 /* player */,
+				37EEC4C629F6C207005D0457 /* AmazonIVSCollector.swift */,
+				37EEC4B429F6C207005D0457 /* AmazonIVSPlayerAdapter.swift */,
+				37EEC4CB29F6C207005D0457 /* AmazonIVSPlayerAdapterFactory.swift */,
+			);
+			path = AmazonIVSPlayerCollector;
+			sourceTree = "<group>";
+		};
+		37EEC4B529F6C207005D0457 /* playback */ = {
+			isa = PBXGroup;
+			children = (
+				37EEC4B629F6C207005D0457 /* VideoStartupService.swift */,
+				37EEC4B729F6C207005D0457 /* DefaultErrorService.swift */,
+				37EEC4B829F6C207005D0457 /* DefaultPlaybackService.swift */,
+				37EEC4B929F6C207005D0457 /* ErrorService.swift */,
+				37EEC4BA29F6C207005D0457 /* PlaybackService.swift */,
+				37EEC4BB29F6C207005D0457 /* DefaultVideoStartupService.swift */,
+			);
+			name = playback;
+			path = ../../Sources/AmazonIVSPlayerCollector/playback;
+			sourceTree = "<group>";
+		};
+		37EEC4BC29F6C207005D0457 /* player */ = {
+			isa = PBXGroup;
+			children = (
+				37EEC4BD29F6C207005D0457 /* DefaultPlaybackQualityProvider.swift */,
+				37EEC4BE29F6C207005D0457 /* AmazonIVSPlayerContext.swift */,
+				37EEC4BF29F6C207005D0457 /* DefaultPlayerStatisticsProvider.swift */,
+				37EEC4C029F6C207005D0457 /* AmazonIVSPlayerListener.swift */,
+				37EEC4C129F6C207005D0457 /* PlaybackQualityProvider.swift */,
+				37EEC4C229F6C207005D0457 /* PlayerStatisticsProvider.swift */,
+			);
+			name = player;
+			path = ../../Sources/AmazonIVSPlayerCollector/player;
+			sourceTree = "<group>";
+		};
+		37EEC4C329F6C207005D0457 /* ivsprotocol */ = {
+			isa = PBXGroup;
+			children = (
+				37EEC4C429F6C207005D0457 /* IVSQualityProtocol.swift */,
+				37EEC4C529F6C207005D0457 /* IVSPlayerProtocol.swift */,
+			);
+			name = ivsprotocol;
+			path = ../../Sources/AmazonIVSPlayerCollector/ivsprotocol;
+			sourceTree = "<group>";
+		};
+		37EEC4C729F6C207005D0457 /* manipulator */ = {
+			isa = PBXGroup;
+			children = (
+				37EEC4C829F6C207005D0457 /* PlayerInfoManipulator.swift */,
+				37EEC4C929F6C207005D0457 /* PlaybackEventDataManipulator.swift */,
+				37EEC4CA29F6C207005D0457 /* QualityEventDataManipulator.swift */,
+			);
+			name = manipulator;
+			path = ../../Sources/AmazonIVSPlayerCollector/manipulator;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -870,6 +989,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37EEC45329F6BF2C005D0457 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EEC4A829F6C1F2005D0457 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1011,6 +1137,24 @@
 			productReference = 37EEC48429F6C024005D0457 /* AVPlayerCollectorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		37EEC4AC29F6C1F2005D0457 /* AmazonIVSPlayerCollector */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37EEC4B329F6C1F2005D0457 /* Build configuration list for PBXNativeTarget "AmazonIVSPlayerCollector" */;
+			buildPhases = (
+				37EEC4A829F6C1F2005D0457 /* Headers */,
+				37EEC4A929F6C1F2005D0457 /* Sources */,
+				37EEC4AA29F6C1F2005D0457 /* Frameworks */,
+				37EEC4AB29F6C1F2005D0457 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AmazonIVSPlayerCollector;
+			productName = AmazonIVSPlayerCollector;
+			productReference = 37EEC4AD29F6C1F2005D0457 /* AmazonIVSPlayerCollector.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1044,6 +1188,10 @@
 						CreatedOnToolsVersion = 14.3;
 						LastSwiftMigration = 1430;
 					};
+					37EEC4AC29F6C1F2005D0457 = {
+						CreatedOnToolsVersion = 14.3;
+						LastSwiftMigration = 1430;
+					};
 				};
 			};
 			buildConfigurationList = 37EEC2D829F6A86B005D0457 /* Build configuration list for PBXProject "BitmovinAnalyticsCollector" */;
@@ -1071,6 +1219,7 @@
 				37EEC43429F6BACA005D0457 /* BitmovinPlayerCollectorTests */,
 				37EEC45729F6BF2C005D0457 /* AVPlayerCollector */,
 				37EEC48329F6C024005D0457 /* AVPlayerCollectorTests */,
+				37EEC4AC29F6C1F2005D0457 /* AmazonIVSPlayerCollector */,
 			);
 		};
 /* End PBXProject section */
@@ -1118,6 +1267,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				37EEC49F29F6C0AD005D0457 /* MockableFiles.xcfilelist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EEC4AB29F6C1F2005D0457 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1338,6 +1494,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		37EEC4A929F6C1F2005D0457 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37EEC4DA29F6C207005D0457 /* IVSPlayerProtocol.swift in Sources */,
+				37EEC4D129F6C207005D0457 /* PlaybackService.swift in Sources */,
+				37EEC4DB29F6C207005D0457 /* AmazonIVSCollector.swift in Sources */,
+				37EEC4CF29F6C207005D0457 /* DefaultPlaybackService.swift in Sources */,
+				37EEC4D029F6C207005D0457 /* ErrorService.swift in Sources */,
+				37EEC4D429F6C207005D0457 /* AmazonIVSPlayerContext.swift in Sources */,
+				37EEC4CE29F6C207005D0457 /* DefaultErrorService.swift in Sources */,
+				37EEC4DE29F6C207005D0457 /* QualityEventDataManipulator.swift in Sources */,
+				37EEC4CC29F6C207005D0457 /* AmazonIVSPlayerAdapter.swift in Sources */,
+				37EEC4DD29F6C207005D0457 /* PlaybackEventDataManipulator.swift in Sources */,
+				37EEC4D929F6C207005D0457 /* IVSQualityProtocol.swift in Sources */,
+				37EEC4D629F6C207005D0457 /* AmazonIVSPlayerListener.swift in Sources */,
+				37EEC4DF29F6C207005D0457 /* AmazonIVSPlayerAdapterFactory.swift in Sources */,
+				37EEC4D229F6C207005D0457 /* DefaultVideoStartupService.swift in Sources */,
+				37EEC4DC29F6C207005D0457 /* PlayerInfoManipulator.swift in Sources */,
+				37EEC4CD29F6C207005D0457 /* VideoStartupService.swift in Sources */,
+				37EEC4D529F6C207005D0457 /* DefaultPlayerStatisticsProvider.swift in Sources */,
+				37EEC4D329F6C207005D0457 /* DefaultPlaybackQualityProvider.swift in Sources */,
+				37EEC4D729F6C207005D0457 /* PlaybackQualityProvider.swift in Sources */,
+				37EEC4D829F6C207005D0457 /* PlayerStatisticsProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1464,6 +1647,185 @@
 			};
 			name = Release;
 		};
+		37EEC4B129F6C1F2005D0457 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37EEC4E229F6C234005D0457 /* AmazonIVSPlayerCollector-Debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 7UXPEM3WRB;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.AmazonIVSPlayerCollector;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		37EEC4B229F6C1F2005D0457 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37EEC4E029F6C234005D0457 /* AmazonIVSPlayerCollector-Release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 7UXPEM3WRB;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.AmazonIVSPlayerCollector;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1526,6 +1888,15 @@
 			buildConfigurations = (
 				37EEC48C29F6C024005D0457 /* Debug */,
 				37EEC48D29F6C024005D0457 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37EEC4B329F6C1F2005D0457 /* Build configuration list for PBXNativeTarget "AmazonIVSPlayerCollector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37EEC4B129F6C1F2005D0457 /* Debug */,
+				37EEC4B229F6C1F2005D0457 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
