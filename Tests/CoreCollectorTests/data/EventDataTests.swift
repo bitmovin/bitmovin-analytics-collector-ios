@@ -1,6 +1,5 @@
 import Nimble
 import Quick
-
 @testable import CoreCollector
 
 class EventDataTests: QuickSpec {

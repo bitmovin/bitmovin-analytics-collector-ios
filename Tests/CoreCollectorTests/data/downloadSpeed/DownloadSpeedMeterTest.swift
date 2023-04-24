@@ -1,6 +1,5 @@
 import Foundation
 import XCTest
-
 @testable import CoreCollector
 
 class DownloadSpeedMeterTest: XCTestCase {

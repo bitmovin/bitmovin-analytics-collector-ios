@@ -1,7 +1,6 @@
 import Cuckoo
 import Nimble
 import Quick
-
 @testable import CoreCollector
 import Foundation
 
