@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		79CFBDE266D7173A3728ED64 /* Pods_CollectorDemoAppTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2139A901497FFA4714AD500A /* Pods_CollectorDemoAppTV.framework */; };
 		96B576F7205BE09A08BB2B70 /* libPods-CollectorDemoAppTVCocoaPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB1F5F69DFBB5DE75E5EF93 /* libPods-CollectorDemoAppTVCocoaPods.a */; };
-		9D3869AF29AF82F100F6531D /* AmazonIVSPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9D3869AE29AF82F100F6531D /* AmazonIVSPlayerCollector */; };
-		9D6FA9EE29AE2C6900B2BF1A /* AVPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9D6FA9ED29AE2C6900B2BF1A /* AVPlayerCollector */; };
-		9D6FA9F029AE2C6900B2BF1A /* BitmovinPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9D6FA9EF29AE2C6900B2BF1A /* BitmovinPlayerCollector */; };
-		9D6FA9F629AE2C8900B2BF1A /* bitmovin-analytics-collector-ios-internal in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D6FA9EC29AE2BFA00B2BF1A /* bitmovin-analytics-collector-ios-internal */; };
 		9D8F6019299A61E200090B46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F6012299A61E200090B46 /* AppDelegate.swift */; };
 		9D8F601A299A61E200090B46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F6013299A61E200090B46 /* ViewController.swift */; };
 		9D8F6031299A65FC00090B46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F601C299A65FB00090B46 /* Assets.xcassets */; };
@@ -33,8 +29,6 @@
 		9DA89916299CB13E004BE1CD /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA89914299CB13E004BE1CD /* AppConfig.swift */; };
 		9DADFEE129D2AFD60013F1A7 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA89914299CB13E004BE1CD /* AppConfig.swift */; };
 		9DADFEE229D2AFDB0013F1A7 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA89914299CB13E004BE1CD /* AppConfig.swift */; };
-		9DB3FDC229D1783100E4CAA3 /* AVPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9DB3FDC129D1783100E4CAA3 /* AVPlayerCollector */; };
-		9DB3FDC429D1783100E4CAA3 /* BitmovinPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9DB3FDC329D1783100E4CAA3 /* BitmovinPlayerCollector */; };
 		9DB3FDF429D17E8000E4CAA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD0AA7729B884A90083AFDB /* AppDelegate.swift */; };
 		9DB3FDF729D17E8C00E4CAA3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD0AA6C29B882FD0083AFDB /* ViewController.swift */; };
 		9DB3FDFA29D1940D00E4CAA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F601C299A65FB00090B46 /* Assets.xcassets */; };
@@ -63,7 +57,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9D6FA9F629AE2C8900B2BF1A /* bitmovin-analytics-collector-ios-internal in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,7 +73,6 @@
 		553B45211679383C2A0F5CD0 /* Pods-CollectorDemoAppCocoaPods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppCocoaPods.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods.debug.xcconfig"; sourceTree = "<group>"; };
 		6363D0EA977656A5C66C82F6 /* Pods_CollectorDemoAppCocoaPods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoAppCocoaPods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9F699843C59A110E606564 /* Pods-CollectorDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoApp.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
-		9D6FA9EC29AE2BFA00B2BF1A /* bitmovin-analytics-collector-ios-internal */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "bitmovin-analytics-collector-ios-internal"; path = ..; sourceTree = "<group>"; };
 		9D8F5F96299A1DE700090B46 /* CollectorDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D8F5FCE299A1F8300090B46 /* CollectorDemoAppTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoAppTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D8F6010299A61E200090B46 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -126,9 +118,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D3869AF29AF82F100F6531D /* AmazonIVSPlayerCollector in Frameworks */,
-				9D6FA9EE29AE2C6900B2BF1A /* AVPlayerCollector in Frameworks */,
-				9D6FA9F029AE2C6900B2BF1A /* BitmovinPlayerCollector in Frameworks */,
 				D1AB2510EDA14C4BEB0F7FD1 /* Pods_CollectorDemoApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,8 +126,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DB3FDC229D1783100E4CAA3 /* AVPlayerCollector in Frameworks */,
-				9DB3FDC429D1783100E4CAA3 /* BitmovinPlayerCollector in Frameworks */,
 				79CFBDE266D7173A3728ED64 /* Pods_CollectorDemoAppTV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,7 +163,6 @@
 		9D6FA9EB29AE2BFA00B2BF1A /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				9D6FA9EC29AE2BFA00B2BF1A /* bitmovin-analytics-collector-ios-internal */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -347,9 +333,6 @@
 			);
 			name = CollectorDemoApp;
 			packageProductDependencies = (
-				9D6FA9ED29AE2C6900B2BF1A /* AVPlayerCollector */,
-				9D6FA9EF29AE2C6900B2BF1A /* BitmovinPlayerCollector */,
-				9D3869AE29AF82F100F6531D /* AmazonIVSPlayerCollector */,
 			);
 			productName = CollectorDemoApp;
 			productReference = 9D8F5F96299A1DE700090B46 /* CollectorDemoApp.app */;
@@ -372,8 +355,6 @@
 			);
 			name = CollectorDemoAppTV;
 			packageProductDependencies = (
-				9DB3FDC129D1783100E4CAA3 /* AVPlayerCollector */,
-				9DB3FDC329D1783100E4CAA3 /* BitmovinPlayerCollector */,
 			);
 			productName = CollectorDemoApp;
 			productReference = 9D8F5FCE299A1F8300090B46 /* CollectorDemoAppTV.app */;
@@ -1291,35 +1272,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9D3869AE29AF82F100F6531D /* AmazonIVSPlayerCollector */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = AmazonIVSPlayerCollector;
-		};
 		9D3869B029AF82FA00F6531D /* AmazonIVSPlayerCollector */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AmazonIVSPlayerCollector;
-		};
-		9D6FA9ED29AE2C6900B2BF1A /* AVPlayerCollector */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = AVPlayerCollector;
-		};
-		9D6FA9EF29AE2C6900B2BF1A /* BitmovinPlayerCollector */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = BitmovinPlayerCollector;
 		};
 		9D6FA9F129AE2C7700B2BF1A /* AVPlayerCollector */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AVPlayerCollector;
 		};
 		9D6FA9F329AE2C7700B2BF1A /* BitmovinPlayerCollector */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = BitmovinPlayerCollector;
-		};
-		9DB3FDC129D1783100E4CAA3 /* AVPlayerCollector */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = AVPlayerCollector;
-		};
-		9DB3FDC329D1783100E4CAA3 /* BitmovinPlayerCollector */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BitmovinPlayerCollector;
 		};
