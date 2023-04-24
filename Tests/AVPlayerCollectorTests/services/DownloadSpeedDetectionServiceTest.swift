@@ -1,14 +1,7 @@
 import Foundation
 import XCTest
-
-#if !SWIFT_PACKAGE
-@testable import BitmovinAnalyticsCollector
-#endif
-
-#if SWIFT_PACKAGE
 @testable import AVPlayerCollector
 @testable import CoreCollector
-#endif
 
 class DownloadSpeedDetectionServiceTest: XCTestCase {
     func test_detectDownloadSpeed_should_notAddMeasurement_when_accessLogProviderIsNil() {
