@@ -26,7 +26,7 @@ MARKETING_VERSION = 1.0
 // the hyphen (`-`). This value is used as the `CFBundleIdentifier` in the `Info.plist`
 // of the built bundle.
 
-PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.CoreCollectorTests
+PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.BitmovinPlayerCollectorTests
 
 // Product Name
 //
