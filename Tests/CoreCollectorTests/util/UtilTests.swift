@@ -1,14 +1,7 @@
 import AVKit
 import XCTest
-
-#if !SWIFT_PACKAGE
-@testable import BitmovinAnalyticsCollector
-#endif
-
-#if SWIFT_PACKAGE
 @testable import CoreCollector
 import CoreMedia
-#endif
 
 class UtilTests: XCTestCase {
     func test_timeIntervalToCMTime() throws {
