@@ -1,8 +1,6 @@
 import AVFoundation
 import Foundation
-#if SWIFT_PACKAGE
 import CoreCollector
-#endif
 
 class AVPlayerContext: PlayerContext {
     private weak var player: AVPlayer?
