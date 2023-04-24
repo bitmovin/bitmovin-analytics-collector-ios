@@ -1,10 +1,6 @@
 import XCTest
-
-
-#if SWIFT_PACKAGE
 @testable import BitmovinPlayerCollector
 @testable import CoreCollector
-#endif
 
 class SourceMetadataProviderTest: XCTestCase {
     class TestSource: NSObject {

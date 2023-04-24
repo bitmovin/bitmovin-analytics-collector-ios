@@ -103,6 +103,15 @@
 		37EEC42829F6BA03005D0457 /* BitmovinPlayerCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC42429F6BA03005D0457 /* BitmovinPlayerCollector.swift */; };
 		37EEC42B29F6BA49005D0457 /* BitmovinPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC42A29F6BA49005D0457 /* BitmovinPlayer */; };
 		37EEC42C29F6BA7F005D0457 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC30729F6A8F5005D0457 /* CoreCollector.framework */; };
+		37EEC43929F6BACA005D0457 /* BitmovinPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC40229F6B901005D0457 /* BitmovinPlayerCollector.framework */; platformFilter = ios; };
+		37EEC44429F6BAF4005D0457 /* BitmovinPlayerAdapterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC43F29F6BAF3005D0457 /* BitmovinPlayerAdapterTest.swift */; };
+		37EEC44529F6BAF4005D0457 /* MockableFiles.xcfilelist in Resources */ = {isa = PBXBuildFile; fileRef = 37EEC44029F6BAF3005D0457 /* MockableFiles.xcfilelist */; };
+		37EEC44629F6BAF4005D0457 /* GeneratedMocks-Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC44129F6BAF3005D0457 /* GeneratedMocks-Core.swift */; };
+		37EEC44729F6BAF4005D0457 /* BitmovinPlayerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC44229F6BAF4005D0457 /* BitmovinPlayerTest.swift */; };
+		37EEC44829F6BAF4005D0457 /* SourceMetadataProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC44329F6BAF4005D0457 /* SourceMetadataProviderTest.swift */; };
+		37EEC44D29F6BB94005D0457 /* Cuckoo in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC44C29F6BB94005D0457 /* Cuckoo */; };
+		37EEC44F29F6BB9A005D0457 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC44E29F6BB9A005D0457 /* Quick */; };
+		37EEC45129F6BB9E005D0457 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC45029F6BB9E005D0457 /* Nimble */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +128,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 37EEC30629F6A8F5005D0457;
 			remoteInfo = CoreCollector;
+		};
+		37EEC43A29F6BACA005D0457 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37EEC2D529F6A86B005D0457 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37EEC40129F6B901005D0457;
+			remoteInfo = BitmovinPlayerCollector;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -228,6 +244,15 @@
 		37EEC42229F6BA03005D0457 /* BitmovinAdAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinAdAdapter.swift; path = ../../Sources/BitmovinPlayerCollector/BitmovinAdAdapter.swift; sourceTree = "<group>"; };
 		37EEC42329F6BA03005D0457 /* BitmovinAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinAnalytics.swift; path = ../../Sources/BitmovinPlayerCollector/BitmovinAnalytics.swift; sourceTree = "<group>"; };
 		37EEC42429F6BA03005D0457 /* BitmovinPlayerCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinPlayerCollector.swift; path = ../../Sources/BitmovinPlayerCollector/BitmovinPlayerCollector.swift; sourceTree = "<group>"; };
+		37EEC43529F6BACA005D0457 /* BitmovinPlayerCollectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BitmovinPlayerCollectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EEC43F29F6BAF3005D0457 /* BitmovinPlayerAdapterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinPlayerAdapterTest.swift; path = ../../Tests/BitmovinPlayerCollectorTests/BitmovinPlayerAdapterTest.swift; sourceTree = "<group>"; };
+		37EEC44029F6BAF3005D0457 /* MockableFiles.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; name = MockableFiles.xcfilelist; path = ../../Tests/BitmovinPlayerCollectorTests/MockableFiles.xcfilelist; sourceTree = "<group>"; };
+		37EEC44129F6BAF3005D0457 /* GeneratedMocks-Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GeneratedMocks-Core.swift"; path = "../../Tests/BitmovinPlayerCollectorTests/GeneratedMocks-Core.swift"; sourceTree = "<group>"; };
+		37EEC44229F6BAF4005D0457 /* BitmovinPlayerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinPlayerTest.swift; path = ../../Tests/BitmovinPlayerCollectorTests/BitmovinPlayerTest.swift; sourceTree = "<group>"; };
+		37EEC44329F6BAF4005D0457 /* SourceMetadataProviderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SourceMetadataProviderTest.swift; path = ../../Tests/BitmovinPlayerCollectorTests/SourceMetadataProviderTest.swift; sourceTree = "<group>"; };
+		37EEC44929F6BB58005D0457 /* BitmovinPlayerCollectorTests-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinPlayerCollectorTests-Shared.xcconfig"; sourceTree = "<group>"; };
+		37EEC44A29F6BB58005D0457 /* BitmovinPlayerCollectorTests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinPlayerCollectorTests-Debug.xcconfig"; sourceTree = "<group>"; };
+		37EEC44B29F6BB58005D0457 /* BitmovinPlayerCollectorTests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinPlayerCollectorTests-Release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +283,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		37EEC43229F6BACA005D0457 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37EEC44F29F6BB9A005D0457 /* Quick in Frameworks */,
+				37EEC45129F6BB9E005D0457 /* Nimble in Frameworks */,
+				37EEC44D29F6BB94005D0457 /* Cuckoo in Frameworks */,
+				37EEC43929F6BACA005D0457 /* BitmovinPlayerCollector.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -267,6 +303,7 @@
 				37EEC30829F6A8F5005D0457 /* CoreCollector */,
 				37EEC3B529F6B118005D0457 /* CoreCollectorTests */,
 				37EEC40329F6B901005D0457 /* BitmovinPlayerCollector */,
+				37EEC43629F6BACA005D0457 /* BitmovinPlayerCollectorTests */,
 				37EEC3A929F6AED6005D0457 /* xcconfig */,
 				37EEC2DF29F6A86B005D0457 /* Products */,
 				37EEC3F729F6B571005D0457 /* Frameworks */,
@@ -279,6 +316,7 @@
 				37EEC30729F6A8F5005D0457 /* CoreCollector.framework */,
 				37EEC3B429F6B118005D0457 /* CoreCollectorTests.xctest */,
 				37EEC40229F6B901005D0457 /* BitmovinPlayerCollector.framework */,
+				37EEC43529F6BACA005D0457 /* BitmovinPlayerCollectorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -511,6 +549,9 @@
 				37EEC41F29F6B9A1005D0457 /* BitmovinPlayerCollector-Debug.xcconfig */,
 				37EEC42029F6B9A1005D0457 /* BitmovinPlayerCollector-Release.xcconfig */,
 				37EEC41E29F6B9A1005D0457 /* BitmovinPlayerCollector-Shared.xcconfig */,
+				37EEC44A29F6BB58005D0457 /* BitmovinPlayerCollectorTests-Debug.xcconfig */,
+				37EEC44B29F6BB58005D0457 /* BitmovinPlayerCollectorTests-Release.xcconfig */,
+				37EEC44929F6BB58005D0457 /* BitmovinPlayerCollectorTests-Shared.xcconfig */,
 			);
 			path = xcconfig;
 			sourceTree = "<group>";
@@ -631,6 +672,18 @@
 			path = ../../Sources/BitmovinPlayerCollector/util;
 			sourceTree = "<group>";
 		};
+		37EEC43629F6BACA005D0457 /* BitmovinPlayerCollectorTests */ = {
+			isa = PBXGroup;
+			children = (
+				37EEC43F29F6BAF3005D0457 /* BitmovinPlayerAdapterTest.swift */,
+				37EEC44229F6BAF4005D0457 /* BitmovinPlayerTest.swift */,
+				37EEC44329F6BAF4005D0457 /* SourceMetadataProviderTest.swift */,
+				37EEC44129F6BAF3005D0457 /* GeneratedMocks-Core.swift */,
+				37EEC44029F6BAF3005D0457 /* MockableFiles.xcfilelist */,
+			);
+			path = BitmovinPlayerCollectorTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -675,7 +728,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37EEC3BD29F6B118005D0457 /* Build configuration list for PBXNativeTarget "CoreCollectorTests" */;
 			buildPhases = (
-				37EEC3FC29F6B587005D0457 /* ShellScript */,
+				37EEC3FC29F6B587005D0457 /* Run Cuckoo code generation */,
 				37EEC3B029F6B118005D0457 /* Sources */,
 				37EEC3B129F6B118005D0457 /* Frameworks */,
 				37EEC3B229F6B118005D0457 /* Resources */,
@@ -717,6 +770,30 @@
 			productReference = 37EEC40229F6B901005D0457 /* BitmovinPlayerCollector.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		37EEC43429F6BACA005D0457 /* BitmovinPlayerCollectorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37EEC43C29F6BACA005D0457 /* Build configuration list for PBXNativeTarget "BitmovinPlayerCollectorTests" */;
+			buildPhases = (
+				37EEC45229F6BBE2005D0457 /* Run Cuckoo code generation */,
+				37EEC43129F6BACA005D0457 /* Sources */,
+				37EEC43229F6BACA005D0457 /* Frameworks */,
+				37EEC43329F6BACA005D0457 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				37EEC43B29F6BACA005D0457 /* PBXTargetDependency */,
+			);
+			name = BitmovinPlayerCollectorTests;
+			packageProductDependencies = (
+				37EEC44C29F6BB94005D0457 /* Cuckoo */,
+				37EEC44E29F6BB9A005D0457 /* Quick */,
+				37EEC45029F6BB9E005D0457 /* Nimble */,
+			);
+			productName = BitmovinPlayerCollectorTests;
+			productReference = 37EEC43529F6BACA005D0457 /* BitmovinPlayerCollectorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -735,6 +812,10 @@
 						LastSwiftMigration = 1430;
 					};
 					37EEC40129F6B901005D0457 = {
+						CreatedOnToolsVersion = 14.3;
+						LastSwiftMigration = 1430;
+					};
+					37EEC43429F6BACA005D0457 = {
 						CreatedOnToolsVersion = 14.3;
 						LastSwiftMigration = 1430;
 					};
@@ -762,6 +843,7 @@
 				37EEC30629F6A8F5005D0457 /* CoreCollector */,
 				37EEC3B329F6B118005D0457 /* CoreCollectorTests */,
 				37EEC40129F6B901005D0457 /* BitmovinPlayerCollector */,
+				37EEC43429F6BACA005D0457 /* BitmovinPlayerCollectorTests */,
 			);
 		};
 /* End PBXProject section */
@@ -789,10 +871,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		37EEC43329F6BACA005D0457 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37EEC44529F6BAF4005D0457 /* MockableFiles.xcfilelist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		37EEC3FC29F6B587005D0457 /* ShellScript */ = {
+		37EEC3FC29F6B587005D0457 /* Run Cuckoo code generation */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -801,6 +891,26 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Cuckoo code generation";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "REPO_ROOT=\"${PROJECT_DIR}/..\"\nPATH_TO_SCRIPT=\"${REPO_ROOT}/scripts/run_cuckoo\"\nbash \"$PATH_TO_SCRIPT\"\n";
+			showEnvVarsInLog = 0;
+		};
+		37EEC45229F6BBE2005D0457 /* Run Cuckoo code generation */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Cuckoo code generation";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -923,6 +1033,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		37EEC43129F6BACA005D0457 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37EEC44829F6BAF4005D0457 /* SourceMetadataProviderTest.swift in Sources */,
+				37EEC44629F6BAF4005D0457 /* GeneratedMocks-Core.swift in Sources */,
+				37EEC44729F6BAF4005D0457 /* BitmovinPlayerTest.swift in Sources */,
+				37EEC44429F6BAF4005D0457 /* BitmovinPlayerAdapterTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -936,6 +1057,12 @@
 			isa = PBXTargetDependency;
 			target = 37EEC30629F6A8F5005D0457 /* CoreCollector */;
 			targetProxy = 37EEC42E29F6BA7F005D0457 /* PBXContainerItemProxy */;
+		};
+		37EEC43B29F6BACA005D0457 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 37EEC40129F6B901005D0457 /* BitmovinPlayerCollector */;
+			targetProxy = 37EEC43A29F6BACA005D0457 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -996,6 +1123,145 @@
 			};
 			name = Release;
 		};
+		37EEC43D29F6BACA005D0457 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37EEC44A29F6BB58005D0457 /* BitmovinPlayerCollectorTests-Debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7UXPEM3WRB;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.BitmovinPlayerCollectorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		37EEC43E29F6BACA005D0457 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37EEC44B29F6BB58005D0457 /* BitmovinPlayerCollectorTests-Release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7UXPEM3WRB;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.BitmovinPlayerCollectorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1031,6 +1297,15 @@
 			buildConfigurations = (
 				37EEC40629F6B901005D0457 /* Debug */,
 				37EEC40729F6B901005D0457 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37EEC43C29F6BACA005D0457 /* Build configuration list for PBXNativeTarget "BitmovinPlayerCollectorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37EEC43D29F6BACA005D0457 /* Debug */,
+				37EEC43E29F6BACA005D0457 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1092,6 +1367,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 37EEC42929F6BA49005D0457 /* XCRemoteSwiftPackageReference "player-ios" */;
 			productName = BitmovinPlayer;
+		};
+		37EEC44C29F6BB94005D0457 /* Cuckoo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37EEC3F429F6B563005D0457 /* XCRemoteSwiftPackageReference "Cuckoo" */;
+			productName = Cuckoo;
+		};
+		37EEC44E29F6BB9A005D0457 /* Quick */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37EEC3EE29F6B523005D0457 /* XCRemoteSwiftPackageReference "Quick" */;
+			productName = Quick;
+		};
+		37EEC45029F6BB9E005D0457 /* Nimble */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37EEC3F129F6B54F005D0457 /* XCRemoteSwiftPackageReference "Nimble" */;
+			productName = Nimble;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
