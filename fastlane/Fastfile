@@ -4,10 +4,10 @@ lane :release do
     release_track = ""
     pod_name = "BitmovinAnalyticsCollector"
     COCOA_DEPLOY_REPO = "cocoapod-specs"
-    
+
     if release_version.start_with?("2")
         release_track = "v2"
-    else 
+    else
         raise "Invalid release track: " + release_version
     end
     release_dir = '.release'
@@ -66,7 +66,7 @@ end
 lane :build_collector do
   scan(
     scheme: "CollectorDemoApp",
-    workspace: "./CollectorDemoApp/CollectorDemoApp.xcworkspace",
+    workspace: "BitmovinAnalyticsCollector.xcworkspace",
     sdk: "iphoneos",
     destination: "generic/platform=iOS",
     clean: true,
@@ -76,7 +76,7 @@ lane :build_collector do
   )
   scan(
     scheme: "CollectorDemoAppCocoaPods",
-    workspace: "./CollectorDemoApp/CollectorDemoApp.xcworkspace",
+    workspace: "BitmovinAnalyticsCollector.xcworkspace",
     sdk: "iphoneos",
     destination: "generic/platform=iOS",
     clean: true,
@@ -89,7 +89,7 @@ end
 lane :build_collector_for_tv do
   scan(
     scheme: "CollectorDemoAppTV",
-    workspace: "./CollectorDemoApp/CollectorDemoApp.xcworkspace",
+    workspace: "BitmovinAnalyticsCollector.xcworkspace",
     sdk: "appletvos",
     destination: "generic/platform=tvOS",
     clean: true,
@@ -99,7 +99,7 @@ lane :build_collector_for_tv do
   )
   scan(
     scheme: "CollectorDemoAppTVCocoaPods",
-    workspace: "./CollectorDemoApp/CollectorDemoApp.xcworkspace",
+    workspace: "BitmovinAnalyticsCollector.xcworkspace",
     sdk: "appletvos",
     destination: "generic/platform=tvOS",
     clean: true,
