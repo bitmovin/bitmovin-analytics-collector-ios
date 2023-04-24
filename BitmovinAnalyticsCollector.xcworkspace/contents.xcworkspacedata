@@ -5,6 +5,9 @@
       location = "group:CollectorDemoApp/CollectorDemoApp.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:BitmovinAnalyticsCollector/BitmovinAnalyticsCollector.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
