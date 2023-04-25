@@ -15,7 +15,6 @@ platform :ios do
     end
 
     ENV["GIT_VERSION"] = sh('git describe --tags --abbrev=0 || echo ""').strip
-    end
   end
 
   desc "build release for specific platform"
