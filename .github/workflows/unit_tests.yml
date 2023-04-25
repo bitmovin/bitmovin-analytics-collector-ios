@@ -6,17 +6,12 @@ on:
     tags-ignore:
       - '**'
   workflow_call:
-    inputs:
-      ref:
-        description: GitHub ref (branch or tag) to check out
-        type: string
-        required: true
 permissions: write-all
 env:
   LC_ALL: en_US.UTF-8
   LANG: en_US.UTF-8
 concurrency:
-  group: unit-tests-${{ inputs.ref || github.event.pull_request.number || github.ref }}
+  group: unit-tests-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
   test_ios:
@@ -28,8 +23,6 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ inputs.ref || github.ref }}
       - uses: ./.github/actions/prepare-dependencies
       - name: Execute iOS Unit Tests for ${{ matrix.collector }}
         timeout-minutes: 10
