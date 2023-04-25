@@ -69,7 +69,7 @@ lane :test_collector do |options|
     workspace: "BitmovinAnalyticsCollector.xcworkspace",
     sdk: "iphoneos",
     clean: true,
-    destination: "name=iPhone 14 Pro Max"
+    destination: "name=iPhone 14 Pro"
   )
 end
 
