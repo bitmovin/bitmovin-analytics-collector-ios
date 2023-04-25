@@ -1,0 +1,1 @@
+Please find terms and conditions [here](https://bitmovin.com/terms/).
