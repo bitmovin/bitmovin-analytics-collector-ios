@@ -125,7 +125,7 @@
 		37EEC47C29F6BF93005D0457 /* BitrateDetectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC46E29F6BF92005D0457 /* BitrateDetectionService.swift */; };
 		37EEC47D29F6BF93005D0457 /* AVPlayerAdapterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC46F29F6BF92005D0457 /* AVPlayerAdapterFactory.swift */; };
 		37EEC47E29F6BF93005D0457 /* AVPlayerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC47129F6BF92005D0457 /* AVPlayerContext.swift */; };
-		37EEC47F29F6BFC6005D0457 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC30729F6A8F5005D0457 /* CoreCollector.framework */; platformFilter = ios; };
+		37EEC47F29F6BFC6005D0457 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC30729F6A8F5005D0457 /* CoreCollector.framework */; };
 		37EEC48829F6C024005D0457 /* AVPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC45829F6BF2C005D0457 /* AVPlayerCollector.framework */; };
 		37EEC49A29F6C0AD005D0457 /* DownloadSpeedDetectionServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC49229F6C0AD005D0457 /* DownloadSpeedDetectionServiceTest.swift */; };
 		37EEC49B29F6C0AD005D0457 /* BitrateDetectionServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC49329F6C0AD005D0457 /* BitrateDetectionServiceTest.swift */; };
@@ -1755,7 +1755,6 @@
 		};
 		37EEC52629F7E5C5005D0457 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = 37EEC30629F6A8F5005D0457 /* CoreCollector */;
 			targetProxy = 37EEC52529F7E5C5005D0457 /* PBXContainerItemProxy */;
 		};
