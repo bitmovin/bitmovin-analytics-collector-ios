@@ -69,10 +69,6 @@ jobs:
           echo "version_number=$new_tag" >> $GITHUB_OUTPUT
 
           echo "Final version number: $new_tag"
-      - name: Setup Git User
-        run: |
-          git config --global user.name "Release Train"
-          git config --global user.email "ios-dev@bitmovin.com"
       - name: Bump SDK version
         run: |
           sed -i "s/MARKETING_VERSION = .*/MARKETING_VERSION = ${{ steps.version_number.outputs.version_number }}/g" BitmovinAnalyticsCollector/xcconfig/Project-Shared.xcconfig
