@@ -125,7 +125,7 @@
 		37EEC47C29F6BF93005D0457 /* BitrateDetectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC46E29F6BF92005D0457 /* BitrateDetectionService.swift */; };
 		37EEC47D29F6BF93005D0457 /* AVPlayerAdapterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC46F29F6BF92005D0457 /* AVPlayerAdapterFactory.swift */; };
 		37EEC47E29F6BF93005D0457 /* AVPlayerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC47129F6BF92005D0457 /* AVPlayerContext.swift */; };
-		37EEC47F29F6BFC6005D0457 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC30729F6A8F5005D0457 /* CoreCollector.framework */; platformFilter = ios; };
+		37EEC47F29F6BFC6005D0457 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC30729F6A8F5005D0457 /* CoreCollector.framework */; };
 		37EEC48829F6C024005D0457 /* AVPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC45829F6BF2C005D0457 /* AVPlayerCollector.framework */; };
 		37EEC49A29F6C0AD005D0457 /* DownloadSpeedDetectionServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC49229F6C0AD005D0457 /* DownloadSpeedDetectionServiceTest.swift */; };
 		37EEC49B29F6C0AD005D0457 /* BitrateDetectionServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC49329F6C0AD005D0457 /* BitrateDetectionServiceTest.swift */; };
@@ -167,6 +167,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 37EEC45729F6BF2C005D0457;
 			remoteInfo = AVPlayerCollector;
+		};
+		A852DF3029F7E15200D9B66D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37EEC2D529F6A86B005D0457 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37EEC30629F6A8F5005D0457;
+			remoteInfo = CoreCollector;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -981,6 +988,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A852DF3129F7E15200D9B66D /* PBXTargetDependency */,
 			);
 			name = AVPlayerCollector;
 			productName = AVPlayerCollector;
@@ -1362,6 +1370,11 @@
 			isa = PBXTargetDependency;
 			target = 37EEC45729F6BF2C005D0457 /* AVPlayerCollector */;
 			targetProxy = 37EEC48929F6C024005D0457 /* PBXContainerItemProxy */;
+		};
+		A852DF3129F7E15200D9B66D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 37EEC30629F6A8F5005D0457 /* CoreCollector */;
+			targetProxy = A852DF3029F7E15200D9B66D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
