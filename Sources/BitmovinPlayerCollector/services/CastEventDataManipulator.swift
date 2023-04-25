@@ -1,9 +1,7 @@
 import BitmovinPlayer
 import Foundation
 
-#if SWIFT_PACKAGE
 import CoreCollector
-#endif
 
 // This class could be used as a base for the interface EventDataDecorator
 class CastEventDataManipulator: EventDataManipulator {

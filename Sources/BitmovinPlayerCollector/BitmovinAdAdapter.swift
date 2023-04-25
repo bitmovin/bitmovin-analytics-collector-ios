@@ -1,7 +1,5 @@
 import BitmovinPlayer
-#if SWIFT_PACKAGE
 import CoreCollector
-#endif
 
 public class BitmovinAdAdapter: NSObject, AdAdapter {
     private var bitmovinPlayer: Player

@@ -1,13 +1,7 @@
 import BitmovinPlayer
 import XCTest
-#if !SWIFT_PACKAGE
-@testable import BitmovinAnalyticsCollector
-#endif
-
-#if SWIFT_PACKAGE
 @testable import BitmovinPlayerCollector
 @testable import CoreCollector
-#endif
 
 class BitmovinPlayerAdapterTests: XCTestCase {
     private let redbullSource = SourceFactory.create(from: SourceConfig(url: URL(string: "https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")!)!)

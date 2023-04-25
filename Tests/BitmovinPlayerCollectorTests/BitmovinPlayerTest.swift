@@ -1,12 +1,6 @@
 import XCTest
-#if !SWIFT_PACKAGE
-@testable import BitmovinAnalyticsCollector
-#endif
-
-#if SWIFT_PACKAGE
 @testable import BitmovinPlayerCollector
 @testable import CoreCollector
-#endif
 
 class BitmovinPlayerV3Test: XCTestCase {
     override func setUpWithError() throws {
