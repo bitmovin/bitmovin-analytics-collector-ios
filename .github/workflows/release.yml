@@ -91,7 +91,7 @@ jobs:
     name: Run Unit Tests
     uses: ./.github/workflows/unit_tests.yml
   build_release:
-    name: Build release
+    name: Build and publish release
     runs-on: self-hosted
     needs: [version_bump, unit_tests]
     steps:
@@ -111,3 +111,4 @@ jobs:
           GC_SACCOUNT: ${{ secrets.GC_SACCOUNT }}
           COCOA_DEPLOY_KEY: ${{ secrets.COCOA_DEPLOY_KEY }}
           SPM_DEPLOY_KEY: ${{ secrets.SPM_DEPLOY_KEY }}
+          KEYCHAIN_LOGIN_PASSWORD: ${{ secrets.KEYCHAIN_LOGIN_PASSWORD }}

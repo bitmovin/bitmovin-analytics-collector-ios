@@ -45,6 +45,15 @@ platform :ios do
     scheme = options[:scheme]
     output_dir = "#{DirectoryHelper.project_root}/Output/#{scheme}"
 
+    is_github_actions = ENV["GITHUB_ACTIONS"] || false
+    if is_github_actions
+      unlock_keychain(
+        path: "~/Library/Keychains/login.keychain-db",
+        password: ENV["KEYCHAIN_LOGIN_PASSWORD"],
+        set_default: true
+      )
+    end
+
     FileUtils.remove_dir(output_dir, true)
     FileUtils.mkdir_p(output_dir)
 
