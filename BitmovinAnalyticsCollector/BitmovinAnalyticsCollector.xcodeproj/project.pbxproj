@@ -313,6 +313,10 @@
 		37EEC49629F6C0AD005D0457 /* GeneratedMocks-Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GeneratedMocks-Core.swift"; path = "../../Tests/AVPlayerCollectorTests/GeneratedMocks-Core.swift"; sourceTree = "<group>"; };
 		37EEC49729F6C0AD005D0457 /* MockableFiles.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; name = MockableFiles.xcfilelist; path = ../../Tests/AVPlayerCollectorTests/MockableFiles.xcfilelist; sourceTree = "<group>"; };
 		37EEC49929F6C0AD005D0457 /* AccessLogProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessLogProviderMock.swift; sourceTree = "<group>"; };
+		A852DF2C29F7CEF700D9B66D /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fastlane; path = ../fastlane; sourceTree = "<group>"; };
+		A852DF2D29F7CEF700D9B66D /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = scripts; path = ../scripts; sourceTree = "<group>"; };
+		A852DF2E29F7CF0900D9B66D /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
+		A852DF2F29F7CF0900D9B66D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -379,6 +383,10 @@
 		37EEC2D429F6A86B005D0457 = {
 			isa = PBXGroup;
 			children = (
+				A852DF2E29F7CF0900D9B66D /* CHANGELOG.md */,
+				A852DF2F29F7CF0900D9B66D /* README.md */,
+				A852DF2C29F7CEF700D9B66D /* fastlane */,
+				A852DF2D29F7CEF700D9B66D /* scripts */,
 				37EEC30829F6A8F5005D0457 /* CoreCollector */,
 				37EEC3B529F6B118005D0457 /* CoreCollectorTests */,
 				37EEC40329F6B901005D0457 /* BitmovinPlayerCollector */,
