@@ -218,6 +218,13 @@
 			remoteGlobalIDString = 37EEC30629F6A8F5005D0457;
 			remoteInfo = CoreCollector;
 		};
+		37EEC52529F7E5C5005D0457 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37EEC2D529F6A86B005D0457 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37EEC30629F6A8F5005D0457;
+			remoteInfo = CoreCollector;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -1224,6 +1231,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				37EEC52629F7E5C5005D0457 /* PBXTargetDependency */,
 			);
 			name = AVPlayerCollector;
 			productName = AVPlayerCollector;
@@ -1744,6 +1752,12 @@
 			isa = PBXTargetDependency;
 			target = 37EEC30629F6A8F5005D0457 /* CoreCollector */;
 			targetProxy = 37EEC52229F7E544005D0457 /* PBXContainerItemProxy */;
+		};
+		37EEC52629F7E5C5005D0457 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 37EEC30629F6A8F5005D0457 /* CoreCollector */;
+			targetProxy = 37EEC52529F7E5C5005D0457 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
