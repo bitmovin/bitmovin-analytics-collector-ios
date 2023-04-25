@@ -1,7 +1,5 @@
 import AmazonIVSPlayer
-#if SWIFT_PACKAGE
 import CoreCollector
-#endif
 
 class DefaultPlayerStatisticsProvider: PlayerStatisticsProvider {
     private weak var player: IVSPlayerProtocol?

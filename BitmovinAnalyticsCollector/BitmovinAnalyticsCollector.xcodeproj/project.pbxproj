@@ -125,7 +125,7 @@
 		37EEC47C29F6BF93005D0457 /* BitrateDetectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC46E29F6BF92005D0457 /* BitrateDetectionService.swift */; };
 		37EEC47D29F6BF93005D0457 /* AVPlayerAdapterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC46F29F6BF92005D0457 /* AVPlayerAdapterFactory.swift */; };
 		37EEC47E29F6BF93005D0457 /* AVPlayerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC47129F6BF92005D0457 /* AVPlayerContext.swift */; };
-		37EEC47F29F6BFC6005D0457 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC30729F6A8F5005D0457 /* CoreCollector.framework */; };
+		37EEC47F29F6BFC6005D0457 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC30729F6A8F5005D0457 /* CoreCollector.framework */; platformFilter = ios; };
 		37EEC48829F6C024005D0457 /* AVPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC45829F6BF2C005D0457 /* AVPlayerCollector.framework */; };
 		37EEC49A29F6C0AD005D0457 /* DownloadSpeedDetectionServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC49229F6C0AD005D0457 /* DownloadSpeedDetectionServiceTest.swift */; };
 		37EEC49B29F6C0AD005D0457 /* BitrateDetectionServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC49329F6C0AD005D0457 /* BitrateDetectionServiceTest.swift */; };
@@ -137,6 +137,42 @@
 		37EEC4A229F6C0EE005D0457 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC4A129F6C0EE005D0457 /* Quick */; };
 		37EEC4A429F6C0F2005D0457 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC4A329F6C0F2005D0457 /* Nimble */; };
 		37EEC4A629F6C0F6005D0457 /* Cuckoo in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC4A529F6C0F6005D0457 /* Cuckoo */; };
+		37EEC4CC29F6C207005D0457 /* AmazonIVSPlayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4B429F6C207005D0457 /* AmazonIVSPlayerAdapter.swift */; };
+		37EEC4CD29F6C207005D0457 /* VideoStartupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4B629F6C207005D0457 /* VideoStartupService.swift */; };
+		37EEC4CE29F6C207005D0457 /* DefaultErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4B729F6C207005D0457 /* DefaultErrorService.swift */; };
+		37EEC4CF29F6C207005D0457 /* DefaultPlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4B829F6C207005D0457 /* DefaultPlaybackService.swift */; };
+		37EEC4D029F6C207005D0457 /* ErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4B929F6C207005D0457 /* ErrorService.swift */; };
+		37EEC4D129F6C207005D0457 /* PlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4BA29F6C207005D0457 /* PlaybackService.swift */; };
+		37EEC4D229F6C207005D0457 /* DefaultVideoStartupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4BB29F6C207005D0457 /* DefaultVideoStartupService.swift */; };
+		37EEC4D329F6C207005D0457 /* DefaultPlaybackQualityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4BD29F6C207005D0457 /* DefaultPlaybackQualityProvider.swift */; };
+		37EEC4D429F6C207005D0457 /* AmazonIVSPlayerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4BE29F6C207005D0457 /* AmazonIVSPlayerContext.swift */; };
+		37EEC4D529F6C207005D0457 /* DefaultPlayerStatisticsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4BF29F6C207005D0457 /* DefaultPlayerStatisticsProvider.swift */; };
+		37EEC4D629F6C207005D0457 /* AmazonIVSPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4C029F6C207005D0457 /* AmazonIVSPlayerListener.swift */; };
+		37EEC4D729F6C207005D0457 /* PlaybackQualityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4C129F6C207005D0457 /* PlaybackQualityProvider.swift */; };
+		37EEC4D829F6C207005D0457 /* PlayerStatisticsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4C229F6C207005D0457 /* PlayerStatisticsProvider.swift */; };
+		37EEC4D929F6C207005D0457 /* IVSQualityProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4C429F6C207005D0457 /* IVSQualityProtocol.swift */; };
+		37EEC4DA29F6C207005D0457 /* IVSPlayerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4C529F6C207005D0457 /* IVSPlayerProtocol.swift */; };
+		37EEC4DB29F6C207005D0457 /* AmazonIVSCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4C629F6C207005D0457 /* AmazonIVSCollector.swift */; };
+		37EEC4DC29F6C207005D0457 /* PlayerInfoManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4C829F6C207005D0457 /* PlayerInfoManipulator.swift */; };
+		37EEC4DD29F6C207005D0457 /* PlaybackEventDataManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4C929F6C207005D0457 /* PlaybackEventDataManipulator.swift */; };
+		37EEC4DE29F6C207005D0457 /* QualityEventDataManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4CA29F6C207005D0457 /* QualityEventDataManipulator.swift */; };
+		37EEC4DF29F6C207005D0457 /* AmazonIVSPlayerAdapterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4CB29F6C207005D0457 /* AmazonIVSPlayerAdapterFactory.swift */; };
+		37EEC4EE29F7D41B005D0457 /* AmazonIVSPlayer.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC4ED29F7D3EC005D0457 /* AmazonIVSPlayer.xcframework */; };
+		37EEC4F929F7D53D005D0457 /* AmazonIVSPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC4AD29F6C1F2005D0457 /* AmazonIVSPlayerCollector.framework */; };
+		37EEC50C29F7D559005D0457 /* AmazonIVSPlayerListenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC50029F7D559005D0457 /* AmazonIVSPlayerListenerTests.swift */; };
+		37EEC50D29F7D559005D0457 /* PlayerStatisticsProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC50129F7D559005D0457 /* PlayerStatisticsProviderTests.swift */; };
+		37EEC50E29F7D559005D0457 /* PlaybackQualityProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC50229F7D559005D0457 /* PlaybackQualityProviderTests.swift */; };
+		37EEC50F29F7D559005D0457 /* GeneratedMocks-Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC50329F7D559005D0457 /* GeneratedMocks-Core.swift */; };
+		37EEC51029F7D559005D0457 /* MockableFiles.xcfilelist in Resources */ = {isa = PBXBuildFile; fileRef = 37EEC50429F7D559005D0457 /* MockableFiles.xcfilelist */; };
+		37EEC51129F7D559005D0457 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC50529F7D559005D0457 /* GeneratedMocks.swift */; };
+		37EEC51229F7D559005D0457 /* PlaybackServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC50729F7D559005D0457 /* PlaybackServiceTest.swift */; };
+		37EEC51329F7D559005D0457 /* ErrorServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC50829F7D559005D0457 /* ErrorServiceTest.swift */; };
+		37EEC51429F7D559005D0457 /* VideoStartupServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC50929F7D559005D0457 /* VideoStartupServiceTest.swift */; };
+		37EEC51529F7D559005D0457 /* PlayerInfoManipulatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC50B29F7D559005D0457 /* PlayerInfoManipulatorTest.swift */; };
+		37EEC51A29F7D6E4005D0457 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC51929F7D6E4005D0457 /* Quick */; };
+		37EEC51C29F7D6E8005D0457 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC51B29F7D6E8005D0457 /* Nimble */; };
+		37EEC51E29F7D6EC005D0457 /* Cuckoo in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC51D29F7D6EC005D0457 /* Cuckoo */; };
+		37EEC52029F7E543005D0457 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC30729F6A8F5005D0457 /* CoreCollector.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,7 +204,21 @@
 			remoteGlobalIDString = 37EEC45729F6BF2C005D0457;
 			remoteInfo = AVPlayerCollector;
 		};
-		A852DF3029F7E15200D9B66D /* PBXContainerItemProxy */ = {
+		37EEC4FA29F7D53D005D0457 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37EEC2D529F6A86B005D0457 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37EEC4AC29F6C1F2005D0457;
+			remoteInfo = AmazonIVSPlayerCollector;
+		};
+		37EEC52229F7E544005D0457 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37EEC2D529F6A86B005D0457 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37EEC30629F6A8F5005D0457;
+			remoteInfo = CoreCollector;
+		};
+		37EEC52529F7E5C5005D0457 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 37EEC2D529F6A86B005D0457 /* Project object */;
 			proxyType = 1;
@@ -320,6 +370,45 @@
 		37EEC49629F6C0AD005D0457 /* GeneratedMocks-Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GeneratedMocks-Core.swift"; path = "../../Tests/AVPlayerCollectorTests/GeneratedMocks-Core.swift"; sourceTree = "<group>"; };
 		37EEC49729F6C0AD005D0457 /* MockableFiles.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; name = MockableFiles.xcfilelist; path = ../../Tests/AVPlayerCollectorTests/MockableFiles.xcfilelist; sourceTree = "<group>"; };
 		37EEC49929F6C0AD005D0457 /* AccessLogProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessLogProviderMock.swift; sourceTree = "<group>"; };
+		37EEC4AD29F6C1F2005D0457 /* AmazonIVSPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AmazonIVSPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EEC4B429F6C207005D0457 /* AmazonIVSPlayerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AmazonIVSPlayerAdapter.swift; path = ../../Sources/AmazonIVSPlayerCollector/AmazonIVSPlayerAdapter.swift; sourceTree = "<group>"; };
+		37EEC4B629F6C207005D0457 /* VideoStartupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoStartupService.swift; sourceTree = "<group>"; };
+		37EEC4B729F6C207005D0457 /* DefaultErrorService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultErrorService.swift; sourceTree = "<group>"; };
+		37EEC4B829F6C207005D0457 /* DefaultPlaybackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPlaybackService.swift; sourceTree = "<group>"; };
+		37EEC4B929F6C207005D0457 /* ErrorService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorService.swift; sourceTree = "<group>"; };
+		37EEC4BA29F6C207005D0457 /* PlaybackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackService.swift; sourceTree = "<group>"; };
+		37EEC4BB29F6C207005D0457 /* DefaultVideoStartupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultVideoStartupService.swift; sourceTree = "<group>"; };
+		37EEC4BD29F6C207005D0457 /* DefaultPlaybackQualityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPlaybackQualityProvider.swift; sourceTree = "<group>"; };
+		37EEC4BE29F6C207005D0457 /* AmazonIVSPlayerContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazonIVSPlayerContext.swift; sourceTree = "<group>"; };
+		37EEC4BF29F6C207005D0457 /* DefaultPlayerStatisticsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPlayerStatisticsProvider.swift; sourceTree = "<group>"; };
+		37EEC4C029F6C207005D0457 /* AmazonIVSPlayerListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazonIVSPlayerListener.swift; sourceTree = "<group>"; };
+		37EEC4C129F6C207005D0457 /* PlaybackQualityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackQualityProvider.swift; sourceTree = "<group>"; };
+		37EEC4C229F6C207005D0457 /* PlayerStatisticsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerStatisticsProvider.swift; sourceTree = "<group>"; };
+		37EEC4C429F6C207005D0457 /* IVSQualityProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IVSQualityProtocol.swift; sourceTree = "<group>"; };
+		37EEC4C529F6C207005D0457 /* IVSPlayerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IVSPlayerProtocol.swift; sourceTree = "<group>"; };
+		37EEC4C629F6C207005D0457 /* AmazonIVSCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AmazonIVSCollector.swift; path = ../../Sources/AmazonIVSPlayerCollector/AmazonIVSCollector.swift; sourceTree = "<group>"; };
+		37EEC4C829F6C207005D0457 /* PlayerInfoManipulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerInfoManipulator.swift; sourceTree = "<group>"; };
+		37EEC4C929F6C207005D0457 /* PlaybackEventDataManipulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackEventDataManipulator.swift; sourceTree = "<group>"; };
+		37EEC4CA29F6C207005D0457 /* QualityEventDataManipulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QualityEventDataManipulator.swift; sourceTree = "<group>"; };
+		37EEC4CB29F6C207005D0457 /* AmazonIVSPlayerAdapterFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AmazonIVSPlayerAdapterFactory.swift; path = ../../Sources/AmazonIVSPlayerCollector/AmazonIVSPlayerAdapterFactory.swift; sourceTree = "<group>"; };
+		37EEC4E029F6C234005D0457 /* AmazonIVSPlayerCollector-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollector-Release.xcconfig"; sourceTree = "<group>"; };
+		37EEC4E129F6C234005D0457 /* AmazonIVSPlayerCollector-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollector-Shared.xcconfig"; sourceTree = "<group>"; };
+		37EEC4E229F6C234005D0457 /* AmazonIVSPlayerCollector-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollector-Debug.xcconfig"; sourceTree = "<group>"; };
+		37EEC4ED29F7D3EC005D0457 /* AmazonIVSPlayer.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = AmazonIVSPlayer.xcframework; sourceTree = "<group>"; };
+		37EEC4F529F7D53D005D0457 /* AmazonIVSPlayerCollectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmazonIVSPlayerCollectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EEC50029F7D559005D0457 /* AmazonIVSPlayerListenerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazonIVSPlayerListenerTests.swift; sourceTree = "<group>"; };
+		37EEC50129F7D559005D0457 /* PlayerStatisticsProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerStatisticsProviderTests.swift; sourceTree = "<group>"; };
+		37EEC50229F7D559005D0457 /* PlaybackQualityProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackQualityProviderTests.swift; sourceTree = "<group>"; };
+		37EEC50329F7D559005D0457 /* GeneratedMocks-Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GeneratedMocks-Core.swift"; path = "../../Tests/AmazonIVSPlayerCollectorTests/GeneratedMocks-Core.swift"; sourceTree = "<group>"; };
+		37EEC50429F7D559005D0457 /* MockableFiles.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; name = MockableFiles.xcfilelist; path = ../../Tests/AmazonIVSPlayerCollectorTests/MockableFiles.xcfilelist; sourceTree = "<group>"; };
+		37EEC50529F7D559005D0457 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeneratedMocks.swift; path = ../../Tests/AmazonIVSPlayerCollectorTests/GeneratedMocks.swift; sourceTree = "<group>"; };
+		37EEC50729F7D559005D0457 /* PlaybackServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackServiceTest.swift; sourceTree = "<group>"; };
+		37EEC50829F7D559005D0457 /* ErrorServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorServiceTest.swift; sourceTree = "<group>"; };
+		37EEC50929F7D559005D0457 /* VideoStartupServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoStartupServiceTest.swift; sourceTree = "<group>"; };
+		37EEC50B29F7D559005D0457 /* PlayerInfoManipulatorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerInfoManipulatorTest.swift; sourceTree = "<group>"; };
+		37EEC51629F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollectorTests-Debug.xcconfig"; sourceTree = "<group>"; };
+		37EEC51729F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollectorTests-Shared.xcconfig"; sourceTree = "<group>"; };
+		37EEC51829F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollectorTests-Release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -380,6 +469,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		37EEC4AA29F6C1F2005D0457 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37EEC4EE29F7D41B005D0457 /* AmazonIVSPlayer.xcframework in Frameworks */,
+				37EEC52029F7E543005D0457 /* CoreCollector.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EEC4F229F7D53D005D0457 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37EEC51C29F7D6E8005D0457 /* Nimble in Frameworks */,
+				37EEC51A29F7D6E4005D0457 /* Quick in Frameworks */,
+				37EEC51E29F7D6EC005D0457 /* Cuckoo in Frameworks */,
+				37EEC4F929F7D53D005D0457 /* AmazonIVSPlayerCollector.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -392,7 +501,10 @@
 				37EEC43629F6BACA005D0457 /* BitmovinPlayerCollectorTests */,
 				37EEC45929F6BF2C005D0457 /* AVPlayerCollector */,
 				37EEC48529F6C024005D0457 /* AVPlayerCollectorTests */,
+				37EEC4AE29F6C1F2005D0457 /* AmazonIVSPlayerCollector */,
+				37EEC4F629F7D53D005D0457 /* AmazonIVSPlayerCollectorTests */,
 				37EEC3A929F6AED6005D0457 /* xcconfig */,
+				37EEC4EC29F7D3EC005D0457 /* ExternalFrameworks */,
 				37EEC2DF29F6A86B005D0457 /* Products */,
 				37EEC3F729F6B571005D0457 /* Frameworks */,
 			);
@@ -407,6 +519,8 @@
 				37EEC43529F6BACA005D0457 /* BitmovinPlayerCollectorTests.xctest */,
 				37EEC45829F6BF2C005D0457 /* AVPlayerCollector.framework */,
 				37EEC48429F6C024005D0457 /* AVPlayerCollectorTests.xctest */,
+				37EEC4AD29F6C1F2005D0457 /* AmazonIVSPlayerCollector.framework */,
+				37EEC4F529F7D53D005D0457 /* AmazonIVSPlayerCollectorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -648,6 +762,12 @@
 				37EEC48E29F6C050005D0457 /* AVPlayerCollectorTests-Debug.xcconfig */,
 				37EEC48F29F6C050005D0457 /* AVPlayerCollectorTests-Release.xcconfig */,
 				37EEC49029F6C050005D0457 /* AVPlayerCollectorTests-Shared.xcconfig */,
+				37EEC4E229F6C234005D0457 /* AmazonIVSPlayerCollector-Debug.xcconfig */,
+				37EEC4E029F6C234005D0457 /* AmazonIVSPlayerCollector-Release.xcconfig */,
+				37EEC4E129F6C234005D0457 /* AmazonIVSPlayerCollector-Shared.xcconfig */,
+				37EEC51629F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Debug.xcconfig */,
+				37EEC51829F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Release.xcconfig */,
+				37EEC51729F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Shared.xcconfig */,
 			);
 			path = xcconfig;
 			sourceTree = "<group>";
@@ -859,6 +979,122 @@
 			path = ../../Tests/AVPlayerCollectorTests/mock;
 			sourceTree = "<group>";
 		};
+		37EEC4AE29F6C1F2005D0457 /* AmazonIVSPlayerCollector */ = {
+			isa = PBXGroup;
+			children = (
+				37EEC4C329F6C207005D0457 /* ivsprotocol */,
+				37EEC4C729F6C207005D0457 /* manipulator */,
+				37EEC4B529F6C207005D0457 /* playback */,
+				37EEC4BC29F6C207005D0457 /* player */,
+				37EEC4C629F6C207005D0457 /* AmazonIVSCollector.swift */,
+				37EEC4B429F6C207005D0457 /* AmazonIVSPlayerAdapter.swift */,
+				37EEC4CB29F6C207005D0457 /* AmazonIVSPlayerAdapterFactory.swift */,
+			);
+			path = AmazonIVSPlayerCollector;
+			sourceTree = "<group>";
+		};
+		37EEC4B529F6C207005D0457 /* playback */ = {
+			isa = PBXGroup;
+			children = (
+				37EEC4B629F6C207005D0457 /* VideoStartupService.swift */,
+				37EEC4B729F6C207005D0457 /* DefaultErrorService.swift */,
+				37EEC4B829F6C207005D0457 /* DefaultPlaybackService.swift */,
+				37EEC4B929F6C207005D0457 /* ErrorService.swift */,
+				37EEC4BA29F6C207005D0457 /* PlaybackService.swift */,
+				37EEC4BB29F6C207005D0457 /* DefaultVideoStartupService.swift */,
+			);
+			name = playback;
+			path = ../../Sources/AmazonIVSPlayerCollector/playback;
+			sourceTree = "<group>";
+		};
+		37EEC4BC29F6C207005D0457 /* player */ = {
+			isa = PBXGroup;
+			children = (
+				37EEC4BD29F6C207005D0457 /* DefaultPlaybackQualityProvider.swift */,
+				37EEC4BE29F6C207005D0457 /* AmazonIVSPlayerContext.swift */,
+				37EEC4BF29F6C207005D0457 /* DefaultPlayerStatisticsProvider.swift */,
+				37EEC4C029F6C207005D0457 /* AmazonIVSPlayerListener.swift */,
+				37EEC4C129F6C207005D0457 /* PlaybackQualityProvider.swift */,
+				37EEC4C229F6C207005D0457 /* PlayerStatisticsProvider.swift */,
+			);
+			name = player;
+			path = ../../Sources/AmazonIVSPlayerCollector/player;
+			sourceTree = "<group>";
+		};
+		37EEC4C329F6C207005D0457 /* ivsprotocol */ = {
+			isa = PBXGroup;
+			children = (
+				37EEC4C429F6C207005D0457 /* IVSQualityProtocol.swift */,
+				37EEC4C529F6C207005D0457 /* IVSPlayerProtocol.swift */,
+			);
+			name = ivsprotocol;
+			path = ../../Sources/AmazonIVSPlayerCollector/ivsprotocol;
+			sourceTree = "<group>";
+		};
+		37EEC4C729F6C207005D0457 /* manipulator */ = {
+			isa = PBXGroup;
+			children = (
+				37EEC4C829F6C207005D0457 /* PlayerInfoManipulator.swift */,
+				37EEC4C929F6C207005D0457 /* PlaybackEventDataManipulator.swift */,
+				37EEC4CA29F6C207005D0457 /* QualityEventDataManipulator.swift */,
+			);
+			name = manipulator;
+			path = ../../Sources/AmazonIVSPlayerCollector/manipulator;
+			sourceTree = "<group>";
+		};
+		37EEC4EC29F7D3EC005D0457 /* ExternalFrameworks */ = {
+			isa = PBXGroup;
+			children = (
+				37EEC4ED29F7D3EC005D0457 /* AmazonIVSPlayer.xcframework */,
+			);
+			name = ExternalFrameworks;
+			path = ../ExternalFrameworks;
+			sourceTree = "<group>";
+		};
+		37EEC4F629F7D53D005D0457 /* AmazonIVSPlayerCollectorTests */ = {
+			isa = PBXGroup;
+			children = (
+				37EEC50A29F7D559005D0457 /* manipulator */,
+				37EEC50629F7D559005D0457 /* playback */,
+				37EEC4FF29F7D559005D0457 /* player */,
+				37EEC50329F7D559005D0457 /* GeneratedMocks-Core.swift */,
+				37EEC50529F7D559005D0457 /* GeneratedMocks.swift */,
+				37EEC50429F7D559005D0457 /* MockableFiles.xcfilelist */,
+			);
+			path = AmazonIVSPlayerCollectorTests;
+			sourceTree = "<group>";
+		};
+		37EEC4FF29F7D559005D0457 /* player */ = {
+			isa = PBXGroup;
+			children = (
+				37EEC50029F7D559005D0457 /* AmazonIVSPlayerListenerTests.swift */,
+				37EEC50129F7D559005D0457 /* PlayerStatisticsProviderTests.swift */,
+				37EEC50229F7D559005D0457 /* PlaybackQualityProviderTests.swift */,
+			);
+			name = player;
+			path = ../../Tests/AmazonIVSPlayerCollectorTests/player;
+			sourceTree = "<group>";
+		};
+		37EEC50629F7D559005D0457 /* playback */ = {
+			isa = PBXGroup;
+			children = (
+				37EEC50729F7D559005D0457 /* PlaybackServiceTest.swift */,
+				37EEC50829F7D559005D0457 /* ErrorServiceTest.swift */,
+				37EEC50929F7D559005D0457 /* VideoStartupServiceTest.swift */,
+			);
+			name = playback;
+			path = ../../Tests/AmazonIVSPlayerCollectorTests/playback;
+			sourceTree = "<group>";
+		};
+		37EEC50A29F7D559005D0457 /* manipulator */ = {
+			isa = PBXGroup;
+			children = (
+				37EEC50B29F7D559005D0457 /* PlayerInfoManipulatorTest.swift */,
+			);
+			name = manipulator;
+			path = ../../Tests/AmazonIVSPlayerCollectorTests/manipulator;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -877,6 +1113,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37EEC45329F6BF2C005D0457 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EEC4A829F6C1F2005D0457 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -988,7 +1231,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				A852DF3129F7E15200D9B66D /* PBXTargetDependency */,
+				37EEC52629F7E5C5005D0457 /* PBXTargetDependency */,
 			);
 			name = AVPlayerCollector;
 			productName = AVPlayerCollector;
@@ -1017,6 +1260,49 @@
 			);
 			productName = AVPlayerCollectorTests;
 			productReference = 37EEC48429F6C024005D0457 /* AVPlayerCollectorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		37EEC4AC29F6C1F2005D0457 /* AmazonIVSPlayerCollector */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37EEC4B329F6C1F2005D0457 /* Build configuration list for PBXNativeTarget "AmazonIVSPlayerCollector" */;
+			buildPhases = (
+				37EEC4A829F6C1F2005D0457 /* Headers */,
+				37EEC4A929F6C1F2005D0457 /* Sources */,
+				37EEC4AA29F6C1F2005D0457 /* Frameworks */,
+				37EEC4AB29F6C1F2005D0457 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				37EEC52329F7E544005D0457 /* PBXTargetDependency */,
+			);
+			name = AmazonIVSPlayerCollector;
+			productName = AmazonIVSPlayerCollector;
+			productReference = 37EEC4AD29F6C1F2005D0457 /* AmazonIVSPlayerCollector.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		37EEC4F429F7D53D005D0457 /* AmazonIVSPlayerCollectorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37EEC4FC29F7D53D005D0457 /* Build configuration list for PBXNativeTarget "AmazonIVSPlayerCollectorTests" */;
+			buildPhases = (
+				37EEC51F29F7D6F1005D0457 /* Run Cuckoo code generation */,
+				37EEC4F129F7D53D005D0457 /* Sources */,
+				37EEC4F229F7D53D005D0457 /* Frameworks */,
+				37EEC4F329F7D53D005D0457 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				37EEC4FB29F7D53D005D0457 /* PBXTargetDependency */,
+			);
+			name = AmazonIVSPlayerCollectorTests;
+			packageProductDependencies = (
+				37EEC51929F7D6E4005D0457 /* Quick */,
+				37EEC51B29F7D6E8005D0457 /* Nimble */,
+				37EEC51D29F7D6EC005D0457 /* Cuckoo */,
+			);
+			productName = AmazonIVSPlayerCollectorTests;
+			productReference = 37EEC4F529F7D53D005D0457 /* AmazonIVSPlayerCollectorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1052,6 +1338,14 @@
 						CreatedOnToolsVersion = 14.3;
 						LastSwiftMigration = 1430;
 					};
+					37EEC4AC29F6C1F2005D0457 = {
+						CreatedOnToolsVersion = 14.3;
+						LastSwiftMigration = 1430;
+					};
+					37EEC4F429F7D53D005D0457 = {
+						CreatedOnToolsVersion = 14.3;
+						LastSwiftMigration = 1430;
+					};
 				};
 			};
 			buildConfigurationList = 37EEC2D829F6A86B005D0457 /* Build configuration list for PBXProject "BitmovinAnalyticsCollector" */;
@@ -1079,6 +1373,8 @@
 				37EEC43429F6BACA005D0457 /* BitmovinPlayerCollectorTests */,
 				37EEC45729F6BF2C005D0457 /* AVPlayerCollector */,
 				37EEC48329F6C024005D0457 /* AVPlayerCollectorTests */,
+				37EEC4AC29F6C1F2005D0457 /* AmazonIVSPlayerCollector */,
+				37EEC4F429F7D53D005D0457 /* AmazonIVSPlayerCollectorTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1126,6 +1422,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				37EEC49F29F6C0AD005D0457 /* MockableFiles.xcfilelist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EEC4AB29F6C1F2005D0457 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EEC4F329F7D53D005D0457 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37EEC51029F7D559005D0457 /* MockableFiles.xcfilelist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1188,6 +1499,24 @@
 			shellPath = /bin/sh;
 			shellScript = "REPO_ROOT=\"${PROJECT_DIR}/..\"\nPATH_TO_SCRIPT=\"${REPO_ROOT}/scripts/run_cuckoo\"\nbash \"$PATH_TO_SCRIPT\"\n";
 			showEnvVarsInLog = 0;
+		};
+		37EEC51F29F7D6F1005D0457 /* Run Cuckoo code generation */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Cuckoo code generation";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "REPO_ROOT=\"${PROJECT_DIR}/..\"\nPATH_TO_SCRIPT=\"${REPO_ROOT}/scripts/run_cuckoo\"\nbash \"$PATH_TO_SCRIPT\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1346,6 +1675,49 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		37EEC4A929F6C1F2005D0457 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37EEC4DA29F6C207005D0457 /* IVSPlayerProtocol.swift in Sources */,
+				37EEC4D129F6C207005D0457 /* PlaybackService.swift in Sources */,
+				37EEC4DB29F6C207005D0457 /* AmazonIVSCollector.swift in Sources */,
+				37EEC4CF29F6C207005D0457 /* DefaultPlaybackService.swift in Sources */,
+				37EEC4D029F6C207005D0457 /* ErrorService.swift in Sources */,
+				37EEC4D429F6C207005D0457 /* AmazonIVSPlayerContext.swift in Sources */,
+				37EEC4CE29F6C207005D0457 /* DefaultErrorService.swift in Sources */,
+				37EEC4DE29F6C207005D0457 /* QualityEventDataManipulator.swift in Sources */,
+				37EEC4CC29F6C207005D0457 /* AmazonIVSPlayerAdapter.swift in Sources */,
+				37EEC4DD29F6C207005D0457 /* PlaybackEventDataManipulator.swift in Sources */,
+				37EEC4D929F6C207005D0457 /* IVSQualityProtocol.swift in Sources */,
+				37EEC4D629F6C207005D0457 /* AmazonIVSPlayerListener.swift in Sources */,
+				37EEC4DF29F6C207005D0457 /* AmazonIVSPlayerAdapterFactory.swift in Sources */,
+				37EEC4D229F6C207005D0457 /* DefaultVideoStartupService.swift in Sources */,
+				37EEC4DC29F6C207005D0457 /* PlayerInfoManipulator.swift in Sources */,
+				37EEC4CD29F6C207005D0457 /* VideoStartupService.swift in Sources */,
+				37EEC4D529F6C207005D0457 /* DefaultPlayerStatisticsProvider.swift in Sources */,
+				37EEC4D329F6C207005D0457 /* DefaultPlaybackQualityProvider.swift in Sources */,
+				37EEC4D729F6C207005D0457 /* PlaybackQualityProvider.swift in Sources */,
+				37EEC4D829F6C207005D0457 /* PlayerStatisticsProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EEC4F129F7D53D005D0457 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37EEC51329F7D559005D0457 /* ErrorServiceTest.swift in Sources */,
+				37EEC50D29F7D559005D0457 /* PlayerStatisticsProviderTests.swift in Sources */,
+				37EEC50C29F7D559005D0457 /* AmazonIVSPlayerListenerTests.swift in Sources */,
+				37EEC51529F7D559005D0457 /* PlayerInfoManipulatorTest.swift in Sources */,
+				37EEC51429F7D559005D0457 /* VideoStartupServiceTest.swift in Sources */,
+				37EEC50F29F7D559005D0457 /* GeneratedMocks-Core.swift in Sources */,
+				37EEC50E29F7D559005D0457 /* PlaybackQualityProviderTests.swift in Sources */,
+				37EEC51229F7D559005D0457 /* PlaybackServiceTest.swift in Sources */,
+				37EEC51129F7D559005D0457 /* GeneratedMocks.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1371,10 +1743,21 @@
 			target = 37EEC45729F6BF2C005D0457 /* AVPlayerCollector */;
 			targetProxy = 37EEC48929F6C024005D0457 /* PBXContainerItemProxy */;
 		};
-		A852DF3129F7E15200D9B66D /* PBXTargetDependency */ = {
+		37EEC4FB29F7D53D005D0457 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 37EEC4AC29F6C1F2005D0457 /* AmazonIVSPlayerCollector */;
+			targetProxy = 37EEC4FA29F7D53D005D0457 /* PBXContainerItemProxy */;
+		};
+		37EEC52329F7E544005D0457 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 37EEC30629F6A8F5005D0457 /* CoreCollector */;
-			targetProxy = A852DF3029F7E15200D9B66D /* PBXContainerItemProxy */;
+			targetProxy = 37EEC52229F7E544005D0457 /* PBXContainerItemProxy */;
+		};
+		37EEC52629F7E5C5005D0457 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 37EEC30629F6A8F5005D0457 /* CoreCollector */;
+			targetProxy = 37EEC52529F7E5C5005D0457 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1477,6 +1860,34 @@
 			};
 			name = Release;
 		};
+		37EEC4B129F6C1F2005D0457 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37EEC4E229F6C234005D0457 /* AmazonIVSPlayerCollector-Debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		37EEC4B229F6C1F2005D0457 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37EEC4E029F6C234005D0457 /* AmazonIVSPlayerCollector-Release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		37EEC4FD29F7D53D005D0457 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37EEC51629F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		37EEC4FE29F7D53D005D0457 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37EEC51829F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1539,6 +1950,24 @@
 			buildConfigurations = (
 				37EEC48C29F6C024005D0457 /* Debug */,
 				37EEC48D29F6C024005D0457 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37EEC4B329F6C1F2005D0457 /* Build configuration list for PBXNativeTarget "AmazonIVSPlayerCollector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37EEC4B129F6C1F2005D0457 /* Debug */,
+				37EEC4B229F6C1F2005D0457 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37EEC4FC29F7D53D005D0457 /* Build configuration list for PBXNativeTarget "AmazonIVSPlayerCollectorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37EEC4FD29F7D53D005D0457 /* Debug */,
+				37EEC4FE29F7D53D005D0457 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1627,6 +2056,21 @@
 			productName = Nimble;
 		};
 		37EEC4A529F6C0F6005D0457 /* Cuckoo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37EEC3F429F6B563005D0457 /* XCRemoteSwiftPackageReference "Cuckoo" */;
+			productName = Cuckoo;
+		};
+		37EEC51929F7D6E4005D0457 /* Quick */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37EEC3EE29F6B523005D0457 /* XCRemoteSwiftPackageReference "Quick" */;
+			productName = Quick;
+		};
+		37EEC51B29F7D6E8005D0457 /* Nimble */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37EEC3F129F6B54F005D0457 /* XCRemoteSwiftPackageReference "Nimble" */;
+			productName = Nimble;
+		};
+		37EEC51D29F7D6EC005D0457 /* Cuckoo */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 37EEC3F429F6B563005D0457 /* XCRemoteSwiftPackageReference "Cuckoo" */;
 			productName = Cuckoo;

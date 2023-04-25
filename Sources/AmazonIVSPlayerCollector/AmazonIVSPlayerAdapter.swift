@@ -1,7 +1,5 @@
 import AmazonIVSPlayer
-#if SWIFT_PACKAGE
 import CoreCollector
-#endif
 import Foundation
 
 internal class AmazonIVSPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
