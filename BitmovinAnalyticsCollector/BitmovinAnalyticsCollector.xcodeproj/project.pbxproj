@@ -1142,6 +1142,7 @@
 			buildConfigurationList = 37EEC30D29F6A8F6005D0457 /* Build configuration list for PBXNativeTarget "CoreCollector" */;
 			buildPhases = (
 				37EEC30229F6A8F5005D0457 /* Headers */,
+				A852DF3429F820C000D9B66D /* Generate BuildConfig */,
 				37EEC30329F6A8F5005D0457 /* Sources */,
 				37EEC30429F6A8F5005D0457 /* Frameworks */,
 				37EEC30529F6A8F5005D0457 /* Resources */,
@@ -1525,6 +1526,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "REPO_ROOT=\"${PROJECT_DIR}/..\"\nPATH_TO_SCRIPT=\"${REPO_ROOT}/scripts/run_cuckoo\"\nbash \"$PATH_TO_SCRIPT\"\n";
+		};
+		A852DF3429F820C000D9B66D /* Generate BuildConfig */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(PROJECT_DIR)/xcconfig/Project-Shared.xcconfig",
+			);
+			name = "Generate BuildConfig";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(PROJECT_DIR)/../Sources/CoreCollector/util/BuildConfig.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${ACTION}\" == \"indexbuild\" ]; then\n  echo \"Not generating GeneratedConstants.swift during indexing.\"\n  exit 0\nfi\n\n# Skip for preview builds\nif [ \"${ENABLE_PREVIEWS}\" = \"YES\" ]; then\n  echo \"Not generating GeneratedConstants.swift during preview builds.\"\n  exit 0\nfi\n\ncat <<EOF > \"${SOURCE_ROOT}/../Sources/${PRODUCT_NAME}/util/BuildConfig.swift\"\n// DO NOT MODIFY THIS FILE. IT IS AUTO-GENERATED ON BUILD.\n\ninternal enum BuildConfig {\n    static let version = \"${MARKETING_VERSION}\"\n}\nEOF\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
