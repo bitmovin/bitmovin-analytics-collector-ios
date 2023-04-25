@@ -8,7 +8,12 @@ on:
         required: true
       release_type:
         description: Select the type of the release
-        type: string
+        type: choice
+        options:
+          - alpha
+          - beta
+          - rc
+          - final
         required: true
 env:
   LC_ALL: en_US.UTF-8
