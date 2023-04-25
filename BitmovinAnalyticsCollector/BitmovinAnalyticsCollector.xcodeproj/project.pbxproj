@@ -1499,7 +1499,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(PROJECT_DIR)/../Tests/BitmovinPlayerCollectorTests/GeneratedMocks-Core.swift",
+				"$(PROJECT_DIR)/../Tests/AVPlayerCollectorTests/GeneratedMocks-Core.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1520,8 +1520,8 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(PROJECT_DIR)/../Tests/BitmovinPlayerCollectorTests/GeneratedMocks-Core.swift",
-				"$(PROJECT_DIR)/../Tests/BitmovinPlayerCollectorTests/GeneratedMocks.swift",
+				"$(PROJECT_DIR)/../Tests/AmazonIVSPlayerCollectorTests/GeneratedMocks-Core.swift",
+				"$(PROJECT_DIR)/../Tests/AmazonIVSPlayerCollectorTests/GeneratedMocks.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
