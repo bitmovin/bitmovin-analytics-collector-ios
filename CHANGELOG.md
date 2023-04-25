@@ -8,7 +8,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Development V2
 
 ### Added
-- [internal] A Xcode worksapce to collect all future target together
+- [internal] A Xcode workspace to collect all future target together
+
+### Changed
+- The collectors (`CoreCollector`, `BitmovinPlayerCollector`, `AVPlayerCollector`, `AmazonIVSPlayerCollector`) are now now shipped as `XCFramework`
+- The source code is removed from the public repository
+- [internal] Unit tests are now handled in separate targets
 
 ## v2.11.0
 

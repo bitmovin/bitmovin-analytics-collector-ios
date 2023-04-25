@@ -124,7 +124,7 @@ import BitmovinPlayerCollector
 
 ## Using [CocoaPods](https://cocoapods.org/)
 
-We depend on `cocoapods` version `>= 1.4`. 
+We depend on `cocoapods` version `>= 1.4`.
 To install it, check which Player/version you are using and add the following lines to your Podfile:
 
 ### Bitmovin Player v3
@@ -178,6 +178,44 @@ pod install
 
 We are happy to accept contributions.
 Upon opening a Pull Request you will be asked to sign a Contributor License Agreement.
+
+### Project setup
+
+#### Dependencies
+
+The project has some ruby and mint dependencies. To install them run the following command in your terminal:
+
+```
+bundle install
+mint bootstrap
+```
+
+#### Install Pods
+To install the Pods used by the project by running the following command from the root directory
+``` bash
+bundle exec pod install
+```
+
+#### Xcode setup
+Working with the project can be done by opening the `BitmovinAnalyticsCollector.xcworkspace`. This will open a workspace where all sub-projects are already included and set up.
+
+This contains the following projects:
+##### `BitmovinAnalyticsCollector`
+
+The `BitmovinAnalyticsCollector` contains one target per collector and one corresponding target for its unit tests. Every target is also represented in a scheme.
+To run the unit tests select the scheme for the desired collector and execute them.
+
+##### `CollectorDemoApp`
+
+The `CollectorDemoApp` contains two targets, one demo App for iOS and one demo App for tvOS. The collectors are included directly as dependencies through Xcode. This ensures that they are always built from source when working with the Demo App.
+
+#### CI setup
+
+The Ci is set up using fastlane and GitHub Actions. On every push, the following workflows will be executed:
+
+- `Swiftlint`
+- All unit tests will be executed
+- The Demo Apps will be build as a sanity check
 
 ## Support
 If you have any questions or issues with this Analytics Collector or its examples, or you require other technical support for our services, please login to your Bitmovin Dashboard at https://bitmovin.com/dashboard and create a new support case. Our team will get back to you as soon as possible 👍
