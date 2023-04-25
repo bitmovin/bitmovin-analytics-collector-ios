@@ -1,6 +1,6 @@
 name: Release
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       version_number:
         description: 'Version number of the release (no `-rc.`, `-b.`, `-a.` suffix)'
@@ -9,16 +9,6 @@ on:
       release_type:
         description: Select the type of the release
         type: string
-        required: true
-    secrets:
-      GC_SACCOUNT:
-        description: Google Cloud Storage account for uploading API docs
-        required: true
-      COCOA_DEPLOY_KEY:
-        description: Deploy key for cocoapods-specs repo to push CocoaPods release
-        required: true
-      SPM_DEPLOY_KEY:
-        description: Deploy key for SPM repo to push SPM release
         required: true
 env:
   LC_ALL: en_US.UTF-8
