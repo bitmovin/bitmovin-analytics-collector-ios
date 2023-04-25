@@ -1,126 +1,261 @@
-desc "push release cocoapod"
-lane :release do
-    release_version = sh("git describe").strip
-    release_track = ""
-    pod_name = "BitmovinAnalyticsCollector"
-    COCOA_DEPLOY_REPO = "cocoapod-specs"
+Dir[File.dirname(__FILE__) + '/lanes/*'].each { |file| import file }
+Dir[File.dirname(__FILE__) + '/helper/*.rb'].each { |file| require file }
 
-    if release_version.start_with?("2")
-        release_track = "v2"
-    else
-        raise "Invalid release track: " + release_version
+default_platform(:ios)
+
+skip_docs
+
+platform :ios do
+  before_all do
+    is_github_actions = ENV["GITHUB_ACTIONS"] || false
+
+    if is_github_actions
+      ENV["PCI_BRANCH"] = sh(%{git describe --exact-match --tags HEAD || echo "#{ENV["GITHUB_REF_NAME"] || ""}"}).strip
+      ENV["CI_BUILD_NUM"] = ENV.fetch("GITHUB_RUN_ID")
     end
-    release_dir = '.release'
 
-    spec = read_podspec(path: "./BitmovinAnalyticsCollector.v2.podspec")
-    spec_output_name = "#{pod_name}.podspec.json"
+    ENV["GIT_VERSION"] = sh('git describe --tags --abbrev=0 || echo ""').strip
+    end
+  end
+
+  desc "build release for specific platform"
+  private_lane :build_release_specific_platform do |options|
+    scheme = options[:scheme]
+    archive_path = "#{options[:output_dir]}/#{scheme}-#{options[:sdk]}.xcarchive"
+    xcodebuild(
+      scheme: scheme,
+      workspace: "BitmovinAnalyticsCollector.xcworkspace",
+      clean: !is_ci,
+      archive: true,
+      archive_path: archive_path,
+      xcargs: "-sdk #{options[:sdk]} -configuration Release SKIP_INSTALL=NO"
+    )
+
+    dsym_path = "#{archive_path}/dSYMs/#{scheme}.framework.dSYM"
+    bcsymbolmap_path = %x[find #{archive_path}/BCSymbolMaps -type f -name *.bcsymbolmap 2> /dev/null || echo ""].strip
+
+    {
+        framework: "#{archive_path}/Products/Library/Frameworks/#{scheme}.framework",
+        dsyms: dsym_path,
+        bcsymbolmap: bcsymbolmap_path
+    }
+  end
+
+  desc "release build tvOS and iOS"
+  lane :build_release do |options|
+    scheme = options[:scheme]
+    output_dir = "#{DirectoryHelper.project_root}/Output/#{scheme}"
+
+    FileUtils.remove_dir(output_dir, true)
+    FileUtils.mkdir_p(output_dir)
+
+    iOS_device_archive_info = build_release_specific_platform(
+      output_dir: output_dir,
+      scheme: scheme,
+      sdk: "iphoneos"
+    )
+    iOS_simulator_archive_info = build_release_specific_platform(
+      output_dir: output_dir,
+      scheme: scheme,
+      sdk: "iphonesimulator"
+    )
+
+    tvOS_device_archive_info = build_release_specific_platform(
+      output_dir: output_dir,
+      scheme: scheme,
+      sdk: "appletvos"
+    )
+    tvOS_simulator_archive_info = build_release_specific_platform(
+      output_dir: output_dir,
+      scheme: scheme,
+      sdk: "appletvsimulator"
+    )
+
+    def transform_to_options(archive_info)
+      options = %{-framework #{archive_info[:framework]} -debug-symbols #{archive_info[:dsyms]}}
+      options << " -debug-symbols #{archive_info[:bcsymbolmap]}" unless archive_info[:bcsymbolmap].empty?
+      options
+    end
+
+    sh(%{xcodebuild -create-xcframework \
+      #{transform_to_options(iOS_device_archive_info)} \
+      #{transform_to_options(iOS_simulator_archive_info)} \
+      #{transform_to_options(tvOS_device_archive_info)} \
+      #{transform_to_options(tvOS_simulator_archive_info)} \
+      -output "#{output_dir}/#{scheme}.xcframework"})
+  end
+
+  desc "create zip out of xcframework"
+  lane :create_release_xcframework_zip do |options|
+    product_name = options[:product_name]
+    product_path = "#{DirectoryHelper.project_root}/Output/#{product_name}/#{product_name}.xcframework"
+
+    release_dir = "#{DirectoryHelper.project_root}/Release"
+    FileUtils.mkdir_p(release_dir)
+    Dir.chdir(release_dir) do
+      Dir.mkdir('temp')
+      Dir.chdir('temp') do
+        FileUtils.cp("#{DirectoryHelper.project_root}/podspec/BitmovinAnalyticsCollector.LICENSE.md", 'LICENSE.md')
+        FileUtils.cp_r(product_path, '.')
+        sh("zip -r #{release_dir}/#{product_name}.zip . -x '**/.DS_Store'")
+      end
+      FileUtils.remove_dir('temp', true)
+    end
+  end
+
+  desc "push release xcframework"
+  lane :push_xcframework do |options|
+    release_version = ENV.fetch("GIT_VERSION")
+    product_name = options[:product_name]
+    release_dir = "#{DirectoryHelper.project_root}/Release"
+
+    gcs_key_path="#{release_dir}/gcs.json"
+    Dir.chdir("..") do
+      File.write(gcs_key_path, ENV.fetch("GC_SACCOUNT")) unless File.exists?(gcs_key_path)
+    end
+
+    bucket_path = "analytics/ios_tvos/#{release_version}/#{product_name}.zip"
+    google_cloud_storage_upload(
+      project: "bitmovincloud",
+      keyfile: gcs_key_path,
+      content_path: "#{release_dir}/#{product_name}.zip",
+      bucket: "cloudflare-cdn-origin-bucket",
+      name: bucket_path
+    )
+  end
+
+  desc "push release cocoapod"
+  lane :push_cocoapods do |options|
+    release_version = ENV.fetch("GIT_VERSION")
+    release_dir = "#{DirectoryHelper.project_root}/Release"
+
+    bucket_base_path = "analytics/ios_tvos/#{release_version}"
+
+    spec = read_podspec(path: "podspec/BitmovinAnalyticsCollector.v2.podspec")
+    spec_output_path = "#{release_dir}/BitmovinAnalyticsCollector.v2.json"
+
+    subspec_to_framework_mapping = {
+      "Core" => "BitmovinAnalyticsCollector",
+      "AVPlayer" => "AVPlayerCollector",
+      "BitmovinPlayer" => "BitmovinPlayerCollector",
+      "AmazonIVSPlayer" => "AmazonIVSPlayerCollector"
+    }
+
     spec["version"] = release_version
-    spec["source"]["tag"] = release_version
 
-    # cocoapod_deploy_key_path="#{release_dir}/cocoapod-deploy.id_rsa"
-    # Dir.chdir("..") do
-    #   unless File.exists?(cocoapod_deploy_key_path)
-    #     File.write(cocoapod_deploy_key_path, "-----BEGIN OPENSSH PRIVATE KEY-----\n") #Keys need to be created with macbook
-    #     File.write(cocoapod_deploy_key_path, options[:COCOA_DEPLOY_KEY], mode: "a")
-    #     File.write(cocoapod_deploy_key_path, "\n-----END OPENSSH PRIVATE KEY-----\n", mode: "a") #Keys need to be created with macbook
-    #   end
-    # end
+    subspec_to_framework_mapping.each do |subspec, framework|
+      spec["subspecs"].find { |entry| entry["name"] == subspec }["source"]["http"] = "https://cdn.bitmovin.com/#{bucket_base_path}/#{framework}.zip"
+    end
+
+    cocoapod_deploy_key_path="#{release_dir}/cocoapod-deploy.id_rsa"
+    Dir.chdir("..") do
+      unless File.exists?(cocoapod_deploy_key_path)
+        File.write(cocoapod_deploy_key_path, "-----BEGIN OPENSSH PRIVATE KEY-----\n") #Keys need to be created with macbook
+        File.write(cocoapod_deploy_key_path, options[:COCOA_DEPLOY_KEY], mode: "a")
+        File.write(cocoapod_deploy_key_path, "\n-----END OPENSSH PRIVATE KEY-----\n", mode: "a") #Keys need to be created with macbook
+      end
+    end
 
     Dir.chdir("..") do
-      Dir.mkdir(release_dir) unless File.exist?(release_dir)
-      File.write("#{release_dir}/#{spec_output_name}",JSON.pretty_generate(spec))
+      File.write(spec_output_path,JSON.pretty_generate(spec))
+      sh("ssh-agent", "sh", "-c",
+        "chmod 0600 #{cocoapod_deploy_key_path};"\
+        "ssh-add #{cocoapod_deploy_key_path};"\
+        "git config --global user.name 'Bitmovin Release Automation';"\
+        "git config --global user.email support@bitmovin.com;"\
+        "bundle exec pod repo add bm-#{options[:COCOA_DEPLOY_REPO]} git@github.com:bitmovin/#{options[:COCOA_DEPLOY_REPO]}.git || bundle exec pod repo update bm-#{options[:COCOA_DEPLOY_REPO]};"\
+        "bundle exec pod repo push bm-#{options[:COCOA_DEPLOY_REPO]} #{spec_output_path}" )
+    end
+  end
 
-      Dir.chdir(release_dir) do
-        if Dir.exist?(COCOA_DEPLOY_REPO)
-            puts "Cocoa deploy repo already exists"
-        else
-            puts "Cloning cocoa deploy repo"
-            sh("git clone git@github.com:bitmovin/#{COCOA_DEPLOY_REPO}.git;")
-        end
-        Dir.chdir(COCOA_DEPLOY_REPO) do
-            branch_name = "release/analytics-#{release_version}"
-            sh("git pull;"\
-                "git checkout #{branch_name} || git checkout -b #{branch_name};")
-            repo_spec_output_path = "Specs/#{pod_name}/#{release_version}"
-            FileUtils.mkdir_p(repo_spec_output_path) unless Dir.exist?(repo_spec_output_path)
-            FileUtils.cp("../#{spec_output_name}", repo_spec_output_path)
-            sh("git add .;"\
-                "git commit -m \"#{pod_name} (#{release_version})\";"\
-                "git push origin #{branch_name};"\
-                "open https://github.com/bitmovin/#{COCOA_DEPLOY_REPO}/pull/new/#{CGI::escapeHTML(branch_name)}")
-        end
-        FileUtils.remove_dir(COCOA_DEPLOY_REPO)
-      end
-    #   sh("ssh-agent", "sh", "-c",
-    #   sh(#"sh", "-c",
-        # "chmod 0600 #{cocoapod_deploy_key_path};"\
-        # "ssh-add #{cocoapod_deploy_key_path};"\
-        # "git config --global user.name 'Bitmovin Release Automation';"\
-        # "git config --global user.email support@bitmovin.com;"\
-        # "bundle exec pod repo add bm-#{COCOA_DEPLOY_REPO} git@github.com:rolandgriesser/#{COCOA_DEPLOY_REPO}.git || bundle exec pod repo update bm-#{COCOA_DEPLOY_REPO};"\
-        # "bundle exec pod repo push bm-#{COCOA_DEPLOY_REPO} #{spec_output_path} --allow-warnings --skip-import-validation --skip-tests")
+  lane :release do
+    FileUtils.remove_dir("#{DirectoryHelper.project_root}/Output", true)
+    FileUtils.remove_dir("#{DirectoryHelper.project_root}/Release", true)
+    schemes = [
+      "CoreCollector",
+      "BitmovinPlayerCollector",
+      "AVPlayerCollector",
+      "AmazonIVSPlayerCollector",
+    ]
+
+    # keep this separate to ensure all can be built successfully
+    schemes.each do |scheme|
+      build_release(
+        scheme: scheme
+      )
+      create_release_xcframework_zip(
+        product_name: scheme
+      )
     end
 
-end
+    schemes.each do |scheme|
+      push_xcframework(
+        product_name: scheme
+      )
+    end
 
-lane :build_collector do
-  scan(
-    scheme: "CollectorDemoApp",
-    workspace: "BitmovinAnalyticsCollector.xcworkspace",
-    sdk: "iphoneos",
-    destination: "generic/platform=iOS",
-    clean: true,
-    build_for_testing: true,
-    configuration: "Debug",
-    xcargs: "CODE_SIGNING_ALLOWED='NO'"
-  )
-  scan(
-    scheme: "CollectorDemoAppCocoaPods",
-    workspace: "BitmovinAnalyticsCollector.xcworkspace",
-    sdk: "iphoneos",
-    destination: "generic/platform=iOS",
-    clean: true,
-    build_for_testing: true,
-    configuration: "Debug",
-    xcargs: "ENABLE_BITCODE='NO' CODE_SIGNING_ALLOWED='NO'"
-  )
-end
+    push_cocoapods
+  end
 
-lane :build_collector_for_tv do
-  scan(
-    scheme: "CollectorDemoAppTV",
-    workspace: "BitmovinAnalyticsCollector.xcworkspace",
-    sdk: "appletvos",
-    destination: "generic/platform=tvOS",
-    clean: true,
-    build_for_testing: true,
-    configuration: "Debug",
-    xcargs: "CODE_SIGNING_ALLOWED='NO'"
-  )
-  scan(
-    scheme: "CollectorDemoAppTVCocoaPods",
-    workspace: "BitmovinAnalyticsCollector.xcworkspace",
-    sdk: "appletvos",
-    destination: "generic/platform=tvOS",
-    clean: true,
-    build_for_testing: true,
-    configuration: "Debug",
-    xcargs: "CODE_SIGNING_ALLOWED='NO'"
-  )
-end
+  lane :build_collector do
+    scan(
+      scheme: "CollectorDemoApp",
+      workspace: "BitmovinAnalyticsCollector.xcworkspace",
+      sdk: "iphoneos",
+      destination: "generic/platform=iOS",
+      clean: true,
+      build_for_testing: true,
+      configuration: "Debug",
+      xcargs: "CODE_SIGNING_ALLOWED='NO'"
+    )
+    scan(
+      scheme: "CollectorDemoAppCocoaPods",
+      workspace: "BitmovinAnalyticsCollector.xcworkspace",
+      sdk: "iphoneos",
+      destination: "generic/platform=iOS",
+      clean: true,
+      build_for_testing: true,
+      configuration: "Debug",
+      xcargs: "ENABLE_BITCODE='NO' CODE_SIGNING_ALLOWED='NO'"
+    )
+  end
 
-lane :test_collector do
-  run_target_tests(target: "BitmovinAnalytics-Package")
-end
+  lane :build_collector_for_tv do
+    scan(
+      scheme: "CollectorDemoAppTV",
+      workspace: "BitmovinAnalyticsCollector.xcworkspace",
+      sdk: "appletvos",
+      destination: "generic/platform=tvOS",
+      clean: true,
+      build_for_testing: true,
+      configuration: "Debug",
+      xcargs: "CODE_SIGNING_ALLOWED='NO'"
+    )
+    scan(
+      scheme: "CollectorDemoAppTVCocoaPods",
+      workspace: "BitmovinAnalyticsCollector.xcworkspace",
+      sdk: "appletvos",
+      destination: "generic/platform=tvOS",
+      clean: true,
+      build_for_testing: true,
+      configuration: "Debug",
+      xcargs: "CODE_SIGNING_ALLOWED='NO'"
+    )
+  end
 
-private_lane :run_target_tests do |options|
-  scan(
-    scheme: options[:target],
-    package_path: "./",
-    destination: "name=iPhone 14",
-    code_coverage: true,
-    result_bundle: true,
-    configuration: "Debug",
-    xcargs: "CODE_SIGNING_ALLOWED='NO'"
-  )
+  lane :test_collector do
+    run_target_tests(target: "BitmovinAnalytics-Package")
+  end
+
+  private_lane :run_target_tests do |options|
+    scan(
+      scheme: options[:target],
+      package_path: "./",
+      destination: "name=iPhone 14",
+      code_coverage: true,
+      result_bundle: true,
+      configuration: "Debug",
+      xcargs: "CODE_SIGNING_ALLOWED='NO'"
+    )
+  end
 end

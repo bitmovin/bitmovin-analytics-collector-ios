@@ -49,7 +49,7 @@ then
   bundle exec fastlane test_collector 
 fi
 
-echo "Make sure you have fastlane installed on your computer before releasing: (sudo gem install fastlane -NV)"
+echo "Make sure you have fastlane installed on your computer before releasing: (bundle install)"
 echo "Make sure to bump the version in the .podspec, README and CHANGELOG first and merge that PR into main."
 echo "If you've changed the version of the player dependency, make sure to also update the .podspec.json files in the Specs folder."
 echo "Version (without leading \"v\")":
@@ -72,6 +72,8 @@ echo "Pushed \"main\" and \"$VERSION\" to internal repo."
 git push git@github.com:bitmovin/bitmovin-analytics-collector-ios.git main $VERSION || exit
 echo "Pushed \"main\" and \"$VERSION\" to public repo."
 
+bundle exec fastlane release
+
 curl \
   -u bitAnalyticsCircleCi:$ANALYTICS_GH_TOKEN \
   -X POST \
@@ -80,8 +82,6 @@ curl \
   -d "{\"tag_name\":\"$VERSION\", \"name\": \"v$VERSION\", \"draft\": false}"
 
 echo "Created release in public repo."
-
-bundle exec fastlane release
 
 echo "Don't forget to create and merge the pull request in the cocoapod-specs repo."
 

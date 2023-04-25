@@ -21,23 +21,23 @@ DESC
       'OTHER_LDFLAGS' => '$(inherited) -ObjC'
   }
   s.subspec 'Core' do |core|
-    core.source_files = 'Sources/CoreCollector/**/*.{swift}'
+    core.source = { :http => 'https://cdn.bitmovin.com/analytics/ios_tvos/x/CoreCollector.zip' }
   end
 
   s.subspec 'BitmovinPlayer' do |bitmovinplayerv3|
-    bitmovinplayerv3.source_files = 'Sources/BitmovinPlayerCollector/**/*.{swift}'
+    bitmovinplayerv3.source = { :http => 'https://cdn.bitmovin.com/analytics/ios_tvos/x/BitmovinPlayerCollector.zip' }
     bitmovinplayerv3.tvos.dependency 'BitmovinPlayer', '~>3.35'
     bitmovinplayerv3.ios.dependency 'BitmovinPlayer', '~>3.35'
   end
 
   s.subspec 'AmazonIVSPlayer' do |ivsplayer|
-    ivsplayer.source_files = 'Sources/AmazonIVSPlayerCollector/**/*.{swift}'
+    ivsplayer.source = { :http => 'https://cdn.bitmovin.com/analytics/ios_tvos/x/AmazonIVSPlayerCollector.zip' }
     ivsplayer.tvos.dependency 'AmazonIVSPlayer', '1.18.0'
     ivsplayer.ios.dependency 'AmazonIVSPlayer', '1.18.0'
   end
 
   s.subspec 'AVPlayer' do |avplayer|
-    avplayer.source_files = 'Sources/AVPlayerCollector/**/*.{swift}'
+    avplayer.source = { :http => 'https://cdn.bitmovin.com/analytics/ios_tvos/x/AVPlayerCollector.zip' }
   end
 
 end
