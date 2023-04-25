@@ -45,24 +45,8 @@ target 'CollectorDemoApp' do
   google_cast_sdk
 end
 
-target 'CollectorDemoAppCocoaPods' do
-  use_frameworks!
-  collector_demo_app_project
-  for_ios
-  collectors
-  google_Adsima_sdk
-  google_cast_sdk
-end
-
 target 'CollectorDemoAppTV' do
   use_frameworks!
   collector_demo_app_project
   for_tvos
-end
-
-target 'CollectorDemoAppTVCocoaPods' do
-  # use_frameworks! # Disable because of cocoapod bug related to subspecs
-  collector_demo_app_project
-  for_tvos
-  tv_collectors
 end

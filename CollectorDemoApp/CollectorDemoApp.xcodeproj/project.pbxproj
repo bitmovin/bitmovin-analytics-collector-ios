@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		79CFBDE266D7173A3728ED64 /* Pods_CollectorDemoAppTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2139A901497FFA4714AD500A /* Pods_CollectorDemoAppTV.framework */; };
-		96B576F7205BE09A08BB2B70 /* libPods-CollectorDemoAppTVCocoaPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB1F5F69DFBB5DE75E5EF93 /* libPods-CollectorDemoAppTVCocoaPods.a */; };
 		9D8F6019299A61E200090B46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F6012299A61E200090B46 /* AppDelegate.swift */; };
 		9D8F601A299A61E200090B46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8F6013299A61E200090B46 /* ViewController.swift */; };
 		9D8F6031299A65FC00090B46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F601C299A65FB00090B46 /* Assets.xcassets */; };
@@ -27,19 +26,8 @@
 		9D8F6040299A65FC00090B46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F602F299A65FC00090B46 /* Main.storyboard */; };
 		9DA89915299CB13E004BE1CD /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA89914299CB13E004BE1CD /* AppConfig.swift */; };
 		9DA89916299CB13E004BE1CD /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA89914299CB13E004BE1CD /* AppConfig.swift */; };
-		9DADFEE129D2AFD60013F1A7 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA89914299CB13E004BE1CD /* AppConfig.swift */; };
-		9DADFEE229D2AFDB0013F1A7 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA89914299CB13E004BE1CD /* AppConfig.swift */; };
-		9DB3FDF429D17E8000E4CAA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD0AA7729B884A90083AFDB /* AppDelegate.swift */; };
-		9DB3FDF729D17E8C00E4CAA3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD0AA6C29B882FD0083AFDB /* ViewController.swift */; };
-		9DB3FDFA29D1940D00E4CAA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F601C299A65FB00090B46 /* Assets.xcassets */; };
-		9DB3FDFB29D194CB00E4CAA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F6016299A61E200090B46 /* Main.storyboard */; };
-		9DB3FDFC29D197D400E4CAA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F601C299A65FB00090B46 /* Assets.xcassets */; };
 		9DB3FDFD29D197DD00E4CAA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F601C299A65FB00090B46 /* Assets.xcassets */; };
 		9DCA88EB29A647F400D1EC9C /* AmazonIvsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCA88EA29A647F400D1EC9C /* AmazonIvsViewController.swift */; };
-		9DD0AA6D29B882FD0083AFDB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD0AA6C29B882FD0083AFDB /* ViewController.swift */; };
-		9DD0AA7529B883DB0083AFDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DD0AA7129B883DB0083AFDB /* LaunchScreen.storyboard */; };
-		9DD0AA7629B883DB0083AFDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DD0AA7329B883DB0083AFDB /* Main.storyboard */; };
-		9DD0AA7829B884A90083AFDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD0AA7729B884A90083AFDB /* AppDelegate.swift */; };
 		9DD665BF299B522C00608720 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D8F6016299A61E200090B46 /* Main.storyboard */; };
 		9DD665C8299B751D00608720 /* DebugBitmovinPlayerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD665C4299B751D00608720 /* DebugBitmovinPlayerListener.swift */; };
 		9DD665C9299B751D00608720 /* AdAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD665C5299B751D00608720 /* AdAssets.swift */; };
@@ -47,7 +35,6 @@
 		9DD665CB299B751D00608720 /* VideoAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD665C7299B751D00608720 /* VideoAssets.swift */; };
 		9DE5887029A7542B00C68DCA /* IVSPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5886F29A7542B00C68DCA /* IVSPlayerController.swift */; };
 		D1AB2510EDA14C4BEB0F7FD1 /* Pods_CollectorDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F10E174AEA18176F06BDF84 /* Pods_CollectorDemoApp.framework */; };
-		EF3AE0CA76C05EDDAA53C787 /* Pods_CollectorDemoAppCocoaPods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6363D0EA977656A5C66C82F6 /* Pods_CollectorDemoAppCocoaPods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -96,14 +83,7 @@
 		9D8F602E299A65FC00090B46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9D8F6030299A65FC00090B46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		9DA89914299CB13E004BE1CD /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
-		9DB3FDEE29D17CAE00E4CAA3 /* CollectorDemoAppTVCocoaPods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoAppTVCocoaPods.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DCA88EA29A647F400D1EC9C /* AmazonIvsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmazonIvsViewController.swift; sourceTree = "<group>"; };
-		9DD0AA6729B87FA70083AFDB /* CollectorDemoAppCocoaPods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoAppCocoaPods.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9DD0AA6C29B882FD0083AFDB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9DD0AA6E29B883760083AFDB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9DD0AA7229B883DB0083AFDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9DD0AA7429B883DB0083AFDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
-		9DD0AA7729B884A90083AFDB /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DD665C4299B751D00608720 /* DebugBitmovinPlayerListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugBitmovinPlayerListener.swift; sourceTree = "<group>"; };
 		9DD665C5299B751D00608720 /* AdAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdAssets.swift; sourceTree = "<group>"; };
 		9DD665C6299B751D00608720 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
@@ -127,22 +107,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				79CFBDE266D7173A3728ED64 /* Pods_CollectorDemoAppTV.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9DB3FDE229D17CAE00E4CAA3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				96B576F7205BE09A08BB2B70 /* libPods-CollectorDemoAppTVCocoaPods.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9DD0AA5529B87FA60083AFDB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EF3AE0CA76C05EDDAA53C787 /* Pods_CollectorDemoAppCocoaPods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,7 +138,6 @@
 				9DA89913299CB13E004BE1CD /* Shared */,
 				9D8F5FF6299A249500090B46 /* CollectorDemoAppTV */,
 				9D8F5F98299A1DE700090B46 /* CollectorDemoApp */,
-				9DD0AA6B29B882B80083AFDB /* CollectorDemoAppCocoaPods */,
 				9D8F5F97299A1DE700090B46 /* Products */,
 				DFEAE2400C8B4C976388A5EF /* Pods */,
 				68A265715B3D1FBECD55E698 /* Frameworks */,
@@ -186,8 +149,6 @@
 			children = (
 				9D8F5F96299A1DE700090B46 /* CollectorDemoApp.app */,
 				9D8F5FCE299A1F8300090B46 /* CollectorDemoAppTV.app */,
-				9DD0AA6729B87FA70083AFDB /* CollectorDemoAppCocoaPods.app */,
-				9DB3FDEE29D17CAE00E4CAA3 /* CollectorDemoAppTVCocoaPods.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -251,26 +212,6 @@
 				9DA89914299CB13E004BE1CD /* AppConfig.swift */,
 			);
 			path = Shared;
-			sourceTree = "<group>";
-		};
-		9DD0AA6B29B882B80083AFDB /* CollectorDemoAppCocoaPods */ = {
-			isa = PBXGroup;
-			children = (
-				9DD0AA7729B884A90083AFDB /* AppDelegate.swift */,
-				9DD0AA7029B883DB0083AFDB /* Base.lproj */,
-				9DD0AA6E29B883760083AFDB /* Info.plist */,
-				9DD0AA6C29B882FD0083AFDB /* ViewController.swift */,
-			);
-			path = CollectorDemoAppCocoaPods;
-			sourceTree = "<group>";
-		};
-		9DD0AA7029B883DB0083AFDB /* Base.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				9DD0AA7129B883DB0083AFDB /* LaunchScreen.storyboard */,
-				9DD0AA7329B883DB0083AFDB /* Main.storyboard */,
-			);
-			path = Base.lproj;
 			sourceTree = "<group>";
 		};
 		9DD665C3299B751D00608720 /* Helper */ = {
@@ -360,45 +301,6 @@
 			productReference = 9D8F5FCE299A1F8300090B46 /* CollectorDemoAppTV.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9DB3FDD829D17CAE00E4CAA3 /* CollectorDemoAppTVCocoaPods */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9DB3FDEB29D17CAE00E4CAA3 /* Build configuration list for PBXNativeTarget "CollectorDemoAppTVCocoaPods" */;
-			buildPhases = (
-				D799125BF334E8393F0409F8 /* [CP] Check Pods Manifest.lock */,
-				9DB3FDDE29D17CAE00E4CAA3 /* Sources */,
-				9DB3FDE229D17CAE00E4CAA3 /* Frameworks */,
-				9DB3FDE629D17CAE00E4CAA3 /* Resources */,
-				D76532510E535147DFDD6B86 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CollectorDemoAppTVCocoaPods;
-			productName = CollectorDemoApp;
-			productReference = 9DB3FDEE29D17CAE00E4CAA3 /* CollectorDemoAppTVCocoaPods.app */;
-			productType = "com.apple.product-type.application";
-		};
-		9DD0AA3A29B87FA60083AFDB /* CollectorDemoAppCocoaPods */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9DD0AA6429B87FA60083AFDB /* Build configuration list for PBXNativeTarget "CollectorDemoAppCocoaPods" */;
-			buildPhases = (
-				7B460336F2B0F855C87C55B3 /* [CP] Check Pods Manifest.lock */,
-				9DD0AA4329B87FA60083AFDB /* Sources */,
-				9DD0AA5529B87FA60083AFDB /* Frameworks */,
-				9DD0AA5A29B87FA60083AFDB /* Resources */,
-				0B16A24FD699F65F5F034477 /* [CP] Embed Pods Frameworks */,
-				CA7356DD9F526E7D3436924B /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CollectorDemoAppCocoaPods;
-			productName = CollectorDemoApp;
-			productReference = 9DD0AA6729B87FA70083AFDB /* CollectorDemoAppCocoaPods.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -433,8 +335,6 @@
 			targets = (
 				9D8F5F95299A1DE700090B46 /* CollectorDemoApp */,
 				9D8F5FC3299A1F8300090B46 /* CollectorDemoAppTV */,
-				9DD0AA3A29B87FA60083AFDB /* CollectorDemoAppCocoaPods */,
-				9DB3FDD829D17CAE00E4CAA3 /* CollectorDemoAppTVCocoaPods */,
 			);
 		};
 /* End PBXProject section */
@@ -460,45 +360,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9DB3FDE629D17CAE00E4CAA3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9DB3FDFB29D194CB00E4CAA3 /* Main.storyboard in Resources */,
-				9DB3FDFA29D1940D00E4CAA3 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9DD0AA5A29B87FA60083AFDB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9DB3FDFC29D197D400E4CAA3 /* Assets.xcassets in Resources */,
-				9DD0AA7529B883DB0083AFDB /* LaunchScreen.storyboard in Resources */,
-				9DD0AA7629B883DB0083AFDB /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0B16A24FD699F65F5F034477 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7539A3FC4F2D54FC19851ED3 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -514,28 +378,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7B460336F2B0F855C87C55B3 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CollectorDemoAppCocoaPods-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8B4E1F9CC7B0A6B901FBEF48 /* [CP] Check Pods Manifest.lock */ = {
@@ -618,62 +460,6 @@
 			shellPath = /bin/sh;
 			shellScript = "REPO_ROOT=\"${PROJECT_DIR}/..\"\nPATH_TO_SCRIPT=\"${REPO_ROOT}/scripts/run_cuckoo\"\nbash \"$PATH_TO_SCRIPT\"\n";
 		};
-		CA7356DD9F526E7D3436924B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D76532510E535147DFDD6B86 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppTVCocoaPods/Pods-CollectorDemoAppTVCocoaPods-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppTVCocoaPods/Pods-CollectorDemoAppTVCocoaPods-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppTVCocoaPods/Pods-CollectorDemoAppTVCocoaPods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D799125BF334E8393F0409F8 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CollectorDemoAppTVCocoaPods-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		F4BC02B6F7299A0502CA7D47 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -728,26 +514,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9DB3FDDE29D17CAE00E4CAA3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9DADFEE129D2AFD60013F1A7 /* AppConfig.swift in Sources */,
-				9DB3FDF429D17E8000E4CAA3 /* AppDelegate.swift in Sources */,
-				9DB3FDF729D17E8C00E4CAA3 /* ViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9DD0AA4329B87FA60083AFDB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9DADFEE229D2AFDB0013F1A7 /* AppConfig.swift in Sources */,
-				9DD0AA7829B884A90083AFDB /* AppDelegate.swift in Sources */,
-				9DD0AA6D29B882FD0083AFDB /* ViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -786,22 +552,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				9D8F6030299A65FC00090B46 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		9DD0AA7129B883DB0083AFDB /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9DD0AA7229B883DB0083AFDB /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		9DD0AA7329B883DB0083AFDB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9DD0AA7429B883DB0083AFDB /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1073,154 +823,6 @@
 			};
 			name = Release;
 		};
-		9DB3FDEC29D17CAE00E4CAA3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 113757787A21558FC1DC8787 /* Pods-CollectorDemoAppTVCocoaPods.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "";
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = CollectorDemoAppTV/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = CollectorDemoAppTVCocoaPods;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.analytics.ios.CollectorDemoApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "appletvos appletvsimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "CollectorDemoAppTV/CollectorDemoAppTV-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-			};
-			name = Debug;
-		};
-		9DB3FDED29D17CAE00E4CAA3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DDBD753B2D5069ACFA4F705A /* Pods-CollectorDemoAppTVCocoaPods.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "";
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = CollectorDemoAppTV/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = CollectorDemoAppTVCocoaPods;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.analytics.ios.CollectorDemoApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "appletvos appletvsimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "CollectorDemoAppTV/CollectorDemoAppTV-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-			};
-			name = Release;
-		};
-		9DD0AA6529B87FA60083AFDB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 553B45211679383C2A0F5CD0 /* Pods-CollectorDemoAppCocoaPods.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = 7UXPEM3WRB;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = CollectorDemoAppCocoaPods/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = CollectorDemoAppCocoaPods;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.analytics.ios.CollectorDemoApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "CollectorDemoApp/CollectorDemoApp-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		9DD0AA6629B87FA60083AFDB /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20E079D6A2BED74B283A3B24 /* Pods-CollectorDemoAppCocoaPods.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = 7UXPEM3WRB;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = CollectorDemoAppCocoaPods/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = CollectorDemoAppCocoaPods;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bitmovin.analytics.ios.CollectorDemoApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "CollectorDemoApp/CollectorDemoApp-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1247,24 +849,6 @@
 			buildConfigurations = (
 				9D8F5FCC299A1F8300090B46 /* Debug */,
 				9D8F5FCD299A1F8300090B46 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9DB3FDEB29D17CAE00E4CAA3 /* Build configuration list for PBXNativeTarget "CollectorDemoAppTVCocoaPods" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9DB3FDEC29D17CAE00E4CAA3 /* Debug */,
-				9DB3FDED29D17CAE00E4CAA3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9DD0AA6429B87FA60083AFDB /* Build configuration list for PBXNativeTarget "CollectorDemoAppCocoaPods" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9DD0AA6529B87FA60083AFDB /* Debug */,
-				9DD0AA6629B87FA60083AFDB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
