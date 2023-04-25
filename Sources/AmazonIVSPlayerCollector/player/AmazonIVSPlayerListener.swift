@@ -1,7 +1,5 @@
 import AmazonIVSPlayer
-#if SWIFT_PACKAGE
 import CoreCollector
-#endif
 
 class AmazonIVSPlayerListener: NSObject, IVSPlayer.Delegate {
     private weak var player: IVSPlayerProtocol?
