@@ -1,7 +1,5 @@
 import AmazonIVSPlayer
-#if SWIFT_PACKAGE
 import CoreCollector
-#endif
 
 @objc
 public class AmazonIVSCollector: NSObject, Collector {

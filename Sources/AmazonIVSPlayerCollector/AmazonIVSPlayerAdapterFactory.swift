@@ -1,9 +1,7 @@
 import AmazonIVSPlayer
 import Foundation
 
-#if SWIFT_PACKAGE
 import CoreCollector
-#endif
 
 enum AmazonIVSPlayerAdapterFactory {
     static func createAdapter(

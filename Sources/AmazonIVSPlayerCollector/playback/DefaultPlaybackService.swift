@@ -1,6 +1,4 @@
-#if SWIFT_PACKAGE
 import CoreCollector
-#endif
 import AmazonIVSPlayer
 
 class DefaultPlaybackService: PlaybackService {

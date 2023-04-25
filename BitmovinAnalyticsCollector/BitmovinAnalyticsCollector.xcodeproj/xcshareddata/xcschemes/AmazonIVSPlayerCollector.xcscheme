@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1420"
-   version = "1.3">
+   LastUpgradeVersion = "1430"
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9DD0AA3A29B87FA60083AFDB"
-               BuildableName = "CollectorDemoAppCocoaPods.app"
-               BlueprintName = "CollectorDemoAppCocoaPods"
-               ReferencedContainer = "container:CollectorDemoApp.xcodeproj">
+               BlueprintIdentifier = "37EEC4AC29F6C1F2005D0457"
+               BuildableName = "AmazonIVSPlayerCollector.framework"
+               BlueprintName = "AmazonIVSPlayerCollector"
+               ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -26,9 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
-      <Testables>
-      </Testables>
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -40,16 +39,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9DD0AA3A29B87FA60083AFDB"
-            BuildableName = "CollectorDemoAppCocoaPods.app"
-            BlueprintName = "CollectorDemoAppCocoaPods"
-            ReferencedContainer = "container:CollectorDemoApp.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -57,16 +46,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9DD0AA3A29B87FA60083AFDB"
-            BuildableName = "CollectorDemoAppCocoaPods.app"
-            BlueprintName = "CollectorDemoAppCocoaPods"
-            ReferencedContainer = "container:CollectorDemoApp.xcodeproj">
+            BlueprintIdentifier = "37EEC4AC29F6C1F2005D0457"
+            BuildableName = "AmazonIVSPlayerCollector.framework"
+            BlueprintName = "AmazonIVSPlayerCollector"
+            ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
