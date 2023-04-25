@@ -43,6 +43,7 @@ platform :ios do
   desc "release build tvOS and iOS"
   lane :build_release do |options|
     scheme = options[:scheme]
+    supports_tvos = options[:supports_tvos]
     output_dir = "#{DirectoryHelper.project_root}/Output/#{scheme}"
 
     is_github_actions = ENV["GITHUB_ACTIONS"] || false
@@ -68,16 +69,18 @@ platform :ios do
       sdk: "iphonesimulator"
     )
 
-    tvOS_device_archive_info = build_release_specific_platform(
-      output_dir: output_dir,
-      scheme: scheme,
-      sdk: "appletvos"
-    )
-    tvOS_simulator_archive_info = build_release_specific_platform(
-      output_dir: output_dir,
-      scheme: scheme,
-      sdk: "appletvsimulator"
-    )
+    if supports_tvos
+      tvOS_device_archive_info = build_release_specific_platform(
+        output_dir: output_dir,
+        scheme: scheme,
+        sdk: "appletvos"
+      )
+      tvOS_simulator_archive_info = build_release_specific_platform(
+        output_dir: output_dir,
+        scheme: scheme,
+        sdk: "appletvsimulator"
+      )
+    end
 
     def transform_to_options(archive_info)
       options = %{-framework #{archive_info[:framework]} -debug-symbols #{archive_info[:dsyms]}}
@@ -85,12 +88,16 @@ platform :ios do
       options
     end
 
-    sh(%{xcodebuild -create-xcframework \
+    xcframework_command = "xcodebuild -create-xcframework \
       #{transform_to_options(iOS_device_archive_info)} \
-      #{transform_to_options(iOS_simulator_archive_info)} \
-      #{transform_to_options(tvOS_device_archive_info)} \
-      #{transform_to_options(tvOS_simulator_archive_info)} \
-      -output "#{output_dir}/#{scheme}.xcframework"})
+      #{transform_to_options(iOS_simulator_archive_info)}"
+
+    xcframework_command << " #{transform_to_options(tvOS_device_archive_info)}" if supports_tvos
+    xcframework_command << " #{transform_to_options(tvOS_simulator_archive_info)}" if supports_tvos
+
+    xcframework_command << " -output #{output_dir}/#{scheme}.xcframework"
+
+    sh(xcframework_command)
   end
 
   desc "create zip out of xcframework"
@@ -179,17 +186,18 @@ platform :ios do
   lane :release do
     FileUtils.remove_dir("#{DirectoryHelper.project_root}/Output", true)
     FileUtils.remove_dir("#{DirectoryHelper.project_root}/Release", true)
-    schemes = [
-      "CoreCollector",
-      "BitmovinPlayerCollector",
-      "AVPlayerCollector",
-      "AmazonIVSPlayerCollector",
-    ]
+    schemes = {
+      "CoreCollector" => true,
+      "BitmovinPlayerCollector" => true,
+      "AVPlayerCollector" => true,
+      "AmazonIVSPlayerCollector" => false,
+    }
 
     # keep this separate to ensure all can be built successfully
-    schemes.each do |scheme|
+    schemes.each do |scheme, supports_tvos|
       build_release(
-        scheme: scheme
+        scheme: scheme,
+        supports_tvos: supports_tvos
       )
       create_release_xcframework_zip(
         product_name: scheme
