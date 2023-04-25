@@ -157,6 +157,7 @@
 		37EEC4DD29F6C207005D0457 /* PlaybackEventDataManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4C929F6C207005D0457 /* PlaybackEventDataManipulator.swift */; };
 		37EEC4DE29F6C207005D0457 /* QualityEventDataManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4CA29F6C207005D0457 /* QualityEventDataManipulator.swift */; };
 		37EEC4DF29F6C207005D0457 /* AmazonIVSPlayerAdapterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4CB29F6C207005D0457 /* AmazonIVSPlayerAdapterFactory.swift */; };
+		37EEC4EE29F7D41B005D0457 /* AmazonIVSPlayer.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC4ED29F7D3EC005D0457 /* AmazonIVSPlayer.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -357,6 +358,7 @@
 		37EEC4E029F6C234005D0457 /* AmazonIVSPlayerCollector-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollector-Release.xcconfig"; sourceTree = "<group>"; };
 		37EEC4E129F6C234005D0457 /* AmazonIVSPlayerCollector-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollector-Shared.xcconfig"; sourceTree = "<group>"; };
 		37EEC4E229F6C234005D0457 /* AmazonIVSPlayerCollector-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollector-Debug.xcconfig"; sourceTree = "<group>"; };
+		37EEC4ED29F7D3EC005D0457 /* AmazonIVSPlayer.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = AmazonIVSPlayer.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -421,6 +423,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37EEC4EE29F7D41B005D0457 /* AmazonIVSPlayer.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +441,7 @@
 				37EEC48529F6C024005D0457 /* AVPlayerCollectorTests */,
 				37EEC4AE29F6C1F2005D0457 /* AmazonIVSPlayerCollector */,
 				37EEC3A929F6AED6005D0457 /* xcconfig */,
+				37EEC4EC29F7D3EC005D0457 /* ExternalFrameworks */,
 				37EEC2DF29F6A86B005D0457 /* Products */,
 				37EEC3F729F6B571005D0457 /* Frameworks */,
 			);
@@ -969,6 +973,15 @@
 			);
 			name = manipulator;
 			path = ../../Sources/AmazonIVSPlayerCollector/manipulator;
+			sourceTree = "<group>";
+		};
+		37EEC4EC29F7D3EC005D0457 /* ExternalFrameworks */ = {
+			isa = PBXGroup;
+			children = (
+				37EEC4ED29F7D3EC005D0457 /* AmazonIVSPlayer.xcframework */,
+			);
+			name = ExternalFrameworks;
+			path = ../ExternalFrameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
