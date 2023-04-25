@@ -1,8 +1,6 @@
 import AVKit
 import Foundation
-#if SWIFT_PACKAGE
 import CoreCollector
-#endif
 
 @objc
 @objcMembers

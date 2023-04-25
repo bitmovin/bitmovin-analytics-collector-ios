@@ -1,9 +1,6 @@
 import AVFoundation
 import Foundation
-
-#if SWIFT_PACKAGE
 import CoreCollector
-#endif
 
 internal class DownloadSpeedDetectionService: NSObject {
     private enum DownloadSpeedDetectionError: Error {

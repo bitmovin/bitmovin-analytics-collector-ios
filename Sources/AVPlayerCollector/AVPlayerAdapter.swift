@@ -1,9 +1,7 @@
 import AVFoundation
 import Foundation
 import UIKit
-#if SWIFT_PACKAGE
 import CoreCollector
-#endif
 
 internal class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     static let periodicTimeObserverIntervalSeconds = 0.2

@@ -1,10 +1,7 @@
 import AVFoundation
 import Foundation
 import UIKit
-
-#if SWIFT_PACKAGE
 import CoreCollector
-#endif
 
 internal class AVPlayerEventDataManipulator: EventDataManipulator {
     private let player: AVPlayer
