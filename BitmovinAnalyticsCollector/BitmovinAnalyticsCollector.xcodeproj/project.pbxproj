@@ -1445,6 +1445,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		37EEC3FC29F6B587005D0457 /* Run Cuckoo code generation */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1456,6 +1457,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(PROJECT_DIR)/../Tests/CoreCollectorTests/GeneratedMocks.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1464,6 +1466,7 @@
 		};
 		37EEC45229F6BBE2005D0457 /* Run Cuckoo code generation */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1475,6 +1478,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(PROJECT_DIR)/../Tests/BitmovinPlayerCollectorTests/GeneratedMocks-Core.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1483,6 +1487,7 @@
 		};
 		37EEC4A729F6C100005D0457 /* Run Cuckoo code generation */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1494,6 +1499,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(PROJECT_DIR)/../Tests/BitmovinPlayerCollectorTests/GeneratedMocks-Core.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1502,6 +1508,7 @@
 		};
 		37EEC51F29F7D6F1005D0457 /* Run Cuckoo code generation */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1513,10 +1520,13 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(PROJECT_DIR)/../Tests/BitmovinPlayerCollectorTests/GeneratedMocks-Core.swift",
+				"$(PROJECT_DIR)/../Tests/BitmovinPlayerCollectorTests/GeneratedMocks.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "REPO_ROOT=\"${PROJECT_DIR}/..\"\nPATH_TO_SCRIPT=\"${REPO_ROOT}/scripts/run_cuckoo\"\nbash \"$PATH_TO_SCRIPT\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
