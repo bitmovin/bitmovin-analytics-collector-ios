@@ -196,32 +196,33 @@ platform :ios do
     push_cocoapods
   end
 
-lane :test_collector do |options|
-  scan(
-    scheme: options[:scheme],
-    workspace: "BitmovinAnalyticsCollector.xcworkspace",
-    sdk: "iphoneos",
-    clean: true,
-    destination: "name=iPhone 14 Pro"
-  )
-end
+  lane :test_collector do |options|
+    scan(
+      scheme: options[:scheme],
+      workspace: "BitmovinAnalyticsCollector.xcworkspace",
+      sdk: "iphoneos",
+      clean: true,
+      destination: "name=iPhone 14 Pro"
+    )
+  end
 
-lane :build_debug_app do
-  xcodebuild(
-    configuration: "Debug",
-    scheme: "CollectorDemoApp",
-    workspace: "BitmovinAnalyticsCollector.xcworkspace",
-    xcargs: "CODE_SIGNING_ALLOWED='NO'",
-    sdk: "iphoneos"
-  )
-end
+  lane :build_debug_app do
+    xcodebuild(
+      configuration: "Debug",
+      scheme: "CollectorDemoApp",
+      workspace: "BitmovinAnalyticsCollector.xcworkspace",
+      xcargs: "CODE_SIGNING_ALLOWED='NO'",
+      sdk: "iphoneos"
+    )
+  end
 
-lane :build_tvos_debug_app do
-  xcodebuild(
-    configuration: "Debug",
-    scheme: "CollectorDemoAppTV",
-    workspace: "BitmovinAnalyticsCollector.xcworkspace",
-    xcargs: "CODE_SIGNING_ALLOWED='NO'",
-    destination: "generic/platform=tvOS"
-  )
+  lane :build_tvos_debug_app do
+    xcodebuild(
+      configuration: "Debug",
+      scheme: "CollectorDemoAppTV",
+      workspace: "BitmovinAnalyticsCollector.xcworkspace",
+      xcargs: "CODE_SIGNING_ALLOWED='NO'",
+      destination: "generic/platform=tvOS"
+    )
+  end
 end
