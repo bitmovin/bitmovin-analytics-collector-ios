@@ -63,64 +63,32 @@ lane :release do
 
 end
 
-lane :build_collector do
+lane :test_collector do |options|
   scan(
+    scheme: options[:scheme],
+    workspace: "BitmovinAnalyticsCollector.xcworkspace",
+    sdk: "iphoneos",
+    clean: true,
+    destination: "name=iPhone 14 Pro"
+  )
+end
+
+lane :build_debug_app do
+  xcodebuild(
+    configuration: "Debug",
     scheme: "CollectorDemoApp",
     workspace: "BitmovinAnalyticsCollector.xcworkspace",
-    sdk: "iphoneos",
-    destination: "generic/platform=iOS",
-    clean: true,
-    build_for_testing: true,
-    configuration: "Debug",
-    xcargs: "CODE_SIGNING_ALLOWED='NO'"
-  )
-  scan(
-    scheme: "CollectorDemoAppCocoaPods",
-    workspace: "BitmovinAnalyticsCollector.xcworkspace",
-    sdk: "iphoneos",
-    destination: "generic/platform=iOS",
-    clean: true,
-    build_for_testing: true,
-    configuration: "Debug",
-    xcargs: "ENABLE_BITCODE='NO' CODE_SIGNING_ALLOWED='NO'"
+    xcargs: "CODE_SIGNING_ALLOWED='NO'",
+    sdk: "iphoneos"
   )
 end
 
-lane :build_collector_for_tv do
-  scan(
+lane :build_tvos_debug_app do
+  xcodebuild(
+    configuration: "Debug",
     scheme: "CollectorDemoAppTV",
     workspace: "BitmovinAnalyticsCollector.xcworkspace",
-    sdk: "appletvos",
-    destination: "generic/platform=tvOS",
-    clean: true,
-    build_for_testing: true,
-    configuration: "Debug",
-    xcargs: "CODE_SIGNING_ALLOWED='NO'"
-  )
-  scan(
-    scheme: "CollectorDemoAppTVCocoaPods",
-    workspace: "BitmovinAnalyticsCollector.xcworkspace",
-    sdk: "appletvos",
-    destination: "generic/platform=tvOS",
-    clean: true,
-    build_for_testing: true,
-    configuration: "Debug",
-    xcargs: "CODE_SIGNING_ALLOWED='NO'"
-  )
-end
-
-lane :test_collector do
-  run_target_tests(target: "BitmovinAnalytics-Package")
-end
-
-private_lane :run_target_tests do |options|
-  scan(
-    scheme: options[:target],
-    package_path: "./",
-    destination: "name=iPhone 14",
-    code_coverage: true,
-    result_bundle: true,
-    configuration: "Debug",
-    xcargs: "CODE_SIGNING_ALLOWED='NO'"
+    xcargs: "CODE_SIGNING_ALLOWED='NO'",
+    destination: "generic/platform=tvOS"
   )
 end

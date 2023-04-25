@@ -73,7 +73,7 @@
 		37EEC39F29F6A9D0005D0457 /* AnalyticsAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC35D29F6A9D0005D0457 /* AnalyticsAd.swift */; };
 		37EEC3A029F6A9D0005D0457 /* AnalyticsAdQuartile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC35E29F6A9D0005D0457 /* AnalyticsAdQuartile.swift */; };
 		37EEC3A129F6A9D0005D0457 /* AnalyticsAdBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC35F29F6A9D0005D0457 /* AnalyticsAdBreak.swift */; };
-		37EEC3B829F6B118005D0457 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC30729F6A8F5005D0457 /* CoreCollector.framework */; platformFilter = ios; };
+		37EEC3B829F6B118005D0457 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC30729F6A8F5005D0457 /* CoreCollector.framework */; };
 		37EEC3DF29F6B3C7005D0457 /* AuthenticatedDispatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC3CC29F6B3C7005D0457 /* AuthenticatedDispatcherTests.swift */; };
 		37EEC3E029F6B3C7005D0457 /* MockUserIdProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC3CE29F6B3C7005D0457 /* MockUserIdProvider.swift */; };
 		37EEC3E129F6B3C7005D0457 /* MockStateMachineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC3CF29F6B3C7005D0457 /* MockStateMachineDelegate.swift */; };
@@ -103,7 +103,7 @@
 		37EEC42829F6BA03005D0457 /* BitmovinPlayerCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC42429F6BA03005D0457 /* BitmovinPlayerCollector.swift */; };
 		37EEC42B29F6BA49005D0457 /* BitmovinPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC42A29F6BA49005D0457 /* BitmovinPlayer */; };
 		37EEC42C29F6BA7F005D0457 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC30729F6A8F5005D0457 /* CoreCollector.framework */; };
-		37EEC43929F6BACA005D0457 /* BitmovinPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC40229F6B901005D0457 /* BitmovinPlayerCollector.framework */; platformFilter = ios; };
+		37EEC43929F6BACA005D0457 /* BitmovinPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC40229F6B901005D0457 /* BitmovinPlayerCollector.framework */; };
 		37EEC44429F6BAF4005D0457 /* BitmovinPlayerAdapterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC43F29F6BAF3005D0457 /* BitmovinPlayerAdapterTest.swift */; };
 		37EEC44529F6BAF4005D0457 /* MockableFiles.xcfilelist in Resources */ = {isa = PBXBuildFile; fileRef = 37EEC44029F6BAF3005D0457 /* MockableFiles.xcfilelist */; };
 		37EEC44629F6BAF4005D0457 /* GeneratedMocks-Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC44129F6BAF3005D0457 /* GeneratedMocks-Core.swift */; };
@@ -1445,6 +1445,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		37EEC3FC29F6B587005D0457 /* Run Cuckoo code generation */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1456,6 +1457,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(PROJECT_DIR)/../Tests/CoreCollectorTests/GeneratedMocks.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1464,6 +1466,7 @@
 		};
 		37EEC45229F6BBE2005D0457 /* Run Cuckoo code generation */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1475,6 +1478,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(PROJECT_DIR)/../Tests/BitmovinPlayerCollectorTests/GeneratedMocks-Core.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1483,6 +1487,7 @@
 		};
 		37EEC4A729F6C100005D0457 /* Run Cuckoo code generation */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1494,6 +1499,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(PROJECT_DIR)/../Tests/AVPlayerCollectorTests/GeneratedMocks-Core.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1502,6 +1508,7 @@
 		};
 		37EEC51F29F7D6F1005D0457 /* Run Cuckoo code generation */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1513,10 +1520,13 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(PROJECT_DIR)/../Tests/AmazonIVSPlayerCollectorTests/GeneratedMocks-Core.swift",
+				"$(PROJECT_DIR)/../Tests/AmazonIVSPlayerCollectorTests/GeneratedMocks.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "REPO_ROOT=\"${PROJECT_DIR}/..\"\nPATH_TO_SCRIPT=\"${REPO_ROOT}/scripts/run_cuckoo\"\nbash \"$PATH_TO_SCRIPT\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1723,7 +1733,6 @@
 /* Begin PBXTargetDependency section */
 		37EEC3BA29F6B118005D0457 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = 37EEC30629F6A8F5005D0457 /* CoreCollector */;
 			targetProxy = 37EEC3B929F6B118005D0457 /* PBXContainerItemProxy */;
 		};
@@ -1734,7 +1743,6 @@
 		};
 		37EEC43B29F6BACA005D0457 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = 37EEC40129F6B901005D0457 /* BitmovinPlayerCollector */;
 			targetProxy = 37EEC43A29F6BACA005D0457 /* PBXContainerItemProxy */;
 		};
