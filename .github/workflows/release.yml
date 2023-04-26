@@ -123,4 +123,4 @@ jobs:
         env:
           # Setting the location for the stored pods and CocoaPods caches to be exclusive to each runner as we observed
           # errors regarding the global Cache when multiple jobs execute `pod install` commands concurrently.
-          CP_HOME_DIR: ${{ github.workspace }}/../../../CocoaPodsCaches
+          CP_HOME_DIR: ${{ github.workspace }}/CocoaPodsCaches
