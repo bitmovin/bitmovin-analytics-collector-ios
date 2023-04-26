@@ -139,6 +139,35 @@ platform :ios do
     )
   end
 
+  desc "build all release packages"
+  lane :build_release do
+    FileUtils.remove_dir("#{DirectoryHelper.project_root}/Output", true)
+    FileUtils.remove_dir("#{DirectoryHelper.project_root}/Release", true)
+    schemes = {
+      "CoreCollector" => true,
+      "BitmovinPlayerCollector" => true,
+      "AVPlayerCollector" => true,
+      "AmazonIVSPlayerCollector" => false,
+    }
+
+    # keep this separate to ensure all can be built successfully
+    schemes.each do |scheme, supports_tvos|
+      build_release(
+        scheme: scheme,
+        supports_tvos: supports_tvos
+      )
+      create_release_xcframework_zip(
+        product_name: scheme
+      )
+    end
+
+    schemes.each do |scheme|
+      push_xcframework(
+        product_name: scheme
+      )
+    end
+  end
+
   desc "push release cocoapod"
   lane :push_cocoapods do |options|
     release_version = ENV.fetch("GIT_VERSION")
@@ -181,36 +210,6 @@ platform :ios do
         "bundle exec pod repo add bm-#{options[:COCOA_DEPLOY_REPO]} git@github.com:bitmovin/#{options[:COCOA_DEPLOY_REPO]}.git || bundle exec pod repo update bm-#{options[:COCOA_DEPLOY_REPO]};"\
         "bundle exec pod repo push bm-#{options[:COCOA_DEPLOY_REPO]} #{spec_output_path}" )
     end
-  end
-
-  lane :release do
-    FileUtils.remove_dir("#{DirectoryHelper.project_root}/Output", true)
-    FileUtils.remove_dir("#{DirectoryHelper.project_root}/Release", true)
-    schemes = {
-      "CoreCollector" => true,
-      "BitmovinPlayerCollector" => true,
-      "AVPlayerCollector" => true,
-      "AmazonIVSPlayerCollector" => false,
-    }
-
-    # keep this separate to ensure all can be built successfully
-    schemes.each do |scheme, supports_tvos|
-      build_release(
-        scheme: scheme,
-        supports_tvos: supports_tvos
-      )
-      create_release_xcframework_zip(
-        product_name: scheme
-      )
-    end
-
-    schemes.each do |scheme|
-      push_xcframework(
-        product_name: scheme
-      )
-    end
-
-    push_cocoapods
   end
 
   lane :test_collector do |options|

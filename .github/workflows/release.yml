@@ -94,6 +94,8 @@ jobs:
     name: Build and publish release
     runs-on: self-hosted
     needs: [version_bump, unit_tests]
+    env:
+      KEYCHAIN_LOGIN_PASSWORD: ${{ secrets.KEYCHAIN_LOGIN_PASSWORD }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -105,10 +107,9 @@ jobs:
           version: 14.1
       - name: Prepare dependencies
         uses: ./.github/actions/prepare-dependencies
-      - name: Release
-        run: bundle exec fastlane ios release
+      - name: Build Release
+        run: bundle exec fastlane ios release_binaries
         env:
           GC_SACCOUNT: ${{ secrets.GC_SACCOUNT }}
-          COCOA_DEPLOY_KEY: ${{ secrets.COCOA_DEPLOY_KEY }}
-          SPM_DEPLOY_KEY: ${{ secrets.SPM_DEPLOY_KEY }}
-          KEYCHAIN_LOGIN_PASSWORD: ${{ secrets.KEYCHAIN_LOGIN_PASSWORD }}
+      - name: Release CocoaPods
+        run: bundle exec fastlane ios push_cocoapods "COCOA_DEPLOY_KEY:${{ secrets.COCOA_DEPLOY_KEY }}" "COCOA_DEPLOY_REPO:cocoapod-specs"
