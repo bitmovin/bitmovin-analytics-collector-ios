@@ -21,7 +21,7 @@ platform :ios do
   private_lane :build_release_specific_platform do |options|
     scheme = options[:scheme]
     archive_path = "#{options[:output_dir]}/#{scheme}-#{options[:sdk]}.xcarchive"
-    UI.message "Building #{scheme} for #{options[:sdk]}"
+    UI.header "Building #{scheme} for #{options[:sdk]}"
 
     xcodebuild(
       scheme: scheme,
@@ -102,14 +102,15 @@ platform :ios do
     sh(xcframework_command)
   end
 
-  desc "create zip out of xcframework"
+  desc "create zip out of individual xcframework"
   lane :create_release_xcframework_zip do |options|
     product_name = options[:product_name]
     product_path = "#{DirectoryHelper.project_root}/Output/#{product_name}/#{product_name}.xcframework"
-
     release_dir = "#{DirectoryHelper.project_root}/Release"
+
     FileUtils.mkdir_p(release_dir)
     Dir.chdir(release_dir) do
+      FileUtils.remove_dir('temp', true)
       Dir.mkdir('temp')
       Dir.chdir('temp') do
         FileUtils.cp("#{DirectoryHelper.project_root}/podspec/BitmovinAnalyticsCollector.LICENSE.md", 'LICENSE.md')
@@ -120,7 +121,24 @@ platform :ios do
     end
   end
 
-  desc "push release xcframework"
+  desc "create zip out of all xcframeworks"
+  lane :create_release_umbrella_xcframework_zip do |options|
+    product_path = "#{DirectoryHelper.project_root}/Output/*/*.xcframework"
+
+    release_dir = "#{DirectoryHelper.project_root}/Release"
+    FileUtils.mkdir_p(release_dir)
+    Dir.chdir(release_dir) do
+      Dir.mkdir('temp')
+      Dir.chdir('temp') do
+        FileUtils.cp("#{DirectoryHelper.project_root}/podspec/BitmovinAnalyticsCollector.LICENSE.md", 'LICENSE.md')
+        sh("cp -R #{product_path} .")
+        sh("zip -r #{release_dir}/BitmovinAnalyticsCollector.zip . -x '**/.DS_Store'")
+      end
+      FileUtils.remove_dir('temp', true)
+    end
+  end
+
+  desc "push individual xcframework zip"
   lane :push_xcframework do |options|
     release_version = ENV.fetch("GIT_VERSION")
     product_name = options[:product_name]
@@ -141,10 +159,31 @@ platform :ios do
     )
   end
 
+  desc "push umbrella xcframework zip"
+  lane :push_umbrella_xcframework do |options|
+    release_version = ENV.fetch("GIT_VERSION")
+    release_dir = "#{DirectoryHelper.project_root}/Release"
+
+    gcs_key_path="#{release_dir}/gcs.json"
+    Dir.chdir("..") do
+      File.write(gcs_key_path, ENV.fetch("GC_SACCOUNT")) unless File.exists?(gcs_key_path)
+    end
+
+    bucket_path = "analytics/ios_tvos/#{release_version}/BitmovinAnalyticsCollector.zip"
+    google_cloud_storage_upload(
+      project: "bitmovincloud",
+      keyfile: gcs_key_path,
+      content_path: "#{release_dir}/BitmovinAnalyticsCollector.zip",
+      bucket: "cloudflare-cdn-origin-bucket",
+      name: bucket_path
+    )
+  end
+
   desc "build all release packages"
   lane :release_binaries do
     FileUtils.remove_dir("#{DirectoryHelper.project_root}/Output", true)
     FileUtils.remove_dir("#{DirectoryHelper.project_root}/Release", true)
+
     schemes = {
       "CoreCollector" => true,
       "BitmovinPlayerCollector" => true,
@@ -162,12 +201,16 @@ platform :ios do
         product_name: scheme
       )
     end
+    
+    create_release_umbrella_xcframework_zip
 
     schemes.each do |scheme|
       push_xcframework(
         product_name: scheme
       )
     end
+    
+    push_umbrella_xcframework
   end
 
   desc "push release cocoapod"
@@ -175,23 +218,13 @@ platform :ios do
     release_version = ENV.fetch("GIT_VERSION")
     release_dir = "#{DirectoryHelper.project_root}/Release"
 
-    bucket_base_path = "analytics/ios_tvos/#{release_version}"
+    bucket_path = "analytics/ios_tvos/#{release_version}/BitmovinAnalyticsCollector.zip"
 
-    spec = read_podspec(path: "podspec/BitmovinAnalyticsCollector.v2.podspec")
-    spec_output_path = "#{release_dir}/BitmovinAnalyticsCollector.v2.json"
-
-    subspec_to_framework_mapping = {
-      "Core" => "BitmovinAnalyticsCollector",
-      "AVPlayer" => "AVPlayerCollector",
-      "BitmovinPlayer" => "BitmovinPlayerCollector",
-      "AmazonIVSPlayer" => "AmazonIVSPlayerCollector"
-    }
+    spec = read_podspec(path: "podspec/BitmovinAnalyticsCollector.podspec")
+    spec_output_path = "#{release_dir}/BitmovinAnalyticsCollector.json"
 
     spec["version"] = release_version
-
-    subspec_to_framework_mapping.each do |subspec, framework|
-      spec["subspecs"].find { |entry| entry["name"] == subspec }["source"]["http"] = "https://cdn.bitmovin.com/#{bucket_base_path}/#{framework}.zip"
-    end
+    spec["source"]["http"] = "https://cdn.bitmovin.com/#{bucket_path}"
 
     cocoapod_deploy_key_path="#{release_dir}/cocoapod-deploy.id_rsa"
     Dir.chdir("..") do
@@ -203,14 +236,14 @@ platform :ios do
     end
 
     Dir.chdir("..") do
-      File.write(spec_output_path,JSON.pretty_generate(spec))
+      File.write(spec_output_path, JSON.pretty_generate(spec))
       sh("ssh-agent", "sh", "-c",
         "chmod 0600 #{cocoapod_deploy_key_path};"\
         "ssh-add #{cocoapod_deploy_key_path};"\
         "git config --global user.name 'Bitmovin Release Automation';"\
         "git config --global user.email support@bitmovin.com;"\
         "bundle exec pod repo add bm-#{options[:COCOA_DEPLOY_REPO]} git@github.com:bitmovin/#{options[:COCOA_DEPLOY_REPO]}.git || bundle exec pod repo update bm-#{options[:COCOA_DEPLOY_REPO]};"\
-        "bundle exec pod repo push bm-#{options[:COCOA_DEPLOY_REPO]} #{spec_output_path}" )
+        "bundle exec pod repo push bm-#{options[:COCOA_DEPLOY_REPO]} #{spec_output_path}")
     end
   end
 
