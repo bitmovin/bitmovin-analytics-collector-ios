@@ -13,21 +13,14 @@ on:
     tags-ignore:
       - '**'
   workflow_call:
-    inputs:
-      ref:
-        description: GitHub ref (branch or tag) to check out
-        type: string
-        required: true
 concurrency:
-  group: swiftlint-${{ inputs.ref || github.event.pull_request.number || github.ref }}
+  group: swiftlint-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
   SwiftLint:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ inputs.ref || github.ref }}
       - name: Select Xcode 14
         uses: ./.github/actions/select-xcode
         with:
