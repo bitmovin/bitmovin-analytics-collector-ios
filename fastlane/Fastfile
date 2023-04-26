@@ -41,7 +41,7 @@ platform :ios do
   end
 
   desc "release build tvOS and iOS"
-  lane :build_release do |options|
+  lane :build_release_product do |options|
     scheme = options[:scheme]
     supports_tvos = options[:supports_tvos]
     output_dir = "#{DirectoryHelper.project_root}/Output/#{scheme}"
@@ -140,7 +140,7 @@ platform :ios do
   end
 
   desc "build all release packages"
-  lane :build_release do
+  lane :release_binaries do
     FileUtils.remove_dir("#{DirectoryHelper.project_root}/Output", true)
     FileUtils.remove_dir("#{DirectoryHelper.project_root}/Release", true)
     schemes = {
@@ -152,7 +152,7 @@ platform :ios do
 
     # keep this separate to ensure all can be built successfully
     schemes.each do |scheme, supports_tvos|
-      build_release(
+      build_release_product(
         scheme: scheme,
         supports_tvos: supports_tvos
       )
