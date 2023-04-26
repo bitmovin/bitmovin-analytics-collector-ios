@@ -124,7 +124,7 @@ import BitmovinPlayerCollector
 
 ## Using [CocoaPods](https://cocoapods.org/)
 
-We depend on `cocoapods` version `>= 1.4`.
+We depend on `cocoapods` version `>= 1.12.1`.
 To install it, check which Player/version you are using and add the following lines to your Podfile:
 
 ### Bitmovin Player v3
@@ -183,15 +183,16 @@ Upon opening a Pull Request you will be asked to sign a Contributor License Agre
 
 #### Dependencies
 
-The project has some ruby and mint dependencies. To install them run the following command in your terminal:
+The project has some brew, ruby and mint dependencies. To install them run the following command in your terminal:
 
 ```
+brew bundle
 bundle install
 mint bootstrap
 ```
 
 #### Install Pods
-To install the Pods used by the project by running the following command from the root directory
+To install the Pods used by the project by running the following command from the root directory:
 ``` bash
 bundle exec pod install
 ```
