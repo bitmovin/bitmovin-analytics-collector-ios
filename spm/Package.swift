@@ -7,47 +7,57 @@ let package = Package(
     name: "BitmovinAnalytics",
     platforms: [
         .iOS(.v14),
-        .tvOS(.v14)
+        .tvOS(.v14),
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "BitmovinPlayerCollector",
-            targets: ["BitmovinPlayerCollector"]
+            targets: ["BitmovinPlayerCollectorWrapper"]
         ),
         .library(
             name: "AVPlayerCollector",
-            targets: ["AVPlayerCollector"]
+            targets: ["AVPlayerCollectorWrapper"]
         ),
         .library(
             name: "AmazonIVSPlayerCollector",
-            targets: ["AmazonIVSPlayerCollector"]
+            targets: ["AmazonIVSPlayerCollectorWrapper"]
         )
     ],
     dependencies: [
         .package(url: "https://github.com/bitmovin/player-ios.git", from: "3.35.0"),
-        .package(url: "https://github.com/Quick/Quick.git", exact: "5.0.1"),
-        .package(url: "https://github.com/Quick/Nimble.git", exact: "10.0.0"),
-        .package(url: "https://github.com/Brightify/Cuckoo.git", from: "1.9.1"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
+        .binaryTarget(
             name: "CoreCollector",
-            dependencies: []
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/x.x.x/CoreCollector.zip",
+            checksum: "CoreCollector-hash"
+        ),
+        .binaryTarget(
+            name: "AVPlayerCollector",
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/x.x.x/AVPlayerCollector.zip",
+            checksum: "AVPlayerCollector-hash"
         ),
         .target(
-            name: "AVPlayerCollector",
+            name: "AVPlayerCollectorWrapper",
             dependencies: [
-                "CoreCollector"
+                "CoreCollector",
+                "AVPlayerCollector",
             ]
         ),
-        .target(
+        .binaryTarget(
             name: "BitmovinPlayerCollector",
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/x.x.x/BitmovinPlayerCollector.zip",
+            checksum: "BitmovinPlayerCollector-hash"
+        ),
+        .target(
+            name: "BitmovinPlayerCollectorWrapper",
             dependencies: [
+                "CoreCollector",
+                "BitmovinPlayerCollector",
                 .product(name: "BitmovinPlayer", package: "player-ios"),
-                "CoreCollector"
             ]
         ),
         .binaryTarget(
@@ -55,49 +65,17 @@ let package = Package(
             url: "https://player.live-video.net/1.18.0/AmazonIVSPlayer.xcframework.zip",
             checksum: "1b50c62c49f2ceb6eb78c276d798fe6fdfa41b8982f8ad369eebe14bfacbdb5f"
         ),
-        .target(
+        .binaryTarget(
             name: "AmazonIVSPlayerCollector",
-            dependencies: [
-                "CoreCollector",
-                "AmazonIVSPlayer"
-            ]
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/x.x.x/AmazonIVSPlayerCollector.zip",
+            checksum: "AmazonIVSPlayerCollector-hash"
         ),
-        .testTarget(
-            name: "CoreCollectorTests",
+        .target(
+            name: "AmazonIVSPlayerCollectorWrapper",
             dependencies: [
-                "CoreCollector",
-                "Quick",
-                "Nimble",
-                "Cuckoo"
-            ]
-        ),
-        .testTarget(
-            name: "BitmovinPlayerCollectorTests",
-            dependencies: [
-                "BitmovinPlayerCollector",
-                .product(name: "BitmovinPlayer", package: "player-ios"),
-                "Quick",
-                "Nimble",
-                "Cuckoo"
-            ]
-        ),
-        .testTarget(
-            name: "AVPlayerCollectorTests",
-            dependencies: [
-                "AVPlayerCollector",
-                "Quick",
-                "Nimble",
-                "Cuckoo"
-            ]
-        ),
-        .testTarget(
-            name: "AmazonIVSPlayerCollectorTests",
-            dependencies: [
-                "AmazonIVSPlayerCollector",
-                "AmazonIVSPlayer",
-                "Quick",
-                "Nimble",
-                "Cuckoo"
+                .target(name: "AmazonIVSPlayerCollector", condition: .when(platforms: [.iOS])),
+                .target(name: "AmazonIVSPlayer", condition: .when(platforms: [.iOS])),
+                .target(name: "CoreCollector", condition: .when(platforms: [.iOS])),
             ]
         ),
     ]

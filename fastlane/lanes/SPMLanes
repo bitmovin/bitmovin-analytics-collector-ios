@@ -1,73 +1,107 @@
 # This file contains Swift Package Manager support related lanes
 
 platform :ios do
-  desc "release SPM package"
-  lane :release_spm_package do |options|
+  desc "prepare SPM package release"
+  lane :prepare_spm_package_release do |options|
     package_version = options[:package_version] || ENV.fetch("GIT_VERSION")
 
-    Dir.chdir("..") do
-      if package_version.to_s.strip.empty?
-        UI.error "Error: parameter `package_version` is empty!"
-        exit(1)
-      end
+    if package_version.to_s.strip.empty?
+      UI.error "Error: parameter `package_version` is empty!"
+      exit(1)
+    end
 
-      release_dir = "#{Dir.pwd}/release"
-      binary_path = "#{release_dir}/BitmovinPlayer.zip"
-      unless File.exists?(binary_path)
-        UI.error "'BitmovinPlayer.zip' was not found at: #{binary_path}"
-        exit(1)
-      end
+    release_dir = "#{DirectoryHelper.project_root}/Release"
 
-      spm_deploy_key_path="#{release_dir}/spm-deploy.id_rsa"
-      spm_deploy_key = options[:spm_deploy_key]
-      SshHelper.ensure_ssh_key(
-        key_path: spm_deploy_key_path,
-        ssh_key: spm_deploy_key
+    binary_path = "#{release_dir}/BitmovinPlayer.zip"
+    unless File.exists?(binary_path)
+      UI.error "'BitmovinPlayer.zip' was not found at: #{binary_path}"
+      exit(1)
+    end
+
+    spm_deploy_key_path="#{release_dir}/spm-deploy.id_rsa"
+    spm_deploy_key = options[:spm_deploy_key]
+    SshHelper.ensure_ssh_key(
+      key_path: spm_deploy_key_path,
+      ssh_key: spm_deploy_key
+    )
+
+    tmp_dir = "#{release_dir}/SPM"
+    sh("rm -rf #{tmp_dir}")
+    Dir.mkdir(tmp_dir) unless File.exists?(tmp_dir)
+
+    spm_repo_url = "git@github.com:bitmovin/bitmovin-analytics-collector-ios.git"
+    GitHelper.clone(
+      repo_url: spm_repo_url,
+      ssh_key_path: spm_deploy_key_path,
+      destination_path: tmp_dir
+    )
+
+    package_manifest_template_path = "#{Dir.pwd}/spm/Package.swift"
+
+    Dir.chdir("#{tmp_dir}") do
+      FileUtils.cp(package_manifest_template_path, 'Package.swift')
+    end
+  end
+
+  desc "prepare SPM package release"
+  lane :update_spm_package_target do |options|
+    target = options[:target]
+    package_version = options[:package_version] || ENV.fetch("GIT_VERSION")
+
+    if package_version.to_s.strip.empty?
+      UI.error "Error: parameter `package_version` is empty!"
+      exit(1)
+    end
+
+    release_dir = "#{DirectoryHelper.project_root}/Release"
+
+    binary_path = "#{release_dir}/#{target}.zip"
+    unless File.exists?(binary_path)
+      UI.error "'BitmovinPlayer.zip' was not found at: #{binary_path}"
+      exit(1)
+    end
+
+    tmp_dir = "#{release_dir}/SPM"
+
+    Dir.chdir("#{tmp_dir}") do
+    SpmHelper.update_package_swift(
+      package_manifest_template_path: "Package.swift",
+      package_version: package_version,
+      target: target,
+      checksum: checksum
+    )
+    end
+  end
+
+  desc "finish release SPM package"
+  lane :push_release_spm_package do |options|
+    package_version = options[:package_version] || ENV.fetch("GIT_VERSION")
+
+    if package_version.to_s.strip.empty?
+      UI.error "Error: parameter `package_version` is empty!"
+      exit(1)
+    end
+
+    release_dir = "#{DirectoryHelper.project_root}/Release"
+
+    tmp_dir = "#{release_dir}/SPM"
+
+    Dir.chdir("#{tmp_dir}") do
+      GitHelper.config_user(
+        name: "Bitmovin Release Automation",
+        email: "support@bitmovin.com"
       )
 
-      tmp_dir = "#{release_dir}/SPM"
-      sh("rm -rf #{tmp_dir}")
-      Dir.mkdir(tmp_dir) unless File.exists?(tmp_dir)
-
-      # TODO update repo URL when moving to public org
-      spm_repo_url = "git@github.com:bitmovin/player-ios.git"
-      GitHelper.clone(
-        repo_url: spm_repo_url,
-        ssh_key_path: spm_deploy_key_path,
-        destination_path: tmp_dir
+      GitHelper.add_files(
+        [
+          "Package.swift",
+          "README.md"
+        ]
       )
-
-      package_manifest_template_path = "#{Dir.pwd}/spm/Package.swift"
-
-      Dir.chdir("#{tmp_dir}") do
-        GitHelper.config_user(
-          name: "Bitmovin Release Automation",
-          email: "support@bitmovin.com"
-        )
-
-        checksum = SpmHelper.calculate_checksum(binary_path)
-
-        SpmHelper.update_package_swift(
-          package_manifest_template_path: package_manifest_template_path,
-          package_version: package_version,
-          checksum: checksum
-        )
-
-        SpmHelper.update_readme(
-          package_version: package_version
-        )
-
-        GitHelper.add_files(
-          [
-            "Package.swift",
-            "README.md"
-          ]
-        )
-        GitHelper.commit("Release #{package_version}")
-        GitHelper.tag(tag: package_version, message: "Release #{package_version}")
-        GitHelper.push(spm_deploy_key_path)
-        GitHelper.push_tags(spm_deploy_key_path)
-      end
+      GitHelper.commit("Release #{package_version}")
+      GitHelper.tag(tag: package_version, message: "Release #{package_version}")
+      GitHelper.push(spm_deploy_key_path)
+      GitHelper.push_tags(spm_deploy_key_path)
     end
   end
 end

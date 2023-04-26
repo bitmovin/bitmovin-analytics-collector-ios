@@ -124,3 +124,5 @@ jobs:
           # Setting the location for the stored pods and CocoaPods caches to be exclusive to each runner as we observed
           # errors regarding the global Cache when multiple jobs execute `pod install` commands concurrently.
           CP_HOME_DIR: ${{ github.workspace }}/CocoaPodsCaches
+      - name: Release SPM
+        run: bundle exec fastlane ios push_spm_package "spm_deploy_key:${{ secrets.SPM_DEPLOY_KEY }}"

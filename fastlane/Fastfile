@@ -247,6 +247,34 @@ platform :ios do
     end
   end
 
+  desc "push release spm package"
+  lane :push_spm_package do |options|
+    spm_deploy_key = options[:spm_deploy_key]
+    package_version = ENV.fetch("GIT_VERSION")
+    schemes = [
+      "CoreCollector",
+      "BitmovinPlayerCollector",
+      "AVPlayerCollector",
+      "AmazonIVSPlayerCollector",
+    ]
+
+    prepare_spm_package_release(
+      package_version: package_version,
+      spm_deploy_key: spm_deploy_key
+    )
+
+    schemes.each do |scheme|
+      update_spm_package_target(
+        scheme: scheme,
+        package_version: package_version
+      )
+    end
+
+    push_release_spm_package(
+      package_version: package_version
+    )
+  end
+
   lane :test_collector do |options|
     scan(
       scheme: options[:scheme],

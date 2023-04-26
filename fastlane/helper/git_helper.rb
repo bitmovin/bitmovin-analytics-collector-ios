@@ -4,7 +4,8 @@ class GitHelper
   def self.clone(repo_url:, ssh_key_path:, destination_path:)
     SshHelper.execute_using_ssh(
       key_path: ssh_key_path,
-      command: "git clone #{repo_url} #{destination_path}"
+      # TODO remove branch once we have a stable release
+      command: "git clone --branch feature/precompiled-binaries #{repo_url} #{destination_path}"
     )
   end
 
