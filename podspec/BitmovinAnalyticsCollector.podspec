@@ -28,6 +28,7 @@ DESC
   end
 
   s.subspec 'AmazonIVSPlayer' do |ivsplayer|
+    ivsplayer.ios.deployment_target = '14.0'
     ivsplayer.ios.vendored_frameworks = 'AmazonIVSPlayerCollector.xcframework'
     ivsplayer.ios.dependency 'AmazonIVSPlayer', '1.18.0'
   end

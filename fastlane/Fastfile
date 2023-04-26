@@ -221,7 +221,7 @@ platform :ios do
     bucket_path = "analytics/ios_tvos/#{release_version}/BitmovinAnalyticsCollector.zip"
 
     spec = read_podspec(path: "podspec/BitmovinAnalyticsCollector.podspec")
-    spec_output_path = "#{release_dir}/BitmovinAnalyticsCollector.json"
+    spec_output_path = "#{release_dir}/BitmovinAnalyticsCollector.podspec.json"
 
     spec["version"] = release_version
     spec["source"]["http"] = "https://cdn.bitmovin.com/#{bucket_path}"
