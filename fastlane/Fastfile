@@ -204,7 +204,7 @@ platform :ios do
     
     create_release_umbrella_xcframework_zip
 
-    schemes.each do |scheme|
+    schemes.each do |scheme, _|
       push_xcframework(
         product_name: scheme
       )
