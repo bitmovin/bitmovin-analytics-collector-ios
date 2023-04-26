@@ -120,3 +120,7 @@ jobs:
           GC_SACCOUNT: ${{ secrets.GC_SACCOUNT }}
       - name: Release CocoaPods
         run: bundle exec fastlane ios push_cocoapods "COCOA_DEPLOY_KEY:${{ secrets.COCOA_DEPLOY_KEY }}" "COCOA_DEPLOY_REPO:cocoapod-specs"
+        env:
+          # Setting the location for the stored pods and CocoaPods caches to be exclusive to each runner as we observed
+          # errors regarding the global Cache when multiple jobs execute `pod install` commands concurrently.
+          CP_HOME_DIR: ${{ github.workspace }}/../../../CocoaPodsCaches
