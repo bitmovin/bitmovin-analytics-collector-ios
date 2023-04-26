@@ -21,6 +21,8 @@ platform :ios do
   private_lane :build_release_specific_platform do |options|
     scheme = options[:scheme]
     archive_path = "#{options[:output_dir]}/#{scheme}-#{options[:sdk]}.xcarchive"
+    UI.message "Building #{scheme} for #{options[:sdk]}"
+
     xcodebuild(
       scheme: scheme,
       workspace: "BitmovinAnalyticsCollector.xcworkspace",
