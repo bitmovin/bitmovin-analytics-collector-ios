@@ -114,8 +114,8 @@ jobs:
           version: 14.1
       - name: Prepare dependencies
         uses: ./.github/actions/prepare-dependencies
-      - name: Build Release
-        run: bundle exec fastlane ios release_binaries
+      - name: Build and release pre-compiled binaries
+        run: bundle exec fastlane ios build_release_binaries
         env:
           GC_SACCOUNT: ${{ secrets.GC_SACCOUNT }}
       - name: Release CocoaPods

@@ -180,7 +180,7 @@ platform :ios do
   end
 
   desc "build all release packages"
-  lane :release_binaries do
+  lane :build_release_binaries do
     FileUtils.remove_dir("#{DirectoryHelper.project_root}/Output", true)
     FileUtils.remove_dir("#{DirectoryHelper.project_root}/Release", true)
 
