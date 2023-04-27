@@ -69,6 +69,9 @@ lane :test_collector do |options|
     workspace: "BitmovinAnalyticsCollector.xcworkspace",
     sdk: "iphoneos",
     clean: true,
+    result_bundle: true,
+    output_types: '',
+    output_directory: "./fastlane/test_output/xctest",
     destination: "name=iPhone 14 Pro"
   )
 end
