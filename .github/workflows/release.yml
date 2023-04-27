@@ -114,15 +114,17 @@ jobs:
           version: 14.1
       - name: Prepare dependencies
         uses: ./.github/actions/prepare-dependencies
-      - name: Build and release pre-compiled binaries
+      - name: Build pre-compiled binaries
         run: bundle exec fastlane ios build_release_binaries
+      - name: Release pre-compiled binaries
+        run: bundle exec fastlane ios push_release_binaries
         env:
           GC_SACCOUNT: ${{ secrets.GC_SACCOUNT }}
       - name: Release CocoaPods
         run: bundle exec fastlane ios push_cocoapods "COCOA_DEPLOY_KEY:${{ secrets.COCOA_DEPLOY_KEY }}" "COCOA_DEPLOY_REPO:cocoapod-specs"
         env:
-          # Setting the location for the stored pods and CocoaPods caches to be exclusive to each runner as we observed
-          # errors regarding the global Cache when multiple jobs execute `pod install` commands concurrently.
+          # Setting the location for the stored pods and CocoaPods caches to be exclusive to the current job
+          # to avoid errors regarding the duplicated spec found in multiple repos when pushing the podspec.
           CP_HOME_DIR: ${{ github.workspace }}/CocoaPodsCaches
       - name: Release SPM
         run: bundle exec fastlane ios push_spm_package "spm_deploy_key:${{ secrets.SPM_DEPLOY_KEY }}"

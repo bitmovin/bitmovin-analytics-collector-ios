@@ -203,13 +203,23 @@ platform :ios do
     end
     
     create_release_umbrella_xcframework_zip
+  end
 
-    schemes.each do |scheme, _|
+  desc "upload all release binaries"
+  lane :push_release_binaries do
+    schemes = [
+      "CoreCollector",
+      "BitmovinPlayerCollector",
+      "AVPlayerCollector",
+      "AmazonIVSPlayerCollector",
+    ]
+
+    schemes.each do |scheme|
       push_xcframework(
         product_name: scheme
       )
     end
-    
+
     push_umbrella_xcframework
   end
 

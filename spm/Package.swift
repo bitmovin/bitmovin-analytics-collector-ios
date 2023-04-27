@@ -13,15 +13,15 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "BitmovinPlayerCollector",
-            targets: ["BitmovinPlayerCollectorWrapper"]
+            targets: ["BitmovinPlayerCollectorTarget"]
         ),
         .library(
             name: "AVPlayerCollector",
-            targets: ["AVPlayerCollectorWrapper"]
+            targets: ["AVPlayerCollectorTarget"]
         ),
         .library(
             name: "AmazonIVSPlayerCollector",
-            targets: ["AmazonIVSPlayerCollectorWrapper"]
+            targets: ["AmazonIVSPlayerCollectorTarget"]
         )
     ],
     dependencies: [
@@ -41,7 +41,7 @@ let package = Package(
             checksum: "AVPlayerCollector-hash"
         ),
         .target(
-            name: "AVPlayerCollectorWrapper",
+            name: "AVPlayerCollectorTarget",
             dependencies: [
                 "CoreCollector",
                 "AVPlayerCollector",
@@ -53,7 +53,7 @@ let package = Package(
             checksum: "BitmovinPlayerCollector-hash"
         ),
         .target(
-            name: "BitmovinPlayerCollectorWrapper",
+            name: "BitmovinPlayerCollectorTarget",
             dependencies: [
                 "CoreCollector",
                 "BitmovinPlayerCollector",
@@ -71,7 +71,7 @@ let package = Package(
             checksum: "AmazonIVSPlayerCollector-hash"
         ),
         .target(
-            name: "AmazonIVSPlayerCollectorWrapper",
+            name: "AmazonIVSPlayerCollectorTarget",
             dependencies: [
                 .target(name: "AmazonIVSPlayerCollector", condition: .when(platforms: [.iOS])),
                 .target(name: "AmazonIVSPlayer", condition: .when(platforms: [.iOS])),
