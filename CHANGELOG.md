@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+### Removed
+- remove support for building for `BITCODE`
+
 ## v2.11.0
 
 ### Added

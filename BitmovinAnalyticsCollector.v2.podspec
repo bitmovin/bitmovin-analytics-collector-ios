@@ -19,7 +19,6 @@ DESC
   s.pod_target_xcconfig = {
       'FRAMEWORK_SEARCH_PATHS' => '"${PODS_ROOT}"/*',
       'OTHER_LDFLAGS' => '$(inherited) -ObjC',
-      'ENABLE_BITCODE' => 'YES'
   }
   s.subspec 'Core' do |core|
     core.source_files = 'Sources/CoreCollector/**/*.{swift}'
