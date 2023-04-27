@@ -150,12 +150,11 @@ platform :ios do
     end
 
     bucket_path = "analytics/ios_tvos/#{release_version}/#{product_name}.zip"
-    google_cloud_storage_upload(
-      project: "bitmovincloud",
-      keyfile: gcs_key_path,
-      content_path: "#{release_dir}/#{product_name}.zip",
-      bucket: "cloudflare-cdn-origin-bucket",
-      name: bucket_path
+    file_to_upload = "#{release_dir}/#{product_name}.zip"
+
+    sh(
+      %{gcloud auth activate-service-account --key-file=#{gcs_key_path}},
+      %{gsutil cp -a public-read #{file_to_upload} gs://cloudflare-cdn-origin-bucket/#{bucket_path}}
     )
   end
 
@@ -170,12 +169,11 @@ platform :ios do
     end
 
     bucket_path = "analytics/ios_tvos/#{release_version}/BitmovinAnalyticsCollector.zip"
-    google_cloud_storage_upload(
-      project: "bitmovincloud",
-      keyfile: gcs_key_path,
-      content_path: "#{release_dir}/BitmovinAnalyticsCollector.zip",
-      bucket: "cloudflare-cdn-origin-bucket",
-      name: bucket_path
+    file_to_upload = "#{release_dir}/BitmovinAnalyticsCollector.zip"
+
+    sh(
+      %{gcloud auth activate-service-account --key-file=#{gcs_key_path}},
+      %{gsutil cp -a public-read #{file_to_upload} gs://cloudflare-cdn-origin-bucket/#{bucket_path}}
     )
   end
 
