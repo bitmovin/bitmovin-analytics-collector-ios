@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - [internal] A Xcode worksapce to collect all future target together
+- [internal] Extended GitHub Actions workflow for unit tests to report results on GitHub
 
 ## v2.11.0
 
