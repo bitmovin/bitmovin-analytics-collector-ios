@@ -34,3 +34,11 @@ jobs:
       - name: Execute iOS Unit Tests for ${{ matrix.collector }}
         timeout-minutes: 10
         run: bundle exec fastlane test_collector "scheme:${{ matrix.collector }}"
+      - name: Test Report
+        uses: kishikawakatsumi/xcresulttool@v1
+        if: success() || failure()
+        with:
+          title: iOS ${{ matrix.collector }} Unit Test Report
+          path: fastlane/test_output/xctest/${{ matrix.collector }}.xcresult
+          show-passed-tests: false
+          upload-bundles: false
