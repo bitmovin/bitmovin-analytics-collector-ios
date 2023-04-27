@@ -1,2 +1,2 @@
 brew "mint"
-brew "google-cloud-sdk"
+cask "google-cloud-sdk"
