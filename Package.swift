@@ -13,15 +13,15 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "BitmovinPlayerCollector",
-            targets: ["BitmovinPlayerCollectorWrapper"]
+            targets: ["BitmovinPlayerCollectorTarget"]
         ),
         .library(
             name: "AVPlayerCollector",
-            targets: ["AVPlayerCollectorWrapper"]
+            targets: ["AVPlayerCollectorTarget"]
         ),
         .library(
             name: "AmazonIVSPlayerCollector",
-            targets: ["AmazonIVSPlayerCollectorWrapper"]
+            targets: ["AmazonIVSPlayerCollectorTarget"]
         )
     ],
     dependencies: [
@@ -41,7 +41,7 @@ let package = Package(
             checksum: "c88c8c49a337cff3078820a8fd8e13b804318f3bbe7f346efc85cd8605151028"
         ),
         .target(
-            name: "AVPlayerCollectorWrapper",
+            name: "AVPlayerCollectorTarget",
             dependencies: [
                 "CoreCollector",
                 "AVPlayerCollector",
@@ -53,7 +53,7 @@ let package = Package(
             checksum: "cfa55d2bc5a12a967ebfb6aeb9812d83d776a0ca074cc8cda25ab9b9e581b37f"
         ),
         .target(
-            name: "BitmovinPlayerCollectorWrapper",
+            name: "BitmovinPlayerCollectorTarget",
             dependencies: [
                 "CoreCollector",
                 "BitmovinPlayerCollector",
@@ -71,7 +71,7 @@ let package = Package(
             checksum: "6458dd1c390a2704e9d4a77558b72499ac8b7e918c84c64c1ea645419ed67bea"
         ),
         .target(
-            name: "AmazonIVSPlayerCollectorWrapper",
+            name: "AmazonIVSPlayerCollectorTarget",
             dependencies: [
                 .target(name: "AmazonIVSPlayerCollector", condition: .when(platforms: [.iOS])),
                 .target(name: "AmazonIVSPlayer", condition: .when(platforms: [.iOS])),
