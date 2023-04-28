@@ -135,10 +135,8 @@ platform :ios do
     bucket_path = "analytics/ios_tvos/#{release_version}/#{product_name}.zip"
     file_to_upload = "#{release_dir}/#{product_name}.zip"
 
-    sh(
-      %{gcloud auth activate-service-account --key-file=#{gcs_key_path}},
-      %{gsutil cp -a public-read #{file_to_upload} gs://#{bucket_name}/#{bucket_path}}
-    )
+    sh(%{gcloud auth activate-service-account --key-file=#{gcs_key_path}})
+    sh(%{gsutil cp -a public-read #{file_to_upload} gs://#{bucket_name}/#{bucket_path}})
   end
 
   desc "push umbrella xcframework zip"
