@@ -77,7 +77,8 @@ jobs:
           fi
 
           echo "version_number=$new_tag" >> $GITHUB_OUTPUT
-          commitish="$(git rev-parse HEAD)""
+          
+          commitish="$(git rev-parse HEAD)"
           echo "commitish=$commitish" >> $GITHUB_OUTPUT
 
           echo "Final version number: $new_tag"
