@@ -37,7 +37,6 @@ jobs:
     needs: [unit_tests, build_workspace, swiftlint]
     outputs:
       version_number: ${{ steps.version_number.outputs.version_number }}
-      commitish: ${{ steps.commitish.outputs.commitish }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -97,12 +96,6 @@ jobs:
         run: |
           git push origin
           git push origin ${{ steps.version_number.outputs.version_number }}
-      - name: Get commit SHA
-        id: commitish
-        run: |
-          commitish="$(git rev-parse HEAD)"
-          echo "commitish=$commitish" >> $GITHUB_OUTPUT
-          echo "Commitish: $commitish"
   build_release:
     name: Build and publish release
     runs-on: self-hosted
@@ -134,12 +127,19 @@ jobs:
           CP_HOME_DIR: ${{ github.workspace }}/CocoaPodsCaches
       - name: Release SPM
         run: bundle exec fastlane ios push_spm_package "spm_deploy_key:${{ secrets.SPM_DEPLOY_KEY }}"
+      - name: Get public repo commit SHA
+        id: commitish
+        run: |
+          commitish="$(git rev-parse HEAD)"
+          echo "commitish=$commitish" >> $GITHUB_OUTPUT
+          echo "Commitish: $commitish"
+        working-directory: Release/SPM
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
         with:
           name: ${{ needs.version_bump.outputs.version_number }}
           tag_name: ${{ needs.version_bump.outputs.version_number }}
-          target_commitish: ${{ needs.version_bump.outputs.commitish }}
+          target_commitish: ${{ steps.commitish.outputs.commitish }}
           repository: bitmovin/bitmovin-analytics-collector-ios
           token: ${{ secrets.ANALYTICS_GH_TOKEN }}
       - name: Notify collector release channel
