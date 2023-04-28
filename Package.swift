@@ -12,7 +12,7 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "BitmovinPlayerCollector",
+            name: "BitmovinPlayerCollectorSDK",
             targets: [
                 "CoreCollector",
                 "BitmovinPlayerCollector",
@@ -20,14 +20,14 @@ let package = Package(
             ]
         ),
         .library(
-            name: "AVPlayerCollector",
+            name: "AVPlayerCollectorSDK",
             targets: [
                 "CoreCollector",
                 "AVPlayerCollector",
             ]
         ),
         .library(
-            name: "AmazonIVSPlayerCollector",
+            name: "AmazonIVSPlayerCollectorSDK",
             targets: ["AmazonIVSPlayerCollectorTarget"]
         )
     ],
