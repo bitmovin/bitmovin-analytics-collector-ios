@@ -7,6 +7,6 @@ class DirectoryHelper
     return @@project_root unless @@project_root.nil?
 
     current_folder = Dir.pwd
-    @@project_root = current_folder.slice(0..current_folder.index('/fastlane'))
+    @@project_root = current_folder.slice(0..(current_folder.index('/fastlane') - 1))
   end
 end
