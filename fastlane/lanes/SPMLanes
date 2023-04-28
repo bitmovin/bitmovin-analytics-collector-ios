@@ -3,13 +3,6 @@
 platform :ios do
   desc "prepare SPM package release"
   lane :prepare_spm_package_release do |options|
-    package_version = options[:package_version] || ENV.fetch("GIT_VERSION")
-
-    if package_version.to_s.strip.empty?
-      UI.error "Error: parameter `package_version` is empty!"
-      exit(1)
-    end
-
     release_dir = "#{DirectoryHelper.project_root}/Release"
 
     spm_deploy_key_path="#{release_dir}/spm-deploy.id_rsa"
@@ -55,16 +48,21 @@ platform :ios do
       exit(1)
     end
 
-    checksum = SpmHelper.calculate_checksum(binary_path)
-
     tmp_dir = "#{release_dir}/SPM"
     Dir.chdir("#{tmp_dir}") do
-    SpmHelper.update_package_swift(
-      package_manifest_template_path: "Package.swift",
-      package_version: package_version,
-      target: target,
-      checksum: checksum
-    )
+      checksum = SpmHelper.calculate_checksum(binary_path)
+
+      if checksum.empty?
+        UI.error "Error: checksum is empty!"
+        exit(1)
+      end
+
+      SpmHelper.update_package_swift(
+        package_manifest_template_path: "#{tmp_dir}/Package.swift",
+        package_version: package_version,
+        target: target,
+        checksum: checksum
+      )
     end
   end
 

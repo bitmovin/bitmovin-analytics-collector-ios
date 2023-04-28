@@ -9,7 +9,7 @@ class SpmHelper
     # Update Package.swift with URL and checksum
     package_swift_contents = File.read(package_manifest_template_path)
       .gsub(/url: "https:\/\/cdn.bitmovin.com\/analytics\/ios_tvos\/.*\/#{target}.zip"/, %{url: "https://cdn.bitmovin.com/analytics/ios_tvos/#{package_version}/#{target}.zip"})
-      .gsub(/checksum: "#{target}-.*"/, %{checksum: "#{checksum}"})
+      .gsub(/checksum: "#{target}-hash"/, %{checksum: "#{checksum}"})
     File.write("Package.swift", package_swift_contents)
   end
 end
