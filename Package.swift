@@ -32,13 +32,13 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .binaryTarget(
             name: "CoreCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.17/CoreCollector.zip",
-            checksum: ""
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.18/CoreCollector.zip",
+            checksum: "ec556e988a36bc289723569c465348fc1cb7f70e6fa0b47be7031de707deda06"
         ),
         .binaryTarget(
             name: "AVPlayerCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.17/AVPlayerCollector.zip",
-            checksum: ""
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.18/AVPlayerCollector.zip",
+            checksum: "5bf84fbf711be7383a519499546930993f575e7bc2843a962f067731fe44c8a0"
         ),
         .target(
             name: "AVPlayerCollectorTarget",
@@ -49,8 +49,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "BitmovinPlayerCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.17/BitmovinPlayerCollector.zip",
-            checksum: ""
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.18/BitmovinPlayerCollector.zip",
+            checksum: "8b5243144dc8237ffd701ec041ca25947bf69c5d34d8c28f2c4a7c357025ab2d"
         ),
         .target(
             name: "BitmovinPlayerCollectorTarget",
@@ -67,8 +67,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "AmazonIVSPlayerCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.17/AmazonIVSPlayerCollector.zip",
-            checksum: ""
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.18/AmazonIVSPlayerCollector.zip",
+            checksum: "88c1caa2e83a712729c7ef295897f11226d9f4c7edc31b9268a79400f2352ba2"
         ),
         .target(
             name: "AmazonIVSPlayerCollectorTarget",
