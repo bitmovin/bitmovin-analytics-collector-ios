@@ -32,13 +32,13 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .binaryTarget(
             name: "CoreCollector",
-            url: "https://cdn.bitmovin.com/player/ios_tvos/2.11.1-a.12/CoreCollector.zip",
-            checksum: "1d9c30956145b7df8a36e4985c00e64137e857039fa27dc5592b2147876d7980"
+            url: "https://cdn.bitmovin.com/player/ios_tvos/2.11.1-a.16/CoreCollector.zip",
+            checksum: ""
         ),
         .binaryTarget(
             name: "AVPlayerCollector",
-            url: "https://cdn.bitmovin.com/player/ios_tvos/2.11.1-a.12/AVPlayerCollector.zip",
-            checksum: "c88c8c49a337cff3078820a8fd8e13b804318f3bbe7f346efc85cd8605151028"
+            url: "https://cdn.bitmovin.com/player/ios_tvos/2.11.1-a.16/AVPlayerCollector.zip",
+            checksum: ""
         ),
         .target(
             name: "AVPlayerCollectorTarget",
@@ -49,8 +49,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "BitmovinPlayerCollector",
-            url: "https://cdn.bitmovin.com/player/ios_tvos/2.11.1-a.12/BitmovinPlayerCollector.zip",
-            checksum: "cfa55d2bc5a12a967ebfb6aeb9812d83d776a0ca074cc8cda25ab9b9e581b37f"
+            url: "https://cdn.bitmovin.com/player/ios_tvos/2.11.1-a.16/BitmovinPlayerCollector.zip",
+            checksum: ""
         ),
         .target(
             name: "BitmovinPlayerCollectorTarget",
@@ -67,8 +67,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "AmazonIVSPlayerCollector",
-            url: "https://cdn.bitmovin.com/player/ios_tvos/2.11.1-a.12/AmazonIVSPlayerCollector.zip",
-            checksum: "6458dd1c390a2704e9d4a77558b72499ac8b7e918c84c64c1ea645419ed67bea"
+            url: "https://cdn.bitmovin.com/player/ios_tvos/2.11.1-a.16/AmazonIVSPlayerCollector.zip",
+            checksum: ""
         ),
         .target(
             name: "AmazonIVSPlayerCollectorTarget",
