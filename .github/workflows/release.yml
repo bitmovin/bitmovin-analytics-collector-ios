@@ -37,7 +37,7 @@ jobs:
     needs: [unit_tests, build_workspace, swiftlint]
     outputs:
       version_number: ${{ steps.version_number.outputs.version_number }}
-      commitish: ${{ steps.commit.outputs.commitish }}
+      commitish: ${{ steps.commitish.outputs.commitish }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -87,13 +87,9 @@ jobs:
         run: |
           sed -E -i "s/(## Development V2)/\1\n\n## ${{ steps.version_number.outputs.version_number }}/g" CHANGELOG.md
       - name: Commit version bump
-        id: commit
         run: |
           git add CHANGELOG.md BitmovinAnalyticsCollector/xcconfig/Project-Shared.xcconfig
           git commit -m "Bump collector version to ${{ steps.version_number.outputs.version_number }}"
-          
-          commitish="$(git rev-parse HEAD)"
-          echo "commitish=$commitish" >> $GITHUB_OUTPUT
       - name: Add tag
         run: |
           git tag ${{ steps.version_number.outputs.version_number }}
@@ -101,6 +97,12 @@ jobs:
         run: |
           git push origin
           git push origin ${{ steps.version_number.outputs.version_number }}
+      - name: Get commit SHA
+        id: commitish
+        run: |
+          commitish="$(git rev-parse HEAD)"
+          echo "commitish=$commitish" >> $GITHUB_OUTPUT
+          echo "Commitish: $commitish"
   build_release:
     name: Build and publish release
     runs-on: self-hosted
