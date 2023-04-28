@@ -128,3 +128,18 @@ jobs:
           CP_HOME_DIR: ${{ github.workspace }}/CocoaPodsCaches
       - name: Release SPM
         run: bundle exec fastlane ios push_spm_package "spm_deploy_key:${{ secrets.SPM_DEPLOY_KEY }}"
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ needs.version_bump.outputs.version_number }}
+          tag_name: ${{ needs.version_bump.outputs.version_number }}
+          target_commitish: ${{ needs.version_bump.outputs.version_number }}
+          repository: bitmovin/bitmovin-analytics-collector-ios
+          token: ${{ secrets.ANALYTICS_GH_TOKEN }}
+      - name: Notify collector release channel
+        if: ${{ inputs.release_type == 'final' }}
+        run: |
+          ./scripts/notifyCollectorReleaseChannel.sh "ios" "${{ needs.version_bump.outputs.version_number }}"
+          ./scripts/notifyCollectorReleaseChannel.sh "tvos" "${{ needs.version_bump.outputs.version_number }}"
+        env:
+          ANALYTICS_API_RELEASE_TOKEN: ${{ secrets.ANALYTICS_API_RELEASE_TOKEN }}
