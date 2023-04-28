@@ -39,8 +39,4 @@ class GitHelper
       command: "git push --tags"
     )
   end
-
-  def self.get_all_stable_tags(major_version)
-    %x[git --no-pager tag | egrep '^#{major_version}\\.\\d+\\.\\d+$'].to_s.split.to_a
-  end
 end
