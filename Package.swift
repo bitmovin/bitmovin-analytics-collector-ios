@@ -32,13 +32,13 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .binaryTarget(
             name: "CoreCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.18/CoreCollector.zip",
-            checksum: "ec556e988a36bc289723569c465348fc1cb7f70e6fa0b47be7031de707deda06"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.19/CoreCollector.zip",
+            checksum: "7de6c425f75aa45a65c5ebc887d00386fa8e2a0ef33fbba35fd9d1ca8f848f81"
         ),
         .binaryTarget(
             name: "AVPlayerCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.18/AVPlayerCollector.zip",
-            checksum: "5bf84fbf711be7383a519499546930993f575e7bc2843a962f067731fe44c8a0"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.19/AVPlayerCollector.zip",
+            checksum: "13c9905b0af7de0f9bf80a1ea012282398a13f4cab2be6193a0f5393fcd63cb2"
         ),
         .target(
             name: "AVPlayerCollectorTarget",
@@ -49,8 +49,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "BitmovinPlayerCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.18/BitmovinPlayerCollector.zip",
-            checksum: "8b5243144dc8237ffd701ec041ca25947bf69c5d34d8c28f2c4a7c357025ab2d"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.19/BitmovinPlayerCollector.zip",
+            checksum: "29b265d2190de3b9f78296f4bd1acc98a975edc8987b1051fec0499a6c5c63fb"
         ),
         .target(
             name: "BitmovinPlayerCollectorTarget",
@@ -67,8 +67,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "AmazonIVSPlayerCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.18/AmazonIVSPlayerCollector.zip",
-            checksum: "88c1caa2e83a712729c7ef295897f11226d9f4c7edc31b9268a79400f2352ba2"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.19/AmazonIVSPlayerCollector.zip",
+            checksum: "32cf84bed1ad5d850f19f29e54cba5100d8544017dc46bcbb10ef47306fc4f94"
         ),
         .target(
             name: "AmazonIVSPlayerCollectorTarget",
