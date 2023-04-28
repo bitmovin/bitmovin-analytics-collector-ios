@@ -96,7 +96,7 @@ platform :ios do
   lane :push_spm_package do |options|
     spm_deploy_key = options[:spm_deploy_key]
     package_version = ENV.fetch("GIT_VERSION")
-    schemes = [
+    targets = [
       "CoreCollector",
       "BitmovinPlayerCollector",
       "AVPlayerCollector",
@@ -108,9 +108,9 @@ platform :ios do
       spm_deploy_key: spm_deploy_key
     )
 
-    schemes.each do |scheme|
+    targets.each do |target|
       update_spm_package_target(
-        scheme: scheme,
+        target: target,
         package_version: package_version
       )
     end
