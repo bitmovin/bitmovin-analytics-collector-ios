@@ -523,4 +523,4 @@ SWIFT_EMIT_LOC_STRINGS = YES
 //
 // This setting defines the user-visible version of the project. The value corresponds to
 // the `CFBundleShortVersionString` key in your app's Info.plist.
-MARKETING_VERSION = 2.11.1-a.17
+MARKETING_VERSION = 2.11.1-a.18
