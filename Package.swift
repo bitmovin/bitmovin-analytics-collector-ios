@@ -20,6 +20,12 @@ let package = Package(
             ]
         ),
         .library(
+            name: "BitmovinPlayerCollector",
+            targets: [
+                "BitmovinPlayerCollector",
+            ]
+        ),
+        .library(
             name: "AVPlayerCollectorSDK",
             targets: [
                 "CoreCollector",
