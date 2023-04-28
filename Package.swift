@@ -32,12 +32,12 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .binaryTarget(
             name: "CoreCollector",
-            url: "https://cdn.bitmovin.com/player/ios_tvos/2.11.1-a.16/CoreCollector.zip",
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.17/CoreCollector.zip",
             checksum: ""
         ),
         .binaryTarget(
             name: "AVPlayerCollector",
-            url: "https://cdn.bitmovin.com/player/ios_tvos/2.11.1-a.16/AVPlayerCollector.zip",
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.17/AVPlayerCollector.zip",
             checksum: ""
         ),
         .target(
@@ -49,7 +49,7 @@ let package = Package(
         ),
         .binaryTarget(
             name: "BitmovinPlayerCollector",
-            url: "https://cdn.bitmovin.com/player/ios_tvos/2.11.1-a.16/BitmovinPlayerCollector.zip",
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.17/BitmovinPlayerCollector.zip",
             checksum: ""
         ),
         .target(
@@ -67,7 +67,7 @@ let package = Package(
         ),
         .binaryTarget(
             name: "AmazonIVSPlayerCollector",
-            url: "https://cdn.bitmovin.com/player/ios_tvos/2.11.1-a.16/AmazonIVSPlayerCollector.zip",
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.17/AmazonIVSPlayerCollector.zip",
             checksum: ""
         ),
         .target(
