@@ -77,6 +77,8 @@ jobs:
           fi
 
           echo "version_number=$new_tag" >> $GITHUB_OUTPUT
+          commitish="$(git rev-parse HEAD)""
+          echo "commitish=$commitish" >> $GITHUB_OUTPUT
 
           echo "Final version number: $new_tag"
       - name: Bump Collector version
@@ -133,7 +135,7 @@ jobs:
         with:
           name: ${{ needs.version_bump.outputs.version_number }}
           tag_name: ${{ needs.version_bump.outputs.version_number }}
-          target_commitish: ${{ needs.version_bump.outputs.version_number }}
+          target_commitish: ${{ needs.version_bump.outputs.commitish }}
           repository: bitmovin/bitmovin-analytics-collector-ios
           token: ${{ secrets.ANALYTICS_GH_TOKEN }}
       - name: Notify collector release channel
