@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+### Fixed 
+- AmazonIVSCollector: `isLive` tracking didn't work
+
 ### Removed
 - remove support for building for `BITCODE`
 

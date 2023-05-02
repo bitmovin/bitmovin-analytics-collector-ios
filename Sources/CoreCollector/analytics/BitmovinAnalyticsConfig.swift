@@ -200,7 +200,7 @@ public class BitmovinAnalyticsConfig: NSObject {
     /**
      * Flag to see if stream is live before stream metadata is available (default: false)
      */
-    public var isLive = false
+    public var isLive: Bool = false
 
     /**
      * Flag to enable Ad tracking

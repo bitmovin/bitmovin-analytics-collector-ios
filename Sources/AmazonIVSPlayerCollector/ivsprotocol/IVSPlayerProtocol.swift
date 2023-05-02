@@ -7,6 +7,9 @@ protocol IVSPlayerProtocol: AnyObject {
     var delegate: IVSPlayer.Delegate? { get set }
     var state: IVSPlayer.State { get }
     var qualityProtocol: IVSQualityProtocol? { get }
+    var muted: Bool { get }
+    var path: URL? { get }
+    var duration: CMTime { get }
 }
 
 extension IVSPlayer: IVSPlayerProtocol {

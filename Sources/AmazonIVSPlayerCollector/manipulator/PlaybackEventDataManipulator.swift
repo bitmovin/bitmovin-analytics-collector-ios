@@ -5,11 +5,11 @@ import AmazonIVSPlayer
 import Foundation
 
 class PlaybackEventDataManipulator: EventDataManipulator {
-    private weak var player: IVSPlayer?
+    private weak var player: IVSPlayerProtocol?
     private let config: BitmovinAnalyticsConfig
 
     init(
-        player: IVSPlayer,
+        player: IVSPlayerProtocol,
         config: BitmovinAnalyticsConfig
     ) {
         self.player = player
@@ -22,7 +22,7 @@ class PlaybackEventDataManipulator: EventDataManipulator {
         }
 
         eventData.isMuted = player.muted
-        eventData.videoDuration = player.duration.toMillis() ?? 0
+        eventData.videoDuration = getVideoDuration(player) ?? 0
 
         // IVS player only supports HLS, thus we hardcode it here
         eventData.streamFormat = StreamType.hls.rawValue
@@ -31,12 +31,18 @@ class PlaybackEventDataManipulator: EventDataManipulator {
         setLive(eventData, player)
     }
 
-    private func setLive(_ eventData: EventData, _ player: IVSPlayer) {
-        let isLiveConfig = config.isLive
-        if isLiveConfig {
-            eventData.isLive = isLiveConfig
-        } else {
-            eventData.isLive = player.duration.isIndefinite
+    private func getVideoDuration(_ player: IVSPlayerProtocol) -> Int64? {
+        // if live stream return 0
+        guard !player.duration.isIndefinite else {
+            return 0
         }
+        return player.duration.toMillis()
+    }
+
+    private func setLive(_ eventData: EventData, _ player: IVSPlayerProtocol) {
+        guard player.duration.isValid else {
+            return
+        }
+        eventData.isLive = player.duration.isIndefinite
     }
 }
