@@ -13,6 +13,7 @@ To get started collecting data with Bitmovin Analytics you need a License-Key wh
 
 - [Bitmovin Player](https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod)
 - AVPlayer
+- [Amazon IVS](https://docs.aws.amazon.com/ivs/latest/userguide/player-ios.html)
 
 ## Example
 
