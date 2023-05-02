@@ -80,32 +80,28 @@ internal class LicenseAuthenticationService: AuthenticationService {
             return .error
         }
 
-        do {
-            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else {
-                logger.e("Bitmovin Analytics licensing failed. Could not decode JSON response: \(data)")
-                return .error
-            }
-
-            guard httpResponse.statusCode < 400 else {
-                let message = json["message"] as? String
-                logger.e("Bitmovin Analytics licensing failed. Reason: \(message ?? "Unknown error")")
-                return .error
-            }
-
-            guard let status = json["status"] as? String else {
-                logger.e("Bitmovin Analytics licensing failed. Reason: status not set")
-                return .error
-            }
-
-            guard status == "granted" else {
-                logger.e("Bitmovin Analytics licensing failed. Reason given by server: \(status)")
-                return .denied
-            }
-
-            return .granted
-        } catch {
+        guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else {
+            logger.e("Bitmovin Analytics licensing failed. Could not decode JSON response: \(data)")
             return .error
         }
+
+        guard httpResponse.statusCode < 400 else {
+            let message = json["message"] as? String
+            logger.e("Bitmovin Analytics licensing failed. Reason: \(message ?? "Unknown error")")
+            return .error
+        }
+
+        guard let status = json["status"] as? String else {
+            logger.e("Bitmovin Analytics licensing failed. Reason: status not set")
+            return .error
+        }
+
+        guard status == "granted" else {
+            logger.e("Bitmovin Analytics licensing failed. Reason given by server: \(status)")
+            return .denied
+        }
+
+        return .granted
     }
 
     private func buildAuthenticationData() -> LicenseCallData {
