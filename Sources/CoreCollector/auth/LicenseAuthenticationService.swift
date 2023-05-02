@@ -23,7 +23,7 @@ internal class LicenseAuthenticationService: AuthenticationService {
     }
 
     func authenticate() {
-        let authenticate = synchronized(self) {
+        let shouldSendLicenseCall = synchronized(self) {
             if licenseCallInProgress {
                 return false
             }
@@ -32,7 +32,7 @@ internal class LicenseAuthenticationService: AuthenticationService {
             return true
         }
 
-        guard authenticate else { return }
+        guard shouldSendLicenseCall else { return }
 
         let licenseCallData = self.buildAuthenticationData()
         let json = Util.toJson(object: licenseCallData)
