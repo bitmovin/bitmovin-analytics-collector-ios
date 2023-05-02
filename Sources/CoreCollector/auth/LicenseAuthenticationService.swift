@@ -14,7 +14,7 @@ internal class LicenseAuthenticationService: AuthenticationService {
     private let config: BitmovinAnalyticsConfig
     private let httpClient: HttpClient
     private let notificationCenter: NotificationCenter
-    private var licenseCallOngoing: Bool = false
+    private var licenseCallInProgress: Bool = false
 
     init(_ httpClient: HttpClient, _ config: BitmovinAnalyticsConfig, _ notificationCenter: NotificationCenter) {
         self.httpClient = httpClient
@@ -24,11 +24,11 @@ internal class LicenseAuthenticationService: AuthenticationService {
 
     func authenticate() {
         let authenticate = synchronized(self) {
-            if licenseCallOngoing {
+            if licenseCallInProgress {
                 return false
             }
 
-            licenseCallOngoing = true
+            licenseCallInProgress = true
             return true
         }
 
@@ -46,7 +46,7 @@ internal class LicenseAuthenticationService: AuthenticationService {
             self.handleLicenseCallResponse(data, response, error)
 
             synchronized(self) {
-                self.licenseCallOngoing = false
+                self.licenseCallInProgress = false
             }
         }
     }
