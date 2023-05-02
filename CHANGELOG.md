@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Development V2
 
 ### Added
+- [internal] A Xcode worksapce to collect all future target together
+- [internal] Extended GitHub Actions workflow for unit tests to report results on GitHub
 - [internal] An Xcode workspace to collect all future targets together
 
 ### Changed
