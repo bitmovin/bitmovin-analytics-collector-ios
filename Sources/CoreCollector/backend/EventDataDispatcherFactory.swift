@@ -20,7 +20,7 @@ internal class EventDataDispatcherFactory {
         let eventDataQueue = persistentQueueFactory.create()
         let httpDispatcher = HttpEventDataDispatcher(httpClient: httpClient, eventDataQueue: eventDataQueue)
 
-        if config.offlinePlaybackAnalyticsEnabled {
+        if config.longTermRetryEnabled {
             let persistingDispatcher = PersistingDispatcher(
                 innerDispatcher: httpDispatcher,
                 eventDataQueue: eventDataQueue
