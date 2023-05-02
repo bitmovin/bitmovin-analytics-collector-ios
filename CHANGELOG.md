@@ -10,7 +10,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - [internal] A Xcode worksapce to collect all future target together
 - [internal] Extended GitHub Actions workflow for unit tests to report results on GitHub
-- [internal] Added release automation via GitHub Actions with manual trigger
+- [internal] Release automation via GitHub Actions with manual trigger
+- [internal] An Xcode workspace to collect all future targets together
+
+### Changed
+- The collectors (`CoreCollector`, `BitmovinPlayerCollector`, `AVPlayerCollector`, `AmazonIVSPlayerCollector`) are now now shipped as `XCFramework`
+- The source code is removed from the public repository
+- [internal] Unit tests are now handled in separate targets
 
 ## v2.11.0
 

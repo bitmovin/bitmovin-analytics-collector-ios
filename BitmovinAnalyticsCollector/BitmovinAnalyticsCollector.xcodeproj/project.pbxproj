@@ -228,6 +228,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		374E116629F82472000D3860 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
+		374E116729F82472000D3860 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		37EEC30729F6A8F5005D0457 /* CoreCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EEC30F29F6A9D0005D0457 /* HttpEventDataDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpEventDataDispatcher.swift; sourceTree = "<group>"; };
 		37EEC31029F6A9D0005D0457 /* EventDataDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataDispatcher.swift; sourceTree = "<group>"; };
