@@ -1,5 +1,5 @@
 import Foundation
-@testable import AVPlayerCollector
+@testable import AVFoundationCollector
 @testable import CoreCollector
 
 class AccessLogProviderMock: AccessLogProvider {

@@ -1,6 +1,6 @@
 import AVKit
 import CoreCollector
-import AVPlayerCollector
+import AVFoundationCollector
 import UIKit
 
 class AVFoundationDrmViewController: UIViewController {

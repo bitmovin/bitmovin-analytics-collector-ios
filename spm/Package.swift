@@ -16,8 +16,8 @@ let package = Package(
             targets: ["BitmovinCollectorTarget"]
         ),
         .library(
-            name: "AVPlayerCollector",
-            targets: ["AVPlayerCollectorTarget"]
+            name: "AVFoundationCollector",
+            targets: ["AVFoundationCollectorTarget"]
         ),
         .library(
             name: "AmazonIVSPlayerCollector",
@@ -36,15 +36,15 @@ let package = Package(
             checksum: "CoreCollector-hash"
         ),
         .binaryTarget(
-            name: "AVPlayerCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/x.x.x/AVPlayerCollector.zip",
-            checksum: "AVPlayerCollector-hash"
+            name: "AVFoundationCollector",
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/x.x.x/AVFoundationCollector.zip",
+            checksum: "AVFoundationCollector-hash"
         ),
         .target(
-            name: "AVPlayerCollectorTarget",
+            name: "AVFoundationCollectorTarget",
             dependencies: [
                 "CoreCollector",
-                "AVPlayerCollector",
+                "AVFoundationCollector",
             ]
         ),
         .binaryTarget(

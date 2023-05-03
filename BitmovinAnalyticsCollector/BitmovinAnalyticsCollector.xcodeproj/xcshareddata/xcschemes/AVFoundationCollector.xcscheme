@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "37EEC45729F6BF2C005D0457"
-               BuildableName = "AVPlayerCollector.framework"
-               BlueprintName = "AVPlayerCollector"
+               BuildableName = ".framework"
+               BlueprintName = "AVFoundationCollector"
                ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -51,8 +51,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "37EEC45729F6BF2C005D0457"
-            BuildableName = "AVPlayerCollector.framework"
-            BlueprintName = "AVPlayerCollector"
+            BuildableName = ".framework"
+            BlueprintName = "AVFoundationCollector"
             ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

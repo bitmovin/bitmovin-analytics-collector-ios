@@ -1,6 +1,6 @@
 import Foundation
 import XCTest
-@testable import AVPlayerCollector
+@testable import AVFoundationCollector
 @testable import CoreCollector
 
 class DownloadSpeedDetectionServiceTest: XCTestCase {

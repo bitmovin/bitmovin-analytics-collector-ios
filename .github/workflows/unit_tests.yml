@@ -19,7 +19,7 @@ jobs:
     name: Execute Unit Tests
     strategy:
       matrix:
-        collector: [CoreCollectorTests, BitmovinCollectorTests, AVPlayerCollectorTests, AmazonIVSPlayerCollectorTests]
+        collector: [CoreCollectorTests, BitmovinCollectorTests, AVFoundationCollectorTests, AmazonIVSPlayerCollectorTests]
       fail-fast: false
     steps:
       - uses: actions/checkout@v3

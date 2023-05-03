@@ -32,7 +32,7 @@ platform :ios do
         supports_tvos: true
       },
       {
-        scheme: "AVPlayerCollector",
+        scheme: "AVFoundationCollector",
         supports_tvos: true
       },
       {
@@ -60,7 +60,7 @@ platform :ios do
     schemes = [
       "CoreCollector",
       "BitmovinCollector",
-      "AVPlayerCollector",
+      "AVFoundationCollector",
       "AmazonIVSPlayerCollector",
     ]
 
@@ -111,7 +111,7 @@ platform :ios do
     targets = [
       "CoreCollector",
       "BitmovinCollector",
-      "AVPlayerCollector",
+      "AVFoundationCollector",
       "AmazonIVSPlayerCollector",
     ]
 

@@ -1,6 +1,6 @@
 import AVKit
 import XCTest
-@testable import AVPlayerCollector
+@testable import AVFoundationCollector
 @testable import CoreCollector
 
 class AVPlayerTest: XCTestCase {

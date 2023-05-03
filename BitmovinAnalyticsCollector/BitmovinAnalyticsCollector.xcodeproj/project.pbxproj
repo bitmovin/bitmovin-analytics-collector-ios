@@ -126,7 +126,7 @@
 		37EEC47D29F6BF93005D0457 /* AVPlayerAdapterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC46F29F6BF92005D0457 /* AVPlayerAdapterFactory.swift */; };
 		37EEC47E29F6BF93005D0457 /* AVPlayerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC47129F6BF92005D0457 /* AVPlayerContext.swift */; };
 		37EEC47F29F6BFC6005D0457 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC30729F6A8F5005D0457 /* CoreCollector.framework */; };
-		37EEC48829F6C024005D0457 /* AVPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC45829F6BF2C005D0457 /* AVPlayerCollector.framework */; };
+		37EEC48829F6C024005D0457 /* AVFoundationCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC45829F6BF2C005D0457 /* AVFoundationCollector.framework */; };
 		37EEC49A29F6C0AD005D0457 /* DownloadSpeedDetectionServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC49229F6C0AD005D0457 /* DownloadSpeedDetectionServiceTest.swift */; };
 		37EEC49B29F6C0AD005D0457 /* BitrateDetectionServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC49329F6C0AD005D0457 /* BitrateDetectionServiceTest.swift */; };
 		37EEC49C29F6C0AD005D0457 /* AVPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC49429F6C0AD005D0457 /* AVPlayerTests.swift */; };
@@ -202,7 +202,7 @@
 			containerPortal = 37EEC2D529F6A86B005D0457 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 37EEC45729F6BF2C005D0457;
-			remoteInfo = AVPlayerCollector;
+			remoteInfo = AVFoundationCollector;
 		};
 		37EEC4FA29F7D53D005D0457 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -342,33 +342,33 @@
 		37EEC44929F6BB58005D0457 /* BitmovinCollectorTests-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinCollectorTests-Shared.xcconfig"; sourceTree = "<group>"; };
 		37EEC44A29F6BB58005D0457 /* BitmovinCollectorTests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinCollectorTests-Debug.xcconfig"; sourceTree = "<group>"; };
 		37EEC44B29F6BB58005D0457 /* BitmovinCollectorTests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinCollectorTests-Release.xcconfig"; sourceTree = "<group>"; };
-		37EEC45829F6BF2C005D0457 /* AVPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AVPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		37EEC45F29F6BF70005D0457 /* AVPlayerCollector-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AVPlayerCollector-Release.xcconfig"; sourceTree = "<group>"; };
-		37EEC46029F6BF70005D0457 /* AVPlayerCollector-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AVPlayerCollector-Debug.xcconfig"; sourceTree = "<group>"; };
-		37EEC46129F6BF70005D0457 /* AVPlayerCollector-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AVPlayerCollector-Shared.xcconfig"; sourceTree = "<group>"; };
+		37EEC45829F6BF2C005D0457 /* AVFoundationCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AVFoundationCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EEC45F29F6BF70005D0457 /* AVFoundationCollector-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AVFoundationCollector-Release.xcconfig"; sourceTree = "<group>"; };
+		37EEC46029F6BF70005D0457 /* AVFoundationCollector-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AVFoundationCollector-Debug.xcconfig"; sourceTree = "<group>"; };
+		37EEC46129F6BF70005D0457 /* AVFoundationCollector-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AVFoundationCollector-Shared.xcconfig"; sourceTree = "<group>"; };
 		37EEC46329F6BF92005D0457 /* AccessLogProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessLogProvider.swift; sourceTree = "<group>"; };
 		37EEC46429F6BF92005D0457 /* AVPlayerAccessLogProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVPlayerAccessLogProvider.swift; sourceTree = "<group>"; };
 		37EEC46529F6BF92005D0457 /* AccessLogDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessLogDto.swift; sourceTree = "<group>"; };
 		37EEC46629F6BF92005D0457 /* VideoQualityDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoQualityDto.swift; sourceTree = "<group>"; };
-		37EEC46729F6BF92005D0457 /* AVPlayerEventDataManipulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AVPlayerEventDataManipulator.swift; path = ../../Sources/AVPlayerCollector/AVPlayerEventDataManipulator.swift; sourceTree = "<group>"; };
-		37EEC46829F6BF92005D0457 /* AVPlayerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AVPlayerAdapter.swift; path = ../../Sources/AVPlayerCollector/AVPlayerAdapter.swift; sourceTree = "<group>"; };
-		37EEC46929F6BF92005D0457 /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorHandler.swift; path = ../../Sources/AVPlayerCollector/ErrorHandler.swift; sourceTree = "<group>"; };
-		37EEC46A29F6BF92005D0457 /* AVPlayerCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AVPlayerCollector.swift; path = ../../Sources/AVPlayerCollector/AVPlayerCollector.swift; sourceTree = "<group>"; };
+		37EEC46729F6BF92005D0457 /* AVPlayerEventDataManipulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AVPlayerEventDataManipulator.swift; path = ../../Sources/AVFoundationCollector/AVPlayerEventDataManipulator.swift; sourceTree = "<group>"; };
+		37EEC46829F6BF92005D0457 /* AVPlayerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AVPlayerAdapter.swift; path = ../../Sources/AVFoundationCollector/AVPlayerAdapter.swift; sourceTree = "<group>"; };
+		37EEC46929F6BF92005D0457 /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorHandler.swift; path = ../../Sources/AVFoundationCollector/ErrorHandler.swift; sourceTree = "<group>"; };
+		37EEC46A29F6BF92005D0457 /* AVPlayerCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AVPlayerCollector.swift; path = ../../Sources/AVFoundationCollector/AVPlayerCollector.swift; sourceTree = "<group>"; };
 		37EEC46C29F6BF92005D0457 /* PlaybackTypeDetectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackTypeDetectionService.swift; sourceTree = "<group>"; };
 		37EEC46D29F6BF92005D0457 /* DownloadSpeedDetectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadSpeedDetectionService.swift; sourceTree = "<group>"; };
 		37EEC46E29F6BF92005D0457 /* BitrateDetectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitrateDetectionService.swift; sourceTree = "<group>"; };
-		37EEC46F29F6BF92005D0457 /* AVPlayerAdapterFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AVPlayerAdapterFactory.swift; path = ../../Sources/AVPlayerCollector/AVPlayerAdapterFactory.swift; sourceTree = "<group>"; };
+		37EEC46F29F6BF92005D0457 /* AVPlayerAdapterFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AVPlayerAdapterFactory.swift; path = ../../Sources/AVFoundationCollector/AVPlayerAdapterFactory.swift; sourceTree = "<group>"; };
 		37EEC47129F6BF92005D0457 /* AVPlayerContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVPlayerContext.swift; sourceTree = "<group>"; };
-		37EEC48429F6C024005D0457 /* AVPlayerCollectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AVPlayerCollectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		37EEC48E29F6C050005D0457 /* AVPlayerCollectorTests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AVPlayerCollectorTests-Debug.xcconfig"; sourceTree = "<group>"; };
-		37EEC48F29F6C050005D0457 /* AVPlayerCollectorTests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AVPlayerCollectorTests-Release.xcconfig"; sourceTree = "<group>"; };
-		37EEC49029F6C050005D0457 /* AVPlayerCollectorTests-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AVPlayerCollectorTests-Shared.xcconfig"; sourceTree = "<group>"; };
+		37EEC48429F6C024005D0457 /* AVFoundationCollectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AVFoundationCollectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EEC48E29F6C050005D0457 /* AVFoundationCollectorTests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AVFoundationCollectorTests-Debug.xcconfig"; sourceTree = "<group>"; };
+		37EEC48F29F6C050005D0457 /* AVFoundationCollectorTests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AVFoundationCollectorTests-Release.xcconfig"; sourceTree = "<group>"; };
+		37EEC49029F6C050005D0457 /* AVFoundationCollectorTests-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AVFoundationCollectorTests-Shared.xcconfig"; sourceTree = "<group>"; };
 		37EEC49229F6C0AD005D0457 /* DownloadSpeedDetectionServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadSpeedDetectionServiceTest.swift; sourceTree = "<group>"; };
 		37EEC49329F6C0AD005D0457 /* BitrateDetectionServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitrateDetectionServiceTest.swift; sourceTree = "<group>"; };
-		37EEC49429F6C0AD005D0457 /* AVPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AVPlayerTests.swift; path = ../../Tests/AVPlayerCollectorTests/AVPlayerTests.swift; sourceTree = "<group>"; };
-		37EEC49529F6C0AD005D0457 /* AVPlayerAdapterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AVPlayerAdapterTests.swift; path = ../../Tests/AVPlayerCollectorTests/AVPlayerAdapterTests.swift; sourceTree = "<group>"; };
-		37EEC49629F6C0AD005D0457 /* GeneratedMocks-Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GeneratedMocks-Core.swift"; path = "../../Tests/AVPlayerCollectorTests/GeneratedMocks-Core.swift"; sourceTree = "<group>"; };
-		37EEC49729F6C0AD005D0457 /* MockableFiles.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; name = MockableFiles.xcfilelist; path = ../../Tests/AVPlayerCollectorTests/MockableFiles.xcfilelist; sourceTree = "<group>"; };
+		37EEC49429F6C0AD005D0457 /* AVPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AVPlayerTests.swift; path = ../../Tests/AVFoundationCollectorTests/AVPlayerTests.swift; sourceTree = "<group>"; };
+		37EEC49529F6C0AD005D0457 /* AVPlayerAdapterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AVPlayerAdapterTests.swift; path = ../../Tests/AVFoundationCollectorTests/AVPlayerAdapterTests.swift; sourceTree = "<group>"; };
+		37EEC49629F6C0AD005D0457 /* GeneratedMocks-Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GeneratedMocks-Core.swift"; path = "../../Tests/AVFoundationCollectorTests/GeneratedMocks-Core.swift"; sourceTree = "<group>"; };
+		37EEC49729F6C0AD005D0457 /* MockableFiles.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; name = MockableFiles.xcfilelist; path = ../../Tests/AVFoundationCollectorTests/MockableFiles.xcfilelist; sourceTree = "<group>"; };
 		37EEC49929F6C0AD005D0457 /* AccessLogProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessLogProviderMock.swift; sourceTree = "<group>"; };
 		37EEC4AD29F6C1F2005D0457 /* AmazonIVSPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AmazonIVSPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EEC4B429F6C207005D0457 /* AmazonIVSPlayerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AmazonIVSPlayerAdapter.swift; path = ../../Sources/AmazonIVSPlayerCollector/AmazonIVSPlayerAdapter.swift; sourceTree = "<group>"; };
@@ -469,7 +469,7 @@
 				37EEC4A429F6C0F2005D0457 /* Nimble in Frameworks */,
 				37EEC4A229F6C0EE005D0457 /* Quick in Frameworks */,
 				37EEC4A629F6C0F6005D0457 /* Cuckoo in Frameworks */,
-				37EEC48829F6C024005D0457 /* AVPlayerCollector.framework in Frameworks */,
+				37EEC48829F6C024005D0457 /* AVFoundationCollector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,8 +507,8 @@
 				37EEC3B529F6B118005D0457 /* CoreCollectorTests */,
 				37EEC40329F6B901005D0457 /* BitmovinCollector */,
 				37EEC43629F6BACA005D0457 /* BitmovinCollectorTests */,
-				37EEC45929F6BF2C005D0457 /* AVPlayerCollector */,
-				37EEC48529F6C024005D0457 /* AVPlayerCollectorTests */,
+				37EEC45929F6BF2C005D0457 /* AVFoundationCollector */,
+				37EEC48529F6C024005D0457 /* AVFoundationCollectorTests */,
 				37EEC4AE29F6C1F2005D0457 /* AmazonIVSPlayerCollector */,
 				37EEC4F629F7D53D005D0457 /* AmazonIVSPlayerCollectorTests */,
 				37EEC3A929F6AED6005D0457 /* xcconfig */,
@@ -525,8 +525,8 @@
 				37EEC3B429F6B118005D0457 /* CoreCollectorTests.xctest */,
 				37EEC40229F6B901005D0457 /* BitmovinCollector.framework */,
 				37EEC43529F6BACA005D0457 /* BitmovinCollectorTests.xctest */,
-				37EEC45829F6BF2C005D0457 /* AVPlayerCollector.framework */,
-				37EEC48429F6C024005D0457 /* AVPlayerCollectorTests.xctest */,
+				37EEC45829F6BF2C005D0457 /* AVFoundationCollector.framework */,
+				37EEC48429F6C024005D0457 /* AVFoundationCollectorTests.xctest */,
 				37EEC4AD29F6C1F2005D0457 /* AmazonIVSPlayerCollector.framework */,
 				37EEC4F529F7D53D005D0457 /* AmazonIVSPlayerCollectorTests.xctest */,
 			);
@@ -764,12 +764,12 @@
 				37EEC44A29F6BB58005D0457 /* BitmovinCollectorTests-Debug.xcconfig */,
 				37EEC44B29F6BB58005D0457 /* BitmovinCollectorTests-Release.xcconfig */,
 				37EEC44929F6BB58005D0457 /* BitmovinCollectorTests-Shared.xcconfig */,
-				37EEC46029F6BF70005D0457 /* AVPlayerCollector-Debug.xcconfig */,
-				37EEC45F29F6BF70005D0457 /* AVPlayerCollector-Release.xcconfig */,
-				37EEC46129F6BF70005D0457 /* AVPlayerCollector-Shared.xcconfig */,
-				37EEC48E29F6C050005D0457 /* AVPlayerCollectorTests-Debug.xcconfig */,
-				37EEC48F29F6C050005D0457 /* AVPlayerCollectorTests-Release.xcconfig */,
-				37EEC49029F6C050005D0457 /* AVPlayerCollectorTests-Shared.xcconfig */,
+				37EEC46029F6BF70005D0457 /* AVFoundationCollector-Debug.xcconfig */,
+				37EEC45F29F6BF70005D0457 /* AVFoundationCollector-Release.xcconfig */,
+				37EEC46129F6BF70005D0457 /* AVFoundationCollector-Shared.xcconfig */,
+				37EEC48E29F6C050005D0457 /* AVFoundationCollectorTests-Debug.xcconfig */,
+				37EEC48F29F6C050005D0457 /* AVFoundationCollectorTests-Release.xcconfig */,
+				37EEC49029F6C050005D0457 /* AVFoundationCollectorTests-Shared.xcconfig */,
 				37EEC4E229F6C234005D0457 /* AmazonIVSPlayerCollector-Debug.xcconfig */,
 				37EEC4E029F6C234005D0457 /* AmazonIVSPlayerCollector-Release.xcconfig */,
 				37EEC4E129F6C234005D0457 /* AmazonIVSPlayerCollector-Shared.xcconfig */,
@@ -908,7 +908,7 @@
 			path = BitmovinCollectorTests;
 			sourceTree = "<group>";
 		};
-		37EEC45929F6BF2C005D0457 /* AVPlayerCollector */ = {
+		37EEC45929F6BF2C005D0457 /* AVFoundationCollector */ = {
 			isa = PBXGroup;
 			children = (
 				37EEC46229F6BF92005D0457 /* data */,
@@ -920,7 +920,7 @@
 				37EEC46729F6BF92005D0457 /* AVPlayerEventDataManipulator.swift */,
 				37EEC46929F6BF92005D0457 /* ErrorHandler.swift */,
 			);
-			path = AVPlayerCollector;
+			path = AVFoundationCollector;
 			sourceTree = "<group>";
 		};
 		37EEC46229F6BF92005D0457 /* data */ = {
@@ -932,7 +932,7 @@
 				37EEC46629F6BF92005D0457 /* VideoQualityDto.swift */,
 			);
 			name = data;
-			path = ../../Sources/AVPlayerCollector/data;
+			path = ../../Sources/AVFoundationCollector/data;
 			sourceTree = "<group>";
 		};
 		37EEC46B29F6BF92005D0457 /* services */ = {
@@ -943,7 +943,7 @@
 				37EEC46E29F6BF92005D0457 /* BitrateDetectionService.swift */,
 			);
 			name = services;
-			path = ../../Sources/AVPlayerCollector/services;
+			path = ../../Sources/AVFoundationCollector/services;
 			sourceTree = "<group>";
 		};
 		37EEC47029F6BF92005D0457 /* player */ = {
@@ -952,10 +952,10 @@
 				37EEC47129F6BF92005D0457 /* AVPlayerContext.swift */,
 			);
 			name = player;
-			path = ../../Sources/AVPlayerCollector/player;
+			path = ../../Sources/AVFoundationCollector/player;
 			sourceTree = "<group>";
 		};
-		37EEC48529F6C024005D0457 /* AVPlayerCollectorTests */ = {
+		37EEC48529F6C024005D0457 /* AVFoundationCollectorTests */ = {
 			isa = PBXGroup;
 			children = (
 				37EEC49829F6C0AD005D0457 /* mock */,
@@ -965,7 +965,7 @@
 				37EEC49629F6C0AD005D0457 /* GeneratedMocks-Core.swift */,
 				37EEC49729F6C0AD005D0457 /* MockableFiles.xcfilelist */,
 			);
-			path = AVPlayerCollectorTests;
+			path = AVFoundationCollectorTests;
 			sourceTree = "<group>";
 		};
 		37EEC49129F6C0AD005D0457 /* services */ = {
@@ -975,7 +975,7 @@
 				37EEC49329F6C0AD005D0457 /* BitrateDetectionServiceTest.swift */,
 			);
 			name = services;
-			path = ../../Tests/AVPlayerCollectorTests/services;
+			path = ../../Tests/AVFoundationCollectorTests/services;
 			sourceTree = "<group>";
 		};
 		37EEC49829F6C0AD005D0457 /* mock */ = {
@@ -984,7 +984,7 @@
 				37EEC49929F6C0AD005D0457 /* AccessLogProviderMock.swift */,
 			);
 			name = mock;
-			path = ../../Tests/AVPlayerCollectorTests/mock;
+			path = ../../Tests/AVFoundationCollectorTests/mock;
 			sourceTree = "<group>";
 		};
 		37EEC4AE29F6C1F2005D0457 /* AmazonIVSPlayerCollector */ = {
@@ -1228,9 +1228,9 @@
 			productReference = 37EEC43529F6BACA005D0457 /* BitmovinCollectorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		37EEC45729F6BF2C005D0457 /* AVPlayerCollector */ = {
+		37EEC45729F6BF2C005D0457 /* AVFoundationCollector */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 37EEC45E29F6BF2C005D0457 /* Build configuration list for PBXNativeTarget "AVPlayerCollector" */;
+			buildConfigurationList = 37EEC45E29F6BF2C005D0457 /* Build configuration list for PBXNativeTarget "AVFoundationCollector" */;
 			buildPhases = (
 				37EEC45329F6BF2C005D0457 /* Headers */,
 				37EEC45429F6BF2C005D0457 /* Sources */,
@@ -1242,14 +1242,14 @@
 			dependencies = (
 				37EEC52629F7E5C5005D0457 /* PBXTargetDependency */,
 			);
-			name = AVPlayerCollector;
-			productName = AVPlayerCollector;
-			productReference = 37EEC45829F6BF2C005D0457 /* AVPlayerCollector.framework */;
+			name = AVFoundationCollector;
+			productName = AVFoundationCollector;
+			productReference = 37EEC45829F6BF2C005D0457 /* AVFoundationCollector.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		37EEC48329F6C024005D0457 /* AVPlayerCollectorTests */ = {
+		37EEC48329F6C024005D0457 /* AVFoundationCollectorTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 37EEC48B29F6C024005D0457 /* Build configuration list for PBXNativeTarget "AVPlayerCollectorTests" */;
+			buildConfigurationList = 37EEC48B29F6C024005D0457 /* Build configuration list for PBXNativeTarget "AVFoundationCollectorTests" */;
 			buildPhases = (
 				37EEC4A729F6C100005D0457 /* Run Cuckoo code generation */,
 				37EEC48029F6C024005D0457 /* Sources */,
@@ -1261,14 +1261,14 @@
 			dependencies = (
 				37EEC48A29F6C024005D0457 /* PBXTargetDependency */,
 			);
-			name = AVPlayerCollectorTests;
+			name = AVFoundationCollectorTests;
 			packageProductDependencies = (
 				37EEC4A129F6C0EE005D0457 /* Quick */,
 				37EEC4A329F6C0F2005D0457 /* Nimble */,
 				37EEC4A529F6C0F6005D0457 /* Cuckoo */,
 			);
-			productName = AVPlayerCollectorTests;
-			productReference = 37EEC48429F6C024005D0457 /* AVPlayerCollectorTests.xctest */;
+			productName = AVFoundationCollectorTests;
+			productReference = 37EEC48429F6C024005D0457 /* AVFoundationCollectorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		37EEC4AC29F6C1F2005D0457 /* AmazonIVSPlayerCollector */ = {
@@ -1380,8 +1380,8 @@
 				37EEC3B329F6B118005D0457 /* CoreCollectorTests */,
 				37EEC40129F6B901005D0457 /* BitmovinCollector */,
 				37EEC43429F6BACA005D0457 /* BitmovinCollectorTests */,
-				37EEC45729F6BF2C005D0457 /* AVPlayerCollector */,
-				37EEC48329F6C024005D0457 /* AVPlayerCollectorTests */,
+				37EEC45729F6BF2C005D0457 /* AVFoundationCollector */,
+				37EEC48329F6C024005D0457 /* AVFoundationCollectorTests */,
 				37EEC4AC29F6C1F2005D0457 /* AmazonIVSPlayerCollector */,
 				37EEC4F429F7D53D005D0457 /* AmazonIVSPlayerCollectorTests */,
 			);
@@ -1508,7 +1508,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(PROJECT_DIR)/../Tests/AVPlayerCollectorTests/GeneratedMocks-Core.swift",
+				"$(PROJECT_DIR)/../Tests/AVFoundationCollectorTests/GeneratedMocks-Core.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1777,7 +1777,7 @@
 		};
 		37EEC48A29F6C024005D0457 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 37EEC45729F6BF2C005D0457 /* AVPlayerCollector */;
+			target = 37EEC45729F6BF2C005D0457 /* AVFoundationCollector */;
 			targetProxy = 37EEC48929F6C024005D0457 /* PBXContainerItemProxy */;
 		};
 		37EEC4FB29F7D53D005D0457 /* PBXTargetDependency */ = {
@@ -1870,28 +1870,28 @@
 		};
 		37EEC45C29F6BF2C005D0457 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37EEC46029F6BF70005D0457 /* AVPlayerCollector-Debug.xcconfig */;
+			baseConfigurationReference = 37EEC46029F6BF70005D0457 /* AVFoundationCollector-Debug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		37EEC45D29F6BF2C005D0457 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37EEC45F29F6BF70005D0457 /* AVPlayerCollector-Release.xcconfig */;
+			baseConfigurationReference = 37EEC45F29F6BF70005D0457 /* AVFoundationCollector-Release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
 		};
 		37EEC48C29F6C024005D0457 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37EEC48E29F6C050005D0457 /* AVPlayerCollectorTests-Debug.xcconfig */;
+			baseConfigurationReference = 37EEC48E29F6C050005D0457 /* AVFoundationCollectorTests-Debug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		37EEC48D29F6C024005D0457 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37EEC48F29F6C050005D0457 /* AVPlayerCollectorTests-Release.xcconfig */;
+			baseConfigurationReference = 37EEC48F29F6C050005D0457 /* AVFoundationCollectorTests-Release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
@@ -1972,7 +1972,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		37EEC45E29F6BF2C005D0457 /* Build configuration list for PBXNativeTarget "AVPlayerCollector" */ = {
+		37EEC45E29F6BF2C005D0457 /* Build configuration list for PBXNativeTarget "AVFoundationCollector" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				37EEC45C29F6BF2C005D0457 /* Debug */,
@@ -1981,7 +1981,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		37EEC48B29F6C024005D0457 /* Build configuration list for PBXNativeTarget "AVPlayerCollectorTests" */ = {
+		37EEC48B29F6C024005D0457 /* Build configuration list for PBXNativeTarget "AVFoundationCollectorTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				37EEC48C29F6C024005D0457 /* Debug */,

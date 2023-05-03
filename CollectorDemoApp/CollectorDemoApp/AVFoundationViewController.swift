@@ -1,6 +1,6 @@
 import AVKit
 import CoreCollector
-import AVPlayerCollector
+import AVFoundationCollector
 import UIKit
 
 class AVFoundationViewController: UIViewController {
@@ -91,7 +91,7 @@ class AVFoundationViewController: UIViewController {
         guard let player = player else {
             return
         }
-        
+
         initPlayerWithCollectorAndPlay(player: player)
     }
 
@@ -99,7 +99,7 @@ class AVFoundationViewController: UIViewController {
         guard let player = player else {
             return
         }
-        
+
         addObserver(self, forKeyPath: #keyPath(AVFoundationViewController.player.rate), options: [.new, .initial], context: &AVFoundationViewController.playerViewControllerKVOContext)
         addObserver(self, forKeyPath: #keyPath(AVFoundationViewController.player.currentItem.duration), options: [.new, .initial], context: &AVFoundationViewController.playerViewControllerKVOContext)
         let interval = CMTimeMake(value: 1, timescale: 1)
@@ -116,7 +116,7 @@ class AVFoundationViewController: UIViewController {
         guard let player = player else {
             return
         }
-        
+
         analyticsCollector.detachPlayer()
         player.pause()
         let asset = AVURLAsset(url: url!, options: nil)
@@ -142,7 +142,7 @@ class AVFoundationViewController: UIViewController {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
-        
+
         guard let player = player else {
             return
         }
@@ -195,7 +195,7 @@ class AVFoundationViewController: UIViewController {
         guard let player = player else {
             return
         }
-        
+
         if player.rate != 1.0 {
             player.play()
         } else {
@@ -208,7 +208,7 @@ class AVFoundationViewController: UIViewController {
         guard let player = player else {
             return
         }
-        
+
         let currentTime = player.currentTime()
         let deltaTime = CMTimeMakeWithSeconds(30, preferredTimescale: 30)
         player.seek(to: CMTimeAdd(currentTime, deltaTime), completionHandler: { completed in
@@ -221,7 +221,7 @@ class AVFoundationViewController: UIViewController {
         guard let player = player else {
             return
         }
-        
+
         let currentTime = player.currentTime()
         let deltaTime = CMTimeMakeWithSeconds(30, preferredTimescale: 30)
         player.seek(to: CMTimeSubtract(currentTime, deltaTime), completionHandler: { completed in
@@ -235,7 +235,7 @@ class AVFoundationViewController: UIViewController {
         guard let player = player else {
             return
         }
-        
+
         player.rate = max(player.rate - 2.0, -2.0)
     }
 
@@ -244,7 +244,7 @@ class AVFoundationViewController: UIViewController {
         guard let player = player else {
             return
         }
-        
+
         player.rate = min(player.rate + 2.0, 2.0)
     }
 
@@ -252,7 +252,7 @@ class AVFoundationViewController: UIViewController {
         guard let player = player else {
             return
         }
-        
+
         isSeeking = true
         player.seek(to: CMTimeMakeWithSeconds(Float64(slider.value), preferredTimescale: 30)) { [weak self] _ in
             self?.isSeeking = false
@@ -269,27 +269,27 @@ class AVFoundationViewController: UIViewController {
     @IBAction func doneButtonWasPressed(_: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    
+
     @IBAction func releaseButtonWasPressed(_: UIButton) {
         analyticsCollector.detachPlayer()
         player?.replaceCurrentItem(with: nil)
         player = nil
     }
-    
+
     @IBAction func createButtonWasPressed(_: UIButton) {
         if player != nil {
             return
         }
-        
+
         player = AVPlayer()
-        
+
         guard let player = player else {
             return
         }
-        
+
         initPlayerWithCollectorAndPlay(player: player)
     }
-    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -300,7 +300,7 @@ class AVFoundationViewController: UIViewController {
         components.second = Int(max(0.0, time))
         return timeRemainingFormatter.string(from: components as DateComponents)!
     }
-    
+
     private func initPlayerWithCollectorAndPlay(player: AVPlayer){
         player.isMuted = true
         playerView.playerLayer.player = player

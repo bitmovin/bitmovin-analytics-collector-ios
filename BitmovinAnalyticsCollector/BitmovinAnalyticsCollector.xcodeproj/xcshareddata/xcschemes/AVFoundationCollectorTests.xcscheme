@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "37EEC48329F6C024005D0457"
-               BuildableName = "AVPlayerCollectorTests.xctest"
-               BlueprintName = "AVPlayerCollectorTests"
+               BuildableName = ".xctest"
+               BlueprintName = "AVFoundationCollectorTests"
                ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,8 +34,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "37EEC48329F6C024005D0457"
-               BuildableName = "AVPlayerCollectorTests.xctest"
-               BlueprintName = "AVPlayerCollectorTests"
+               BuildableName = ".xctest"
+               BlueprintName = "AVFoundationCollectorTests"
                ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "37EEC48329F6C024005D0457"
-            BuildableName = "AVPlayerCollectorTests.xctest"
-            BlueprintName = "AVPlayerCollectorTests"
+            BuildableName = ".xctest"
+            BlueprintName = "AVFoundationCollectorTests"
             ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

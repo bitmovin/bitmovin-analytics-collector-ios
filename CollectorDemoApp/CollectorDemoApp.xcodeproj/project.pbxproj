@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		37A75A3329F7FFFC00D2740B /* AVPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A75A3229F7FFFC00D2740B /* AVPlayerCollector.framework */; };
-		37A75A3429F7FFFC00D2740B /* AVPlayerCollector.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37A75A3229F7FFFC00D2740B /* AVPlayerCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37A75A3329F7FFFC00D2740B /* AVFoundationCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A75A3229F7FFFC00D2740B /* AVFoundationCollector.framework */; };
+		37A75A3429F7FFFC00D2740B /* AVFoundationCollector.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37A75A3229F7FFFC00D2740B /* AVFoundationCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37D01D3A29F7F405001CA3B7 /* BitmovinCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D01D3629F7F405001CA3B7 /* BitmovinCollector.framework */; };
 		37D01D3B29F7F405001CA3B7 /* BitmovinCollector.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37D01D3629F7F405001CA3B7 /* BitmovinCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37D01D3C29F7F405001CA3B7 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D01D3729F7F405001CA3B7 /* CoreCollector.framework */; };
 		37D01D3D29F7F405001CA3B7 /* CoreCollector.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37D01D3729F7F405001CA3B7 /* CoreCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37EEC52B29F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC52729F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework */; };
 		37EEC52C29F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37EEC52729F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		37EEC52D29F7EBD8005D0457 /* AVPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC52829F7EBD8005D0457 /* AVPlayerCollector.framework */; };
-		37EEC52E29F7EBD8005D0457 /* AVPlayerCollector.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37EEC52829F7EBD8005D0457 /* AVPlayerCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37EEC52D29F7EBD8005D0457 /* AVFoundationCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC52829F7EBD8005D0457 /* AVFoundationCollector.framework */; };
+		37EEC52E29F7EBD8005D0457 /* AVFoundationCollector.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37EEC52829F7EBD8005D0457 /* AVFoundationCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37EEC52F29F7EBD8005D0457 /* BitmovinCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC52929F7EBD8005D0457 /* BitmovinCollector.framework */; };
 		37EEC53029F7EBD8005D0457 /* BitmovinCollector.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37EEC52929F7EBD8005D0457 /* BitmovinCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37EEC53129F7EBD8005D0457 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC52A29F7EBD8005D0457 /* CoreCollector.framework */; };
@@ -60,7 +60,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				37A75A3429F7FFFC00D2740B /* AVPlayerCollector.framework in Embed Frameworks */,
+				37A75A3429F7FFFC00D2740B /* AVFoundationCollector.framework in Embed Frameworks */,
 				37D01D3D29F7F405001CA3B7 /* CoreCollector.framework in Embed Frameworks */,
 				37D01D3B29F7F405001CA3B7 /* BitmovinCollector.framework in Embed Frameworks */,
 			);
@@ -73,7 +73,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				37EEC52E29F7EBD8005D0457 /* AVPlayerCollector.framework in CopyFiles */,
+				37EEC52E29F7EBD8005D0457 /* AVFoundationCollector.framework in CopyFiles */,
 				37EEC52C29F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework in CopyFiles */,
 				37EEC53029F7EBD8005D0457 /* BitmovinCollector.framework in CopyFiles */,
 				37EEC53229F7EBD8005D0457 /* CoreCollector.framework in CopyFiles */,
@@ -89,12 +89,12 @@
 		27989DBC2C1A13750A807605 /* Pods-CollectorDemoAppTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTV.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV.debug.xcconfig"; sourceTree = "<group>"; };
 		2F10E174AEA18176F06BDF84 /* Pods_CollectorDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3171027DBF1470DD82EE993A /* Pods-CollectorDemoAppTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTV.release.xcconfig"; path = "../../Pods/Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV.release.xcconfig"; sourceTree = "<group>"; };
-		37A75A3229F7FFFC00D2740B /* AVPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AVPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		37D01D3529F7F405001CA3B7 /* AVPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AVPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37A75A3229F7FFFC00D2740B /* AVFoundationCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AVFoundationCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37D01D3529F7F405001CA3B7 /* AVFoundationCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AVFoundationCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D01D3629F7F405001CA3B7 /* BitmovinCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BitmovinCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D01D3729F7F405001CA3B7 /* CoreCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CoreCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EEC52729F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AmazonIVSPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		37EEC52829F7EBD8005D0457 /* AVPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AVPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EEC52829F7EBD8005D0457 /* AVFoundationCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AVFoundationCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EEC52929F7EBD8005D0457 /* BitmovinCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BitmovinCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EEC52A29F7EBD8005D0457 /* CoreCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CoreCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB1F5F69DFBB5DE75E5EF93 /* libPods-CollectorDemoAppTVCocoaPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CollectorDemoAppTVCocoaPods.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,7 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37EEC52D29F7EBD8005D0457 /* AVPlayerCollector.framework in Frameworks */,
+				37EEC52D29F7EBD8005D0457 /* AVFoundationCollector.framework in Frameworks */,
 				37EEC52B29F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework in Frameworks */,
 				37EEC53129F7EBD8005D0457 /* CoreCollector.framework in Frameworks */,
 				D1AB2510EDA14C4BEB0F7FD1 /* Pods_CollectorDemoApp.framework in Frameworks */,
@@ -156,7 +156,7 @@
 				37D01D3C29F7F405001CA3B7 /* CoreCollector.framework in Frameworks */,
 				79CFBDE266D7173A3728ED64 /* Pods_CollectorDemoAppTV.framework in Frameworks */,
 				37D01D3A29F7F405001CA3B7 /* BitmovinCollector.framework in Frameworks */,
-				37A75A3329F7FFFC00D2740B /* AVPlayerCollector.framework in Frameworks */,
+				37A75A3329F7FFFC00D2740B /* AVFoundationCollector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,12 +166,12 @@
 		68A265715B3D1FBECD55E698 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				37A75A3229F7FFFC00D2740B /* AVPlayerCollector.framework */,
-				37D01D3529F7F405001CA3B7 /* AVPlayerCollector.framework */,
+				37A75A3229F7FFFC00D2740B /* AVFoundationCollector.framework */,
+				37D01D3529F7F405001CA3B7 /* AVFoundationCollector.framework */,
 				37D01D3629F7F405001CA3B7 /* BitmovinCollector.framework */,
 				37D01D3729F7F405001CA3B7 /* CoreCollector.framework */,
 				37EEC52729F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework */,
-				37EEC52829F7EBD8005D0457 /* AVPlayerCollector.framework */,
+				37EEC52829F7EBD8005D0457 /* AVFoundationCollector.framework */,
 				37EEC52929F7EBD8005D0457 /* BitmovinCollector.framework */,
 				37EEC52A29F7EBD8005D0457 /* CoreCollector.framework */,
 				2F10E174AEA18176F06BDF84 /* Pods_CollectorDemoApp.framework */,
@@ -922,9 +922,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = AmazonIVSPlayerCollector;
 		};
-		9D6FA9F129AE2C7700B2BF1A /* AVPlayerCollector */ = {
+		9D6FA9F129AE2C7700B2BF1A /* AVFoundationCollector */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = AVPlayerCollector;
+			productName = AVFoundationCollector;
 		};
 		9D6FA9F329AE2C7700B2BF1A /* BitmovinCollector */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,7 +1,7 @@
 import AVKit
 import Nimble
 import Quick
-@testable import AVPlayerCollector
+@testable import AVFoundationCollector
 @testable import CoreCollector
 
 class AVPlayerAdapterTests: QuickSpec {

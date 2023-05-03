@@ -34,6 +34,6 @@ DESC
   end
 
   s.subspec 'AVPlayer' do |avplayer|
-    avplayer.vendored_frameworks = 'AVPlayerCollector.xcframework'
+    avplayer.vendored_frameworks = 'AVFoundationCollector.xcframework'
   end
 end
