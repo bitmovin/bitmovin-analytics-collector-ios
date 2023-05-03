@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "37EEC43429F6BACA005D0457"
-               BuildableName = "BitmovinPlayerCollectorTests.xctest"
-               BlueprintName = "BitmovinPlayerCollectorTests"
+               BuildableName = "BitmovinCollectorTests.xctest"
+               BlueprintName = "BitmovinCollectorTests"
                ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,8 +34,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "37EEC43429F6BACA005D0457"
-               BuildableName = "BitmovinPlayerCollectorTests.xctest"
-               BlueprintName = "BitmovinPlayerCollectorTests"
+               BuildableName = "BitmovinCollectorTests.xctest"
+               BlueprintName = "BitmovinCollectorTests"
                ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "37EEC43429F6BACA005D0457"
-            BuildableName = "BitmovinPlayerCollectorTests.xctest"
-            BlueprintName = "BitmovinPlayerCollectorTests"
+            BuildableName = "BitmovinCollectorTests.xctest"
+            BlueprintName = "BitmovinCollectorTests"
             ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

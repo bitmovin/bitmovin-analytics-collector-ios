@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "37EEC40129F6B901005D0457"
-               BuildableName = "BitmovinPlayerCollector.framework"
-               BlueprintName = "BitmovinPlayerCollector"
+               BuildableName = "BitmovinCollector.framework"
+               BlueprintName = "BitmovinCollector"
                ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -50,8 +50,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "37EEC40129F6B901005D0457"
-            BuildableName = "BitmovinPlayerCollector.framework"
-            BlueprintName = "BitmovinPlayerCollector"
+            BuildableName = "BitmovinCollector.framework"
+            BlueprintName = "BitmovinCollector"
             ReferencedContainer = "container:BitmovinAnalyticsCollector.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

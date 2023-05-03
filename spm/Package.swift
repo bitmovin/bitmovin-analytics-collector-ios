@@ -12,8 +12,8 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "BitmovinPlayerCollector",
-            targets: ["BitmovinPlayerCollectorTarget"]
+            name: "BitmovinCollector",
+            targets: ["BitmovinCollectorTarget"]
         ),
         .library(
             name: "AVPlayerCollector",
@@ -48,15 +48,15 @@ let package = Package(
             ]
         ),
         .binaryTarget(
-            name: "BitmovinPlayerCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/x.x.x/BitmovinPlayerCollector.zip",
-            checksum: "BitmovinPlayerCollector-hash"
+            name: "BitmovinCollector",
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/x.x.x/BitmovinCollector.zip",
+            checksum: "BitmovinCollector-hash"
         ),
         .target(
-            name: "BitmovinPlayerCollectorTarget",
+            name: "BitmovinCollectorTarget",
             dependencies: [
                 "CoreCollector",
-                "BitmovinPlayerCollector",
+                "BitmovinCollector",
                 .product(name: "BitmovinPlayer", package: "player-ios"),
             ]
         ),

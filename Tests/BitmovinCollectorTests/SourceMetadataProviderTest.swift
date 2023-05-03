@@ -1,5 +1,5 @@
 import XCTest
-@testable import BitmovinPlayerCollector
+@testable import BitmovinCollector
 @testable import CoreCollector
 
 class SourceMetadataProviderTest: XCTestCase {

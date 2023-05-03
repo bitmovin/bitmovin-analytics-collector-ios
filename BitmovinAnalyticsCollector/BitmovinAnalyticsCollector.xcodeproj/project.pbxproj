@@ -103,7 +103,7 @@
 		37EEC42829F6BA03005D0457 /* BitmovinPlayerCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC42429F6BA03005D0457 /* BitmovinPlayerCollector.swift */; };
 		37EEC42B29F6BA49005D0457 /* BitmovinPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC42A29F6BA49005D0457 /* BitmovinPlayer */; };
 		37EEC42C29F6BA7F005D0457 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC30729F6A8F5005D0457 /* CoreCollector.framework */; };
-		37EEC43929F6BACA005D0457 /* BitmovinPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC40229F6B901005D0457 /* BitmovinPlayerCollector.framework */; };
+		37EEC43929F6BACA005D0457 /* BitmovinCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC40229F6B901005D0457 /* BitmovinCollector.framework */; };
 		37EEC44429F6BAF4005D0457 /* BitmovinPlayerAdapterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC43F29F6BAF3005D0457 /* BitmovinPlayerAdapterTest.swift */; };
 		37EEC44529F6BAF4005D0457 /* MockableFiles.xcfilelist in Resources */ = {isa = PBXBuildFile; fileRef = 37EEC44029F6BAF3005D0457 /* MockableFiles.xcfilelist */; };
 		37EEC44629F6BAF4005D0457 /* GeneratedMocks-Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC44129F6BAF3005D0457 /* GeneratedMocks-Core.swift */; };
@@ -195,7 +195,7 @@
 			containerPortal = 37EEC2D529F6A86B005D0457 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 37EEC40129F6B901005D0457;
-			remoteInfo = BitmovinPlayerCollector;
+			remoteInfo = BitmovinCollector;
 		};
 		37EEC48929F6C024005D0457 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -228,8 +228,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		374E116629F82472000D3860 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
-		374E116729F82472000D3860 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		37EEC30729F6A8F5005D0457 /* CoreCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EEC30F29F6A9D0005D0457 /* HttpEventDataDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpEventDataDispatcher.swift; sourceTree = "<group>"; };
 		37EEC31029F6A9D0005D0457 /* EventDataDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataDispatcher.swift; sourceTree = "<group>"; };
@@ -322,28 +320,28 @@
 		37EEC3DC29F6B3C7005D0457 /* UtilTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilTests.swift; sourceTree = "<group>"; };
 		37EEC3DD29F6B3C7005D0457 /* CMTime+ExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CMTime+ExtensionTests.swift"; sourceTree = "<group>"; };
 		37EEC3DE29F6B3C7005D0457 /* MockableFiles.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; name = MockableFiles.xcfilelist; path = ../../Tests/CoreCollectorTests/MockableFiles.xcfilelist; sourceTree = "<group>"; };
-		37EEC40229F6B901005D0457 /* BitmovinPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BitmovinPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EEC40229F6B901005D0457 /* BitmovinCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BitmovinCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EEC40A29F6B924005D0457 /* BitmovinPlayerContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitmovinPlayerContext.swift; sourceTree = "<group>"; };
 		37EEC40E29F6B924005D0457 /* CastEventDataManipulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastEventDataManipulator.swift; sourceTree = "<group>"; };
 		37EEC41029F6B924005D0457 /* Player+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Player+Extension.swift"; sourceTree = "<group>"; };
 		37EEC41129F6B924005D0457 /* AdModelMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdModelMapper.swift; sourceTree = "<group>"; };
 		37EEC41229F6B924005D0457 /* BitmovinPlayerUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitmovinPlayerUtil.swift; sourceTree = "<group>"; };
-		37EEC41E29F6B9A1005D0457 /* BitmovinPlayerCollector-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinPlayerCollector-Shared.xcconfig"; sourceTree = "<group>"; };
-		37EEC41F29F6B9A1005D0457 /* BitmovinPlayerCollector-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinPlayerCollector-Debug.xcconfig"; sourceTree = "<group>"; };
-		37EEC42029F6B9A1005D0457 /* BitmovinPlayerCollector-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinPlayerCollector-Release.xcconfig"; sourceTree = "<group>"; };
-		37EEC42129F6BA03005D0457 /* BitmovinPlayerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinPlayerAdapter.swift; path = ../../Sources/BitmovinPlayerCollector/BitmovinPlayerAdapter.swift; sourceTree = "<group>"; };
-		37EEC42229F6BA03005D0457 /* BitmovinAdAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinAdAdapter.swift; path = ../../Sources/BitmovinPlayerCollector/BitmovinAdAdapter.swift; sourceTree = "<group>"; };
-		37EEC42329F6BA03005D0457 /* BitmovinAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinAnalytics.swift; path = ../../Sources/BitmovinPlayerCollector/BitmovinAnalytics.swift; sourceTree = "<group>"; };
-		37EEC42429F6BA03005D0457 /* BitmovinPlayerCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinPlayerCollector.swift; path = ../../Sources/BitmovinPlayerCollector/BitmovinPlayerCollector.swift; sourceTree = "<group>"; };
-		37EEC43529F6BACA005D0457 /* BitmovinPlayerCollectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BitmovinPlayerCollectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		37EEC43F29F6BAF3005D0457 /* BitmovinPlayerAdapterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinPlayerAdapterTest.swift; path = ../../Tests/BitmovinPlayerCollectorTests/BitmovinPlayerAdapterTest.swift; sourceTree = "<group>"; };
-		37EEC44029F6BAF3005D0457 /* MockableFiles.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; name = MockableFiles.xcfilelist; path = ../../Tests/BitmovinPlayerCollectorTests/MockableFiles.xcfilelist; sourceTree = "<group>"; };
-		37EEC44129F6BAF3005D0457 /* GeneratedMocks-Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GeneratedMocks-Core.swift"; path = "../../Tests/BitmovinPlayerCollectorTests/GeneratedMocks-Core.swift"; sourceTree = "<group>"; };
-		37EEC44229F6BAF4005D0457 /* BitmovinPlayerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinPlayerTest.swift; path = ../../Tests/BitmovinPlayerCollectorTests/BitmovinPlayerTest.swift; sourceTree = "<group>"; };
-		37EEC44329F6BAF4005D0457 /* SourceMetadataProviderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SourceMetadataProviderTest.swift; path = ../../Tests/BitmovinPlayerCollectorTests/SourceMetadataProviderTest.swift; sourceTree = "<group>"; };
-		37EEC44929F6BB58005D0457 /* BitmovinPlayerCollectorTests-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinPlayerCollectorTests-Shared.xcconfig"; sourceTree = "<group>"; };
-		37EEC44A29F6BB58005D0457 /* BitmovinPlayerCollectorTests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinPlayerCollectorTests-Debug.xcconfig"; sourceTree = "<group>"; };
-		37EEC44B29F6BB58005D0457 /* BitmovinPlayerCollectorTests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinPlayerCollectorTests-Release.xcconfig"; sourceTree = "<group>"; };
+		37EEC41E29F6B9A1005D0457 /* BitmovinCollector-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinCollector-Shared.xcconfig"; sourceTree = "<group>"; };
+		37EEC41F29F6B9A1005D0457 /* BitmovinCollector-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinCollector-Debug.xcconfig"; sourceTree = "<group>"; };
+		37EEC42029F6B9A1005D0457 /* BitmovinCollector-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinCollector-Release.xcconfig"; sourceTree = "<group>"; };
+		37EEC42129F6BA03005D0457 /* BitmovinPlayerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinPlayerAdapter.swift; path = ../../Sources/BitmovinCollector/BitmovinPlayerAdapter.swift; sourceTree = "<group>"; };
+		37EEC42229F6BA03005D0457 /* BitmovinAdAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinAdAdapter.swift; path = ../../Sources/BitmovinCollector/BitmovinAdAdapter.swift; sourceTree = "<group>"; };
+		37EEC42329F6BA03005D0457 /* BitmovinAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinAnalytics.swift; path = ../../Sources/BitmovinCollector/BitmovinAnalytics.swift; sourceTree = "<group>"; };
+		37EEC42429F6BA03005D0457 /* BitmovinPlayerCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinPlayerCollector.swift; path = ../../Sources/BitmovinCollector/BitmovinPlayerCollector.swift; sourceTree = "<group>"; };
+		37EEC43529F6BACA005D0457 /* BitmovinCollectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BitmovinCollectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EEC43F29F6BAF3005D0457 /* BitmovinPlayerAdapterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinPlayerAdapterTest.swift; path = ../../Tests/BitmovinCollectorTests/BitmovinPlayerAdapterTest.swift; sourceTree = "<group>"; };
+		37EEC44029F6BAF3005D0457 /* MockableFiles.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; name = MockableFiles.xcfilelist; path = ../../Tests/BitmovinCollectorTests/MockableFiles.xcfilelist; sourceTree = "<group>"; };
+		37EEC44129F6BAF3005D0457 /* GeneratedMocks-Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GeneratedMocks-Core.swift"; path = "../../Tests/BitmovinCollectorTests/GeneratedMocks-Core.swift"; sourceTree = "<group>"; };
+		37EEC44229F6BAF4005D0457 /* BitmovinPlayerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BitmovinPlayerTest.swift; path = ../../Tests/BitmovinCollectorTests/BitmovinPlayerTest.swift; sourceTree = "<group>"; };
+		37EEC44329F6BAF4005D0457 /* SourceMetadataProviderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SourceMetadataProviderTest.swift; path = ../../Tests/BitmovinCollectorTests/SourceMetadataProviderTest.swift; sourceTree = "<group>"; };
+		37EEC44929F6BB58005D0457 /* BitmovinCollectorTests-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinCollectorTests-Shared.xcconfig"; sourceTree = "<group>"; };
+		37EEC44A29F6BB58005D0457 /* BitmovinCollectorTests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinCollectorTests-Debug.xcconfig"; sourceTree = "<group>"; };
+		37EEC44B29F6BB58005D0457 /* BitmovinCollectorTests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BitmovinCollectorTests-Release.xcconfig"; sourceTree = "<group>"; };
 		37EEC45829F6BF2C005D0457 /* AVPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AVPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EEC45F29F6BF70005D0457 /* AVPlayerCollector-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AVPlayerCollector-Release.xcconfig"; sourceTree = "<group>"; };
 		37EEC46029F6BF70005D0457 /* AVPlayerCollector-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AVPlayerCollector-Debug.xcconfig"; sourceTree = "<group>"; };
@@ -452,7 +450,7 @@
 				37EEC44F29F6BB9A005D0457 /* Quick in Frameworks */,
 				37EEC45129F6BB9E005D0457 /* Nimble in Frameworks */,
 				37EEC44D29F6BB94005D0457 /* Cuckoo in Frameworks */,
-				37EEC43929F6BACA005D0457 /* BitmovinPlayerCollector.framework in Frameworks */,
+				37EEC43929F6BACA005D0457 /* BitmovinCollector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,8 +505,8 @@
 				A852DF2F29F7CF0900D9B66D /* README.md */,
 				37EEC30829F6A8F5005D0457 /* CoreCollector */,
 				37EEC3B529F6B118005D0457 /* CoreCollectorTests */,
-				37EEC40329F6B901005D0457 /* BitmovinPlayerCollector */,
-				37EEC43629F6BACA005D0457 /* BitmovinPlayerCollectorTests */,
+				37EEC40329F6B901005D0457 /* BitmovinCollector */,
+				37EEC43629F6BACA005D0457 /* BitmovinCollectorTests */,
 				37EEC45929F6BF2C005D0457 /* AVPlayerCollector */,
 				37EEC48529F6C024005D0457 /* AVPlayerCollectorTests */,
 				37EEC4AE29F6C1F2005D0457 /* AmazonIVSPlayerCollector */,
@@ -525,8 +523,8 @@
 			children = (
 				37EEC30729F6A8F5005D0457 /* CoreCollector.framework */,
 				37EEC3B429F6B118005D0457 /* CoreCollectorTests.xctest */,
-				37EEC40229F6B901005D0457 /* BitmovinPlayerCollector.framework */,
-				37EEC43529F6BACA005D0457 /* BitmovinPlayerCollectorTests.xctest */,
+				37EEC40229F6B901005D0457 /* BitmovinCollector.framework */,
+				37EEC43529F6BACA005D0457 /* BitmovinCollectorTests.xctest */,
 				37EEC45829F6BF2C005D0457 /* AVPlayerCollector.framework */,
 				37EEC48429F6C024005D0457 /* AVPlayerCollectorTests.xctest */,
 				37EEC4AD29F6C1F2005D0457 /* AmazonIVSPlayerCollector.framework */,
@@ -760,12 +758,12 @@
 				37EEC3C929F6B20F005D0457 /* CoreCollectorTests-Debug.xcconfig */,
 				37EEC3C829F6B20F005D0457 /* CoreCollectorTests-Release.xcconfig */,
 				37EEC3CA29F6B20F005D0457 /* CoreCollectorTests-Shared.xcconfig */,
-				37EEC41F29F6B9A1005D0457 /* BitmovinPlayerCollector-Debug.xcconfig */,
-				37EEC42029F6B9A1005D0457 /* BitmovinPlayerCollector-Release.xcconfig */,
-				37EEC41E29F6B9A1005D0457 /* BitmovinPlayerCollector-Shared.xcconfig */,
-				37EEC44A29F6BB58005D0457 /* BitmovinPlayerCollectorTests-Debug.xcconfig */,
-				37EEC44B29F6BB58005D0457 /* BitmovinPlayerCollectorTests-Release.xcconfig */,
-				37EEC44929F6BB58005D0457 /* BitmovinPlayerCollectorTests-Shared.xcconfig */,
+				37EEC41F29F6B9A1005D0457 /* BitmovinCollector-Debug.xcconfig */,
+				37EEC42029F6B9A1005D0457 /* BitmovinCollector-Release.xcconfig */,
+				37EEC41E29F6B9A1005D0457 /* BitmovinCollector-Shared.xcconfig */,
+				37EEC44A29F6BB58005D0457 /* BitmovinCollectorTests-Debug.xcconfig */,
+				37EEC44B29F6BB58005D0457 /* BitmovinCollectorTests-Release.xcconfig */,
+				37EEC44929F6BB58005D0457 /* BitmovinCollectorTests-Shared.xcconfig */,
 				37EEC46029F6BF70005D0457 /* AVPlayerCollector-Debug.xcconfig */,
 				37EEC45F29F6BF70005D0457 /* AVPlayerCollector-Release.xcconfig */,
 				37EEC46129F6BF70005D0457 /* AVPlayerCollector-Shared.xcconfig */,
@@ -855,7 +853,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		37EEC40329F6B901005D0457 /* BitmovinPlayerCollector */ = {
+		37EEC40329F6B901005D0457 /* BitmovinCollector */ = {
 			isa = PBXGroup;
 			children = (
 				37EEC40929F6B924005D0457 /* player */,
@@ -866,7 +864,7 @@
 				37EEC42129F6BA03005D0457 /* BitmovinPlayerAdapter.swift */,
 				37EEC42429F6BA03005D0457 /* BitmovinPlayerCollector.swift */,
 			);
-			path = BitmovinPlayerCollector;
+			path = BitmovinCollector;
 			sourceTree = "<group>";
 		};
 		37EEC40929F6B924005D0457 /* player */ = {
@@ -875,7 +873,7 @@
 				37EEC40A29F6B924005D0457 /* BitmovinPlayerContext.swift */,
 			);
 			name = player;
-			path = ../../Sources/BitmovinPlayerCollector/player;
+			path = ../../Sources/BitmovinCollector/player;
 			sourceTree = "<group>";
 		};
 		37EEC40D29F6B924005D0457 /* services */ = {
@@ -884,7 +882,7 @@
 				37EEC40E29F6B924005D0457 /* CastEventDataManipulator.swift */,
 			);
 			name = services;
-			path = ../../Sources/BitmovinPlayerCollector/services;
+			path = ../../Sources/BitmovinCollector/services;
 			sourceTree = "<group>";
 		};
 		37EEC40F29F6B924005D0457 /* util */ = {
@@ -895,10 +893,10 @@
 				37EEC41229F6B924005D0457 /* BitmovinPlayerUtil.swift */,
 			);
 			name = util;
-			path = ../../Sources/BitmovinPlayerCollector/util;
+			path = ../../Sources/BitmovinCollector/util;
 			sourceTree = "<group>";
 		};
-		37EEC43629F6BACA005D0457 /* BitmovinPlayerCollectorTests */ = {
+		37EEC43629F6BACA005D0457 /* BitmovinCollectorTests */ = {
 			isa = PBXGroup;
 			children = (
 				37EEC43F29F6BAF3005D0457 /* BitmovinPlayerAdapterTest.swift */,
@@ -907,7 +905,7 @@
 				37EEC44129F6BAF3005D0457 /* GeneratedMocks-Core.swift */,
 				37EEC44029F6BAF3005D0457 /* MockableFiles.xcfilelist */,
 			);
-			path = BitmovinPlayerCollectorTests;
+			path = BitmovinCollectorTests;
 			sourceTree = "<group>";
 		};
 		37EEC45929F6BF2C005D0457 /* AVPlayerCollector */ = {
@@ -1184,9 +1182,9 @@
 			productReference = 37EEC3B429F6B118005D0457 /* CoreCollectorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		37EEC40129F6B901005D0457 /* BitmovinPlayerCollector */ = {
+		37EEC40129F6B901005D0457 /* BitmovinCollector */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 37EEC40829F6B901005D0457 /* Build configuration list for PBXNativeTarget "BitmovinPlayerCollector" */;
+			buildConfigurationList = 37EEC40829F6B901005D0457 /* Build configuration list for PBXNativeTarget "BitmovinCollector" */;
 			buildPhases = (
 				37EEC3FD29F6B901005D0457 /* Headers */,
 				37EEC3FE29F6B901005D0457 /* Sources */,
@@ -1198,17 +1196,17 @@
 			dependencies = (
 				37EEC42F29F6BA7F005D0457 /* PBXTargetDependency */,
 			);
-			name = BitmovinPlayerCollector;
+			name = BitmovinCollector;
 			packageProductDependencies = (
 				37EEC42A29F6BA49005D0457 /* BitmovinPlayer */,
 			);
-			productName = BitmovinPlayerCollector;
-			productReference = 37EEC40229F6B901005D0457 /* BitmovinPlayerCollector.framework */;
+			productName = BitmovinCollector;
+			productReference = 37EEC40229F6B901005D0457 /* BitmovinCollector.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		37EEC43429F6BACA005D0457 /* BitmovinPlayerCollectorTests */ = {
+		37EEC43429F6BACA005D0457 /* BitmovinCollectorTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 37EEC43C29F6BACA005D0457 /* Build configuration list for PBXNativeTarget "BitmovinPlayerCollectorTests" */;
+			buildConfigurationList = 37EEC43C29F6BACA005D0457 /* Build configuration list for PBXNativeTarget "BitmovinCollectorTests" */;
 			buildPhases = (
 				37EEC45229F6BBE2005D0457 /* Run Cuckoo code generation */,
 				37EEC43129F6BACA005D0457 /* Sources */,
@@ -1220,14 +1218,14 @@
 			dependencies = (
 				37EEC43B29F6BACA005D0457 /* PBXTargetDependency */,
 			);
-			name = BitmovinPlayerCollectorTests;
+			name = BitmovinCollectorTests;
 			packageProductDependencies = (
 				37EEC44C29F6BB94005D0457 /* Cuckoo */,
 				37EEC44E29F6BB9A005D0457 /* Quick */,
 				37EEC45029F6BB9E005D0457 /* Nimble */,
 			);
-			productName = BitmovinPlayerCollectorTests;
-			productReference = 37EEC43529F6BACA005D0457 /* BitmovinPlayerCollectorTests.xctest */;
+			productName = BitmovinCollectorTests;
+			productReference = 37EEC43529F6BACA005D0457 /* BitmovinCollectorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		37EEC45729F6BF2C005D0457 /* AVPlayerCollector */ = {
@@ -1380,8 +1378,8 @@
 			targets = (
 				37EEC30629F6A8F5005D0457 /* CoreCollector */,
 				37EEC3B329F6B118005D0457 /* CoreCollectorTests */,
-				37EEC40129F6B901005D0457 /* BitmovinPlayerCollector */,
-				37EEC43429F6BACA005D0457 /* BitmovinPlayerCollectorTests */,
+				37EEC40129F6B901005D0457 /* BitmovinCollector */,
+				37EEC43429F6BACA005D0457 /* BitmovinCollectorTests */,
 				37EEC45729F6BF2C005D0457 /* AVPlayerCollector */,
 				37EEC48329F6C024005D0457 /* AVPlayerCollectorTests */,
 				37EEC4AC29F6C1F2005D0457 /* AmazonIVSPlayerCollector */,
@@ -1489,7 +1487,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(PROJECT_DIR)/../Tests/BitmovinPlayerCollectorTests/GeneratedMocks-Core.swift",
+				"$(PROJECT_DIR)/../Tests/BitmovinCollectorTests/GeneratedMocks-Core.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1774,7 +1772,7 @@
 		};
 		37EEC43B29F6BACA005D0457 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 37EEC40129F6B901005D0457 /* BitmovinPlayerCollector */;
+			target = 37EEC40129F6B901005D0457 /* BitmovinCollector */;
 			targetProxy = 37EEC43A29F6BACA005D0457 /* PBXContainerItemProxy */;
 		};
 		37EEC48A29F6C024005D0457 /* PBXTargetDependency */ = {
@@ -1844,28 +1842,28 @@
 		};
 		37EEC40629F6B901005D0457 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37EEC41F29F6B9A1005D0457 /* BitmovinPlayerCollector-Debug.xcconfig */;
+			baseConfigurationReference = 37EEC41F29F6B9A1005D0457 /* BitmovinCollector-Debug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		37EEC40729F6B901005D0457 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37EEC42029F6B9A1005D0457 /* BitmovinPlayerCollector-Release.xcconfig */;
+			baseConfigurationReference = 37EEC42029F6B9A1005D0457 /* BitmovinCollector-Release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
 		};
 		37EEC43D29F6BACA005D0457 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37EEC44A29F6BB58005D0457 /* BitmovinPlayerCollectorTests-Debug.xcconfig */;
+			baseConfigurationReference = 37EEC44A29F6BB58005D0457 /* BitmovinCollectorTests-Debug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		37EEC43E29F6BACA005D0457 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37EEC44B29F6BB58005D0457 /* BitmovinPlayerCollectorTests-Release.xcconfig */;
+			baseConfigurationReference = 37EEC44B29F6BB58005D0457 /* BitmovinCollectorTests-Release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
@@ -1956,7 +1954,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		37EEC40829F6B901005D0457 /* Build configuration list for PBXNativeTarget "BitmovinPlayerCollector" */ = {
+		37EEC40829F6B901005D0457 /* Build configuration list for PBXNativeTarget "BitmovinCollector" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				37EEC40629F6B901005D0457 /* Debug */,
@@ -1965,7 +1963,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		37EEC43C29F6BACA005D0457 /* Build configuration list for PBXNativeTarget "BitmovinPlayerCollectorTests" */ = {
+		37EEC43C29F6BACA005D0457 /* Build configuration list for PBXNativeTarget "BitmovinCollectorTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				37EEC43D29F6BACA005D0457 /* Debug */,

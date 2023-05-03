@@ -23,7 +23,7 @@ DESC
   end
 
   s.subspec 'BitmovinPlayer' do |bitmovinplayerv3|
-    bitmovinplayerv3.vendored_frameworks = 'BitmovinPlayerCollector.xcframework'
+    bitmovinplayerv3.vendored_frameworks = 'BitmovinCollector.xcframework'
     bitmovinplayerv3.dependency 'BitmovinPlayer', '~>3.35'
   end
 

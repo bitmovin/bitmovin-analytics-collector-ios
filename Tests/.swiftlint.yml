@@ -1,11 +1,11 @@
 excluded:
-  - ${PWD}/AmazonIVSPlayerCollectorTests/GeneratedMocks.swift 
-  - ${PWD}/AmazonIVSPlayerCollectorTests/GeneratedMocks-Core.swift 
-  - ${PWD}/BitmovinPlayerCollectorTests/GeneratedMocks.swift 
-  - ${PWD}/BitmovinPlayerCollectorTests/GeneratedMocks-Core.swift 
-  - ${PWD}/AVPlayerCollectorTests/GeneratedMocks.swift 
-  - ${PWD}/AVPlayerCollectorTests/GeneratedMocks-Core.swift 
-  - ${PWD}/CoreCollectorTests/GeneratedMocks.swift 
+  - ${PWD}/AmazonIVSPlayerCollectorTests/GeneratedMocks.swift
+  - ${PWD}/AmazonIVSPlayerCollectorTests/GeneratedMocks-Core.swift
+  - ${PWD}/BitmovinCollectorTests/GeneratedMocks.swift
+  - ${PWD}/BitmovinCollectorTests/GeneratedMocks-Core.swift
+  - ${PWD}/AVPlayerCollectorTests/GeneratedMocks.swift
+  - ${PWD}/AVPlayerCollectorTests/GeneratedMocks-Core.swift
+  - ${PWD}/CoreCollectorTests/GeneratedMocks.swift
 disabled_rules:
   - force_cast
   - force_try

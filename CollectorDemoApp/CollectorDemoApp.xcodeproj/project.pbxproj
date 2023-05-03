@@ -9,16 +9,16 @@
 /* Begin PBXBuildFile section */
 		37A75A3329F7FFFC00D2740B /* AVPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A75A3229F7FFFC00D2740B /* AVPlayerCollector.framework */; };
 		37A75A3429F7FFFC00D2740B /* AVPlayerCollector.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37A75A3229F7FFFC00D2740B /* AVPlayerCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		37D01D3A29F7F405001CA3B7 /* BitmovinPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D01D3629F7F405001CA3B7 /* BitmovinPlayerCollector.framework */; };
-		37D01D3B29F7F405001CA3B7 /* BitmovinPlayerCollector.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37D01D3629F7F405001CA3B7 /* BitmovinPlayerCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37D01D3A29F7F405001CA3B7 /* BitmovinCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D01D3629F7F405001CA3B7 /* BitmovinCollector.framework */; };
+		37D01D3B29F7F405001CA3B7 /* BitmovinCollector.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37D01D3629F7F405001CA3B7 /* BitmovinCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37D01D3C29F7F405001CA3B7 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D01D3729F7F405001CA3B7 /* CoreCollector.framework */; };
 		37D01D3D29F7F405001CA3B7 /* CoreCollector.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37D01D3729F7F405001CA3B7 /* CoreCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37EEC52B29F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC52729F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework */; };
 		37EEC52C29F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37EEC52729F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37EEC52D29F7EBD8005D0457 /* AVPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC52829F7EBD8005D0457 /* AVPlayerCollector.framework */; };
 		37EEC52E29F7EBD8005D0457 /* AVPlayerCollector.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37EEC52829F7EBD8005D0457 /* AVPlayerCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		37EEC52F29F7EBD8005D0457 /* BitmovinPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC52929F7EBD8005D0457 /* BitmovinPlayerCollector.framework */; };
-		37EEC53029F7EBD8005D0457 /* BitmovinPlayerCollector.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37EEC52929F7EBD8005D0457 /* BitmovinPlayerCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37EEC52F29F7EBD8005D0457 /* BitmovinCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC52929F7EBD8005D0457 /* BitmovinCollector.framework */; };
+		37EEC53029F7EBD8005D0457 /* BitmovinCollector.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37EEC52929F7EBD8005D0457 /* BitmovinCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37EEC53129F7EBD8005D0457 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC52A29F7EBD8005D0457 /* CoreCollector.framework */; };
 		37EEC53229F7EBD8005D0457 /* CoreCollector.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37EEC52A29F7EBD8005D0457 /* CoreCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37EEC53C29F7EC91005D0457 /* BitmovinPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC53B29F7EC91005D0457 /* BitmovinPlayer */; };
@@ -62,7 +62,7 @@
 			files = (
 				37A75A3429F7FFFC00D2740B /* AVPlayerCollector.framework in Embed Frameworks */,
 				37D01D3D29F7F405001CA3B7 /* CoreCollector.framework in Embed Frameworks */,
-				37D01D3B29F7F405001CA3B7 /* BitmovinPlayerCollector.framework in Embed Frameworks */,
+				37D01D3B29F7F405001CA3B7 /* BitmovinCollector.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -75,7 +75,7 @@
 			files = (
 				37EEC52E29F7EBD8005D0457 /* AVPlayerCollector.framework in CopyFiles */,
 				37EEC52C29F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework in CopyFiles */,
-				37EEC53029F7EBD8005D0457 /* BitmovinPlayerCollector.framework in CopyFiles */,
+				37EEC53029F7EBD8005D0457 /* BitmovinCollector.framework in CopyFiles */,
 				37EEC53229F7EBD8005D0457 /* CoreCollector.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,11 +91,11 @@
 		3171027DBF1470DD82EE993A /* Pods-CollectorDemoAppTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTV.release.xcconfig"; path = "../../Pods/Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV.release.xcconfig"; sourceTree = "<group>"; };
 		37A75A3229F7FFFC00D2740B /* AVPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AVPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D01D3529F7F405001CA3B7 /* AVPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AVPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		37D01D3629F7F405001CA3B7 /* BitmovinPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BitmovinPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37D01D3629F7F405001CA3B7 /* BitmovinCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BitmovinCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D01D3729F7F405001CA3B7 /* CoreCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CoreCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EEC52729F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AmazonIVSPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EEC52829F7EBD8005D0457 /* AVPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AVPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		37EEC52929F7EBD8005D0457 /* BitmovinPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BitmovinPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EEC52929F7EBD8005D0457 /* BitmovinCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BitmovinCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EEC52A29F7EBD8005D0457 /* CoreCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CoreCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB1F5F69DFBB5DE75E5EF93 /* libPods-CollectorDemoAppTVCocoaPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CollectorDemoAppTVCocoaPods.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		553B45211679383C2A0F5CD0 /* Pods-CollectorDemoAppCocoaPods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppCocoaPods.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -143,7 +143,7 @@
 				37EEC52B29F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework in Frameworks */,
 				37EEC53129F7EBD8005D0457 /* CoreCollector.framework in Frameworks */,
 				D1AB2510EDA14C4BEB0F7FD1 /* Pods_CollectorDemoApp.framework in Frameworks */,
-				37EEC52F29F7EBD8005D0457 /* BitmovinPlayerCollector.framework in Frameworks */,
+				37EEC52F29F7EBD8005D0457 /* BitmovinCollector.framework in Frameworks */,
 				37EEC53C29F7EC91005D0457 /* BitmovinPlayer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,7 +155,7 @@
 				37EEC53E29F7ECA3005D0457 /* BitmovinPlayer in Frameworks */,
 				37D01D3C29F7F405001CA3B7 /* CoreCollector.framework in Frameworks */,
 				79CFBDE266D7173A3728ED64 /* Pods_CollectorDemoAppTV.framework in Frameworks */,
-				37D01D3A29F7F405001CA3B7 /* BitmovinPlayerCollector.framework in Frameworks */,
+				37D01D3A29F7F405001CA3B7 /* BitmovinCollector.framework in Frameworks */,
 				37A75A3329F7FFFC00D2740B /* AVPlayerCollector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -168,11 +168,11 @@
 			children = (
 				37A75A3229F7FFFC00D2740B /* AVPlayerCollector.framework */,
 				37D01D3529F7F405001CA3B7 /* AVPlayerCollector.framework */,
-				37D01D3629F7F405001CA3B7 /* BitmovinPlayerCollector.framework */,
+				37D01D3629F7F405001CA3B7 /* BitmovinCollector.framework */,
 				37D01D3729F7F405001CA3B7 /* CoreCollector.framework */,
 				37EEC52729F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework */,
 				37EEC52829F7EBD8005D0457 /* AVPlayerCollector.framework */,
-				37EEC52929F7EBD8005D0457 /* BitmovinPlayerCollector.framework */,
+				37EEC52929F7EBD8005D0457 /* BitmovinCollector.framework */,
 				37EEC52A29F7EBD8005D0457 /* CoreCollector.framework */,
 				2F10E174AEA18176F06BDF84 /* Pods_CollectorDemoApp.framework */,
 				6363D0EA977656A5C66C82F6 /* Pods_CollectorDemoAppCocoaPods.framework */,
@@ -572,7 +572,7 @@
 		};
 		9D6FA9F429AE2C7700B2BF1A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = 9D6FA9F329AE2C7700B2BF1A /* BitmovinPlayerCollector */;
+			productRef = 9D6FA9F329AE2C7700B2BF1A /* BitmovinCollector */;
 		};
 /* End PBXTargetDependency section */
 
@@ -926,9 +926,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = AVPlayerCollector;
 		};
-		9D6FA9F329AE2C7700B2BF1A /* BitmovinPlayerCollector */ = {
+		9D6FA9F329AE2C7700B2BF1A /* BitmovinCollector */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = BitmovinPlayerCollector;
+			productName = BitmovinCollector;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -93,7 +93,7 @@ let package = Package(
     .target(
       name: "<NAME_OF_YOUR_PACKAGE>",
       dependencies: [
-        .product(name: "BitmovinPlayerCollector", package: "BitmovinAnalytics"),
+        .product(name: "BitmovinCollector", package: "BitmovinAnalytics"),
         .product(name: "AVPlayerCollector", package: "BitmovinAnalytics")
         .product(name: "AmazonIVSPlayerCollector", package: "BitmovinAnalytics")
       ]),
@@ -108,7 +108,7 @@ Executing `swift build` from the command line is currently not supported. Open t
 
 We have split the `BitmovinAnalytics` into 3 targets
 - CoreCollector - including shared code for all collectors
-- BitmovinPlayerCollector - including `BitmovinPlayer` Collector
+- BitmovinCollector - including `BitmovinPlayer` Collector
 - AVPlayerCollector - including `AVPlayer` Collector
 - AmazonIVSPlayerCollector - including `AmazonIVSPlayer` Collector
 
