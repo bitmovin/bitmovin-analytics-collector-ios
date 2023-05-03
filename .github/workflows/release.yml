@@ -84,7 +84,7 @@ jobs:
       - name: Bump changelog version
         if: ${{ inputs.release_type == 'final' }}
         run: |
-          sed -E -i "s/(## Development V2)/\1\n\n## ${{ steps.version_number.outputs.version_number }}/g" CHANGELOG.md
+          sed -E -i "s/(## Unreleased)/\1\n\n## ${{ steps.version_number.outputs.version_number }}/g" CHANGELOG.md
       - name: Commit version bump
         run: |
           git add CHANGELOG.md BitmovinAnalyticsCollector/xcconfig/Project-Shared.xcconfig
