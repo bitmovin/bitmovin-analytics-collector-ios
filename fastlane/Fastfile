@@ -22,21 +22,33 @@ platform :ios do
     FileUtils.remove_dir("#{DirectoryHelper.project_root}/Output", true)
     FileUtils.remove_dir("#{DirectoryHelper.project_root}/Release", true)
 
-    schemes = {
-      "CoreCollector" => true,
-      "BitmovinPlayerCollector" => true,
-      "AVPlayerCollector" => true,
-      "AmazonIVSPlayerCollector" => false,
-    }
+    schemes = [
+      {
+        scheme: "CoreCollector", 
+        supports_tvos: true
+      },
+      {
+        scheme: "BitmovinPlayerCollector", 
+        supports_tvos: true
+      },
+      {
+        scheme: "AVPlayerCollector", 
+        supports_tvos: true
+      },
+      {
+        scheme: "AmazonIVSPlayerCollector", 
+        supports_tvos: false
+      },
+    ]
 
     # keep this separate to ensure all can be built successfully
-    schemes.each do |scheme, supports_tvos|
+    schemes.each do |entry|
       build_release_product(
-        scheme: scheme,
-        supports_tvos: supports_tvos
+        scheme: entry[:scheme],
+        supports_tvos: entry[:supports_tvos]
       )
       create_release_xcframework_zip(
-        product_name: scheme
+        product_name: entry[:scheme]
       )
     end
     
