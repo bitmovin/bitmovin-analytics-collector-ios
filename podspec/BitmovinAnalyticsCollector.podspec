@@ -22,18 +22,18 @@ DESC
     core.vendored_frameworks = 'CoreCollector.xcframework'
   end
 
-  s.subspec 'BitmovinPlayer' do |bitmovinplayerv3|
+  s.subspec 'BitmovinCollector' do |bitmovinplayerv3|
     bitmovinplayerv3.vendored_frameworks = 'BitmovinCollector.xcframework'
     bitmovinplayerv3.dependency 'BitmovinPlayer', '~>3.35'
   end
 
-  s.subspec 'AmazonIVSPlayer' do |ivsplayer|
+  s.subspec 'AmazonIVSPlayerCollector' do |ivsplayer|
     ivsplayer.ios.deployment_target = '14.0'
     ivsplayer.ios.vendored_frameworks = 'AmazonIVSPlayerCollector.xcframework'
     ivsplayer.ios.dependency 'AmazonIVSPlayer', '1.18.0'
   end
 
-  s.subspec 'AVPlayer' do |avplayer|
+  s.subspec 'AVFoundationCollector' do |avplayer|
     avplayer.vendored_frameworks = 'AVFoundationCollector.xcframework'
   end
 end
