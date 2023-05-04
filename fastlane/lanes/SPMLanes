@@ -26,6 +26,10 @@ platform :ios do
     package_template_path = "#{DirectoryHelper.project_root}/spm/."
 
     Dir.chdir("#{tmp_dir}") do
+      # Removing the old Sources folder so the template folder is treated as the source of truth
+      # in case something changes there
+      sh("rm -rf Sources")
+
       FileUtils.cp_r(package_template_path, '.')
     end
   end
@@ -88,7 +92,8 @@ platform :ios do
       GitHelper.add_files(
         [
           "Package.swift",
-          "README.md"
+          "README.md",
+          "Sources"
         ]
       )
       GitHelper.commit("Release #{package_version}")

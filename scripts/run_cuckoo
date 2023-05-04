@@ -36,7 +36,7 @@ run_cuckoo_generator() {
 
 generate() {
     TESTABLE_TARGET=$1
-    
+
     TESTS_PATH="${REPO_ROOT}/Tests/${TESTABLE_TARGET}Tests"
     INPUT_FILE_LIST="${TESTS_PATH}/MockableFiles.xcfilelist"
     OUTPUT_FILE="${TESTS_PATH}/GeneratedMocks.swift"
@@ -51,12 +51,12 @@ cpyCoreTo() {
 }
 
 generate "CoreCollector"
-generate "AmazonIVSPlayerCollector"
-generate "BitmovinPlayerCollector"
-generate "AVPlayerCollector"
+generate "AmazonIVSCollector"
+generate "BitmovinCollector"
+generate "AVFoundationCollector"
 
-# we need to copy the generated mocks from the CoreCollector package 
+# we need to copy the generated mocks from the CoreCollector package
 # to the other packages so we can use the mock also in there
-cpyCoreTo "AmazonIVSPlayerCollector"
-cpyCoreTo "BitmovinPlayerCollector"
-cpyCoreTo "AVPlayerCollector"
+cpyCoreTo "AmazonIVSCollector"
+cpyCoreTo "BitmovinCollector"
+cpyCoreTo "AVFoundationCollector"

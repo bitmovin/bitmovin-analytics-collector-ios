@@ -2,7 +2,7 @@ import AmazonIVSPlayer
 import Foundation
 import UIKit
 import CoreCollector
-import AmazonIVSPlayerCollector
+import AmazonIVSCollector
 
 class AmazonIvsViewController: UIViewController, IVSPlayer.Delegate {
     // MARK: - View Lifecycle
@@ -30,11 +30,11 @@ class AmazonIvsViewController: UIViewController, IVSPlayer.Delegate {
 
     // MARK: - Bitmovin Analytics
 
-    private var collector: AmazonIVSCollector? = nil
+    private var collector: AmazonIVSPlayerCollector? = nil
     private func createConfig() {
         let config = BitmovinAnalyticsConfig(key: AppConfig.analyticsLicenseKey)
         // create adapter
-        self.collector = AmazonIVSCollector(config: config)
+        self.collector = AmazonIVSPlayerCollector(config: config)
 
     }
 

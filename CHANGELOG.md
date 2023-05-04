@@ -14,8 +14,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [internal] An Xcode workspace to collect all future targets together
 
 ### Changed
-- The collectors (`CoreCollector`, `BitmovinPlayerCollector`, `AVPlayerCollector`, `AmazonIVSPlayerCollector`) are now now shipped as `XCFramework`
+- The collectors (`CoreCollector`, `BitmovinCollector`, `AVFoundationCollector`, `AmazonIVSCollector`) are now now shipped as `XCFramework`
 - The source code is removed from the public repository
+- `AmazonIVSCollector` was renamed to `AmazonIVSPlayerCollector` to be consistent with the other collectors
 - [internal] Unit tests are now handled in separate targets
 
 ## v2.11.0

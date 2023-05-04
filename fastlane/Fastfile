@@ -24,19 +24,19 @@ platform :ios do
 
     schemes = [
       {
-        scheme: "CoreCollector", 
+        scheme: "CoreCollector",
         supports_tvos: true
       },
       {
-        scheme: "BitmovinPlayerCollector", 
+        scheme: "BitmovinCollector",
         supports_tvos: true
       },
       {
-        scheme: "AVPlayerCollector", 
+        scheme: "AVFoundationCollector",
         supports_tvos: true
       },
       {
-        scheme: "AmazonIVSPlayerCollector", 
+        scheme: "AmazonIVSCollector",
         supports_tvos: false
       },
     ]
@@ -51,7 +51,7 @@ platform :ios do
         product_name: entry[:scheme]
       )
     end
-    
+
     create_release_umbrella_xcframework_zip
   end
 
@@ -59,9 +59,9 @@ platform :ios do
   lane :push_release_binaries do
     schemes = [
       "CoreCollector",
-      "BitmovinPlayerCollector",
-      "AVPlayerCollector",
-      "AmazonIVSPlayerCollector",
+      "BitmovinCollector",
+      "AVFoundationCollector",
+      "AmazonIVSCollector",
     ]
 
     schemes.each do |scheme|
@@ -87,7 +87,7 @@ platform :ios do
     spec["source"]["http"] = "https://cdn.bitmovin.com/#{bucket_path}"
 
     cocoapod_deploy_key_path="#{release_dir}/cocoapod-deploy.id_rsa"
-    
+
     unless File.exists?(cocoapod_deploy_key_path)
       File.write(cocoapod_deploy_key_path, "-----BEGIN OPENSSH PRIVATE KEY-----\n") #Keys need to be created with macbook
       File.write(cocoapod_deploy_key_path, options[:COCOA_DEPLOY_KEY], mode: "a")
@@ -110,9 +110,9 @@ platform :ios do
     package_version = ENV.fetch("GIT_VERSION")
     targets = [
       "CoreCollector",
-      "BitmovinPlayerCollector",
-      "AVPlayerCollector",
-      "AmazonIVSPlayerCollector",
+      "BitmovinCollector",
+      "AVFoundationCollector",
+      "AmazonIVSCollector",
     ]
 
     prepare_spm_package_release(

@@ -64,9 +64,9 @@ Swift Package Manager is a tool for managing the distribution of Swift framework
 Swift Package Manager support since `2.8.0`
 
 We provide three products:
-- `BitmovinPlayerCollector` including BitmovinPlayer v3 Collector
-- `AVPlayerCollector` including AVPlayer Collector
-- `AmazonIVSPlayerCollector` including Amazon IVS Player Collector
+- `BitmovinCollector` including BitmovinPlayer v3 Collector
+- `AVFoundationCollector` including AVPlayer Collector
+- `AmazonIVSCollector` including Amazon IVS Player Collector
 
 ### Using Xcode
 
@@ -93,9 +93,9 @@ let package = Package(
     .target(
       name: "<NAME_OF_YOUR_PACKAGE>",
       dependencies: [
-        .product(name: "BitmovinPlayerCollector", package: "BitmovinAnalytics"),
-        .product(name: "AVPlayerCollector", package: "BitmovinAnalytics")
-        .product(name: "AmazonIVSPlayerCollector", package: "BitmovinAnalytics")
+        .product(name: "BitmovinCollector", package: "BitmovinAnalytics"),
+        .product(name: "AVFoundationCollector", package: "BitmovinAnalytics")
+        .product(name: "AmazonIVSCollector", package: "BitmovinAnalytics")
       ]),
   ]
   ...
@@ -106,11 +106,11 @@ Executing `swift build` from the command line is currently not supported. Open t
 
 ### Import BitmovinAnalyticsCollector into your Code
 
-We have split the `BitmovinAnalytics` into 3 targets
+We have split the `BitmovinAnalytics` into 4 targets
 - CoreCollector - including shared code for all collectors
-- BitmovinPlayerCollector - including `BitmovinPlayer` Collector
-- AVPlayerCollector - including `AVPlayer` Collector
-- AmazonIVSPlayerCollector - including `AmazonIVSPlayer` Collector
+- BitmovinCollector - including `BitmovinPlayer` Collector
+- AVFoundationCollector - including `AVPlayer` Collector
+- AmazonIVSCollector - including `AmazonIVSPlayer` Collector
 
 if you are working with our Collectors you need to add at least `import CoreCollector` as many Classes are relocated to that package
 
@@ -119,7 +119,7 @@ Going further you need to import the corresponding Collector package for player
 Example when using BitmovinPlayer
 ```
 import CoreCollector
-import BitmovinPlayerCollector
+import BitmovinCollector
 ```
 
 ## Using [CocoaPods](https://cocoapods.org/)
