@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - The collectors (`CoreCollector`, `BitmovinCollector`, `AVFoundationCollector`, `AmazonIVSCollector`) are now now shipped as `XCFramework`
 - The source code is removed from the public repository
+- `AmazonIVSCollector` was renamed to `AmazonIVSPlayerCollector` to be consistent with the other collectors
 - [internal] Unit tests are now handled in separate targets
 
 ## v2.11.0
