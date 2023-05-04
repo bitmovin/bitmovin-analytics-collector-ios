@@ -3,12 +3,12 @@ import Cuckoo
 import Nimble
 import Quick
 
-@testable import AmazonIVSPlayerCollector
+@testable import AmazonIVSCollector
 import CoreCollector
 
 class ErrorServiceTest: QuickSpec {
     override func spec() {
-        
+
         // arrange
         var mockStateMachine = MockStateMachine()
         var mockPlayerContext = MockPlayerContext()
@@ -24,7 +24,7 @@ class ErrorServiceTest: QuickSpec {
                 stateMachine: mockStateMachine
             )
         }
-        
+
         describe("onError") {
             it("should transition onPlayAttemptFailed") {
                 // arrange
@@ -86,7 +86,7 @@ class ErrorServiceTest: QuickSpec {
                 // assert
                 verify(mockStateMachine).error(withError: equal (to: errorData), time: equal(to: position))
             }
-            
+
         }
     }
 }

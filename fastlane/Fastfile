@@ -36,7 +36,7 @@ platform :ios do
         supports_tvos: true
       },
       {
-        scheme: "AmazonIVSPlayerCollector",
+        scheme: "AmazonIVSCollector",
         supports_tvos: false
       },
     ]
@@ -61,7 +61,7 @@ platform :ios do
       "CoreCollector",
       "BitmovinCollector",
       "AVFoundationCollector",
-      "AmazonIVSPlayerCollector",
+      "AmazonIVSCollector",
     ]
 
     schemes.each do |scheme|
@@ -112,7 +112,7 @@ platform :ios do
       "CoreCollector",
       "BitmovinCollector",
       "AVFoundationCollector",
-      "AmazonIVSPlayerCollector",
+      "AmazonIVSCollector",
     ]
 
     prepare_spm_package_release(

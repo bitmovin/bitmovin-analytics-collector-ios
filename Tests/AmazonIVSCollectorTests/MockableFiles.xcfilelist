@@ -1,0 +1,8 @@
+$(SOURCES_ROOT)/AmazonIVSCollector/playback/VideoStartupService.swift
+$(SOURCES_ROOT)/AmazonIVSCollector/ivsprotocol/IVSQualityProtocol.swift
+$(SOURCES_ROOT)/AmazonIVSCollector/ivsprotocol/IVSPlayerProtocol.swift
+$(SOURCES_ROOT)/AmazonIVSCollector/playback/ErrorService.swift
+$(SOURCES_ROOT)/AmazonIVSCollector/playback/PlaybackService.swift
+$(SOURCES_ROOT)/AmazonIVSCollector/playback/VideoStartupService.swift
+$(SOURCES_ROOT)/AmazonIVSCollector/player/PlaybackQualityProvider.swift
+$(SOURCES_ROOT)/AmazonIVSCollector/player/PlayerStatisticsProvider.swift

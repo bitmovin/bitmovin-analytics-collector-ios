@@ -2,7 +2,7 @@ import AmazonIVSPlayer
 import Foundation
 import UIKit
 import CoreCollector
-import AmazonIVSPlayerCollector
+import AmazonIVSCollector
 
 class AmazonIvsViewController: UIViewController, IVSPlayer.Delegate {
     // MARK: - View Lifecycle

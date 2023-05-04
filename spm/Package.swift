@@ -20,8 +20,8 @@ let package = Package(
             targets: ["AVFoundationCollectorTarget"]
         ),
         .library(
-            name: "AmazonIVSPlayerCollector",
-            targets: ["AmazonIVSPlayerCollectorTarget"]
+            name: "AmazonIVSCollector",
+            targets: ["AmazonIVSCollectorTarget"]
         )
     ],
     dependencies: [
@@ -66,14 +66,14 @@ let package = Package(
             checksum: "1b50c62c49f2ceb6eb78c276d798fe6fdfa41b8982f8ad369eebe14bfacbdb5f"
         ),
         .binaryTarget(
-            name: "AmazonIVSPlayerCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/x.x.x/AmazonIVSPlayerCollector.zip",
-            checksum: "AmazonIVSPlayerCollector-hash"
+            name: "AmazonIVSCollector",
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/x.x.x/AmazonIVSCollector.zip",
+            checksum: "AmazonIVSCollector-hash"
         ),
         .target(
-            name: "AmazonIVSPlayerCollectorTarget",
+            name: "AmazonIVSCollectorTarget",
             dependencies: [
-                .target(name: "AmazonIVSPlayerCollector", condition: .when(platforms: [.iOS])),
+                .target(name: "AmazonIVSCollector", condition: .when(platforms: [.iOS])),
                 .target(name: "AmazonIVSPlayer", condition: .when(platforms: [.iOS])),
                 .target(name: "CoreCollector", condition: .when(platforms: [.iOS])),
             ]

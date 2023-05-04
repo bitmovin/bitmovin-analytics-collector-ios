@@ -1,6 +1,6 @@
 excluded:
-  - ${PWD}/AmazonIVSPlayerCollectorTests/GeneratedMocks.swift
-  - ${PWD}/AmazonIVSPlayerCollectorTests/GeneratedMocks-Core.swift
+  - ${PWD}/AmazonIVSCollectorTests/GeneratedMocks.swift
+  - ${PWD}/AmazonIVSCollectorTests/GeneratedMocks-Core.swift
   - ${PWD}/BitmovinCollectorTests/GeneratedMocks.swift
   - ${PWD}/BitmovinCollectorTests/GeneratedMocks-Core.swift
   - ${PWD}/AVFoundationCollectorTests/GeneratedMocks.swift

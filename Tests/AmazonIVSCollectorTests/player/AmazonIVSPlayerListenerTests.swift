@@ -3,7 +3,7 @@ import Nimble
 import Quick
 
 import AmazonIVSPlayer
-@testable import AmazonIVSPlayerCollector
+@testable import AmazonIVSCollector
 
 class AmazonIVSPlayerListenerTests: QuickSpec {
     override func spec() {

@@ -3,7 +3,7 @@ import Cuckoo
 import Nimble
 import Quick
 
-@testable import AmazonIVSPlayerCollector
+@testable import AmazonIVSCollector
 import CoreCollector
 
 class PlaybackServiceTest: QuickSpec {
@@ -185,7 +185,7 @@ class PlaybackServiceTest: QuickSpec {
                     }
                 }
                 let quality: IVSQualityProtocol = IVSQualityProtocolStub()
-                
+
                 // act
 
                 playbackService.onQualityChange(quality)

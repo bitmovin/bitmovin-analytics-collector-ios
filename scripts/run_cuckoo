@@ -51,12 +51,12 @@ cpyCoreTo() {
 }
 
 generate "CoreCollector"
-generate "AmazonIVSPlayerCollector"
+generate "AmazonIVSCollector"
 generate "BitmovinCollector"
 generate "AVFoundationCollector"
 
 # we need to copy the generated mocks from the CoreCollector package
 # to the other packages so we can use the mock also in there
-cpyCoreTo "AmazonIVSPlayerCollector"
+cpyCoreTo "AmazonIVSCollector"
 cpyCoreTo "BitmovinCollector"
 cpyCoreTo "AVFoundationCollector"

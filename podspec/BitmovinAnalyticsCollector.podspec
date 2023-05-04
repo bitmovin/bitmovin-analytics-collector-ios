@@ -27,9 +27,9 @@ DESC
     bitmovinplayerv3.dependency 'BitmovinPlayer', '~>3.35'
   end
 
-  s.subspec 'AmazonIVSPlayerCollector' do |ivsplayer|
+  s.subspec 'AmazonIVSCollector' do |ivsplayer|
     ivsplayer.ios.deployment_target = '14.0'
-    ivsplayer.ios.vendored_frameworks = 'AmazonIVSPlayerCollector.xcframework'
+    ivsplayer.ios.vendored_frameworks = 'AmazonIVSCollector.xcframework'
     ivsplayer.ios.dependency 'AmazonIVSPlayer', '1.18.0'
   end
 

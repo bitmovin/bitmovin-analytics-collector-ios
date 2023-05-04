@@ -3,7 +3,7 @@ import Cuckoo
 import Nimble
 import Quick
 
-@testable import AmazonIVSPlayerCollector
+@testable import AmazonIVSCollector
 import CoreCollector
 
 class VideoStartupServiceTest: QuickSpec {

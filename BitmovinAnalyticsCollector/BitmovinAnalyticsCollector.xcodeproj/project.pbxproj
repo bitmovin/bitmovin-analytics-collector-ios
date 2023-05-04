@@ -158,7 +158,7 @@
 		37EEC4DE29F6C207005D0457 /* QualityEventDataManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4CA29F6C207005D0457 /* QualityEventDataManipulator.swift */; };
 		37EEC4DF29F6C207005D0457 /* AmazonIVSPlayerAdapterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC4CB29F6C207005D0457 /* AmazonIVSPlayerAdapterFactory.swift */; };
 		37EEC4EE29F7D41B005D0457 /* AmazonIVSPlayer.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC4ED29F7D3EC005D0457 /* AmazonIVSPlayer.xcframework */; };
-		37EEC4F929F7D53D005D0457 /* AmazonIVSPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC4AD29F6C1F2005D0457 /* AmazonIVSPlayerCollector.framework */; };
+		37EEC4F929F7D53D005D0457 /* AmazonIVSCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC4AD29F6C1F2005D0457 /* AmazonIVSCollector.framework */; };
 		37EEC50C29F7D559005D0457 /* AmazonIVSPlayerListenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC50029F7D559005D0457 /* AmazonIVSPlayerListenerTests.swift */; };
 		37EEC50D29F7D559005D0457 /* PlayerStatisticsProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC50129F7D559005D0457 /* PlayerStatisticsProviderTests.swift */; };
 		37EEC50E29F7D559005D0457 /* PlaybackQualityProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC50229F7D559005D0457 /* PlaybackQualityProviderTests.swift */; };
@@ -209,7 +209,7 @@
 			containerPortal = 37EEC2D529F6A86B005D0457 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 37EEC4AC29F6C1F2005D0457;
-			remoteInfo = AmazonIVSPlayerCollector;
+			remoteInfo = AmazonIVSCollector;
 		};
 		37EEC52229F7E544005D0457 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -370,8 +370,8 @@
 		37EEC49629F6C0AD005D0457 /* GeneratedMocks-Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GeneratedMocks-Core.swift"; path = "../../Tests/AVFoundationCollectorTests/GeneratedMocks-Core.swift"; sourceTree = "<group>"; };
 		37EEC49729F6C0AD005D0457 /* MockableFiles.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; name = MockableFiles.xcfilelist; path = ../../Tests/AVFoundationCollectorTests/MockableFiles.xcfilelist; sourceTree = "<group>"; };
 		37EEC49929F6C0AD005D0457 /* AccessLogProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessLogProviderMock.swift; sourceTree = "<group>"; };
-		37EEC4AD29F6C1F2005D0457 /* AmazonIVSPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AmazonIVSPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		37EEC4B429F6C207005D0457 /* AmazonIVSPlayerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AmazonIVSPlayerAdapter.swift; path = ../../Sources/AmazonIVSPlayerCollector/AmazonIVSPlayerAdapter.swift; sourceTree = "<group>"; };
+		37EEC4AD29F6C1F2005D0457 /* AmazonIVSCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AmazonIVSCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EEC4B429F6C207005D0457 /* AmazonIVSPlayerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AmazonIVSPlayerAdapter.swift; path = ../../Sources/AmazonIVSCollector/AmazonIVSPlayerAdapter.swift; sourceTree = "<group>"; };
 		37EEC4B629F6C207005D0457 /* VideoStartupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoStartupService.swift; sourceTree = "<group>"; };
 		37EEC4B729F6C207005D0457 /* DefaultErrorService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultErrorService.swift; sourceTree = "<group>"; };
 		37EEC4B829F6C207005D0457 /* DefaultPlaybackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPlaybackService.swift; sourceTree = "<group>"; };
@@ -386,29 +386,29 @@
 		37EEC4C229F6C207005D0457 /* PlayerStatisticsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerStatisticsProvider.swift; sourceTree = "<group>"; };
 		37EEC4C429F6C207005D0457 /* IVSQualityProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IVSQualityProtocol.swift; sourceTree = "<group>"; };
 		37EEC4C529F6C207005D0457 /* IVSPlayerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IVSPlayerProtocol.swift; sourceTree = "<group>"; };
-		37EEC4C629F6C207005D0457 /* AmazonIVSCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AmazonIVSCollector.swift; path = ../../Sources/AmazonIVSPlayerCollector/AmazonIVSCollector.swift; sourceTree = "<group>"; };
+		37EEC4C629F6C207005D0457 /* AmazonIVSCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AmazonIVSCollector.swift; path = ../../Sources/AmazonIVSCollector/AmazonIVSCollector.swift; sourceTree = "<group>"; };
 		37EEC4C829F6C207005D0457 /* PlayerInfoManipulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerInfoManipulator.swift; sourceTree = "<group>"; };
 		37EEC4C929F6C207005D0457 /* PlaybackEventDataManipulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackEventDataManipulator.swift; sourceTree = "<group>"; };
 		37EEC4CA29F6C207005D0457 /* QualityEventDataManipulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QualityEventDataManipulator.swift; sourceTree = "<group>"; };
-		37EEC4CB29F6C207005D0457 /* AmazonIVSPlayerAdapterFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AmazonIVSPlayerAdapterFactory.swift; path = ../../Sources/AmazonIVSPlayerCollector/AmazonIVSPlayerAdapterFactory.swift; sourceTree = "<group>"; };
-		37EEC4E029F6C234005D0457 /* AmazonIVSPlayerCollector-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollector-Release.xcconfig"; sourceTree = "<group>"; };
-		37EEC4E129F6C234005D0457 /* AmazonIVSPlayerCollector-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollector-Shared.xcconfig"; sourceTree = "<group>"; };
-		37EEC4E229F6C234005D0457 /* AmazonIVSPlayerCollector-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollector-Debug.xcconfig"; sourceTree = "<group>"; };
+		37EEC4CB29F6C207005D0457 /* AmazonIVSPlayerAdapterFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AmazonIVSPlayerAdapterFactory.swift; path = ../../Sources/AmazonIVSCollector/AmazonIVSPlayerAdapterFactory.swift; sourceTree = "<group>"; };
+		37EEC4E029F6C234005D0457 /* AmazonIVSCollector-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSCollector-Release.xcconfig"; sourceTree = "<group>"; };
+		37EEC4E129F6C234005D0457 /* AmazonIVSCollector-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSCollector-Shared.xcconfig"; sourceTree = "<group>"; };
+		37EEC4E229F6C234005D0457 /* AmazonIVSCollector-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSCollector-Debug.xcconfig"; sourceTree = "<group>"; };
 		37EEC4ED29F7D3EC005D0457 /* AmazonIVSPlayer.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = AmazonIVSPlayer.xcframework; sourceTree = "<group>"; };
-		37EEC4F529F7D53D005D0457 /* AmazonIVSPlayerCollectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmazonIVSPlayerCollectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EEC4F529F7D53D005D0457 /* AmazonIVSCollectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmazonIVSCollectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EEC50029F7D559005D0457 /* AmazonIVSPlayerListenerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazonIVSPlayerListenerTests.swift; sourceTree = "<group>"; };
 		37EEC50129F7D559005D0457 /* PlayerStatisticsProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerStatisticsProviderTests.swift; sourceTree = "<group>"; };
 		37EEC50229F7D559005D0457 /* PlaybackQualityProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackQualityProviderTests.swift; sourceTree = "<group>"; };
-		37EEC50329F7D559005D0457 /* GeneratedMocks-Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GeneratedMocks-Core.swift"; path = "../../Tests/AmazonIVSPlayerCollectorTests/GeneratedMocks-Core.swift"; sourceTree = "<group>"; };
-		37EEC50429F7D559005D0457 /* MockableFiles.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; name = MockableFiles.xcfilelist; path = ../../Tests/AmazonIVSPlayerCollectorTests/MockableFiles.xcfilelist; sourceTree = "<group>"; };
-		37EEC50529F7D559005D0457 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeneratedMocks.swift; path = ../../Tests/AmazonIVSPlayerCollectorTests/GeneratedMocks.swift; sourceTree = "<group>"; };
+		37EEC50329F7D559005D0457 /* GeneratedMocks-Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GeneratedMocks-Core.swift"; path = "../../Tests/AmazonIVSCollectorTests/GeneratedMocks-Core.swift"; sourceTree = "<group>"; };
+		37EEC50429F7D559005D0457 /* MockableFiles.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; name = MockableFiles.xcfilelist; path = ../../Tests/AmazonIVSCollectorTests/MockableFiles.xcfilelist; sourceTree = "<group>"; };
+		37EEC50529F7D559005D0457 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeneratedMocks.swift; path = ../../Tests/AmazonIVSCollectorTests/GeneratedMocks.swift; sourceTree = "<group>"; };
 		37EEC50729F7D559005D0457 /* PlaybackServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackServiceTest.swift; sourceTree = "<group>"; };
 		37EEC50829F7D559005D0457 /* ErrorServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorServiceTest.swift; sourceTree = "<group>"; };
 		37EEC50929F7D559005D0457 /* VideoStartupServiceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoStartupServiceTest.swift; sourceTree = "<group>"; };
 		37EEC50B29F7D559005D0457 /* PlayerInfoManipulatorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerInfoManipulatorTest.swift; sourceTree = "<group>"; };
-		37EEC51629F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollectorTests-Debug.xcconfig"; sourceTree = "<group>"; };
-		37EEC51729F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollectorTests-Shared.xcconfig"; sourceTree = "<group>"; };
-		37EEC51829F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollectorTests-Release.xcconfig"; sourceTree = "<group>"; };
+		37EEC51629F7D69F005D0457 /* AmazonIVSCollectorTests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSCollectorTests-Debug.xcconfig"; sourceTree = "<group>"; };
+		37EEC51729F7D69F005D0457 /* AmazonIVSCollectorTests-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSCollectorTests-Shared.xcconfig"; sourceTree = "<group>"; };
+		37EEC51829F7D69F005D0457 /* AmazonIVSCollectorTests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSCollectorTests-Release.xcconfig"; sourceTree = "<group>"; };
 		A852DF2E29F7CF0900D9B66D /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 		A852DF2F29F7CF0900D9B66D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		A852DF3229F7E45700D9B66D /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fastlane; path = ../fastlane; sourceTree = "<group>"; };
@@ -489,7 +489,7 @@
 				37EEC51C29F7D6E8005D0457 /* Nimble in Frameworks */,
 				37EEC51A29F7D6E4005D0457 /* Quick in Frameworks */,
 				37EEC51E29F7D6EC005D0457 /* Cuckoo in Frameworks */,
-				37EEC4F929F7D53D005D0457 /* AmazonIVSPlayerCollector.framework in Frameworks */,
+				37EEC4F929F7D53D005D0457 /* AmazonIVSCollector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,8 +509,8 @@
 				37EEC43629F6BACA005D0457 /* BitmovinCollectorTests */,
 				37EEC45929F6BF2C005D0457 /* AVFoundationCollector */,
 				37EEC48529F6C024005D0457 /* AVFoundationCollectorTests */,
-				37EEC4AE29F6C1F2005D0457 /* AmazonIVSPlayerCollector */,
-				37EEC4F629F7D53D005D0457 /* AmazonIVSPlayerCollectorTests */,
+				37EEC4AE29F6C1F2005D0457 /* AmazonIVSCollector */,
+				37EEC4F629F7D53D005D0457 /* AmazonIVSCollectorTests */,
 				37EEC3A929F6AED6005D0457 /* xcconfig */,
 				37EEC4EC29F7D3EC005D0457 /* ExternalFrameworks */,
 				37EEC2DF29F6A86B005D0457 /* Products */,
@@ -527,8 +527,8 @@
 				37EEC43529F6BACA005D0457 /* BitmovinCollectorTests.xctest */,
 				37EEC45829F6BF2C005D0457 /* AVFoundationCollector.framework */,
 				37EEC48429F6C024005D0457 /* AVFoundationCollectorTests.xctest */,
-				37EEC4AD29F6C1F2005D0457 /* AmazonIVSPlayerCollector.framework */,
-				37EEC4F529F7D53D005D0457 /* AmazonIVSPlayerCollectorTests.xctest */,
+				37EEC4AD29F6C1F2005D0457 /* AmazonIVSCollector.framework */,
+				37EEC4F529F7D53D005D0457 /* AmazonIVSCollectorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -770,12 +770,12 @@
 				37EEC48E29F6C050005D0457 /* AVFoundationCollectorTests-Debug.xcconfig */,
 				37EEC48F29F6C050005D0457 /* AVFoundationCollectorTests-Release.xcconfig */,
 				37EEC49029F6C050005D0457 /* AVFoundationCollectorTests-Shared.xcconfig */,
-				37EEC4E229F6C234005D0457 /* AmazonIVSPlayerCollector-Debug.xcconfig */,
-				37EEC4E029F6C234005D0457 /* AmazonIVSPlayerCollector-Release.xcconfig */,
-				37EEC4E129F6C234005D0457 /* AmazonIVSPlayerCollector-Shared.xcconfig */,
-				37EEC51629F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Debug.xcconfig */,
-				37EEC51829F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Release.xcconfig */,
-				37EEC51729F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Shared.xcconfig */,
+				37EEC4E229F6C234005D0457 /* AmazonIVSCollector-Debug.xcconfig */,
+				37EEC4E029F6C234005D0457 /* AmazonIVSCollector-Release.xcconfig */,
+				37EEC4E129F6C234005D0457 /* AmazonIVSCollector-Shared.xcconfig */,
+				37EEC51629F7D69F005D0457 /* AmazonIVSCollectorTests-Debug.xcconfig */,
+				37EEC51829F7D69F005D0457 /* AmazonIVSCollectorTests-Release.xcconfig */,
+				37EEC51729F7D69F005D0457 /* AmazonIVSCollectorTests-Shared.xcconfig */,
 			);
 			path = xcconfig;
 			sourceTree = "<group>";
@@ -987,7 +987,7 @@
 			path = ../../Tests/AVFoundationCollectorTests/mock;
 			sourceTree = "<group>";
 		};
-		37EEC4AE29F6C1F2005D0457 /* AmazonIVSPlayerCollector */ = {
+		37EEC4AE29F6C1F2005D0457 /* AmazonIVSCollector */ = {
 			isa = PBXGroup;
 			children = (
 				37EEC4C329F6C207005D0457 /* ivsprotocol */,
@@ -998,7 +998,7 @@
 				37EEC4B429F6C207005D0457 /* AmazonIVSPlayerAdapter.swift */,
 				37EEC4CB29F6C207005D0457 /* AmazonIVSPlayerAdapterFactory.swift */,
 			);
-			path = AmazonIVSPlayerCollector;
+			path = AmazonIVSCollector;
 			sourceTree = "<group>";
 		};
 		37EEC4B529F6C207005D0457 /* playback */ = {
@@ -1012,7 +1012,7 @@
 				37EEC4BB29F6C207005D0457 /* DefaultVideoStartupService.swift */,
 			);
 			name = playback;
-			path = ../../Sources/AmazonIVSPlayerCollector/playback;
+			path = ../../Sources/AmazonIVSCollector/playback;
 			sourceTree = "<group>";
 		};
 		37EEC4BC29F6C207005D0457 /* player */ = {
@@ -1026,7 +1026,7 @@
 				37EEC4C229F6C207005D0457 /* PlayerStatisticsProvider.swift */,
 			);
 			name = player;
-			path = ../../Sources/AmazonIVSPlayerCollector/player;
+			path = ../../Sources/AmazonIVSCollector/player;
 			sourceTree = "<group>";
 		};
 		37EEC4C329F6C207005D0457 /* ivsprotocol */ = {
@@ -1036,7 +1036,7 @@
 				37EEC4C529F6C207005D0457 /* IVSPlayerProtocol.swift */,
 			);
 			name = ivsprotocol;
-			path = ../../Sources/AmazonIVSPlayerCollector/ivsprotocol;
+			path = ../../Sources/AmazonIVSCollector/ivsprotocol;
 			sourceTree = "<group>";
 		};
 		37EEC4C729F6C207005D0457 /* manipulator */ = {
@@ -1047,7 +1047,7 @@
 				37EEC4CA29F6C207005D0457 /* QualityEventDataManipulator.swift */,
 			);
 			name = manipulator;
-			path = ../../Sources/AmazonIVSPlayerCollector/manipulator;
+			path = ../../Sources/AmazonIVSCollector/manipulator;
 			sourceTree = "<group>";
 		};
 		37EEC4EC29F7D3EC005D0457 /* ExternalFrameworks */ = {
@@ -1059,7 +1059,7 @@
 			path = ../ExternalFrameworks;
 			sourceTree = "<group>";
 		};
-		37EEC4F629F7D53D005D0457 /* AmazonIVSPlayerCollectorTests */ = {
+		37EEC4F629F7D53D005D0457 /* AmazonIVSCollectorTests */ = {
 			isa = PBXGroup;
 			children = (
 				37EEC50A29F7D559005D0457 /* manipulator */,
@@ -1069,7 +1069,7 @@
 				37EEC50529F7D559005D0457 /* GeneratedMocks.swift */,
 				37EEC50429F7D559005D0457 /* MockableFiles.xcfilelist */,
 			);
-			path = AmazonIVSPlayerCollectorTests;
+			path = AmazonIVSCollectorTests;
 			sourceTree = "<group>";
 		};
 		37EEC4FF29F7D559005D0457 /* player */ = {
@@ -1080,7 +1080,7 @@
 				37EEC50229F7D559005D0457 /* PlaybackQualityProviderTests.swift */,
 			);
 			name = player;
-			path = ../../Tests/AmazonIVSPlayerCollectorTests/player;
+			path = ../../Tests/AmazonIVSCollectorTests/player;
 			sourceTree = "<group>";
 		};
 		37EEC50629F7D559005D0457 /* playback */ = {
@@ -1091,7 +1091,7 @@
 				37EEC50929F7D559005D0457 /* VideoStartupServiceTest.swift */,
 			);
 			name = playback;
-			path = ../../Tests/AmazonIVSPlayerCollectorTests/playback;
+			path = ../../Tests/AmazonIVSCollectorTests/playback;
 			sourceTree = "<group>";
 		};
 		37EEC50A29F7D559005D0457 /* manipulator */ = {
@@ -1100,7 +1100,7 @@
 				37EEC50B29F7D559005D0457 /* PlayerInfoManipulatorTest.swift */,
 			);
 			name = manipulator;
-			path = ../../Tests/AmazonIVSPlayerCollectorTests/manipulator;
+			path = ../../Tests/AmazonIVSCollectorTests/manipulator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1271,9 +1271,9 @@
 			productReference = 37EEC48429F6C024005D0457 /* AVFoundationCollectorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		37EEC4AC29F6C1F2005D0457 /* AmazonIVSPlayerCollector */ = {
+		37EEC4AC29F6C1F2005D0457 /* AmazonIVSCollector */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 37EEC4B329F6C1F2005D0457 /* Build configuration list for PBXNativeTarget "AmazonIVSPlayerCollector" */;
+			buildConfigurationList = 37EEC4B329F6C1F2005D0457 /* Build configuration list for PBXNativeTarget "AmazonIVSCollector" */;
 			buildPhases = (
 				37EEC4A829F6C1F2005D0457 /* Headers */,
 				37EEC4A929F6C1F2005D0457 /* Sources */,
@@ -1285,14 +1285,14 @@
 			dependencies = (
 				37EEC52329F7E544005D0457 /* PBXTargetDependency */,
 			);
-			name = AmazonIVSPlayerCollector;
-			productName = AmazonIVSPlayerCollector;
-			productReference = 37EEC4AD29F6C1F2005D0457 /* AmazonIVSPlayerCollector.framework */;
+			name = AmazonIVSCollector;
+			productName = AmazonIVSCollector;
+			productReference = 37EEC4AD29F6C1F2005D0457 /* AmazonIVSCollector.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		37EEC4F429F7D53D005D0457 /* AmazonIVSPlayerCollectorTests */ = {
+		37EEC4F429F7D53D005D0457 /* AmazonIVSCollectorTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 37EEC4FC29F7D53D005D0457 /* Build configuration list for PBXNativeTarget "AmazonIVSPlayerCollectorTests" */;
+			buildConfigurationList = 37EEC4FC29F7D53D005D0457 /* Build configuration list for PBXNativeTarget "AmazonIVSCollectorTests" */;
 			buildPhases = (
 				37EEC51F29F7D6F1005D0457 /* Run Cuckoo code generation */,
 				37EEC4F129F7D53D005D0457 /* Sources */,
@@ -1304,14 +1304,14 @@
 			dependencies = (
 				37EEC4FB29F7D53D005D0457 /* PBXTargetDependency */,
 			);
-			name = AmazonIVSPlayerCollectorTests;
+			name = AmazonIVSCollectorTests;
 			packageProductDependencies = (
 				37EEC51929F7D6E4005D0457 /* Quick */,
 				37EEC51B29F7D6E8005D0457 /* Nimble */,
 				37EEC51D29F7D6EC005D0457 /* Cuckoo */,
 			);
-			productName = AmazonIVSPlayerCollectorTests;
-			productReference = 37EEC4F529F7D53D005D0457 /* AmazonIVSPlayerCollectorTests.xctest */;
+			productName = AmazonIVSCollectorTests;
+			productReference = 37EEC4F529F7D53D005D0457 /* AmazonIVSCollectorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1382,8 +1382,8 @@
 				37EEC43429F6BACA005D0457 /* BitmovinCollectorTests */,
 				37EEC45729F6BF2C005D0457 /* AVFoundationCollector */,
 				37EEC48329F6C024005D0457 /* AVFoundationCollectorTests */,
-				37EEC4AC29F6C1F2005D0457 /* AmazonIVSPlayerCollector */,
-				37EEC4F429F7D53D005D0457 /* AmazonIVSPlayerCollectorTests */,
+				37EEC4AC29F6C1F2005D0457 /* AmazonIVSCollector */,
+				37EEC4F429F7D53D005D0457 /* AmazonIVSCollectorTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1529,8 +1529,8 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(PROJECT_DIR)/../Tests/AmazonIVSPlayerCollectorTests/GeneratedMocks-Core.swift",
-				"$(PROJECT_DIR)/../Tests/AmazonIVSPlayerCollectorTests/GeneratedMocks.swift",
+				"$(PROJECT_DIR)/../Tests/AmazonIVSCollectorTests/GeneratedMocks-Core.swift",
+				"$(PROJECT_DIR)/../Tests/AmazonIVSCollectorTests/GeneratedMocks.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1782,7 +1782,7 @@
 		};
 		37EEC4FB29F7D53D005D0457 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 37EEC4AC29F6C1F2005D0457 /* AmazonIVSPlayerCollector */;
+			target = 37EEC4AC29F6C1F2005D0457 /* AmazonIVSCollector */;
 			targetProxy = 37EEC4FA29F7D53D005D0457 /* PBXContainerItemProxy */;
 		};
 		37EEC52329F7E544005D0457 /* PBXTargetDependency */ = {
@@ -1898,28 +1898,28 @@
 		};
 		37EEC4B129F6C1F2005D0457 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37EEC4E229F6C234005D0457 /* AmazonIVSPlayerCollector-Debug.xcconfig */;
+			baseConfigurationReference = 37EEC4E229F6C234005D0457 /* AmazonIVSCollector-Debug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		37EEC4B229F6C1F2005D0457 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37EEC4E029F6C234005D0457 /* AmazonIVSPlayerCollector-Release.xcconfig */;
+			baseConfigurationReference = 37EEC4E029F6C234005D0457 /* AmazonIVSCollector-Release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
 		};
 		37EEC4FD29F7D53D005D0457 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37EEC51629F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Debug.xcconfig */;
+			baseConfigurationReference = 37EEC51629F7D69F005D0457 /* AmazonIVSCollectorTests-Debug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		37EEC4FE29F7D53D005D0457 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37EEC51829F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Release.xcconfig */;
+			baseConfigurationReference = 37EEC51829F7D69F005D0457 /* AmazonIVSCollectorTests-Release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
@@ -1990,7 +1990,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		37EEC4B329F6C1F2005D0457 /* Build configuration list for PBXNativeTarget "AmazonIVSPlayerCollector" */ = {
+		37EEC4B329F6C1F2005D0457 /* Build configuration list for PBXNativeTarget "AmazonIVSCollector" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				37EEC4B129F6C1F2005D0457 /* Debug */,
@@ -1999,7 +1999,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		37EEC4FC29F7D53D005D0457 /* Build configuration list for PBXNativeTarget "AmazonIVSPlayerCollectorTests" */ = {
+		37EEC4FC29F7D53D005D0457 /* Build configuration list for PBXNativeTarget "AmazonIVSCollectorTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				37EEC4FD29F7D53D005D0457 /* Debug */,

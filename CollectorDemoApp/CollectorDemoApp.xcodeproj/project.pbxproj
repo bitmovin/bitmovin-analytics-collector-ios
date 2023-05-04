@@ -13,8 +13,8 @@
 		37D01D3B29F7F405001CA3B7 /* BitmovinCollector.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37D01D3629F7F405001CA3B7 /* BitmovinCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37D01D3C29F7F405001CA3B7 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D01D3729F7F405001CA3B7 /* CoreCollector.framework */; };
 		37D01D3D29F7F405001CA3B7 /* CoreCollector.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37D01D3729F7F405001CA3B7 /* CoreCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		37EEC52B29F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC52729F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework */; };
-		37EEC52C29F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37EEC52729F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37EEC52B29F7EBD8005D0457 /* AmazonIVSCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC52729F7EBD8005D0457 /* AmazonIVSCollector.framework */; };
+		37EEC52C29F7EBD8005D0457 /* AmazonIVSCollector.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37EEC52729F7EBD8005D0457 /* AmazonIVSCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37EEC52D29F7EBD8005D0457 /* AVFoundationCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC52829F7EBD8005D0457 /* AVFoundationCollector.framework */; };
 		37EEC52E29F7EBD8005D0457 /* AVFoundationCollector.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37EEC52829F7EBD8005D0457 /* AVFoundationCollector.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37EEC52F29F7EBD8005D0457 /* BitmovinCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC52929F7EBD8005D0457 /* BitmovinCollector.framework */; };
@@ -74,7 +74,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				37EEC52E29F7EBD8005D0457 /* AVFoundationCollector.framework in CopyFiles */,
-				37EEC52C29F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework in CopyFiles */,
+				37EEC52C29F7EBD8005D0457 /* AmazonIVSCollector.framework in CopyFiles */,
 				37EEC53029F7EBD8005D0457 /* BitmovinCollector.framework in CopyFiles */,
 				37EEC53229F7EBD8005D0457 /* CoreCollector.framework in CopyFiles */,
 			);
@@ -93,7 +93,7 @@
 		37D01D3529F7F405001CA3B7 /* AVFoundationCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AVFoundationCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D01D3629F7F405001CA3B7 /* BitmovinCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BitmovinCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D01D3729F7F405001CA3B7 /* CoreCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CoreCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		37EEC52729F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AmazonIVSPlayerCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EEC52729F7EBD8005D0457 /* AmazonIVSCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AmazonIVSCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EEC52829F7EBD8005D0457 /* AVFoundationCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AVFoundationCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EEC52929F7EBD8005D0457 /* BitmovinCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BitmovinCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EEC52A29F7EBD8005D0457 /* CoreCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CoreCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,7 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37EEC52D29F7EBD8005D0457 /* AVFoundationCollector.framework in Frameworks */,
-				37EEC52B29F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework in Frameworks */,
+				37EEC52B29F7EBD8005D0457 /* AmazonIVSCollector.framework in Frameworks */,
 				37EEC53129F7EBD8005D0457 /* CoreCollector.framework in Frameworks */,
 				D1AB2510EDA14C4BEB0F7FD1 /* Pods_CollectorDemoApp.framework in Frameworks */,
 				37EEC52F29F7EBD8005D0457 /* BitmovinCollector.framework in Frameworks */,
@@ -170,7 +170,7 @@
 				37D01D3529F7F405001CA3B7 /* AVFoundationCollector.framework */,
 				37D01D3629F7F405001CA3B7 /* BitmovinCollector.framework */,
 				37D01D3729F7F405001CA3B7 /* CoreCollector.framework */,
-				37EEC52729F7EBD8005D0457 /* AmazonIVSPlayerCollector.framework */,
+				37EEC52729F7EBD8005D0457 /* AmazonIVSCollector.framework */,
 				37EEC52829F7EBD8005D0457 /* AVFoundationCollector.framework */,
 				37EEC52929F7EBD8005D0457 /* BitmovinCollector.framework */,
 				37EEC52A29F7EBD8005D0457 /* CoreCollector.framework */,
@@ -564,7 +564,7 @@
 /* Begin PBXTargetDependency section */
 		9D3869B129AF82FA00F6531D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = 9D3869B029AF82FA00F6531D /* AmazonIVSPlayerCollector */;
+			productRef = 9D3869B029AF82FA00F6531D /* AmazonIVSCollector */;
 		};
 		9D6FA9F229AE2C7700B2BF1A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -918,9 +918,9 @@
 			package = 37EEC53A29F7EC91005D0457 /* XCRemoteSwiftPackageReference "player-ios" */;
 			productName = BitmovinPlayer;
 		};
-		9D3869B029AF82FA00F6531D /* AmazonIVSPlayerCollector */ = {
+		9D3869B029AF82FA00F6531D /* AmazonIVSCollector */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = AmazonIVSPlayerCollector;
+			productName = AmazonIVSCollector;
 		};
 		9D6FA9F129AE2C7700B2BF1A /* AVFoundationCollector */ = {
 			isa = XCSwiftPackageProductDependency;

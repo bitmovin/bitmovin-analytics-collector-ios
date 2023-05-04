@@ -3,7 +3,7 @@ import Nimble
 import Quick
 import Cuckoo
 
-@testable import AmazonIVSPlayerCollector
+@testable import AmazonIVSCollector
 
 class PlayerStatisticsProviderTests: QuickSpec {
     override func spec() {
