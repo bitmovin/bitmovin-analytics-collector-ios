@@ -17,12 +17,10 @@ platform :ios do
     )
 
     dsym_path = "#{archive_path}/dSYMs/#{scheme}.framework.dSYM"
-    bcsymbolmap_path = %x[find #{archive_path}/BCSymbolMaps -type f -name *.bcsymbolmap 2> /dev/null || echo ""].strip
 
     {
         framework: "#{archive_path}/Products/Library/Frameworks/#{scheme}.framework",
-        dsyms: dsym_path,
-        bcsymbolmap: bcsymbolmap_path
+        dsyms: dsym_path
     }
   end
 
@@ -70,7 +68,6 @@ platform :ios do
 
     def transform_to_options(archive_info)
       options = %{-framework #{archive_info[:framework]} -debug-symbols #{archive_info[:dsyms]}}
-      options << " -debug-symbols #{archive_info[:bcsymbolmap]}" unless archive_info[:bcsymbolmap].empty?
       options
     end
 
