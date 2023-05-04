@@ -2,7 +2,7 @@ import AmazonIVSPlayer
 import CoreCollector
 
 @objc
-public class AmazonIVSCollector: NSObject, Collector {
+public class AmazonIVSPlayerCollector: NSObject, Collector {
     public typealias TPlayer = IVSPlayer
     private var analytics: BitmovinAnalyticsInternal
     private let userIdProvider: UserIdProvider
