@@ -25,11 +25,6 @@ on:
     tags-ignore:
       - '**'
   workflow_call:
-    inputs:
-      ref:
-        description: GitHub ref (branch or tag) to check out
-        type: string
-        required: true
 env:
   LC_ALL: en_US.UTF-8
   LANG: en_US.UTF-8
@@ -38,12 +33,10 @@ jobs:
     name: "Build Collector Demo Apps"
     runs-on: self-hosted
     concurrency:
-      group: build-workspace-apps-${{ inputs.ref || github.event.pull_request.number || github.ref }}
+      group: build-workspace-apps-${{ github.event.pull_request.number || github.ref }}
       cancel-in-progress: true
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ inputs.ref || github.ref }}
       - uses: ./.github/actions/select-xcode
         with:
           version: 14

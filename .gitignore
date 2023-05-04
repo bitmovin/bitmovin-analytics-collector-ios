@@ -97,3 +97,10 @@ DerivedData/
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode
+
+fastlane/build-*
+Output/
+Release/
+
+# auto-generated sdk version constant
+Sources/CoreCollector/util/BuildConfig.swift

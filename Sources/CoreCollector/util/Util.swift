@@ -14,7 +14,7 @@ public enum Util {
     }
 
     static func version() -> String {
-        BuildConfig.VERSION
+        BuildConfig.version
     }
 
     public static func timeIntervalToCMTime(_ timeInterval: TimeInterval) -> CMTime? {

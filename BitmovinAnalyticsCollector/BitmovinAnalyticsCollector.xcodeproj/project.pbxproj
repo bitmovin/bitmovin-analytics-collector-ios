@@ -411,6 +411,10 @@
 		37EEC51629F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollectorTests-Debug.xcconfig"; sourceTree = "<group>"; };
 		37EEC51729F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollectorTests-Shared.xcconfig"; sourceTree = "<group>"; };
 		37EEC51829F7D69F005D0457 /* AmazonIVSPlayerCollectorTests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AmazonIVSPlayerCollectorTests-Release.xcconfig"; sourceTree = "<group>"; };
+		A852DF2E29F7CF0900D9B66D /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
+		A852DF2F29F7CF0900D9B66D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		A852DF3229F7E45700D9B66D /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fastlane; path = ../fastlane; sourceTree = "<group>"; };
+		A852DF3329F7E45700D9B66D /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = scripts; path = ../scripts; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -497,8 +501,10 @@
 		37EEC2D429F6A86B005D0457 = {
 			isa = PBXGroup;
 			children = (
-				374E116629F82472000D3860 /* CHANGELOG.md */,
-				374E116729F82472000D3860 /* README.md */,
+				A852DF3229F7E45700D9B66D /* fastlane */,
+				A852DF3329F7E45700D9B66D /* scripts */,
+				A852DF2E29F7CF0900D9B66D /* CHANGELOG.md */,
+				A852DF2F29F7CF0900D9B66D /* README.md */,
 				37EEC30829F6A8F5005D0457 /* CoreCollector */,
 				37EEC3B529F6B118005D0457 /* CoreCollectorTests */,
 				37EEC40329F6B901005D0457 /* BitmovinPlayerCollector */,
@@ -1138,6 +1144,7 @@
 			buildConfigurationList = 37EEC30D29F6A8F6005D0457 /* Build configuration list for PBXNativeTarget "CoreCollector" */;
 			buildPhases = (
 				37EEC30229F6A8F5005D0457 /* Headers */,
+				A852DF3429F820C000D9B66D /* Generate BuildConfig */,
 				37EEC30329F6A8F5005D0457 /* Sources */,
 				37EEC30429F6A8F5005D0457 /* Frameworks */,
 				37EEC30529F6A8F5005D0457 /* Resources */,
@@ -1531,6 +1538,26 @@
 			shellPath = /bin/sh;
 			shellScript = "REPO_ROOT=\"${PROJECT_DIR}/..\"\nPATH_TO_SCRIPT=\"${REPO_ROOT}/scripts/run_cuckoo\"\nbash \"$PATH_TO_SCRIPT\"\n";
 			showEnvVarsInLog = 0;
+		};
+		A852DF3429F820C000D9B66D /* Generate BuildConfig */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(PROJECT_DIR)/xcconfig/Project-Shared.xcconfig",
+			);
+			name = "Generate BuildConfig";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(PROJECT_DIR)/../Sources/CoreCollector/util/BuildConfig.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${ACTION}\" == \"indexbuild\" ]; then\n  echo \"Not generating GeneratedConstants.swift during indexing.\"\n  exit 0\nfi\n\n# Skip for preview builds\nif [ \"${ENABLE_PREVIEWS}\" = \"YES\" ]; then\n  echo \"Not generating GeneratedConstants.swift during preview builds.\"\n  exit 0\nfi\n\ncat <<EOF > \"${SOURCE_ROOT}/../Sources/${PRODUCT_NAME}/util/BuildConfig.swift\"\n// DO NOT MODIFY THIS FILE. IT IS AUTO-GENERATED ON BUILD.\n\ninternal enum BuildConfig {\n    static let version = \"${MARKETING_VERSION}\"\n}\nEOF\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

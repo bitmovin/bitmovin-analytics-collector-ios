@@ -1,0 +1,150 @@
+name: Release
+on:
+  workflow_dispatch:
+    inputs:
+      version_number:
+        description: 'Version number of the release (no `-rc.`, `-b.`, `-a.` suffix)'
+        type: string
+        required: true
+      release_type:
+        description: Select the type of the release
+        type: choice
+        options:
+          - alpha
+          - beta
+          - rc
+          - final
+        required: true
+env:
+  LC_ALL: en_US.UTF-8
+  LANG: en_US.UTF-8
+concurrency:
+  group: release-${{ inputs.version_number }}-${{ inputs.release_type }}
+  cancel-in-progress: true
+jobs:
+  unit_tests:
+    name: Run Unit Tests
+    uses: ./.github/workflows/unit_tests.yml
+  build_workspace:
+    name: Build workspace
+    uses: ./.github/workflows/build_collector_app.yml
+  swiftlint:
+    name: Run SwiftLint
+    uses: ./.github/workflows/swiftlint.yml
+  version_bump:
+    name: Bump version and push tag
+    runs-on: ubuntu-latest
+    needs: [unit_tests, build_workspace, swiftlint]
+    outputs:
+      version_number: ${{ steps.version_number.outputs.version_number }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Git User
+        run: |
+          # setup git
+          git config --global user.name "Release Train"
+          git config --global user.email "ios-dev@bitmovin.com"
+      - name: Build version number
+        id: version_number
+        run: |
+          input_version_number=${{ inputs.version_number }}
+          release_type=${{ inputs.release_type }}
+
+          if [ "$release_type" == "final" ]; then
+            new_tag=$input_version_number
+          else
+            case $release_type in
+                "alpha")
+                    short_name="a"
+                    ;;
+                "beta")
+                    short_name="b"
+                    ;;
+                "rc")
+                    short_name="rc"
+                    ;;
+                *)
+                    echo "Invalid release type"
+                    exit 1
+                    ;;
+            esac
+
+            latest_tag=$(git describe --tags `git rev-list --tags --max-count=1` --match "$input_version_number-$short_name.*" 2> /dev/null || echo $input_version_number)
+            num=$(echo "$latest_tag" | grep -Eo ".*-.*" | grep -Eo "[0-9]+$" || true)
+            new_tag="$input_version_number-$short_name.$((num+1))"
+          fi
+
+          echo "version_number=$new_tag" >> $GITHUB_OUTPUT
+          echo "Final version number: $new_tag"
+      - name: Bump Collector version
+        run: |
+          sed -i "s/MARKETING_VERSION = .*/MARKETING_VERSION = ${{ steps.version_number.outputs.version_number }}/g" BitmovinAnalyticsCollector/xcconfig/Project-Shared.xcconfig
+      - name: Bump changelog version
+        if: ${{ inputs.release_type == 'final' }}
+        run: |
+          sed -E -i "s/(## Unreleased)/\1\n\n## ${{ steps.version_number.outputs.version_number }}/g" CHANGELOG.md
+      - name: Commit version bump
+        run: |
+          git add CHANGELOG.md BitmovinAnalyticsCollector/xcconfig/Project-Shared.xcconfig
+          git commit -m "Bump collector version to ${{ steps.version_number.outputs.version_number }}"
+      - name: Add tag
+        run: |
+          git tag ${{ steps.version_number.outputs.version_number }}
+      - name: Git push
+        run: |
+          git push origin
+          git push origin ${{ steps.version_number.outputs.version_number }}
+  build_release:
+    name: Build and publish release
+    runs-on: self-hosted
+    needs: [version_bump]
+    env:
+      KEYCHAIN_LOGIN_PASSWORD: ${{ secrets.KEYCHAIN_LOGIN_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ needs.version_bump.outputs.version_number }}
+      - name: Select Xcode 14.1
+        uses: ./.github/actions/select-xcode
+        with:
+          version: 14.1
+      - name: Prepare dependencies
+        uses: ./.github/actions/prepare-dependencies
+      - name: Build pre-compiled binaries
+        run: bundle exec fastlane ios build_release_binaries
+      - name: Release pre-compiled binaries
+        run: bundle exec fastlane ios push_release_binaries
+        env:
+          GC_SACCOUNT: ${{ secrets.GC_SACCOUNT }}
+      - name: Release CocoaPods
+        run: bundle exec fastlane ios push_cocoapods "COCOA_DEPLOY_KEY:${{ secrets.COCOA_DEPLOY_KEY }}" "COCOA_DEPLOY_REPO:cocoapod-specs"
+        env:
+          # Setting the location for the stored pods and CocoaPods caches to be exclusive to the current job
+          # to avoid errors regarding the duplicated spec found in multiple repos when pushing the podspec.
+          CP_HOME_DIR: ${{ github.workspace }}/CocoaPodsCaches
+      - name: Release SPM
+        run: bundle exec fastlane ios push_spm_package "spm_deploy_key:${{ secrets.SPM_DEPLOY_KEY }}"
+      - name: Get public repo commit SHA
+        id: commitish
+        run: |
+          commitish="$(git rev-parse HEAD)"
+          echo "commitish=$commitish" >> $GITHUB_OUTPUT
+          echo "Commitish: $commitish"
+        working-directory: Release/SPM
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ needs.version_bump.outputs.version_number }}
+          tag_name: ${{ needs.version_bump.outputs.version_number }}
+          target_commitish: ${{ steps.commitish.outputs.commitish }}
+          repository: bitmovin/bitmovin-analytics-collector-ios
+          token: ${{ secrets.ANALYTICS_GH_TOKEN }}
+      - name: Notify collector release channel
+        if: ${{ inputs.release_type == 'final' }}
+        run: |
+          ./scripts/notifyCollectorReleaseChannel.sh "ios" "${{ needs.version_bump.outputs.version_number }}"
+          ./scripts/notifyCollectorReleaseChannel.sh "tvos" "${{ needs.version_bump.outputs.version_number }}"
+        env:
+          ANALYTICS_API_RELEASE_TOKEN: ${{ secrets.ANALYTICS_API_RELEASE_TOKEN }}

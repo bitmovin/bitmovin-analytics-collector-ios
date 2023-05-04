@@ -5,11 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## Development V2
+## Unreleased
 
 ### Added
 - [internal] A Xcode worksapce to collect all future target together
 - [internal] Extended GitHub Actions workflow for unit tests to report results on GitHub
+- [internal] Release automation via GitHub Actions with manual trigger
 - [internal] An Xcode workspace to collect all future targets together
 
 ### Changed
