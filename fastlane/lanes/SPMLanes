@@ -93,7 +93,7 @@ platform :ios do
         [
           "Package.swift",
           "README.md",
-          "Sources/**"
+          "Sources"
         ]
       )
       GitHelper.commit("Release #{package_version}")
