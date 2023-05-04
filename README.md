@@ -106,7 +106,7 @@ Executing `swift build` from the command line is currently not supported. Open t
 
 ### Import BitmovinAnalyticsCollector into your Code
 
-We have split the `BitmovinAnalytics` into 3 targets
+We have split the `BitmovinAnalytics` into 4 targets
 - CoreCollector - including shared code for all collectors
 - BitmovinCollector - including `BitmovinPlayer` Collector
 - AVFoundationCollector - including `AVPlayer` Collector
@@ -119,7 +119,7 @@ Going further you need to import the corresponding Collector package for player
 Example when using BitmovinPlayer
 ```
 import CoreCollector
-import BitmovinPlayerCollector
+import BitmovinCollector
 ```
 
 ## Using [CocoaPods](https://cocoapods.org/)
