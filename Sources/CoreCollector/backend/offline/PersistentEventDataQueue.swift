@@ -38,10 +38,10 @@ internal class PersistentEventDataQueue {
     }
 
     func removeFirst() async -> EventData? {
-        guard let next = await eventDataQueue.removeFirst() else { return nil }
+        guard let eventData = await eventDataQueue.removeFirst() else { return nil }
 
-        if next.age <= maxEntryAge {
-            return next
+        if eventData.age <= maxEntryAge {
+            return eventData
         }
 
         logger.d("Entry exceeding max age found, discarding and fetching next")
@@ -49,10 +49,10 @@ internal class PersistentEventDataQueue {
     }
 
     func removeFirstAd() async -> AdEventData? {
-        guard let next = await adEventDataQueue.removeFirst() else { return nil }
+        guard let adEventData = await adEventDataQueue.removeFirst() else { return nil }
 
-        if next.age <= maxEntryAge {
-            return next
+        if adEventData.age <= maxEntryAge {
+            return adEventData
         }
 
         logger.d("Entry exceeding max age found, discarding and fetching next")
