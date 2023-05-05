@@ -84,15 +84,15 @@ extension HttpEventDataDispatcher: CallbackEventDataDispatcher {
 extension HttpEventDataDispatcher: ResendingDispatcher {
     func sendPersistedEventData() {
         Task {
-            if let next = await eventDataQueue.removeFirst() {
+            if let eventData = await eventDataQueue.removeFirst() {
                 logger.d("Retrying sending persisted event data")
-                add(next)
+                add(eventData)
                 return
             }
 
-            if let nextAd = await eventDataQueue.removeFirstAd() {
+            if let adEventData = await eventDataQueue.removeFirstAd() {
                 logger.d("Retrying sending persisted ad event data")
-                addAd(nextAd)
+                addAd(adEventData)
             }
         }
     }
