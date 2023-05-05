@@ -25,11 +25,11 @@ class PersistingAuthenticatedDispatcher: EventDataDispatcher {
         self.innerDispatcher = innerDispatcher
         self.eventDataQueue = eventDataQueue
 
-        self.addObserver(authenticationService)
+        addObserver(authenticationService)
     }
 
     deinit {
-        self.removeObserver()
+        removeObserver()
     }
 
     func add(_ eventData: EventData) {
