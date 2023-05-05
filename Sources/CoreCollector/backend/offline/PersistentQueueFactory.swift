@@ -6,16 +6,17 @@ private let adEventDataOfflineStorageFile = "adEventData.json"
 
 internal class PersistentQueueFactory {
     private lazy var baseDirectory: URL = {
-        if let applicationSupportDirectory = try? FileManager.default.url(
+        guard let applicationSupportDirectory = try? FileManager.default.url(
             for: .applicationSupportDirectory,
             in: .userDomainMask,
             appropriateFor: nil,
             create: true
-        ) {
-            return applicationSupportDirectory.appendingPathComponent(bitmovinOfflineStoragePath)
+        ) else {
+            // Fallback to temporary directory if application support directory is not accessible
+            return FileManager.default.temporaryDirectory.appendingPathComponent(bitmovinOfflineStoragePath)
         }
 
-        return FileManager.default.temporaryDirectory.appendingPathComponent(bitmovinOfflineStoragePath)
+        return applicationSupportDirectory.appendingPathComponent(bitmovinOfflineStoragePath)
     }()
 
     private func createForEventData() -> PersistentQueue<EventData> {
