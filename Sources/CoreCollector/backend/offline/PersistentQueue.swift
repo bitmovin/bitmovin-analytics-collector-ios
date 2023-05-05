@@ -39,11 +39,11 @@ internal class PersistentQueue<T: Codable> {
     func removeFirst() -> T? {
         ensureDatabaseInitialized()
 
-        guard let next = fileReaderWriter.removeFirstLine(from: fileUrl) else {
+        guard let firstEntry = fileReaderWriter.removeFirstLine(from: fileUrl) else {
             return nil
         }
 
-        return try? JSONDecoder().decode(T.self, from: next)
+        return try? JSONDecoder().decode(T.self, from: firstEntry)
     }
 }
 
