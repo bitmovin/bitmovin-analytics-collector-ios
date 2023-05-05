@@ -1,9 +1,9 @@
 import Foundation
 
-internal class FileReaderWriter {
-    private let lineSeparator = Data("\n".utf8)
-    private let chunkSize = 4096
+private let lineSeparator = Data("\n".utf8)
+private let chunkSize = 4096
 
+internal class FileReaderWriter {
     func writeEmptyFile(to file: URL) {
         try? "".write(to: file, atomically: true, encoding: .utf8)
     }
