@@ -45,6 +45,21 @@ internal class PersistentQueue<T: Codable> {
 
         return try? JSONDecoder().decode(T.self, from: firstEntry)
     }
+
+    @PersistentQueueActor
+    func forEach(body: (T) -> Void) {
+        ensureDatabaseInitialized()
+
+        guard let fileHandle = try? FileHandle(forReadingFrom: fileUrl) else { return }
+        defer {
+            fileHandle.closeFile()
+        }
+
+        while let nextEntry = fileReaderWriter.readLine(from: fileHandle) {
+            guard let decodedEntry = try? JSONDecoder().decode(T.self, from: nextEntry) else { continue }
+            body(decodedEntry)
+        }
+    }
 }
 
 @PersistentQueueActor
