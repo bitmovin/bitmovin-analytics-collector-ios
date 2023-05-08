@@ -34,11 +34,7 @@ internal class FileReaderWriter {
     }
 
     func readLine(from fileHandle: FileHandle) -> Data? {
-        guard let line = fileHandle.readLine(lineSeparator, chunkSize) else {
-            return nil
-        }
-
-        return line
+        return fileHandle.readLine(lineSeparator, chunkSize)
     }
 
     func removeFirstLine(from file: URL) -> Data? {
