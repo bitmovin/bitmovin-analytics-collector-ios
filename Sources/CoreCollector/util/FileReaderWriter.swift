@@ -30,6 +30,10 @@ internal class FileReaderWriter {
             fileHandle.closeFile()
         }
 
+        return readLine(from: fileHandle)
+    }
+
+    func readLine(from fileHandle: FileHandle) -> Data? {
         guard let line = fileHandle.readLine(lineSeparator, chunkSize) else {
             return nil
         }
