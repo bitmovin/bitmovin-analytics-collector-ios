@@ -20,48 +20,68 @@ internal class PersistentEventDataQueue {
     func add(_ eventData: EventData) async {
         guard eventData.sequenceNumber <= maxSequenceNumber else { return }
 
-        while await eventDataQueue.count >= maxEntries {
-            _ = await eventDataQueue.removeFirst()
-        }
-
+        await cleanUpDatabase()
         await eventDataQueue.add(entry: eventData)
         logger.d("Added event data to queue")
     }
 
     func addAd(_ adEventData: AdEventData) async {
-        while await adEventDataQueue.count >= maxEntries {
-            _ = await adEventDataQueue.removeFirst()
-        }
-
+        await cleanUpDatabase()
         await adEventDataQueue.add(entry: adEventData)
         logger.d("Added ad event data to queue")
     }
 
     func removeFirst() async -> EventData? {
-        guard let eventData = await eventDataQueue.removeFirst() else { return nil }
-
-        if eventData.age <= maxEntryAge {
-            return eventData
-        }
-
-        logger.d("Entry exceeding max age found, discarding and fetching next")
-        return await removeFirst()
+        await cleanUpDatabase()
+        return await eventDataQueue.removeFirst()
     }
 
     func removeFirstAd() async -> AdEventData? {
-        guard let adEventData = await adEventDataQueue.removeFirst() else { return nil }
-
-        if adEventData.age <= maxEntryAge {
-            return adEventData
-        }
-
-        logger.d("Entry exceeding max age found, discarding and fetching next")
-        return await removeFirstAd()
+        await cleanUpDatabase()
+        return await adEventDataQueue.removeFirst()
     }
 
     func removeAll() async {
         await eventDataQueue.removeAll()
         await adEventDataQueue.removeAll()
+    }
+}
+
+private extension PersistentEventDataQueue {
+    func cleanUpDatabase() async {
+        await purgeEntries(for: await findOldSessionsToPurge())
+
+        while await eventDataQueue.count >= maxEntries {
+            guard let entryToPurge = await eventDataQueue.removeFirst() else { break }
+            await purgeEntries(for: entryToPurge.impressionId)
+        }
+    }
+
+    func findOldSessionsToPurge() async -> Set<String> {
+        var sessionsToPurge: Set<String> = []
+
+        await eventDataQueue.forEach { eventData in
+            if eventData.age > maxEntryAge {
+                sessionsToPurge.insert(eventData.impressionId)
+            }
+        }
+
+        return sessionsToPurge
+    }
+
+    func purgeEntries(for impressionId: String) async {
+        await purgeEntries(for: [impressionId])
+    }
+
+    func purgeEntries(for impressionIds: Set<String>) async {
+        await eventDataQueue.removeAll { eventData in
+            return impressionIds.contains(eventData.impressionId)
+        }
+
+        await adEventDataQueue.removeAll { adEventData in
+            guard let impressionId = adEventData.videoImpressionId else { return true }
+            return impressionIds.contains(impressionId)
+        }
     }
 }
 
