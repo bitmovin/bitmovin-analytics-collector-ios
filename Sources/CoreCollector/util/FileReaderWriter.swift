@@ -8,6 +8,10 @@ internal class FileReaderWriter {
         try? "".write(to: file, atomically: true, encoding: .utf8)
     }
 
+    func overwrite(file: URL, with data: Data) {
+        try? data.write(to: file, options: .atomic)
+    }
+
     func appendLine(_ line: Data, to file: URL) {
         guard let fileHandle = try? FileHandle(forWritingTo: file) else { return }
         defer {

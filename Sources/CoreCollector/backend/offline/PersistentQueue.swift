@@ -36,6 +36,27 @@ internal class PersistentQueue<T: Codable> {
     }
 
     @PersistentQueueActor
+    func removeAll(where shouldRemove: (T) -> Bool) {
+        ensureDatabaseInitialized()
+
+        guard let fileHandle = try? FileHandle(forReadingFrom: fileUrl) else { return }
+
+        var entriesToKeep = Data()
+        while let nextEntry = fileReaderWriter.readLine(from: fileHandle) {
+            guard let decodedEntry = try? JSONDecoder().decode(T.self, from: nextEntry) else { continue }
+
+            if shouldRemove(decodedEntry) {
+                continue
+            }
+
+            entriesToKeep.append(nextEntry)
+        }
+
+        fileHandle.closeFile()
+        fileReaderWriter.overwrite(file: fileUrl, with: entriesToKeep)
+    }
+
+    @PersistentQueueActor
     func removeFirst() -> T? {
         ensureDatabaseInitialized()
 
