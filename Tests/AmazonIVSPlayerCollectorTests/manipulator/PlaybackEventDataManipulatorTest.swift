@@ -7,7 +7,7 @@ import Quick
 import CoreMedia
 
 class PlaybackEventDataManipulatorTests: QuickSpec {
-    override func spec() {
+    override class func spec() {
         describe("manipulate") {
             it("should set all fields correctly") {
                 // arrange
