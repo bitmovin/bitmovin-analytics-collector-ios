@@ -20,8 +20,8 @@ internal class FileReaderWriter {
 
         fileHandle.seekToEndOfFile()
 
+        var line = line
         if line.suffix(lineSeparator.count) != lineSeparator {
-            var line = line
             line.append(lineSeparator)
         }
 
