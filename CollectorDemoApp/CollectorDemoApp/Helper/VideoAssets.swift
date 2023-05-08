@@ -1,7 +1,12 @@
+import Foundation
+
 class VideoAssets {
     static let sintel: String = "https://bitmovin-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
     static let redbull: String = "https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8"
     static let liveSim: String = "https://bitcdn-kronehit.bitmovin.com/v2/hls/playlist.m3u8"
+
+    // MARK: - Local assets for offline playback
+    static let artOfMotionLocal = Bundle.main.url(forResource: "art-of-motion", withExtension: "mp4")
 
     // MARK: - Casting receiver-v3 compatible sources
     static let sintelCasting: String = "https://bitmovin-a.akamaihd.net/content/sintel/Sintel.mp4"

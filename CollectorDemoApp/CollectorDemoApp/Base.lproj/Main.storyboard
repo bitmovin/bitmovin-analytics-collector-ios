@@ -252,7 +252,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="IWW-sI-AB0">
-                                <rect key="frame" x="32" y="224.33333333333337" width="311" height="285"/>
+                                <rect key="frame" x="32" y="224.33333333333337" width="311" height="350"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pwj-ea-28F">
                                         <rect key="frame" x="0.0" y="0.0" width="311" height="25"/>
@@ -281,11 +281,21 @@
                                         </constraints>
                                         <state key="normal" title="AVPlayer Example"/>
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" id="AJk-eA-oof"/>
+                                            <action selector="avPlayerExampleWasPressed:" destination="db8-gG-r1q" eventType="touchUpInside" id="AAz-bT-TP3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3H-HD-hhh" userLabel="AVPlayer Offline Button">
+                                        <rect key="frame" x="0.0" y="194.99999999999997" width="311" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="YsR-tX-S5u"/>
+                                        </constraints>
+                                        <state key="normal" title="AVPlayer Offline Example"/>
+                                        <connections>
+                                            <action selector="avPlayerOfflineExampleWasPressed:" destination="db8-gG-r1q" eventType="touchUpInside" id="aFz-5W-tKu"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fS-it-7h2" userLabel="AVPlayer DRM Button">
-                                        <rect key="frame" x="0.0" y="194.99999999999997" width="311" height="25"/>
+                                        <rect key="frame" x="0.0" y="260" width="311" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="0kX-Wz-hXF"/>
                                         </constraints>
@@ -295,7 +305,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asl-gs-XlO" userLabel="Amazon IVS Button">
-                                        <rect key="frame" x="0.0" y="260" width="311" height="25"/>
+                                        <rect key="frame" x="0.0" y="325" width="311" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="blr-9w-zFN"/>
                                         </constraints>
@@ -331,17 +341,17 @@
         <!--AVFoundation View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="AVFoundation View Controller" customClass="AVFoundationViewController" customModule="CollectorDemoApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AVFoundationViewController" id="BYZ-38-t0r" userLabel="AVFoundation View Controller" customClass="AVFoundationViewController" customModule="CollectorDemoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="755"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xrl-4x-Edh">
-                                <rect key="frame" x="46" y="671" width="50" height="30"/>
+                                <rect key="frame" x="46" y="728" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="ek6-hN-Qy1"/>
                                 </constraints>
@@ -351,7 +361,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AcP-gW-NjJ">
-                                <rect key="frame" x="96" y="671" width="50" height="30"/>
+                                <rect key="frame" x="96" y="728" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="Ggf-ZQ-6K1"/>
                                 </constraints>
@@ -361,7 +371,7 @@
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="zs2-tO-O9K">
-                                <rect key="frame" x="296" y="671" width="65" height="31"/>
+                                <rect key="frame" x="296" y="728" width="65" height="31"/>
                                 <connections>
                                     <action selector="timeSliderDidChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="nwz-gW-JRb"/>
                                 </connections>
@@ -371,7 +381,7 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ph-2J-7JL">
-                                <rect key="frame" x="-4" y="671" width="50" height="30"/>
+                                <rect key="frame" x="-4" y="728" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="egI-Wi-Tzg"/>
                                     <constraint firstAttribute="width" constant="50" id="g84-0o-5bJ"/>
@@ -382,12 +392,12 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSE-mk-Glu" userLabel="StartTime">
-                                <rect key="frame" x="281" y="649" width="50" height="20"/>
+                                <rect key="frame" x="281" y="706" width="50" height="20"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zZ-f5-2Kr">
-                                <rect key="frame" x="146" y="671" width="40" height="30"/>
+                                <rect key="frame" x="146" y="728" width="40" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="I3W-Z1-9SU"/>
                                 </constraints>
@@ -397,7 +407,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPx-xu-KMD" userLabel="Jump Back Button">
-                                <rect key="frame" x="194" y="671" width="40" height="30"/>
+                                <rect key="frame" x="194" y="728" width="40" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="u0W-Dh-ihK"/>
                                 </constraints>
@@ -407,7 +417,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Qj-dl-K4Q" userLabel="Jump Forward Button">
-                                <rect key="frame" x="242" y="671" width="40" height="30"/>
+                                <rect key="frame" x="242" y="728" width="40" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="Vuv-ag-dkk"/>
                                 </constraints>
@@ -417,7 +427,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-:--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOC-Kz-nZX" userLabel="Duration">
-                                <rect key="frame" x="338.33333333333331" y="652" width="20.666666666666686" height="14.333333333333371"/>
+                                <rect key="frame" x="338.33333333333331" y="709" width="20.666666666666686" height="14.333333333333371"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="highlightedColor"/>
                             </label>

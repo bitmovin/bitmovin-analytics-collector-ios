@@ -35,7 +35,7 @@ public class BitmovinAnalyticsInternal: NSObject {
         self.init(
             config,
             notificationCenter,
-            dispatcherFactory.createDispatcher(),
+            dispatcherFactory.createDispatcher(config: config),
             authenticationService,
             eventDataFactory
         )
@@ -211,15 +211,22 @@ public class BitmovinAnalyticsInternal: NSObject {
     }
 
     private func removeObserver() {
-        self.notificationCenter.removeObserver(self, name: .authenticationFailed, object: self.authenticationService)
+        self.notificationCenter.removeObserver(self, name: .authenticationDenied, object: self.authenticationService)
+        self.notificationCenter.removeObserver(self, name: .authenticationError, object: self.authenticationService)
         self.notificationCenter.removeObserver(self, name: UIApplication.willTerminateNotification, object: nil)
     }
 
     private func setupObservers() {
         self.notificationCenter.addObserver(
             self,
-            selector: #selector(handleAuthenticationFailed(notification:)),
-            name: .authenticationFailed,
+            selector: #selector(handleAuthenticationDenied(notification:)),
+            name: .authenticationDenied,
+            object: self.authenticationService
+        )
+        self.notificationCenter.addObserver(
+            self,
+            selector: #selector(handleAuthenticationError(notification:)),
+            name: .authenticationError,
             object: self.authenticationService
         )
         self.notificationCenter.addObserver(
@@ -231,7 +238,13 @@ public class BitmovinAnalyticsInternal: NSObject {
     }
 
     @objc
-    private func handleAuthenticationFailed(notification _: Notification) {
+    private func handleAuthenticationDenied(notification _: Notification) {
+        detachPlayer()
+    }
+
+    @objc
+    private func handleAuthenticationError(notification _: Notification) {
+        guard !config.longTermRetryEnabled else { return }
         detachPlayer()
     }
 

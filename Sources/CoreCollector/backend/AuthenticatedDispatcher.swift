@@ -63,7 +63,13 @@ internal class AuthenticatedDispatcher: EventDataDispatcher {
         notificationCenter.addObserver(
             self,
             selector: #selector(self.handleAuthenticationFailed),
-            name: .authenticationFailed,
+            name: .authenticationDenied,
+            object: authenticationService
+        )
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(self.handleAuthenticationFailed),
+            name: .authenticationError,
             object: authenticationService
         )
     }

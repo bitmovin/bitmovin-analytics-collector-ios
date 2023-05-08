@@ -6,7 +6,7 @@ import Quick
 @testable import AmazonIVSPlayerCollector
 
 class PlaybackQualityProviderTests: QuickSpec {
-    override func spec() {
+    override class func spec() {
         // These tests don't cover cases where both qualities are not nil
         // The actual equality check should be performed by the AmazonIVSPlayer lib
         describe("didVideoChange") {

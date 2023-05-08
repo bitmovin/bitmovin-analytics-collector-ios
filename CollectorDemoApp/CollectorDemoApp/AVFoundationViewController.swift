@@ -23,7 +23,7 @@ class AVFoundationViewController: UIViewController {
     @IBOutlet var setCustomDataButton: UIButton!
     @IBOutlet var doneButton: UIButton!
     @IBOutlet var playerView: PlayerView!
-    let url = URL(string: VideoAssets.sintel)
+    var url = URL(string: VideoAssets.sintel)
     let corruptedUrl = URL(string: VideoAssets.corruptRedBull)
 
     var duration: Double {
@@ -317,3 +317,5 @@ class AVFoundationViewController: UIViewController {
         player.play()
     }
 }
+
+extension AVFoundationViewController: StoryboardInitializable { }

@@ -7,7 +7,7 @@ import Quick
 import CoreCollector
 
 class ErrorServiceTest: QuickSpec {
-    override func spec() {
+    override class func spec() {
         
         // arrange
         var mockStateMachine = MockStateMachine()
