@@ -1,8 +1,8 @@
 import Foundation
 
-private let maxSequenceNumber: Int = 1_000
-private let maxEntries: Int = 10_000
-private let maxEntryAge: TimeInterval = 60 * 60 * 24 * 30 // 30 days in seconds
+private let maxSequenceNumber: Int = 500
+private let maxEntries: Int = 5_000
+private let maxEntryAge: TimeInterval = 60 * 60 * 24 * 14 // 14 days in seconds
 
 internal class PersistentEventDataQueue {
     private let logger = _AnalyticsLogger(className: "PersistentEventDataQueue")
