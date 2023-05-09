@@ -148,7 +148,9 @@ private extension PersistentQueue {
 
     private func parseKey(from entry: Data) -> Key? {
         guard let range = entry[entry.startIndex...].range(of: separator), !range.isEmpty else { return nil }
-        guard let keyString = String(data: entry[entry.startIndex..<range.lowerBound], encoding: .utf8) else { return nil }
+
+        let keyData = entry[entry.startIndex..<range.lowerBound]
+        guard let keyString = String(data: keyData, encoding: .utf8) else { return nil }
 
         return Key.init(keyString)
     }
