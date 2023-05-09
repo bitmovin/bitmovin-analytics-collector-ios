@@ -1,7 +1,7 @@
 import Foundation
 
 extension AdEventData: KeyDerivable {
-    var queueKey: LosslessStringConvertible? {
+    var derivedKey: LosslessStringConvertible? {
         guard let impressionId = videoImpressionId else { return nil }
         return EventDataKey(sessionId: impressionId, creationTime: creationTime)
     }

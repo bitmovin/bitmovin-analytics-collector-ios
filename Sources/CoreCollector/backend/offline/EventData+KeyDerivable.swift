@@ -1,7 +1,7 @@
 import Foundation
 
 extension EventData: KeyDerivable {
-    var queueKey: LosslessStringConvertible? {
+    var derivedKey: LosslessStringConvertible? {
         EventDataKey(sessionId: impressionId, creationTime: creationTime)
     }
 

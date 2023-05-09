@@ -27,9 +27,9 @@ internal class PersistentQueue<Payload: Codable & KeyDerivable, Key: LosslessStr
     func add(_ payload: Payload) {
         ensureDatabaseInitialized()
 
-        guard let payloadData = try? encoder.encode(payload), let keys = payload.queueKey else { return }
+        guard let payloadData = try? encoder.encode(payload), let key = payload.derivedKey else { return }
 
-        let line = Data(keys.description.utf8) + separator + payloadData
+        let line = Data(key.description.utf8) + separator + payloadData
         fileReaderWriter.appendLine(line, to: fileUrl)
     }
 
