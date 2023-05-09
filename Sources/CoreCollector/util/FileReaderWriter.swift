@@ -1,7 +1,7 @@
 import Foundation
 
 private let lineSeparator = Data("\n".utf8)
-private let chunkSize = 4096
+private let chunkSize = 4_096
 
 internal class FileReaderWriter {
     func writeEmptyFile(to file: URL) {
@@ -38,7 +38,7 @@ internal class FileReaderWriter {
     }
 
     func readLine(from fileHandle: FileHandle) -> Data? {
-        return fileHandle.readLine(lineSeparator, chunkSize)
+        fileHandle.readLine(lineSeparator, chunkSize)
     }
 
     func removeFirstLine(from file: URL) -> Data? {
