@@ -58,8 +58,8 @@ internal class PersistentEventDataQueue {
         }
 
         logger.d("Entry exceeding max age found, discarding old sessions and fetching next")
-        if let impressionId = adEventData.videoImpressionId {
-            await cleanUpDatabase(including: impressionId)
+        if let sessionId = adEventData.videoImpressionId {
+            await cleanUpDatabase(including: sessionId)
         }
 
         return await removeFirstAd()
@@ -72,15 +72,15 @@ internal class PersistentEventDataQueue {
 }
 
 private extension PersistentEventDataQueue {
-    func cleanUpDatabase(including impressionId: String? = nil) async {
+    func cleanUpDatabase(including sessionId: String? = nil) async {
         logger.d("Cleaning up database")
 
-        var impressionIdsToPurge = await findOldSessionsToPurge()
-        if let impressionId {
-            impressionIdsToPurge.insert(impressionId)
+        var sessionIdsToPurge = await findOldSessionsToPurge()
+        if let sessionId {
+            sessionIdsToPurge.insert(sessionId)
         }
 
-        await purgeEntries(for: impressionIdsToPurge)
+        await purgeEntries(for: sessionIdsToPurge)
 
         if await eventDataQueue.count >= maxEntries {
             guard let entryToPurge = await eventDataQueue.removeFirst() else { return }
@@ -101,21 +101,21 @@ private extension PersistentEventDataQueue {
         return sessionsToPurge
     }
 
-    func purgeEntries(for impressionId: String) async {
-        await purgeEntries(for: [impressionId])
+    func purgeEntries(for sessionId: String) async {
+        await purgeEntries(for: [sessionId])
     }
 
-    func purgeEntries(for impressionIds: Set<String>) async {
-        guard !impressionIds.isEmpty else { return }
+    func purgeEntries(for sessionIds: Set<String>) async {
+        guard !sessionIds.isEmpty else { return }
 
-        logger.d("Purging entries for \(impressionIds.count) impression IDs")
+        logger.d("Purging entries for \(sessionIds.count) session IDs")
 
         await eventDataQueue.removeAll { key in
-            return impressionIds.contains(key.sessionId)
+            return sessionIds.contains(key.sessionId)
         }
 
         await adEventDataQueue.removeAll { key in
-            return impressionIds.contains(key.sessionId)
+            return sessionIds.contains(key.sessionId)
         }
     }
 }

@@ -2,8 +2,8 @@ import Foundation
 
 extension AdEventData: KeyDerivable {
     var derivedKey: LosslessStringConvertible? {
-        guard let impressionId = videoImpressionId else { return nil }
-        return EventDataKey(sessionId: impressionId, creationTime: creationTime)
+        guard let sessionId = videoImpressionId else { return nil }
+        return EventDataKey(sessionId: sessionId, creationTime: creationTime)
     }
 
     var creationTime: TimeInterval {
