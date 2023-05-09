@@ -186,26 +186,3 @@ class PersistentQueueTests: AsyncSpec {
         }
     }
 }
-
-// TODO: move to general place and improve implementation
-extension EventData {
-    static var random: EventData {
-        let eventData = EventData(UUID().uuidString)
-        eventData.audioBitrate = 1000
-        eventData.videoCodec = "HEVC"
-        eventData.audioLanguage = "de"
-        eventData.videoTitle = "Lorem ipsum dolor"
-        eventData.cdnProvider = "Akamai"
-        eventData.domain = "com.bitmovin.player"
-        eventData.time = Date().timeIntervalSince1970Millis
-
-        return eventData
-    }
-
-    static var old: EventData {
-        let eventData = EventData.random
-        eventData.time = 0
-
-        return eventData
-    }
-}
