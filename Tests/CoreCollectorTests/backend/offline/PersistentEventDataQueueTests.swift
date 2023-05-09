@@ -1,9 +1,7 @@
-import Cuckoo
-import Nimble
-import Quick
-
 @testable import CoreCollector
 import Foundation
+import Nimble
+import Quick
 
 class PersistentEventDataQueueTests: AsyncSpec {
     override class func spec() {
