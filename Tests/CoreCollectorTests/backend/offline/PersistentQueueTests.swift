@@ -7,7 +7,7 @@ import Foundation
 
 class PersistentQueueTests: AsyncSpec {
     override class func spec() {
-        var persistentQueue: PersistentQueue<EventData>!
+        var persistentQueue: PersistentQueue<EventData, EventDataKey>!
         var fileLocation: URL!
 
         beforeEach {
@@ -24,7 +24,7 @@ class PersistentQueueTests: AsyncSpec {
                     let executionTime = await PerformanceTestHelper.measure(
                         numberOfIterations: entryCount
                     ) {
-                        await persistentQueue.add(entry: EventData.random)
+                        await persistentQueue.add(EventData.random)
                     }
 
                     expect(executionTime).to(beLessThan(0.005))
@@ -33,8 +33,8 @@ class PersistentQueueTests: AsyncSpec {
         }
         describe("adding entries") {
             it("adds the entry to the end of the queue") {
-                await persistentQueue.add(entry: EventData("1"))
-                await persistentQueue.add(entry: EventData("2"))
+                await persistentQueue.add(EventData("1"))
+                await persistentQueue.add(EventData("2"))
 
                 let first = await persistentQueue.removeFirst()
                 let second = await persistentQueue.removeFirst()
@@ -46,8 +46,8 @@ class PersistentQueueTests: AsyncSpec {
         describe("removing entries") {
             context("when entries exist in the queue") {
                 it("removes entries from the beginning of the queue") {
-                    await persistentQueue.add(entry: EventData("1"))
-                    await persistentQueue.add(entry: EventData("2"))
+                    await persistentQueue.add(EventData("1"))
+                    await persistentQueue.add(EventData("2"))
 
                     let first = await persistentQueue.removeFirst()
 
@@ -64,9 +64,9 @@ class PersistentQueueTests: AsyncSpec {
         describe("removing all entries") {
             context("when entries exist in the queue") {
                 beforeEach {
-                    await persistentQueue.add(entry: EventData("1"))
-                    await persistentQueue.add(entry: EventData("2"))
-                    await persistentQueue.add(entry: EventData("3"))
+                    await persistentQueue.add(EventData("1"))
+                    await persistentQueue.add(EventData("2"))
+                    await persistentQueue.add(EventData("3"))
                 }
                 it("removes all entries") {
                     await persistentQueue.removeAll()
@@ -95,7 +95,7 @@ class PersistentQueueTests: AsyncSpec {
                 it("returns correct value") {
                     let expectedCount = 10
                     for index in 0..<expectedCount {
-                        await persistentQueue.add(entry: EventData(String(index)))
+                        await persistentQueue.add(EventData(String(index)))
                     }
 
                     let count = await persistentQueue.count
@@ -107,7 +107,7 @@ class PersistentQueueTests: AsyncSpec {
 
                 beforeEach {
                     for _ in 0..<entryCount {
-                        await persistentQueue.add(entry: EventData.random)
+                        await persistentQueue.add(EventData.random)
                     }
                 }
                 it("returns correct value within 75 milliseconds") {
@@ -133,7 +133,7 @@ class PersistentQueueTests: AsyncSpec {
                 }
                 context("and a new entry is added") {
                     it("is the only entry in the queue") {
-                        await persistentQueue.add(entry: EventData("1"))
+                        await persistentQueue.add(EventData("1"))
 
                         let count = await persistentQueue.count
                         expect(count).to(equal(1))
@@ -148,8 +148,8 @@ class PersistentQueueTests: AsyncSpec {
             }
             context("when file is not corrupted") {
                 beforeEach {
-                    await persistentQueue.add(entry: EventData("1"))
-                    await persistentQueue.add(entry: EventData("2"))
+                    await persistentQueue.add(EventData("1"))
+                    await persistentQueue.add(EventData("2"))
                     persistentQueue = PersistentQueue(fileUrl: fileLocation)
                 }
                 it("uses the existing queue") {
@@ -170,17 +170,17 @@ class PersistentQueueTests: AsyncSpec {
             context("when the queue contains \(entryCount) entries") {
                 beforeEach {
                     for _ in 0..<entryCount {
-                        await persistentQueue.add(entry: EventData.random)
+                        await persistentQueue.add(EventData.random)
                     }
                 }
-                it("takes less than 750 milliseconds on average to iterate the whole queue") {
+                it("takes less than 150 milliseconds on average to iterate the whole queue") {
                     let executionTime = await PerformanceTestHelper.measure(
                         numberOfIterations: 10
                     ) {
                         await persistentQueue.forEach { _ in }
                     }
 
-                    expect(executionTime).to(beLessThan(0.75))
+                    expect(executionTime).to(beLessThan(0.15))
                 }
             }
         }

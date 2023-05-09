@@ -6,12 +6,12 @@ private let maxEntryAge: TimeInterval = 60 * 60 * 24 * 14 // 14 days in seconds
 
 internal class PersistentEventDataQueue {
     private let logger = _AnalyticsLogger(className: "PersistentEventDataQueue")
-    private let eventDataQueue: PersistentQueue<EventData>
-    private let adEventDataQueue: PersistentQueue<AdEventData>
+    private let eventDataQueue: PersistentQueue<EventData, EventDataKey>
+    private let adEventDataQueue: PersistentQueue<AdEventData, EventDataKey>
 
     init(
-        eventDataQueue: PersistentQueue<EventData>,
-        adEventDataQueue: PersistentQueue<AdEventData>
+        eventDataQueue: PersistentQueue<EventData, EventDataKey>,
+        adEventDataQueue: PersistentQueue<AdEventData, EventDataKey>
     ) {
         self.eventDataQueue = eventDataQueue
         self.adEventDataQueue = adEventDataQueue
@@ -24,7 +24,7 @@ internal class PersistentEventDataQueue {
             await cleanUpDatabase()
         }
 
-        await eventDataQueue.add(entry: eventData)
+        await eventDataQueue.add(eventData)
         logger.d("Added event data to queue")
     }
 
@@ -33,7 +33,7 @@ internal class PersistentEventDataQueue {
             await cleanUpDatabase()
         }
 
-        await adEventDataQueue.add(entry: adEventData)
+        await adEventDataQueue.add(adEventData)
         logger.d("Added ad event data to queue")
     }
 
@@ -91,9 +91,10 @@ private extension PersistentEventDataQueue {
     func findOldSessionsToPurge() async -> Set<String> {
         var sessionsToPurge: Set<String> = []
 
-        await eventDataQueue.forEach { eventData in
-            if eventData.age > maxEntryAge {
-                sessionsToPurge.insert(eventData.impressionId)
+        await eventDataQueue.forEach { key in
+            let age = Date().timeIntervalSince1970 - key.creationTime
+            if age > maxEntryAge {
+                sessionsToPurge.insert(key.sessionId)
             }
         }
 
@@ -109,35 +110,24 @@ private extension PersistentEventDataQueue {
 
         logger.d("Purging entries for \(impressionIds.count) impression IDs")
 
-        await eventDataQueue.removeAll { eventData in
-            return impressionIds.contains(eventData.impressionId)
+        await eventDataQueue.removeAll { key in
+            return impressionIds.contains(key.sessionId)
         }
 
-        await adEventDataQueue.removeAll { adEventData in
-            guard let impressionId = adEventData.videoImpressionId else { return true }
-            return impressionIds.contains(impressionId)
+        await adEventDataQueue.removeAll { key in
+            return impressionIds.contains(key.sessionId)
         }
     }
 }
 
-private extension EventData {
+internal extension EventData {
     var age: TimeInterval {
-        guard let eventDataCreationTime = time else {
-            return .nan
-        }
-
-        let ageMilliseconds = Date().timeIntervalSince1970Millis - eventDataCreationTime
-        return Double(ageMilliseconds / 1_000)
+        Date().timeIntervalSince1970 - creationTime
     }
 }
 
-private extension AdEventData {
+internal extension AdEventData {
     var age: TimeInterval {
-        guard let eventDataCreationTime = time else {
-            return .nan
-        }
-
-        let ageMilliseconds = Date().timeIntervalSince1970Millis - eventDataCreationTime
-        return Double(ageMilliseconds / 1_000)
+        Date().timeIntervalSince1970 - creationTime
     }
 }
