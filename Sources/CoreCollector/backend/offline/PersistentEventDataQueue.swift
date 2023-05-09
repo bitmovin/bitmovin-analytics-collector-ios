@@ -82,8 +82,8 @@ private extension PersistentEventDataQueue {
 
         await purgeEntries(for: impressionIdsToPurge)
 
-        while await eventDataQueue.count >= maxEntries {
-            guard let entryToPurge = await eventDataQueue.removeFirst() else { break }
+        if await eventDataQueue.count >= maxEntries {
+            guard let entryToPurge = await eventDataQueue.removeFirst() else { return }
             await purgeEntries(for: entryToPurge.impressionId)
         }
     }
