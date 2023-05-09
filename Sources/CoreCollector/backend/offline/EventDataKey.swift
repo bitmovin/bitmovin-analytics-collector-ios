@@ -1,7 +1,8 @@
 import Foundation
 
+private let separator = "#"
+
 internal struct EventDataKey: LosslessStringConvertible {
-    private let separator = "#"
     let sessionId: String
     let creationTime: TimeInterval
     var description: String {
@@ -15,9 +16,11 @@ internal struct EventDataKey: LosslessStringConvertible {
     }
 
     init?(_ description: String) {
-        guard let data = Data(base64Encoded: description) else { return nil }
-        guard let keyString = String(data: data, encoding: .utf8) else { return nil }
-        guard let range = keyString.range(of: separator), !range.isEmpty else { return nil }
+        guard let data = Data(base64Encoded: description),
+              let keyString = String(data: data, encoding: .utf8),
+              let range = keyString.range(of: separator), !range.isEmpty else {
+            return nil
+        }
 
         let creationTimeString = String(keyString[..<range.lowerBound])
         let sessionId = String(keyString[range.upperBound...])
