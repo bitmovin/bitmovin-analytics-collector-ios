@@ -65,11 +65,8 @@ internal class PersistentQueue<Payload: Codable & KeyDerivable, Key: LosslessStr
     func removeFirst() -> Payload? {
         ensureDatabaseInitialized()
 
-        guard let firstEntry = fileReaderWriter.removeFirstLine(from: fileUrl), !firstEntry.isEmpty else {
-            return nil
-        }
-
-        guard let payloadData = parsePayloadData(from: firstEntry) else {
+        guard let firstEntry = fileReaderWriter.removeFirstLine(from: fileUrl), !firstEntry.isEmpty,
+              let payloadData = parsePayloadData(from: firstEntry) else {
             return nil
         }
 
