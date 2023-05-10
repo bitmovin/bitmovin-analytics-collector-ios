@@ -152,7 +152,7 @@ private extension PersistentQueue {
         let keyData = entry[entry.startIndex..<range.lowerBound]
         guard let keyString = String(data: keyData, encoding: .utf8) else { return nil }
 
-        return Key.init(keyString)
+        return Key(keyString)
     }
 
     private func parsePayloadData(from entry: Data) -> Data? {
