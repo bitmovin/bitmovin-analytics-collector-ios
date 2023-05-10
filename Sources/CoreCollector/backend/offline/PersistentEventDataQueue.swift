@@ -115,11 +115,11 @@ private extension PersistentEventDataQueue {
         logger.d("Purging entries for \(sessionIds.count) session IDs")
 
         await eventDataQueue.removeAll { key in
-            return sessionIds.contains(key.sessionId)
+            sessionIds.contains(key.sessionId)
         }
 
         await adEventDataQueue.removeAll { key in
-            return sessionIds.contains(key.sessionId)
+            sessionIds.contains(key.sessionId)
         }
     }
 }
