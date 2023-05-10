@@ -24,6 +24,8 @@ internal class PersistentEventDataQueue {
             await cleanUpDatabase()
         }
 
+        eventData.delayed = true
+
         await eventDataQueue.add(eventData)
         logger.d("Added event data to queue")
     }
@@ -32,6 +34,8 @@ internal class PersistentEventDataQueue {
         if await eventDataQueue.count >= maxEntries {
             await cleanUpDatabase()
         }
+
+        adEventData.delayed = true
 
         await adEventDataQueue.add(adEventData)
         logger.d("Added ad event data to queue")
