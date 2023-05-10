@@ -4,7 +4,7 @@ class PersistingAuthenticatedDispatcher: EventDataDispatcher {
     private enum OperationMode {
         case unauthenticated
         case authenticated
-        case disabled
+        case denied
     }
 
     private let logger = _AnalyticsLogger(className: "PersistingAuthenticatedDispatcher")
@@ -33,7 +33,7 @@ class PersistingAuthenticatedDispatcher: EventDataDispatcher {
     }
 
     func add(_ eventData: EventData) {
-        guard currentOperationMode != .disabled else { return }
+        guard currentOperationMode != .denied else { return }
         guard currentOperationMode == .authenticated else {
             logger.d("Received event data but not authenticated. Trying to authenticate")
             Task { [weak self] in
@@ -49,7 +49,7 @@ class PersistingAuthenticatedDispatcher: EventDataDispatcher {
     }
 
     func addAd(_ adEventData: AdEventData) {
-        guard currentOperationMode != .disabled else { return }
+        guard currentOperationMode != .denied else { return }
         guard currentOperationMode == .authenticated else {
             logger.d("Received ad event data but not authenticated. Trying to authenticate")
             Task { [weak self] in
@@ -65,8 +65,7 @@ class PersistingAuthenticatedDispatcher: EventDataDispatcher {
     }
 
     func disable() {
-        currentOperationMode = .disabled
-        innerDispatcher.disable()
+        currentOperationMode = .unauthenticated
     }
 
     func resetSourceState() {
@@ -88,6 +87,12 @@ private extension PersistingAuthenticatedDispatcher {
             name: .authenticationDenied,
             object: authenticationService
         )
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(self.handleAuthenticationError),
+            name: .authenticationError,
+            object: authenticationService
+        )
     }
 
     func removeObserver() {
@@ -105,12 +110,18 @@ private extension PersistingAuthenticatedDispatcher {
     @objc
     func handleAuthenticationDenied(_ notification: Notification) {
         logger.d("Authentication denied")
-        disable()
+        currentOperationMode = .denied
 
         Task { [weak self] in
             guard let self else { return }
 
             await self.eventDataQueue.removeAll()
         }
+    }
+
+    @objc
+    func handleAuthenticationError(_ notification: Notification) {
+        logger.d("Authentication error")
+        currentOperationMode = .unauthenticated
     }
 }
