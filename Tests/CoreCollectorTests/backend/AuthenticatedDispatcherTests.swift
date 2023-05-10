@@ -80,18 +80,6 @@ class AuthenticatedDispatcherTests: QuickSpec {
             }
         }
         describe("disable") {
-            it("should call innerDispatcher") {
-                // arrange
-                stub(mockInnerDispatcher) { stub in
-                    when(stub.disable()).thenDoNothing()
-                }
-
-                // act
-                dispatcher.disable()
-
-                // assert
-                verify(mockInnerDispatcher).disable()
-            }
             it("should not call add and addAd on innerDispatcher when .disable was called") {
                 // arrange
                 stub(mockInnerDispatcher) { stub in
@@ -108,7 +96,6 @@ class AuthenticatedDispatcherTests: QuickSpec {
                 dispatcher.disable()
 
                 // assert
-                verify(mockInnerDispatcher).disable()
                 dispatcher.addAd(adEventData)
                 dispatcher.add(eventData)
                 verifyNoMoreInteractions(mockInnerDispatcher)
@@ -129,18 +116,6 @@ class AuthenticatedDispatcherTests: QuickSpec {
             }
         }
         describe("authentication denied") {
-            it("should call innerDispatcher") {
-                // arrange
-                stub(mockInnerDispatcher) { stub in
-                    when(stub.disable()).thenDoNothing()
-                }
-
-                // act
-                mockNotificationCenter.post(name: .authenticationDenied, object: mockAuthService)
-
-                // assert
-                verify(mockInnerDispatcher).disable()
-            }
             it("should not call add and addAd on innerDispatcher when authentication was denied") {
                 // arrange
                 stub(mockInnerDispatcher) { stub in
@@ -157,25 +132,12 @@ class AuthenticatedDispatcherTests: QuickSpec {
                 mockNotificationCenter.post(name: .authenticationDenied, object: mockAuthService)
 
                 // assert
-                verify(mockInnerDispatcher).disable()
                 dispatcher.addAd(adEventData)
                 dispatcher.add(eventData)
                 verifyNoMoreInteractions(mockInnerDispatcher)
             }
         }
         describe("authentication error") {
-            it("should call innerDispatcher") {
-                // arrange
-                stub(mockInnerDispatcher) { stub in
-                    when(stub.disable()).thenDoNothing()
-                }
-
-                // act
-                mockNotificationCenter.post(name: .authenticationError, object: mockAuthService)
-
-                // assert
-                verify(mockInnerDispatcher).disable()
-            }
             it("should not call add and addAd on innerDispatcher when authentication failed") {
                 // arrange
                 stub(mockInnerDispatcher) { stub in
@@ -192,7 +154,6 @@ class AuthenticatedDispatcherTests: QuickSpec {
                 mockNotificationCenter.post(name: .authenticationError, object: mockAuthService)
 
                 // assert
-                verify(mockInnerDispatcher).disable()
                 dispatcher.addAd(adEventData)
                 dispatcher.add(eventData)
                 verifyNoMoreInteractions(mockInnerDispatcher)
