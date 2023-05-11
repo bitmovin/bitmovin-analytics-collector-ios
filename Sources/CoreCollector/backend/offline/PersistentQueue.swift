@@ -147,16 +147,23 @@ private extension PersistentQueue {
     }
 
     private func parseKey(from entry: Data) -> Key? {
-        guard let range = entry[entry.startIndex...].range(of: separator), !range.isEmpty else { return nil }
+        let components = entry.split(separator: separator[0], maxSplits: 1, omittingEmptySubsequences: false)
 
-        let keyData = entry[entry.startIndex..<range.lowerBound]
-        guard let keyString = String(data: keyData, encoding: .utf8) else { return nil }
+        guard components.count == 2,
+              let keyString = String(data: components[0], encoding: .utf8) else {
+            return nil
+        }
 
         return Key(keyString)
     }
 
     private func parsePayloadData(from entry: Data) -> Data? {
-        guard let range = entry[entry.startIndex...].range(of: separator), !range.isEmpty else { return nil }
-        return entry[range.upperBound...]
+        let components = entry.split(separator: separator[0], maxSplits: 1, omittingEmptySubsequences: false)
+
+        guard components.count == 2 else {
+            return nil
+        }
+
+        return components[1]
     }
 }

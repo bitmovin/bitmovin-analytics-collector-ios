@@ -183,6 +183,16 @@ class PersistentQueueTests: AsyncSpec {
                     expect(executionTime).to(beLessThan(0.15))
                 }
             }
+            it("provides the correct values as key") {
+                let eventData = EventData("123")
+                eventData.time = 10 * 1_000
+
+                await persistentQueue.add(eventData)
+                await persistentQueue.forEach { key in
+                    expect(key.sessionId).to(equal("123"))
+                    expect(key.creationTime).to(equal(10))
+                }
+            }
         }
     }
 }
