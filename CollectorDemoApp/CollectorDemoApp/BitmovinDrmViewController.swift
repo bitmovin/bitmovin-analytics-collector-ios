@@ -1,6 +1,6 @@
 import CoreCollector
 import BitmovinCollector
-import BitmovinPlayer
+import BitmovinPlayerCore
 import UIKit
 
 class BitmovinDrmViewController: UIViewController {
@@ -94,7 +94,7 @@ class BitmovinDrmViewController: UIViewController {
         analyticsCollector.attachPlayer(player: player)
 
         // Create player view and pass the player instance
-        let playerBoundary = BitmovinPlayer.PlayerView(player: player, frame: .zero)
+        let playerBoundary = BitmovinPlayerCore.PlayerView(player: player, frame: .zero)
 
         playerBoundary.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         playerBoundary.frame = playerView.bounds

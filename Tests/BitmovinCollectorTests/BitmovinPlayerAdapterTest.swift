@@ -1,4 +1,4 @@
-import BitmovinPlayer
+import BitmovinPlayerCore
 import XCTest
 @testable import BitmovinCollector
 @testable import CoreCollector

@@ -1,4 +1,4 @@
-import BitmovinPlayer
+import BitmovinPlayerCore
 import CoreCollector
 
 class DebugBitmovinPlayerEvents: NSObject, PlayerListener, SourceListener {

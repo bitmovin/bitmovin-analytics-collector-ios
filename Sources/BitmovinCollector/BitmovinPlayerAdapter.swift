@@ -1,4 +1,4 @@
-import BitmovinPlayer
+import BitmovinPlayerCore
 import CoreCollector
 
 internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter, EventDataManipulator {

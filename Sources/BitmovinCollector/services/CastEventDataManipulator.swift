@@ -1,4 +1,4 @@
-import BitmovinPlayer
+import BitmovinPlayerCore
 import Foundation
 
 import CoreCollector

@@ -101,7 +101,6 @@
 		37EEC42629F6BA03005D0457 /* BitmovinAdAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC42229F6BA03005D0457 /* BitmovinAdAdapter.swift */; };
 		37EEC42729F6BA03005D0457 /* BitmovinAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC42329F6BA03005D0457 /* BitmovinAnalytics.swift */; };
 		37EEC42829F6BA03005D0457 /* BitmovinPlayerCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC42429F6BA03005D0457 /* BitmovinPlayerCollector.swift */; };
-		37EEC42B29F6BA49005D0457 /* BitmovinPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC42A29F6BA49005D0457 /* BitmovinPlayer */; };
 		37EEC42C29F6BA7F005D0457 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC30729F6A8F5005D0457 /* CoreCollector.framework */; };
 		37EEC43929F6BACA005D0457 /* BitmovinCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC40229F6B901005D0457 /* BitmovinCollector.framework */; };
 		37EEC44429F6BAF4005D0457 /* BitmovinPlayerAdapterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEC43F29F6BAF3005D0457 /* BitmovinPlayerAdapterTest.swift */; };
@@ -173,6 +172,7 @@
 		37EEC51C29F7D6E8005D0457 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC51B29F7D6E8005D0457 /* Nimble */; };
 		37EEC51E29F7D6EC005D0457 /* Cuckoo in Frameworks */ = {isa = PBXBuildFile; productRef = 37EEC51D29F7D6EC005D0457 /* Cuckoo */; };
 		37EEC52029F7E543005D0457 /* CoreCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EEC30729F6A8F5005D0457 /* CoreCollector.framework */; };
+		A85362992A122B41003E7AE4 /* BitmovinPlayerCore in Frameworks */ = {isa = PBXBuildFile; productRef = A85362982A122B41003E7AE4 /* BitmovinPlayerCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -438,7 +438,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37EEC42B29F6BA49005D0457 /* BitmovinPlayer in Frameworks */,
+				A85362992A122B41003E7AE4 /* BitmovinPlayerCore in Frameworks */,
 				37EEC42C29F6BA7F005D0457 /* CoreCollector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1198,7 +1198,7 @@
 			);
 			name = BitmovinCollector;
 			packageProductDependencies = (
-				37EEC42A29F6BA49005D0457 /* BitmovinPlayer */,
+				A85362982A122B41003E7AE4 /* BitmovinPlayerCore */,
 			);
 			productName = BitmovinCollector;
 			productReference = 37EEC40229F6B901005D0457 /* BitmovinCollector.framework */;
@@ -1370,7 +1370,7 @@
 				37EEC3EE29F6B523005D0457 /* XCRemoteSwiftPackageReference "Quick" */,
 				37EEC3F129F6B54F005D0457 /* XCRemoteSwiftPackageReference "Nimble" */,
 				37EEC3F429F6B563005D0457 /* XCRemoteSwiftPackageReference "Cuckoo" */,
-				37EEC42929F6BA49005D0457 /* XCRemoteSwiftPackageReference "player-ios" */,
+				A85362972A122B41003E7AE4 /* XCRemoteSwiftPackageReference "player-ios-core" */,
 			);
 			productRefGroup = 37EEC2DF29F6A86B005D0457 /* Products */;
 			projectDirPath = "";
@@ -2035,12 +2035,12 @@
 				minimumVersion = 1.9.1;
 			};
 		};
-		37EEC42929F6BA49005D0457 /* XCRemoteSwiftPackageReference "player-ios" */ = {
+		A85362972A122B41003E7AE4 /* XCRemoteSwiftPackageReference "player-ios-core" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/bitmovin/player-ios.git";
+			repositoryURL = "https://github.com/bitmovin/player-ios-core.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.35.0;
+				minimumVersion = "3.39.0-a.16";
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -2060,11 +2060,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 37EEC3F129F6B54F005D0457 /* XCRemoteSwiftPackageReference "Nimble" */;
 			productName = Nimble;
-		};
-		37EEC42A29F6BA49005D0457 /* BitmovinPlayer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 37EEC42929F6BA49005D0457 /* XCRemoteSwiftPackageReference "player-ios" */;
-			productName = BitmovinPlayer;
 		};
 		37EEC44C29F6BB94005D0457 /* Cuckoo */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2110,6 +2105,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 37EEC3F429F6B563005D0457 /* XCRemoteSwiftPackageReference "Cuckoo" */;
 			productName = Cuckoo;
+		};
+		A85362982A122B41003E7AE4 /* BitmovinPlayerCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A85362972A122B41003E7AE4 /* XCRemoteSwiftPackageReference "player-ios-core" */;
+			productName = BitmovinPlayerCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -1,4 +1,4 @@
-import BitmovinPlayer
+import BitmovinPlayerCore
 import BitmovinCollector
 import CoreCollector
 import UIKit
@@ -145,7 +145,7 @@ class BitmovinViewController: UIViewController {
         self.player = player
 
         // Create player view and pass the player instance to it
-        let playerBoundaries = BitmovinPlayer.PlayerView(player: player, frame: .zero)
+        let playerBoundaries = BitmovinPlayerCore.PlayerView(player: player, frame: .zero)
 
         playerBoundaries.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         playerBoundaries.frame = playerView.bounds

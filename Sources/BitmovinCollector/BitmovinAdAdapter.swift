@@ -1,4 +1,4 @@
-import BitmovinPlayer
+import BitmovinPlayerCore
 import CoreCollector
 
 public class BitmovinAdAdapter: NSObject, AdAdapter {
