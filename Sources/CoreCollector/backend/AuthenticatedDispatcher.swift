@@ -46,7 +46,6 @@ internal class AuthenticatedDispatcher: EventDataDispatcher {
 
     func disable() {
         enabled = false
-        innerDispatcher.disable()
     }
 
     func resetSourceState() {
@@ -63,7 +62,13 @@ internal class AuthenticatedDispatcher: EventDataDispatcher {
         notificationCenter.addObserver(
             self,
             selector: #selector(self.handleAuthenticationFailed),
-            name: .authenticationFailed,
+            name: .authenticationDenied,
+            object: authenticationService
+        )
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(self.handleAuthenticationFailed),
+            name: .authenticationError,
             object: authenticationService
         )
     }

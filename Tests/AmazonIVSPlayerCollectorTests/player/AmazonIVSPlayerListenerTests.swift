@@ -6,7 +6,7 @@ import AmazonIVSPlayer
 @testable import AmazonIVSPlayerCollector
 
 class AmazonIVSPlayerListenerTests: QuickSpec {
-    override func spec() {
+    override class func spec() {
         describe("player didChangeQuality") {
             it("should call customerDelegate") {
                 // arrange

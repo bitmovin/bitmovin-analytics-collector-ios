@@ -9,15 +9,12 @@ class HttpClient {
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         request.setValue("http://\(Util.mainBundleIdentifier())", forHTTPHeaderField: "Origin")
         request.httpMethod = "POST"
-        let postString = json
-        request.httpBody = postString.data(using: .utf8)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard error == nil else { // check for fundamental networking error
-                return
-            }
+        request.httpBody = json.data(using: .utf8)
 
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
             completionHandler?(data, response, error)
         }
+
         task.resume()
     }
 }

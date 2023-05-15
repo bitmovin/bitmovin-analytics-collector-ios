@@ -12,7 +12,7 @@ import Quick
 #endif
 
 class AVPlayerAdapterTests: QuickSpec {
-    override func spec() {
+    override class func spec() {
         describe("stopMonitoring") {
             it("should not fail on multiple calls") {
                 // arrange
@@ -20,7 +20,7 @@ class AVPlayerAdapterTests: QuickSpec {
                 let config = BitmovinAnalyticsConfig(key: "")
                 let playerContext = MockPlayerContext()
                 let stateMachine = DefaultStateMachine(playerContext: playerContext)
-                let adapter = self.createAdapter(stateMachine, player)
+                let adapter = createAdapter(stateMachine, player)
 
                 // act
                 adapter.stopMonitoring()
@@ -30,20 +30,20 @@ class AVPlayerAdapterTests: QuickSpec {
             }
         }
     }
+}
 
-    private func createAdapter(
-        _ stateMachine: StateMachine,
-        _ player: AVPlayer
-    ) -> AVPlayerAdapter {
-        let eventDataFactory = EventDataFactory(BitmovinAnalyticsConfig(key: ""), UserDefaultUserIdProvider())
-        let analytics = BitmovinAnalyticsInternal.createAnalytics(
-            config: BitmovinAnalyticsConfig(key: "test-key"),
-            eventDataFactory: eventDataFactory
-        )
-        return AVPlayerAdapterFactory.createAdapter(
-            analytics: analytics,
-            eventDataFactory: eventDataFactory,
-            player: player
-        )
-    }
+private func createAdapter(
+    _ stateMachine: StateMachine,
+    _ player: AVPlayer
+) -> AVPlayerAdapter {
+    let eventDataFactory = EventDataFactory(BitmovinAnalyticsConfig(key: ""), UserDefaultUserIdProvider())
+    let analytics = BitmovinAnalyticsInternal.createAnalytics(
+        config: BitmovinAnalyticsConfig(key: "test-key"),
+        eventDataFactory: eventDataFactory
+    )
+    return AVPlayerAdapterFactory.createAdapter(
+        analytics: analytics,
+        eventDataFactory: eventDataFactory,
+        player: player
+    )
 }

@@ -4,6 +4,7 @@ internal class EventDataDispatcherFactory {
     private let httpClient: HttpClient
     private let authenticationService: AuthenticationService
     private let notificationCenter: NotificationCenter
+    private let persistentQueueFactory = PersistentQueueFactory()
 
     init(
         _ httpClient: HttpClient,
@@ -15,15 +16,28 @@ internal class EventDataDispatcherFactory {
         self.authenticationService = authenticationService
     }
 
-    func createDispatcher() -> EventDataDispatcher {
-        let httpDispatcher = HttpEventDataDispatcher(httpClient: self.httpClient)
+    func createDispatcher(config: BitmovinAnalyticsConfig) -> EventDataDispatcher {
+        let eventDataQueue = persistentQueueFactory.create()
+        let httpDispatcher = HttpEventDataDispatcher(httpClient: httpClient, eventDataQueue: eventDataQueue)
 
-        let authDispatcher = AuthenticatedDispatcher(
-            authenticationService: self.authenticationService,
-            notificationCenter: self.notificationCenter,
+        if config.longTermRetryEnabled {
+            let persistingDispatcher = PersistingDispatcher(
+                innerDispatcher: httpDispatcher,
+                eventDataQueue: eventDataQueue
+            )
+
+            return PersistingAuthenticatedDispatcher(
+                authenticationService: authenticationService,
+                notificationCenter: notificationCenter,
+                innerDispatcher: persistingDispatcher,
+                eventDataQueue: eventDataQueue
+            )
+        }
+
+        return AuthenticatedDispatcher(
+            authenticationService: authenticationService,
+            notificationCenter: notificationCenter,
             innerDispatcher: httpDispatcher
         )
-
-        return authDispatcher
     }
 }

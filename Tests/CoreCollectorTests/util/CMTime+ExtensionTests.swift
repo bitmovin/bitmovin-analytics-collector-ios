@@ -3,7 +3,7 @@ import Nimble
 import Quick
 
 class CMTimeExtentionTests: QuickSpec {
-    override func spec() {
+    override class func spec() {
         it("should return correct value") {
             // arrange
             let time = CMTimeMakeWithSeconds(123, preferredTimescale: 1_000)

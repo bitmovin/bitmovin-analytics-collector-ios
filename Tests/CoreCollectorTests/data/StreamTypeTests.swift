@@ -9,7 +9,7 @@ import Quick
 #endif
 
 class StreamTypeTests: QuickSpec {
-    override func spec() {
+    override class func spec() {
         let testTable: [(name: String, streamUrl: String, expectedStreamType: StreamType)] = [
             (name: "Test HLS input with queryParams",
              streamUrl: "https://demo-hls5-live.zahs.tv/fullhd/master.m3u8?timeshift=100",

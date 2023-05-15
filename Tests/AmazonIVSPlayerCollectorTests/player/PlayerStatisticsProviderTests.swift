@@ -6,7 +6,7 @@ import Cuckoo
 @testable import AmazonIVSPlayerCollector
 
 class PlayerStatisticsProviderTests: QuickSpec {
-    override func spec() {
+    override class func spec() {
         describe("reset") {
             it("should reset saved values to 0") {
                 // arrange
