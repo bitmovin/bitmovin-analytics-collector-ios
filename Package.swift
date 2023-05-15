@@ -25,20 +25,20 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/bitmovin/player-ios.git", from: "3.35.0"),
+        .package(url: "https://github.com/bitmovin/player-ios-core.git", from: "3.39.0-a.16"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .binaryTarget(
             name: "CoreCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.28/CoreCollector.zip",
-            checksum: "6f7f1140f35f6946a65c4f1c7f6817ac6e22d05325d507bfb82ebf5a1624699a"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.39.0-a.1/CoreCollector.zip",
+            checksum: "d5bb13db4f756d3eea68cb8d4bbac25cef3965f6aaae1dc600081e82e86b3acf"
         ),
         .binaryTarget(
             name: "AVFoundationCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.28/AVFoundationCollector.zip",
-            checksum: "5520d93c72c27b6691ce0d66bf7ad0b81fc7e46d7e2dd1129422560729e53116"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.39.0-a.1/AVFoundationCollector.zip",
+            checksum: "e58e970f1993589deddc70a7a4a42d6bed6ced20e983f8747ff0329feae12bc4"
         ),
         .target(
             name: "AVFoundationCollectorTarget",
@@ -49,8 +49,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "BitmovinCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.28/BitmovinCollector.zip",
-            checksum: "b60d49793034eae47dce1e1f49407f2cf851f1ca4b33946e7f5767a9e65231b1"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.39.0-a.1/BitmovinCollector.zip",
+            checksum: "6cdde28f2462cf187ab18ce83ec929740fdb7dd9e9dd5877a2f73e43974e7f55"
         ),
         .target(
             name: "BitmovinCollectorTarget",
@@ -67,8 +67,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "AmazonIVSCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.28/AmazonIVSCollector.zip",
-            checksum: "55a23e774b9cb1858f898657a2494d024feae9c372b512cb24b7003298c88cff"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.39.0-a.1/AmazonIVSCollector.zip",
+            checksum: "fcae29cc5f850863ce1f303c0bb054cfd8d3c73505c087d372f403021f71ea9e"
         ),
         .target(
             name: "AmazonIVSCollectorTarget",
