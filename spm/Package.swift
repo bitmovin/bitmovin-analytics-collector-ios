@@ -25,7 +25,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/bitmovin/player-ios.git", from: "3.35.0"),
+        .package(url: "https://github.com/bitmovin/player-ios-core.git", from: "3.39.0-a.16"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.

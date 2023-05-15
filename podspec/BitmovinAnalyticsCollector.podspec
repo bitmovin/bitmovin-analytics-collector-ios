@@ -24,7 +24,7 @@ DESC
 
   s.subspec 'BitmovinPlayer' do |bitmovinplayerv3|
     bitmovinplayerv3.vendored_frameworks = 'BitmovinCollector.xcframework'
-    bitmovinplayerv3.dependency 'BitmovinPlayer', '~>3.35'
+    bitmovinplayerv3.dependency 'BitmovinPlayerCore', '~>3.39.0-a.16'
   end
 
   s.subspec 'AmazonIVSPlayer' do |ivsplayer|
