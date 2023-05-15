@@ -73,7 +73,7 @@ class ViewController: UIViewController {
         analyticsCollector.attachBitmovinPlayer(player: player)
 
         // Create player view and pass the player instance to it
-        let playerBoundaries = BitmovinPlayer.PlayerView(player: player, frame: .zero)
+        let playerBoundaries = BitmovinPlayerCore.PlayerView(player: player, frame: .zero)
 
         // Listen to player events
 
