@@ -1,17 +1,17 @@
 import Foundation
 
-private let maxSequenceNumber: Int = 1_000
-private let maxEntries: Int = 10_000
-private let maxEntryAge: TimeInterval = 60 * 60 * 24 * 30 // 30 days in seconds
+private let maxSequenceNumber: Int = 500
+private let maxEntries: Int = 5_000
+private let maxEntryAge: TimeInterval = 60 * 60 * 24 * 14 // 14 days in seconds
 
 internal class PersistentEventDataQueue {
     private let logger = _AnalyticsLogger(className: "PersistentEventDataQueue")
-    private let eventDataQueue: PersistentQueue<EventData>
-    private let adEventDataQueue: PersistentQueue<AdEventData>
+    private let eventDataQueue: PersistentQueue<EventData, EventDataKey>
+    private let adEventDataQueue: PersistentQueue<AdEventData, EventDataKey>
 
     init(
-        eventDataQueue: PersistentQueue<EventData>,
-        adEventDataQueue: PersistentQueue<AdEventData>
+        eventDataQueue: PersistentQueue<EventData, EventDataKey>,
+        adEventDataQueue: PersistentQueue<AdEventData, EventDataKey>
     ) {
         self.eventDataQueue = eventDataQueue
         self.adEventDataQueue = adEventDataQueue
@@ -20,20 +20,24 @@ internal class PersistentEventDataQueue {
     func add(_ eventData: EventData) async {
         guard eventData.sequenceNumber <= maxSequenceNumber else { return }
 
-        while await eventDataQueue.count >= maxEntries {
-            _ = await eventDataQueue.removeFirst()
+        if await eventDataQueue.count >= maxEntries {
+            await cleanUpDatabase()
         }
 
-        await eventDataQueue.add(entry: eventData)
+        eventData.delayed = true
+
+        await eventDataQueue.add(eventData)
         logger.d("Added event data to queue")
     }
 
     func addAd(_ adEventData: AdEventData) async {
-        while await adEventDataQueue.count >= maxEntries {
-            _ = await adEventDataQueue.removeFirst()
+        if await eventDataQueue.count >= maxEntries {
+            await cleanUpDatabase()
         }
 
-        await adEventDataQueue.add(entry: adEventData)
+        adEventData.delayed = true
+
+        await adEventDataQueue.add(adEventData)
         logger.d("Added ad event data to queue")
     }
 
@@ -44,7 +48,9 @@ internal class PersistentEventDataQueue {
             return eventData
         }
 
-        logger.d("Entry exceeding max age found, discarding and fetching next")
+        logger.d("Entry exceeding max age found, discarding old sessions and fetching next")
+        await cleanUpDatabase(including: eventData.impressionId)
+
         return await removeFirst()
     }
 
@@ -55,7 +61,11 @@ internal class PersistentEventDataQueue {
             return adEventData
         }
 
-        logger.d("Entry exceeding max age found, discarding and fetching next")
+        logger.d("Entry exceeding max age found, discarding old sessions and fetching next")
+        if let sessionId = adEventData.videoImpressionId {
+            await cleanUpDatabase(including: sessionId)
+        }
+
         return await removeFirstAd()
     }
 
@@ -65,24 +75,63 @@ internal class PersistentEventDataQueue {
     }
 }
 
-private extension EventData {
-    var age: TimeInterval {
-        guard let eventDataCreationTime = time else {
-            return .nan
+private extension PersistentEventDataQueue {
+    func cleanUpDatabase(including sessionId: String? = nil) async {
+        logger.d("Cleaning up database")
+
+        var sessionIdsToPurge = await findOldSessionsToPurge()
+        if let sessionId {
+            sessionIdsToPurge.insert(sessionId)
         }
 
-        let ageMilliseconds = Date().timeIntervalSince1970Millis - eventDataCreationTime
-        return Double(ageMilliseconds / 1_000)
+        await purgeEntries(for: sessionIdsToPurge)
+
+        if await eventDataQueue.count >= maxEntries {
+            guard let entryToPurge = await eventDataQueue.removeFirst() else { return }
+            await purgeEntries(for: entryToPurge.impressionId)
+        }
+    }
+
+    func findOldSessionsToPurge() async -> Set<String> {
+        var sessionsToPurge: Set<String> = []
+
+        await eventDataQueue.forEach { key in
+            let age = Date().timeIntervalSince1970 - key.creationTime
+            if age > maxEntryAge {
+                sessionsToPurge.insert(key.sessionId)
+            }
+        }
+
+        return sessionsToPurge
+    }
+
+    func purgeEntries(for sessionId: String) async {
+        await purgeEntries(for: [sessionId])
+    }
+
+    func purgeEntries(for sessionIds: Set<String>) async {
+        guard !sessionIds.isEmpty else { return }
+
+        logger.d("Purging entries for \(sessionIds.count) session IDs")
+
+        await eventDataQueue.removeAll { key in
+            sessionIds.contains(key.sessionId)
+        }
+
+        await adEventDataQueue.removeAll { key in
+            sessionIds.contains(key.sessionId)
+        }
     }
 }
 
-private extension AdEventData {
+internal extension EventData {
     var age: TimeInterval {
-        guard let eventDataCreationTime = time else {
-            return .nan
-        }
+        Date().timeIntervalSince1970 - creationTime
+    }
+}
 
-        let ageMilliseconds = Date().timeIntervalSince1970Millis - eventDataCreationTime
-        return Double(ageMilliseconds / 1_000)
+internal extension AdEventData {
+    var age: TimeInterval {
+        Date().timeIntervalSince1970 - creationTime
     }
 }

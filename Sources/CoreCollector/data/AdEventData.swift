@@ -139,6 +139,8 @@ public class AdEventData: Codable {
     var time: Int64?
     var adImpressionId: String?
 
+    var delayed: Bool = false
+
     public func setEventData(eventData: EventData) {
         self.analyticsVersion = eventData.analyticsVersion
         self.audioCodec = eventData.audioCodec

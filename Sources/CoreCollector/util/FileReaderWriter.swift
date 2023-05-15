@@ -1,11 +1,15 @@
 import Foundation
 
 private let lineSeparator = Data("\n".utf8)
-private let chunkSize = 4096
+private let chunkSize = 4_096
 
 internal class FileReaderWriter {
     func writeEmptyFile(to file: URL) {
         try? "".write(to: file, atomically: true, encoding: .utf8)
+    }
+
+    func overwrite(file: URL, with data: Data) {
+        try? data.write(to: file, options: .atomic)
     }
 
     func appendLine(_ line: Data, to file: URL) {
@@ -17,7 +21,10 @@ internal class FileReaderWriter {
         fileHandle.seekToEndOfFile()
 
         var line = line
-        line.append(lineSeparator)
+        if line.suffix(lineSeparator.count) != lineSeparator {
+            line.append(lineSeparator)
+        }
+
         fileHandle.write(line)
     }
 
@@ -27,11 +34,11 @@ internal class FileReaderWriter {
             fileHandle.closeFile()
         }
 
-        guard let line = fileHandle.readLine(lineSeparator, chunkSize) else {
-            return nil
-        }
+        return readLine(from: fileHandle)
+    }
 
-        return line
+    func readLine(from fileHandle: FileHandle) -> Data? {
+        fileHandle.readLine(lineSeparator, chunkSize)
     }
 
     func removeFirstLine(from file: URL) -> Data? {

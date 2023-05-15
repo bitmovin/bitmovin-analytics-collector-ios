@@ -46,7 +46,6 @@ internal class AuthenticatedDispatcher: EventDataDispatcher {
 
     func disable() {
         enabled = false
-        innerDispatcher.disable()
     }
 
     func resetSourceState() {

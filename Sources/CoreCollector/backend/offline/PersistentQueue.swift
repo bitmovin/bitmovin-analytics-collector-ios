@@ -1,6 +1,8 @@
 import Foundation
 
-internal class PersistentQueue<T: Codable> {
+private let separator = Data("#".utf8)
+
+internal class PersistentQueue<Payload: Codable & KeyDerivable, Key: LosslessStringConvertible> {
     private let logger = _AnalyticsLogger(className: "PersistentQueue")
     private let fileReaderWriter = FileReaderWriter()
     private var databaseInitialized: Bool = false
@@ -8,6 +10,8 @@ internal class PersistentQueue<T: Codable> {
     private var fileExists: Bool {
         FileManager.default.fileExists(atPath: fileUrl.path)
     }
+    private let encoder = JSONEncoder()
+    private let decoder = JSONDecoder()
 
     @PersistentQueueActor
     var count: Int {
@@ -20,12 +24,13 @@ internal class PersistentQueue<T: Codable> {
     }
 
     @PersistentQueueActor
-    func add(entry: T) {
+    func add(_ payload: Payload) {
         ensureDatabaseInitialized()
 
-        if let data = try? JSONEncoder().encode(entry) {
-            fileReaderWriter.appendLine(data, to: fileUrl)
-        }
+        guard let payloadData = try? encoder.encode(payload), let key = payload.derivedKey else { return }
+
+        let line = Data(key.description.utf8) + separator + payloadData
+        fileReaderWriter.appendLine(line, to: fileUrl)
     }
 
     @PersistentQueueActor
@@ -36,14 +41,52 @@ internal class PersistentQueue<T: Codable> {
     }
 
     @PersistentQueueActor
-    func removeFirst() -> T? {
+    func removeAll(where shouldRemove: (Key) -> Bool) {
         ensureDatabaseInitialized()
 
-        guard let firstEntry = fileReaderWriter.removeFirstLine(from: fileUrl) else {
+        guard let fileHandle = try? FileHandle(forReadingFrom: fileUrl) else { return }
+
+        var entriesToKeep = Data()
+        while let nextEntry = fileReaderWriter.readLine(from: fileHandle), !nextEntry.isEmpty {
+            guard let key = parseKey(from: nextEntry) else { continue }
+
+            if shouldRemove(key) {
+                continue
+            }
+
+            entriesToKeep.append(nextEntry)
+        }
+
+        fileHandle.closeFile()
+        fileReaderWriter.overwrite(file: fileUrl, with: entriesToKeep)
+    }
+
+    @PersistentQueueActor
+    func removeFirst() -> Payload? {
+        ensureDatabaseInitialized()
+
+        guard let firstEntry = fileReaderWriter.removeFirstLine(from: fileUrl), !firstEntry.isEmpty,
+              let payloadData = parsePayloadData(from: firstEntry) else {
             return nil
         }
 
-        return try? JSONDecoder().decode(T.self, from: firstEntry)
+        return try? decoder.decode(Payload.self, from: payloadData)
+    }
+
+    @PersistentQueueActor
+    func forEach(body: (Key) -> Void) {
+        ensureDatabaseInitialized()
+
+        guard let fileHandle = try? FileHandle(forReadingFrom: fileUrl) else { return }
+        defer {
+            fileHandle.closeFile()
+        }
+
+        while let nextEntry = fileReaderWriter.readLine(from: fileHandle), !nextEntry.isEmpty {
+            guard let key = parseKey(from: nextEntry) else { continue }
+
+            body(key)
+        }
     }
 }
 
@@ -79,7 +122,9 @@ private extension PersistentQueue {
     private func hasIntegrity() -> Bool {
         if let firstEntry = fileReaderWriter.readFirstLine(from: fileUrl) {
             do {
-                _ = try JSONDecoder().decode(T.self, from: firstEntry)
+                guard parseKey(from: firstEntry) != nil else { return false }
+                guard let payloadData = parsePayloadData(from: firstEntry) else { return false }
+                _ = try decoder.decode(Payload.self, from: payloadData)
             } catch {
                 return false
             }
@@ -99,5 +144,26 @@ private extension PersistentQueue {
             withIntermediateDirectories: true,
             attributes: nil
         )
+    }
+
+    private func parseKey(from entry: Data) -> Key? {
+        let components = entry.split(separator: separator[0], maxSplits: 1, omittingEmptySubsequences: false)
+
+        guard components.count == 2,
+              let keyString = String(data: components[0], encoding: .utf8) else {
+            return nil
+        }
+
+        return Key(keyString)
+    }
+
+    private func parsePayloadData(from entry: Data) -> Data? {
+        let components = entry.split(separator: separator[0], maxSplits: 1, omittingEmptySubsequences: false)
+
+        guard components.count == 2 else {
+            return nil
+        }
+
+        return components[1]
     }
 }

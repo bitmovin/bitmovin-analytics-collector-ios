@@ -98,6 +98,7 @@ public class EventData: Codable {
     public var videoStartFailed: Bool?
     public var videoStartFailedReason: String?
     public var downloadSpeedInfo: DownloadSpeedInfoDto?
+    var delayed: Bool = false
 
     init(_ impressionId: String) {
         self.impressionId = impressionId
