@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed 
 - AmazonIVSCollector: `isLive` tracking didn't work
+- AVPlayerCollector: no heartbeat was triggered every 59sec
 
 ### Removed
 - remove support for building for `BITCODE`

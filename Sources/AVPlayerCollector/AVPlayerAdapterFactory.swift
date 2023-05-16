@@ -23,8 +23,8 @@ internal enum AVPlayerAdapterFactory {
         )
         eventDataFactory.registerEventDataManipulator(manipulator: manipulator)
 
-        var playerContext = AVPlayerContext(player: player, playbackTypeDetectionService: playbackTypeDetectionService)
-        var stateMachine = StateMachineFactory.create(playerContext: playerContext)
+        let playerContext = AVPlayerContext(player: player, playbackTypeDetectionService: playbackTypeDetectionService)
+        let stateMachine = StateMachineFactory.create(playerContext: playerContext)
         analytics.setStateMachine(stateMachine)
         return AVPlayerAdapter(
             player: player,

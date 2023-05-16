@@ -12,13 +12,15 @@ class PlayingHeartbeatService {
     func enableHeartbeat() {
         let interval = Double(heartbeatInterval) / 1_000.0
         heartbeatTimer?.invalidate()
-        heartbeatTimer = Timer.scheduledTimer(
-            timeInterval: interval,
-            target: self,
-            selector: #selector(PlayingHeartbeatService.onHeartbeat),
-            userInfo: nil,
-            repeats: true
-        )
+        executeOnMain {
+            heartbeatTimer = Timer.scheduledTimer(
+                timeInterval: interval,
+                target: self,
+                selector: #selector(PlayingHeartbeatService.onHeartbeat),
+                userInfo: nil,
+                repeats: true
+            )
+        }
     }
 
     func disableHeartbeat() {
@@ -34,6 +36,16 @@ class PlayingHeartbeatService {
         let cont = listener.onPlayingHeartbeat()
         if !cont {
             disableHeartbeat()
+        }
+    }
+
+    private func executeOnMain(block: () -> Void) {
+        if Thread.isMainThread {
+            block()
+        } else {
+            DispatchQueue.main.sync {
+                block()
+            }
         }
     }
 }
