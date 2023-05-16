@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BitmovinAnalyticsCollector'
-  s.version          = '2.11.0'
+  s.version          = '2.12.0'
   s.summary          = 'iOS library that allows you to monitor your iOS video playback with Bitmovin Analytics'
 
   s.description      = <<-DESC
