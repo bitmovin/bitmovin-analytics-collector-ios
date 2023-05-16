@@ -1,4 +1,4 @@
-// swift-tools-version:5.7
+// swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -34,12 +34,12 @@ let package = Package(
         .binaryTarget(
             name: "CoreCollector",
             url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.86/CoreCollector.zip",
-            checksum: "46458c13e0503b6d86bd26948e5bdf9372390951ce441974759c26a38321db61"
+            checksum: "90ed15d349de48320c271566554b66fe256b51bda208417faf1e8ee3a00eb715"
         ),
         .binaryTarget(
             name: "AVFoundationCollector",
             url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.86/AVFoundationCollector.zip",
-            checksum: "0a9a2374c77e8530c7160e1d309d8243772d90e51642d2d931f0110c77f7a47e"
+            checksum: "5746c51d17a953f2d20a0cdc467a981f36abd98e2ccc75019940b84df2243ad6"
         ),
         .target(
             name: "AVFoundationCollectorTarget",
@@ -51,7 +51,7 @@ let package = Package(
         .binaryTarget(
             name: "BitmovinCollector",
             url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.86/BitmovinCollector.zip",
-            checksum: "a8324cd08e1cc4f3e1f1d31f36ac820237e2b27e0740b28122fed62e626fbc2f"
+            checksum: "437dd52d16170b94cf4749ca9b410344b8e210267efc96a49314c2e8abc7bf20"
         ),
         .target(
             name: "BitmovinCollectorTarget",
@@ -69,7 +69,7 @@ let package = Package(
         .binaryTarget(
             name: "AmazonIVSCollector",
             url: "https://cdn.bitmovin.com/analytics/ios_tvos/2.11.1-a.86/AmazonIVSCollector.zip",
-            checksum: "41656239995637421f38bd0edbb3cc667f18a4d9ca31cb677934fe7be5feca81"
+            checksum: "49c149bd7c5d5273141cdf6a7b253cbf86d91f367bf20ab94083a328a3167b29"
         ),
         .target(
             name: "AmazonIVSCollectorTarget",
