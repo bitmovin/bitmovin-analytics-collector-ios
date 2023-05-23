@@ -51,7 +51,7 @@ config.isLive = true
 config.ads = true
 ```
 
-A full example app can be seen [here](https://github.com/bitmovin/bitmovin-analytics-collector-ios/tree/develop/CollectorDemoApp).
+A full example app can be seen [here](https://github.com/bitmovin/bitmovin-analytics-collector-ios/tree/main/CollectorDemoApp).
 
 ## Installation
 
