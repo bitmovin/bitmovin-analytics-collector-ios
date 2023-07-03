@@ -125,13 +125,15 @@ internal class BitmovinPlayerAdapter: CorePlayerAdapter, PlayerAdapter, EventDat
             }
 
             // isLive & duration
-            let duration = source.duration
-            if duration != 0 {
-                if duration.isInfinite {
-                    eventData.isLive = true
-                } else {
-                    eventData.isLive = false
-                    eventData.videoDuration = duration.milliseconds ?? 0
+            if source.isAttachedToPlayer {
+                let duration = source.duration
+                if duration != 0 {
+                    if duration.isInfinite {
+                        eventData.isLive = true
+                    } else {
+                        eventData.isLive = false
+                        eventData.videoDuration = duration.milliseconds ?? 0
+                    }
                 }
             }
 
