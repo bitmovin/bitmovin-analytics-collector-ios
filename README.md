@@ -133,8 +133,8 @@ The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` versi
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '2.11.0'
-pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '2.11.0'
+pod 'BitmovinAnalyticsCollector/Core', '2.11.1'
+pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '2.11.1'
 pod 'BitmovinPlayer', '3.0.0'
 
 use_frameworks!
@@ -144,8 +144,8 @@ use_frameworks!
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '2.11.0'
-pod 'BitmovinAnalyticsCollector/AVPlayer', '2.11.0'
+pod 'BitmovinAnalyticsCollector/Core', '2.11.1'
+pod 'BitmovinAnalyticsCollector/AVPlayer', '2.11.1'
 
 use_frameworks!
 ```
@@ -156,8 +156,8 @@ The collector for the Amazon IVS Player has a dependency on `AmazonIVSPlayer` ve
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '2.11.0'
-pod 'BitmovinAnalyticsCollector/AmazonIVSPlayer', '2.11.0'
+pod 'BitmovinAnalyticsCollector/Core', '2.11.1'
+pod 'BitmovinAnalyticsCollector/AmazonIVSPlayer', '2.11.1'
 pod 'AmazonIVSPlayer', '1.18.0'
 
 use_frameworks!
