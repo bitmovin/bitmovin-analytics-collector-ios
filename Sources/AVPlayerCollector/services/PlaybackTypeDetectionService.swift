@@ -11,6 +11,7 @@ class PlaybackTypeDetectionService {
     }
 
     func startMonitoring(playerItem: AVPlayerItem) {
+        resetSourceState()
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(observeNewAccessLogEntry(notification:)),
@@ -25,7 +26,6 @@ class PlaybackTypeDetectionService {
             name: NSNotification.Name.AVPlayerItemNewAccessLogEntry,
             object: playerItem
         )
-        resetSourceState()
     }
 
     func resetSourceState() {

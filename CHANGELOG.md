@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+## v2.12.1
+
+### Fixed
+- AVPlayer: does not track that source is live stream automatically
+
 ## v2.12.0
 
 ### Added
