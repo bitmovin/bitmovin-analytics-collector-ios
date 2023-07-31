@@ -175,10 +175,5 @@ pod install
 - The `audioCodec` property is not collected at the moment, as the information isn't available in the player.
 - `subtitleLanguage` will fallback to the `label`, if no language is defined.
 
-## Contributing
-
-We are happy to accept contributions.
-Upon opening a Pull Request you will be asked to sign a Contributor License Agreement.
-
 ## Support
 If you have any questions or issues with this Analytics Collector or its examples, or you require other technical support for our services, please login to your Bitmovin Dashboard at https://bitmovin.com/dashboard and create a new support case. Our team will get back to you as soon as possible 👍

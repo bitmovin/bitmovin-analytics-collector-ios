@@ -1,8 +1,0 @@
-name: Generate Mocks
-description: Generate Mocks
-runs:
-  using: "composite"
-  steps:
-    - name: Run Cuckoo mock generation
-      run: ./scripts/run_cuckoo
-      shell: bash
