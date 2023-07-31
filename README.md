@@ -13,6 +13,7 @@ To get started collecting data with Bitmovin Analytics you need a License-Key wh
 
 - [Bitmovin Player](https://github.com/bitmovin/bitmovin-player-ios-sdk-cocoapod)
 - AVPlayer
+- [Amazon IVS](https://docs.aws.amazon.com/ivs/latest/userguide/player-ios.html)
 
 ## Example
 
@@ -50,7 +51,7 @@ config.isLive = true
 config.ads = true
 ```
 
-A full example app can be seen [here](https://github.com/bitmovin/bitmovin-analytics-collector-ios/tree/develop/CollectorDemoApp).
+A full example app can be seen [here](https://github.com/bitmovin/bitmovin-analytics-collector-ios/tree/main/CollectorDemoApp).
 
 ## Installation
 
@@ -133,8 +134,8 @@ The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` versi
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '2.11.0'
-pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '2.11.0'
+pod 'BitmovinAnalyticsCollector/Core', '2.12.0'
+pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '2.12.0'
 pod 'BitmovinPlayer', '3.0.0'
 
 use_frameworks!
@@ -144,8 +145,8 @@ use_frameworks!
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '2.11.0'
-pod 'BitmovinAnalyticsCollector/AVPlayer', '2.11.0'
+pod 'BitmovinAnalyticsCollector/Core', '2.12.0'
+pod 'BitmovinAnalyticsCollector/AVPlayer', '2.12.0'
 
 use_frameworks!
 ```
@@ -156,8 +157,8 @@ The collector for the Amazon IVS Player has a dependency on `AmazonIVSPlayer` ve
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '2.11.0'
-pod 'BitmovinAnalyticsCollector/AmazonIVSPlayer', '2.11.0'
+pod 'BitmovinAnalyticsCollector/Core', '2.12.0'
+pod 'BitmovinAnalyticsCollector/AmazonIVSPlayer', '2.12.0'
 pod 'AmazonIVSPlayer', '1.18.0'
 
 use_frameworks!
