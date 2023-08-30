@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Development V2
 ## Development V1
 
+## 2.10.2
+
+### Fixed
+- AVPlayer: does not track buffering and seeks out of buffer
+
 ## 2.10.1
 
 ### Fixed

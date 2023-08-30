@@ -32,7 +32,7 @@ class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
     init(player: AVPlayer,
          config: BitmovinAnalyticsConfig,
          stateMachine: StateMachine,
-         notificationCenter: NotificationCenter = NotificationCenter()
+         notificationCenter: NotificationCenter = NotificationCenter.default
     ) {
         self.player = player
         self.config = config

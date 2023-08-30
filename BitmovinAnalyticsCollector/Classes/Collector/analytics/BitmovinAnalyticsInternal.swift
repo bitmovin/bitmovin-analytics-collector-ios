@@ -29,7 +29,7 @@ open class BitmovinAnalyticsInternal: NSObject {
     internal var didSendDrmLoadTime = false
     
     public convenience init(config: BitmovinAnalyticsConfig) {
-        let notificationCenter = NotificationCenter()
+        let notificationCenter = NotificationCenter.default
         let httpClient = HttpClient()
         let authenticationService = LicenseAuthenticationService(httpClient: httpClient, config: config, notificationCenter: notificationCenter)
         let dispatcherFactory = EventDataDispatcherFactory(httpClient: httpClient, authenticationService: authenticationService, notificationCenter: notificationCenter)
