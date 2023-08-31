@@ -25,7 +25,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/bitmovin/player-ios.git", "3.35.0"..."3.39.0"),
+        .package(url: "https://github.com/bitmovin/player-ios.git", "3.35.0"..<"3.42.0"),
         .package(url: "https://github.com/Quick/Quick.git", exact: "7.0.0-beta.1"),
         .package(url: "https://github.com/Quick/Nimble.git", exact: "10.0.0"),
         .package(url: "https://github.com/Brightify/Cuckoo.git", from: "1.9.1"),

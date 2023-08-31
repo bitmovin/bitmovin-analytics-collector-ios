@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Development V2
 
 ### Changed
-- Restrict the upper version boundary of the Bitmovin Player to 3.39.0 or lower. For newer Player versions support, please use 3.0.0 or higher of the Bitmovin Analytics Collector.
+- Restrict the upper version boundary of the Bitmovin Player to lower than 3.42.0. For newer Player versions support, please use 3.0.0 or higher of the Bitmovin Analytics Collector.
 
 ## v2.12.1
 
