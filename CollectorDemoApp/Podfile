@@ -26,16 +26,16 @@ def google_Adsima_sdk
   pod 'GoogleAds-IMA-iOS-SDK', '3.18.4'
 end
 
-def google_cast_sdk
-  pod 'google-cast-sdk', '4.6.1'
-end
-
+#def google_cast_sdk
+#  pod 'google-cast-sdk', '4.6.1'
+#end
 
 target 'CollectorDemoApp' do
   use_frameworks!
   for_ios
   google_Adsima_sdk
-  google_cast_sdk
+  # TODO: use once the a XCFramework version is available on Cocoapods.
+#   google_cast_sdk
 end
 
 target 'CollectorDemoAppCocoaPods' do
@@ -43,7 +43,8 @@ target 'CollectorDemoAppCocoaPods' do
   for_ios
   collectors
   google_Adsima_sdk
-  google_cast_sdk
+  # TODO: use once the a XCFramework version is available on Cocoapods.
+#   google_cast_sdk
 end
 
 target 'CollectorDemoAppTV' do
