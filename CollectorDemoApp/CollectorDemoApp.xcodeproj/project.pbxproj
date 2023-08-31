@@ -7,8 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10B6208CFA4E8C835C1E0BB4 /* Pods_CollectorDemoAppCocoaPods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 620863E1AA3F7344449AFD58 /* Pods_CollectorDemoAppCocoaPods.framework */; };
+		1F3D6F0BE130A2AEFE058349 /* Pods_CollectorDemoAppTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A134AFB7556A3CE0434B12 /* Pods_CollectorDemoAppTV.framework */; };
+		37EBB0032A9F766E00085462 /* GoogleCast.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EBB0022A9F765E00085462 /* GoogleCast.xcframework */; };
+		37EBB0042A9F766E00085462 /* GoogleCast.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37EBB0022A9F765E00085462 /* GoogleCast.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37EBB0052A9F767800085462 /* GoogleCast.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EBB0022A9F765E00085462 /* GoogleCast.xcframework */; };
+		37EBB0062A9F767800085462 /* GoogleCast.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37EBB0022A9F765E00085462 /* GoogleCast.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		79CFBDE266D7173A3728ED64 /* Pods_CollectorDemoAppTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2139A901497FFA4714AD500A /* Pods_CollectorDemoAppTV.framework */; };
 		96B576F7205BE09A08BB2B70 /* libPods-CollectorDemoAppTVCocoaPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB1F5F69DFBB5DE75E5EF93 /* libPods-CollectorDemoAppTVCocoaPods.a */; };
+		9B3435527BC2A865673877E3 /* libPods-CollectorDemoAppTVCocoaPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D084ADACF5387A6C7BAAC1C /* libPods-CollectorDemoAppTVCocoaPods.a */; };
 		9D3869AF29AF82F100F6531D /* AmazonIVSPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9D3869AE29AF82F100F6531D /* AmazonIVSPlayerCollector */; };
 		9D6FA9EE29AE2C6900B2BF1A /* AVPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9D6FA9ED29AE2C6900B2BF1A /* AVPlayerCollector */; };
 		9D6FA9F029AE2C6900B2BF1A /* BitmovinPlayerCollector in Frameworks */ = {isa = PBXBuildFile; productRef = 9D6FA9EF29AE2C6900B2BF1A /* BitmovinPlayerCollector */; };
@@ -52,6 +59,7 @@
 		9DD665CA299B751D00608720 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD665C6299B751D00608720 /* PlayerView.swift */; };
 		9DD665CB299B751D00608720 /* VideoAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD665C7299B751D00608720 /* VideoAssets.swift */; };
 		9DE5887029A7542B00C68DCA /* IVSPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5886F29A7542B00C68DCA /* IVSPlayerController.swift */; };
+		A4B12BCD18534519A2FE488B /* Pods_CollectorDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFC0F978D0525574FA7BE43 /* Pods_CollectorDemoApp.framework */; };
 		ACB3066B29ED5133003CB501 /* art-of-motion.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ACB3066A29ED5133003CB501 /* art-of-motion.mp4 */; };
 		ACB3066C29ED5133003CB501 /* art-of-motion.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ACB3066A29ED5133003CB501 /* art-of-motion.mp4 */; };
 		ACB3066D29ED5133003CB501 /* art-of-motion.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ACB3066A29ED5133003CB501 /* art-of-motion.mp4 */; };
@@ -62,6 +70,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		37EBB0072A9F767800085462 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				37EBB0062A9F767800085462 /* GoogleCast.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9D6FA9F529AE2C7E00B2BF1A /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -69,6 +88,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				9D6FA9F629AE2C8900B2BF1A /* bitmovin-analytics-collector-ios-internal in CopyFiles */,
+				37EBB0042A9F766E00085462 /* GoogleCast.xcframework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,12 +99,16 @@
 		20E079D6A2BED74B283A3B24 /* Pods-CollectorDemoAppCocoaPods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppCocoaPods.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods.release.xcconfig"; sourceTree = "<group>"; };
 		2139A901497FFA4714AD500A /* Pods_CollectorDemoAppTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoAppTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27989DBC2C1A13750A807605 /* Pods-CollectorDemoAppTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTV.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV.debug.xcconfig"; sourceTree = "<group>"; };
+		2EFC0F978D0525574FA7BE43 /* Pods_CollectorDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F10E174AEA18176F06BDF84 /* Pods_CollectorDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3171027DBF1470DD82EE993A /* Pods-CollectorDemoAppTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTV.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppTV/Pods-CollectorDemoAppTV.release.xcconfig"; sourceTree = "<group>"; };
+		37EBB0022A9F765E00085462 /* GoogleCast.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleCast.xcframework; sourceTree = "<group>"; };
 		3AB1F5F69DFBB5DE75E5EF93 /* libPods-CollectorDemoAppTVCocoaPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CollectorDemoAppTVCocoaPods.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		553B45211679383C2A0F5CD0 /* Pods-CollectorDemoAppCocoaPods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppCocoaPods.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods.debug.xcconfig"; sourceTree = "<group>"; };
+		620863E1AA3F7344449AFD58 /* Pods_CollectorDemoAppCocoaPods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoAppCocoaPods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6363D0EA977656A5C66C82F6 /* Pods_CollectorDemoAppCocoaPods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoAppCocoaPods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9F699843C59A110E606564 /* Pods-CollectorDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoApp.debug.xcconfig"; path = "Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
+		9D084ADACF5387A6C7BAAC1C /* libPods-CollectorDemoAppTVCocoaPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CollectorDemoAppTVCocoaPods.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D6FA9EC29AE2BFA00B2BF1A /* bitmovin-analytics-collector-ios-internal */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "bitmovin-analytics-collector-ios-internal"; path = ..; sourceTree = "<group>"; };
 		9D8F5F96299A1DE700090B46 /* CollectorDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D8F5FCE299A1F8300090B46 /* CollectorDemoAppTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectorDemoAppTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +150,7 @@
 		ACB3067929F17B70003CB501 /* StoryboardInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardInitializable.swift; sourceTree = "<group>"; };
 		B7C310C361410E272DBB8B82 /* Pods-CollectorDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoApp.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp.release.xcconfig"; sourceTree = "<group>"; };
 		DDBD753B2D5069ACFA4F705A /* Pods-CollectorDemoAppTVCocoaPods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollectorDemoAppTVCocoaPods.release.xcconfig"; path = "Target Support Files/Pods-CollectorDemoAppTVCocoaPods/Pods-CollectorDemoAppTVCocoaPods.release.xcconfig"; sourceTree = "<group>"; };
+		F4A134AFB7556A3CE0434B12 /* Pods_CollectorDemoAppTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollectorDemoAppTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,8 +160,10 @@
 			files = (
 				9D3869AF29AF82F100F6531D /* AmazonIVSPlayerCollector in Frameworks */,
 				9D6FA9EE29AE2C6900B2BF1A /* AVPlayerCollector in Frameworks */,
+				37EBB0032A9F766E00085462 /* GoogleCast.xcframework in Frameworks */,
 				9D6FA9F029AE2C6900B2BF1A /* BitmovinPlayerCollector in Frameworks */,
 				D1AB2510EDA14C4BEB0F7FD1 /* Pods_CollectorDemoApp.framework in Frameworks */,
+				A4B12BCD18534519A2FE488B /* Pods_CollectorDemoApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +174,7 @@
 				9DB3FDC229D1783100E4CAA3 /* AVPlayerCollector in Frameworks */,
 				9DB3FDC429D1783100E4CAA3 /* BitmovinPlayerCollector in Frameworks */,
 				79CFBDE266D7173A3728ED64 /* Pods_CollectorDemoAppTV.framework in Frameworks */,
+				1F3D6F0BE130A2AEFE058349 /* Pods_CollectorDemoAppTV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96B576F7205BE09A08BB2B70 /* libPods-CollectorDemoAppTVCocoaPods.a in Frameworks */,
+				9B3435527BC2A865673877E3 /* libPods-CollectorDemoAppTVCocoaPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,12 +192,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF3AE0CA76C05EDDAA53C787 /* Pods_CollectorDemoAppCocoaPods.framework in Frameworks */,
+				37EBB0052A9F767800085462 /* GoogleCast.xcframework in Frameworks */,
+				10B6208CFA4E8C835C1E0BB4 /* Pods_CollectorDemoAppCocoaPods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37EBB0002A9F763500085462 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				37EBB0012A9F764200085462 /* iOS */,
+				2EFC0F978D0525574FA7BE43 /* Pods_CollectorDemoApp.framework */,
+				620863E1AA3F7344449AFD58 /* Pods_CollectorDemoAppCocoaPods.framework */,
+				F4A134AFB7556A3CE0434B12 /* Pods_CollectorDemoAppTV.framework */,
+				9D084ADACF5387A6C7BAAC1C /* libPods-CollectorDemoAppTVCocoaPods.a */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		37EBB0012A9F764200085462 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				37EBB0022A9F765E00085462 /* GoogleCast.xcframework */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
 		68A265715B3D1FBECD55E698 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +247,7 @@
 				9D8F5FF6299A249500090B46 /* CollectorDemoAppTV */,
 				9D8F5F98299A1DE700090B46 /* CollectorDemoApp */,
 				9DD0AA6B29B882B80083AFDB /* CollectorDemoAppCocoaPods */,
+				37EBB0002A9F763500085462 /* Frameworks */,
 				9D8F5F97299A1DE700090B46 /* Products */,
 				DFEAE2400C8B4C976388A5EF /* Pods */,
 				68A265715B3D1FBECD55E698 /* Frameworks */,
@@ -353,7 +405,6 @@
 				9D2CDEB3299F84FA004B6176 /* [CUSTOM] Run SwiftLint */,
 				9D6FA9F529AE2C7E00B2BF1A /* CopyFiles */,
 				F4BC02B6F7299A0502CA7D47 /* [CP] Embed Pods Frameworks */,
-				7539A3FC4F2D54FC19851ED3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -424,7 +475,7 @@
 				9DD0AA5529B87FA60083AFDB /* Frameworks */,
 				9DD0AA5A29B87FA60083AFDB /* Resources */,
 				0B16A24FD699F65F5F034477 /* [CP] Embed Pods Frameworks */,
-				CA7356DD9F526E7D3436924B /* [CP] Copy Pods Resources */,
+				37EBB0072A9F767800085462 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -463,6 +514,8 @@
 				Base,
 			);
 			mainGroup = 9D8F5F8D299A1DE600090B46;
+			packageReferences = (
+			);
 			productRefGroup = 9D8F5F97299A1DE700090B46 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -537,23 +590,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7539A3FC4F2D54FC19851ED3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoApp/Pods-CollectorDemoApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7B460336F2B0F855C87C55B3 /* [CP] Check Pods Manifest.lock */ = {
@@ -657,23 +693,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "REPO_ROOT=\"${PROJECT_DIR}/..\"\nPATH_TO_SCRIPT=\"${REPO_ROOT}/scripts/run_cuckoo\"\nbash \"$PATH_TO_SCRIPT\"\n";
-		};
-		CA7356DD9F526E7D3436924B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CollectorDemoAppCocoaPods/Pods-CollectorDemoAppCocoaPods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		D76532510E535147DFDD6B86 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
