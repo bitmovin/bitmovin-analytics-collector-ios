@@ -130,7 +130,7 @@ To install it, check which Player/version you are using and add the following li
 
 ### Bitmovin Player v3
 
-The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` version `>= 3.35.0`.
+The collector for the Bitmovin Player has a dependency on `BitmovinPlayer` version `>= 3.35.0` and `< 3.42.0`.
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'

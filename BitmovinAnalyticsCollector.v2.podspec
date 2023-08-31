@@ -26,8 +26,8 @@ DESC
 
   s.subspec 'BitmovinPlayer' do |bitmovinplayerv3|
     bitmovinplayerv3.source_files = 'Sources/BitmovinPlayerCollector/**/*.{swift}'
-    bitmovinplayerv3.tvos.dependency 'BitmovinPlayer', '~>3.35'
-    bitmovinplayerv3.ios.dependency 'BitmovinPlayer', '~>3.35'
+    bitmovinplayerv3.tvos.dependency 'BitmovinPlayer', '~>3.35', '<3.42'
+    bitmovinplayerv3.ios.dependency 'BitmovinPlayer', '~>3.35', '<3.42'
   end
 
   s.subspec 'AmazonIVSPlayer' do |ivsplayer|
