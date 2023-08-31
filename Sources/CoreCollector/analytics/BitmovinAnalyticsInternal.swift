@@ -28,7 +28,7 @@ public class BitmovinAnalyticsInternal: NSObject {
         config: BitmovinAnalyticsConfig,
         eventDataFactory: EventDataFactory
     ) {
-        let notificationCenter = NotificationCenter()
+        let notificationCenter = NotificationCenter.default
         let httpClient = HttpClient()
         let authenticationService = LicenseAuthenticationService(httpClient, config, notificationCenter)
         let dispatcherFactory = EventDataDispatcherFactory(httpClient, authenticationService, notificationCenter)

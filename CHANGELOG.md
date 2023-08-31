@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Development V2
 
+## v2.12.2
+
+### Fixed
+- AVPlayer: Tracking of buffering events and seeks out of buffer
+
 ### Changed
 - Restrict the upper version boundary of the Bitmovin Player to lower than 3.42.0. For newer Player versions support, please use 3.0.0 or higher of the Bitmovin Analytics Collector.
 

@@ -45,7 +45,7 @@ internal class AVPlayerAdapter: CorePlayerAdapter, PlayerAdapter {
         downloadSpeedDetectionService: DownloadSpeedDetectionService,
         downloadSpeedMeter: DownloadSpeedMeter,
         manipulator: AVPlayerEventDataManipulator,
-        notificationCenter: NotificationCenter = NotificationCenter()
+        notificationCenter: NotificationCenter = NotificationCenter.default
     ) {
         self.player = player
         self.errorHandler = errorHandler

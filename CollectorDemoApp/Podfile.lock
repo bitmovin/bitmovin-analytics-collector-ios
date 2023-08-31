@@ -1,11 +1,11 @@
 PODS:
   - AmazonIVSPlayer (1.18.0)
-  - BitmovinAnalyticsCollector/AmazonIVSPlayer (2.12.0):
+  - BitmovinAnalyticsCollector/AmazonIVSPlayer (2.12.2):
     - AmazonIVSPlayer (= 1.18.0)
-  - BitmovinAnalyticsCollector/AVPlayer (2.12.0)
-  - BitmovinAnalyticsCollector/BitmovinPlayer (2.12.0):
+  - BitmovinAnalyticsCollector/AVPlayer (2.12.2)
+  - BitmovinAnalyticsCollector/BitmovinPlayer (2.12.2):
     - BitmovinPlayer (< 3.42, ~> 3.35)
-  - BitmovinAnalyticsCollector/Core (2.12.0)
+  - BitmovinAnalyticsCollector/Core (2.12.2)
   - BitmovinPlayer (3.41.2):
     - BitmovinPlayerCore (= 3.41.2)
   - BitmovinPlayerCore (3.41.2)
@@ -32,7 +32,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AmazonIVSPlayer: 15b74392987e2385f9a859201273185f76d58959
-  BitmovinAnalyticsCollector: 191b0e8003d3024b6186d95e015c31c25686f058
+  BitmovinAnalyticsCollector: 9d78e50392e0e7ddd291c6584ad8399e670b50b2
   BitmovinPlayer: d6dfadb088e7c69412a85afd7ca48a94594edb35
   BitmovinPlayerCore: 12721d2d25e1c60f6099585fb8e413052c7be458
   GoogleAds-IMA-iOS-SDK: b01284e3bf3d64ba948de6692ffda531452c3713
