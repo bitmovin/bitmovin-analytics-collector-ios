@@ -21,6 +21,7 @@ To get started collecting data with Bitmovin Analytics you need a License-Key wh
 
 We recommend to use the integrated Analytics that comes with the Bitmovin Player for iOS and tvOS SDK.
 Since Analytics is directly integrated in the Player, usage is simplified compared to the standalone collector.
+
 Please check out the [Getting Started](https://developer.bitmovin.com/playback/docs/getting-started-ios) guide.
 
 ### Collector for Amazon IVS and AVPlayer
