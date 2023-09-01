@@ -17,13 +17,21 @@ To get started collecting data with Bitmovin Analytics you need a License-Key wh
 
 ## Example
 
-The following example creates a BitmovinAnalytics object and attaches an AVPlayer instance to it.
+### Integrated Analytics within Bitmovin Player
+
+We recommend to use the integrated Analytics that comes with the Bitmovin Player for iOS and tvOS SDK.
+Since Analytics is directly integrated in the Player, usage is simplified compared to the standalone collector.
+Please check out the [Getting Started](https://developer.bitmovin.com/playback/docs/getting-started-ios) guide.
+
+### Collector for Amazon IVS and AVPlayer
+
+The following example creates a AnalyticsConfig object and attaches an AVPlayer instance to it.
 
 ```swift
-// Create a BitmovinAnalyticsConfig using your Bitmovin analytics license key
+// Create a AnalyticsConfig using your Bitmovin analytics license key
 let config: AnalyticsConfig = AnalyticsConfig(licenseKey:"YOUR_ANALYTICS_KEY")
 
-// Create a AVPlayerCollector object using the config just created (for the Bitmovin Player, create a BitmovinPlayerCollector)
+// Create a AVPlayerCollector object using the config just created (for Amazon IVS use AmazonIVSPlayerCollectorFactory)
 let analyticsCollector = AVPlayerCollectorFactory.create(config: config);
 
 // Attach your player instance
@@ -59,8 +67,6 @@ let sourceMetadata = SourceMetadata(
   isLive: false,
   customData: customData
 )
-// For BitmovinCollector
-analyticsCollector.apply(sourceMetadata:sourceMetadata, for:source)
 
 // For AVPlayerCollector and AmazonIVSCollector
 analyticsCollector.sourceMetadata = sourceMetadata
