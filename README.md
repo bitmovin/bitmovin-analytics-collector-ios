@@ -102,7 +102,7 @@ https://github.com/bitmovin/bitmovin-analytics-collector-ios
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift` and replace `Version Number` with the desired version of the SDK.
 ```
-.package(name: "BitmovinAnalytics", url: "https://github.com/bitmovin/bitmovin-analytics-collector-ios", .exact("Version Number"))
+.package(name: "BitmovinAnalytics", url: "https://github.com/bitmovin/bitmovin-analytics-collector-ios", .exact("<Bitmovin Analytics Version Number>"))
 ```
 And then specify the `BitmovinAnalytics` as a dependency of the desired target. Here is an example of a `Package.swift` file:
 ```
@@ -110,7 +110,7 @@ let package = Package(
   ...
   dependencies: [
     ...
-    .package(name: "BitmovinAnalytics", url: "https://github.com/bitmovin/bitmovin-analytics-collector-ios", .exact("Version Number"))
+    .package(name: "BitmovinAnalytics", url: "https://github.com/bitmovin/bitmovin-analytics-collector-ios", .exact("<Bitmovin Analytics Version Number>"))
   ],
   targets: [
     .target(
@@ -156,9 +156,9 @@ The collector for the Bitmovin Player has a dependency on [BitmovinPlayerCore](h
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '3.1.1'
-pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '3.1.1'
-pod 'BitmovinPlayer', '3.44.0'
+pod 'BitmovinAnalyticsCollector/Core', '<Bitmovin Analytics Version Number>'
+pod 'BitmovinAnalyticsCollector/BitmovinPlayer', '<Bitmovin Analytics Version Number>'
+pod 'BitmovinPlayer', '<Bitmovin Player Version Number>'
 
 use_frameworks!
 ```
@@ -167,8 +167,8 @@ use_frameworks!
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '3.1.1'
-pod 'BitmovinAnalyticsCollector/AVPlayer', '3.1.1'
+pod 'BitmovinAnalyticsCollector/Core', '<Bitmovin Analytics Version Number>'
+pod 'BitmovinAnalyticsCollector/AVPlayer', '<Bitmovin Analytics Version Number>'
 
 use_frameworks!
 ```
@@ -179,8 +179,8 @@ The collector for the Amazon IVS Player has a dependency on `AmazonIVSPlayer` ve
 
 ```ruby
 source 'https://github.com/bitmovin/cocoapod-specs.git'
-pod 'BitmovinAnalyticsCollector/Core', '3.1.1'
-pod 'BitmovinAnalyticsCollector/AmazonIVSPlayer', '3.1.1'
+pod 'BitmovinAnalyticsCollector/Core', '<Bitmovin Analytics Version Number>'
+pod 'BitmovinAnalyticsCollector/AmazonIVSPlayer', '<Bitmovin Analytics Version Number>'
 pod 'AmazonIVSPlayer', '1.20.0'
 
 use_frameworks!
