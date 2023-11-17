@@ -24,39 +24,41 @@ let package = Package(
             targets: ["AmazonIVSCollectorTarget"]
         )
     ],
+    dependencies: [
+        .package(url: "https://github.com/bitmovin/player-ios-core.git", from: "3.41.1"),
+    ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .binaryTarget(
             name: "CoreCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.3.0-rc.2/CoreCollector.zip",
-            checksum: "0244439e59d1e7cb0c7217345aa0ff30a5435090934eaea84c06ebfbde416a92"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.3.0-a.1/CoreCollector.zip",
+            checksum: "c05119dc7c1d803e4d0b4e7fde44392209e46791d3a730f2723144a736cfdc03"
         ),
         .binaryTarget(
             name: "AVFoundationCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.3.0-rc.2/AVFoundationCollector.zip",
-            checksum: "011a2425cc0f8da242b53bb869baac3fba9a1e9f3c5513837dd2284266aa2f35"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.3.0-a.1/AVFoundationCollector.zip",
+            checksum: "4207a951c6ca0571ae676486b3ea06251ed581165497daf2aa648507e3c8b395"
         ),
         .target(
             name: "AVFoundationCollectorTarget",
             dependencies: [
                 "CoreCollector",
                 "AVFoundationCollector",
-            ],
-            path: "spm/public/Sources/AVFoundationCollectorTarget"
+            ]
         ),
         .binaryTarget(
             name: "BitmovinCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.3.0-rc.2/BitmovinCollector.zip",
-            checksum: "668753c3505379c15e21aff632778473b8219d36a5a2c90a8819a8e102f7bab3"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.3.0-a.1/BitmovinCollector.zip",
+            checksum: "527d3358c13e3e1b3f019544c3f7e71ed68a8b3a625ab469355e734c6aad265e"
         ),
         .target(
             name: "BitmovinCollectorTarget",
             dependencies: [
                 "CoreCollector",
-                "BitmovinCollector"
-            ],
-            path: "spm/public/Sources/BitmovinCollectorTarget"
+                "BitmovinCollector",
+                .product(name: "BitmovinPlayerCore", package: "player-ios-core"),
+            ]
         ),
         .binaryTarget(
             name: "AmazonIVSPlayer",
@@ -65,16 +67,16 @@ let package = Package(
         ),
         .binaryTarget(
             name: "AmazonIVSCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.3.0-rc.2/AmazonIVSCollector.zip",
-            checksum: "6bda6c2186227e5f5585f5c63ddd1cdb0c5b0f13d7d6901c3d59377809ef53ce"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.3.0-a.1/AmazonIVSCollector.zip",
+            checksum: "14014ab2510c7eb7f4042d827b7cc71d6fbf09129312923d0a758e016e0c96d2"
         ),
         .target(
             name: "AmazonIVSCollectorTarget",
             dependencies: [
-                "CoreCollector",
                 .target(name: "AmazonIVSCollector", condition: .when(platforms: [.iOS])),
-            ],
-            path: "spm/public/Sources/AmazonIVSCollectorTarget"
+                .target(name: "AmazonIVSPlayer", condition: .when(platforms: [.iOS])),
+                .target(name: "CoreCollector", condition: .when(platforms: [.iOS])),
+            ]
         ),
     ]
 )
