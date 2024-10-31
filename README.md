@@ -156,7 +156,8 @@ We depend on `cocoapods` version `>= 1.13.0`.
 
 Add the following lines to the Podfile of your project while replacing `VERSION_NUMBER` with the desired version of the SDK.
 
-> All available versions can be listed via `pod trunk info BitmovinAnalyticsCollector`
+> All available versions from **3.8.1** on can be listed via `pod trunk info BitmovinAnalyticsCollector` and are available in [CocoaPods trunk repository](https://github.com/CocoaPods/Specs/tree/master/Specs/6/1/d/BitmovinAnalyticsCollector).
+> Earlier versions are listed in our [CocoaPods repository](https://github.com/bitmovin/cocoapod-specs/tree/master/Specs/BitmovinAnalyticsCollector) instead
 
 ### Bitmovin Player v3
 
