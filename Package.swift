@@ -33,13 +33,13 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .binaryTarget(
             name: "CoreCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.12.2/CoreCollector.zip",
-            checksum: "9e1ad9d7ba241741e8d74e355dcce6b55c9dcb55979989e1f036caefde163bbd"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.13.0-a.1/CoreCollector.zip",
+            checksum: "6dd35942c5884e51704c371ba0b7d565e6801eb3d5d2f7c45339de0d9628a32a"
         ),
         .binaryTarget(
             name: "AVFoundationCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.12.2/AVFoundationCollector.zip",
-            checksum: "36853a5134967bccfae89c0f8cc8511306db64a125f0879fe96c2b6c9f75cb87"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.13.0-a.1/AVFoundationCollector.zip",
+            checksum: "239a398384e47a354faecabb655ae0e5685c3eec0952442ea8f07bd9909e5411"
         ),
         .target(
             name: "AVFoundationCollectorTarget",
@@ -50,8 +50,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "BitmovinCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.12.2/BitmovinCollector.zip",
-            checksum: "014eda329463187fbb405fe9483736e42a7417313f7dd763133540c7e066b2c3"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.13.0-a.1/BitmovinCollector.zip",
+            checksum: "134cb3580c099922fc1522e74817b7abfa0bc00a0fa526816bb6db1e6a512761"
         ),
         .target(
             name: "BitmovinCollectorTarget",
@@ -68,8 +68,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "AmazonIVSCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.12.2/AmazonIVSCollector.zip",
-            checksum: "f2542b98f23c7c91fd137f75e51f72718d7a8d0e7156f1a42af15b443f81b613"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.13.0-a.1/AmazonIVSCollector.zip",
+            checksum: "d7dafda61738aa97e678b5cd4f470fc7f045adfad6ce5727cb6a11f5ae0b02dc"
         ),
         .target(
             name: "AmazonIVSCollectorTarget",
