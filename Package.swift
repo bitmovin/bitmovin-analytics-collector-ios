@@ -38,13 +38,13 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .binaryTarget(
             name: "CoreCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.21.0-a.8/CoreCollector.zip",
-            checksum: "54fda3cd2b5ad954baa51b937f47aab6089568315648ffd2fd2246b0cfcca803"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.21.0-a.9/CoreCollector.zip",
+            checksum: "835bd1a019e41157e9a7d21193f440fde01c58bd6d8bd31a99032eecaa2a4338"
         ),
         .binaryTarget(
             name: "AVFoundationCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.21.0-a.8/AVFoundationCollector.zip",
-            checksum: "8f88f9e1e3db68a6fc0000ad873ba16cdfa9edfd63334288aabbe896fac2c8be"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.21.0-a.9/AVFoundationCollector.zip",
+            checksum: "69b8590e73a094d5cbf29dcb67f4cb2b74f9c88a8e4fe0d822ef84329c8e1b29"
         ),
         .target(
             name: "AVFoundationCollectorTarget",
@@ -55,8 +55,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "THEOplayerCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.21.0-a.8/THEOplayerCollector.zip",
-            checksum: "e1e3f0ea886207c2831faa6b2d3316941bf4fbc7e712795a49759f4d592476ae"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.21.0-a.9/THEOplayerCollector.zip",
+            checksum: "3e467feb95a14fc2ae63c9b7766f0ea672d0eaca46b0b0e25b155448a736f4aa"
         ),
         .target(
             name: "THEOplayerCollectorTarget",
@@ -68,8 +68,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "BitmovinCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.21.0-a.8/BitmovinCollector.zip",
-            checksum: "a328186f71761e1db26e585159e086367adbd59b874806c6c39461fb229589d1"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.21.0-a.9/BitmovinCollector.zip",
+            checksum: "34c28ceebf16fdab206d6b831fb153c745463ccdd5f4df5b460c0fc8161cd0b6"
         ),
         .target(
             name: "BitmovinCollectorTarget",
@@ -86,8 +86,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "AmazonIVSCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.21.0-a.8/AmazonIVSCollector.zip",
-            checksum: "0e0393af7d1bf0b6cd65ab7db40eed0c7c4f2a58b8ac90b63f8ab76a448c7f0b"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.21.0-a.9/AmazonIVSCollector.zip",
+            checksum: "13fb62051202cd9f1fc6db161b9e5fb870cdd6931c6ecbe190c7729b7c90888f"
         ),
         .target(
             name: "AmazonIVSCollectorTarget",
