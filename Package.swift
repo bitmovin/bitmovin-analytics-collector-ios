@@ -33,13 +33,13 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .binaryTarget(
             name: "CoreCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.24.0-a.1/CoreCollector.zip",
-            checksum: "cac7adb74e83cc939d5b8b1a9c8ea96d55c1a3af5aac80285d55ef7db4cb3fea"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.24.0-a.2/CoreCollector.zip",
+            checksum: "42138ae914cbf5cc5272925bb6fd8c5d74394a423a12c15378b7371f86fc0d9e"
         ),
         .binaryTarget(
             name: "AVFoundationCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.24.0-a.1/AVFoundationCollector.zip",
-            checksum: "52e9416d0c51cba32254d3a6aa51926d4b6419791377b7e4a9e19538020e8902"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.24.0-a.2/AVFoundationCollector.zip",
+            checksum: "0748674cac53fd077aba3d8fde9584d63bcc654ac664b16cc19f8c76cdd01512"
         ),
         .target(
             name: "AVFoundationCollectorTarget",
@@ -50,8 +50,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "THEOplayerCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.24.0-a.1/THEOplayerCollector.zip",
-            checksum: "a7f4e2d0c40cb5ea09aa618bc80f2cfd2e4955b8c884d621f9d8f8dd01d8f7f4"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.24.0-a.2/THEOplayerCollector.zip",
+            checksum: "da793f053a161a8155a58ad0839026709821a8a492c7166fcfd8a88147c209c6"
         ),
         .target(
             name: "THEOplayerCollectorTarget",
@@ -62,8 +62,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "BitmovinCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.24.0-a.1/BitmovinCollector.zip",
-            checksum: "d1def250ef8957ad0c53d130aa335d47c507db6ccf39ba5399ffabba707be157"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.24.0-a.2/BitmovinCollector.zip",
+            checksum: "e764283d869143379dd961e01d590bc243b172849da065d03a0bacbcab365e66"
         ),
         .target(
             name: "BitmovinCollectorTarget",
