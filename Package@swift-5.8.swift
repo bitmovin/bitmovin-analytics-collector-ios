@@ -32,13 +32,13 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .binaryTarget(
             name: "CoreCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.26.1-rc.1/CoreCollector.zip",
-            checksum: "e877c475f81e564f1775f66e635c576866e4a68125e263e0f957bbc5745a9fc7"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.26.1/CoreCollector.zip",
+            checksum: "f7bf797600621154c7c454c9711e148b5d61988ac615b3a61c13417a36e91dbc"
         ),
         .binaryTarget(
             name: "AVFoundationCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.26.1-rc.1/AVFoundationCollector.zip",
-            checksum: "3e949d206e879e746d05983ce09f6cf3689fe36be0a046694efb36879b0d7c27"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.26.1/AVFoundationCollector.zip",
+            checksum: "e08f8535ca16728091bce15493a210b5358480d1387375d469c9d8b7f12c7c83"
         ),
         .target(
             name: "AVFoundationCollectorTarget",
@@ -49,8 +49,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "BitmovinCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.26.1-rc.1/BitmovinCollector.zip",
-            checksum: "b1cdf5a5877b6d4fe61517c68d9dba4df9b7aad147b1b0ae0f4dc888ab82199e"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.26.1/BitmovinCollector.zip",
+            checksum: "2f21c0ed79f7a4904ae38f51ba867e038685827651ada1f0efc722d2af8fc3e9"
         ),
         .target(
             name: "BitmovinCollectorTarget",
@@ -62,8 +62,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "THEOplayerCollector",
-            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.26.1-rc.1/THEOplayerCollector.zip",
-            checksum: "f58fe81f08650fc0b99b9175d621e6c7ce008ab45fc265f6f7e91adf6bb065dc"
+            url: "https://cdn.bitmovin.com/analytics/ios_tvos/3.26.1/THEOplayerCollector.zip",
+            checksum: "b29a4b5849a524c6ed8ca3e8b3c57ca0c546af3e381840d8e92bfe3f916267ff"
         ),
         .target(
             name: "THEOplayerCollectorTarget",
